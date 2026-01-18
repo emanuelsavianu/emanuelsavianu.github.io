@@ -115,6 +115,26 @@
             font-weight: 500;
         }
 
+        .cta-button {
+            display: block;
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+            text-align: center;
+            margin: 25px 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 25px rgba(72, 187, 120, 0.4);
+        }
+
         .contact-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -174,6 +194,11 @@
             .section-title {
                 font-size: 1.1em;
             }
+
+            .cta-button {
+                font-size: 1.1em;
+                padding: 16px 30px;
+            }
         }
     </style>
 </head>
@@ -183,36 +208,13 @@
             <h1>Dott. Emanuel Savianu</h1>
             <p>Medico di Medicina Generale</p>
         </div>
-
-        <div class="content">
-            <div class="section">
-                <h2 class="section-title">Informazioni Professionali</h2>
-                <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Codice Regionale</div>
-                        <div class="info-value">C.R. 011189</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Numero di Telefono</div>
-                        <div class="info-value">327 809 5905</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Ordine dei Medici di Arezzo</div>
-                        <div class="info-value">n. 3499</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Partita IVA</div>
-                        <div class="info-value">02348320512</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-label">Codice SDI</div>
-                        <div class="info-value">JKKZDGR</div>
-                    </div>
-                </div>
-            </div>
-
             <div class="section">
                 <h2 class="section-title">Contatti e Indirizzo</h2>
+                
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/arezzo/carlo-nardini" target="_blank" rel="noopener noreferrer" class="cta-button">
+                    📅 Prenota Appuntamento
+                </a>
+                
                 <div class="contact-box">
                     <div class="icon">📍</div>
                     <h3>Studio Medico</h3>
@@ -222,7 +224,7 @@
                 <div class="contact-box">
                     <div class="icon">✉️</div>
                     <h3>Email PEC</h3>
-                    <p><a href="mailto:emanuel.savianu@pec.omceoar.it" class="email-link">emanuel.savianu@pec.omceoar.it</a></p>
+                    <p><a href="mailto:emanuel.savianu@gmail.com" class="email-link">emanuelsavianu@gmail.com</a></p>
                 </div>
             </div>
         </div>
