@@ -3,235 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Dott. Emanuel Savianu - Medico di Medicina Generale ad Arezzo. Informazioni di contatto e dettagli professionali.">
-    <title>Dott. Emanuel Savianu - Medico di Medicina Generale</title>
+    <title>Dott. Emanuel Savianu – Medico di Medicina Generale</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+            background-color: #f5f7fa;
             color: #333;
         }
-
+        header {
+            background-color: #2a7fa8;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.2em;
+        }
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+        }
         .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .card {
             background: white;
-            max-width: 700px;
-            width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
-            color: white;
-            padding: 50px 30px;
-            text-align: center;
-        }
-
-        .header h1 {
-            font-family: Georgia, serif;
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
-
-        .header p {
-            font-size: 1.2em;
-            opacity: 0.95;
-            letter-spacing: 0.3px;
-        }
-
-        .content {
-            padding: 40px 30px;
-        }
-
-        .section {
-            margin-bottom: 35px;
-        }
-
-        .section-title {
-            color: #1a365d;
-            font-size: 1.3em;
-            font-weight: 600;
-            margin-bottom: 15px;
-            padding-bottom: 8px;
-            border-bottom: 2px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::before {
-            content: '';
-            display: inline-block;
-            width: 4px;
-            height: 20px;
-            background: #667eea;
-            margin-right: 10px;
-            border-radius: 2px;
-        }
-
-        .info-grid {
-            display: grid;
-            gap: 15px;
-        }
-
-        .info-item {
-            background: #f7fafc;
-            padding: 15px 20px;
-            border-radius: 10px;
-            border-left: 4px solid #667eea;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .info-item:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
-        }
-
-        .info-label {
-            font-size: 0.85em;
-            color: #718096;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-            font-weight: 500;
-        }
-
-        .info-value {
-            font-size: 1.1em;
-            color: #2d3748;
-            font-weight: 500;
-        }
-
-        .cta-button {
-            display: block;
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-            color: white;
-            padding: 18px 40px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 1.2em;
-            font-weight: 600;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
-            text-align: center;
-            margin: 25px 0;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 25px rgba(72, 187, 120, 0.4);
-        }
-
-        .contact-box {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
             padding: 25px;
-            border-radius: 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 25px;
+        }
+        h2 {
+            color: #2a7fa8;
+        }
+        .contact-info p {
+            font-size: 1.1em;
+            margin: 8px 0;
+        }
+        .map-container {
+            margin-top: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .call-button {
+            display: block;
+            width: 100%;
             text-align: center;
-        }
-
-        .contact-box .icon {
-            font-size: 2em;
-            margin-bottom: 10px;
-        }
-
-        .contact-box h3 {
-            font-size: 1.4em;
-            margin-bottom: 10px;
-        }
-
-        .contact-box p {
-            font-size: 1.05em;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
-
-        .email-link {
+            background-color: #2a7fa8;
             color: white;
+            padding: 15px;
+            border-radius: 8px;
             text-decoration: none;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.5);
-            transition: border-color 0.3s;
+            font-size: 1.2em;
+            margin-top: 20px;
         }
-
-        .email-link:hover {
-            border-bottom-color: white;
+        .call-button:hover {
+            background-color: #256f92;
         }
-
-        .footer {
+        footer {
             text-align: center;
             padding: 20px;
-            background: #f7fafc;
-            color: #718096;
+            background: #e9eef2;
+            margin-top: 40px;
             font-size: 0.9em;
-        }
-
-        @media (max-width: 600px) {
-            .header h1 {
-                font-size: 2em;
-            }
-
-            .header p {
-                font-size: 1em;
-            }
-
-            .content {
-                padding: 30px 20px;
-            }
-
-            .section-title {
-                font-size: 1.1em;
-            }
-
-            .cta-button {
-                font-size: 1.1em;
-                padding: 16px 30px;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>Dott. Emanuel Savianu</h1>
-            <p>Medico di Medicina Generale</p>
-        </div>
-            <div class="section">
-                <h2 class="section-title">Contatti e Indirizzo</h2>
-                
-                <a href="https://www.doctolib.it/medico-di-medicina-generale/arezzo/carlo-nardini" target="_blank" rel="noopener noreferrer" class="cta-button">
-                    📅 Prenota Appuntamento
-                </a>
-                
-                <div class="contact-box">
-                    <div class="icon">📍</div>
-                    <h3>Studio Medico</h3>
-                    <p>Via Tullio Innocenti 38<br>Arezzo</p>
-                </div>
-                <div style="height: 20px;"></div>
-                <div class="contact-box">
-                    <div class="icon">✉️</div>
-                    <h3>Email PEC</h3>
-                    <p><a href="mailto:emanuel.savianu@gmail.com" class="email-link">emanuelsavianu@gmail.com</a></p>
-                </div>
-            </div>
-        </div>
 
-        <div class="footer">
-            <p>&copy; 2026 Dott. Emanuel Savianu - Tutti i diritti riservati</p>
+<header>
+    <h1>Dott. Emanuel Savianu</h1>
+    <p>Medico di Medicina Generale</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Benvenuti</h2>
+        <p>
+            Questo sito fornisce informazioni utili per i pazienti del 
+            <strong>Dott. Emanuel Savianu</strong>, medico di famiglia ad Arezzo.
+            Qui puoi trovare contatti, orari e indicazioni per accedere ai servizi.
+        </p>
+    </div>
+
+    <div class="card contact-info">
+        <h2>Contatti</h2>
+        <p><strong>Indirizzo:</strong> Via Ubaldo Pasqui 38, Arezzo</p>
+        <p><strong>Telefono:</strong> 327 809 5905</p>
+
+        <a class="call-button" href="tel:3278095905">Chiama ora</a>
+
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.676474939225!2d11.87265!3d43.46952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132be8d3f0c2b0d1%3A0x7c2f4b8e0f5f6e4!2sVia%20Ubaldo%20Pasqui%2C%2038%2C%2052100%20Arezzo%20AR!5e0!3m2!1sit!2sit!4v1700000000000"
+                width="100%" 
+                height="350" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </div>
     </div>
+
+    <div class="card">
+        <h2>Orari di Apertura</h2>
+        <ul>
+            <li><strong>Lunedì:</strong> 17:00 – 18:30</li>
+            <li><strong>Martedì:</strong> 11:30 – 13:00</li>
+            <li><strong>Mercoledì:</strong> 17:00 – 18:30</li>
+            <li><strong>Giovedì:</strong> 11:30 – 13:00</li>
+            <li><strong>Venerdì:</strong> 17:00 – 18:30</li>
+        </ul>
+    </div>
+
+    <div class="card">
+        <h2>Servizi Offerti</h2>
+        <ul>
+            <li>Assistenza sanitaria di base</li>
+            <li>Prescrizioni e ricette</li>
+            <li>Visite ambulatoriali</li>
+            <li>Certificazioni mediche</li>
+            <li>Monitoraggio pazienti cronici</li>
+        </ul>
+    </div>
+
+</div>
+
+<footer>
+    © 2026 – Studio Medico Dott. Emanuel Savianu
+</footer>
+
 </body>
 </html>
