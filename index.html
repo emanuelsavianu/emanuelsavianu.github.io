@@ -47,7 +47,16 @@
             min-height: 100vh;
         }
 
-        /* Header/Hero */
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+
         header {
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.95) 0%, rgba(51, 133, 214, 0.9) 100%);
             color: var(--white);
@@ -96,7 +105,6 @@
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Container */
         .container {
             max-width: 1200px;
             margin: -70px auto 60px;
@@ -108,7 +116,6 @@
             z-index: 10;
         }
 
-        /* Desktop Layout logic */
         @media (min-width: 768px) {
             .container { grid-template-columns: 1fr 1fr; }
             .card-large { grid-column: span 2; }
@@ -117,16 +124,13 @@
         @media (min-width: 1024px) {
             .container { grid-template-columns: 2fr 1fr; }
             .card-large { grid-column: 1; }
-            /* This makes the right column stretch to match the left height */
             .sidebar-column {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-between;
                 gap: 30px;
             }
         }
 
-        /* Cards */
         .card {
             background: var(--white);
             padding: 40px;
@@ -159,7 +163,6 @@
             font-weight: 700;
         }
 
-        /* NEW LOGO POSITIONING */
         .logo-display-container {
             display: flex;
             justify-content: center;
@@ -170,11 +173,10 @@
         .face-logo {
             width: 250px;
             height: auto;
-            opacity: 1; /* Fully visible */
+            opacity: 1;
             display: block;
         }
 
-        /* Info Items */
         .info-grid {
             display: grid;
             gap: 24px;
@@ -202,7 +204,7 @@
             border-radius: var(--radius-sm);
         }
 
-        .call-button {
+        .call-button, .directions-button {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -213,10 +215,17 @@
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 600;
-            margin: 24px 0;
+            margin: 24px 0 0 0;
+            width: 100%;
         }
 
-        /* Hours */
+        .directions-button {
+            margin-top: 15px;
+            padding: 15px 24px;
+            background: var(--primary-light);
+            font-size: 0.95rem;
+        }
+
         .hours-list { list-style: none; }
         .hours-list li {
             display: flex;
@@ -235,7 +244,6 @@
             font-size: 0.9rem;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 48px 24px;
@@ -262,36 +270,36 @@
         </div>
         
         <div class="info-grid">
-            <div class="info-item">
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="info-item">
                 <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="info-content">
                     <strong>Studio Medico</strong>
                     <span>Via Ubaldo Pasqui 38, Arezzo</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="info-item">
+            <a href="tel:0575910904" class="info-item">
                 <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
                 <div class="info-content">
                     <strong>Telefono</strong>
                     <span>0575 910 904</span>
                 </div>
-            </div>
+            </a>
 
-            <div class="info-item">
+            <a href="mailto:studiomedicoippocratearezzo@gmail.com" class="info-item">
                 <div class="info-icon"><i class="fas fa-envelope"></i></div>
                 <div class="info-content">
                     <strong>Email</strong>
                     <span>studiomedicoippocratearezzo@gmail.com</span>
                 </div>
-            </div>
+            </a>
         </div>
 
         <a class="call-button" href="tel:0575910904">
             <i class="fas fa-phone-alt"></i> Chiama Ora
         </a>
 
-        <div class="calendly-inline-widget" data-url="https://calendly.com/emanuelsavianu/30min" style="min-width:320px;height:700px;"></div>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/emanuelsavianu/30min" style="min-width:320px;height:700px; margin-top: 30px;"></div>
         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
 
@@ -311,6 +319,27 @@
             </ul>
         </div>
 
+        <div class="card" style="padding: 20px;">
+            <div class="card-header" style="margin-bottom: 15px;">
+                <i class="fas fa-map-marked-alt"></i>
+                <h2>Dove Siamo</h2>
+            </div>
+            <div style="width: 100%; border-radius: var(--radius-sm); overflow: hidden; line-height: 0;">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.0854483424155!2d11.874136276632497!3d43.45878437111197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132ba816f564f9f7%3A0x63346594d232847c!2sVia%20Ubaldo%20Pasqui%2C%2038%2C%2052100%20Arezzo%20AR!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" 
+                    width="100%" 
+                    height="300" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="directions-button">
+                <i class="fas fa-directions"></i> Indicazioni Stradali
+            </a>
+        </div>
+
         <div class="logo-display-container">
             <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo" class="face-logo">
         </div>
@@ -320,7 +349,7 @@
 
 <footer>
     <p><strong>© 2026 Studio Medico Dott. Emanuel Savianu</strong><br>
-    Via Ubaldo Pasqui 38, Arezzo</p>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank">Via Ubaldo Pasqui 38, Arezzo</a></p>
 </footer>
 
 </body>
