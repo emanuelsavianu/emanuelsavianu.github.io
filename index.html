@@ -108,6 +108,7 @@
             z-index: 10;
         }
 
+        /* Desktop Layout logic */
         @media (min-width: 768px) {
             .container { grid-template-columns: 1fr 1fr; }
             .card-large { grid-column: span 2; }
@@ -116,6 +117,13 @@
         @media (min-width: 1024px) {
             .container { grid-template-columns: 2fr 1fr; }
             .card-large { grid-column: 1; }
+            /* This makes the right column stretch to match the left height */
+            .sidebar-column {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                gap: 30px;
+            }
         }
 
         /* Cards */
@@ -126,29 +134,6 @@
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
             position: relative;
-            overflow: hidden; /* Importante per contenere il logo in background */
-        }
-
-        /* LOGO IN BACKGROUND (Watermark) */
-        .card-large::after {
-            content: '';
-            position: absolute;
-            bottom: -20px;
-            right: -20px;
-            width: 250px;
-            height: 250px;
-            background-image: url('https://i.postimg.cc/R6LJHmdT/logo-transparent.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.08; /* Molto leggero per non disturbare la lettura */
-            z-index: 0;
-            pointer-events: none; /* Non interferisce con i click sui pulsanti */
-        }
-
-        .card-header, .info-grid, .call-button, .calendly-inline-widget {
-            position: relative;
-            z-index: 1; /* Mette i contenuti sopra il logo di sfondo */
         }
 
         .card-header {
@@ -174,6 +159,21 @@
             font-weight: 700;
         }
 
+        /* NEW LOGO POSITIONING */
+        .logo-display-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .face-logo {
+            width: 250px;
+            height: auto;
+            opacity: 1; /* Fully visible */
+            display: block;
+        }
+
         /* Info Items */
         .info-grid {
             display: grid;
@@ -185,7 +185,7 @@
             align-items: flex-start;
             gap: 16px;
             padding: 20px;
-            background: rgba(248, 251, 255, 0.8); /* Semi-trasparente */
+            background: rgba(248, 251, 255, 0.8);
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
         }
@@ -242,12 +242,6 @@
             border-top: 1px solid var(--border-color);
             margin-top: 60px;
         }
-
-        .footer-logo {
-            width: 80px;
-            opacity: 0.5;
-            margin-bottom: 15px;
-        }
     </style>
 </head>
 <body>
@@ -301,25 +295,30 @@
         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <i class="fas fa-clock"></i>
-            <h2>Orari di Ricevimento</h2>
+    <div class="sidebar-column">
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-clock"></i>
+                <h2>Orari di Ricevimento</h2>
+            </div>
+            
+            <ul class="hours-list">
+                <li><span>Lunedì</span><span class="time">17:00 – 18:30</span></li>
+                <li><span>Martedì</span><span class="time">11:30 – 13:00</span></li>
+                <li><span>Mercoledì</span><span class="time">17:00 – 18:30</span></li>
+                <li><span>Giovedì</span><span class="time">11:30 – 13:00</span></li>
+                <li><span>Venerdì</span><span class="time">17:00 – 18:30</span></li>
+            </ul>
         </div>
-        
-        <ul class="hours-list">
-            <li><span>Lunedì</span><span class="time">17:00 – 18:30</span></li>
-            <li><span>Martedì</span><span class="time">11:30 – 13:00</span></li>
-            <li><span>Mercoledì</span><span class="time">17:00 – 18:30</span></li>
-            <li><span>Giovedì</span><span class="time">11:30 – 13:00</span></li>
-            <li><span>Venerdì</span><span class="time">17:00 – 18:30</span></li>
-        </ul>
+
+        <div class="logo-display-container">
+            <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo" class="face-logo">
+        </div>
     </div>
 
 </div>
 
 <footer>
-    <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Studio Medico Logo" class="footer-logo">
     <p><strong>© 2026 Studio Medico Dott. Emanuel Savianu</strong><br>
     Via Ubaldo Pasqui 38, Arezzo</p>
 </footer>
