@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Dott. Emanuel Savianu | Medico di Medicina Generale</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,6 +38,11 @@
             padding: 0;
         }
 
+        html, body {
+            overflow-x: hidden; /* Prevents horizontal scroll */
+            width: 100%;
+        }
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
@@ -53,14 +58,12 @@
             transition: opacity 0.2s;
         }
 
-        a:hover {
-            opacity: 0.8;
-        }
+        a:hover { opacity: 0.8; }
 
         header {
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.95) 0%, rgba(51, 133, 214, 0.9) 100%);
             color: var(--white);
-            padding: 100px 20px 140px;
+            padding: 80px 20px 120px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -93,162 +96,137 @@
         }
 
         header h1 {
-            font-size: 3rem;
+            font-size: 2.2rem;
             font-weight: 700;
             margin-bottom: 12px;
             text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
 
         header p {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             font-weight: 300;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
 
         .container {
             max-width: 1200px;
-            margin: -70px auto 60px;
-            padding: 0 24px;
+            margin: -50px auto 40px;
+            padding: 0 15px; /* Reduced for mobile */
             display: grid;
             grid-template-columns: 1fr;
-            gap: 30px;
+            gap: 20px;
             position: relative;
             z-index: 10;
         }
 
         @media (min-width: 768px) {
-            .container { grid-template-columns: 1fr 1fr; }
+            header { padding: 100px 20px 140px; }
+            header h1 { font-size: 3rem; }
+            .container { 
+                grid-template-columns: 1fr 1fr; 
+                margin-top: -70px;
+                padding: 0 24px;
+            }
             .card-large { grid-column: span 2; }
         }
 
         @media (min-width: 1024px) {
             .container { grid-template-columns: 2fr 1fr; }
             .card-large { grid-column: 1; }
-            .sidebar-column {
-                display: flex;
-                flex-direction: column;
-                gap: 30px;
-            }
+            .sidebar-column { display: flex; flex-direction: column; gap: 30px; }
         }
 
         .card {
             background: var(--white);
-            padding: 40px;
+            padding: 25px; /* Responsive padding */
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
-            position: relative;
+            width: 100%;
         }
+
+        @media (min-width: 768px) { .card { padding: 40px; } }
 
         .card-header {
             display: flex;
             align-items: center;
             gap: 12px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
             border-bottom: 2px solid var(--border-color);
         }
 
         .card-header i {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: var(--primary);
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 184, 169, 0.1) 100%);
-            padding: 12px;
+            background: rgba(0, 102, 204, 0.1);
+            padding: 10px;
             border-radius: var(--radius-sm);
         }
 
-        h2 {
-            color: var(--text-dark);
-            font-size: 1.75rem;
-            font-weight: 700;
-        }
+        h2 { color: var(--text-dark); font-size: 1.5rem; font-weight: 700; }
 
-        .logo-display-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .face-logo {
-            width: 250px;
-            height: auto;
-            opacity: 1;
-            display: block;
-        }
-
-        .info-grid {
-            display: grid;
-            gap: 24px;
-        }
+        .info-grid { display: grid; gap: 15px; }
 
         .info-item {
             display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 20px;
-            background: rgba(248, 251, 255, 0.8);
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            background: var(--bg-gradient-1);
             border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
+            word-break: break-all; /* Prevents email from breaking layout */
         }
 
         .info-icon {
             flex-shrink: 0;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--primary);
-            color: var(--white);
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--primary); color: var(--white);
             border-radius: var(--radius-sm);
         }
 
         .call-button, .directions-button {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            background: var(--primary);
-            color: var(--white);
-            padding: 20px 32px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 600;
-            margin: 24px 0 0 0;
-            width: 100%;
+            display: flex; justify-content: center; align-items: center;
+            gap: 10px; background: var(--primary); color: var(--white);
+            padding: 18px; border-radius: var(--radius-md);
+            font-weight: 600; width: 100%; margin-top: 20px;
         }
 
-        .directions-button {
-            margin-top: 15px;
-            padding: 15px 24px;
-            background: var(--primary-light);
-            font-size: 0.95rem;
-        }
+        .directions-button { background: var(--primary-light); margin-top: 15px; }
 
         .hours-list { list-style: none; }
         .hours-list li {
-            display: flex;
-            justify-content: space-between;
-            padding: 16px 20px;
-            margin-bottom: 8px;
-            background: var(--bg-gradient-1);
-            border-radius: var(--radius-sm);
-        }
-
-        .time {
-            color: var(--white);
-            background: var(--primary);
-            padding: 6px 16px;
-            border-radius: 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 15px; margin-bottom: 8px;
+            background: var(--bg-gradient-1); border-radius: var(--radius-sm);
             font-size: 0.9rem;
         }
 
+        .time {
+            color: var(--white); background: var(--primary);
+            padding: 4px 12px; border-radius: 20px; font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        /* Fixed Calendly sizing */
+        .calendly-inline-widget {
+            max-width: 100% !important;
+            width: 100% !important;
+            margin-top: 30px;
+        }
+
+        .logo-display-container {
+            display: flex; justify-content: center; padding: 20px;
+        }
+
+        .face-logo {
+            max-width: 200px; width: 100%; height: auto;
+        }
+
         footer {
-            text-align: center;
-            padding: 48px 24px;
-            border-top: 1px solid var(--border-color);
-            margin-top: 60px;
+            text-align: center; padding: 40px 20px;
+            border-top: 1px solid var(--border-color); margin-top: 40px;
         }
     </style>
 </head>
@@ -273,7 +251,7 @@
             <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="info-item">
                 <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="info-content">
-                    <strong>Studio Medico</strong>
+                    <strong>Studio Medico</strong><br>
                     <span>Via Ubaldo Pasqui 38, Arezzo</span>
                 </div>
             </a>
@@ -281,7 +259,7 @@
             <a href="tel:0575910904" class="info-item">
                 <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
                 <div class="info-content">
-                    <strong>Telefono</strong>
+                    <strong>Telefono</strong><br>
                     <span>0575 910 904</span>
                 </div>
             </a>
@@ -289,8 +267,8 @@
             <a href="mailto:studiomedicoippocratearezzo@gmail.com" class="info-item">
                 <div class="info-icon"><i class="fas fa-envelope"></i></div>
                 <div class="info-content">
-                    <strong>Email</strong>
-                    <span>studiomedicoippocratearezzo@gmail.com</span>
+                    <strong>Email</strong><br>
+                    <span style="font-size: 0.85rem;">studiomedicoippocratearezzo@gmail.com</span>
                 </div>
             </a>
         </div>
@@ -299,7 +277,7 @@
             <i class="fas fa-phone-alt"></i> Chiama Ora
         </a>
 
-        <div class="calendly-inline-widget" data-url="https://calendly.com/emanuelsavianu/30min" style="min-width:320px;height:700px; margin-top: 30px;"></div>
+        <div class="calendly-inline-widget" data-url="https://calendly.com/emanuelsavianu/30min" style="min-width:300px;height:700px;"></div>
         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
 
@@ -307,9 +285,8 @@
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-clock"></i>
-                <h2>Orari di Ricevimento</h2>
+                <h2>Orari</h2>
             </div>
-            
             <ul class="hours-list">
                 <li><span>Lunedì</span><span class="time">17:00 – 18:30</span></li>
                 <li><span>Martedì</span><span class="time">11:30 – 13:00</span></li>
@@ -319,20 +296,15 @@
             </ul>
         </div>
 
-        <div class="card" style="padding: 20px;">
-            <div class="card-header" style="margin-bottom: 15px;">
+        <div class="card" style="padding: 15px;">
+            <div class="card-header" style="margin-bottom: 15px; border:none; padding:0;">
                 <i class="fas fa-map-marked-alt"></i>
                 <h2>Dove Siamo</h2>
             </div>
             <div style="width: 100%; border-radius: var(--radius-sm); overflow: hidden; line-height: 0;">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2893.0854483424155!2d11.874136276632497!3d43.45878437111197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132ba816f564f9f7%3A0x63346594d232847c!2sVia%20Ubaldo%20Pasqui%2C%2038%2C%2052100%20Arezzo%20AR!5e0!3m2!1sit!2sit!4v1700000000000!5m2!1sit!2sit" 
-                    width="100%" 
-                    height="300" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2892.4271813444265!2d11.871866376573!3d43.45170497111242!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x132ba2da268579ef%3A0xe5a2872651139499!2sVia%20Ubaldo%20Pasqui%2C%2038%2C%2052100%20Arezzo%20AR!5e0!3m2!1sit!2sit!4v1700000000000" 
+                    width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
             <a href="https://www.google.com/maps/dir/?api=1&destination=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="directions-button">
