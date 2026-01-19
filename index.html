@@ -32,18 +32,6 @@
             --radius-lg: 16px;
         }
 
-        .footer-logo {
-            width: 120px;
-            height: auto;
-            margin-bottom: 20px;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
-        }
-
-        .footer-logo:hover {
-            opacity: 1;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -63,7 +51,7 @@
         header {
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.95) 0%, rgba(51, 133, 214, 0.9) 100%);
             color: var(--white);
-            padding: 80px 20px 120px;
+            padding: 100px 20px 140px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -101,11 +89,13 @@
             margin: 0 auto;
         }
 
-        .header-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            opacity: 0.95;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
+        /* Logo rimosso dall'header e pulito */
+        .custom-logo-body {
+            display: block;
+            width: 160px;
+            height: auto;
+            margin: 0 auto 30px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.05));
         }
 
         header h1 {
@@ -188,7 +178,6 @@
             transform: scaleX(1);
         }
 
-        /* Card Headers */
         .card-header {
             display: flex;
             align-items: center;
@@ -214,7 +203,7 @@
             letter-spacing: -0.5px;
         }
 
-        /* Contact Info */
+        /* Info Items */
         .info-grid {
             display: grid;
             gap: 24px;
@@ -259,12 +248,6 @@
             font-size: 1rem;
         }
 
-        .info-content span {
-            color: var(--text-medium);
-            font-size: 0.95rem;
-        }
-
-        /* Call Button */
         .call-button {
             display: flex;
             justify-content: center;
@@ -278,38 +261,9 @@
             font-weight: 600;
             font-size: 1.15rem;
             transition: all 0.3s ease;
-            margin-top: 24px;
+            margin: 24px 0;
             box-shadow: 0 8px 24px rgba(0, 102, 204, 0.25);
             border: none;
-            cursor: pointer;
-        }
-
-        .call-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 102, 204, 0.35);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
-        }
-
-        .call-button:active {
-            transform: translateY(0);
-        }
-
-        .call-button i {
-            font-size: 1.3rem;
-        }
-
-        /* Map */
-        .map-container {
-            margin-top: 28px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            height: 280px;
-            border: 2px solid var(--border-color);
-        }
-
-        .map-container iframe {
-            filter: grayscale(0.2) contrast(1.1);
         }
 
         /* Hours */
@@ -325,18 +279,6 @@
             margin-bottom: 8px;
             background: var(--bg-gradient-1);
             border-radius: var(--radius-sm);
-            transition: all 0.2s ease;
-        }
-
-        .hours-list li:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 184, 169, 0.05) 100%);
-            transform: translateX(4px);
-        }
-
-        .day {
-            font-weight: 600;
-            color: var(--text-dark);
-            font-size: 1rem;
         }
 
         .time {
@@ -346,18 +288,15 @@
             border-radius: 20px;
             font-size: 0.9rem;
             font-weight: 500;
-            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.2);
         }
 
         .hours-note {
             margin-top: 20px;
-            padding: 16px;
-            background: linear-gradient(135deg, rgba(0, 184, 169, 0.08) 0%, rgba(0, 102, 204, 0.08) 100%);
-            border-left: 4px solid var(--accent);
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: var(--text-medium);
-            font-style: italic;
+            display: flex;
+            gap: 10px;
+            align-items: center;
         }
 
         /* Footer */
@@ -369,66 +308,16 @@
             margin-top: 60px;
         }
 
-        footer p {
-            color: var(--text-light);
-            font-size: 0.95rem;
-            line-height: 1.8;
+        .footer-logo {
+            width: 100px;
+            height: auto;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
-        footer strong {
-            color: var(--text-dark);
-            font-weight: 600;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            header {
-                padding: 60px 20px 100px;
-            }
-
-            header h1 {
-                font-size: 2.2rem;
-            }
-
-            header p {
-                font-size: 1.15rem;
-            }
-
-            .header-icon {
-                font-size: 3rem;
-            }
-
-            .container {
-                margin-top: -50px;
-                gap: 24px;
-            }
-
-            .card {
-                padding: 28px;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            .call-button {
-                font-size: 1.05rem;
-                padding: 18px 28px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            header h1 {
-                font-size: 1.85rem;
-            }
-
-            .card {
-                padding: 24px;
-            }
-
-            .info-item {
-                padding: 16px;
-            }
+            header h1 { font-size: 2.2rem; }
+            .custom-logo-body { width: 130px; }
         }
     </style>
 </head>
@@ -436,7 +325,6 @@
 
 <header>
     <div class="header-content">
-        <i class="fas fa-user-md header-icon"></i>
         <h1>Dott. Emanuel Savianu</h1>
         <p>Medico di Medicina Generale</p>
     </div>
@@ -450,11 +338,11 @@
             <h2>Contatti</h2>
         </div>
         
+        <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo Dott. Savianu" class="custom-logo-body">
+
         <div class="info-grid">
             <div class="info-item">
-                <div class="info-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </div>
+                <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                 <div class="info-content">
                     <strong>Studio Medico</strong>
                     <span>Via Ubaldo Pasqui 38, Arezzo</span>
@@ -462,9 +350,7 @@
             </div>
 
             <div class="info-item">
-                <div class="info-icon">
-                    <i class="fas fa-phone-alt"></i>
-                </div>
+                <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
                 <div class="info-content">
                     <strong>Telefono</strong>
                     <span>0575 910 904</span>
@@ -472,9 +358,7 @@
             </div>
 
             <div class="info-item">
-                <div class="info-icon">
-                    <i class="fas fa-envelope"></i>
-                </div>
+                <div class="info-icon"><i class="fas fa-envelope"></i></div>
                 <div class="info-content">
                     <strong>Email</strong>
                     <span>studiomedicoippocratearezzo@gmail.com</span>
@@ -485,21 +369,9 @@
         <a class="call-button" href="tel:0575910904">
             <i class="fas fa-phone-alt"></i> Chiama Ora
         </a>
-<!-- Calendly inline widget begin -->
-<div class="calendly-inline-widget" data-url="https://calendly.com/emanuelsavianu/30min" style="min-width:320px;height:700px;"></div>
-<script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-<!-- Calendly inline widget end -->
-        <div class="map-container">
-            <iframe 
-                width="100%" 
-                height="100%" 
-                frameborder="0" 
-                scrolling="no" 
-                marginheight="0" 
-                marginwidth="0" 
-                src="https://maps.google.com/maps?q=Via+Ubaldo+Pasqui+38,+Arezzo&t=&z=15&ie=UTF8&iwloc=&output=embed">
-            </iframe>
-        </div>
+
+        <div class="calendly-inline-widget" data-url="https://calendly.com/emanuelsavianu/30min" style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
     </div>
 
     <div class="card">
@@ -509,26 +381,11 @@
         </div>
         
         <ul class="hours-list">
-            <li>
-                <span class="day">Lunedì</span>
-                <span class="time">17:00 – 18:30</span>
-            </li>
-            <li>
-                <span class="day">Martedì</span>
-                <span class="time">11:30 – 13:00</span>
-            </li>
-            <li>
-                <span class="day">Mercoledì</span>
-                <span class="time">17:00 – 18:30</span>
-            </li>
-            <li>
-                <span class="day">Giovedì</span>
-                <span class="time">11:30 – 13:00</span>
-            </li>
-            <li>
-                <span class="day">Venerdì</span>
-                <span class="time">17:00 – 18:30</span>
-            </li>
+            <li><span class="day">Lunedì</span><span class="time">17:00 – 18:30</span></li>
+            <li><span class="day">Martedì</span><span class="time">11:30 – 13:00</span></li>
+            <li><span class="day">Mercoledì</span><span class="time">17:00 – 18:30</span></li>
+            <li><span class="day">Giovedì</span><span class="time">11:30 – 13:00</span></li>
+            <li><span class="day">Venerdì</span><span class="time">17:00 – 18:30</span></li>
         </ul>
         
         <div class="hours-note">
@@ -539,8 +396,8 @@
 </div>
 
 <footer>
-    <img src="https://i.postimg.cc/HswBvrpy/43166-(1).jpg" alt="Studio Medico Logo" class="footer-logo">
-    <p><strong>&copy; 2026 Studio Medico Dott. Emanuel Savianu</strong><br>
+    <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Studio Medico Logo" class="footer-logo">
+    <p><strong>© 2026 Studio Medico Dott. Emanuel Savianu</strong><br>
     Via Ubaldo Pasqui 38, Arezzo</p>
 </footer>
 
