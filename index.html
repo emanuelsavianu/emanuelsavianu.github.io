@@ -13,230 +13,241 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
+        /* --- STILI ORIGINALI INTEGRATI --- */
         :root {
-            --primary: #0056b3; /* Blu Medico più serio */
-            --primary-light: #e7f1ff;
-            --accent: #10b981; /* Verde Rassicurante per azioni positive */
-            --accent-dark: #059669;
-            --urgent: #ef4444;
-            --text-dark: #1f2937;
-            --text-gray: #4b5563;
-            --bg-page: #f3f4f6;
+            --primary: #0066cc;        /* Tuo Blu Originale */
+            --primary-dark: #004c99;
+            --primary-light: #3385d6;
+            --accent: #00b8a9;         /* Tuo Verde Acqua Originale */
+            --info: #6366f1;           /* Viola per messaggi */
+            --bg-gradient-1: #f8fbff;
+            --bg-gradient-2: #ffffff;
+            --text-dark: #1a1a2e;
+            --text-medium: #4a5568;
             --white: #ffffff;
-            --radius: 12px;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --border-color: #e2e8f0;
+            --shadow-md: 0 8px 24px rgba(0, 102, 204, 0.12);
+            --radius-lg: 16px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-page);
+            background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
             color: var(--text-dark);
             line-height: 1.6;
+            min-height: 100vh;
         }
 
-        /* --- Header --- */
+        a { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+        a:hover { opacity: 0.9; }
+
+        /* --- HEADER --- */
         header {
-            background: linear-gradient(135deg, var(--primary), #003d80);
-            color: white;
-            padding: 40px 20px 80px; /* Spazio extra sotto per sovrapposizione card */
+            /* Rimosso il gradiente blu solido, ora è trasparente con overlay scuro */
+            background-color: #0066cc; 
+            color: var(--white);
+            padding: 80px 20px 120px;
+            position: relative;
+            overflow: hidden;
             text-align: center;
         }
-        
-        .header-logo {
-            max-width: 120px;
-            margin-bottom: 15px;
-            filter: brightness(0) invert(1); /* Rende il logo bianco se è trasparente */
-            opacity: 0.9;
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            /* Immagine originale senza filtri */
+            background-image: url('https://i.postimg.cc/QxQ0YFXg/43166.jpg');
+            background-size: cover;
+            background-position: center;
+            opacity: 1;
+            z-index: 0;
         }
 
-        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .subtitle { font-size: 1.1rem; opacity: 0.9; font-weight: 300; }
+        /* Aggiunto un leggero overlay nero solo per leggere il testo bianco sopra l'immagine */
+        header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.4); 
+            z-index: 1;
+        }
 
-        /* --- Layout Griglia --- */
+        .header-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 900px; 
+            margin: 0 auto; 
+        }
+
+        header h1 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            margin-bottom: 10px; 
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+        
+        header p { 
+            font-size: 1.3rem; 
+            font-weight: 400; 
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- LAYOUT --- */
         .container {
-            max-width: 1000px;
-            margin: -60px auto 40px; /* Effetto sovrapposizione header */
-            padding: 0 15px;
+            max-width: 1100px;
+            margin: -60px auto 60px; /* Effetto sovrapposizione header */
+            padding: 0 20px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 25px;
             position: relative;
             z-index: 10;
         }
 
-        @media (min-width: 768px) {
-            .container { 
-                grid-template-columns: 2fr 1fr; /* 2/3 contenuto, 1/3 sidebar */
-            }
+        @media (min-width: 900px) {
+            .container { grid-template-columns: 2fr 1fr; }
         }
 
-        /* --- Cards --- */
+        /* --- CARDS --- */
         .card {
             background: var(--white);
-            border-radius: var(--radius);
-            padding: 25px;
-            box-shadow: var(--shadow);
-            margin-bottom: 20px;
-            border: 1px solid #e5e7eb;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px;
         }
 
         .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #f0f0f0;
+            display: flex; align-items: center; gap: 12px;
+            margin-bottom: 20px; padding-bottom: 15px;
+            border-bottom: 2px solid var(--bg-gradient-1);
         }
         
-        .card-header h2 { font-size: 1.25rem; color: var(--primary); }
-        .card-header i { font-size: 1.25rem; }
-
-        /* --- Pulsanti Azione (Core Business) --- */
-        .action-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
+        .card-header i { 
+            font-size: 1.4rem; color: var(--primary); 
+            background: rgba(0, 102, 204, 0.1); padding: 10px; border-radius: 8px;
         }
-        @media (min-width: 600px) { .action-grid { grid-template-columns: 1fr 1fr; } }
+        
+        h2 { font-size: 1.4rem; font-weight: 700; color: var(--primary-dark); }
+
+        /* --- LOGO SIDEBAR --- */
+        .sidebar-logo-container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 25px; /* Spazio sotto il logo */
+        }
+        
+        .sidebar-logo-img {
+            max-width: 200px;
+            height: auto;
+            /* Nessun filtro: colore originale (nero su bianco) */
+        }
+
+        /* --- PULSANTI AZIONE --- */
+        .action-grid {
+            display: grid; grid-template-columns: 1fr; gap: 15px;
+        }
+        @media (min-width: 600px) { 
+            .action-grid { grid-template-columns: 1fr 1fr; }
+            .btn-prenota-wrapper { grid-column: span 2; }
+        }
 
         .btn-main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 25px 15px;
-            border-radius: var(--radius);
-            text-decoration: none;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 25px; border-radius: var(--radius-lg);
+            text-align: center; border: none; cursor: pointer; width: 100%;
             transition: transform 0.2s, box-shadow 0.2s;
-            text-align: center;
-            border: none;
-            cursor: pointer;
-            height: 100%;
+            color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         
         .btn-main i { font-size: 2rem; margin-bottom: 10px; }
-        .btn-main span { font-weight: 700; font-size: 1.1rem; display: block; }
-        .btn-main small { font-size: 0.85rem; font-weight: 400; opacity: 0.9; margin-top: 5px; display: block; }
+        .btn-main span { font-weight: 700; font-size: 1.1rem; }
+        .btn-main small { font-size: 0.85rem; opacity: 0.9; margin-top: 5px; }
 
-        .btn-prenota { 
-            background: var(--primary); 
-            color: white; 
-        }
-        
-        .btn-ricette { 
-            background: var(--accent); 
-            color: white; 
-        }
+        .btn-prenota { background: var(--primary); }
+        .btn-ricette { background: var(--accent); }
+        .btn-messaggi { background: var(--info); }
 
-        /* --- Avvisi --- */
+        /* --- AVVISI --- */
         .alert-box {
-            background-color: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-            font-size: 0.95rem;
-            color: #856404;
+            background-color: #fff8e1; border-left: 5px solid #ffc107;
+            padding: 15px; margin-bottom: 25px; border-radius: 8px;
+            color: #856404; font-size: 0.95rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
 
-        /* --- Contatti & Sidebar --- */
+        /* --- CONTATTI --- */
         .contact-row {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: var(--bg-page);
-            border-radius: 8px;
-            text-decoration: none;
-            color: inherit;
-            transition: background 0.2s;
+            display: flex; align-items: center; gap: 15px;
+            margin-bottom: 15px; padding: 12px;
+            background: var(--bg-gradient-1); border-radius: 10px;
+            border: 1px solid var(--border-color);
         }
-        .contact-row:hover { background: #e5e7eb; }
+        .contact-row:hover { background: #edf2f7; }
         
         .icon-circle {
-            width: 40px; height: 40px;
-            background: var(--white);
-            color: var(--primary);
-            border-radius: 50%;
+            width: 36px; height: 36px; background: var(--white);
+            color: var(--primary); border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            flex-shrink: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
         }
 
-        .phone-highlight { font-size: 1.2rem; font-weight: 700; color: var(--text-dark); display: block; }
-        .voip-label { font-size: 0.75rem; text-transform: uppercase; color: var(--accent-dark); font-weight: 700; letter-spacing: 0.5px; }
-
-        /* --- Orari --- */
+        /* --- ORARI --- */
         .hours-table { width: 100%; border-collapse: collapse; }
-        .hours-table td { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.95rem; }
+        .hours-table td { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
         .hours-table tr:last-child td { border-bottom: none; }
-        .hours-table .day { font-weight: 600; color: var(--text-gray); }
-        .hours-table .time { text-align: right; font-feature-settings: "tnum"; font-variant-numeric: tabular-nums; }
+        .hours-table .day { font-weight: 600; color: var(--text-medium); }
+        .hours-table .time { text-align: right; color: var(--primary-dark); font-weight: 500; }
 
-        /* --- Iframe Containers --- */
+        /* --- CALENDARIO IFRAME --- */
         .iframe-wrapper {
-            position: relative;
-            width: 100%;
-            /* Modificato per adattarsi meglio al modulo prenotazioni verticale */
-            min-height: 600px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f9fafb;
+            position: relative; width: 100%; min-height: 650px;
+            border: 1px solid var(--border-color); border-radius: var(--radius-lg);
+            overflow: hidden; background: #fafafa;
         }
-        .iframe-wrapper iframe {
-            width: 100%; 
-            height: 600px;
-            border: 0;
-        }
+        .iframe-wrapper iframe { width: 100%; height: 650px; border: 0; }
 
-        /* --- Footer --- */
+        /* --- FOOTER --- */
         footer {
-            text-align: center;
-            padding: 40px 20px;
-            font-size: 0.85rem;
-            color: var(--text-gray);
-            background: var(--white);
-            border-top: 1px solid #e5e7eb;
-            margin-top: 40px;
+            text-align: center; padding: 40px 20px; font-size: 0.85rem;
+            color: var(--text-medium); background: var(--white); border-top: 1px solid var(--border-color);
         }
-        footer a { color: var(--primary); text-decoration: none; }
 
-        /* Utility nascosta per JS switch */
+        /* Utility */
         .hidden { display: none; }
         .fade-in { animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-    /* --- Modale Privacy --- */
-    .modal-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0,0,0,0.5); z-index: 1000;
-        display: none; justify-content: center; align-items: center;
-        padding: 20px;
-    }
-    .modal-content {
-        background: white; padding: 30px; border-radius: var(--radius);
-        max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    }
-    .close-modal {
-        float: right; font-size: 1.5rem; cursor: pointer; color: #666;
-    }
-</style>
+
+        /* Modal Privacy */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 1000;
+            display: none; justify-content: center; align-items: center; padding: 20px;
+        }
+        .modal-content {
+            background: white; padding: 30px; border-radius: var(--radius-lg);
+            max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
+        }
+        .close-modal { float: right; font-size: 1.5rem; cursor: pointer; }
+    </style>
 </head>
 <body>
 
 <header>
-    <!-- Logo (se disponibile) o Icona -->
-    <i class="fas fa-user-md fa-3x" style="color: rgba(255,255,255,0.8); margin-bottom: 15px;"></i>
-    <h1>Dott. Emanuel Savianu</h1>
-    <p class="subtitle">Medico di Medicina Generale - Arezzo</p>
+    <div class="header-content">
+        <h1>Dott. Emanuel Savianu</h1>
+        <p>Medico di Medicina Generale - Arezzo</p>
+    </div>
 </header>
 
 <div class="container">
@@ -244,52 +255,57 @@
     <!-- COLONNA PRINCIPALE (SINISTRA) -->
     <main>
         
-        <!-- Box Avvisi (Visibile solo se necessario) -->
         <div class="alert-box">
-            <i class="fas fa-bullhorn"></i> <strong>Avviso Importante:</strong> 
-            Per evitare attese telefoniche, si prega di utilizzare il sito per le ricette ripetitive.
+            <i class="fas fa-bullhorn"></i> <strong>Avviso:</strong> 
+            Per evitare attese telefoniche, si prega di utilizzare i moduli online qui sotto per ricette e comunicazioni.
         </div>
 
         <!-- Box Azioni Rapide -->
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-mouse-pointer"></i>
-                <h2>Cosa vuoi fare oggi?</h2>
+                <h2>Servizi Online</h2>
             </div>
             
             <div class="action-grid">
-                <!-- Bottone Prenota -->
-                <button onclick="showSection('booking')" class="btn-main btn-prenota">
-                    <i class="far fa-calendar-check"></i>
-                    <span>Prenota Visita</span>
-                    <small>Scegli l'orario in autonomia</small>
-                </button>
+                <!-- 1. PRENOTA -->
+                <div class="btn-prenota-wrapper">
+                    <button onclick="showSection('booking')" class="btn-main btn-prenota">
+                        <i class="far fa-calendar-check"></i>
+                        <span>Prenota Visita</span>
+                        <small>Scegli l'orario in autonomia</small>
+                    </button>
+                </div>
 
-                <!-- Bottone Ricette -->
-                <!-- LINK AGGIORNATO CON MODULO REALE -->
+                <!-- 2. FARMACI -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" class="btn-main btn-ricette">
                     <i class="fas fa-pills"></i>
                     <span>Richiedi Farmaci</span>
                     <small>Rinnovo ricette continuative</small>
                 </a>
+
+                <!-- 3. MESSAGGI -->
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6I-JgIHyVk3VA_Bx5jMOiwJqT0YBgN118Wso3snHiCKB_Tg/viewform?usp=header" target="_blank" class="btn-main btn-messaggi">
+                    <i class="far fa-envelope"></i>
+                    <span>Scrivi alla Segreteria</span>
+                    <small>Info, Referti o Comunicazioni</small>
+                </a>
             </div>
         </div>
 
-        <!-- Sezione Prenotazione (Inizialmente nascosta o visibile, a scelta) -->
+        <!-- Sezione Prenotazione -->
         <div id="booking-section" class="card hidden">
             <div class="card-header">
                 <i class="far fa-calendar-alt"></i>
                 <h2>Calendario Prenotazioni</h2>
             </div>
-            <p style="margin-bottom: 15px; color: var(--text-gray);">
-                Seleziona uno slot libero. Riceverai una conferma via email.
+            <p style="margin-bottom: 15px; color: var(--text-medium);">
+                Seleziona uno slot libero qui sotto. Riceverai una conferma via email.
             </p>
             
-            <!-- CONTENITORE CALENDARIO -->
             <div class="iframe-wrapper">
-                <!-- Google Calendar Appointment Scheduling begin -->
+                <!-- Google Calendar Appointment Scheduling -->
                 <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
-                <!-- end Google Calendar Appointment Scheduling -->
             </div>
         </div>
 
@@ -298,40 +314,41 @@
     <!-- COLONNA LATERALE (DESTRA) -->
     <aside>
         
-        <!-- Info Contatto -->
+        <!-- Contatti -->
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-address-book"></i>
                 <h2>Contatti</h2>
             </div>
 
-            <!-- Telefono Studio -->
             <a href="tel:05751713428" class="contact-row">
                 <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
                 <div>
-                    <span class="voip-label">Segreteria / Studio</span>
-                    <span class="phone-highlight">0575 171 3428</span>
+                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Segreteria</span><br>
+                    <span style="font-size: 1.1rem; font-weight: 700;">0575 171 3428</span>
                 </div>
             </a>
 
-            <!-- Indirizzo -->
             <a href="https://goo.gl/maps/Arezzo" target="_blank" class="contact-row">
                 <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
                 <div>
-                    <span class="voip-label">Dove Siamo</span>
-                    <span style="display:block; font-weight:600;">Via Ubaldo Pasqui 38</span>
-                    <span style="font-size:0.9rem;">Arezzo</span>
+                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
+                    <span>Via Ubaldo Pasqui 38, Arezzo</span>
                 </div>
             </a>
 
-            <!-- Email -->
             <a href="mailto:studiomedicoippocratearezzo@gmail.com" class="contact-row">
                 <div class="icon-circle"><i class="far fa-envelope"></i></div>
                 <div>
-                    <span class="voip-label">Email</span>
-                    <span style="font-size:0.85rem; word-break: break-all;">studiomedicoippocratearezzo@gmail.com</span>
+                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Email</span><br>
+                    <span style="font-size:0.85rem;">studiomedicoippocratearezzo@gmail.com</span>
                 </div>
             </a>
+        </div>
+
+        <!-- LOGO POSIZIONATO SOTTO I CONTATTI -->
+        <div class="sidebar-logo-container">
+            <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo Studio Savianu" class="sidebar-logo-img">
         </div>
 
         <!-- Orari -->
@@ -348,9 +365,6 @@
                 <tr><td class="day">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
                 <tr><td class="day" style="color:#ef4444;">Sab - Dom</td><td class="time">Chiuso</td></tr>
             </table>
-            <div style="margin-top: 15px; font-size: 0.8rem; color: #666; background: #f9fafb; padding: 10px; border-radius: 6px;">
-                <i class="fas fa-info-circle"></i> <strong>Nota:</strong> Si riceve preferibilmente su appuntamento.
-            </div>
         </div>
 
     </aside>
@@ -359,9 +373,9 @@
 
 <footer>
     <div style="max-width: 1000px; margin: 0 auto;">
-        <p>&copy; 2026 Studio Medico Dott. Emanuel Savianu - P.IVA/CF: [Inserire Dati]</p>
+        <p>&copy; 2026 Studio Medico Dott. Emanuel Savianu</p>
         <p style="margin-top: 10px;">
-            <a href="#" onclick="openPrivacy(event)">Privacy Policy</a> | <a href="#">Cookie Policy</a> | <a href="https://www.ordine-medici-arezzo.it/" target="_blank">Ordine dei Medici Arezzo</a>
+            <a href="#" onclick="openPrivacy(event)">Privacy Policy</a> | <a href="https://www.ordine-medici-arezzo.it/" target="_blank">Ordine dei Medici Arezzo</a>
         </p>
     </div>
 </footer>
@@ -370,35 +384,30 @@
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
         <span class="close-modal" onclick="closePrivacy()">&times;</span>
-        <h2 style="color: var(--primary); margin-bottom: 15px;">Informativa Privacy Semplificata</h2>
-        <p style="margin-bottom: 10px; font-size: 0.9rem;">
-            <strong>Titolare del Trattamento:</strong> Dott. Emanuel Savianu, Via Ubaldo Pasqui 38, Arezzo.<br>
+        <h2 style="color: var(--primary); margin-bottom: 15px;">Informativa Privacy</h2>
+        <p style="margin-bottom: 10px;">
+            <strong>Titolare del Trattamento:</strong> Dott. Emanuel Savianu, Via Ubaldo Pasqui 38, Arezzo.
+        </p>
+        <p style="margin-bottom: 10px;">
             <strong>Finalità:</strong> I dati raccolti tramite il sito (Google Forms, Prenotazioni) sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste.
         </p>
-        <p style="margin-bottom: 10px; font-size: 0.9rem;">
-            <strong>Strumenti:</strong> Questo sito utilizza servizi professionali Google Workspace conformi al GDPR per la gestione sicura dei dati.
+        <p style="margin-bottom: 10px;">
+            <strong>Gestione Dati:</strong> Utilizziamo Google Workspace in conformità con il GDPR.
         </p>
-        <p style="margin-bottom: 10px; font-size: 0.9rem;">
-            <strong>Diritti:</strong> Il paziente può richiedere in ogni momento la cancellazione o la modifica dei propri dati contattando la segreteria.
-        </p>
-        <hr style="border: 0; border-top: 1px solid #eee; margin: 15px 0;">
-        <small>Per l'informativa completa, consultare il documento cartaceo affisso in studio.</small>
+        <small>Per l'informativa completa, consultare il documento in studio.</small>
     </div>
 </div>
 
 <script>
     function showSection(sectionId) {
-        // Logica semplice per mostrare la sezione prenotazione
         const section = document.getElementById(sectionId + '-section');
         if(section) {
             section.classList.remove('hidden');
             section.classList.add('fade-in');
-            // Scroll morbido verso la sezione
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 
-    // Funzioni Privacy Modal
     function openPrivacy(e) {
         e.preventDefault();
         document.getElementById('privacyModal').style.display = 'flex';
@@ -406,7 +415,6 @@
     function closePrivacy() {
         document.getElementById('privacyModal').style.display = 'none';
     }
-    // Chiudi se si clicca fuori dal box
     window.onclick = function(event) {
         const modal = document.getElementById('privacyModal');
         if (event.target == modal) {
