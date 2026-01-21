@@ -183,17 +183,16 @@
         .iframe-wrapper {
             position: relative;
             width: 100%;
-            height: 0;
-            padding-bottom: 75%; /* Aspect ratio for calendar */
+            /* Modificato per adattarsi meglio al modulo prenotazioni verticale */
+            min-height: 600px;
             border: 1px solid #e5e7eb;
             border-radius: 8px;
             overflow: hidden;
             background: #f9fafb;
         }
         .iframe-wrapper iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 100%; 
+            height: 600px;
             border: 0;
         }
 
@@ -268,7 +267,7 @@
 
                 <!-- Bottone Ricette -->
                 <!-- LINK AGGIORNATO CON MODULO REALE -->
-                <a href="https://forms.gle/GzqWVqZyyb3Qowpf9" target="_blank" class="btn-main btn-ricette">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" class="btn-main btn-ricette">
                     <i class="fas fa-pills"></i>
                     <span>Richiedi Farmaci</span>
                     <small>Rinnovo ricette continuative</small>
@@ -287,19 +286,10 @@
             </p>
             
             <!-- CONTENITORE CALENDARIO -->
-            <!-- Istruzioni: Vai su Google Calendar > Pagina appuntamenti > Condividi > Incorpora nel sito web. 
-                 Incolla il codice iframe qui sotto al posto di questo commento. -->
             <div class="iframe-wrapper">
-                <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #666; text-align: center; padding: 20px;">
-                    <p>
-                        <i class="fas fa-cog fa-spin fa-2x"></i><br><br>
-                        <strong>Configurazione in corso...</strong><br>
-                        Dottore, incolla qui il codice "iframe" della Pagina Appuntamenti di Google Calendar.
-                    </p>
-                </div>
-                <!-- Esempio di come apparirà: 
-                <iframe src="https://calendar.google.com/calendar/appointments/..." loading="lazy"></iframe> 
-                -->
+                <!-- Google Calendar Appointment Scheduling begin -->
+                <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+                <!-- end Google Calendar Appointment Scheduling -->
             </div>
         </div>
 
