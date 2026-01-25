@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Dott. Emanuel Savianu | Medico di Medicina Generale Arezzo</title>
     
+    <!-- Preload Fonts per performance migliori -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" as="style">
+    
     <!-- Meta Tag SEO -->
     <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Medico di Medicina Generale. Prenotazioni online, ricette e gestione appuntamenti tramite MilleBook.">
     <meta name="keywords" content="medico di base arezzo, dottor savianu, prenotazione visita, millebook arezzo, ricette online, family doctor arezzo, general practitioner arezzo">
@@ -33,6 +36,10 @@
         "addressLocality": "Arezzo",
         "postalCode": "52100",
         "addressCountry": "IT"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Arezzo"
       },
       "openingHoursSpecification": [
         {
@@ -463,7 +470,7 @@
             </p>
             
             <div class="iframe-wrapper">
-                <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+                <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
 
@@ -553,6 +560,24 @@
             </div>
         </div>
 
+        <!-- Dati Professionali -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-info-circle"></i>
+                <h2 data-i18n="prof_info_title">Dati Professionali</h2>
+            </div>
+            <div style="font-size: 0.9rem; line-height: 1.6; color: var(--text-medium);">
+                <p><strong>Dott. Emanuel Savianu</strong><br>
+                <span data-i18n="prof_role">Medico di Medicina Generale</span><br>
+                C.R. 011189 nr. 3278095905<br>
+                Ord. Medici AR n. 3499<br>
+                P.IVA 02348320512<br>
+                Codice SDI JKKZDGR<br>
+                via Tullio Innocenti 38 Arezzo<br>
+                <a href="mailto:emanuel.savianu@pec.omceoar.it">emanuel.savianu@pec.omceoar.it</a></p>
+            </div>
+        </div>
+
     </aside>
 
 </div>
@@ -561,10 +586,32 @@
     <div style="max-width: 1000px; margin: 0 auto;">
         <p>&copy; 2026 Studio Medico Dott. Emanuel Savianu</p>
         <p style="margin-top: 10px;">
-            <a href="#" onclick="openPrivacy(event)">Privacy Policy</a> | <a href="https://www.ordine-medici-arezzo.it/" target="_blank">Ordine dei Medici Arezzo</a>
+            <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a> | <a href="https://www.omceoar.it/" target="_blank">Ordine dei Medici Arezzo</a>
         </p>
     </div>
 </footer>
+
+<!-- Inizio Banner Cookie Semplice -->
+<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #2c3e50; color: white; padding: 15px; text-align: center; font-size: 14px; z-index: 9999; display: none;">
+    <p style="margin: 0; display: inline-block;">
+        <span data-i18n="cookie_text">Questo sito utilizza cookie tecnici per garantire il corretto funzionamento. Cliccando sui link esterni (MilleBook/Google) si applicano le relative privacy policy.</span>
+        <a href="privacy.html" style="color: #3498db; text-decoration: underline;" data-i18n="cookie_link">Leggi l'informativa</a>.
+    </p>
+    <button onclick="acceptCookies()" style="margin-left: 15px; background: #27ae60; color: white; border: none; padding: 5px 15px; border-radius: 3px; cursor: pointer;" data-i18n="cookie_btn">Ho capito</button>
+</div>
+
+<script>
+    // Mostra il banner solo se non è stato già accettato
+    if (!localStorage.getItem('cookieConsent')) {
+        document.getElementById('cookie-banner').style.display = 'block';
+    }
+
+    function acceptCookies() {
+        localStorage.setItem('cookieConsent', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+</script>
+<!-- Fine Banner Cookie -->
 
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
@@ -614,13 +661,19 @@
             guard_title: "Continuità Assistenziale",
             guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
             guard_label: "Numero Unico (Ex Guardia Medica)",
+            prof_info_title: "Dati Professionali",
+            prof_role: "Medico di Medicina Generale",
             privacy_owner_label: "Titolare del Trattamento:",
             privacy_purpose_label: "Finalità:",
             privacy_purpose_text: "I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.",
-            privacy_note: "Per l'informativa completa, consultare il documento in studio."
+            privacy_note: "Per l'informativa completa, consultare il documento in studio.",
+            link_privacy: "Privacy Policy",
+            cookie_text: "Questo sito utilizza cookie tecnici per garantire il corretto funzionamento. Cliccando sui link esterni (MilleBook/Google) si applicano le relative privacy policy.",
+            cookie_link: "Leggi l'informativa",
+            cookie_btn: "Ho capito"
         },
         en: {
-            header_subtitle: "Family Medicine - General Practitioner - Arezzo",
+            header_subtitle: "General Practitioner - Arezzo",
             alert_p1: "<i class='fas fa-heart' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
             alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
             services_title: "Online Services",
@@ -650,10 +703,16 @@
             guard_title: "Out-of-Hours Service",
             guard_desc: "For non-urgent medical assistance during the night, holidays, and pre-holidays.",
             guard_label: "Toll-free Number",
+            prof_info_title: "Professional Details",
+            prof_role: "General Practitioner",
             privacy_owner_label: "Data Controller:",
             privacy_purpose_label: "Purpose:",
             privacy_purpose_text: "Data collected is used exclusively for providing healthcare services requested via the Millebook and Google portals.",
-            privacy_note: "For the complete privacy policy, please consult the document in the office."
+            privacy_note: "For the complete privacy policy, please consult the document in the office.",
+            link_privacy: "Privacy Policy",
+            cookie_text: "This site uses technical cookies to ensure proper functioning. Clicking on external links (MilleBook/Google) applies their respective privacy policies.",
+            cookie_link: "Read the policy",
+            cookie_btn: "I understand"
         }
     };
 
