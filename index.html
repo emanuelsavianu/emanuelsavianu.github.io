@@ -4,7 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Dott. Emanuel Savianu | Medico di Medicina Generale Arezzo</title>
-    <meta name="description" content="Studio Medico Dott. Savianu Emanuel, Arezzo. Prenotazione appuntamenti e ricette tramite Millebook. Via Ubaldo Pasqui 38.">
+    
+    <!-- Meta Tag SEO -->
+    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Medico di Medicina Generale. Prenotazioni online, ricette e gestione appuntamenti tramite MilleBook.">
+    <meta name="keywords" content="medico di base arezzo, dottor savianu, prenotazione visita, millebook arezzo, ricette online, family doctor arezzo, general practitioner arezzo">
+    <meta name="author" content="Dott. Emanuel Savianu">
+
+    <!-- Open Graph per condivisione social -->
+    <meta property="og:title" content="Studio Medico Dott. Savianu - Arezzo">
+    <meta property="og:description" content="Prenota la tua visita o richiedi ricette online presso lo studio del Dott. Savianu.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://savianu.it">
+    <meta property="og:image" content="https://i.postimg.cc/QxQ0YFXg/43166.jpg"> <!-- Immagine di anteprima -->
+
+    <!-- Dati Strutturati (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "name": "Dott. Emanuel Savianu",
+      "image": "https://i.postimg.cc/R6LJHmdT/logo-transparent.png", 
+      "@id": "https://savianu.it",
+      "url": "https://savianu.it",
+      "telephone": "+3905751713428",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Via Ubaldo Pasqui 38",
+        "addressLocality": "Arezzo",
+        "postalCode": "52100",
+        "addressCountry": "IT"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "19:00"
+        }
+      ],
+      "medicalSpecialty": "General Practice"
+    }
+    </script>
     
     <!-- Fonts e Icone -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -91,6 +131,36 @@
             font-weight: 400; 
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
+
+        /* --- LANGUAGE SWITCHER --- */
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            padding: 0;
+        }
+
+        .lang-btn:hover { color: white; }
+        .lang-btn.active { color: white; text-decoration: underline; text-underline-offset: 4px; }
+        .lang-separator { color: rgba(255,255,255,0.5); }
 
         /* --- LAYOUT --- */
         .container {
@@ -282,9 +352,14 @@
 <body>
 
 <header>
+    <div class="lang-switch">
+        <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
+        <span class="lang-separator">|</span>
+        <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
+    </div>
     <div class="header-content">
         <h1>Dott. Emanuel Savianu</h1>
-        <p>Medico di Medicina Generale - Arezzo</p>
+        <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
     </div>
 </header>
 
@@ -294,11 +369,11 @@
     <main>
         
         <div class="alert-box">
-            <p>
+            <p id="alert_p1">
                 <i class="fas fa-heart" style="color: #ef4444; margin-right: 8px;"></i>
                 <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.
             </p>
-            <p>
+            <p id="alert_p2">
                 <i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>
                 Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
             </p>
@@ -308,23 +383,23 @@
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-mouse-pointer"></i>
-                <h2>Servizi Online</h2>
+                <h2 data-i18n="services_title">Servizi Online</h2>
             </div>
             
             <!-- SEZIONE MILLEBOOK (ACCESSO PRIORITARIO) -->
             <div class="millebook-wrapper">
                 <a href="https://millebook.it" target="_blank" class="btn-millebook">
                     <i class="fas fa-laptop-medical"></i>
-                    <span>ACCEDI A MILLEBOOK</span>
-                    <small>Il tuo fascicolo sanitario digitale</small>
+                    <span data-i18n="millebook_btn">ACCEDI A MILLEBOOK</span>
+                    <small data-i18n="millebook_sub">Il tuo fascicolo sanitario digitale</small>
                 </a>
             </div>
 
             <div class="service-divider">
                 <p>
                     <i class="fas fa-user-plus" style="color: var(--primary);"></i> 
-                    <strong>Gestione Nuovi Utenti</strong><br>
-                    Utilizza i tasti qui sotto se devi prenotare la tua <strong>prima visita</strong> o se riscontri problemi tecnici con il portale principale.
+                    <strong data-i18n="new_users_title">Gestione Nuovi Utenti</strong><br>
+                    <span data-i18n="new_users_desc">Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.</span>
                 </p>
             </div>
 
@@ -332,15 +407,15 @@
                 <!-- 1. PRENOTA -->
                 <button onclick="showSection('booking')" class="btn-main btn-prenota">
                     <i class="far fa-calendar-check"></i>
-                    <span>Prenota Prima Visita</span>
-                    <small>Nuovi pazienti</small>
+                    <span data-i18n="btn_book">Prenota Prima Visita</span>
+                    <small data-i18n="btn_book_sub">Nuovi pazienti o urgenze</small>
                 </button>
 
                 <!-- 2. FARMACI -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" class="btn-main btn-ricette">
                     <i class="fas fa-pills"></i>
-                    <span>Richiesta ricette</span>
-                    <small>Prescrizione Farmaci</small>
+                    <span data-i18n="btn_drugs">Modulo Farmaci</span>
+                    <small data-i18n="btn_drugs_sub">Solo per emergenze tecniche</small>
                 </a>
             </div>
         </div>
@@ -349,9 +424,9 @@
         <div id="booking-section" class="card hidden">
             <div class="card-header">
                 <i class="far fa-calendar-alt"></i>
-                <h2>Calendario Appuntamenti</h2>
+                <h2 data-i18n="booking_title">Calendario Appuntamenti</h2>
             </div>
-            <p style="margin-bottom: 15px; color: var(--text-medium);">
+            <p style="margin-bottom: 15px; color: var(--text-medium);" data-i18n="booking_desc">
                 Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.
             </p>
             
@@ -369,13 +444,13 @@
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-address-book"></i>
-                <h2>Contatti Studio</h2>
+                <h2 data-i18n="contacts_title">Contatti Studio</h2>
             </div>
 
             <a href="tel:05751713428" class="contact-row">
                 <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
                 <div>
-                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Segreteria</span><br>
+                    <span data-i18n="label_secretary" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Segreteria</span><br>
                     <span style="font-size: 1.1rem; font-weight: 700;">0575 171 3428</span>
                 </div>
             </a>
@@ -383,7 +458,7 @@
             <a href="https://goo.gl/maps/Arezzo" target="_blank" class="contact-row">
                 <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
                 <div>
-                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
+                    <span data-i18n="label_address" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
                     <span>Via Ubaldo Pasqui 38, Arezzo</span>
                 </div>
             </a>
@@ -405,15 +480,15 @@
         <div class="card">
             <div class="card-header">
                 <i class="far fa-clock"></i>
-                <h2>Orari Ambulatorio</h2>
+                <h2 data-i18n="hours_title">Orari Ambulatorio</h2>
             </div>
             <table class="hours-table">
-                <tr><td class="day">Lunedì</td><td class="time">17:00 – 18:30</td></tr>
-                <tr><td class="day">Martedì</td><td class="time">11:30 – 13:00</td></tr>
-                <tr><td class="day">Mercoledì</td><td class="time">17:00 – 18:30</td></tr>
-                <tr><td class="day">Giovedì</td><td class="time">11:30 – 13:00</td></tr>
-                <tr><td class="day">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
-                <tr><td class="day" style="color:#ef4444;">Sab - Dom</td><td class="time">Chiuso</td></tr>
+                <tr><td class="day" data-i18n="day_mon">Lunedì</td><td class="time">17:00 – 18:30</td></tr>
+                <tr><td class="day" data-i18n="day_tue">Martedì</td><td class="time">11:30 – 13:00</td></tr>
+                <tr><td class="day" data-i18n="day_wed">Mercoledì</td><td class="time">17:00 – 18:30</td></tr>
+                <tr><td class="day" data-i18n="day_thu">Giovedì</td><td class="time">11:30 – 13:00</td></tr>
+                <tr><td class="day" data-i18n="day_fri">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
+                <tr><td class="day" data-i18n="day_sat_sun" style="color:#ef4444;">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
             </table>
         </div>
 
@@ -435,16 +510,106 @@
         <span class="close-modal" onclick="closePrivacy()">&times;</span>
         <h2 style="color: var(--primary); margin-bottom: 15px;">Informativa Privacy</h2>
         <p style="margin-bottom: 10px;">
-            <strong>Titolare del Trattamento:</strong> Dott. Emanuel Savianu, Via Ubaldo Pasqui 38, Arezzo.
+            <strong data-i18n="privacy_owner_label">Titolare del Trattamento:</strong> Dott. Emanuel Savianu, Via Ubaldo Pasqui 38, Arezzo.
         </p>
         <p style="margin-bottom: 10px;">
-            <strong>Finalità:</strong> I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.
+            <strong data-i18n="privacy_purpose_label">Finalità:</strong> <span data-i18n="privacy_purpose_text">I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.</span>
         </p>
-        <small>Per l'informativa completa, consultare il documento in studio.</small>
+        <small data-i18n="privacy_note">Per l'informativa completa, consultare il documento in studio.</small>
     </div>
 </div>
 
 <script>
+    // --- LANGUAGE MANAGEMENT ---
+    const translations = {
+        it: {
+            header_subtitle: "Medico di Medicina Generale - Arezzo",
+            alert_p1: "<i class='fas fa-heart' style='color: #ef4444; margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
+            alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.",
+            services_title: "Servizi Online",
+            millebook_btn: "ACCEDI A MILLEBOOK",
+            millebook_sub: "Il tuo fascicolo sanitario digitale",
+            new_users_title: "Gestione Nuovi Utenti",
+            new_users_desc: "Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.",
+            btn_book: "Prenota Prima Visita",
+            btn_book_sub: "Nuovi pazienti o urgenze",
+            btn_drugs: "Modulo Farmaci",
+            btn_drugs_sub: "Solo per emergenze tecniche",
+            booking_title: "Calendario Appuntamenti",
+            booking_desc: "Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.",
+            contacts_title: "Contatti Studio",
+            label_secretary: "Segreteria",
+            label_address: "Indirizzo",
+            hours_title: "Orari Ambulatorio",
+            day_mon: "Lunedì",
+            day_tue: "Martedì",
+            day_wed: "Mercoledì",
+            day_thu: "Giovedì",
+            day_fri: "Venerdì",
+            day_sat_sun: "Sab - Dom",
+            closed: "Chiuso",
+            privacy_owner_label: "Titolare del Trattamento:",
+            privacy_purpose_label: "Finalità:",
+            privacy_purpose_text: "I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.",
+            privacy_note: "Per l'informativa completa, consultare il documento in studio."
+        },
+        en: {
+            header_subtitle: "General Practitioner - Arezzo",
+            alert_p1: "<i class='fas fa-heart' style='color: #ef4444; margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
+            alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
+            services_title: "Online Services",
+            millebook_btn: "LOGIN TO MILLEBOOK",
+            millebook_sub: "Your digital health record",
+            new_users_title: "New User Management",
+            new_users_desc: "Use the buttons below if you need to book your first visit or if you are experiencing technical issues with the main portal.",
+            btn_book: "Book First Visit",
+            btn_book_sub: "New patients or emergencies",
+            btn_drugs: "Prescription Form",
+            btn_drugs_sub: "Only for technical emergencies",
+            booking_title: "Appointment Calendar",
+            booking_desc: "Select an available slot. You will receive a confirmation email with details.",
+            contacts_title: "Office Contacts",
+            label_secretary: "Reception",
+            label_address: "Address",
+            hours_title: "Clinic Hours",
+            day_mon: "Monday",
+            day_tue: "Tuesday",
+            day_wed: "Wednesday",
+            day_thu: "Thursday",
+            day_fri: "Friday",
+            day_sat_sun: "Sat - Sun",
+            closed: "Closed",
+            privacy_owner_label: "Data Controller:",
+            privacy_purpose_label: "Purpose:",
+            privacy_purpose_text: "Data collected is used exclusively for providing healthcare services requested via the Millebook and Google portals.",
+            privacy_note: "For the complete privacy policy, please consult the document in the office."
+        }
+    };
+
+    function setLanguage(lang) {
+        // Update Buttons
+        document.getElementById('btn-it').classList.toggle('active', lang === 'it');
+        document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+        // Update Text Content
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang][key]) {
+                element.textContent = translations[lang][key];
+            }
+        });
+
+        // Update HTML Content (for alerts with bold tags)
+        if (document.getElementById('alert_p1')) {
+            document.getElementById('alert_p1').innerHTML = translations[lang].alert_p1;
+        }
+        if (document.getElementById('alert_p2')) {
+            document.getElementById('alert_p2').innerHTML = translations[lang].alert_p2;
+        }
+    }
+
+    // --- OTHER FUNCTIONS ---
+
     function showSection(sectionId) {
         const section = document.getElementById(sectionId + '-section');
         if(section) {
