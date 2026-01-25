@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Dott. Emanuel Savianu | Medico di Medicina Generale Arezzo</title>
-    <meta name="description" content="Studio Medico Dott. Savianu Emanuel, Arezzo. Prenotazione appuntamenti online e rinnovo ricette. Via Ubaldo Pasqui 38.">
+    <meta name="description" content="Studio Medico Dott. Savianu Emanuel, Arezzo. Prenotazione appuntamenti e ricette tramite Millebook. Via Ubaldo Pasqui 38.">
     
     <!-- Fonts e Icone -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,13 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* --- STILI ORIGINALI INTEGRATI --- */
+        /* --- VARIABILI E STILI DI BASE --- */
         :root {
-            --primary: #0066cc;        /* Tuo Blu Originale */
+            --primary: #0066cc;        
             --primary-dark: #004c99;
             --primary-light: #3385d6;
-            --accent: #00b8a9;         /* Tuo Verde Acqua Originale */
-            --info: #6366f1;           /* Viola per messaggi */
+            --accent: #00b8a9;         
             --bg-gradient-1: #f8fbff;
             --bg-gradient-2: #ffffff;
             --text-dark: #1a1a2e;
@@ -45,7 +44,6 @@
 
         /* --- HEADER --- */
         header {
-            /* Rimosso il gradiente blu solido, ora è trasparente con overlay scuro */
             background-color: #0066cc; 
             color: var(--white);
             padding: 80px 20px 120px;
@@ -58,7 +56,6 @@
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            /* Immagine originale senza filtri */
             background-image: url('https://i.postimg.cc/QxQ0YFXg/43166.jpg');
             background-size: cover;
             background-position: center;
@@ -66,7 +63,6 @@
             z-index: 0;
         }
 
-        /* Aggiunto un leggero overlay nero solo per leggere il testo bianco sopra l'immagine */
         header::after {
             content: '';
             position: absolute;
@@ -99,7 +95,7 @@
         /* --- LAYOUT --- */
         .container {
             max-width: 1100px;
-            margin: -60px auto 60px; /* Effetto sovrapposizione header */
+            margin: -60px auto 60px;
             padding: 0 20px;
             display: grid;
             grid-template-columns: 1fr;
@@ -143,58 +139,103 @@
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-md);
             border: 1px solid var(--border-color);
-            margin-bottom: 25px; /* Spazio sotto il logo */
+            margin-bottom: 25px;
         }
         
         .sidebar-logo-img {
             max-width: 200px;
             height: auto;
-            /* Nessun filtro: colore originale (nero su bianco) */
         }
 
-        /* --- PULSANTI AZIONE --- */
+        /* --- SEZIONE MILLEBOOK & AZIONI --- */
+        
+        .millebook-wrapper {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .btn-millebook {
+            background: linear-gradient(135deg, #0288d1 0%, #01579b 100%);
+            width: 100%;
+            padding: 30px;
+            border-radius: var(--radius-lg);
+            color: white;
+            box-shadow: 0 8px 20px rgba(1, 87, 155, 0.25);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid #0277bd;
+        }
+
+        .btn-millebook:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(1, 87, 155, 0.35);
+        }
+
+        .btn-millebook i { font-size: 2.5rem; margin-bottom: 10px; color: #e1f5fe; }
+        .btn-millebook span { font-size: 1.4rem; font-weight: 700; letter-spacing: 0.5px; }
+        .btn-millebook small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 400; }
+
+        .service-divider {
+            margin: 30px 0 20px 0;
+            text-align: center;
+        }
+        .service-divider p {
+            background: #f0f4f8;
+            padding: 15px;
+            border-radius: 8px;
+            display: inline-block;
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            border-left: 4px solid var(--accent);
+            text-align: left;
+            max-width: 90%;
+        }
+
         .action-grid {
             display: grid; grid-template-columns: 1fr; gap: 15px;
         }
         @media (min-width: 600px) { 
             .action-grid { grid-template-columns: 1fr 1fr; }
-            .btn-prenota-wrapper { grid-column: span 2; }
         }
 
         .btn-main {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 25px; border-radius: var(--radius-lg);
+            padding: 20px; border-radius: var(--radius-lg);
             text-align: center; border: none; cursor: pointer; width: 100%;
             transition: transform 0.2s, box-shadow 0.2s;
             color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
         .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
         
-        .btn-main i { font-size: 2rem; margin-bottom: 10px; }
-        .btn-main span { font-weight: 700; font-size: 1.1rem; }
-        .btn-main small { font-size: 0.85rem; opacity: 0.9; margin-top: 5px; }
+        .btn-secondary-group .btn-main i { font-size: 1.8rem; margin-bottom: 8px; }
+        .btn-secondary-group .btn-main span { font-weight: 600; font-size: 1rem; }
+        .btn-secondary-group .btn-main small { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
 
-        .btn-prenota { background: var(--primary); }
+        .btn-prenota { background: var(--primary-light); } 
         .btn-ricette { background: var(--accent); }
-        .btn-messaggi { background: var(--info); }
 
         /* --- AVVISI --- */
         .alert-box {
-            background-color: #fff8e1; border-left: 5px solid #ffc107;
-            padding: 15px; margin-bottom: 25px; border-radius: 8px;
-            color: #856404; font-size: 0.95rem;
+            background-color: #f1f8fe; border-left: 5px solid var(--primary);
+            padding: 20px; margin-bottom: 25px; border-radius: 8px;
+            color: var(--text-dark); font-size: 1rem;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            line-height: 1.6;
         }
 
-        /* --- CONTATTI --- */
+        .alert-box p { margin-bottom: 10px; }
+        .alert-box p:last-child { margin-bottom: 0; }
+
+        /* --- CONTATTI E TABELLE --- */
         .contact-row {
             display: flex; align-items: center; gap: 15px;
             margin-bottom: 15px; padding: 12px;
             background: var(--bg-gradient-1); border-radius: 10px;
             border: 1px solid var(--border-color);
         }
-        .contact-row:hover { background: #edf2f7; }
-        
         .icon-circle {
             width: 36px; height: 36px; background: var(--white);
             color: var(--primary); border-radius: 50%;
@@ -202,14 +243,12 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
         }
 
-        /* --- ORARI --- */
         .hours-table { width: 100%; border-collapse: collapse; }
         .hours-table td { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
         .hours-table tr:last-child td { border-bottom: none; }
         .hours-table .day { font-weight: 600; color: var(--text-medium); }
         .hours-table .time { text-align: right; color: var(--primary-dark); font-weight: 500; }
 
-        /* --- CALENDARIO IFRAME --- */
         .iframe-wrapper {
             position: relative; width: 100%; min-height: 650px;
             border: 1px solid var(--border-color); border-radius: var(--radius-lg);
@@ -223,7 +262,6 @@
             color: var(--text-medium); background: var(--white); border-top: 1px solid var(--border-color);
         }
 
-        /* Utility */
         .hidden { display: none; }
         .fade-in { animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
@@ -256,8 +294,14 @@
     <main>
         
         <div class="alert-box">
-            <i class="fas fa-bullhorn"></i> <strong>Avviso:</strong> 
-            Per evitare attese telefoniche, si prega di utilizzare i moduli online qui sotto per ricette e comunicazioni.
+            <p>
+                <i class="fas fa-heart" style="color: #ef4444; margin-right: 8px;"></i>
+                <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.
+            </p>
+            <p>
+                <i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>
+                Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
+            </p>
         </div>
 
         <!-- Box Azioni Rapide -->
@@ -267,28 +311,36 @@
                 <h2>Servizi Online</h2>
             </div>
             
-            <div class="action-grid">
+            <!-- SEZIONE MILLEBOOK (ACCESSO PRIORITARIO) -->
+            <div class="millebook-wrapper">
+                <a href="https://millebook.it" target="_blank" class="btn-millebook">
+                    <i class="fas fa-laptop-medical"></i>
+                    <span>ACCEDI A MILLEBOOK</span>
+                    <small>Il tuo fascicolo sanitario digitale</small>
+                </a>
+            </div>
+
+            <div class="service-divider">
+                <p>
+                    <i class="fas fa-user-plus" style="color: var(--primary);"></i> 
+                    <strong>Gestione Nuovi Utenti</strong><br>
+                    Utilizza i tasti qui sotto se devi prenotare la tua <strong>prima visita</strong> o se riscontri problemi tecnici con il portale principale.
+                </p>
+            </div>
+
+            <div class="action-grid btn-secondary-group">
                 <!-- 1. PRENOTA -->
-                <div class="btn-prenota-wrapper">
-                    <button onclick="showSection('booking')" class="btn-main btn-prenota">
-                        <i class="far fa-calendar-check"></i>
-                        <span>Prenota Visita</span>
-                        <small>Scegli l'orario in autonomia</small>
-                    </button>
-                </div>
+                <button onclick="showSection('booking')" class="btn-main btn-prenota">
+                    <i class="far fa-calendar-check"></i>
+                    <span>Prenota Prima Visita</span>
+                    <small>Nuovi pazienti</small>
+                </button>
 
                 <!-- 2. FARMACI -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" class="btn-main btn-ricette">
                     <i class="fas fa-pills"></i>
-                    <span>Richiedi Farmaci</span>
-                    <small>Rinnovo ricette continuative</small>
-                </a>
-
-                <!-- 3. MESSAGGI -->
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd6I-JgIHyVk3VA_Bx5jMOiwJqT0YBgN118Wso3snHiCKB_Tg/viewform?usp=header" target="_blank" class="btn-main btn-messaggi">
-                    <i class="far fa-envelope"></i>
-                    <span>Scrivi alla Segreteria</span>
-                    <small>Info, Referti o Comunicazioni</small>
+                    <span>Richiesta ricette</span>
+                    <small>Prescrizione Farmaci</small>
                 </a>
             </div>
         </div>
@@ -297,14 +349,13 @@
         <div id="booking-section" class="card hidden">
             <div class="card-header">
                 <i class="far fa-calendar-alt"></i>
-                <h2>Calendario Prenotazioni</h2>
+                <h2>Calendario Appuntamenti</h2>
             </div>
             <p style="margin-bottom: 15px; color: var(--text-medium);">
-                Seleziona uno slot libero qui sotto. Riceverai una conferma via email.
+                Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.
             </p>
             
             <div class="iframe-wrapper">
-                <!-- Google Calendar Appointment Scheduling -->
                 <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
             </div>
         </div>
@@ -318,7 +369,7 @@
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-address-book"></i>
-                <h2>Contatti</h2>
+                <h2>Contatti Studio</h2>
             </div>
 
             <a href="tel:05751713428" class="contact-row">
@@ -346,7 +397,6 @@
             </a>
         </div>
 
-        <!-- LOGO POSIZIONATO SOTTO I CONTATTI -->
         <div class="sidebar-logo-container">
             <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo Studio Savianu" class="sidebar-logo-img">
         </div>
@@ -380,7 +430,6 @@
     </div>
 </footer>
 
-<!-- Modale Privacy Policy -->
 <div id="privacyModal" class="modal-overlay">
     <div class="modal-content">
         <span class="close-modal" onclick="closePrivacy()">&times;</span>
@@ -389,10 +438,7 @@
             <strong>Titolare del Trattamento:</strong> Dott. Emanuel Savianu, Via Ubaldo Pasqui 38, Arezzo.
         </p>
         <p style="margin-bottom: 10px;">
-            <strong>Finalità:</strong> I dati raccolti tramite il sito (Google Forms, Prenotazioni) sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste.
-        </p>
-        <p style="margin-bottom: 10px;">
-            <strong>Gestione Dati:</strong> Utilizziamo Google Workspace in conformità con il GDPR.
+            <strong>Finalità:</strong> I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.
         </p>
         <small>Per l'informativa completa, consultare il documento in studio.</small>
     </div>
