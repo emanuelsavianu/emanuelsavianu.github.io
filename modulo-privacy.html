@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modulo Consenso Privacy - Dott. Emanuel Savianu</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 10pt;
+            line-height: 1.4;
+            color: #1a1a1a;
+            background-color: #f5f5f5;
+            padding: 15px;
+        }
+
+        .page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 0 auto;
+            padding: 18mm 20mm;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Header */
+        header {
+            border-bottom: 2px solid #1a73e8;
+            padding-bottom: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .doctor-info h1 {
+            font-size: 16pt;
+            color: #1a1a1a;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .doctor-info p {
+            font-size: 8.5pt;
+            color: #666;
+            line-height: 1.3;
+        }
+
+        .contacts {
+            text-align: right;
+            font-size: 8.5pt;
+            color: #666;
+        }
+
+        .contacts p {
+            margin-bottom: 2px;
+        }
+
+        /* Title */
+        .main-title {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        .main-title h2 {
+            font-size: 13pt;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 4px;
+        }
+
+        .main-title p {
+            font-size: 8.5pt;
+            color: #666;
+        }
+
+        /* Section Headers */
+        .section-title {
+            background: linear-gradient(to right, #1a73e8, #4285f4);
+            color: white;
+            padding: 6px 12px;
+            font-weight: 600;
+            font-size: 9.5pt;
+            margin: 14px 0 10px 0;
+            border-radius: 3px;
+        }
+
+        /* Form Grid */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 8pt;
+            font-weight: 500;
+            color: #444;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="email"],
+        input[type="tel"] {
+            border: 1px solid #d1d5db;
+            padding: 7px 10px;
+            font-size: 10pt;
+            border-radius: 4px;
+            font-family: inherit;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #1a73e8;
+        }
+
+        /* Consent Boxes */
+        .consent-box {
+            border: 1px solid #e5e7eb;
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: #fafafa;
+        }
+
+        .consent-header {
+            font-weight: 600;
+            font-size: 9.5pt;
+            color: #1a1a1a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .consent-header::before {
+            content: '';
+            width: 4px;
+            height: 16px;
+            background: #1a73e8;
+            border-radius: 2px;
+        }
+
+        .consent-desc {
+            font-size: 9pt;
+            color: #374151;
+            margin-bottom: 8px;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        .options {
+            display: flex;
+            gap: 20px;
+            padding: 8px;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            cursor: pointer;
+            font-size: 9pt;
+        }
+
+        .radio-option input[type="radio"],
+        .radio-option input[type="checkbox"] {
+            cursor: pointer;
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Notes */
+        .note {
+            font-size: 7.5pt;
+            color: #6b7280;
+            font-style: italic;
+            margin-top: 4px;
+            line-height: 1.3;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 3px solid #1a73e8;
+            padding: 8px 10px;
+            margin: 10px 0;
+            font-size: 8.5pt;
+            color: #1e40af;
+            border-radius: 3px;
+        }
+
+        /* Signature */
+        .signature-section {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding-top: 16px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .sig-box {
+            text-align: center;
+        }
+
+        .sig-line {
+            border-top: 1.5px solid #374151;
+            margin-top: 40px;
+            padding-top: 6px;
+            font-size: 8.5pt;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            padding-top: 12px;
+            border-top: 1px dashed #d1d5db;
+            font-size: 7.5pt;
+            color: #9ca3af;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: 100%;
+                padding: 15mm 20mm;
+            }
+            input {
+                border-color: #999 !important;
+            }
+            .consent-box {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page">
+    <header>
+        <div class="doctor-info">
+            <h1>Dott. Emanuel Savianu</h1>
+            <p>Medico di Medicina Generale - SSN</p>
+            <p>Via Ubaldo Pasqui 38, 52100 Arezzo (AR)</p>
+        </div>
+        <div class="contacts">
+            <p><strong>Tel:</strong> 0575 171 3428</p>
+            <p><strong>Email:</strong> segreteria@savianu.it</p>
+        </div>
+    </header>
+
+    <div class="main-title">
+        <h2>INFORMATIVA E CONSENSO AL TRATTAMENTO DEI DATI PERSONALI</h2>
+        <p>ai sensi del Regolamento UE 2016/679 (GDPR) e D.Lgs. 196/2003</p>
+    </div>
+
+    <div class="info-box">
+        <strong>Titolare del trattamento:</strong> Dott. Emanuel Savianu | <strong>Finalità:</strong> Erogazione prestazioni sanitarie | <strong>Base giuridica:</strong> Art. 9 GDPR (trattamento dati sanitari per finalità di cura)
+    </div>
+
+    <!-- SEZIONE 1: ANAGRAFICA -->
+    <div class="section-title">1. DATI ANAGRAFICI DEL PAZIENTE</div>
+    
+    <div class="grid-2">
+        <div class="input-group">
+            <label>Cognome</label>
+            <input type="text">
+        </div>
+        <div class="input-group">
+            <label>Nome</label>
+            <input type="text">
+        </div>
+        
+        <div class="input-group">
+            <label>Codice Fiscale</label>
+            <input type="text" style="text-transform: uppercase; letter-spacing: 1px;">
+        </div>
+        <div class="input-group">
+            <label>Data di Nascita</label>
+            <input type="date">
+        </div>
+
+        <div class="input-group full-width">
+            <label>Indirizzo di Residenza Completo</label>
+            <input type="text" placeholder="Via/Piazza, n. civico, CAP, Città, Provincia">
+        </div>
+
+        <div class="input-group">
+            <label>Telefono Cellulare</label>
+            <input type="tel" placeholder="+39">
+        </div>
+        <div class="input-group">
+            <label>Indirizzo Email</label>
+            <input type="email" placeholder="esempio@email.com">
+        </div>
+    </div>
+    
+    <p class="note">* I recapiti digitali (cellulare ed email) consentono l'invio di ricette dematerializzate, promemoria e comunicazioni di servizio, riducendo l'uso di carta.</p>
+
+    <!-- SEZIONE 2: CONSENSI -->
+    <div class="section-title">2. ESPRESSIONE DEI CONSENSI</div>
+
+    <!-- Consenso A -->
+    <div class="consent-box">
+        <div class="consent-header">A) TRATTAMENTO DATI PER FINALITÀ DI CURA</div>
+        <div class="consent-desc">
+            Dichiaro di aver ricevuto e compreso l'informativa sulla privacy. Acconsento al trattamento dei miei dati personali e sanitari da parte del Dott. Savianu per le finalità di diagnosi, cura, prevenzione e riabilitazione, anche mediante l'utilizzo di sistemi informatici (Millewin) e il Fascicolo Sanitario Elettronico.
+        </div>
+        <div class="options">
+            <label class="radio-option">
+                <input type="checkbox" checked disabled>
+                <strong>ACCONSENTO</strong> <span style="color: #dc2626; font-size: 8pt;">(Obbligatorio per ricevere assistenza)</span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Consenso B -->
+    <div class="consent-box">
+        <div class="consent-header">B) ACCESSO DA PARTE DI COLLABORATORI E SOSTITUTI</div>
+        <div class="consent-desc">
+            Autorizzo l'accesso ai miei dati sanitari al personale di segreteria dello studio, ai medici della Medicina di Gruppo/Rete territoriale e ai medici sostituti per garantire la continuità assistenziale, la gestione delle ricette e il servizio anche in assenza del titolare.
+        </div>
+        <div class="options">
+            <label class="radio-option">
+                <input type="radio" name="consenso_b" value="si">
+                <strong>ACCONSENTO</strong>
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="consenso_b" value="no">
+                <strong>NON ACCONSENTO</strong>
+            </label>
+        </div>
+        <p class="note">Nota: Il diniego può comportare impossibilità di preparazione ricette da parte della segreteria e mancata accessibilità ai dati da parte dei sostituti.</p>
+    </div>
+
+    <!-- Consenso C -->
+    <div class="consent-box">
+        <div class="consent-header">C) FASCICOLO SANITARIO ELETTRONICO (FSE)</div>
+        <div class="consent-desc">
+            Acconsento all'alimentazione e alla consultazione del Fascicolo Sanitario Elettronico regionale per consentire al medico curante una visione integrata della mia storia clinica e favorire il coordinamento delle cure.
+        </div>
+        <div class="options">
+            <label class="radio-option">
+                <input type="radio" name="consenso_c" value="si">
+                <strong>ACCONSENTO</strong>
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="consenso_c" value="no">
+                <strong>NON ACCONSENTO</strong>
+            </label>
+        </div>
+    </div>
+
+    <!-- Consenso D -->
+    <div class="consent-box">
+        <div class="consent-header">D) COMUNICAZIONI DIGITALI (SMS, WhatsApp, Email)</div>
+        <div class="consent-desc">
+            Autorizzo lo studio medico all'invio di codici NRE (ricette dematerializzate), promemoria di appuntamenti e comunicazioni di servizio tramite SMS, WhatsApp o Email ai recapiti sopra indicati.
+        </div>
+        <div class="options">
+            <label class="radio-option">
+                <input type="radio" name="consenso_d" value="si">
+                <strong>ACCONSENTO</strong>
+            </label>
+            <label class="radio-option">
+                <input type="radio" name="consenso_d" value="no">
+                <strong>NON ACCONSENTO</strong>
+            </label>
+        </div>
+    </div>
+
+    <!-- FIRMA -->
+    <div class="signature-section">
+        <div class="input-group">
+            <label>Luogo e Data</label>
+            <input type="text" value="Arezzo, ____ / ____ / ________" style="font-weight: 500;">
+        </div>
+        <div class="sig-box">
+            <div class="sig-line">
+                Firma leggibile del Paziente
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <strong>Diritti dell'interessato:</strong> Può esercitare i diritti di accesso, rettifica, cancellazione, limitazione, portabilità e opposizione ai sensi degli artt. 15-22 GDPR.<br>
+        Il consenso può essere revocato in qualsiasi momento con comunicazione scritta a: segreteria@savianu.it<br>
+        <strong>Informativa completa disponibile presso lo studio o su richiesta via email.</strong>
+    </div>
+
+</div>
+
+</body>
+</html>
