@@ -15,7 +15,7 @@
     <meta property="og:description" content="Prenota la tua visita o richiedi ricette online presso lo studio del Dott. Savianu.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://savianu.it">
-    <meta property="og:image" content="https://i.postimg.cc/QxQ0YFXg/43166.jpg"> <!-- Immagine di anteprima -->
+    <meta property="og:image" content="https://i.postimg.cc/QxQ0YFXg/43166.jpg">
 
     <!-- Dati Strutturati (Schema.org) -->
     <script type="application/ld+json">
@@ -67,6 +67,7 @@
             --border-color: #e2e8f0;
             --shadow-md: 0 8px 24px rgba(0, 102, 204, 0.12);
             --radius-lg: 16px;
+            --danger: #ef4444; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -287,7 +288,7 @@
         .btn-prenota { background: var(--primary-light); } 
         .btn-ricette { background: var(--accent); }
 
-        /* --- AVVISI --- */
+        /* --- AVVISI & ALERT --- */
         .alert-box {
             background-color: #f1f8fe; border-left: 5px solid var(--primary);
             padding: 20px; margin-bottom: 25px; border-radius: 8px;
@@ -298,6 +299,23 @@
 
         .alert-box p { margin-bottom: 10px; }
         .alert-box p:last-child { margin-bottom: 0; }
+
+        .alert-emergency {
+            background-color: #fef2f2; 
+            border: 2px solid var(--danger);
+            color: #991b1b;
+            padding: 20px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin-top: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: var(--shadow-md);
+        }
+        .alert-emergency i { font-size: 1.8rem; color: var(--danger); }
 
         /* --- CONTATTI E TABELLE --- */
         .contact-row {
@@ -312,6 +330,19 @@
             display: flex; align-items: center; justify-content: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
         }
+
+        .btn-map-small {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 6px;
+            font-weight: 600;
+            margin-left: 51px;
+        }
+        .btn-map-small:hover { opacity: 0.9; }
 
         .hours-table { width: 100%; border-collapse: collapse; }
         .hours-table td { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
@@ -368,12 +399,13 @@
     <!-- COLONNA PRINCIPALE (SINISTRA) -->
     <main>
         
+        <!-- AVVISI -->
         <div class="alert-box">
-            <p id="alert_p1">
-                <i class="fas fa-heart" style="color: #ef4444; margin-right: 8px;"></i>
+            <p data-i18n="alert_p1">
+                <i class="fas fa-heart" style="color: var(--primary); margin-right: 8px;"></i>
                 <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.
             </p>
-            <p id="alert_p2">
+            <p data-i18n="alert_p2">
                 <i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>
                 Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
             </p>
@@ -408,14 +440,14 @@
                 <button onclick="showSection('booking')" class="btn-main btn-prenota">
                     <i class="far fa-calendar-check"></i>
                     <span data-i18n="btn_book">Prenota Prima Visita</span>
-                    <small data-i18n="btn_book_sub">Nuovi pazienti o urgenze</small>
+                    <small data-i18n="btn_book_sub">Nuovi pazienti</small>
                 </button>
 
                 <!-- 2. FARMACI -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" class="btn-main btn-ricette">
                     <i class="fas fa-pills"></i>
                     <span data-i18n="btn_drugs">Modulo Farmaci</span>
-                    <small data-i18n="btn_drugs_sub">Solo per emergenze tecniche</small>
+                    <small data-i18n="btn_drugs_sub">Se Millebook non funziona</small>
                 </a>
             </div>
         </div>
@@ -433,6 +465,12 @@
             <div class="iframe-wrapper">
                 <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
             </div>
+        </div>
+
+        <!-- ALERT 112 EMERGENZA -->
+        <div class="alert-emergency">
+            <i class="fas fa-ambulance"></i>
+            <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
         </div>
 
     </main>
@@ -455,13 +493,19 @@
                 </div>
             </a>
 
-            <a href="https://goo.gl/maps/Arezzo" target="_blank" class="contact-row">
-                <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-                <div>
-                    <span data-i18n="label_address" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
-                    <span>Via Ubaldo Pasqui 38, Arezzo</span>
-                </div>
-            </a>
+            <!-- Blocco Indirizzo con Bottone -->
+            <div style="margin-bottom: 15px;">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+                    <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <span data-i18n="label_address" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
+                        <span>Via Ubaldo Pasqui 38, Arezzo</span>
+                    </div>
+                </a>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="btn-map-small">
+                    <i class="fas fa-location-arrow"></i> <span data-i18n="btn_map">Portami qui</span>
+                </a>
+            </div>
 
             <a href="mailto:segreteria@savianu.it" class="contact-row">
                 <div class="icon-circle"><i class="far fa-envelope"></i></div>
@@ -490,6 +534,23 @@
                 <tr><td class="day" data-i18n="day_fri">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
                 <tr><td class="day" data-i18n="day_sat_sun" style="color:#ef4444;">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
             </table>
+        </div>
+
+        <!-- Guardia Medica -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-moon"></i>
+                <h2 data-i18n="guard_title">Continuità Assistenziale</h2>
+            </div>
+            <p data-i18n="guard_desc" style="margin-bottom: 15px;">
+                Per assistenza medica non urgente durante la notte, i festivi e prefestivi.
+            </p>
+            <div style="text-align: center; background: #eef2ff; padding: 15px; border-radius: 10px; border: 1px dashed var(--primary);">
+                <i class="fas fa-phone-volume" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
+                <a href="tel:116117" style="font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none;">116 117</a>
+                <br>
+                <small data-i18n="guard_label">Numero Unico (Ex Guardia Medica)</small>
+            </div>
         </div>
 
     </aside>
@@ -524,7 +585,7 @@
     const translations = {
         it: {
             header_subtitle: "Medico di Medicina Generale - Arezzo",
-            alert_p1: "<i class='fas fa-heart' style='color: #ef4444; margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
+            alert_p1: "<i class='fas fa-heart' style='color: var(--primary); margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
             alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.",
             services_title: "Servizi Online",
             millebook_btn: "ACCEDI A MILLEBOOK",
@@ -532,14 +593,16 @@
             new_users_title: "Gestione Nuovi Utenti",
             new_users_desc: "Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.",
             btn_book: "Prenota Prima Visita",
-            btn_book_sub: "Nuovi pazienti o urgenze",
+            btn_book_sub: "Nuovi pazienti",
             btn_drugs: "Modulo Farmaci",
-            btn_drugs_sub: "Solo per emergenze tecniche",
+            btn_drugs_sub: "Se Millebook non funziona",
             booking_title: "Calendario Appuntamenti",
             booking_desc: "Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.",
+            emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
             contacts_title: "Contatti Studio",
             label_secretary: "Segreteria",
             label_address: "Indirizzo",
+            btn_map: "Portami qui",
             hours_title: "Orari Ambulatorio",
             day_mon: "Lunedì",
             day_tue: "Martedì",
@@ -548,6 +611,9 @@
             day_fri: "Venerdì",
             day_sat_sun: "Sab - Dom",
             closed: "Chiuso",
+            guard_title: "Continuità Assistenziale",
+            guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
+            guard_label: "Numero Unico (Ex Guardia Medica)",
             privacy_owner_label: "Titolare del Trattamento:",
             privacy_purpose_label: "Finalità:",
             privacy_purpose_text: "I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.",
@@ -555,7 +621,7 @@
         },
         en: {
             header_subtitle: "General Practitioner - Arezzo",
-            alert_p1: "<i class='fas fa-heart' style='color: #ef4444; margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
+            alert_p1: "<i class='fas fa-heart' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
             alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
             services_title: "Online Services",
             millebook_btn: "LOGIN TO MILLEBOOK",
@@ -563,14 +629,16 @@
             new_users_title: "New User Management",
             new_users_desc: "Use the buttons below if you need to book your first visit or if you are experiencing technical issues with the main portal.",
             btn_book: "Book First Visit",
-            btn_book_sub: "New patients or emergencies",
+            btn_book_sub: "New patients",
             btn_drugs: "Prescription Form",
-            btn_drugs_sub: "Only for technical emergencies",
+            btn_drugs_sub: "If Millebook is down",
             booking_title: "Appointment Calendar",
             booking_desc: "Select an available slot. You will receive a confirmation email with details.",
+            emergency_112: "For medical emergencies, always contact the Emergency Number 112.",
             contacts_title: "Office Contacts",
             label_secretary: "Reception",
             label_address: "Address",
+            btn_map: "Take me there",
             hours_title: "Clinic Hours",
             day_mon: "Monday",
             day_tue: "Tuesday",
@@ -579,6 +647,9 @@
             day_fri: "Friday",
             day_sat_sun: "Sat - Sun",
             closed: "Closed",
+            guard_title: "Out-of-Hours Service",
+            guard_desc: "For non-urgent medical assistance during the night, holidays, and pre-holidays.",
+            guard_label: "Toll-free Number",
             privacy_owner_label: "Data Controller:",
             privacy_purpose_label: "Purpose:",
             privacy_purpose_text: "Data collected is used exclusively for providing healthcare services requested via the Millebook and Google portals.",
@@ -587,25 +658,18 @@
     };
 
     function setLanguage(lang) {
-        // Update Buttons
+        // Update Buttons visual state
         document.getElementById('btn-it').classList.toggle('active', lang === 'it');
         document.getElementById('btn-en').classList.toggle('active', lang === 'en');
 
-        // Update Text Content
-        document.querySelectorAll('[data-i18n]').forEach(element => {
+        // Update Text Content using innerHTML to support bold tags/icons
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(element => {
             const key = element.getAttribute('data-i18n');
-            if (translations[lang][key]) {
-                element.textContent = translations[lang][key];
+            if (translations[lang] && translations[lang][key]) {
+                element.innerHTML = translations[lang][key];
             }
         });
-
-        // Update HTML Content (for alerts with bold tags)
-        if (document.getElementById('alert_p1')) {
-            document.getElementById('alert_p1').innerHTML = translations[lang].alert_p1;
-        }
-        if (document.getElementById('alert_p2')) {
-            document.getElementById('alert_p2').innerHTML = translations[lang].alert_p2;
-        }
     }
 
     // --- OTHER FUNCTIONS ---
