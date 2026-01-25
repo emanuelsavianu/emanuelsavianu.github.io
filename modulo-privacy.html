@@ -7,11 +7,7 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -29,7 +25,29 @@
             margin: 0 auto;
             padding: 18mm 20mm;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: relative;
         }
+
+        /* Tasto Stampa a video */
+        .print-btn-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .print-btn {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .print-btn:hover { background-color: #1557b0; }
 
         /* Header */
         header {
@@ -41,46 +59,16 @@
             align-items: flex-start;
         }
 
-        .doctor-info h1 {
-            font-size: 16pt;
-            color: #1a1a1a;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
+        .doctor-info h1 { font-size: 16pt; color: #1a1a1a; font-weight: 600; margin-bottom: 4px; }
+        .doctor-info p { font-size: 8.5pt; color: #666; line-height: 1.3; }
 
-        .doctor-info p {
-            font-size: 8.5pt;
-            color: #666;
-            line-height: 1.3;
-        }
-
-        .contacts {
-            text-align: right;
-            font-size: 8.5pt;
-            color: #666;
-        }
-
-        .contacts p {
-            margin-bottom: 2px;
-        }
+        .contacts { text-align: right; font-size: 8.5pt; color: #666; }
+        .contacts p { margin-bottom: 2px; }
 
         /* Title */
-        .main-title {
-            text-align: center;
-            margin-bottom: 16px;
-        }
-
-        .main-title h2 {
-            font-size: 13pt;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 4px;
-        }
-
-        .main-title p {
-            font-size: 8.5pt;
-            color: #666;
-        }
+        .main-title { text-align: center; margin-bottom: 16px; }
+        .main-title h2 { font-size: 13pt; font-weight: 600; color: #1a1a1a; margin-bottom: 4px; }
+        .main-title p { font-size: 8.5pt; color: #666; }
 
         /* Section Headers */
         .section-title {
@@ -94,182 +82,92 @@
         }
 
         /* Form Grid */
-        .grid-2 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .full-width { grid-column: span 2; }
 
-        .full-width {
-            grid-column: span 2;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-        }
+        .input-group { display: flex; flex-direction: column; }
 
         label {
-            font-size: 8pt;
-            font-weight: 500;
-            color: #444;
-            margin-bottom: 3px;
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
+            font-size: 8pt; font-weight: 500; color: #444; margin-bottom: 3px;
+            text-transform: uppercase; letter-spacing: 0.3px;
         }
 
-        input[type="text"],
-        input[type="date"],
-        input[type="email"],
-        input[type="tel"] {
-            border: 1px solid #d1d5db;
-            padding: 7px 10px;
-            font-size: 10pt;
-            border-radius: 4px;
-            font-family: inherit;
-            transition: border-color 0.2s;
+        input[type="text"], input[type="date"], input[type="email"], input[type="tel"] {
+            border: 1px solid #d1d5db; padding: 7px 10px; font-size: 10pt;
+            border-radius: 4px; font-family: inherit; transition: border-color 0.2s;
         }
-
-        input:focus {
-            outline: none;
-            border-color: #1a73e8;
-        }
+        input:focus { outline: none; border-color: #1a73e8; }
 
         /* Consent Boxes */
         .consent-box {
-            border: 1px solid #e5e7eb;
-            border-radius: 6px;
-            padding: 12px;
-            margin-bottom: 10px;
-            background: #fafafa;
+            border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px;
+            margin-bottom: 10px; background: #fafafa;
         }
 
         .consent-header {
-            font-weight: 600;
-            font-size: 9.5pt;
-            color: #1a1a1a;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            font-weight: 600; font-size: 9.5pt; color: #1a1a1a; margin-bottom: 6px;
+            display: flex; align-items: center; gap: 6px;
         }
-
         .consent-header::before {
-            content: '';
-            width: 4px;
-            height: 16px;
-            background: #1a73e8;
-            border-radius: 2px;
+            content: ''; width: 4px; height: 16px; background: #1a73e8; border-radius: 2px;
         }
 
         .consent-desc {
-            font-size: 9pt;
-            color: #374151;
-            margin-bottom: 8px;
-            line-height: 1.5;
-            text-align: justify;
+            font-size: 9pt; color: #374151; margin-bottom: 8px; line-height: 1.5; text-align: justify;
         }
 
         .options {
-            display: flex;
-            gap: 20px;
-            padding: 8px;
-            background: white;
-            border-radius: 4px;
-            border: 1px solid #e5e7eb;
+            display: flex; gap: 20px; padding: 8px; background: white;
+            border-radius: 4px; border: 1px solid #e5e7eb;
         }
 
-        .radio-option {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            font-size: 9pt;
-        }
+        .radio-option { display: flex; align-items: center; gap: 6px; cursor: pointer; font-size: 9pt; }
+        .radio-option input { cursor: pointer; width: 16px; height: 16px; }
 
-        .radio-option input[type="radio"],
-        .radio-option input[type="checkbox"] {
-            cursor: pointer;
-            width: 16px;
-            height: 16px;
-        }
-
-        /* Notes */
-        .note {
-            font-size: 7.5pt;
-            color: #6b7280;
-            font-style: italic;
-            margin-top: 4px;
-            line-height: 1.3;
-        }
-
+        /* Notes & Info */
+        .note { font-size: 7.5pt; color: #6b7280; font-style: italic; margin-top: 4px; line-height: 1.3; }
         .info-box {
-            background: #eff6ff;
-            border-left: 3px solid #1a73e8;
-            padding: 8px 10px;
-            margin: 10px 0;
-            font-size: 8.5pt;
-            color: #1e40af;
-            border-radius: 3px;
+            background: #eff6ff; border-left: 3px solid #1a73e8; padding: 8px 10px;
+            margin: 10px 0; font-size: 8.5pt; color: #1e40af; border-radius: 3px;
         }
 
         /* Signature */
         .signature-section {
-            margin-top: 20px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            padding-top: 16px;
-            border-top: 1px solid #e5e7eb;
+            margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 30px;
+            padding-top: 16px; border-top: 1px solid #e5e7eb;
         }
-
-        .sig-box {
-            text-align: center;
-        }
-
+        .sig-box { text-align: center; }
         .sig-line {
-            border-top: 1.5px solid #374151;
-            margin-top: 40px;
-            padding-top: 6px;
-            font-size: 8.5pt;
-            color: #666;
-            font-weight: 500;
+            border-top: 1.5px solid #374151; margin-top: 40px; padding-top: 6px;
+            font-size: 8.5pt; color: #666; font-weight: 500;
         }
 
         /* Footer */
         .footer {
-            margin-top: 20px;
-            padding-top: 12px;
-            border-top: 1px dashed #d1d5db;
-            font-size: 7.5pt;
-            color: #9ca3af;
-            text-align: center;
-            line-height: 1.4;
+            margin-top: 20px; padding-top: 12px; border-top: 1px dashed #d1d5db;
+            font-size: 7.5pt; color: #9ca3af; text-align: center; line-height: 1.4;
         }
 
         /* Print Styles */
         @media print {
-            body {
-                background: white;
-                padding: 0;
-            }
-            .page {
-                box-shadow: none;
-                margin: 0;
-                width: 100%;
-                padding: 15mm 20mm;
-            }
-            input {
-                border-color: #999 !important;
-            }
-            .consent-box {
-                page-break-inside: avoid;
-            }
+            body { background: white; padding: 0; }
+            .page { box-shadow: none; margin: 0; width: 100%; padding: 10mm 15mm; }
+            .print-btn-container { display: none; }
+            input { border-color: #999 !important; }
+            .consent-box { page-break-inside: avoid; }
+            /* Forza la stampa dei background colors per i titoli */
+            .section-title { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
+
+<div class="print-btn-container no-print">
+    <button onclick="window.print()" class="print-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+        Stampa Modulo
+    </button>
+</div>
 
 <div class="page">
     <header>
