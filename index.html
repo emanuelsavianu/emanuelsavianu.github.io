@@ -209,7 +209,7 @@
         
         h2 { font-size: 1.4rem; font-weight: 700; color: var(--primary-dark); }
 
-        /* --- LOGO SIDEBAR --- */
+        /* --- SIDEBAR ELEMENTS --- */
         .sidebar-logo-container {
             text-align: center;
             background: white;
@@ -226,7 +226,6 @@
         }
 
         /* --- SEZIONE MILLEBOOK & AZIONI --- */
-        
         .millebook-wrapper {
             margin-bottom: 25px;
             text-align: center;
@@ -295,7 +294,7 @@
         .btn-prenota { background: var(--primary-light); } 
         .btn-ricette { background: var(--accent); }
 
-        /* --- AVVISI & ALERT --- */
+        /* --- ALERTS --- */
         .alert-box {
             background-color: #f1f8fe; border-left: 5px solid var(--primary);
             padding: 20px; margin-bottom: 25px; border-radius: 8px;
@@ -303,9 +302,6 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
             line-height: 1.6;
         }
-
-        .alert-box p { margin-bottom: 10px; }
-        .alert-box p:last-child { margin-bottom: 0; }
 
         .alert-emergency {
             background-color: #fef2f2; 
@@ -321,8 +317,8 @@
             justify-content: center;
             gap: 15px;
             box-shadow: var(--shadow-md);
+            margin-bottom: 25px;
         }
-        .alert-emergency i { font-size: 1.8rem; color: var(--danger); }
 
         /* --- CONTATTI E TABELLE --- */
         .contact-row {
@@ -338,22 +334,8 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
         }
 
-        .btn-map-small {
-            display: inline-block;
-            margin-top: 5px;
-            padding: 6px 12px;
-            font-size: 0.85rem;
-            background-color: var(--primary);
-            color: white;
-            border-radius: 6px;
-            font-weight: 600;
-            margin-left: 51px;
-        }
-        .btn-map-small:hover { opacity: 0.9; }
-
         .hours-table { width: 100%; border-collapse: collapse; }
         .hours-table td { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
-        .hours-table tr:last-child td { border-bottom: none; }
         .hours-table .day { font-weight: 600; color: var(--text-medium); }
         .hours-table .time { text-align: right; color: var(--primary-dark); font-weight: 500; }
 
@@ -364,6 +346,50 @@
         }
         .iframe-wrapper iframe { width: 100%; height: 650px; border: 0; }
 
+        /* --- FATTURAZIONE E QR --- */
+        .billing-flex {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        @media (min-width: 600px) {
+            .billing-flex { flex-direction: row; align-items: center; text-align: left; }
+        }
+
+        .qr-container {
+            flex-shrink: 0;
+            background: #fff;
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+        .qr-container img {
+            display: block;
+            width: 150px;
+            height: auto;
+        }
+
+        .billing-info-text {
+            flex-grow: 1;
+            font-family: 'Courier New', Courier, monospace;
+            background: #f4f7f9;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            width: 100%;
+        }
+        .billing-info-text strong { color: var(--primary-dark); font-family: 'Inter', sans-serif; }
+        .billing-item { 
+            margin-bottom: 8px; 
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 1px dashed #cbd5e0;
+            padding-bottom: 4px;
+        }
+        .billing-item:last-child { border-bottom: none; margin-bottom: 0; }
+
         /* --- FOOTER --- */
         footer {
             text-align: center; padding: 40px 20px; font-size: 0.85rem;
@@ -373,18 +399,6 @@
         .hidden { display: none; }
         .fade-in { animation: fadeIn 0.5s; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* Modal Privacy */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.5); z-index: 1000;
-            display: none; justify-content: center; align-items: center; padding: 20px;
-        }
-        .modal-content {
-            background: white; padding: 30px; border-radius: var(--radius-lg);
-            max-width: 600px; width: 100%; max-height: 80vh; overflow-y: auto;
-        }
-        .close-modal { float: right; font-size: 1.5rem; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -409,10 +423,10 @@
         <!-- AVVISI -->
         <div class="alert-box">
             <p data-i18n="alert_p1">
-                <i class="fas fa-heart" style="color: var(--primary); margin-right: 8px;"></i>
+                <i class="fas fa-exclamation-circle" style="color: var(--primary); margin-right: 8px;"></i>
                 <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.
             </p>
-            <p data-i18n="alert_p2">
+            <p data-i18n="alert_p2" style="margin-top: 10px;">
                 <i class="fas fa-check-circle" style="color: var(--primary); margin-right: 8px;"></i>
                 Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
             </p>
@@ -425,7 +439,6 @@
                 <h2 data-i18n="services_title">Servizi Online</h2>
             </div>
             
-            <!-- SEZIONE MILLEBOOK (ACCESSO PRIORITARIO) -->
             <div class="millebook-wrapper">
                 <a href="https://millebook.it" target="_blank" class="btn-millebook">
                     <i class="fas fa-laptop-medical"></i>
@@ -443,14 +456,12 @@
             </div>
 
             <div class="action-grid btn-secondary-group">
-                <!-- 1. PRENOTA -->
                 <button onclick="showSection('booking')" class="btn-main btn-prenota">
                     <i class="far fa-calendar-check"></i>
                     <span data-i18n="btn_book">Prenota Prima Visita</span>
                     <small data-i18n="btn_book_sub">Nuovi pazienti</small>
                 </button>
 
-                <!-- 2. FARMACI -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" class="btn-main btn-ricette">
                     <i class="fas fa-pills"></i>
                     <span data-i18n="btn_drugs">Modulo Farmaci</span>
@@ -473,7 +484,6 @@
                 <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" style="border: 0" width="100%" height="600" frameborder="0" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
 
-            <!-- NUOVO LINK MODULO PRIVACY -->
             <div style="margin-top: 25px; background: #f8fbff; padding: 15px; border-radius: 8px; border: 1px dashed var(--primary-light); text-align: center;">
                 <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-dark);">
                     <i class="fas fa-info-circle" style="color: var(--primary);"></i>
@@ -483,7 +493,6 @@
                     <span data-i18n="privacy_modulo_link">Leggi Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
                 </a>
             </div>
-
         </div>
 
         <!-- ALERT 112 EMERGENZA -->
@@ -492,70 +501,7 @@
             <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
         </div>
 
-    </main>
-
-    <!-- COLONNA LATERALE (DESTRA) -->
-    <aside>
-        
-        <!-- Contatti -->
-        <div class="card">
-            <div class="card-header">
-                <i class="fas fa-address-book"></i>
-                <h2 data-i18n="contacts_title">Contatti Studio</h2>
-            </div>
-
-            <a href="tel:05751713428" class="contact-row">
-                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
-                <div>
-                    <span data-i18n="label_secretary" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Segreteria</span><br>
-                    <span style="font-size: 1.1rem; font-weight: 700;">0575 171 3428</span>
-                </div>
-            </a>
-
-            <!-- Blocco Indirizzo con Bottone -->
-            <div style="margin-bottom: 15px;">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
-                    <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-                    <div>
-                        <span data-i18n="label_address" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
-                        <span>Via Ubaldo Pasqui 38, Arezzo</span>
-                    </div>
-                </a>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="btn-map-small">
-                    <i class="fas fa-location-arrow"></i> <span data-i18n="btn_map">Portami qui</span>
-                </a>
-            </div>
-
-            <a href="mailto:segreteria@savianu.it" class="contact-row">
-                <div class="icon-circle"><i class="far fa-envelope"></i></div>
-                <div>
-                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Email</span><br>
-                    <span style="font-size:0.85rem;">segreteria@savianu.it</span>
-                </div>
-            </a>
-        </div>
-
-        <div class="sidebar-logo-container">
-            <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo Studio Savianu" class="sidebar-logo-img">
-        </div>
-
-        <!-- Orari -->
-        <div class="card">
-            <div class="card-header">
-                <i class="far fa-clock"></i>
-                <h2 data-i18n="hours_title">Orari Ambulatorio</h2>
-            </div>
-            <table class="hours-table">
-                <tr><td class="day" data-i18n="day_mon">Lunedì</td><td class="time">17:00 – 18:30</td></tr>
-                <tr><td class="day" data-i18n="day_tue">Martedì</td><td class="time">11:30 – 13:00</td></tr>
-                <tr><td class="day" data-i18n="day_wed">Mercoledì</td><td class="time">17:00 – 18:30</td></tr>
-                <tr><td class="day" data-i18n="day_thu">Giovedì</td><td class="time">11:30 – 13:00</td></tr>
-                <tr><td class="day" data-i18n="day_fri">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
-                <tr><td class="day" data-i18n="day_sat_sun" style="color:#ef4444;">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
-            </table>
-        </div>
-
-        <!-- Guardia Medica -->
+        <!-- CONTINUITÀ ASSISTENZIALE -->
         <div class="card">
             <div class="card-header">
                 <i class="fas fa-moon"></i>
@@ -572,24 +518,95 @@
             </div>
         </div>
 
-        <!-- Dati Professionali -->
+        <!-- DATI PROFESSIONALI -->
         <div class="card">
             <div class="card-header">
-                <i class="fas fa-info-circle"></i>
+                <i class="fas fa-id-card"></i>
                 <h2 data-i18n="prof_info_title">Dati Professionali</h2>
             </div>
             <div style="font-size: 0.9rem; line-height: 1.6; color: var(--text-medium);">
                 <p><strong>Dott. Emanuel Savianu</strong><br>
                 <span data-i18n="prof_role">Medico di Medicina Generale</span><br>
-                C.R. 011189 nr. 3278095905<br>
-                Ord. Medici AR n. 3499<br>
-                P.IVA 02348320512<br>
-                Codice SDI JKKZDGR<br>
-                via Tullio Innocenti 38 Arezzo<br>
-                <a href="mailto:emanuel.savianu@pec.omceoar.it">emanuel.savianu@pec.omceoar.it</a></p>
+                C.R. 011189 nr. 3278095905 | Ord. Medici AR n. 3499<br>
+                P.IVA 02348320512 | SDI JKKZDGR<br>
+                via Tullio Innocenti 38, Arezzo<br>
+                <a href="mailto:emanuel.savianu@pec.omceoar.it" style="color: var(--primary);">emanuel.savianu@pec.omceoar.it</a></p>
             </div>
         </div>
 
+        <!-- FATTURAZIONE ELETTRONICA (HTML + QR) -->
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-qrcode"></i>
+                <h2 data-i18n="billing_title">Dati Fatturazione Elettronica</h2>
+            </div>
+            <div class="billing-flex">
+                <div class="qr-container">
+                    <img src="data:image/png;base64,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" alt="QR Code Fatturazione">
+                </div>
+                <div class="billing-info-text">
+                    <div class="billing-item"><strong>P. IVA:</strong> <span>02348320512</span></div>
+                    <div class="billing-item"><strong>Codice SDI:</strong> <span>JKKZDGR</span></div>
+                    <div class="billing-item"><strong>Sogg. Ric.:</strong> <span>Dott. Emanuel Savianu</span></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- COLONNA LATERALE (DESTRA) -->
+    <aside>
+        <div class="sidebar-logo-container">
+            <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo Studio Savianu" class="sidebar-logo-img">
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="fas fa-address-book"></i>
+                <h2 data-i18n="contacts_title">Contatti Studio</h2>
+            </div>
+
+            <a href="tel:05751713428" class="contact-row">
+                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                <div>
+                    <span data-i18n="label_secretary" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Segreteria</span><br>
+                    <span style="font-size: 1.1rem; font-weight: 700;">0575 171 3428</span>
+                </div>
+            </a>
+
+            <div style="margin-bottom: 15px;">
+                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;">
+                    <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                    <div>
+                        <span data-i18n="label_address" style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Indirizzo</span><br>
+                        <span>Via Ubaldo Pasqui 38, Arezzo</span>
+                    </div>
+                </a>
+            </div>
+
+            <a href="mailto:segreteria@savianu.it" class="contact-row">
+                <div class="icon-circle"><i class="far fa-envelope"></i></div>
+                <div>
+                    <span style="font-size: 0.8rem; text-transform:uppercase; color:var(--text-medium); font-weight:700;">Email</span><br>
+                    <span style="font-size:0.85rem;">segreteria@savianu.it</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <i class="far fa-clock"></i>
+                <h2 data-i18n="hours_title">Orari Ambulatorio</h2>
+            </div>
+            <table class="hours-table">
+                <tr><td class="day" data-i18n="day_mon">Lunedì</td><td class="time">17:00 – 18:30</td></tr>
+                <tr><td class="day" data-i18n="day_tue">Martedì</td><td class="time">11:30 – 13:00</td></tr>
+                <tr><td class="day" data-i18n="day_wed">Mercoledì</td><td class="time">17:00 – 18:30</td></tr>
+                <tr><td class="day" data-i18n="day_thu">Giovedì</td><td class="time">11:30 – 13:00</td></tr>
+                <tr><td class="day" data-i18n="day_fri">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
+                <tr><td class="day" data-i18n="day_sat_sun" style="color:#ef4444;">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
+            </table>
+        </div>
     </aside>
 
 </div>
@@ -603,48 +620,12 @@
     </div>
 </footer>
 
-<!-- Inizio Banner Cookie Semplice -->
-<div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: #2c3e50; color: white; padding: 15px; text-align: center; font-size: 14px; z-index: 9999; display: none;">
-    <p style="margin: 0; display: inline-block;">
-        <span data-i18n="cookie_text">Questo sito utilizza cookie tecnici per garantire il corretto funzionamento. Cliccando sui link esterni (MilleBook/Google) si applicano le relative privacy policy.</span>
-        <a href="privacy.html" style="color: #3498db; text-decoration: underline;" data-i18n="cookie_link">Leggi l'informativa</a>.
-    </p>
-    <button onclick="acceptCookies()" style="margin-left: 15px; background: #27ae60; color: white; border: none; padding: 5px 15px; border-radius: 3px; cursor: pointer;" data-i18n="cookie_btn">Ho capito</button>
-</div>
-
-<script>
-    // Mostra il banner solo se non è stato già accettato
-    if (!localStorage.getItem('cookieConsent')) {
-        document.getElementById('cookie-banner').style.display = 'block';
-    }
-
-    function acceptCookies() {
-        localStorage.setItem('cookieConsent', 'true');
-        document.getElementById('cookie-banner').style.display = 'none';
-    }
-</script>
-<!-- Fine Banner Cookie -->
-
-<div id="privacyModal" class="modal-overlay">
-    <div class="modal-content">
-        <span class="close-modal" onclick="closePrivacy()">&times;</span>
-        <h2 style="color: var(--primary); margin-bottom: 15px;">Informativa Privacy</h2>
-        <p style="margin-bottom: 10px;">
-            <strong data-i18n="privacy_owner_label">Titolare del Trattamento:</strong> Dott. Emanuel Savianu, Via Ubaldo Pasqui 38, Arezzo.
-        </p>
-        <p style="margin-bottom: 10px;">
-            <strong data-i18n="privacy_purpose_label">Finalità:</strong> <span data-i18n="privacy_purpose_text">I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.</span>
-        </p>
-        <small data-i18n="privacy_note">Per l'informativa completa, consultare il documento in studio.</small>
-    </div>
-</div>
-
 <script>
     // --- LANGUAGE MANAGEMENT ---
     const translations = {
         it: {
             header_subtitle: "Medico di Medicina Generale - Arezzo",
-            alert_p1: "<i class='fas fa-heart' style='color: var(--primary); margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
+            alert_p1: "<i class='fas fa-exclamation-circle' style='color: var(--primary); margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
             alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.",
             services_title: "Servizi Online",
             millebook_btn: "ACCEDI A MILLEBOOK",
@@ -663,7 +644,6 @@
             contacts_title: "Contatti Studio",
             label_secretary: "Segreteria",
             label_address: "Indirizzo",
-            btn_map: "Portami qui",
             hours_title: "Orari Ambulatorio",
             day_mon: "Lunedì",
             day_tue: "Martedì",
@@ -677,18 +657,12 @@
             guard_label: "Numero Unico (Ex Guardia Medica)",
             prof_info_title: "Dati Professionali",
             prof_role: "Medico di Medicina Generale",
-            privacy_owner_label: "Titolare del Trattamento:",
-            privacy_purpose_label: "Finalità:",
-            privacy_purpose_text: "I dati raccolti sono utilizzati esclusivamente per l'erogazione delle prestazioni sanitarie richieste tramite i portali Millebook e Google.",
-            privacy_note: "Per l'informativa completa, consultare il documento in studio.",
-            link_privacy: "Privacy Policy",
-            cookie_text: "Questo sito utilizza cookie tecnici per garantire il corretto funzionamento. Cliccando sui link esterni (MilleBook/Google) si applicano le relative privacy policy.",
-            cookie_link: "Leggi l'informativa",
-            cookie_btn: "Ho capito"
+            billing_title: "Dati Fatturazione Elettronica",
+            link_privacy: "Privacy Policy"
         },
         en: {
             header_subtitle: "General Practitioner - Arezzo",
-            alert_p1: "<i class='fas fa-heart' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
+            alert_p1: "<i class='fas fa-exclamation-circle' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
             alert_p2: "<i class='fas fa-check-circle' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
             services_title: "Online Services",
             millebook_btn: "LOGIN TO MILLEBOOK",
@@ -707,7 +681,6 @@
             contacts_title: "Office Contacts",
             label_secretary: "Reception",
             label_address: "Address",
-            btn_map: "Take me there",
             hours_title: "Clinic Hours",
             day_mon: "Monday",
             day_tue: "Tuesday",
@@ -721,23 +694,14 @@
             guard_label: "Toll-free Number",
             prof_info_title: "Professional Details",
             prof_role: "General Practitioner",
-            privacy_owner_label: "Data Controller:",
-            privacy_purpose_label: "Purpose:",
-            privacy_purpose_text: "Data collected is used exclusively for providing healthcare services requested via the Millebook and Google portals.",
-            privacy_note: "For the complete privacy policy, please consult the document in the office.",
-            link_privacy: "Privacy Policy",
-            cookie_text: "This site uses technical cookies to ensure proper functioning. Clicking on external links (MilleBook/Google) applies their respective privacy policies.",
-            cookie_link: "Read the policy",
-            cookie_btn: "I understand"
+            billing_title: "e-Billing Data",
+            link_privacy: "Privacy Policy"
         }
     };
 
     function setLanguage(lang) {
-        // Update Buttons visual state
         document.getElementById('btn-it').classList.toggle('active', lang === 'it');
         document.getElementById('btn-en').classList.toggle('active', lang === 'en');
-
-        // Update Text Content using innerHTML to support bold tags/icons
         const elements = document.querySelectorAll('[data-i18n]');
         elements.forEach(element => {
             const key = element.getAttribute('data-i18n');
@@ -747,28 +711,12 @@
         });
     }
 
-    // --- OTHER FUNCTIONS ---
-
     function showSection(sectionId) {
         const section = document.getElementById(sectionId + '-section');
         if(section) {
             section.classList.remove('hidden');
             section.classList.add('fade-in');
             section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-
-    function openPrivacy(e) {
-        e.preventDefault();
-        document.getElementById('privacyModal').style.display = 'flex';
-    }
-    function closePrivacy() {
-        document.getElementById('privacyModal').style.display = 'none';
-    }
-    window.onclick = function(event) {
-        const modal = document.getElementById('privacyModal');
-        if (event.target == modal) {
-            modal.style.display = "none";
         }
     }
 </script>
