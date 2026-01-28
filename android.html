@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Dott. Emanuel Savianu | App</title>
     
     <!-- Icona per la Home Screen (iOS) -->
@@ -11,27 +11,9 @@
     <meta name="apple-mobile-web-app-title" content="Dott. Savianu">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/R6LJHmdT/logo-transparent.png">
 
-    <!-- Manifest Integrato per Android (Rende l'app installabile e Full Screen) -->
-    <link rel="manifest" href='data:application/manifest+json,{
-        "name": "Dott. Emanuel Savianu",
-        "short_name": "Dott. Savianu",
-        "start_url": "./android.html",
-        "display": "standalone",
-        "background_color": "#ffffff",
-        "theme_color": "#2563eb",
-        "icons": [
-            {
-                "src": "https://i.postimg.cc/R6LJHmdT/logo-transparent.png",
-                "sizes": "192x192",
-                "type": "image/png"
-            },
-            {
-                "src": "https://i.postimg.cc/R6LJHmdT/logo-transparent.png",
-                "sizes": "512x512",
-                "type": "image/png"
-            }
-        ]
-    }'>
+    <!-- Manifest Integrato per Android (CORRETTO E CODIFICATO) -->
+    <!-- Ora usa una codifica URL sicura per garantire che Android lo legga correttamente -->
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Dott.%20Emanuel%20Savianu%22%2C%22short_name%22%3A%22Dott.%20Savianu%22%2C%22start_url%22%3A%22.%2Fandroid.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 
     <!-- Tailwind CSS (Stili) -->
     <script src="https://cdn.tailwindcss.com"></script>
