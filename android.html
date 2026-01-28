@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="https://i.postimg.cc/R6LJHmdT/logo-transparent.png">
 
     <!-- Manifest ottimizzato per Android -->
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Dott.%20Emanuel%20Savianu%22%2C%22short_name%22%3A%22Dott.%20Savianu%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Dott.%20Emanuel%20Savianu%20-%20Medico%20di%20Base%22%2C%22short_name%22%3A%22Dott.%20Savianu%22%2C%22description%22%3A%22App%20per%20prenotazioni%2C%20contatti%20e%20informazioni%20dello%20studio%20medico%22%2C%22start_url%22%3A%22.%2F%22%2C%22scope%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22maskable%22%7D%5D%7D">
 
     <!-- Preconnect per performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,6 +50,113 @@
     </script>
 
     <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        // Register Service Worker for PWA installation
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('data:text/javascript;base64,Ly8gU2VydmljZSBXb3JrZXIgZm9yIFBXQQpjb25zdCBDQUNIRV9OQU1FID0gJ2RyLXNhdmlhbnUtdjEnOwpjb25zdCB1cmxzVG9DYWNoZSA9IFsKICAnLi8nCl07CgovLyBJbnN0YWxsIGV2ZW50CnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignaW5zdGFsbCcsIChldmVudCkgPT4gewogIGV2ZW50LndhaXRVbnRpbCgKICAgIGNhY2hlcy5vcGVuKENBQ0hFX05BTUUpCiAgICAgIC50aGVuKChjYWNoZSkgPT4gY2FjaGUuYWRkQWxsKHVybHNUb0NhY2hlKSkKICApOwogIHNlbGYuc2tpcFdhaXRpbmcoKTsKfSk7CgovLyBGZXRjaCBldmVudApzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2ZldGNoJywgKGV2ZW50KSA9PiB7CiAgZXZlbnQucmVzcG9uZFdpdGgoCiAgICBjYWNoZXMubWF0Y2goZXZlbnQucmVxdWVzdCkKICAgICAgLnRoZW4oKHJlc3BvbnNlKSA9PiByZXNwb25zZSB8fCBmZXRjaChldmVudC5yZXF1ZXN0KSkKICApOwp9KTsKCi8vIEFjdGl2YXRlIGV2ZW50CnNlbGYuYWRkRXZlbnRMaXN0ZW5lcignYWN0aXZhdGUnLCAoZXZlbnQpID0+IHsKICBldmVudC53YWl0VW50aWwoCiAgICBjYWNoZXMua2V5cygpLnRoZW4oKGNhY2hlTmFtZXMpID0+IHsKICAgICAgcmV0dXJuIFByb21pc2UuYWxsKAogICAgICAgIGNhY2hlTmFtZXMubWFwKChjYWNoZU5hbWUpID0+IHsKICAgICAgICAgIGlmIChjYWNoZU5hbWUgIT09IENBQ0hFX05BTUUpIHsKICAgICAgICAgICAgcmV0dXJuIGNhY2hlcy5kZWxldGUoY2FjaGVOYW1lKTsKICAgICAgICAgIH0KICAgICAgICB9KQogICAgICApOwogICAgfSkKICApOwogIHJldHVybiBzZWxmLmNsaWVudHMuY2xhaW0oKTsKfSk7')
+                    .then(() => console.log('Service Worker registered'))
+                    .catch(err => console.log('Service Worker registration failed:', err));
+            });
+        }
+
+        // Handle PWA install prompt
+        let deferredPrompt;
+        let installButton;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent Chrome's default install prompt
+            e.preventDefault();
+            // Store the event for later use
+            deferredPrompt = e;
+            
+            // Show custom install button after a short delay
+            setTimeout(() => {
+                showInstallPrompt();
+            }, 2000);
+        });
+
+        function showInstallPrompt() {
+            if (!deferredPrompt) return;
+
+            // Create custom install banner
+            const banner = document.createElement('div');
+            banner.id = 'install-banner';
+            banner.innerHTML = `
+                <div style="position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 90%; max-width: 400px; background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: white; padding: 16px 20px; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); animation: slideUp 0.4s ease-out; font-family: Inter, sans-serif;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="background: white/20; padding: 10px; border-radius: 12px; flex-shrink: 0;">
+                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                        </div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 15px; margin-bottom: 4px;">Installa l'App</div>
+                            <div style="font-size: 12px; opacity: 0.9;">Accesso rapido dalla home screen</div>
+                        </div>
+                        <button id="install-btn" style="background: white; color: #2563eb; border: none; padding: 10px 20px; border-radius: 10px; font-weight: 700; font-size: 13px; cursor: pointer; white-space: nowrap; touch-action: manipulation;">
+                            INSTALLA
+                        </button>
+                        <button id="close-banner" style="background: transparent; border: none; color: white; font-size: 24px; cursor: pointer; padding: 0; width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; margin-left: -8px; touch-action: manipulation;">
+                            ×
+                        </button>
+                    </div>
+                </div>
+                <style>
+                    @keyframes slideUp {
+                        from { transform: translate(-50%, 20px); opacity: 0; }
+                        to { transform: translate(-50%, 0); opacity: 1; }
+                    }
+                    #install-btn:active {
+                        transform: scale(0.95);
+                    }
+                    #close-banner:active {
+                        transform: scale(0.9);
+                    }
+                </style>
+            `;
+            
+            document.body.appendChild(banner);
+            
+            // Install button click handler
+            document.getElementById('install-btn').addEventListener('click', async () => {
+                if (!deferredPrompt) return;
+                
+                // Show the install prompt
+                deferredPrompt.prompt();
+                
+                // Wait for the user's response
+                const { outcome } = await deferredPrompt.userChoice;
+                
+                console.log(`User response: ${outcome}`);
+                
+                // Clear the deferred prompt
+                deferredPrompt = null;
+                
+                // Remove banner
+                banner.remove();
+            });
+            
+            // Close button click handler
+            document.getElementById('close-banner').addEventListener('click', () => {
+                banner.remove();
+            });
+        }
+
+        // Track when app is installed
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA installed successfully');
+            deferredPrompt = null;
+            
+            // Remove banner if still visible
+            const banner = document.getElementById('install-banner');
+            if (banner) banner.remove();
+        });
+    </script>
 
     <style>
         * {
