@@ -5,82 +5,165 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Dott. Emanuel Savianu | App</title>
     
-    <!-- Icona per la Home Screen (iOS) -->
+    <!-- PWA Configuration -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Dott. Savianu">
+    <meta name="theme-color" content="#2563eb">
     <link rel="apple-touch-icon" href="https://i.postimg.cc/R6LJHmdT/logo-transparent.png">
 
-    <!-- Manifest Integrato per Android (CORRETTO E CODIFICATO) -->
-    <!-- Ora usa una codifica URL sicura per garantire che Android lo legga correttamente -->
-    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Dott.%20Emanuel%20Savianu%22%2C%22short_name%22%3A%22Dott.%20Savianu%22%2C%22start_url%22%3A%22.%2Fandroid.html%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
+    <!-- Manifest ottimizzato per Android -->
+    <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Dott.%20Emanuel%20Savianu%22%2C%22short_name%22%3A%22Dott.%20Savianu%22%2C%22start_url%22%3A%22.%2F%22%2C%22display%22%3A%22standalone%22%2C%22orientation%22%3A%22portrait%22%2C%22background_color%22%3A%22%23ffffff%22%2C%22theme_color%22%3A%22%232563eb%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22192x192%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%2C%7B%22src%22%3A%22https%3A%2F%2Fi.postimg.cc%2FR6LJHmdT%2Flogo-transparent.png%22%2C%22sizes%22%3A%22512x512%22%2C%22type%22%3A%22image%2Fpng%22%2C%22purpose%22%3A%22any%20maskable%22%7D%5D%7D">
 
-    <!-- Tailwind CSS (Stili) -->
+    <!-- Preconnect per performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <!-- Font ottimizzato -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Configurazione Tailwind per i colori personalizzati -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
                     },
-                    padding: {
-                        'safe': 'env(safe-area-inset-bottom, 20px)',
-                    }
                 }
             }
         }
     </script>
 
-    <!-- Import Map per far funzionare React e Lucide direttamente nel browser -->
+    <!-- Import Map ottimizzato -->
     <script type="importmap">
     {
         "imports": {
-            "react": "https://esm.sh/react@18.2.0",
-            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+            "react": "https://esm.sh/react@18.2.0?dev",
+            "react-dom/client": "https://esm.sh/react-dom@18.2.0/client?dev",
             "lucide-react": "https://esm.sh/lucide-react@0.263.1"
         }
     }
     </script>
 
-    <!-- Babel per tradurre il codice React (JSX) nel browser -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
 
-    <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
     <style>
-        body { font-family: 'Inter', sans-serif; -webkit-tap-highlight-color: transparent; }
-        /* Animazione personalizzata */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        * {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
         }
+        
+        body { 
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            overscroll-behavior: none;
+            touch-action: pan-y;
+        }
+
+        /* Animazioni ottimizzate con will-change */
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(15px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        @keyframes slideInRight {
+            from { 
+                opacity: 0; 
+                transform: translateX(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateX(0); 
+            }
+        }
+
         .animate-fade-in {
-            animation: fadeIn 0.3s ease-out forwards;
+            animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            will-change: transform, opacity;
         }
-        /* Nasconde scrollbar ma permette lo scroll */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        .animate-slide-in {
+            animation: slideInRight 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Scrollbar nascosta ma ottimizzata */
+        .no-scrollbar::-webkit-scrollbar { 
+            display: none; 
+        }
+        .no-scrollbar { 
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Ottimizzazione touch feedback */
+        .touch-feedback {
+            transition: transform 0.1s ease, opacity 0.1s ease;
+        }
+        
+        .touch-feedback:active {
+            transform: scale(0.96);
+            opacity: 0.8;
+        }
+
+        /* Miglioramento rendering */
+        .hw-accelerate {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        /* Rimozione delay click iOS */
+        a, button, input, select {
+            touch-action: manipulation;
+        }
+
+        /* Ottimizzazione iframe */
+        iframe {
+            border: 0;
+            display: block;
+            will-change: scroll-position;
+        }
+
+        /* Safe area per Android con notch */
+        .safe-top {
+            padding-top: env(safe-area-inset-top, 0);
+        }
+        
+        .safe-bottom {
+            padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+
+        /* Prevenzione selezione testo */
+        .no-select {
+            user-select: none;
+            -webkit-user-select: none;
+        }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900 h-screen w-screen overflow-hidden">
+<body class="bg-gray-50 text-gray-900 h-screen w-screen overflow-hidden no-select">
     
     <div id="root"></div>
 
-    <!-- IL TUO CODICE DELL'APP -->
     <script type="text/babel" data-type="module">
-        import React, { useState, useEffect } from 'react';
+        import React, { useState, useEffect, useCallback, useMemo, memo } from 'react';
         import { createRoot } from 'react-dom/client';
         import { 
-            Phone, MapPin, Calendar, FileText, Info, Menu, X, Globe, 
+            Phone, MapPin, Calendar, FileText, Info, Globe, 
             Clock, AlertCircle, Monitor, Pill, UserPlus, Moon, 
             QrCode, Mail, ExternalLink 
         } from 'lucide-react';
 
-        // --- DATI ---
+        // --- DATI OTTIMIZZATI ---
         const translations = {
             it: {
                 role: "Medico di Medicina Generale",
@@ -88,7 +171,7 @@
                 tab_booking: "Prenota",
                 tab_contacts: "Contatti",
                 tab_info: "Info",
-                alert_new_patient: "Nuovi pazienti: Prenota la prima visita qui sotto. Ti iscriverò a MilleBook di persona.",
+                alert_new_patient: "Prenota la prima visita qui sotto. Ti iscriverò a MilleBook di persona.",
                 alert_millebook: "Dopo la prima visita, usa solo MilleBook per ricette e appuntamenti.",
                 btn_millebook: "ACCEDI A MILLEBOOK",
                 btn_millebook_sub: "Fascicolo Sanitario",
@@ -102,7 +185,8 @@
                 contacts_title: "Contatti",
                 billing_title: "Dati Fatturazione",
                 emergency: "Per emergenze mediche chiama il 112",
-                privacy: "Privacy Policy"
+                privacy: "Privacy Policy",
+                new_patients: "Nuovi Pazienti:"
             },
             en: {
                 role: "General Practitioner",
@@ -110,7 +194,7 @@
                 tab_booking: "Book",
                 tab_contacts: "Contacts",
                 tab_info: "Info",
-                alert_new_patient: "New Patients: Book your first visit below. I will register you on MilleBook in person.",
+                alert_new_patient: "Book your first visit below. I will register you on MilleBook in person.",
                 alert_millebook: "After the first visit, please use MilleBook for prescriptions and appointments.",
                 btn_millebook: "LOGIN TO MILLEBOOK",
                 btn_millebook_sub: "Health Record",
@@ -124,7 +208,8 @@
                 contacts_title: "Contacts",
                 billing_title: "Billing Data",
                 emergency: "For medical emergencies call 112",
-                privacy: "Privacy Policy"
+                privacy: "Privacy Policy",
+                new_patients: "New Patients:"
             }
         };
 
@@ -139,11 +224,11 @@
 
         const qrCodeSrc = "data:image/png;base64,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";
 
-        // --- COMPONENTI ---
+        // --- COMPONENTI OTTIMIZZATI CON MEMO ---
 
-        const Header = ({ lang, setLang, t }) => (
-            <header className="bg-blue-600 text-white pt-12 pb-6 px-4 shadow-lg rounded-b-3xl relative overflow-hidden shrink-0">
-                <div className="absolute inset-0 opacity-20 bg-[url('https://i.postimg.cc/QxQ0YFXg/43166.jpg')] bg-cover bg-center"></div>
+        const Header = memo(({ lang, setLang, t }) => (
+            <header className="bg-blue-600 text-white pt-12 pb-6 px-4 shadow-lg rounded-b-3xl relative overflow-hidden shrink-0 hw-accelerate safe-top">
+                <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-blue-700 to-blue-500"></div>
                 <div className="relative z-10 flex justify-between items-start">
                     <div>
                         <h1 className="text-2xl font-bold">Dott. Savianu</h1>
@@ -151,25 +236,26 @@
                     </div>
                     <button 
                         onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
-                        className="flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold hover:bg-white/30 transition-colors"
+                        className="flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold hover:bg-white/30 transition-colors touch-feedback active:bg-white/40"
+                        aria-label="Cambia lingua"
                     >
                         <Globe size={14} />
                         {lang.toUpperCase()}
                     </button>
                 </div>
             </header>
-        );
+        ));
 
-        const BottomNav = ({ activeTab, setActiveTab, t }) => {
-            const tabs = [
+        const BottomNav = memo(({ activeTab, setActiveTab, t }) => {
+            const tabs = useMemo(() => [
                 { id: 'home', icon: FileText, label: t.tab_home },
                 { id: 'booking', icon: Calendar, label: t.tab_booking },
                 { id: 'contacts', icon: MapPin, label: t.tab_contacts },
                 { id: 'info', icon: Info, label: t.tab_info },
-            ];
+            ], [t]);
 
             return (
-                <nav className="bg-white border-t border-gray-200 pb-safe pt-2 px-2 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] shrink-0 z-50">
+                <nav className="bg-white border-t border-gray-200 pb-safe pt-2 px-2 shadow-[0_-4px_10px_rgba(0,0,0,0.05)] shrink-0 z-50 hw-accelerate safe-bottom">
                     <div className="flex justify-around items-center">
                         {tabs.map((tab) => {
                             const isActive = activeTab === tab.id;
@@ -177,7 +263,9 @@
                                 <button
                                     key={tab.id}
                                     onClick={() => setActiveTab(tab.id)}
-                                    className={`flex flex-col items-center p-2 rounded-xl transition-all duration-300 ${isActive ? 'text-blue-600 -translate-y-1' : 'text-gray-400'}`}
+                                    className={`flex flex-col items-center p-2 rounded-xl transition-all duration-200 touch-feedback ${isActive ? 'text-blue-600 -translate-y-1' : 'text-gray-400'}`}
+                                    aria-label={tab.label}
+                                    aria-current={isActive ? 'page' : undefined}
                                 >
                                     <tab.icon size={24} strokeWidth={isActive ? 2.5 : 2} />
                                     <span className={`text-[10px] font-medium mt-1 ${isActive ? 'opacity-100' : 'opacity-70'}`}>
@@ -189,16 +277,16 @@
                     </div>
                 </nav>
             );
-        };
+        });
 
-        const HomeScreen = ({ t, setActiveTab }) => (
+        const HomeScreen = memo(({ t, setActiveTab }) => (
             <div className="space-y-6 pb-24 animate-fade-in">
                 {/* Alert Box */}
                 <div className="bg-blue-50 border-l-4 border-blue-600 p-4 rounded-r-lg shadow-sm">
                     <div className="flex gap-3">
                         <AlertCircle className="text-blue-600 shrink-0" size={24} />
-                        <div className="text-sm text-gray-700 space-y-2">
-                            <p><strong>Nuovi Pazienti:</strong> {t.alert_new_patient}</p>
+                        <div className="text-sm text-gray-700">
+                            <p><strong>{t.new_patients}</strong> {t.alert_new_patient}</p>
                         </div>
                     </div>
                 </div>
@@ -208,9 +296,9 @@
                     href="https://millebook.it" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="block group"
+                    className="block group touch-feedback"
                 >
-                    <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-6 text-white text-center shadow-blue-200 shadow-xl transform transition hover:scale-[1.02] active:scale-95">
+                    <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl p-6 text-white text-center shadow-lg hw-accelerate">
                         <Monitor className="mx-auto mb-3 text-blue-200" size={48} />
                         <h2 className="text-xl font-bold tracking-wide">{t.btn_millebook}</h2>
                         <p className="text-blue-100 opacity-90 text-sm mt-1">{t.btn_millebook_sub}</p>
@@ -226,7 +314,8 @@
                     <div className="grid grid-cols-2 gap-4">
                         <button 
                             onClick={() => setActiveTab('booking')}
-                            className="bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center justify-center text-center gap-2 hover:bg-gray-50 active:bg-gray-100 transition"
+                            className="bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center justify-center text-center gap-2 touch-feedback hw-accelerate"
+                            aria-label={t.btn_book}
                         >
                             <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
                                 <Calendar size={20} />
@@ -238,7 +327,8 @@
                             href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center justify-center text-center gap-2 hover:bg-gray-50 active:bg-gray-100 transition"
+                            className="bg-white p-4 rounded-xl shadow-md border border-gray-100 flex flex-col items-center justify-center text-center gap-2 touch-feedback hw-accelerate"
+                            aria-label={t.btn_drugs}
                         >
                             <div className="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-600">
                                 <Pill size={20} />
@@ -258,16 +348,20 @@
                         <h3 className="font-bold text-indigo-900">{t.guard_title}</h3>
                     </div>
                     <p className="text-xs text-indigo-700 mb-4">{t.guard_desc}</p>
-                    <a href="tel:116117" className="flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 rounded-lg font-bold shadow-lg hover:bg-indigo-700 transition">
+                    <a 
+                        href="tel:116117" 
+                        className="flex items-center justify-center gap-2 bg-indigo-600 text-white py-3 rounded-lg font-bold shadow-lg touch-feedback"
+                        aria-label="Chiama 116 117"
+                    >
                         <Phone size={18} />
                         116 117
                     </a>
                 </div>
             </div>
-        );
+        ));
 
-        const BookingScreen = ({ t }) => (
-            <div className="h-full flex flex-col pb-safe animate-fade-in">
+        const BookingScreen = memo(({ t }) => (
+            <div className="h-full flex flex-col pb-safe animate-fade-in safe-bottom">
                 <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-200 mb-4 mx-4 mt-4">
                     <h2 className="text-lg font-bold text-gray-800 flex items-center gap-2">
                         <Calendar className="text-blue-600" size={20} />
@@ -278,19 +372,19 @@
                 <div className="flex-1 bg-white relative overflow-hidden rounded-t-2xl shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
                     <iframe 
                         src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" 
-                        style={{border: 0}}
                         className="w-full h-full absolute inset-0"
                         title="Prenotazioni"
+                        loading="lazy"
                     ></iframe>
                 </div>
             </div>
-        );
+        ));
 
-        const ContactsScreen = ({ t }) => (
+        const ContactsScreen = memo(({ t }) => (
             <div className="space-y-6 pb-24 px-4 pt-4 animate-fade-in">
                 <div className="bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
-                    <div className="h-40 bg-gray-200 relative">
-                        <div className="absolute inset-0 flex items-center justify-center bg-blue-50 text-blue-300">
+                    <div className="h-40 bg-gradient-to-br from-blue-50 to-blue-100 relative">
+                        <div className="absolute inset-0 flex items-center justify-center text-blue-300">
                             <MapPin size={48} />
                         </div>
                         <div className="absolute bottom-4 right-4">
@@ -298,7 +392,8 @@
                                 href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2"
+                                className="bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-full shadow-lg flex items-center gap-2 touch-feedback"
+                                aria-label="Apri in Google Maps"
                             >
                                 <ExternalLink size={12} /> APRI MAPPA
                             </a>
@@ -311,9 +406,13 @@
                         <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
                             <div className="flex flex-col">
                                 <span className="text-xs font-bold text-gray-400 uppercase">Segreteria</span>
-                                <span className="text-lg font-semibold text-blue-600">0575 171 3428</span>
+                                <a href="tel:05751713428" className="text-lg font-semibold text-blue-600">0575 171 3428</a>
                             </div>
-                            <a href="tel:05751713428" className="bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition">
+                            <a 
+                                href="tel:05751713428" 
+                                className="bg-green-500 text-white p-3 rounded-full shadow-lg touch-feedback"
+                                aria-label="Chiama segreteria"
+                            >
                                 <Phone size={20} />
                             </a>
                         </div>
@@ -335,17 +434,26 @@
                     </div>
                 </div>
                 
-                <a href="mailto:segreteria@savianu.it" className="flex items-center justify-center gap-2 text-gray-500 text-sm py-2">
+                <a 
+                    href="mailto:segreteria@savianu.it" 
+                    className="flex items-center justify-center gap-2 text-gray-500 text-sm py-2 touch-feedback"
+                    aria-label="Invia email"
+                >
                     <Mail size={16} /> segreteria@savianu.it
                 </a>
             </div>
-        );
+        ));
 
-        const InfoScreen = ({ t }) => (
+        const InfoScreen = memo(({ t }) => (
             <div className="space-y-6 pb-24 px-4 pt-4 animate-fade-in">
                 <div className="text-center">
                     <div className="w-24 h-24 mx-auto bg-white rounded-full shadow-md p-2 mb-3">
-                        <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo" className="w-full h-full object-contain" />
+                        <img 
+                            src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" 
+                            alt="Logo Dott. Savianu" 
+                            className="w-full h-full object-contain"
+                            loading="lazy"
+                        />
                     </div>
                     <h2 className="text-xl font-bold text-gray-800">Dott. Emanuel Savianu</h2>
                     <p className="text-blue-600 font-medium text-sm">{t.role}</p>
@@ -360,7 +468,12 @@
                     
                     <div className="flex flex-row items-center gap-4">
                         <div className="bg-white p-2 border rounded-lg shadow-sm shrink-0">
-                            <img src={qrCodeSrc} alt="QR Code" className="w-24 h-24" />
+                            <img 
+                                src={qrCodeSrc} 
+                                alt="QR Code Fatturazione" 
+                                className="w-24 h-24"
+                                loading="lazy"
+                            />
                         </div>
                         <div className="text-xs space-y-2 text-gray-600 overflow-hidden">
                             <div>
@@ -376,23 +489,48 @@
                 </div>
 
                 <div className="text-center">
-                    <a href="privacy.html" className="text-xs text-gray-400 underline">{t.privacy}</a>
+                    <a 
+                        href="privacy.html" 
+                        className="text-xs text-gray-400 underline"
+                        aria-label="Privacy Policy"
+                    >
+                        {t.privacy}
+                    </a>
                 </div>
             </div>
-        );
+        ));
 
         function App() {
             const [activeTab, setActiveTab] = useState('home');
             const [lang, setLang] = useState('it');
-            const t = translations[lang];
+            
+            // Ottimizzazione: usa useMemo per evitare ricreazione oggetto
+            const t = useMemo(() => translations[lang], [lang]);
+
+            // Ottimizzazione: callbacks memoizzati
+            const handleTabChange = useCallback((tab) => {
+                setActiveTab(tab);
+            }, []);
+
+            const handleLangChange = useCallback((newLang) => {
+                setLang(newLang);
+            }, []);
+
+            // Prevenzione scroll overscroll su body
+            useEffect(() => {
+                document.body.style.overscrollBehavior = 'none';
+                return () => {
+                    document.body.style.overscrollBehavior = 'auto';
+                };
+            }, []);
 
             return (
-                <div className="flex flex-col h-screen bg-gray-50 font-sans text-gray-900 overflow-hidden select-none">
-                    <Header lang={lang} setLang={setLang} t={t} />
+                <div className="flex flex-col h-screen bg-gray-50 font-sans text-gray-900 overflow-hidden">
+                    <Header lang={lang} setLang={handleLangChange} t={t} />
 
                     <main className="flex-1 overflow-y-auto overflow-x-hidden scroll-smooth w-full relative no-scrollbar">
                         <div className={activeTab === 'booking' ? 'h-full' : 'p-4'}>
-                            {activeTab === 'home' && <HomeScreen t={t} setActiveTab={setActiveTab} />}
+                            {activeTab === 'home' && <HomeScreen t={t} setActiveTab={handleTabChange} />}
                             {activeTab === 'booking' && <BookingScreen t={t} />}
                             {activeTab === 'contacts' && <ContactsScreen t={t} />}
                             {activeTab === 'info' && <InfoScreen t={t} />}
@@ -407,11 +545,12 @@
                         </div>
                     )}
 
-                    <BottomNav activeTab={activeTab} setActiveTab={setActiveTab} t={t} />
+                    <BottomNav activeTab={activeTab} setActiveTab={handleTabChange} t={t} />
                 </div>
             );
         }
 
+        // Rendering ottimizzato
         const root = createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
