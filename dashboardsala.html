@@ -23,10 +23,10 @@
             font-family: 'Lato', sans-serif;
             color: var(--text-dark);
             height: 100vh;
+            margin: 0;
             overflow: hidden;
         }
 
-        /* SIDEBAR */
         .sidebar {
             background-color: white;
             border-right: 1px solid #e0e0e0;
@@ -72,6 +72,8 @@
             border-radius: 8px;
             margin-bottom: 5px;
             transition: all 0.2s;
+            text-decoration: none;
+            display: block;
         }
 
         .nav-link:hover, .nav-link.active {
@@ -80,7 +82,6 @@
             font-weight: 700;
         }
 
-        /* MAIN CONTENT */
         .main-content {
             padding: 30px;
             overflow-y: auto;
@@ -94,29 +95,22 @@
             margin-bottom: 30px;
         }
 
-        /* PATIENT LIST */
         .patient-card {
             background: white;
             border-radius: 10px;
             padding: 20px;
             margin-bottom: 15px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-            border-left: 5px solid #ccc; /* Default grey */
+            border-left: 5px solid #ccc;
             display: flex;
             justify-content: space-between;
             align-items: center;
             transition: transform 0.2s;
         }
 
-        .patient-card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-
-        /* Status Colors */
-        .status-waiting { border-left-color: #e76f51; } /* Rosso/Arancio - In attesa */
-        .status-called { border-left-color: var(--accent-color); background-color: #f0fdfa; } /* Verde - Chiamato */
-        .status-next { border-left-color: #e9c46a; } /* Giallo - Prossimo */
+        .status-waiting { border-left-color: #e76f51; }
+        .status-called { border-left-color: var(--accent-color); background-color: #f0fdfa; }
+        .status-next { border-left-color: #e9c46a; }
 
         .time-badge {
             background-color: var(--primary-color);
@@ -150,7 +144,6 @@
         .btn-done { background-color: #fce4e4; color: #c0392b; }
         .btn-done:hover { background-color: #c0392b; color: white; }
 
-        /* Stats Cards */
         .stat-card {
             background: white;
             padding: 20px;
@@ -160,19 +153,16 @@
         }
         .stat-num { font-size: 2rem; font-weight: 700; color: var(--primary-color); }
         .stat-label { font-size: 0.8rem; color: #888; text-transform: uppercase; }
-
     </style>
 </head>
 <body>
 
 <div class="container-fluid">
     <div class="row">
-        
         <div class="col-md-3 col-lg-2 sidebar d-none d-md-flex">
             <div class="brand-logo">
                 <i class="bi bi-shield-plus"></i> IPPOCRATE
             </div>
-
             <div class="doctor-profile">
                 <div class="doctor-avatar">
                     <i class="bi bi-person-vcard"></i>
@@ -180,171 +170,84 @@
                 <h6 class="fw-bold mb-0">Dott. E. Savianu</h6>
                 <small class="text-muted">In Servizio</small>
             </div>
-
             <nav class="nav flex-column">
                 <a class="nav-link active" href="#"><i class="bi bi-people me-2"></i> Sala d'Attesa</a>
                 <a class="nav-link" href="#"><i class="bi bi-calendar-check me-2"></i> Appuntamenti</a>
-                <a class="nav-link" href="#"><i class="bi bi-clock-history me-2"></i> Storico</a>
                 <div class="mt-auto"></div>
                 <a class="nav-link text-danger" href="#"><i class="bi bi-power me-2"></i> Esci</a>
             </nav>
         </div>
 
         <div class="col-md-9 col-lg-10 main-content">
-            
             <div class="header-dash">
                 <div>
-                    <h2 class="fw-bold" style="color: var(--primary-color);">Gestione Pazienti</h2>
-                    <p class="text-muted mb-0">Situazione in tempo reale della sala d'attesa.</p>
+                    <h2 class="fw-bold" style="color: var(--primary-color);">Dashboard Medico</h2>
+                    <p class="text-muted mb-0">Simulazione pannello di controllo.</p>
                 </div>
-                <div class="d-flex align-items-center gap-3">
-                    <div class="text-end">
-                        <h4 class="mb-0" id="clock">00:00</h4>
-                        <small id="date" class="text-muted">Data</small>
-                    </div>
-                    <button class="btn btn-primary rounded-circle p-3" onclick="refreshList()">
-                        <i class="bi bi-arrow-clockwise"></i>
-                    </button>
+                <div class="text-end">
+                    <h4 class="mb-0" id="clock">00:00</h4>
+                    <small id="date" class="text-muted"></small>
                 </div>
             </div>
 
             <div class="row mb-4">
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-num text-warning">3</div>
-                        <div class="stat-label">Pazienti in Attesa</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-num text-success">12</div>
-                        <div class="stat-label">Visite Concluse</div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="stat-card">
-                        <div class="stat-num" style="color: var(--accent-color);">15:45</div>
-                        <div class="stat-label">Prossimo Slot Libero</div>
-                    </div>
-                </div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-num text-warning">3</div><div class="stat-label">In Attesa</div></div></div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-num text-success">12</div><div class="stat-label">Conclusi</div></div></div>
+                <div class="col-md-4"><div class="stat-card"><div class="stat-num" style="color: var(--accent-color);">15:45</div><div class="stat-label">Prossimo Slot</div></div></div>
             </div>
 
-            <h5 class="mb-3 text-muted text-uppercase small ls-1">In Coda (Arrivati)</h5>
-            
             <div id="patientList">
                 <div class="patient-card status-waiting" id="card-1">
                     <div class="d-flex align-items-center">
-                        <div class="time-badge bg-danger">16:00</div> <div class="patient-info ms-2">
+                        <div class="time-badge bg-danger">16:00</div>
+                        <div class="patient-info">
                             <h5>Rossi Mario</h5>
-                            <small><i class="bi bi-clock"></i> In attesa da 25 min (Appuntamento ore 16:00)</small>
+                            <small>Appuntamento ore 16:00</small>
                         </div>
                     </div>
                     <div class="d-flex">
-                        <button class="action-btn btn-call" title="Chiama in Sala" onclick="chamaPaziente('Rossi Mario', 'card-1')">
-                            <i class="bi bi-megaphone-fill"></i>
-                        </button>
-                        <button class="action-btn btn-done" title="Concludi" onclick="concludiVisita('card-1')">
-                            <i class="bi bi-check-lg"></i>
-                        </button>
+                        <button class="action-btn btn-call" onclick="chamaPaziente('Rossi Mario', 'card-1')"><i class="bi bi-megaphone-fill"></i></button>
+                        <button class="action-btn btn-done" onclick="concludiVisita('card-1')"><i class="bi bi-check-lg"></i></button>
                     </div>
                 </div>
-
+                
                 <div class="patient-card status-next" id="card-2">
                     <div class="d-flex align-items-center">
                         <div class="time-badge">16:15</div>
-                        <div class="patient-info ms-2">
-                            <h5>Bianchi Francesca</h5>
-                            <small><i class="bi bi-check-circle"></i> Arrivata in orario</small>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <button class="action-btn btn-call" title="Chiama in Sala" onclick="chamaPaziente('Bianchi Francesca', 'card-2')">
-                            <i class="bi bi-megaphone-fill"></i>
-                        </button>
-                        <button class="action-btn btn-done" title="Concludi" onclick="concludiVisita('card-2')">
-                            <i class="bi bi-check-lg"></i>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="patient-card" style="border-left-color: #888;" id="card-3">
-                    <div class="d-flex align-items-center">
-                        <div class="time-badge bg-secondary">16:45</div>
-                        <div class="patient-info ms-2">
-                            <h5>Verdi Luigi</h5>
-                            <small>Arrivato con largo anticipo</small>
-                        </div>
-                    </div>
-                    <div class="d-flex">
-                        <button class="action-btn btn-call" title="Chiama in Sala" onclick="chamaPaziente('Verdi Luigi', 'card-3')">
-                            <i class="bi bi-megaphone-fill"></i>
-                        </button>
-                        <button class="action-btn btn-done" title="Concludi" onclick="concludiVisita('card-3')">
-                            <i class="bi bi-check-lg"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <h5 class="mt-5 mb-3 text-muted text-uppercase small ls-1">Appena Conclusi</h5>
-            <div class="opacity-50">
-                 <div class="patient-card">
-                    <div class="d-flex align-items-center">
-                        <span class="text-muted me-3">15:45</span>
                         <div class="patient-info">
-                            <h6 class="mb-0 text-decoration-line-through">Neri Alessandro</h6>
+                            <h5>Bianchi Francesca</h5>
+                            <small>Arrivata in orario</small>
                         </div>
                     </div>
-                    <span class="badge bg-success">Completato</span>
+                    <div class="d-flex">
+                        <button class="action-btn btn-call" onclick="chamaPaziente('Bianchi Francesca', 'card-2')"><i class="bi bi-megaphone-fill"></i></button>
+                        <button class="action-btn btn-done" onclick="concludiVisita('card-2')"><i class="bi bi-check-lg"></i></button>
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
 
 <script>
-    // Orologio
     function updateTime() {
         const now = new Date();
         document.getElementById('clock').innerText = now.toLocaleTimeString('it-IT', {hour: '2-digit', minute:'2-digit'});
-        document.getElementById('date').innerText = now.toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        document.getElementById('date').innerText = now.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric', month: 'short' });
     }
     setInterval(updateTime, 1000);
     updateTime();
 
-    // Funzioni Demo
     function chamaPaziente(nome, cardId) {
-        // Simulazione chiamata
-        alert(`🔊 Chiamata inviata al monitor di sala per: ${nome}`);
-        
-        // Cambio stile card
-        const card = document.getElementById(cardId);
-        card.classList.remove('status-waiting', 'status-next');
-        card.classList.add('status-called');
-        
-        // Modifica testo badge o info
-        const info = card.querySelector('.patient-info small');
-        info.innerHTML = '<span class="text-success fw-bold">🔵 Chiamato - In attesa di ingresso</span>';
+        alert(`🔊 Chiamata inviata per: ${nome}`);
+        document.getElementById(cardId).classList.add('status-called');
     }
 
     function concludiVisita(cardId) {
-        if(confirm("Confermi di aver terminato la visita?")) {
-            const card = document.getElementById(cardId);
-            card.style.transform = 'translateX(100px)';
-            card.style.opacity = '0';
-            setTimeout(() => {
-                card.style.display = 'none';
-                // Qui aggiorneremmo i contatori...
-            }, 300);
+        if(confirm("Chiudere la visita?")) {
+            document.getElementById(cardId).style.display = 'none';
         }
     }
-
-    function refreshList() {
-        // Qui si farebbe la chiamata AJAX reale a FQM
-        alert("Aggiornamento lista pazienti...");
-    }
 </script>
-
 </body>
 </html>
