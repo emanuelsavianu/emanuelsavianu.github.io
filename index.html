@@ -98,6 +98,11 @@
             line-height: 1.6;
             min-height: 100vh;
         }
+        
+        /* Stop scroll quando il modal è aperto */
+        body.modal-open {
+            overflow: hidden;
+        }
 
         /* Accessibilità: Skip Link */
         .skip-link {
@@ -480,9 +485,9 @@
 
         /* --- STILI DI STAMPA --- */
         @media print {
-            header, .lang-switch, .btn-millebook, .action-grid, .urgency-wrapper, footer, .skip-link { display: none; }
+            header, .lang-switch, .btn-millebook, .action-grid, .urgency-wrapper, footer, .skip-link, #welcome-overlay { display: none !important; }
             .card { page-break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-            body { font-size: 12pt; background: white; color: black; }
+            body { font-size: 12pt; background: white; color: black; overflow: visible !important; }
         }
 
         /* --- MOTO RIDOTTO --- */
@@ -494,12 +499,210 @@
                 scroll-behavior: auto !important;
             }
         }
+
+        /* --- MODAL DI BENVENUTO / PATTO --- */
+        #welcome-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 40, 80, 0.7); /* Sfondo scuro bluastro */
+            backdrop-filter: blur(8px); /* Effetto vetro sfocato modernissimo */
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s;
+        }
+
+        #welcome-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .welcome-card {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh; /* Non supera l'altezza dello schermo */
+            overflow-y: auto; /* Scroll interno se necessario */
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Intestazione del modal con gradiente gentile */
+        .welcome-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .welcome-header h2 { color: white; margin: 0; font-size: 1.8rem; }
+        .welcome-header p { margin-top: 10px; font-size: 1.1rem; opacity: 0.95; font-weight: 300; }
+
+        .welcome-body {
+            padding: 30px;
+            color: var(--text-dark);
+        }
+
+        .welcome-step {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+
+        .step-icon {
+            background: #eef6ff;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .step-content h3 {
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+        }
+        
+        .step-content p {
+            font-size: 0.95rem;
+            color: var(--text-medium);
+            margin-bottom: 0;
+        }
+
+        .urgency-highlight {
+            background-color: #fef2f2;
+            border-left: 4px solid var(--danger);
+            padding: 15px;
+            border-radius: 4px;
+        }
+        
+        .urgency-highlight .step-icon {
+            background: #fee2e2;
+            color: var(--danger);
+        }
+        
+        .urgency-highlight h3 { color: #991b1b; }
+
+        .faq-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+        .faq-item { margin-bottom: 15px; }
+        .faq-item:last-child { margin-bottom: 0; }
+        .faq-q { font-weight: 600; color: var(--primary-dark); font-size: 0.9rem; display: block; margin-bottom: 4px; }
+        .faq-a { font-size: 0.9rem; color: var(--text-medium); display: block; }
+
+        .welcome-footer {
+            padding: 20px 30px 30px;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+            background: #fff;
+            border-radius: 0 0 20px 20px;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .btn-accept {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-accept:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+
     </style>
 </head>
-<body>
+<body class="modal-open">
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
+<div id="welcome-overlay" class="active" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
+    <div class="welcome-card">
+        <div class="welcome-header">
+            <h2 id="welcome-title">Benvenuti nel mio Studio</h2>
+            <p>Patto di collaborazione digitale</p>
+        </div>
+        
+        <div class="welcome-body">
+            <p style="margin-bottom: 25px; font-size: 1.05rem;">
+                Sono il <strong>Dott. Emanuel Savianu</strong>. Ho organizzato questo sito per semplificare la vostra vita. 
+                Utilizzando gli strumenti digitali per la routine, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
+            </p>
+
+            <div class="welcome-step">
+                <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="step-content">
+                    <h3>1. Canale Preferenziale: Millebook</h3>
+                    <p>Usatelo per <strong>farmaci continuativi</strong>, messaggi brevi e visione ricette. È il metodo più veloce.</p>
+                </div>
+            </div>
+
+            <div class="welcome-step">
+                <div class="step-icon"><i class="far fa-calendar-check"></i></div>
+                <div class="step-content">
+                    <h3>2. Prenotazione Appuntamenti</h3>
+                    <p>L'agenda online è sincronizzata in tempo reale. Se serve una visita, consultazione referti: niente attese al telefono, conferma immediata.</p>
+                </div>
+            </div>
+
+            <div class="welcome-step urgency-highlight">
+                <div class="step-icon"><i class="fas fa-phone-alt"></i></div>
+                <div class="step-content">
+                    <h3>3. Urgenze Vere</h3>
+                    <p>Il cellulare (327 809 5905) va usato <strong>esclusivamente per urgenze cliniche</strong> che non possono attendere. Per tutto il resto, usate il sito.</p>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-item">
+                    <span class="faq-q">"Non sono pratico con la tecnologia..."</span>
+                    <span class="faq-a">Spesso un familiare può aiutarvi. In alternativa, ho attivato la segreteria allo 0575 171 3428 (risposta più lenta).</span>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">"Posso usare il cellulare per le ricette?"</span>
+                    <span class="faq-a"><strong>No.</strong> Il cellulare deve restare libero per chi sta male.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="welcome-footer">
+            <button class="btn-accept" onclick="closeWelcome()">
+                <span>Ho letto e accetto</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
 <header role="banner">
     <nav class="lang-switch" aria-label="Language selector">
         <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it" aria-label="Italiano" aria-pressed="true">ITA</button>
@@ -743,6 +946,7 @@
     <div class="footer-content">
         <p>© <span id="current-year">2026</span> Studio Medico Dott. Emanuel Savianu</p>
         <nav aria-label="Footer navigation" style="margin-top:10px;">
+            <a href="#" onclick="openWelcome(); return false;">Patto di Collaborazione</a> | 
             <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a> | 
             <a href="https://www.omceoar.it/" target="_blank" rel="noopener noreferrer">Ordine dei Medici Arezzo</a>
         </nav>
@@ -888,6 +1092,38 @@
             if (firstFocusable) firstFocusable.focus();
         }
     }
+
+    // --- WELCOME MODAL LOGIC ---
+    function closeWelcome() {
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+        
+        // Salva in sessionStorage che l'utente ha visto il messaggio in questa sessione
+        try {
+            sessionStorage.setItem('welcomeSeen', 'true');
+        } catch(e) {}
+    }
+
+    function openWelcome() {
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.classList.add('active');
+        document.body.classList.add('modal-open');
+    }
+
+    // Check on load (Mostra il messaggio se non è già stato visto in questa sessione)
+    window.addEventListener('load', function() {
+        try {
+            if (!sessionStorage.getItem('welcomeSeen')) {
+                // Il modal è già visibile da HTML/CSS, qui non facciamo nulla
+            } else {
+                // Se l'ha già visto, rimuovi le classi active
+                const overlay = document.getElementById('welcome-overlay');
+                overlay.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        } catch(e) {}
+    });
 </script>
 </body>
 </html>
