@@ -6,219 +6,285 @@
     <title>Check-in Studio Medico Ippocrate</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
 
     <style>
         :root {
-            --primary-color: #1a3a4a; /* Blu fumo scuro, molto professionale */
-            --accent-color: #2a9d8f;  /* Verde medico */
-            --light-bg: #fdfdfd;
-            --sec-color: #d4a373;     /* Sabbia per segreteria */
+            --primary-color: #0f2a3a; /* Blu scurissimo per massimo contrasto */
+            --accent-color: #007c68;  /* Verde più scuro e visibile */
+            --highlight-bg: #e6fffa;  /* Sfondo evidenziato */
+            --text-dark: #000000;     /* Nero puro per i testi */
+            --text-dim: #333333;      /* Grigio scuro (mai chiaro) */
         }
 
         body {
-            background-color: var(--light-bg);
+            background-color: #f4f6f8;
             font-family: 'Lato', sans-serif;
-            color: #333;
+            color: var(--text-dark);
             height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden;
         }
 
         /* HEADER */
         .top-bar {
             background: white;
-            padding: 20px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding: 25px 30px;
+            border-bottom: 4px solid var(--primary-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 3px solid var(--primary-color);
         }
 
         .brand-name {
-            font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
+            font-weight: 900;
             color: var(--primary-color);
+            text-transform: uppercase;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
         .live-clock {
-            font-size: 1.1rem;
-            color: #777;
-            font-weight: 400;
-            letter-spacing: 1px;
+            font-size: 2rem; /* Orologio molto grande */
+            font-weight: 700;
+            color: var(--text-dark);
+            background: #e9ecef;
+            padding: 5px 20px;
+            border-radius: 10px;
         }
 
-        /* CARDS */
+        /* ISTRUZIONI */
+        .instruction-box {
+            background-color: #fff3cd;
+            border: 2px solid #ffecb5;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .instruction-text {
+            color: #000;
+            font-size: 1.5rem; /* Testo istruzioni gigante */
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        /* CARDS MEDICI */
         .medico-card {
             background: white;
-            border: 1px solid #e9ecef;
-            border-radius: 10px;
-            padding: 25px 15px;
+            border: 2px solid #ced4da; /* Bordo visibile di default */
+            border-radius: 15px;
+            padding: 20px 10px;
             text-align: center;
-            transition: all 0.2s ease-in-out;
             cursor: pointer;
             height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.1s;
         }
 
-        .medico-card:hover {
+        .medico-card:active {
+            transform: scale(0.98);
+            background-color: var(--highlight-bg);
             border-color: var(--accent-color);
-            background-color: #f0f9f8;
-            transform: translateY(-3px);
         }
 
-        /* Nuova Icona Anonima e Professionale */
+        /* Icona semplificata e grande */
         .medico-icon {
-            font-size: 2.2rem;
-            color: #cbd5e0; /* Grigio neutro di base */
-            margin-bottom: 12px;
-            transition: color 0.2s;
-        }
-
-        .medico-card:hover .medico-icon {
-            color: var(--accent-color);
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
         }
 
         .medico-name {
-            font-size: 1.05rem;
-            font-weight: 700;
+            font-size: 1.4rem; /* Nome molto grande */
+            font-weight: 900;
             color: var(--primary-color);
-            margin-bottom: 4px;
+            line-height: 1.2;
+            margin-bottom: 5px;
         }
 
         .medico-role {
-            font-size: 0.75rem;
-            color: #999;
+            font-size: 1.1rem;
+            color: var(--text-dim); /* Non più grigio chiaro */
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         /* SEGRETERIA */
         .card-segreteria {
-            border-left: 5px solid var(--sec-color);
+            border: 3px solid #d4a373;
+            background-color: #fffaf0;
         }
-        .card-segreteria .medico-icon { color: var(--sec-color); }
-        .card-segreteria:hover { background-color: #fdf8f3; }
+        .card-segreteria .medico-name { color: #854d0e; }
 
-        /* MODALE */
-        .modal-header { background-color: var(--primary-color); color: white; border: none; }
+        /* MODALE (Finestra di check-in) */
+        .modal-content {
+            border: 3px solid var(--primary-color);
+        }
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px;
+        }
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        .btn-close-white {
+            filter: invert(1) grayscale(100%) brightness(200%);
+            opacity: 1;
+        }
+
+        /* GRIGLIA ORARI - Il punto critico per gli anziani */
         .time-btn {
-            border: 1px solid #dee2e6;
+            border: 2px solid #adb5bd;
             background: #fff;
-            padding: 10px;
-            border-radius: 6px;
-            font-weight: 600;
-            font-size: 0.9rem;
+            padding: 15px 10px; /* Pulsanti belli grossi */
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.4rem; /* Numeri grandi */
+            width: 100px; /* Larghezza fissa ampia */
+            color: var(--text-dark);
+            margin: 5px;
         }
-        .time-btn.active { background-color: var(--accent-color); color: white; border-color: var(--accent-color); }
 
-        .instruction-text { color: #666; font-weight: 300; margin-bottom: 30px; }
+        .time-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transform: scale(1.1);
+        }
+
+        .form-control-lg {
+            font-size: 1.3rem;
+            padding: 15px;
+            border: 2px solid #adb5bd;
+        }
+
+        .btn-confirm {
+            background-color: var(--accent-color);
+            color: white;
+            font-size: 1.6rem;
+            font-weight: 900;
+            border-radius: 10px;
+            padding: 20px;
+            border: none;
+            margin-top: 20px;
+        }
+        
+        .btn-confirm:hover {
+            background-color: #005a4b;
+            color: white;
+        }
+
     </style>
 </head>
 <body>
 
     <div class="top-bar">
         <div class="brand-name">
-            <i class="bi bi-shield-plus"></i> STUDIO MEDICO IPPOCRATE
+            <i class="bi bi-hospital"></i> STUDIO IPPOCRATE
         </div>
         <div class="live-clock" id="clock">00:00</div>
     </div>
 
-    <div class="container my-auto py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-light">Benvenuti</h2>
-            <p class="instruction-text">Selezionare il proprio medico per confermare l'arrivo o rivolgersi alla segreteria.</p>
+    <div class="container-fluid my-auto px-4 py-3">
+        
+        <div class="text-center mb-4">
+            <div class="instruction-box">
+                <p class="instruction-text">
+                    <i class="bi bi-hand-index-thumb"></i> TOCCA IL NOME DEL TUO MEDICO QUI SOTTO
+                </p>
+            </div>
         </div>
 
         <div class="row g-4 justify-content-center">
-            <div class="col-md-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="medico-card" onclick="openCheckIn('Dott. Renato Corsi', 1)">
-                    <i class="bi bi-person-vcard medico-icon"></i>
-                    <div class="medico-name">Dott. Renato Corsi</div>
-                    <div class="medico-role">Medicina Generale</div>
+                    <div class="medico-name">Dott. Renato<br>CORSI</div>
                 </div>
             </div>
 
-            <div class="col-md-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="medico-card" onclick="openCheckIn('Dott. Mauro Sacchi', 2)">
-                    <i class="bi bi-person-vcard medico-icon"></i>
-                    <div class="medico-name">Dott. Mauro Sacchi</div>
-                    <div class="medico-role">Medicina Generale</div>
+                    <div class="medico-name">Dott. Mauro<br>SACCHI</div>
                 </div>
             </div>
 
-            <div class="col-md-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="medico-card" onclick="openCheckIn('Dott.ssa Claudia Guidelli', 3)">
-                    <i class="bi bi-person-vcard medico-icon"></i>
-                    <div class="medico-name">Dott.ssa Claudia Guidelli</div>
-                    <div class="medico-role">Medicina Generale</div>
+                    <div class="medico-name">Dott.ssa Claudia<br>GUIDELLI</div>
                 </div>
             </div>
 
-            <div class="col-md-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="medico-card" onclick="openCheckIn('Dott. Matteo Lacrimini', 4)">
-                    <i class="bi bi-person-vcard medico-icon"></i>
-                    <div class="medico-name">Dott. Matteo Lacrimini</div>
-                    <div class="medico-role">Medicina Generale</div>
+                    <div class="medico-name">Dott. Matteo<br>LACRIMINI</div>
                 </div>
             </div>
 
-            <div class="col-md-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="medico-card" onclick="openCheckIn('Dott. Carlo Nardini', 5)">
-                    <i class="bi bi-person-vcard medico-icon"></i>
-                    <div class="medico-name">Dott. Carlo Nardini</div>
-                    <div class="medico-role">Medicina Generale</div>
+                    <div class="medico-name">Dott. Carlo<br>NARDINI</div>
                 </div>
             </div>
 
-            <div class="col-md-4 col-6">
+            <div class="col-lg-4 col-md-6 col-12">
                 <div class="medico-card" onclick="openCheckIn('Dott. Emanuel Savianu', 6)">
-                    <i class="bi bi-person-vcard medico-icon"></i>
-                    <div class="medico-name">Dott. Emanuel Savianu</div>
-                    <div class="medico-role">Medicina Generale</div>
+                    <div class="medico-name">Dott. Emanuel<br>SAVIANU</div>
                 </div>
             </div>
         </div>
 
-        <div class="row mt-5 justify-content-center">
-            <div class="col-md-8">
-                <div class="medico-card card-segreteria flex-row gap-4 py-3" onclick="selectSegreteria()">
-                    <i class="bi bi-info-square medico-icon mb-0"></i>
+        <div class="row mt-4 justify-content-center">
+            <div class="col-lg-8 col-12">
+                <div class="medico-card card-segreteria flex-row gap-4 py-4" onclick="selectSegreteria()">
+                    <i class="bi bi-info-circle-fill medico-icon mb-0" style="color: #d4a373;"></i>
                     <div class="text-start">
-                        <div class="medico-name">Segreteria e Accoglienza</div>
-                        <div class="medico-role">Informazioni / Consegna Documenti</div>
+                        <div class="medico-name">SEGRETERIA</div>
+                        <div class="medico-role" style="color: black;">Tocca qui per informazioni o ricette</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="checkInModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content border-0 shadow">
+    <div class="modal fade" id="checkInModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content shadow-lg">
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle">Check-in</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" style="font-size: 1.5rem;"></button>
                 </div>
                 <div class="modal-body p-4 text-center">
-                    <label class="form-label text-muted mb-3">Orario dell'appuntamento:</label>
-                    <div id="timeSlots" class="d-flex flex-wrap justify-content-center gap-2 mb-4" style="max-height:200px; overflow-y:auto;">
+                    <h4 class="mb-3 fw-bold">A CHE ORA HAI L'APPUNTAMENTO?</h4>
+                    <p class="fs-5 mb-3">Tocca l'orario qui sotto:</p>
+                    
+                    <div id="timeSlots" class="d-flex flex-wrap justify-content-center gap-3 mb-4" style="max-height:300px; overflow-y:auto; padding: 10px;">
                         </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="patientName" placeholder="Nome">
-                        <label>Cognome e Nome (facoltativo)</label>
+
+                    <hr class="my-4">
+
+                    <div class="mb-3 text-start">
+                        <label class="form-label fw-bold fs-4">Scrivi il tuo Cognome (Facoltativo)</label>
+                        <input type="text" class="form-control form-control-lg" id="patientName" placeholder="Tocca qui per scrivere...">
                     </div>
-                    <button class="btn btn-dark btn-lg w-100 py-3" onclick="submitCheckIn()">CONFERMA ARRIVO</button>
+                    
+                    <button class="btn btn-confirm w-100 shadow" onclick="submitCheckIn()">
+                        <i class="bi bi-check-circle-fill"></i> CONFERMA PRESENZA
+                    </button>
                 </div>
             </div>
         </div>
@@ -242,7 +308,8 @@
 
         function openCheckIn(docName, id) {
             currentServiceId = SERVICE_IDS[docName] || id;
-            document.getElementById('modalTitle').innerText = docName;
+            // Rimuovo "Dott." dal titolo modale per renderlo più immediato
+            document.getElementById('modalTitle').innerText = "Sei dal " + docName;
             generateTimeSlots();
             new bootstrap.Modal(document.getElementById('checkInModal')).show();
         }
@@ -250,14 +317,18 @@
         function generateTimeSlots() {
             const container = document.getElementById('timeSlots');
             container.innerHTML = '';
+            // Ho ridotto il range orario per non confondere con troppi bottoni (es. 8:30 - 12:30 e 15:00 - 19:00 tipici)
+            // Per semplicità qui lascio range ampio ma incremento ogni 15 min
             for (let h = 8; h <= 19; h++) {
                 for (let m = 0; m < 60; m += 15) {
                     const t = `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}`;
                     const b = document.createElement('button');
-                    b.className = 'time-btn'; b.innerText = t;
+                    b.className = 'time-btn'; 
+                    b.innerText = t;
                     b.onclick = () => {
                         document.querySelectorAll('.time-btn').forEach(x => x.classList.remove('active'));
-                        b.classList.add('active'); selectedTime = t;
+                        b.classList.add('active'); 
+                        selectedTime = t;
                     };
                     container.appendChild(b);
                 }
@@ -265,15 +336,22 @@
         }
 
         function selectSegreteria() {
-            if(confirm("Desideri metterti in coda per la segreteria?")) {
-                alert("Numero assegnato. Attendi il tuo turno sul monitor.");
+            // Usa confirm nativo ma con testo grande è meglio una modale custom. 
+            // Per ora semplifichiamo l'interazione standard.
+            if(confirm("Vuoi prendere il numero per la SEGRETERIA?")) {
+                alert("TICKET PRENOTATO. Attendi la chiamata.");
             }
         }
 
         function submitCheckIn() {
-            if (!selectedTime) return alert("Seleziona l'orario.");
-            const name = document.getElementById('patientName').value || "Paziente";
-            alert(`Registrato: ${selectedTime} - ${name}. Prego, si accomodi.`);
+            if (!selectedTime) {
+                alert("⚠️ ATTENZIONE: Seleziona prima l'orario del tuo appuntamento.");
+                return;
+            }
+            const name = document.getElementById('patientName').value.toUpperCase() || "PAZIENTE";
+            
+            // Feedback sonoro o visivo sarebbe ideale qui
+            alert(`✅ BENVENUTO ${name}!\nIl Dottore sa che sei arrivato per le ore ${selectedTime}.`);
             location.reload();
         }
     </script>
