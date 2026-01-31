@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Check-in Studio Medico Ippocrate</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+    <style>
+        :root {
+            --primary-color: #264653; /* Verde Petrolio Scuro */
+            --accent-color: #2a9d8f;  /* Verde Acqua */
+            --light-bg: #f8f9fa;      /* Bianco Ghiaccio */
+            --sec-color: #e9c46a;     /* Oro Sabbia per Segreteria */
+            --text-dark: #333;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Lato', sans-serif;
+            color: var(--text-dark);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* HEADER */
+        .top-bar {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        .brand-name {
+            font-family: 'Cinzel', serif; /* Font elegante per il nome */
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-clock {
+            font-size: 1.2rem;
+            font-weight: 300;
+            color: #666;
+            background: #eee;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        /* ISTRUZIONI */
+        .instruction-banner {
+            text-align: center;
+            padding: 20px;
+            color: #555;
+        }
+
+        /* GRIGLIA MEDICI */
+        .medico-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            height: 100%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .medico-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(42, 157, 143, 0.15);
+            border-color: var(--accent-color);
+        }
+
+        .medico-card:active {
+            transform: scale(0.98);
+        }
+
+        .medico-icon {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .medico-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .medico-role {
+            font-size: 0.85rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* SEGRETERIA SPECIFIC STYLE */
+        .card-segreteria {
+            background: linear-gradient(135deg, #fff 0%, #fffbf0 100%);
+            border-color: #fcefb4;
+        }
+        .card-segreteria .medico-icon { color: var(--sec-color); }
+        .card-segreteria .medico-name { color: #b07d16; }
+        .card-segreteria:hover {
+            box-shadow: 0 10px 20px rgba(233, 196, 106, 0.2);
+            border-color: var(--sec-color);
+        }
+
+        /* MODALE ORARI */
+        .modal-header {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .modal-title { font-family: 'Cinzel', serif; }
+        
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .time-btn {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: 0.2s;
+        }
+        
+        .time-btn:hover, .time-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+        }
+
+        /* Footer */
+        .footer-info {
+            margin-top: auto;
+            text-align: center;
+            padding: 15px;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <div class="brand-name">
+            <i class="bi bi-hospital"></i> Studio Medico Ippocrate
+        </div>
+        <div class="live-clock" id="clock">00:00</div>
+    </div>
+
+    <div class="container my-4">
+        
+        <div class="instruction-banner">
+            <h3>Benvenuto</h3>
+            <p>Se hai un appuntamento, tocca il nome del tuo medico.<br>
+            Per informazioni o ricette senza appuntamento, seleziona Segreteria.</p>
+        </div>
+
+        <div class="row g-4 justify-content-center">
+            
+            <div class="col-md-4 col-6">
+                <div class="medico-card" onclick="openCheckIn('Dott. Renato Corsi', 1)">
+                    <i class="bi bi-person-heart medico-icon"></i>
+                    <div class="medico-name">Dott. Renato Corsi</div>
+                    <div class="medico-role">Medico di Medicina Generale</div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="medico-card" onclick="openCheckIn('Dott. Mauro Sacchi', 2)">
+                    <i class="bi bi-person-heart medico-icon"></i>
+                    <div class="medico-name">Dott. Mauro Sacchi</div>
+                    <div class="medico-role">Medico di Medicina Generale</div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="medico-card" onclick="openCheckIn('Dott.ssa Claudia Guidelli', 3)">
+                    <i class="bi bi-person-hearts medico-icon"></i> <div class="medico-name">Dott.ssa Claudia Guidelli</div>
+                    <div class="medico-role">Medico di Medicina Generale</div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="medico-card" onclick="openCheckIn('Dott. Matteo Lacrimini', 4)">
+                    <i class="bi bi-person-heart medico-icon"></i>
+                    <div class="medico-name">Dott. Matteo Lacrimini</div>
+                    <div class="medico-role">Medico di Medicina Generale</div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="medico-card" onclick="openCheckIn('Dott. Carlo Nardini', 5)">
+                    <i class="bi bi-person-heart medico-icon"></i>
+                    <div class="medico-name">Dott. Carlo Nardini</div>
+                    <div class="medico-role">Medico di Medicina Generale</div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-6">
+                <div class="medico-card" onclick="openCheckIn('Dott. Emanuel Savianu', 6)">
+                    <i class="bi bi-person-heart medico-icon"></i>
+                    <div class="medico-name">Dott. Emanuel Savianu</div>
+                    <div class="medico-role">Medico di Medicina Generale</div>
+                </div>
+            </div>
+
+        </div> <div class="row mt-4 justify-content-center">
+            <div class="col-md-8 col-12">
+                <div class="medico-card card-segreteria d-flex flex-row align-items-center justify-content-center gap-3" onclick="selectSegreteria()">
+                    <i class="bi bi-info-circle-fill medico-icon mb-0"></i>
+                    <div class="text-start">
+                        <div class="medico-name mb-0">Segreteria / Informazioni</div>
+                        <small class="text-muted">Prendi il numero per lo sportello</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-info">
+        Sistema di Gestione Code & Appuntamenti - Powered by FQM
+    </div>
+
+    <div class="modal fade" id="checkInModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Check-in</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-4">
+                    <p class="lead mb-3 text-muted">A che ora è il tuo appuntamento?</p>
+                    
+                    <div id="timeSlots" class="time-grid mb-4">
+                        </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="patientName" placeholder="Il tuo nome">
+                        <label for="patientName">Cognome e Nome (Opzionale)</label>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-lg" style="background-color: var(--primary-color); color: white;" onclick="submitCheckIn()">
+                            <i class="bi bi-check-circle-fill"></i> Conferma Arrivo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form id="fqmForm" action="/add_ticket" method="POST" style="display:none;">
+        <input type="hidden" name="name" id="fqmName">
+        <input type="hidden" name="service_id" id="fqmServiceId">
+    </form>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // CONFIGURAZIONE
+        // Mappa qui gli ID che hai creato nel pannello Admin di FQM
+        const SERVICE_IDS = {
+            'Dott. Renato Corsi': 1,
+            'Dott. Mauro Sacchi': 2,
+            'Dott.ssa Claudia Guidelli': 3,
+            'Dott. Matteo Lacrimini': 4,
+            'Dott. Carlo Nardini': 5,
+            'Dott. Emanuel Savianu': 6,
+            'Segreteria': 7
+        };
+
+        let currentServiceId = null;
+        let selectedTime = null;
+
+        // OROLOGIO
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleTimeString('it-IT', {hour: '2-digit', minute:'2-digit'});
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // APERTURA MODALE MEDICO
+        function openCheckIn(docName, idDefault) {
+            // Cerchiamo l'ID nella mappa, se non c'è usiamo quello passato come fallback
+            currentServiceId = SERVICE_IDS[docName] || idDefault;
+            
+            document.getElementById('modalTitle').innerText = docName;
+            document.getElementById('patientName').value = '';
+            selectedTime = null;
+            
+            generateTimeSlots();
+            
+            const modal = new bootstrap.Modal(document.getElementById('checkInModal'));
+            modal.show();
+        }
+
+        // GENERAZIONE ORARI (8:00 - 20:00)
+        function generateTimeSlots() {
+            const container = document.getElementById('timeSlots');
+            container.innerHTML = '';
+            
+            const startHour = 8;
+            const endHour = 20;
+            
+            for (let h = startHour; h < endHour; h++) {
+                for (let m = 0; m < 60; m += 15) { // Step 15 minuti
+                    const timeStr = `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+                    const btn = document.createElement('button');
+                    btn.className = 'time-btn';
+                    btn.innerText = timeStr;
+                    btn.onclick = () => selectTime(btn, timeStr);
+                    container.appendChild(btn);
+                }
+            }
+        }
+
+        function selectTime(btn, time) {
+            // Rimuovi active dagli altri
+            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+            // Attiva questo
+            btn.classList.add('active');
+            selectedTime = time;
+        }
+
+        // GESTIONE SEGRETERIA
+        function selectSegreteria() {
+            // Per la segreteria non chiediamo l'orario, mandiamo direttamente la richiesta
+            // Oppure chiediamo solo il nome. Qui faccio un invio diretto per semplicità.
+            if(confirm("Vuoi prendere un numero per la Segreteria?")) {
+                sendToFQM("Paziente in Coda", SERVICE_IDS['Segreteria']);
+            }
+        }
+
+        // INVIO DATI
+        function submitCheckIn() {
+            if (!selectedTime) {
+                alert("Per favore, seleziona l'orario del tuo appuntamento.");
+                return;
+            }
+            
+            const pName = document.getElementById('patientName').value.trim();
+            const displayName = pName ? pName : "Paziente";
+            
+            // Format che appare sul PC del medico: "10:30 - Mario Rossi"
+            const finalString = `${selectedTime} - ${displayName}`;
+            
+            sendToFQM(finalString, currentServiceId);
+        }
+
+        function sendToFQM(name, serviceId) {
+            // Qui avviene l'invio reale
+            const nameField = document.getElementById('fqmName');
+            const serviceField = document.getElementById('fqmServiceId');
+            const form = document.getElementById('fqmForm');
+            
+            nameField.value = name;
+            serviceField.value = serviceId;
+
+            // De-commenta la riga sotto per attivare l'invio reale quando sei sul server
+            // form.submit();
+
+            // FEEDBACK VISIVO (Simulazione)
+            const modalEl = document.getElementById('checkInModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            if(modal) modal.hide();
+
+            // Mostriamo un alert temporaneo carino invece di quello brutto di sistema
+            const msg = `✅ Check-in effettuato per: ${name}\nAccomodati, sarai chiamato a breve.`;
+            alert(msg);
+            
+            // Reset per il prossimo paziente
+            setTimeout(() => location.reload(), 1000); 
+        }
+    </script>
+</body>
+</html>
