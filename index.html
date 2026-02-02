@@ -3,18 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Dott. Emanuel Savianu | Medico di Famiglia a Arezzo (GP)</title>
-    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Medico di medicina generale e famiglia (Family Doctor / GP). Prenotazioni online, ricette e assistenza medica.">
-    <meta name="keywords" content="dott emanuel savianu, medico di famiglia, medico di base, family doctor, gp, general practitioner, doctor in arezzo, medicina generale, ricette, visite, millebook">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Dott. Emanuel Savianu | Medico di Famiglia Arezzo (GP)</title>
+    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Medico di medicina generale (Family Doctor / GP). Prenota visite, ricette online e nuovi pazienti.">
+    <meta name="keywords" content="dott emanuel savianu, medico di famiglia, medico di base, family doctor, gp, general practitioner, doctor in arezzo, medicina generale, ricette online, millebook">
     <meta name="author" content="Dott. Emanuel Savianu">
     <meta name="robots" content="index, follow">
-    
-    <meta property="og:title" content="Dott. Emanuel Savianu | Medico di Famiglia a Arezzo">
-    <meta property="og:description" content="Benvenuti nello studio del Dott. Emanuel Savianu. Medico di medicina generale a Arezzo. Prenota la tua visita online.">
+
+    <meta property="og:title" content="Dott. Emanuel Savianu | Medico di Famiglia Arezzo">
+    <meta property="og:description" content="Medico di Medicina Generale a Arezzo. Prenotazioni online e gestione ricette.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://savianu.it/">
-    <meta property="og:image" content="https://savianu.it/logo.png"> <script type="application/ld+json">
+    <meta property="og:image" content="https://savianu.it/logo.png">
+
+    <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Physician",
@@ -36,288 +39,308 @@
         "longitude": 11.878
       },
       "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Monday",
-          "opens": "17:00",
-          "closes": "18:30"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Tuesday",
-          "opens": "11:30",
-          "closes": "13:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Wednesday",
-          "opens": "17:00",
-          "closes": "18:30"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Thursday",
-          "opens": "11:30",
-          "closes": "13:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "opens": "17:00",
-          "closes": "18:30"
-        }
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Monday", "opens": "17:00", "closes": "18:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Tuesday", "opens": "11:30", "closes": "13:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Wednesday", "opens": "17:00", "closes": "18:30" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "11:30", "closes": "13:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "17:00", "closes": "18:30" }
       ],
-      "priceRange": "SSN",
-      "medicalSpecialty": "General Practice"
+      "priceRange": "SSN"
     }
     </script>
-
     <style>
-        /* General Styles */
+        /* CSS RESET & VARIABLES */
         :root {
-            --primary-color: #0056b3;
-            --secondary-color: #f4f4f4;
-            --text-color: #333;
-            --accent-color: #e63946;
+            --primary: #004aad;    /* Professional Medical Blue */
+            --dark: #2c3e50;       /* Dark Text */
+            --light: #f8f9fa;      /* Light Background */
+            --white: #ffffff;
+            --accent: #e74c3c;     /* Alert Red */
+            --border-radius: 8px;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
-
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
         body {
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: var(--text-color);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             line-height: 1.6;
         }
 
-        a {
-            color: var(--primary-color);
-            text-decoration: none;
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* HEADER */
+        .site-header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        a:hover {
-            text-decoration: underline;
-        }
-
-        /* Header / Landing Section */
-        header {
-            background-color: var(--secondary-color);
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 5px solid var(--primary-color);
-        }
-
-        .hero-container {
-            max-width: 800px;
+        .header-container {
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 15px 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            gap: 20px;
         }
 
-        .logo-img {
-            max-width: 150px;
-            height: auto;
-            border-radius: 8px; /* Optional: adds rounded corners */
-        }
-
-        h1 {
-            margin: 0;
-            color: var(--primary-color);
-            font-size: 2.5rem;
-        }
-
-        .subtitle {
+        .brand-name {
             font-size: 1.2rem;
-            color: #555;
-            margin-bottom: 10px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .welcome-text {
+        .lang-switch a {
             font-weight: bold;
-            font-size: 1.5rem;
-            margin-top: 10px;
+            color: var(--dark);
+            margin-left: 10px;
         }
+        .lang-switch a:hover { color: var(--primary); }
 
-        /* Language Toggle */
-        .lang-switch {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 0.9rem;
-        }
-
-        /* Main Content */
-        .container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            margin-bottom: 40px;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid #eee;
-            padding-bottom: 10px;
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            margin: 5px 0;
+        /* HERO SECTION (Landing Page) - WHERE THE LOGO GOES */
+        .hero-section {
+            background: var(--white);
+            padding: 60px 20px;
             text-align: center;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #004494;
-            text-decoration: none;
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: #fff;
-        }
-
-        /* Contact Info Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .hours-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .hours-table td {
-            padding: 5px 0;
             border-bottom: 1px solid #eee;
         }
 
-        /* Footer */
-        footer {
-            background-color: #333;
-            color: #fff;
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row; /* Side by side layout */
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap; /* Wraps on mobile */
+        }
+
+        /* The Logo Styling */
+        .main-logo {
+            max-width: 180px;
+            height: auto;
+            display: block;
+        }
+
+        .hero-text {
+            text-align: left;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-text h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero-text .welcome {
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--dark);
+            border-left: 4px solid var(--primary);
+            padding-left: 15px;
+        }
+
+        /* GRID SYSTEM FOR CARDS */
+        .main-container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            border-top: 4px solid var(--primary);
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        /* BUTTONS */
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 25px;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 15px;
             text-align: center;
-            padding: 20px;
-            margin-top: 50px;
+            width: 100%;
+        }
+
+        .btn:hover {
+            background: #003380;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* TABLES */
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .hours-table td {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .hours-table tr:last-child td { border-bottom: none; }
+
+        /* URGENT BOX */
+        .urgent-alert {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            border: 1px solid #ffeeba;
+            margin-top: 20px;
             font-size: 0.9rem;
         }
 
-        footer a {
+        /* FOOTER */
+        footer {
+            background: var(--dark);
             color: #bbb;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
         }
-        
-        .urgent-box {
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        
-        @media (max-width: 600px) {
-            h1 { font-size: 1.8rem; }
-            .lang-switch { position: static; text-align: center; margin-bottom: 10px; }
+        footer a { color: var(--white); text-decoration: underline; }
+
+        /* MOBILE FIXES */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column-reverse; /* Text on top, logo below or vice versa */
+                text-align: center;
+            }
+            .hero-text { text-align: center; }
+            .hero-text .welcome { border-left: none; border-bottom: 3px solid var(--primary); padding-bottom: 10px; padding-left: 0; }
+            .header-container { flex-direction: column; gap: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="lang-switch">
-            <strong>ITA</strong> | <a href="#">ENG</a>
-        </div>
-        <div class="hero-container">
-            <img src="logo.png" alt="Logo Studio Medico Dott. Savianu" class="logo-img">
-            
-            <div>
-                <h1>Dott. Emanuel Savianu</h1>
-                <div class="subtitle">Medico di Medicina Generale - Arezzo</div>
-                <div class="subtitle">Family Doctor / General Practitioner (GP)</div>
-                <div class="welcome-text">Benvenuti nel mio studio</div>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="brand-name">Dr. Emanuel Savianu</div>
+            <div class="lang-switch">
+                <span>ITA</span> | <a href="#">ENG</a>
             </div>
         </div>
     </header>
 
-    <div class="container">
-        
-        <div class="section">
-            <h2>Nuovi Pazienti</h2>
-            <p>Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento. Durante la prima visita provvederò a iscriverti a MilleBook per gestire tutto da casa.</p>
-            <a href="#" class="btn">Prenota Prima Visita</a>
-        </div>
-
-        <div class="section">
-            <h2>Servizi Online</h2>
-            <p>Dopo la registrazione, utilizza <strong>MilleBook</strong> per richiedere farmaci, inviare referti o prenotare visite.</p>
-            <a href="https://millebook.it" target="_blank" class="btn">ACCEDI A MILLEBOOK</a>
-            <div style="margin-top: 10px;">
-                <a href="#" class="btn btn-outline">Modulo Farmaci (Backup)</a>
-                <a href="#" class="btn btn-outline">Problemi Tecnici?</a>
-            </div>
-        </div>
-
-        <div class="info-grid">
-            <div class="section">
-                <h2>Orari Ambulatorio</h2>
-                <table class="hours-table">
-                    <tr><td>Lunedì</td><td>17:00 – 18:30</td></tr>
-                    <tr><td>Martedì</td><td>11:30 – 13:00</td></tr>
-                    <tr><td>Mercoledì</td><td>17:00 – 18:30</td></tr>
-                    <tr><td>Giovedì</td><td>11:30 – 13:00</td></tr>
-                    <tr><td>Venerdì</td><td>17:00 – 18:30</td></tr>
-                    <tr><td>Sab - Dom</td><td>Chiuso</td></tr>
-                </table>
-                <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
-                    Si riceve su appuntamento.<br>
-                    <strong>Segreteria:</strong> 0575 171 3428
+    <section class="hero-section">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Dott. Emanuel Savianu</h1>
+                <div class="subtitle">Medico di Medicina Generale - Arezzo<br>Family Doctor / GP</div>
+                
+                <div class="welcome">
+                    Benvenuti nel mio studio
+                </div>
+                <p style="margin-top:15px; color: #555;">
+                    Prenota le tue visite e gestisci le tue ricette comodamente online.
                 </p>
             </div>
 
-            <div class="section">
-                <h2>Dove Siamo</h2>
-                <p><strong>Studio Medico Dott. Emanuel Savianu</strong><br>
-                Via Ubaldo Pasqui 38<br>
-                52100 Arezzo (AR)</p>
-                <a href="https://maps.google.com/?q=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="btn btn-outline">Portami qui</a>
-                
-                <div class="urgent-box">
-                    <strong>Emergenze (112)</strong><br>
-                    Per urgenze mediche contattare il 112.<br>
-                    <strong>Guardia Medica (116 117)</strong><br>
-                    Per assistenza notturna e festiva.
-                </div>
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo Studio Medico Savianu" class="main-logo">
             </div>
         </div>
+    </section>
 
-    </div>
+    <main class="main-container">
+
+        <article class="card">
+            <h2>Nuovi Pazienti</h2>
+            <p>Se è la tua prima volta in studio e non sei ancora registrato, prenota qui il tuo primo appuntamento.</p>
+            <p style="font-size:0.9rem; color:#666; margin-top:10px;">Provvederò a iscriverti a MilleBook durante la visita.</p>
+            <a href="#" class="btn">Prenota Prima Visita</a>
+        </article>
+
+        <article class="card">
+            <h2>Servizi Online</h2>
+            <p>Utilizza la piattaforma <strong>MilleBook</strong> per richiedere farmaci, inviare referti o prenotare visite successive.</p>
+            <a href="https://millebook.it" target="_blank" class="btn">ACCEDI A MILLEBOOK</a>
+            <div style="margin-top:15px; display:flex; gap:10px; flex-wrap:wrap;">
+                <a href="#" class="btn btn-outline" style="flex:1; margin-top:0; font-size:0.9rem;">Modulo Farmaci</a>
+                <a href="#" class="btn btn-outline" style="flex:1; margin-top:0; font-size:0.9rem;">Problemi Tecnici?</a>
+            </div>
+        </article>
+
+        <article class="card">
+            <h2>Orari Ambulatorio</h2>
+            <table class="hours-table">
+                <tr><td><strong>Lunedì</strong></td><td>17:00 – 18:30</td></tr>
+                <tr><td><strong>Martedì</strong></td><td>11:30 – 13:00</td></tr>
+                <tr><td><strong>Mercoledì</strong></td><td>17:00 – 18:30</td></tr>
+                <tr><td><strong>Giovedì</strong></td><td>11:30 – 13:00</td></tr>
+                <tr><td><strong>Venerdì</strong></td><td>17:00 – 18:30</td></tr>
+                <tr><td><strong>Sab - Dom</strong></td><td>Chiuso</td></tr>
+            </table>
+            <p style="font-size:0.85rem; margin-top:15px; color:#555;">* Si riceve solo su appuntamento.</p>
+        </article>
+
+        <article class="card">
+            <h2>Contatti & Dove Siamo</h2>
+            <p><strong>Segreteria:</strong> <a href="tel:05751713428" style="color:var(--primary)">0575 171 3428</a></p>
+            <p><strong>Email:</strong> segreteria@savianu.it</p>
+            <hr style="margin: 15px 0; border:0; border-top:1px solid #eee;">
+            <p>Via Ubaldo Pasqui 38<br>52100 Arezzo (AR)</p>
+            <a href="https://goo.gl/maps/PLACEHOLDER" target="_blank" class="btn btn-outline">Apri su Google Maps</a>
+
+            <div class="urgent-alert">
+                <strong>Emergenze:</strong> 112<br>
+                <strong>Guardia Medica:</strong> 116 117<br>
+                (Notturni e Festivi)
+            </div>
+        </article>
+
+    </main>
 
     <footer>
-        <p>&copy; 2026 Studio Medico Dott. Emanuel Savianu - Arezzo</p>
-        <p>
-            <small>P.IVA 02348320512 | Ordine dei Medici AR n. 3499</small><br>
-            <a href="#">Privacy Policy</a> | <a href="https://omceoar.it/" target="_blank">Ordine dei Medici Arezzo</a>
+        <p>&copy; 2026 Studio Medico Dott. Emanuel Savianu</p>
+        <p style="font-size:0.8rem; margin-top:10px;">
+            P.IVA 02348320512 | Ordine dei Medici AR n. 3499<br>
+            <a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a>
         </p>
     </footer>
 
