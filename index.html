@@ -77,13 +77,13 @@
     <div class="welcome-card">
         <div class="welcome-header" style="text-align: center;">
             <img src="logo.png" alt="Logo Studio Savianu" style="max-width: 120px; margin-bottom: 15px; border-radius: 10px;">
-            
             <h2 id="welcome-title">Benvenuti nel mio Studio</h2>
-            </div>
+        </div>
         
         <div class="welcome-body">
             <p style="margin-bottom: 25px; font-size: 1.05rem;">
-                <strong>Dott. Emanuel Savianu</strong>. 
+                Sono il <strong>Dott. Emanuel Savianu</strong>. Ho organizzato questo sito per semplificare la vostra vita. 
+                Utilizzando gli strumenti digitali per la routine, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
             </p>
 
             <div class="welcome-step">
@@ -130,6 +130,21 @@
                 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
+    </div>
+</div>
+
+<div id="reps-overlay" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.85); z-index: 20000; justify-content: center; align-items: center; padding: 20px; backdrop-filter: blur(5px);">
+    <div style="background: white; width: 100%; max-width: 500px; padding: 30px; border-radius: 16px; text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border: 1px solid #e2e8f0;">
+        <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: #ef4444; margin-bottom: 20px;"></i>
+        <h3 style="margin-bottom: 15px; color: #1a1a2e; font-size: 1.4rem; font-weight: 700; line-height: 1.2;">Informazione per Rappresentanti e Informatori</h3>
+        <p style="margin-bottom: 25px; line-height: 1.6; color: #2d3748; text-align: justify; font-size: 0.95rem;">
+            Si informa che il Dott. Emanuel Savianu, per motivi organizzativi e per garantire la priorità dell'attività clinica, <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>.
+            <br><br>
+            I canali di contatto dello studio (telefono, email e PEC) sono riservati esclusivamente alle necessità dei pazienti e alle comunicazioni istituzionali. Grazie per la collaborazione.
+        </p>
+        <button onclick="toggleRepsModal(false)" style="background: #0066cc; color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: 600; cursor: pointer; transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,102,204,0.3);">
+            Ho capito
+        </button>
     </div>
 </div>
 
@@ -242,7 +257,6 @@
                   var target = document.currentScript;
                   window.addEventListener('load', function() {
                     calendar.schedulingButton.load({
-                      /* AGGIORNATO CON &hl=it */
                       url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
                       color: '#039BE5',
                       label: 'Fissa un appuntamento',
@@ -374,6 +388,12 @@
 
 <footer role="contentinfo">
     <div class="footer-content">
+        <div style="margin-bottom: 25px;">
+            <button onclick="toggleRepsModal(true)" style="background: transparent; border: 1px solid #cbd5e0; padding: 8px 16px; border-radius: 6px; color: #718096; font-size: 0.85rem; cursor: pointer; transition: all 0.2s;">
+                <i class="fas fa-info-circle"></i> Per offerte commerciali e informatori scientifici
+            </button>
+        </div>
+
         <p>© <span id="current-year">2026</span> Studio Medico Dott. Emanuel Savianu</p>
         <nav aria-label="Footer navigation">
             <a href="#" onclick="openWelcome(); return false;">Patto di Collaborazione</a> | 
@@ -386,6 +406,22 @@
 <script>
     // --- AUTOMATIC YEAR ---
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // --- REPS MODAL LOGIC (New) ---
+    function toggleRepsModal(show) {
+        const modal = document.getElementById('reps-overlay');
+        modal.style.display = show ? 'flex' : 'none';
+        
+        // Prevent body scroll when modal is open
+        if (show) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            // Restore only if main welcome modal is not active
+            if (!document.getElementById('welcome-overlay').classList.contains('active')) {
+                document.body.style.overflow = 'auto';
+            }
+        }
+    }
 
     // --- LANGUAGE MANAGEMENT ---
     const translations = {
