@@ -3,38 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dott. Emanuel Savianu | Medico di Medicina Generale Arezzo</title>
     
-    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Medico di Medicina Generale. Prenotazioni online, ricette e gestione appuntamenti tramite MilleBook.">
-    <meta name="keywords" content="medico di base arezzo, dottor savianu, prenotazione visita, millebook arezzo, ricette online, family doctor arezzo, general practitioner arezzo">
+    <title>Dott. Emanuel Savianu | Medico di Famiglia a Arezzo (GP)</title>
+    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Medico di medicina generale e famiglia (Family Doctor / GP). Prenotazioni online, ricette e assistenza medica.">
+    <meta name="keywords" content="dott emanuel savianu, medico di famiglia, medico di base, family doctor, gp, general practitioner, doctor in arezzo, medicina generale, ricette, visite, millebook">
     <meta name="author" content="Dott. Emanuel Savianu">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://savianu.it">
-
-    <meta property="og:title" content="Studio Medico Dott. Savianu - Arezzo">
-    <meta property="og:description" content="Prenota la tua visita o richiedi ricette online presso lo studio del Dott. Savianu.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://savianu.it">
-    <meta property="og:image" content="https://i.postimg.cc/QxQ0YFXg/43166.jpg">
-    <meta property="og:locale" content="it_IT">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     
-    <script type="application/ld+json">
+    <meta property="og:title" content="Dott. Emanuel Savianu | Medico di Famiglia a Arezzo">
+    <meta property="og:description" content="Benvenuti nello studio del Dott. Emanuel Savianu. Medico di medicina generale a Arezzo. Prenota la tua visita online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://savianu.it/">
+    <meta property="og:image" content="https://savianu.it/logo.png"> <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Physician",
       "name": "Dott. Emanuel Savianu",
-      "image": "https://i.postimg.cc/R6LJHmdT/logo-transparent.png",
-      "@id": "https://savianu.it",
-      "url": "https://savianu.it",
+      "image": "https://savianu.it/logo.png",
+      "@id": "https://savianu.it/",
+      "url": "https://savianu.it/",
       "telephone": "+3905751713428",
-      "email": "segreteria@savianu.it",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via Ubaldo Pasqui 38",
@@ -44,1088 +32,294 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "43.4632",
-        "longitude": "11.8796"
-      },
-      "areaServed": {
-        "@type": "City",
-        "name": "Arezzo"
+        "latitude": 43.463,
+        "longitude": 11.878
       },
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
+          "dayOfWeek": "Monday",
           "opens": "17:00",
           "closes": "18:30"
         },
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Thursday"],
+          "dayOfWeek": "Tuesday",
           "opens": "11:30",
           "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Wednesday",
+          "opens": "17:00",
+          "closes": "18:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Thursday",
+          "opens": "11:30",
+          "closes": "13:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "17:00",
+          "closes": "18:30"
         }
       ],
+      "priceRange": "SSN",
       "medicalSpecialty": "General Practice"
     }
     </script>
-    
+
     <style>
-        /* --- CSS CRITICO & VARIABILI --- */
+        /* General Styles */
         :root {
-            --primary: #0066cc;        
-            --primary-dark: #004c99;
-            --primary-light: #3385d6;
-            --accent: #00b8a9;          
-            --bg-gradient-1: #f8fbff;
-            --bg-gradient-2: #ffffff;
-            --text-dark: #1a1a2e;
-            --text-medium: #4a5568;
-            --white: #ffffff;
-            --border-color: #e2e8f0;
-            --shadow-md: 0 8px 24px rgba(0, 102, 204, 0.12);
-            --radius-lg: 16px;
-            --danger: #ef4444; 
-            --warning: #f57c00;
+            --primary-color: #0056b3;
+            --secondary-color: #f4f4f4;
+            --text-color: #333;
+            --accent-color: #e63946;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        /* Font Fallback di sistema per performance istantanea */
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: linear-gradient(180deg, var(--bg-gradient-1) 0%, var(--bg-gradient-2) 100%);
-            color: var(--text-dark);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
             line-height: 1.6;
-            min-height: 100vh;
-        }
-        
-        /* Stop scroll quando il modal è aperto */
-        body.modal-open {
-            overflow: hidden;
         }
 
-        /* Accessibilità: Skip Link */
-        .skip-link {
-            position: absolute; top: -40px; left: 0;
-            background: var(--primary); color: white;
-            padding: 8px; z-index: 100;
-            transition: top 0.2s;
-        }
-        .skip-link:focus { top: 0; }
-
-        a { text-decoration: none; color: inherit; transition: opacity 0.2s, transform 0.2s; }
-        a:hover { opacity: 0.9; }
-        a:focus-visible {
-            outline: 3px solid var(--primary);
-            outline-offset: 2px;
-            border-radius: 4px;
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
         }
 
-        /* --- HEADER --- */
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Header / Landing Section */
         header {
-            background-color: #0066cc; 
-            color: var(--white);
-            padding: 80px 20px 120px;
-            position: relative;
-            overflow: hidden;
+            background-color: var(--secondary-color);
+            padding: 40px 20px;
             text-align: center;
+            border-bottom: 5px solid var(--primary-color);
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: url('https://i.postimg.cc/QxQ0YFXg/43166.jpg');
-            background-size: cover;
-            background-position: center;
-            opacity: 1;
-            z-index: 0;
+        .hero-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
 
-        header::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.4); 
-            z-index: 1;
+        .logo-img {
+            max-width: 150px;
+            height: auto;
+            border-radius: 8px; /* Optional: adds rounded corners */
         }
 
-        .header-content { 
-            position: relative; 
-            z-index: 2; 
-            max-width: 900px; 
-            margin: 0 auto; 
+        h1 {
+            margin: 0;
+            color: var(--primary-color);
+            font-size: 2.5rem;
         }
 
-        header h1 { 
-            font-size: clamp(1.75rem, 5vw, 2.5rem);
-            font-weight: 700; 
-            margin-bottom: 10px; 
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            line-height: 1.2;
-        }
-        
-        header p { 
-            font-size: clamp(1.1rem, 3vw, 1.3rem);
-            font-weight: 400; 
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 10px;
         }
 
-        /* --- LANGUAGE SWITCHER --- */
+        .welcome-text {
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-top: 10px;
+        }
+
+        /* Language Toggle */
         .lang-switch {
             position: absolute;
             top: 20px;
             right: 20px;
-            z-index: 20;
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(5px);
-            padding: 5px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            display: flex;
-            gap: 10px;
-        }
-
-        .lang-btn {
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 600;
-            cursor: pointer;
             font-size: 0.9rem;
-            transition: color 0.3s;
-            padding: 5px 8px;
         }
 
-        .lang-btn:hover { color: white; }
-        .lang-btn.active { color: white; text-decoration: underline; text-underline-offset: 4px; }
-        .lang-separator { color: rgba(255,255,255,0.5); }
-
-        /* --- LAYOUT --- */
+        /* Main Content */
         .container {
-            max-width: 1100px;
-            margin: -60px auto 60px;
+            max-width: 1000px;
+            margin: 40px auto;
             padding: 0 20px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            position: relative;
-            z-index: 10;
         }
 
-        @media (min-width: 900px) {
-            .container { grid-template-columns: 2fr 1fr; }
-        }
-
-        /* --- CARDS --- */
-        .card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-
-        .card-header {
-            display: flex; align-items: center; gap: 12px;
-            margin-bottom: 20px; padding-bottom: 15px;
-            border-bottom: 2px solid var(--bg-gradient-1);
-        }
-        
-        .card-header i { 
-            font-size: 1.4rem; color: var(--primary); 
-            background: rgba(0, 102, 204, 0.1); padding: 10px; border-radius: 8px;
-        }
-        
-        h2 { font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700; color: var(--primary-dark); }
-
-        /* --- SIDEBAR ELEMENTS --- */
-        .sidebar-logo-container {
-            text-align: center;
-            background: white;
+        .section {
+            margin-bottom: 40px;
+            background: #fff;
             padding: 20px;
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-        }
-        
-        .sidebar-logo-img {
-            max-width: 200px;
-            height: auto;
-        }
-
-        /* --- SEZIONE MILLEBOOK & AZIONI --- */
-        
-        .millebook-wrapper {
-            margin-bottom: 25px;
-            text-align: center;
-        }
-
-        .btn-millebook {
-            background: linear-gradient(135deg, #0288d1 0%, #01579b 100%);
-            width: 100%;
-            padding: 30px;
-            border-radius: var(--radius-lg);
-            color: white;
-            box-shadow: 0 8px 20px rgba(1, 87, 155, 0.25);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 2px solid #0277bd;
-        }
-
-        .btn-millebook:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 25px rgba(1, 87, 155, 0.35);
-        }
-
-        .btn-millebook i { font-size: 2.5rem; margin-bottom: 10px; color: #e1f5fe; }
-        .btn-millebook span { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: 0.5px; }
-        .btn-millebook small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 400; }
-
-        .service-divider {
-            margin: 30px 0 20px 0;
-            text-align: center;
-        }
-        .service-divider p {
-            background: #f0f4f8;
-            padding: 15px;
             border-radius: 8px;
-            display: inline-block;
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            border-left: 4px solid var(--accent);
-            text-align: left;
-            max-width: 90%;
-        }
-
-        .action-grid {
-            display: grid; grid-template-columns: 1fr; gap: 15px;
-        }
-        @media (min-width: 600px) { 
-            .action-grid { grid-template-columns: 1fr 1fr; }
-        }
-
-        .btn-main {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 20px; border-radius: var(--radius-lg);
-            text-align: center; border: none; cursor: pointer; width: 100%;
-            transition: transform 0.2s, box-shadow 0.2s;
-            color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .btn-main:focus-visible { outline: 3px solid var(--primary-dark); outline-offset: 3px; }
-        
-        .btn-secondary-group .btn-main i { font-size: 1.8rem; margin-bottom: 8px; }
-        .btn-secondary-group .btn-main span { font-weight: 600; font-size: clamp(0.9rem, 2vw, 1rem); }
-        .btn-secondary-group .btn-main small { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
-
-        .btn-prenota { background: var(--primary-light); } 
-        .btn-ricette { background: var(--accent); }
-
-        /* --- AVVISI & ALERT --- */
-        .alert-box {
-            background-color: #f1f8fe; border-left: 5px solid var(--primary);
-            padding: 20px; margin-bottom: 25px; border-radius: 8px;
-            color: var(--text-dark); font-size: clamp(0.9rem, 2vw, 1rem);
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            line-height: 1.6;
         }
 
-        .alert-box p { margin-bottom: 10px; }
-        .alert-box p:last-child { margin-bottom: 0; }
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
 
-        /* --- NUOVO LAYOUT URGENZE (Desktop Split) --- */
-        .urgency-wrapper {
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 5px 0;
+            text-align: center;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #004494;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        /* Contact Info Grid */
+        .info-grid {
             display: grid;
-            grid-template-columns: 1fr;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 20px;
-            margin-top: 30px;
-            margin-bottom: 25px;
         }
 
-        /* Card Visite Brevi */
-        .urgency-card {
-            background: #fff8e1; /* Arancione chiarissimo */
-            border: 2px solid #ffb74d;
-            border-radius: var(--radius-lg);
-            padding: 20px;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: var(--shadow-md);
-        }
-        .urgency-card h3 { color: #e65100; font-size: 1.1rem; font-weight: 700; margin-bottom: 5px; }
-        .urgency-card p { color: #bf360c; font-size: 0.9rem; margin-bottom: 15px; }
-
-        /* Card 112 */
-        .alert-emergency {
-            background-color: #fef2f2; 
-            border: 2px solid var(--danger);
-            color: #991b1b;
-            padding: 20px;
-            border-radius: var(--radius-lg);
-            text-align: center;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            box-shadow: var(--shadow-md);
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            height: 100%; /* Altezza piena nella griglia */
-            margin: 0; /* Margin gestito dal wrapper */
-        }
-        .alert-emergency i { font-size: 1.8rem; color: var(--danger); flex-shrink: 0; }
-
-        @media (min-width: 768px) {
-            .urgency-wrapper {
-                grid-template-columns: 1fr 1fr; /* Affiancati su Desktop */
-                align-items: stretch;
-            }
-        }
-
-        /* --- CONTATTI E TABELLE --- */
-        .contact-row {
-            display: flex; align-items: center; gap: 15px;
-            margin-bottom: 15px; padding: 12px;
-            background: var(--bg-gradient-1); border-radius: 10px;
-            border: 1px solid var(--border-color);
-            transition: background 0.2s ease;
-        }
-        .contact-row:hover { background: #e8f2ff; }
-        
-        .icon-circle {
-            width: 36px; height: 36px; background: var(--white);
-            color: var(--primary); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); flex-shrink: 0;
-        }
-
-        .contact-label {
-            font-size: 0.8rem; text-transform: uppercase; color: var(--text-medium); font-weight: 700; display: block;
-        }
-        .contact-value {
-            font-size: 1.1rem; font-weight: 700; display: block;
-        }
-
-        .hours-table { width: 100%; border-collapse: collapse; }
-        .hours-table td { padding: 10px 0; border-bottom: 1px solid var(--border-color); font-size: 0.95rem; }
-        .hours-table tr:last-child td { border-bottom: none; }
-        .hours-table .day { font-weight: 600; color: var(--text-medium); }
-        .hours-table .time { text-align: right; color: var(--primary-dark); font-weight: 500; }
-        .hours-table .closed-day { color: var(--danger); }
-
-        .iframe-wrapper {
-            position: relative; width: 100%; min-height: 650px;
-            border: 1px solid var(--border-color); border-radius: var(--radius-lg);
-            overflow: hidden; background: #fafafa;
-        }
-        .iframe-wrapper iframe { width: 100%; height: 650px; border: 0; }
-
-        /* --- FATTURAZIONE E QR --- */
-        .billing-flex {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-        }
-        @media (min-width: 600px) {
-            .billing-flex { flex-direction: row; align-items: center; text-align: left; }
-        }
-
-        .qr-container {
-            flex-shrink: 0;
-            background: #fff;
-            padding: 10px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
-        }
-        .qr-container img {
-            display: block; width: 150px; height: auto;
-        }
-
-        .billing-info-text {
-            flex-grow: 1;
-            font-family: 'Courier New', Courier, monospace;
-            background: #f4f7f9;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
+        .hours-table {
             width: 100%;
+            border-collapse: collapse;
         }
-        .billing-info-text strong { color: var(--primary-dark); font-family: 'Inter', sans-serif; }
-        .billing-item { 
-            margin-bottom: 8px; 
-            display: flex; justify-content: space-between; 
-            border-bottom: 1px dashed #cbd5e0;
-            padding-bottom: 4px;
-        }
-        .billing-item:last-child { border-bottom: none; margin-bottom: 0; }
 
-        /* --- FOOTER --- */
+        .hours-table td {
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        /* Footer */
         footer {
-            text-align: center; padding: 40px 20px; font-size: 0.85rem;
-            color: var(--text-medium); background: var(--white); border-top: 1px solid var(--border-color);
-        }
-        
-        .footer-content { max-width: 1000px; margin: 0 auto; }
-        footer a { color: var(--primary); }
-
-        .hidden { display: none; }
-        .fade-in { animation: fadeIn 0.5s; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* --- STILI DI STAMPA --- */
-        @media print {
-            header, .lang-switch, .btn-millebook, .action-grid, .urgency-wrapper, footer, .skip-link, #welcome-overlay { display: none !important; }
-            .card { page-break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
-            body { font-size: 12pt; background: white; color: black; overflow: visible !important; }
-        }
-
-        /* --- MOTO RIDOTTO --- */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* --- MODAL DI BENVENUTO / PATTO --- */
-        #welcome-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: rgba(0, 40, 80, 0.7); /* Sfondo scuro bluastro */
-            backdrop-filter: blur(8px); /* Effetto vetro sfocato modernissimo */
-            z-index: 10000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease, visibility 0.4s;
-        }
-
-        #welcome-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .welcome-card {
-            background: white;
-            width: 100%;
-            max-width: 700px;
-            max-height: 90vh; /* Non supera l'altezza dello schermo */
-            overflow-y: auto; /* Scroll interno se necessario */
-            border-radius: 20px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* Intestazione del modal con gradiente gentile */
-        .welcome-header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            color: white;
-            padding: 30px;
+            background-color: #333;
+            color: #fff;
             text-align: center;
-            border-radius: 20px 20px 0 0;
+            padding: 20px;
+            margin-top: 50px;
+            font-size: 0.9rem;
         }
 
-        .welcome-header h2 { color: white; margin: 0; font-size: 1.8rem; }
-        .welcome-header p { margin-top: 10px; font-size: 1.1rem; opacity: 0.95; font-weight: 300; }
-
-        .welcome-body {
-            padding: 30px;
-            color: var(--text-dark);
-        }
-
-        .welcome-step {
-            margin-bottom: 25px;
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-        }
-
-        .step-icon {
-            background: #eef6ff;
-            color: var(--primary);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            flex-shrink: 0;
-        }
-
-        .step-content h3 {
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            margin-bottom: 5px;
+        footer a {
+            color: #bbb;
         }
         
-        .step-content p {
-            font-size: 0.95rem;
-            color: var(--text-medium);
-            margin-bottom: 0;
-        }
-
-        .urgency-highlight {
-            background-color: #fef2f2;
-            border-left: 4px solid var(--danger);
+        .urgent-box {
+            background-color: #fff3cd;
+            border: 1px solid #ffeeba;
+            color: #856404;
             padding: 15px;
-            border-radius: 4px;
+            border-radius: 5px;
+            margin-top: 20px;
         }
         
-        .urgency-highlight .step-icon {
-            background: #fee2e2;
-            color: var(--danger);
+        @media (max-width: 600px) {
+            h1 { font-size: 1.8rem; }
+            .lang-switch { position: static; text-align: center; margin-bottom: 10px; }
         }
-        
-        .urgency-highlight h3 { color: #991b1b; }
-
-        .faq-section {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            margin-top: 10px;
-        }
-        .faq-item { margin-bottom: 15px; }
-        .faq-item:last-child { margin-bottom: 0; }
-        .faq-q { font-weight: 600; color: var(--primary-dark); font-size: 0.9rem; display: block; margin-bottom: 4px; }
-        .faq-a { font-size: 0.9rem; color: var(--text-medium); display: block; }
-
-        .welcome-footer {
-            padding: 20px 30px 30px;
-            text-align: center;
-            border-top: 1px solid var(--border-color);
-            background: #fff;
-            border-radius: 0 0 20px 20px;
-            position: sticky;
-            bottom: 0;
-        }
-
-        .btn-accept {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-accept:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-        }
-
     </style>
 </head>
-<body class="modal-open">
+<body>
 
-<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
-
-<div id="welcome-overlay" class="active" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
-    <div class="welcome-card">
-        <div class="welcome-header">
-            <h2 id="welcome-title">Benvenuti nel mio Studio</h2>
-            <p>Patto di collaborazione digitale</p>
+    <header>
+        <div class="lang-switch">
+            <strong>ITA</strong> | <a href="#">ENG</a>
         </div>
-        
-        <div class="welcome-body">
-            <p style="margin-bottom: 25px; font-size: 1.05rem;">
-                Sono il <strong>Dott. Emanuel Savianu</strong>.  
-                Utilizzare gli strumenti digitali presenti su questo sito, mi permettete di dedicare la massima attenzione a voi e alle visite mediche vere e proprie.
-            </p>
-
-            <div class="welcome-step">
-                <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
-                <div class="step-content">
-                    <h3>1. Canale Preferenziale: Millebook</h3>
-                    <p>Usatelo per <strong>farmaci continuativi</strong>, messaggi brevi e visione ricette. È il metodo più veloce.</p>
-                </div>
-            </div>
-
-            <div class="welcome-step">
-                <div class="step-icon"><i class="far fa-calendar-check"></i></div>
-                <div class="step-content">
-                    <h3>2. Prenotazione Appuntamenti</h3>
-                    <p>L'agenda online è sincronizzata in tempo reale. Niente attese al telefono, conferma immediata.</p>
-                </div>
-            </div>
-
-            <div class="welcome-step urgency-highlight">
-                <div class="step-icon"><i class="fas fa-phone-alt"></i></div>
-                <div class="step-content">
-                    <h3>3. Urgenze e Contatto Diretto</h3>
-                    <p style="margin-bottom: 5px;"><strong>Urgenze vere: chiamare 112.</strong></p>
-                    <p style="margin-bottom: 5px;">Se avete necessità di parlare con me chiamatemi al <strong>0575 171 3428</strong>. Se non posso rispondere vi ricontatterò io a breve.</p>
+        <div class="hero-container">
+            <img src="logo.png" alt="Logo Studio Medico Dott. Savianu" class="logo-img">
             
-                </div>
-            </div>
-
-            <div class="faq-section">
-                <div class="faq-item">
-                    <span class="faq-q">"Non sono pratico con la tecnologia..."</span>
-                    <span class="faq-a">Chiamate lo 0575 171 3428, vi richiamerò appena possibile.</span>
-                </div>
-                <div class="faq-item">
-                    <span class="faq-q">"Posso chiamarla al cellulare per le ricette o per prendere appuntamenti?"</span>
-                    <span class="faq-a">A meno di problemi tecnici, è preferibile prenotare dal sito o usando Millebook e lasciare il cellulare solo per richieste urgenti.</span>
-                </div>
+            <div>
+                <h1>Dott. Emanuel Savianu</h1>
+                <div class="subtitle">Medico di Medicina Generale - Arezzo</div>
+                <div class="subtitle">Family Doctor / General Practitioner (GP)</div>
+                <div class="welcome-text">Benvenuti nel mio studio</div>
             </div>
         </div>
+    </header>
 
-        <div class="welcome-footer">
-            <button class="btn-accept" onclick="closeWelcome()">
-                <span>Ho letto e accetto</span>
-                <i class="fas fa-arrow-right"></i>
-            </button>
-        </div>
-    </div>
-</div>
-<header role="banner">
-    <nav class="lang-switch" aria-label="Language selector">
-        <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it" aria-label="Italiano" aria-pressed="true">ITA</button>
-        <span class="lang-separator" aria-hidden="true">|</span>
-        <button onclick="setLanguage('en')" class="lang-btn" id="btn-en" aria-label="English" aria-pressed="false">ENG</button>
-    </nav>
-    <div class="header-content">
-        <h1>Dott. Emanuel Savianu</h1>
-        <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
-    </div>
-</header>
-
-<div class="container">
-
-    <main role="main" id="main-content">
+    <div class="container">
         
-        <section class="alert-box" role="alert" aria-live="polite">
-            <p data-i18n="alert_p1">
-                <i class="fas fa-exclamation-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
-                <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.
-            </p>
-            <p data-i18n="alert_p2" style="margin-top: 10px;">
-                <i class="fas fa-check-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
-                Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
-            </p>
-        </section>
+        <div class="section">
+            <h2>Nuovi Pazienti</h2>
+            <p>Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento. Durante la prima visita provvederò a iscriverti a MilleBook per gestire tutto da casa.</p>
+            <a href="#" class="btn">Prenota Prima Visita</a>
+        </div>
 
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-mouse-pointer" aria-hidden="true"></i>
-                <h2 data-i18n="services_title">Servizi Online</h2>
+        <div class="section">
+            <h2>Servizi Online</h2>
+            <p>Dopo la registrazione, utilizza <strong>MilleBook</strong> per richiedere farmaci, inviare referti o prenotare visite.</p>
+            <a href="https://millebook.it" target="_blank" class="btn">ACCEDI A MILLEBOOK</a>
+            <div style="margin-top: 10px;">
+                <a href="#" class="btn btn-outline">Modulo Farmaci (Backup)</a>
+                <a href="#" class="btn btn-outline">Problemi Tecnici?</a>
             </div>
-            
-            <div class="millebook-wrapper">
-                <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="btn-millebook" aria-label="Accedi a MilleBook - Il tuo fascicolo sanitario digitale">
-                    <i class="fas fa-laptop-medical" aria-hidden="true"></i>
-                    <span data-i18n="millebook_btn">ACCEDI A MILLEBOOK</span>
-                    <small data-i18n="millebook_sub">Il tuo fascicolo sanitario digitale</small>
-                </a>
-            </div>
+        </div>
 
-            <div class="service-divider">
-                <p>
-                    <i class="fas fa-user-plus" aria-hidden="true" style="color: var(--primary);"></i> 
-                    <strong data-i18n="new_users_title">Gestione Nuovi Utenti</strong><br>
-                    <span data-i18n="new_users_desc">Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.</span>
+        <div class="info-grid">
+            <div class="section">
+                <h2>Orari Ambulatorio</h2>
+                <table class="hours-table">
+                    <tr><td>Lunedì</td><td>17:00 – 18:30</td></tr>
+                    <tr><td>Martedì</td><td>11:30 – 13:00</td></tr>
+                    <tr><td>Mercoledì</td><td>17:00 – 18:30</td></tr>
+                    <tr><td>Giovedì</td><td>11:30 – 13:00</td></tr>
+                    <tr><td>Venerdì</td><td>17:00 – 18:30</td></tr>
+                    <tr><td>Sab - Dom</td><td>Chiuso</td></tr>
+                </table>
+                <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+                    Si riceve su appuntamento.<br>
+                    <strong>Segreteria:</strong> 0575 171 3428
                 </p>
             </div>
 
-            <div class="action-grid btn-secondary-group">
-                <button onclick="showSection('booking')" class="btn-main btn-prenota" aria-label="Prenota la tua prima visita">
-                    <i class="far fa-calendar-check" aria-hidden="true"></i>
-                    <span data-i18n="btn_book">Prenota Prima Visita</span>
-                    <small data-i18n="btn_book_sub">Nuovi pazienti</small>
-                </button>
-
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-main btn-ricette" aria-label="Modulo per richiedere farmaci se MilleBook non funziona">
-                    <i class="fas fa-pills" aria-hidden="true"></i>
-                    <span data-i18n="btn_drugs">Modulo Farmaci</span>
-                    <small data-i18n="btn_drugs_sub">Se Millebook non funziona</small>
-                </a>
-            </div>
-        </section>
-
-        <section id="booking-section" class="card hidden" aria-labelledby="booking-title">
-            <div class="card-header">
-                <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                <h2 id="booking-title" data-i18n="booking_title">Calendario Appuntamenti</h2>
-            </div>
-            <p style="margin-bottom: 15px; color: var(--text-medium);" data-i18n="booking_desc">
-                Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.
-            </p>
-            
-            <div class="iframe-wrapper">
-                <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true" 
-                        style="border: 0" 
-                        width="100%" 
-                        height="600" 
-                        frameborder="0" 
-                        loading="lazy" 
-                        title="Calendario prenotazioni appuntamenti"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </div>
-
-            <div style="margin-top: 25px; background: #f8fbff; padding: 15px; border-radius: 8px; border: 1px dashed var(--primary-light); text-align: center;">
-                <p style="font-size: 0.9rem; margin-bottom: 10px; color: var(--text-dark);">
-                    <i class="fas fa-info-circle" aria-hidden="true" style="color: var(--primary);"></i>
-                    <span data-i18n="privacy_modulo_desc">Per ridurre i tempi di attesa il giorno della visita, ti invito a leggere l'informativa sul trattamento dei dati.</span>
-                </p>
-                <a href="modulo-privacy.html" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-weight: 600; text-decoration: underline;">
-                    <span data-i18n="privacy_modulo_link">Leggi Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
-                </a>
-            </div>
-        </section>
-
-        <div class="urgency-wrapper">
-            
-            <div class="urgency-card">
-                <h3><i class="fas fa-stopwatch" aria-hidden="true"></i> Visite Brevi</h3>
-                <p>Per sintomi insorti negli ultimi giorni</p>
+            <div class="section">
+                <h2>Dove Siamo</h2>
+                <p><strong>Studio Medico Dott. Emanuel Savianu</strong><br>
+                Via Ubaldo Pasqui 38<br>
+                52100 Arezzo (AR)</p>
+                <a href="https://maps.google.com/?q=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="btn btn-outline">Portami qui</a>
                 
-                <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                <script>
-                (function() {
-                  var target = document.currentScript;
-                  window.addEventListener('load', function() {
-                    calendar.schedulingButton.load({
-                      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true',
-                      color: '#039BE5',
-                      label: 'Fissa un appuntamento',
-                      target,
-                    });
-                  });
-                })();
-                </script>
+                <div class="urgent-box">
+                    <strong>Emergenze (112)</strong><br>
+                    Per urgenze mediche contattare il 112.<br>
+                    <strong>Guardia Medica (116 117)</strong><br>
+                    Per assistenza notturna e festiva.
                 </div>
-
-            <aside class="alert-emergency" role="alert" aria-live="polite">
-                <i class="fas fa-ambulance" aria-hidden="true"></i>
-                <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
-            </aside>
-
+            </div>
         </div>
 
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-moon" aria-hidden="true"></i>
-                <h2 data-i18n="guard_title">Continuità Assistenziale</h2>
-            </div>
-            <p data-i18n="guard_desc" style="margin-bottom: 15px;">
-                Per assistenza medica non urgente durante la notte, i festivi e prefestivi.
-            </p>
-            <div style="text-align: center; background: #eef2ff; padding: 15px; border-radius: 10px; border: 1px dashed var(--primary);">
-                <i class="fas fa-phone-volume" aria-hidden="true" style="color: var(--primary); font-size: 1.5rem; margin-bottom: 10px; display: block;"></i>
-                <a href="tel:116117" style="font-size: 1.5rem; font-weight: 700; color: var(--primary); text-decoration: none;" aria-label="Chiama il 116117 - Continuità Assistenziale">116 117</a>
-                <br>
-                <small data-i18n="guard_label">Numero Unico (Ex Guardia Medica)</small>
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-id-card" aria-hidden="true"></i>
-                <h2 data-i18n="prof_info_title">Dati Professionali</h2>
-            </div>
-            <address style="font-size: 0.9rem; line-height: 1.6; color: var(--text-medium); font-style: normal;">
-                <p><strong>Dott. Emanuel Savianu</strong><br>
-                <span data-i18n="prof_role">Medico di Medicina Generale</span><br>
-                C.R. 011189 nr. 3278095905 | Ord. Medici AR n. 3499<br>
-                P.IVA 02348320512 | SDI JKKZDGR<br>
-                via Tullio Innocenti 38, Arezzo<br>
-                <a href="mailto:emanuel.savianu@pec.omceoar.it" style="color: var(--primary);">emanuel.savianu@pec.omceoar.it</a></p>
-            </address>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-qrcode" aria-hidden="true"></i>
-                <h2 data-i18n="billing_title">Dati Fatturazione Elettronica</h2>
-            </div>
-            <div class="billing-flex">
-                <div class="qr-container">
-                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXQAAAF0AQMAAAAJrVAQAAAABlBMVEX///8AAABVwtN+AAAACXBIWXMAAA7EAAAOxAGVKw4bAAAGJElEQVR4nO2aS27jQAxE+wa8/y15A474HluOZzNbAhMjji25ZKDd/FQVdc7v4/fxXz+qKiPy+fc883mePn7OPwe8yTrxnH9gK/HP/wcaz6MAnwf2nKnDJXGiLyhgO/F99gGXmOd/9kE9qzy8fa6LBLYW30tKPnw2rTenF8oXPN/0PCt243l6wcTcE4anjMFnsX+vdxW+/wyp6M+eNQex9lyVRlunzVd8bsK7xH8+vurDJjxr7uPsl074MFc48eRKb1Z819xV+PKjw4714q3Ap187//uvk2gpvktqF6RO9ezcptx26HW6d7U6p5cbNz6X4bs8hRF1JjmKbSNnKsiT6OOdeBvebEqxWWCjI60XWe7kya34XjFNgdcidboGdLnKLmH8GufmzDI8DY1872dRVztbgujriGMf+ytW4uVCQYXq5VGeiqPOlOrqVS57JZ58p2mQ1Cdp0hUsuhOm3KuKsxLfWd25UVKmXmTStd2lrJen7sSHiYBm6L0rySqUiTBrKk5By614oqtVDYs/lyjB/lx2xVse9uEr0rwOoMnuEWB8V+dNffJlG54toRvbE9wcYo9k4rXp9xuey/CwuaK0WqqIPAhGKeHmF8mVeA5RZOoCOkfQJopzo39yKb7o1XLTozgj3qBOhV6j990d24dHHF+6xGdnNH/wE4RM9tVru/Bhe25BEOgbVPLtGb12+p0qdCE+lQkxG1Kpu0XlJfdL8XDzfRv+mioHpqQ3B+WrYX52cI434hH82HSdKbS45OqbQ1A+O99GPBofoyXU9i3hIE69/IKFUMxyJ94rUo3Zra4zJkf+oNduGd6JzwkzSYdr5BUbLGThaSneiJeXmjq4RFX2bL2XA+8b7roRX3dToE1pwcKitswihAJfYyceUd8ZjVlNmyPowpIrVXUHN+K7OulSw05ZKaFm/UoS54fjuA1PWXW4lGFoWXeVPmwZBmTsxCMRnIxhy3HsZXF9Oj2LnXgMLjq2Xa1Chl0KByuZTWUlvkgMh0yY1wSX1yQSLjTFrr20DY+2IdyOO8X20ahlTk783vhch1dP4qug0F57ms5h1r90ex1eex3CHXgTh7XnHXYjQ/GRciVemVywDDKjNEs1ukh/OPn167bhx60eRyK067C+2LXyI1nhRvz4iZA8pzMq//FaDL0x8VbiHVMmFC+mRbtDySwQNviS83X4udeAdBiDaJKIpgfVQzO8AmkXnjCzwCLSxnhH3jj9m5slbnguw/duhBOx1F2vnERJt1L99vKlbXjahaejZkCg5kdwHnte3Xxfh4dcjOIpi2xNtyhYkifvhm3DQ67jNaoRmaFJissYn4naTjxeiitSeZ5w3JR6ebTqfOd92/Bn2h0kqURMpyaVmNmMibcSTym6BAlfK8e6Pt6mEuP+npV45CS+RBlXGEUo/nLtom+8bcPL6FKyNBWXbn2cuqIbHCevxIf3OzGrnIFlMSRggjzeNZObsxXfi7ZwwfYQOTAlTN5EdX70zjI8uoy7sz6mhGObMVBxwvzKjXhvjLiKwHtUoNnePwFhKm8CWYkPqR1DMifFXV8dANL/uBXq485vw1feFY7Lov7hm7B58VDj3q67D1+jzRjxYVOrOGVIzlz714ideLpbuFZbBOKe3nHw68ox8kcwrMLD7e7QaZpDTA9nxo1etoOsxGsTxfTspH0Am6lN3PnNTvwIHYiS1lfKP6YEcPWPefE2/C1LNIeYWyZKkurH3ceduW7E56QI23WsvKF71JqHSyS0ZyU+GBlgNh5F8mT9zJ80tH27EY8ag82lN6Yc505psMVU2rdhbMNPW6NxUK4oWaUBENdxqc+8exmeUZ/crqXN+L3MCWI0W4fiZ1q/DB8x3K6cHOMzYlKkTNCB+Dtw3Yan12FUwKy1dy1c5X0sunef+cIuPNcYZ1yWDJecn3HF+z5X4nG4AtLkrEmPBa/CwUfom8ZOfO9XfHFUy60zYwfGyuizE18yPcVy3ds9zrUBzh07Lca7YfQ8t69M+JROzV1/uRc/08qciRMiOjTplM1RV++swxNvAse6O/QN7paD9XHhd3zuwd9IwppwMMkJZHPoBNfJ87M+bML/Pn4f/+3jD/hBz8jKXRy8AAAAAElFTkSuQmCC" alt="QR Code Fatturazione" width="150" height="150" loading="lazy">
-                </div>
-                <div class="billing-info-text">
-                    <div class="billing-item"><strong>P. IVA:</strong> <span>02348320512</span></div>
-                    <div class="billing-item"><strong>Codice SDI:</strong> <span>JKKZDGR</span></div>
-                    <div class="billing-item"><strong>Sogg. Ric.:</strong> <span>Dott. Emanuel Savianu</span></div>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <aside role="complementary">
-        
-        <div class="sidebar-logo-container">
-            <img src="https://i.postimg.cc/R6LJHmdT/logo-transparent.png" alt="Logo Studio Savianu" class="sidebar-logo-img" width="200" height="auto" loading="lazy">
-        </div>
-
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-address-book" aria-hidden="true"></i>
-                <h2 data-i18n="contacts_title">Contatti Studio</h2>
-            </div>
-
-            <a href="tel:05751713428" class="contact-row" aria-label="Chiama la segreteria - 0575 171 3428">
-                <div class="icon-circle"><i class="fas fa-phone-alt" aria-hidden="true"></i></div>
-                <div>
-                    <span data-i18n="label_secretary" class="contact-label">Segreteria</span>
-                    <span class="contact-value">0575 171 3428</span>
-                </div>
-            </a>
-
-            <div style="margin-bottom: 15px;">
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" rel="noopener noreferrer" class="contact-row" style="margin-bottom: 0; border-bottom-left-radius: 0; border-bottom-right-radius: 0;" aria-label="Ottieni indicazioni per Via Ubaldo Pasqui 38, Arezzo">
-                    <div class="icon-circle"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></div>
-                    <div>
-                        <span data-i18n="label_address" class="contact-label">Indirizzo</span>
-                        <span style="display:block;">Via Ubaldo Pasqui 38, Arezzo</span>
-                    </div>
-                </a>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=Studio+Medico+Ippocrate+Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" rel="noopener noreferrer" class="btn-map-small" style="display: inline-block; margin-top: 5px; padding: 6px 12px; font-size: 0.85rem; background-color: var(--primary); color: white; border-radius: 6px; font-weight: 600; margin-left: 51px;">
-                    <i class="fas fa-location-arrow" aria-hidden="true"></i> <span data-i18n="btn_map">Portami qui</span>
-                </a>
-            </div>
-
-            <a href="mailto:segreteria@savianu.it" class="contact-row" aria-label="Invia email alla segreteria">
-                <div class="icon-circle"><i class="far fa-envelope" aria-hidden="true"></i></div>
-                <div>
-                    <span class="contact-label">Email</span>
-                    <span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span>
-                </div>
-            </a>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <i class="far fa-clock" aria-hidden="true"></i>
-                <h2 data-i18n="hours_title">Orari Ambulatorio</h2>
-            </div>
-            <table class="hours-table">
-                <tbody>
-                    <tr><td class="day" data-i18n="day_mon">Lunedì</td><td class="time">17:00 – 18:30</td></tr>
-                    <tr><td class="day" data-i18n="day_tue">Martedì</td><td class="time">11:30 – 13:00</td></tr>
-                    <tr><td class="day" data-i18n="day_wed">Mercoledì</td><td class="time">17:00 – 18:30</td></tr>
-                    <tr><td class="day" data-i18n="day_thu">Giovedì</td><td class="time">11:30 – 13:00</td></tr>
-                    <tr><td class="day" data-i18n="day_fri">Venerdì</td><td class="time">17:00 – 18:30</td></tr>
-                    <tr><td class="day closed-day" data-i18n="day_sat_sun">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
-                </tbody>
-            </table>
-        </section>
-
-    </aside>
-
-</div>
-
-<footer role="contentinfo">
-    <div class="footer-content">
-        <p>© <span id="current-year">2026</span> Studio Medico Dott. Emanuel Savianu</p>
-        <nav aria-label="Footer navigation" style="margin-top:10px;">
-            <a href="#" onclick="openWelcome(); return false;">Patto di Collaborazione</a> | 
-            <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a> | 
-            <a href="https://www.omceoar.it/" target="_blank" rel="noopener noreferrer">Ordine dei Medici Arezzo</a>
-        </nav>
     </div>
-</footer>
 
-<script>
-    // Anno corrente automatico
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+    <footer>
+        <p>&copy; 2026 Studio Medico Dott. Emanuel Savianu - Arezzo</p>
+        <p>
+            <small>P.IVA 02348320512 | Ordine dei Medici AR n. 3499</small><br>
+            <a href="#">Privacy Policy</a> | <a href="https://omceoar.it/" target="_blank">Ordine dei Medici Arezzo</a>
+        </p>
+    </footer>
 
-    // --- LANGUAGE MANAGEMENT ---
-    const translations = {
-        it: {
-            header_subtitle: "Medico di Medicina Generale - Arezzo",
-            alert_p1: "<i class='fas fa-exclamation-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
-            alert_p2: "<i class='fas fa-check-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.",
-            services_title: "Servizi Online",
-            millebook_btn: "ACCEDI A MILLEBOOK",
-            millebook_sub: "Il tuo fascicolo sanitario digitale",
-            new_users_title: "Gestione Nuovi Utenti",
-            new_users_desc: "Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.",
-            btn_book: "Prenota Prima Visita",
-            btn_book_sub: "Nuovi pazienti",
-            btn_drugs: "Modulo Farmaci",
-            btn_drugs_sub: "Se Millebook non funziona",
-            booking_title: "Calendario Appuntamenti",
-            booking_desc: "Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.",
-            privacy_modulo_desc: "Per ridurre i tempi di attesa il giorno della visita, ti invito a leggere l'informativa sul trattamento dei dati.",
-            privacy_modulo_link: "Leggi Informativa Trattamento Dati",
-            emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
-            contacts_title: "Contatti Studio",
-            label_secretary: "Segreteria",
-            label_address: "Indirizzo",
-            btn_map: "Portami qui",
-            hours_title: "Orari Ambulatorio",
-            day_mon: "Lunedì",
-            day_tue: "Martedì",
-            day_wed: "Mercoledì",
-            day_thu: "Giovedì",
-            day_fri: "Venerdì",
-            day_sat_sun: "Sab - Dom",
-            closed: "Chiuso",
-            guard_title: "Continuità Assistenziale",
-            guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
-            guard_label: "Numero Unico (Ex Guardia Medica)",
-            prof_info_title: "Dati Professionali",
-            prof_role: "Medico di Medicina Generale",
-            billing_title: "Dati Fatturazione Elettronica",
-            link_privacy: "Privacy Policy"
-        },
-        en: {
-            header_subtitle: "General Practitioner - Arezzo",
-            alert_p1: "<i class='fas fa-exclamation-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
-            alert_p2: "<i class='fas fa-check-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
-            services_title: "Online Services",
-            millebook_btn: "LOGIN TO MILLEBOOK",
-            millebook_sub: "Your digital health record",
-            new_users_title: "New User Management",
-            new_users_desc: "Use the buttons below if you need to book your first visit or if you are experiencing technical issues with the main portal.",
-            btn_book: "Book First Visit",
-            btn_book_sub: "New patients",
-            btn_drugs: "Prescription Form",
-            btn_drugs_sub: "If Millebook is down",
-            booking_title: "Appointment Calendar",
-            booking_desc: "Select an available slot. You will receive a confirmation email with details.",
-            privacy_modulo_desc: "To reduce waiting times on the day of your visit, please read the data processing policy.",
-            privacy_modulo_link: "Read Data Processing Policy",
-            emergency_112: "For medical emergencies, always contact the Emergency Number 112.",
-            contacts_title: "Office Contacts",
-            label_secretary: "Reception",
-            label_address: "Address",
-            btn_map: "Take me there",
-            hours_title: "Clinic Hours",
-            day_mon: "Monday",
-            day_tue: "Tuesday",
-            day_wed: "Wednesday",
-            day_thu: "Thursday",
-            day_fri: "Friday",
-            day_sat_sun: "Sat - Sun",
-            closed: "Closed",
-            guard_title: "Out-of-Hours Service",
-            guard_desc: "For non-urgent medical assistance during the night, holidays, and pre-holidays.",
-            guard_label: "Toll-free Number",
-            prof_info_title: "Professional Details",
-            prof_role: "General Practitioner",
-            billing_title: "e-Billing Data",
-            link_privacy: "Privacy Policy"
-        }
-    };
-
-    function setLanguage(lang) {
-        // Update Buttons visual state
-        const btnIt = document.getElementById('btn-it');
-        const btnEn = document.getElementById('btn-en');
-        
-        btnIt.classList.toggle('active', lang === 'it');
-        btnEn.classList.toggle('active', lang === 'en');
-        btnIt.setAttribute('aria-pressed', lang === 'it');
-        btnEn.setAttribute('aria-pressed', lang === 'en');
-
-        document.documentElement.lang = lang;
-
-        // Update Text Content
-        const elements = document.querySelectorAll('[data-i18n]');
-        elements.forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                element.innerHTML = translations[lang][key];
-            }
-        });
-
-        // Persist preference safely
-        try {
-            localStorage.setItem('preferredLanguage', lang);
-        } catch (e) { console.warn('localStorage not available'); }
-    }
-
-    // Load saved language
-    try {
-        const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang && (savedLang === 'it' || savedLang === 'en')) {
-            setLanguage(savedLang);
-        }
-    } catch (e) { console.warn('localStorage not available'); }
-
-    // --- SMOOTH SCROLL & FOCUS ---
-
-    function showSection(sectionId) {
-        const section = document.getElementById(sectionId + '-section');
-        if(section) {
-            section.classList.remove('hidden');
-            section.classList.add('fade-in');
-            
-            // Smooth scroll with offset
-            setTimeout(() => {
-                const yOffset = -20;
-                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y, behavior: 'smooth' });
-            }, 100);
-
-            // Focus management for accessibility
-            const firstFocusable = section.querySelector('h2, button, a, input, select, textarea');
-            if (firstFocusable) firstFocusable.focus();
-        }
-    }
-
-    // --- WELCOME MODAL LOGIC ---
-    function closeWelcome() {
-        const overlay = document.getElementById('welcome-overlay');
-        overlay.classList.remove('active');
-        document.body.classList.remove('modal-open');
-        
-        // Salva in sessionStorage che l'utente ha visto il messaggio in questa sessione
-        try {
-            sessionStorage.setItem('welcomeSeen', 'true');
-        } catch(e) {}
-    }
-
-    function openWelcome() {
-        const overlay = document.getElementById('welcome-overlay');
-        overlay.classList.add('active');
-        document.body.classList.add('modal-open');
-    }
-
-    // Check on load (Mostra il messaggio se non è già stato visto in questa sessione)
-    window.addEventListener('load', function() {
-        try {
-            if (!sessionStorage.getItem('welcomeSeen')) {
-                // Il modal è già visibile da HTML/CSS, qui non facciamo nulla
-            } else {
-                // Se l'ha già visto, rimuovi le classi active
-                const overlay = document.getElementById('welcome-overlay');
-                overlay.classList.remove('active');
-                document.body.classList.remove('modal-open');
-            }
-        } catch(e) {}
-    });
-</script>
 </body>
 </html>
