@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Colleghi | Dott. Emanuel Savianu</title>
-    <meta name="robots" content="noindex, nofollow"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
@@ -74,6 +75,8 @@
             font-size: 0.9rem;
             font-weight: 600;
             width: 100%;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-tool.secondary {
@@ -123,9 +126,8 @@
             color: #1e293b;
         }
         
-        /* Nasconde header/footer di stampa standard */
         @media print {
-            .tools-grid, header, footer { display: none; }
+            .tools-grid, header, footer, .calendar-section { display: none; }
             .legal-disclaimer { display: none; }
         }
     </style>
@@ -143,7 +145,7 @@
         
         <main role="main">
             
-            <a href="index.html" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--primary);">
+            <a href="index.html" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--primary); text-decoration: none;">
                 <i class="fas fa-arrow-left"></i> Torna alla Home
             </a>
 
@@ -151,10 +153,7 @@
                 <strong><i class="fas fa-balance-scale"></i> DISCLAIMER MEDICO-LEGALE:</strong><br><br>
                 Le informazioni, i documenti e i collegamenti contenuti in questa sezione ("Area Colleghi") sono destinati esclusivamente alla consultazione da parte di personale medico e sanitario qualificato. 
                 <br><br>
-                I contenuti non costituiscono in alcun modo parere medico rivolto al pubblico generale, né linee guida ufficiali vincolanti, se non dove esplicitamente citato dalla fonte originale. 
-                L'utilizzo di prontuari, calcolatori o liste di codici è da intendersi come mero supporto all'attività professionale. Il medico utilizzatore mantiene la piena e unica responsabilità nelle decisioni cliniche, diagnostiche e terapeutiche.
-                <br><br>
-                L'autore del sito declina ogni responsabilità per eventuali errori, inesattezze o per l'uso improprio delle informazioni qui riportate.
+                I contenuti non costituiscono in alcun modo parere medico rivolto al pubblico generale, né linee guida ufficiali vincolanti. Il medico utilizzatore mantiene la piena e unica responsabilità nelle decisioni cliniche, diagnostiche e terapeutiche.
             </div>
 
             <section class="tools-grid">
@@ -169,154 +168,25 @@
                 <div class="tool-card">
                     <i class="fas fa-id-card-alt tool-icon"></i>
                     <div class="tool-title">Portale Dipendenti</div>
-                    <div class="tool-desc">Cedolini, comunicazioni e servizi amministrativi.</div>
+                    <div class="tool-desc">Cedolini e servizi amministrativi.</div>
                     <a href="https://gru-portale.ssr.toscana.it" target="_blank" class="btn-tool secondary">Stipendi <i class="fas fa-external-link-alt"></i></a>
                 </div>
 
                 <div class="tool-card">
                     <i class="fas fa-baby tool-icon" style="color: #ec4899;"></i>
                     <div class="tool-title">Prontuario Pediatrico</div>
-                    <div class="tool-desc">Per il Medico di Continuità Assistenziale.<br><small>Credits: Dott. F. Miconi</small></div>
+                    <div class="tool-desc">Per la Continuità Assistenziale.<br><small>Credits: Dott. F. Miconi</small></div>
                     <a href="PRONTUARIO_PEDIATRICO_PER_IL_MEDICO_DI_CONTINUITA.pdf" target="_blank" class="btn-tool" style="background-color: #ec4899;">Scarica PDF <i class="fas fa-file-pdf"></i></a>
                 </div>
 
             </section>
 
-            <section class="card">
+            <section class="card calendar-section" style="margin-bottom: 30px; padding: 20px;">
                 <div class="card-header">
-                    <i class="fas fa-dna"></i>
-                    <h2>Catalogo Esami Genetica</h2>
+                    <i class="fas fa-calendar-alt"></i>
+                    <h2>Organizzazione Eventi e Formazione</h2>
                 </div>
-                <p style="margin-bottom: 20px; color: var(--text-medium);">
-                    Elenco codici catalogo per prescrizione esami genetici e molecolari.
+                <p style="margin-bottom: 15px; color: var(--text-medium); font-size: 0.9rem;">
+                    Calendario condiviso per la pianificazione di eventi clinici e riunioni di studio.
                 </p>
-
-                <div style="overflow-x: auto;">
-                    
-                    <div class="category-header">Ematologia e Coagulazione</div>
-                    <table class="genetic-table">
-                        <thead>
-                            <tr>
-                                <th>Sigla</th>
-                                <th>Esame</th>
-                                <th>Codice Catalogo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>F II</td><td>Mutazione protrombina (G20210A)</td><td class="code-cell">KGM144</td></tr>
-                            <tr><td>F V</td><td>Mutazione Leiden (G1691A)</td><td class="code-cell">KGM143</td></tr>
-                            <tr><td>Jak2</td><td>Esone 14</td><td class="code-cell">KGM195</td></tr>
-                            <tr><td>Jak2</td><td>Esone 12</td><td class="code-cell">KGM196</td></tr>
-                            <tr><td>CALR</td><td>Calreticolina</td><td class="code-cell">KGM198</td></tr>
-                            <tr><td>MPL</td><td>Recettore Trombopoietina</td><td class="code-cell">KGM197</td></tr>
-                            <tr><td>Emocromatosi</td><td>Mutazioni HFE</td><td class="code-cell">KGM137</td></tr>
-                            <tr><td>S. Gilbert</td><td>UGT1A1</td><td class="code-cell">-</td></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="category-header">Tipizzazione HLA e Autoimmunità</div>
-                    <table class="genetic-table">
-                        <thead>
-                            <tr>
-                                <th>Sigla</th>
-                                <th>Indicazione / Esame</th>
-                                <th>Codice Catalogo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>HLA A</td><td>HLA I Classe</td><td class="code-cell">6246</td></tr>
-                            <tr><td>HLA B</td><td>HLA I Classe</td><td class="code-cell">6248</td></tr>
-                            <tr><td>HLA C</td><td>HLA I Classe</td><td class="code-cell">6251</td></tr>
-                            <tr><td>HLA DQB1</td><td>HLA II Classe</td><td class="code-cell">6258</td></tr>
-                            <tr><td>HLA DRB1</td><td>HLA II Classe</td><td class="code-cell">6261</td></tr>
-                            <tr><td>Celiachia</td><td>Pannello HLA DQA1 DQB1 DRB1</td><td class="code-cell">KGM018</td></tr>
-                            <tr><td>HLA B27</td><td>Spondilite Anchilosante</td><td class="code-cell">6248</td></tr>
-                            <tr><td>HLA B57:01</td><td>Ipersensibilità Abacavir</td><td class="code-cell">6248</td></tr>
-                            <tr><td>Artrite Giovanile</td><td>HLA B, C, DRB1</td><td class="code-cell">KGM001</td></tr>
-                            <tr><td>Artrite Reattiva</td><td>HLA B</td><td class="code-cell">KGM003</td></tr>
-                            <tr><td>Artrite Reumatoide</td><td>HLA DRB1</td><td class="code-cell">KGM004</td></tr>
-                            <tr><td>M. Bechet</td><td>HLA B</td><td class="code-cell">KGM005</td></tr>
-                            <tr><td>Sacroileite / Spondiloartrite</td><td>HLA B</td><td class="code-cell">KGM009 / KGM011</td></tr>
-                            <tr><td>Uveite</td><td>HLA B</td><td class="code-cell">KGM012</td></tr>
-                            <tr><td>Artropatia Psoriasica</td><td>HLA B, C</td><td class="code-cell">KGM016</td></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="category-header">Citogenetica e Altro</div>
-                    <table class="genetic-table">
-                        <thead>
-                            <tr>
-                                <th>Sigla</th>
-                                <th>Esame</th>
-                                <th>Codice Catalogo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>SP*</td><td>Cariotipo su Sangue Periferico</td><td class="code-cell">KGC001</td></tr>
-                            <tr><td>FC*</td><td>Fibrosi Cistica</td><td class="code-cell">KGM136</td></tr>
-                            <tr><td>MY</td><td>Microdelezione Cromosoma Y</td><td class="code-cell">KGM121</td></tr>
-                            <tr><td>X-Fragile</td><td>Gene FMR1</td><td class="code-cell">KGM015</td></tr>
-                            <tr><td>Ipoacusia</td><td>Connessina</td><td class="code-cell">KGM140</td></tr>
-                            <tr><td>CGH Array</td><td>Su sangue periferico</td><td class="code-cell">KGC009</td></tr>
-                            <tr><td>ApoE</td><td>Apolipoproteina E</td><td class="code-cell">KGM100AP</td></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="category-header">Esami Oncologici e FISH (Previa Consulenza)</div>
-                    <table class="genetic-table">
-                        <thead>
-                            <tr>
-                                <th>Sigla</th>
-                                <th>Esame</th>
-                                <th>Codice Catalogo</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>BRCA1/2**</td><td>Analisi Mutazionale</td><td class="code-cell">8901</td></tr>
-                            <tr><td>Lynch**</td><td>NGS</td><td class="code-cell">KGM191</td></tr>
-                            <tr><td>PMGN**</td><td>Pannello Multigenico</td><td class="code-cell">KGM164</td></tr>
-                            <tr><td>Poliposi**</td><td>Analisi mutazionale familiare</td><td class="code-cell">KGM129</td></tr>
-                            <tr><td>FISH</td><td>No oncoematologia</td><td class="code-cell">KGC008</td></tr>
-                            <tr><td>FISH</td><td>Oncoematologia (1 sonda)</td><td class="code-cell">KGC011</td></tr>
-                            <tr><td>FISH</td><td>Oncoematologia (2-4 sonde)</td><td class="code-cell">KGS080</td></tr>
-                        </tbody>
-                    </table>
-
-                    <div class="category-header">Servizi Tecnici</div>
-                    <table class="genetic-table">
-                        <tbody>
-                            <tr>
-                                <td><strong>Estrazione DNA</strong></td>
-                                <td class="code-cell">6949</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Conservazione DNA</strong></td>
-                                <td class="code-cell">6945</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Prelievo Venoso</strong></td>
-                                <td>Per altri laboratori (Genetica)</td>
-                                <td class="code-cell">7073</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                    <div style="margin-top: 20px; font-size: 0.8rem; font-style: italic; background: #fff8e1; padding: 10px; border-radius: 6px;">
-                        * Cariotipo e FC se per un percorso di PMA prescrivibili dal genetista clinico dopo Consulenza Genetica (codice 1059)<br>
-                        ** Esami oncologici prescrivibili da genetista clinico dopo Consulenza Genetica (codice 1059)
-                    </div>
-
-                </div>
-            </section>
-
-        </main>
-    </div>
-
-    <footer role="contentinfo">
-        <div class="footer-content">
-            <p>© 2026 Studio Medico Dott. Emanuel Savianu</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+                <div style="position: relative; overflow: hidden; padding-top: 75%; border: 1px solid #
