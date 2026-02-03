@@ -5,47 +5,51 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Colleghi | Dott. Emanuel Savianu</title>
     <meta name="robots" content="noindex, nofollow">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Stili specifici per questa pagina */
+        /* Stili specifici per l'area colleghi */
+        body {
+            background: #f8fafc;
+            padding-bottom: 50px;
+        }
+
         .legal-disclaimer {
-            background-color: #f8f9fa;
-            border-left: 4px solid #6c757d;
+            background-color: #f1f5f9;
+            border-left: 5px solid #64748b;
             padding: 20px;
             margin-bottom: 30px;
             font-size: 0.9rem;
-            color: #495057;
-            text-align: justify;
+            color: #334155;
+            border-radius: 4px;
         }
 
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .tool-card {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #e2e8f0;
+            padding: 25px;
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
             text-align: center;
             transition: transform 0.2s, box-shadow 0.2s;
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: 100%;
+            box-shadow: var(--shadow-md);
         }
 
         .tool-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            border-color: var(--primary);
         }
 
         .tool-icon {
@@ -54,29 +58,16 @@
             margin-bottom: 15px;
         }
 
-        .tool-title {
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-
-        .tool-desc {
-            font-size: 0.85rem;
-            color: var(--text-medium);
-            margin-bottom: 15px;
-            flex-grow: 1;
-        }
-
         .btn-tool {
             background-color: var(--primary);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 20px;
             border-radius: 50px;
             font-size: 0.9rem;
             font-weight: 600;
             width: 100%;
             text-decoration: none;
-            display: inline-block;
+            margin-top: 15px;
         }
 
         .btn-tool.secondary {
@@ -85,108 +76,138 @@
             color: var(--primary);
         }
 
-        /* Stili Tabella Genetica */
+        /* Contenitore Responsive per il Calendario */
+        .calendar-container {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            padding-top: 75%; /* Rapporto 4:3 */
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .calendar-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Tabella Genetica */
         .genetic-table {
             width: 100%;
             border-collapse: collapse;
             font-size: 0.9rem;
-            margin-top: 10px;
         }
 
         .genetic-table th, .genetic-table td {
-            padding: 12px 15px;
+            padding: 12px;
             border-bottom: 1px solid #e2e8f0;
             text-align: left;
         }
 
-        .genetic-table th {
-            background-color: #f1f5f9;
-            color: var(--primary-dark);
-            font-weight: 700;
-            text-transform: uppercase;
-            font-size: 0.8rem;
+        .code-pill {
+            font-family: monospace;
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
         }
 
-        .genetic-table tr:hover {
-            background-color: #f8fafc;
-        }
-
-        .code-cell {
-            font-family: 'Courier New', monospace;
-            font-weight: 700;
-            color: #2563eb;
-        }
-
-        .category-header {
-            background-color: #e2e8f0;
-            padding: 10px;
-            margin-top: 20px;
-            font-weight: 700;
-            border-radius: 6px;
-            color: #1e293b;
-        }
-        
         @media print {
-            .tools-grid, header, footer, .calendar-section { display: none; }
-            .legal-disclaimer { display: none; }
+            header, .calendar-section, .tools-grid { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <header role="banner" style="padding: 40px 20px; min-height: auto;">
+    <header role="banner" style="padding: 60px 20px; text-align: center;">
         <div class="header-content">
-            <h1>Area Colleghi</h1>
-            <p>Risorse per Professionisti Sanitari</p>
+            <h1>Area Riservata Colleghi</h1>
+            <p>Strumenti e risorse professionali</p>
         </div>
     </header>
 
-    <div class="container" style="margin-top: -30px;">
-        
-        <main role="main">
-            
-            <a href="index.html" style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px; font-weight: 600; color: var(--primary); text-decoration: none;">
-                <i class="fas fa-arrow-left"></i> Torna alla Home
+    <div class="container">
+        <main>
+            <a href="index.html" style="text-decoration: none; color: var(--primary); font-weight: 700; display: inline-block; margin-bottom: 25px;">
+                <i class="fas fa-arrow-left"></i> Torna al sito principale
             </a>
 
             <div class="legal-disclaimer">
                 <strong><i class="fas fa-balance-scale"></i> DISCLAIMER MEDICO-LEGALE:</strong><br><br>
-                Le informazioni, i documenti e i collegamenti contenuti in questa sezione ("Area Colleghi") sono destinati esclusivamente alla consultazione da parte di personale medico e sanitario qualificato. 
-                <br><br>
-                I contenuti non costituiscono in alcun modo parere medico rivolto al pubblico generale, né linee guida ufficiali vincolanti. Il medico utilizzatore mantiene la piena e unica responsabilità nelle decisioni cliniche, diagnostiche e terapeutiche.
+                Le informazioni e i collegamenti in questa pagina sono destinati esclusivamente a personale medico e sanitario. 
+                I contenuti hanno scopo puramente informativo e di supporto alla pratica clinica e non sostituiscono il giudizio diagnostico e terapeutico del medico. 
+                L'utilizzatore è l'unico responsabile delle decisioni cliniche intraprese.
             </div>
 
-            <section class="tools-grid">
-                
+            <div class="tools-grid">
                 <div class="tool-card">
                     <i class="fas fa-laptop-medical tool-icon"></i>
-                    <div class="tool-title">Portale Medico</div>
-                    <div class="tool-desc">Accesso al Portale Medico SSR Toscana.</div>
+                    <h3>Portale Medico</h3>
+                    <p style="font-size: 0.85rem; color: #64748b;">Accesso Portale Medico SSR Toscana</p>
                     <a href="https://portalemedico.ssr.toscana.it/portale/" target="_blank" class="btn-tool">Accedi <i class="fas fa-external-link-alt"></i></a>
                 </div>
 
                 <div class="tool-card">
-                    <i class="fas fa-id-card-alt tool-icon"></i>
-                    <div class="tool-title">Portale Dipendenti</div>
-                    <div class="tool-desc">Cedolini e servizi amministrativi.</div>
+                    <i class="fas fa-file-invoice-dollar tool-icon"></i>
+                    <h3>Portale Dipendenti</h3>
+                    <p style="font-size: 0.85rem; color: #64748b;">Cedolini e comunicazioni GRU</p>
                     <a href="https://gru-portale.ssr.toscana.it" target="_blank" class="btn-tool secondary">Stipendi <i class="fas fa-external-link-alt"></i></a>
                 </div>
 
                 <div class="tool-card">
-                    <i class="fas fa-baby tool-icon" style="color: #ec4899;"></i>
-                    <div class="tool-title">Prontuario Pediatrico</div>
-                    <div class="tool-desc">Per la Continuità Assistenziale.<br><small>Credits: Dott. F. Miconi</small></div>
-                    <a href="PRONTUARIO_PEDIATRICO_PER_IL_MEDICO_DI_CONTINUITA.pdf" target="_blank" class="btn-tool" style="background-color: #ec4899;">Scarica PDF <i class="fas fa-file-pdf"></i></a>
+                    <i class="fas fa-file-pdf tool-icon" style="color: #db2777;"></i>
+                    <h3>Prontuario Pediatrico</h3>
+                    <p style="font-size: 0.85rem; color: #64748b;">Per la Continuità Assistenziale</p>
+                    <a href="PRONTUARIO_PEDIATRICO_PER_IL_MEDICO_DI_CONTINUITA.pdf" target="_blank" class="btn-tool" style="background-color: #db2777;">Scarica PDF <i class="fas fa-download"></i></a>
                 </div>
+            </div>
 
-            </section>
-
-            <section class="card calendar-section" style="margin-bottom: 30px; padding: 20px;">
+            <section class="card calendar-section">
                 <div class="card-header">
                     <i class="fas fa-calendar-alt"></i>
                     <h2>Organizzazione Eventi e Formazione</h2>
                 </div>
-                <p style="margin-bottom: 15px; color: var(--text-medium); font-size: 0.9rem;">
-                    Calendario condiviso per la pianificazione di eventi clinici e riunioni di studio.
-                </p>
-                <div style="position: relative; overflow: hidden; padding-top: 75%; border: 1px solid #
+                <p style="margin-bottom: 20px; font-size: 0.9rem; color: #64748b;">Pianificazione eventi clinici e riunioni dello studio.</p>
+                <div class="calendar-container">
+                    <iframe src="https://calendar.google.com/calendar/embed?src=c_b1cb83455dd147a9eed267ca93664b7b7e428369b1fd28c99775b94e29aada51%40group.calendar.google.com&ctz=Europe%2FRome" 
+                            frameborder="0" scrolling="no"></iframe>
+                </div>
+            </section>
+
+            <section class="card" style="margin-top: 30px;">
+                <div class="card-header">
+                    <i class="fas fa-dna"></i>
+                    <h2>Catalogo Test Genetici</h2>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="genetic-table">
+                        <thead>
+                            <tr style="background: #f1f5f9;">
+                                <th>Esame</th>
+                                <th>Codice Catalogo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mutazione protrombina (F II - G20210A)</td><td><span class="code-pill">KGM144</span></td></tr>
+                            <tr><td>Mutazione Leiden (F V - G1691A)</td><td><span class="code-pill">KGM143</span></td></tr>
+                            <tr><td>Celiachia (HLA DQA1 DQB1 DRB1)</td><td><span class="code-pill">KGM018</span></td></tr>
+                            <tr><td>Emocromatosi (Mutazioni HFE)</td><td><span class="code-pill">KGM137</span></td></tr>
+                            <tr><td>Jak2 (Esone 14)</td><td><span class="code-pill">KGM195</span></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer style="text-align: center; margin-top: 50px; padding: 20px; border-top: 1px solid #e2e8f0;">
+        <p style="font-size: 0.8rem; color: #94a3b8;">© 2026 Studio Medico Dott. Emanuel Savianu</p>
+    </footer>
+
+</body>
+</html>
