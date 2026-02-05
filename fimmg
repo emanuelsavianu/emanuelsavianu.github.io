@@ -26,6 +26,14 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
+        /* Stile per l'immagine banner */
+        .banner-image {
+            width: 100%;
+            height: auto;
+            display: block; /* Rimuove lo spazio bianco sotto l'immagine */
+            border-bottom: 1px solid #eef1f5;
+        }
+
         /* Header */
         .header {
             background: linear-gradient(135deg, #003366 0%, #0056b3 100%);
@@ -171,6 +179,9 @@
 <body>
 
     <div class="email-container">
+        <!-- Banner Immagine -->
+        <img src="fimmg.png" alt="Il punto FIMMG Arezzo" class="banner-image">
+
         <!-- Header -->
         <div class="header">
             <h1>FIMMG AREZZO</h1>
