@@ -26,6 +26,29 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
+        /* Titolo in cima personalizzato */
+        .main-title-box {
+            text-align: center;
+            padding: 25px 20px 10px 20px;
+            background-color: #ffffff;
+        }
+        
+        .main-title-box h1 {
+            margin: 0;
+            color: #003366;
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Contenitore Calendario */
+        .calendar-wrapper {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid #eef1f5;
+        }
+
         /* Stile per l'immagine banner */
         .banner-image {
             width: 100%;
@@ -34,7 +57,7 @@
             border-bottom: 1px solid #eef1f5;
         }
 
-        /* Header */
+        /* Header Blu (Notizie) */
         .header {
             background: linear-gradient(135deg, #003366 0%, #0056b3 100%);
             color: #ffffff;
@@ -42,11 +65,10 @@
             text-align: center;
         }
 
-        .header h1 {
+        .header h2 {
             margin: 0;
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
-            letter-spacing: 1px;
         }
 
         .header .subtitle {
@@ -179,60 +201,58 @@
 <body>
 
     <div class="email-container">
-        <!-- Banner Immagine -->
-        <img src="fimmg.png" alt="Il punto FIMMG Arezzo" class="banner-image">
-
-        <!-- Header -->
-        <div class="header">
+        
+        <div class="main-title-box">
             <h1>FIMMG AREZZO</h1>
-            <div class="subtitle">Notizie, Aggiornamenti e Vita Sindacale</div>
+        </div>
+
+        <div class="calendar-wrapper">
+            <iframe src="https://calendar.google.com/calendar/embed?src=c_b1cb83455dd147a9eed267ca93664b7b7e428369b1fd28c99775b94e29aada51%40group.calendar.google.com&ctz=Europe%2FRome" style="border: 0; width: 100%; height: 600px;" frameborder="0" scrolling="no"></iframe>
+        </div>
+
+        <img src="FIMMG.png" alt="Il punto FIMMG Arezzo" class="banner-image">
+
+        <div class="header">
+            <h2>NOTIZIE SINDACALI</h2>
+            <div class="subtitle">Aggiornamenti e Vita Sindacale</div>
             <div class="date">5 Febbraio 2026</div>
         </div>
 
-        <!-- Contenuto -->
         <div class="content">
             
-            <!-- Intro -->
             <div class="intro-text">
                 <strong>Cari Colleghi, bentrovati.</strong><br>
                 Mentre l'influenza inizia (forse) a darci tregua, la burocrazia e la cronaca non vanno mai in vacanza. Ecco le notizie essenziali di inizio febbraio 2026, selezionate per voi tra una ricetta e l'altra.
             </div>
 
-            <!-- Sezione 1: Clinica -->
             <div class="section-title">
                 <span>📋</span> Clinica e Burocrazia
             </div>
 
             <div class="news-item">
-                <!-- Link Generico AIFA o alla Nota Specifica -->
                 <h3><a href="https://www.aifa.gov.it/note-aifa" target="_blank">Nuova Nota AIFA 103/2026: Cambiano le regole per gli IPP</a></h3>
                 <p>Proprio quando pensavate di conoscere a memoria ogni nota, il 2 febbraio è stata pubblicata la <strong>Nota 103</strong> che introduce nuove indicazioni per la prescrizione degli Inibitori di Pompa Protonica. Vi consigliamo di leggerla attentamente per evitare spiacevoli sorprese (e il bruciore di stomaco, quello metaforico).</p>
             </div>
 
             <div class="news-item">
-                <!-- Link Epicentro ISS per Influenza -->
                 <h3><a href="https://www.epicentro.iss.it/influenza/" target="_blank">Influenza: calano i casi, ma occhio ai più piccoli</a></h3>
                 <p>La curva sembra scendere, ma non cantiamo vittoria troppo presto: la scorsa settimana ha messo a letto ancora <strong>620 mila italiani</strong>. Il dato in controtendenza riguarda i bambini piccoli, dove i casi risultano ancora in crescita.</p>
             </div>
 
-            <!-- Sezione 2: Politica -->
             <div class="section-title">
                 <span>🏛️</span> Politica Sindacale
             </div>
 
             <div class="news-item">
-                <!-- Link Reale al Comunicato Regione Emilia Romagna -->
                 <h3><a href="https://www.regione.emilia-romagna.it/notizie/primopiano/nuovo-accordo-medicina-generale" target="_blank">Emilia Romagna: Firmato un accordo "storico"?</a></h3>
                 <p>Il 5 febbraio è stato siglato l'Accordo Integrativo Regionale in Emilia Romagna. Definito "fortemente innovativo" dai vertici FIMMG e dalla parte pubblica, potrebbe diventare un riferimento nazionale. Il Segretario Morini lo definisce una "base solida". Vedremo se l'onda dell'innovazione arriverà anche in Toscana.</p>
             </div>
 
             <div class="news-item">
-                <!-- Link FIMMG Nazionale -->
                 <h3><a href="https://www.fimmg.org/" target="_blank">Giovani medici: "Vogliamo flessibilità"</a></h3>
                 <p>Il Segretario Scotti ribadisce un concetto chiave: i giovani colleghi, spaventati dai carichi attuali, cercano "elasticità, flessibilità e variabilità". Il vecchio modello di "medico solo al comando" non è più attrattivo.</p>
             </div>
 
-            <!-- Sezione 3: Focus Arezzo -->
             <div class="section-title">
                 <span>📍</span> Focus Arezzo e ASL Toscana Sud Est
             </div>
@@ -260,7 +280,6 @@
                 <p>È attivo il nuovo servizio di <strong>richiesta online</strong> per il Codice Regionale, per evitare file inutili agli uffici convenzioni.</p>
             </div>
 
-            <!-- Sezione 4: Sicurezza (Alert) -->
             <div class="alert-box">
                 <div class="section-title" style="border:none; margin-top:0; color:#d32f2f;">
                     <span>⚠️</span> Sicurezza e Solidarietà
@@ -274,7 +293,6 @@
 
         </div>
 
-        <!-- Footer -->
         <div class="footer">
             <p>Buon lavoro e buona settimana,<br><strong>La Segreteria FIMMG Arezzo</strong></p>
             <p style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
