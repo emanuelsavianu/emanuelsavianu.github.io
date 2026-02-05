@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter FIMMG Arezzo - 5 Febbraio 2026</title>
+    <style>
+        /* Reset e Stili Base */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f6f9;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333333;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Contenitore Principale */
+        .email-container {
+            max-width: 680px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #003366 0%, #0056b3 100%);
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header .subtitle {
+            margin-top: 10px;
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .header .date {
+            background-color: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            margin-top: 15px;
+        }
+
+        /* Corpo del testo */
+        .content {
+            padding: 30px;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 30px;
+            border-left: 4px solid #0056b3;
+            padding-left: 15px;
+            background-color: #f8fbff;
+            padding: 15px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        /* Sezioni Tematiche */
+        .section-title {
+            color: #003366;
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eef1f5;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title span {
+            margin-right: 10px;
+            font-size: 24px;
+        }
+
+        /* Card Notizie e Link */
+        .news-item {
+            margin-bottom: 25px;
+        }
+
+        .news-item h3 {
+            margin: 0 0 8px 0;
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        /* Stile dei link nei titoli */
+        .news-item h3 a {
+            color: #0056b3;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .news-item h3 a:hover {
+            color: #003366;
+            text-decoration: underline;
+        }
+
+        .news-item p {
+            margin: 0;
+            color: #444;
+            font-size: 15px;
+        }
+
+        /* Box Speciali */
+        .highlight-box {
+            background-color: #fff8e1;
+            border: 1px solid #ffe082;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        .alert-box {
+            background-color: #fff1f0;
+            border-left: 4px solid #d32f2f;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+        
+        .alert-box h3 {
+            color: #d32f2f !important;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            font-size: 13px;
+            color: #888;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 600px) {
+            .email-container {
+                margin: 0;
+                border-radius: 0;
+            }
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>FIMMG AREZZO</h1>
+            <div class="subtitle">Notizie, Aggiornamenti e Vita Sindacale</div>
+            <div class="date">5 Febbraio 2026</div>
+        </div>
+
+        <!-- Contenuto -->
+        <div class="content">
+            
+            <!-- Intro -->
+            <div class="intro-text">
+                <strong>Cari Colleghi, bentrovati.</strong><br>
+                Mentre l'influenza inizia (forse) a darci tregua, la burocrazia e la cronaca non vanno mai in vacanza. Ecco le notizie essenziali di inizio febbraio 2026, selezionate per voi tra una ricetta e l'altra.
+            </div>
+
+            <!-- Sezione 1: Clinica -->
+            <div class="section-title">
+                <span>📋</span> Clinica e Burocrazia
+            </div>
+
+            <div class="news-item">
+                <!-- Link Generico AIFA o alla Nota Specifica -->
+                <h3><a href="https://www.aifa.gov.it/note-aifa" target="_blank">Nuova Nota AIFA 103/2026: Cambiano le regole per gli IPP</a></h3>
+                <p>Proprio quando pensavate di conoscere a memoria ogni nota, il 2 febbraio è stata pubblicata la <strong>Nota 103</strong> che introduce nuove indicazioni per la prescrizione degli Inibitori di Pompa Protonica. Vi consigliamo di leggerla attentamente per evitare spiacevoli sorprese (e il bruciore di stomaco, quello metaforico).</p>
+            </div>
+
+            <div class="news-item">
+                <!-- Link Epicentro ISS per Influenza -->
+                <h3><a href="https://www.epicentro.iss.it/influenza/" target="_blank">Influenza: calano i casi, ma occhio ai più piccoli</a></h3>
+                <p>La curva sembra scendere, ma non cantiamo vittoria troppo presto: la scorsa settimana ha messo a letto ancora <strong>620 mila italiani</strong>. Il dato in controtendenza riguarda i bambini piccoli, dove i casi risultano ancora in crescita.</p>
+            </div>
+
+            <!-- Sezione 2: Politica -->
+            <div class="section-title">
+                <span>🏛️</span> Politica Sindacale
+            </div>
+
+            <div class="news-item">
+                <!-- Link Reale al Comunicato Regione Emilia Romagna -->
+                <h3><a href="https://www.regione.emilia-romagna.it/notizie/primopiano/nuovo-accordo-medicina-generale" target="_blank">Emilia Romagna: Firmato un accordo "storico"?</a></h3>
+                <p>Il 5 febbraio è stato siglato l'Accordo Integrativo Regionale in Emilia Romagna. Definito "fortemente innovativo" dai vertici FIMMG e dalla parte pubblica, potrebbe diventare un riferimento nazionale. Il Segretario Morini lo definisce una "base solida". Vedremo se l'onda dell'innovazione arriverà anche in Toscana.</p>
+            </div>
+
+            <div class="news-item">
+                <!-- Link FIMMG Nazionale -->
+                <h3><a href="https://www.fimmg.org/" target="_blank">Giovani medici: "Vogliamo flessibilità"</a></h3>
+                <p>Il Segretario Scotti ribadisce un concetto chiave: i giovani colleghi, spaventati dai carichi attuali, cercano "elasticità, flessibilità e variabilità". Il vecchio modello di "medico solo al comando" non è più attrattivo.</p>
+            </div>
+
+            <!-- Sezione 3: Focus Arezzo -->
+            <div class="section-title">
+                <span>📍</span> Focus Arezzo e ASL Toscana Sud Est
+            </div>
+
+            <div class="highlight-box">
+                <div class="news-item" style="margin-bottom: 0;">
+                    <h3>☎️ CUP Telefonico: Ritardi per... allagamento</h3>
+                    <p>Dal 3 febbraio si registrano disagi al CUP telefonico a causa dell'allagamento di un call center. Armiamoci di pazienza se i pazienti segnalano attese.</p>
+                </div>
+            </div>
+            <br>
+
+            <div class="news-item">
+                <h3>Territorio attivo: 34 mila emoderivati</h3>
+                <p>Nell'area della nostra ASL sono stati distribuiti oltre 34 mila farmaci emoderivati, confermando il ruolo centrale della rete distributiva locale.</p>
+            </div>
+
+            <div class="news-item">
+                <h3><a href="https://www.uslsudest.toscana.it/notizie" target="_blank">Nomine e Nuovi Incarichi</a></h3>
+                <p>Dal 4 febbraio il <strong>Dr. Danilo Tacconi</strong> è alla guida del Dipartimento di Medicina Interna. Dal 26 gennaio, nuova direttrice per il Consultorio della Zona Distretto Aretina.</p>
+            </div>
+
+            <div class="news-item">
+                <h3><a href="https://www.regione.toscana.it/servizi-online" target="_blank">Giovani Medici: Codice Regionale Provvisorio</a></h3>
+                <p>È attivo il nuovo servizio di <strong>richiesta online</strong> per il Codice Regionale, per evitare file inutili agli uffici convenzioni.</p>
+            </div>
+
+            <!-- Sezione 4: Sicurezza (Alert) -->
+            <div class="alert-box">
+                <div class="section-title" style="border:none; margin-top:0; color:#d32f2f;">
+                    <span>⚠️</span> Sicurezza e Solidarietà
+                </div>
+                <div class="news-item">
+                    <h3>Medico di CA aggredito e derubato</h3>
+                    <p>Il 4 febbraio un collega di Continuità Assistenziale è stato preso a sassate mentre gli veniva rubata l'auto di servizio. Come sottolinea il Segretario Ciliberti, episodi del genere rischiano di svuotare il servizio se non si garantisce la sicurezza.</p>
+                    <p style="margin-top:10px; font-weight:bold;">Massima solidarietà al collega da tutta la FIMMG Arezzo.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Buon lavoro e buona settimana,<br><strong>La Segreteria FIMMG Arezzo</strong></p>
+            <p style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 10px;">
+                FIMMG Arezzo - Federazione Italiana Medici di Medicina Generale<br>
+                <a href="https://www.fimmg.org/it/3300/" target="_blank">Visita il sito web</a> | <a href="mailto:info@fimmgarezzo.it">Scrivici una email</a>
+            </p>
+            <p style="font-size: 11px; color: #aaa;">Ricevi questa email perché sei iscritto alla newsletter FIMMG Arezzo. <a href="#" style="color:#aaa; text-decoration: underline;">Disiscriviti</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
