@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Dott. Savianu - Carta Intestata (A4 & A5)</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --black: #000;
+    --gray-dark: #444;
+    --gray-light: #f4f4f4;
+    --border-width: 0.7pt;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust: exact; }
+
+body {
+    background: #e0e0e0;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --- PAGINA --- */
+.page {
+    background: #fff;
+    position: relative;
+    margin-bottom: 40px;
+    overflow: hidden;
+}
+
+.a4 { width: 210mm; height: 297mm; padding: 18mm 20mm; }
+.a5 { width: 148mm; height: 210mm; padding: 12mm 15mm; }
+
+/* --- HEADER --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1pt solid var(--black);
+    padding-bottom: 10px;
+    margin-bottom: 25px;
+}
+
+.doc-identity h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 22pt;
+    font-weight: 700;
+    color: var(--black);
+    line-height: 1.1;
+}
+
+.a5 .doc-identity h1 { font-size: 18pt; }
+
+.doc-identity p {
+    font-size: 9pt;
+    text-transform: uppercase;
+    letter-spacing: 1.5pt;
+    color: var(--gray-dark);
+    margin-top: 4px;
+}
+
+.contacts {
+    text-align: right;
+    font-size: 8.5pt;
+    line-height: 1.4;
+}
+
+.qr-placeholder {
+    width: 40px;
+    height: 40px;
+    border: 0.7pt solid #aaa;
+    display: inline-block;
+    vertical-align: top;
+    font-size: 6pt;
+    text-align: center;
+    padding-top: 12px;
+    color: #aaa;
+    margin-left: 8px;
+}
+
+/* --- META --- */
+.meta-data {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10pt;
+    margin-bottom: 35px;
+}
+
+/* --- CONTENUTO --- */
+.content-body {
+    min-height: 60%;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: var(--black);
+}
+
+.a5 .content-body { font-size: 10pt; line-height: 1.5; }
+
+/* --- FIRMA --- */
+.signature-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.sig-block {
+    text-align: center;
+    width: 220px;
+}
+
+.sig-line {
+    border-bottom: 0.5pt solid var(--black);
+    height: 40px;
+    margin-bottom: 6px;
+}
+
+.sig-label { font-size: 8pt; color: var(--gray-dark); line-height: 1.2; }
+
+/* --- FOOTER --- */
+footer {
+    position: absolute;
+    bottom: 12mm;
+    left: 20mm;
+    right: 20mm;
+    border-top: 0.5pt solid #ccc;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #666;
+}
+
+.a5 footer { left: 15mm; right: 15mm; bottom: 8mm; font-size: 7pt; }
+
+/* --- STAMPA --- */
+@media print {
+    body { background: none; padding: 0; }
+    .page { box-shadow: none; margin: 0; page-break-after: always; }
+    .qr-placeholder { border-color: #000; }
+}
+</style>
+</head>
+<body>
+
+<!-- A4 -->
+<div class="page a4">
+<header>
+    <div class="doc-identity">
+        <h1>Dott. Emanuel Savianu</h1>
+        <p>Medico di Medicina Generale</p>
+    </div>
+    <div class="contacts">
+        Arezzo, Via Tullio Innocenti 38<br>
+        T: 0575 1713428 • C: 327 8095905<br>
+        <strong>Dott.Emanuel@Savianu.it</strong>
+        <div class="qr-placeholder">QR WEB</div>
+    </div>
+</header>
+
+<div class="meta-data">
+    <div>Data: Arezzo, __________________</div>
+    <div>Paziente: _________________________________</div>
+</div>
+
+<div class="content-body">
+</div>
+
+<div class="signature-section">
+    <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-label">
+            Dott. Emanuel Savianu<br>
+            Cod. Reg. 011189 • Ord. Medici AR 3499
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div>P.IVA 02348320512 • SDI: JKKZDGR</div>
+    <div>PEC: emanuel.savianu@pec.omceoar.it</div>
+</footer>
+</div>
+
+<!-- A5 -->
+<div class="page a5">
+<header>
+    <div class="doc-identity">
+        <h1>Dott. Emanuel Savianu</h1>
+        <p>Medicina Generale</p>
+    </div>
+    <div class="contacts">
+        Tel: 0575 1713428<br>
+        Dott.Emanuel@Savianu.it
+    </div>
+</header>
+
+<div class="content-body">
+</div>
+
+<div class="signature-section">
+    <div class="sig-block">
+        <div class="sig-line"></div>
+        <div class="sig-label">Il Medico</div>
+    </div>
+</div>
+
+<footer>
+    <div>C.R. 011189 • P.IVA 02348320512</div>
+    <div>Arezzo, Via T. Innocenti 38</div>
+</footer>
+</div>
+
+</body>
+</html>
