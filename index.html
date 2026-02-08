@@ -25,6 +25,81 @@
     
     <link rel="stylesheet" href="styles.css">
 
+    <style>
+        /* Stili specifici per la nuova gestione del calendario senza scroll interno */
+        .booking-choice-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 600px) {
+            .booking-choice-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .btn-choice {
+            padding: 20px;
+            border: 2px solid var(--primary);
+            background-color: white;
+            color: var(--primary);
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-choice:hover {
+            background-color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-choice i {
+            font-size: 1.8rem;
+        }
+
+        /* Il contenitore del calendario deve essere alto per evitare scroll interno */
+        .calendar-iframe-container {
+            width: 100%;
+            position: relative;
+            /* Altezza minima elevata per mostrare tutto il calendario verticale su mobile */
+            min-height: 1150px; 
+            transition: height 0.3s ease;
+        }
+
+        .calendar-iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: none;
+            /* Impedisce lo scroll interno all'iframe */
+            overflow-y: hidden; 
+        }
+
+        .back-selection-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            color: var(--text-medium);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            text-decoration: underline;
+        }
+    </style>
+
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -38,7 +113,7 @@
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Via Ubaldo Pasqui 38",
-        "addressLocality": "Arezio",
+        "addressLocality": "Arezzo",
         "postalCode": "52100",
         "addressCountry": "IT"
       },
@@ -167,11 +242,11 @@
         <section class="alert-box" role="alert" aria-live="polite">
             <p data-i18n="alert_p1">
                 <i class="fas fa-exclamation-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
-                <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.
+                <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il tasto "Prenota Visita". Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>.
             </p>
             <p data-i18n="alert_p2" style="margin-top: 10px;">
                 <i class="fas fa-check-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
-                Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
+                Dopo la prima visita, per richiedere farmaci o inviare referti, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.
             </p>
         </section>
 
@@ -185,6 +260,7 @@
                 I canali di contatto dello studio sono riservati esclusivamente alle necessità dei pazienti.
             </p>
         </section>
+
         <section class="card">
             <div class="card-header">
                 <i class="fas fa-mouse-pointer" aria-hidden="true"></i>
@@ -201,17 +277,17 @@
 
             <div class="service-divider">
                 <p>
-                    <i class="fas fa-user-plus" aria-hidden="true" style="color: var(--primary);"></i> 
-                    <strong data-i18n="new_users_title">Gestione Nuovi Utenti</strong><br>
-                    <span data-i18n="new_users_desc">Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.</span>
+                    <i class="fas fa-calendar-alt" aria-hidden="true" style="color: var(--primary);"></i> 
+                    <strong data-i18n="new_users_title">Prenotazioni & Modulistica</strong><br>
+                    <span data-i18n="new_users_desc">Usa questi tasti per fissare un appuntamento o se hai problemi tecnici con MilleBook.</span>
                 </p>
             </div>
 
             <div class="action-grid btn-secondary-group">
-                <button onclick="showSection('booking')" class="btn-main btn-prenota" aria-label="Prenota la tua prima visita">
+                <button onclick="showSection('booking')" class="btn-main btn-prenota" aria-label="Prenota una visita">
                     <i class="far fa-calendar-check" aria-hidden="true"></i>
-                    <span data-i18n="btn_book">Prenota Prima Visita</span>
-                    <small data-i18n="btn_book_sub">Nuovi pazienti</small>
+                    <span data-i18n="btn_book">Prenota Visita</span>
+                    <small data-i18n="btn_book_sub">Visite brevi e Nuovi pazienti</small>
                 </button>
 
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-main btn-ricette" aria-label="Modulo per richiedere farmaci se MilleBook non funziona">
@@ -225,7 +301,7 @@
         <section id="booking-section" class="card hidden" aria-labelledby="booking-title">
             <div class="card-header">
                 <i class="far fa-calendar-alt" aria-hidden="true"></i>
-                <h2 id="booking-title" data-i18n="booking_title">Calendario Appuntamenti</h2>
+                <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
             </div>
             
             <div style="background-color: #fff5f5; border: 1px solid #fc8181; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
@@ -237,20 +313,40 @@
                     </span>
                 </p>
             </div>
-            <p style="margin-bottom: 15px; color: var(--text-medium);" data-i18n="booking_desc">
-                Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.
-            </p>
             
-            <div class="iframe-wrapper">
-                <iframe src="https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true&hl=it" 
-                        style="border: 0" 
-                        width="100%" 
-                        height="600" 
-                        frameborder="0" 
-                        loading="lazy" 
-                        title="Calendario prenotazioni appuntamenti"
-                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <div id="booking-selection-ui">
+                <p style="margin-bottom: 15px; color: var(--text-medium);" data-i18n="booking_choose_desc">
+                    Scegli il motivo della visita per aprire il calendario corretto:
+                </p>
+
+                <div class="booking-choice-container">
+                    <button class="btn-choice" onclick="loadCalendar('brief')">
+                        <i class="fas fa-stopwatch"></i>
+                        <span>Visita Breve</span>
+                        <small style="font-weight:400; font-size:0.85rem; color:#666;">Per sintomi recenti</small>
+                    </button>
+                    
+                    <button class="btn-choice" onclick="loadCalendar('first')">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Prima Visita</span>
+                        <small style="font-weight:400; font-size:0.85rem; color:#666;">Nuovi pazienti</small>
+                    </button>
+                </div>
+            </div>
+
+            <div id="calendar-wrapper" style="display: none;">
+                <button onclick="resetBookingSelection()" class="back-selection-btn">
+                    <i class="fas fa-arrow-left"></i> Cambia tipo di visita
+                </button>
+                
+                <div class="calendar-iframe-container">
+                    <iframe id="calendar-iframe"
+                            src="" 
+                            scrolling="no"
+                            title="Calendario prenotazioni appuntamenti"
+                            sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                            allowtransparency="true"></iframe>
+                </div>
             </div>
 
             <div class="privacy-notice">
@@ -265,33 +361,10 @@
         </section>
 
         <div class="urgency-wrapper">
-            
-            <div class="urgency-card">
-                <h3><i class="fas fa-stopwatch" aria-hidden="true"></i> Visite Brevi</h3>
-                <p>Per sintomi insorti negli ultimi giorni</p>
-                
-                <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-                <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-                <script>
-                (function() {
-                  var target = document.currentScript;
-                  window.addEventListener('load', function() {
-                    calendar.schedulingButton.load({
-                      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
-                      color: '#039BE5',
-                      label: 'Fissa un appuntamento',
-                      target,
-                    });
-                  });
-                })();
-                </script>
-            </div>
-
             <aside class="alert-emergency" role="alert" aria-live="polite">
                 <i class="fas fa-ambulance" aria-hidden="true"></i>
                 <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
             </aside>
-
         </div>
 
         <section class="card">
@@ -449,160 +522,37 @@
         }
     }
 
-    // --- LANGUAGE MANAGEMENT ---
-    const translations = {
-        it: {
-            header_subtitle: "Medico di Medicina Generale - Arezzo",
-            alert_p1: "<i class='fas fa-exclamation-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il modulo sottostante. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>, così che tu possa gestire tutto comodamente da casa.",
-            alert_p2: "<i class='fas fa-check-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.",
-            services_title: "Servizi Online",
-            millebook_btn: "ACCEDI A MILLEBOOK",
-            millebook_sub: "Il tuo fascicolo sanitario digitale",
-            new_users_title: "Gestione Nuovi Utenti",
-            new_users_desc: "Utilizza i tasti qui sotto se devi prenotare la tua prima visita o se riscontri problemi tecnici con il portale principale.",
-            btn_book: "Prenota Prima Visita",
-            btn_book_sub: "Nuovi pazienti",
-            btn_drugs: "Modulo Farmaci",
-            btn_drugs_sub: "Se Millebook non funziona",
-            booking_title: "Calendario Appuntamenti",
-            booking_desc: "Seleziona uno spazio disponibile. Riceverai un'email di conferma con i dettagli.",
-            privacy_modulo_desc: "Per ridurre i tempi di attesa il giorno della visita, ti invito a leggere l'informativa sul trattamento dei dati.",
-            privacy_modulo_link: "Leggi Informativa Trattamento Dati",
-            emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
-            contacts_title: "Contatti Studio",
-            label_secretary: "Segreteria",
-            label_address: "Indirizzo",
-            btn_map: "Portami qui",
-            hours_title: "Orari Ambulatorio",
-            day_mon: "Lunedì",
-            day_tue: "Martedì",
-            day_wed: "Mercoledì",
-            day_thu: "Giovedì",
-            day_fri: "Venerdì",
-            day_sat_sun: "Sab - Dom",
-            closed: "Chiuso",
-            guard_title: "Continuità Assistenziale",
-            guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
-            guard_label: "Numero Unico (Ex Guardia Medica)",
-            prof_info_title: "Dati Professionali",
-            prof_role: "Medico di Medicina Generale",
-            billing_title: "Dati Fatturazione Elettronica",
-            link_privacy: "Privacy Policy",
-            reps_disclaimer_full: "Si informa che il Dott. Emanuel Savianu, per motivi organizzativi e per garantire la priorità dell'attività clinica, <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>. I canali di contatto dello studio sono riservati esclusivamente alle necessità dei pazienti.",
-            booking_reps_warning: "ATTENZIONE: Non si accettano appuntamenti con Informatori Scientifici. Eventuali appuntamenti prenotati verranno cancellati d'ufficio."
-        },
-        en: {
-            header_subtitle: "General Practitioner - Arezzo",
-            alert_p1: "<i class='fas fa-exclamation-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment using the form below. During our first visit, I will personally register you on <strong>MilleBook</strong>, so you can manage everything comfortably from home.",
-            alert_p2: "<i class='fas fa-check-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
-            services_title: "Online Services",
-            millebook_btn: "LOGIN TO MILLEBOOK",
-            millebook_sub: "Your digital health record",
-            new_users_title: "New User Management",
-            new_users_desc: "Use the buttons below if you need to book your first visit or if you are experiencing technical issues with the main portal.",
-            btn_book: "Book First Visit",
-            btn_book_sub: "New patients",
-            btn_drugs: "Prescription Form",
-            btn_drugs_sub: "If Millebook is down",
-            booking_title: "Appointment Calendar",
-            booking_desc: "Select an available slot. You will receive a confirmation email with details.",
-            privacy_modulo_desc: "To reduce waiting times on the day of your visit, please read the data processing policy.",
-            privacy_modulo_link: "Read Data Processing Policy",
-            emergency_112: "For medical emergencies, always contact the Emergency Number 112.",
-            contacts_title: "Office Contacts",
-            label_secretary: "Reception",
-            label_address: "Address",
-            btn_map: "Take me there",
-            hours_title: "Clinic Hours",
-            day_mon: "Monday",
-            day_tue: "Tuesday",
-            day_wed: "Wednesday",
-            day_thu: "Thursday",
-            day_fri: "Friday",
-            day_sat_sun: "Sat - Sun",
-            closed: "Closed",
-            guard_title: "Out-of-Hours Service",
-            guard_desc: "For non-urgent medical assistance during the night, holidays, and pre-holidays.",
-            guard_label: "Toll-free Number",
-            prof_info_title: "Professional Details",
-            prof_role: "General Practitioner",
-            billing_title: "e-Billing Data",
-            link_privacy: "Privacy Policy",
-            reps_disclaimer_full: "Please note that Dr. Emanuel Savianu, for organizational reasons and to prioritize clinical activity, <strong>does not accept appointments with pharmaceutical representatives</strong>. The practice's contact channels are reserved exclusively for patient needs.",
-            booking_reps_warning: "ATTENTION: Appointments with Pharmaceutical Representatives are not accepted. Any booked appointments will be cancelled."
-        }
+    // --- CALENDAR LOGIC (New) ---
+    const calendarLinks = {
+        'brief': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
+        'first': 'https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true&hl=it'
     };
 
-    function setLanguage(lang) {
-        const btnIt = document.getElementById('btn-it');
-        const btnEn = document.getElementById('btn-en');
-        
-        btnIt.classList.toggle('active', lang === 'it');
-        btnEn.classList.toggle('active', lang === 'en');
-        btnIt.setAttribute('aria-pressed', lang === 'it');
-        btnEn.setAttribute('aria-pressed', lang === 'en');
+    function loadCalendar(type) {
+        const uiDiv = document.getElementById('booking-selection-ui');
+        const calWrapper = document.getElementById('calendar-wrapper');
+        const iframe = document.getElementById('calendar-iframe');
 
-        document.documentElement.lang = lang;
-
-        const elements = document.querySelectorAll('[data-i18n]');
-        elements.forEach(element => {
-            const key = element.getAttribute('data-i18n');
-            if (translations[lang] && translations[lang][key]) {
-                element.innerHTML = translations[lang][key];
-            }
-        });
-
-        try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
-    }
-
-    try {
-        const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang && (savedLang === 'it' || savedLang === 'en')) {
-            setLanguage(savedLang);
-        }
-    } catch (e) {}
-
-    // --- SMOOTH SCROLL & FOCUS ---
-    function showSection(sectionId) {
-        const section = document.getElementById(sectionId + '-section');
-        if(section) {
-            section.classList.remove('hidden');
-            section.classList.add('fade-in');
+        if(calendarLinks[type]) {
+            iframe.src = calendarLinks[type];
+            uiDiv.style.display = 'none';
+            calWrapper.style.display = 'block';
             
+            // Scroll delicato per assicurare che l'iframe sia visibile
             setTimeout(() => {
-                const yOffset = -20;
-                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-                window.scrollTo({ top: y, behavior: 'smooth' });
+                const yOffset = -50; 
+                const y = calWrapper.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({top: y, behavior: 'smooth'});
             }, 100);
-
-            const firstFocusable = section.querySelector('h2, button, a, input, select, textarea');
-            if (firstFocusable) firstFocusable.focus();
         }
     }
 
-    // --- WELCOME MODAL LOGIC ---
-    function closeWelcome() {
-        const overlay = document.getElementById('welcome-overlay');
-        overlay.classList.remove('active');
-        document.body.classList.remove('modal-open');
-        try { sessionStorage.setItem('welcomeSeen', 'true'); } catch(e) {}
-    }
+    function resetBookingSelection() {
+        const uiDiv = document.getElementById('booking-selection-ui');
+        const calWrapper = document.getElementById('calendar-wrapper');
+        const iframe = document.getElementById('calendar-iframe');
 
-    function openWelcome() {
-        const overlay = document.getElementById('welcome-overlay');
-        overlay.classList.add('active');
-        document.body.classList.add('modal-open');
+        iframe.src = ""; // Stop iframe loading
+        calWrapper.style.display = 'none';
+        uiDiv.style.display = 'block';
     }
-
-    window.addEventListener('load', function() {
-        try {
-            if (sessionStorage.getItem('welcomeSeen')) {
-                const overlay = document.getElementById('welcome-overlay');
-                overlay.classList.remove('active');
-                document.body.classList.remove('modal-open');
-            }
-        } catch(e) {}
-    });
-</script>
-</body>
-</html>
