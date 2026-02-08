@@ -20,12 +20,27 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link rel="stylesheet" href="styles.css">
 
     <style>
+        /* Miglioramenti tipografia */
+        :root {
+            --font-sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'IBM Plex Serif', Georgia, serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+        }
+
+        h1, h2, h3 {
+            font-family: var(--font-sans);
+            font-weight: 600;
+        }
+
         /* Stili specifici per la nuova gestione del calendario senza scroll interno */
         .booking-choice-container {
             display: grid;
@@ -53,37 +68,88 @@
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .btn-choice:hover {
             background-color: var(--primary-light);
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .btn-choice:active {
+            transform: translateY(0);
         }
 
         .btn-choice i {
             font-size: 1.8rem;
         }
 
-        /* Il contenitore del calendario deve essere alto per evitare scroll interno */
+        /* SOLUZIONE CALENDARIO MOBILE - Altezza dinamica aumentata */
         .calendar-iframe-container {
             width: 100%;
             position: relative;
-            /* Altezza minima elevata per mostrare tutto il calendario verticale su mobile */
+            /* Altezza base per desktop */
             min-height: 1150px; 
             transition: height 0.3s ease;
+            background: linear-gradient(to bottom, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* CRITICAL: Altezza molto più elevata per mobile */
+        @media (max-width: 768px) {
+            .calendar-iframe-container {
+                /* Aumentato significativamente per evitare scroll interno su mobile */
+                min-height: 1800px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .calendar-iframe-container {
+                /* Ancora più alto per schermi molto piccoli */
+                min-height: 2000px;
+            }
         }
 
         .calendar-iframe-container iframe {
             width: 100%;
             height: 100%;
+            min-height: inherit;
             position: absolute;
             top: 0;
             left: 0;
             border: none;
             /* Impedisce lo scroll interno all'iframe */
-            overflow-y: hidden; 
+            overflow: hidden;
+        }
+
+        /* Loading state per il calendario */
+        .calendar-loading {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-medium);
+            z-index: 1;
+        }
+
+        .calendar-loading.active {
+            display: block;
+        }
+
+        .calendar-loading i {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .back-selection-btn {
@@ -91,12 +157,100 @@
             align-items: center;
             gap: 8px;
             margin-bottom: 15px;
-            color: var(--text-medium);
-            background: none;
-            border: none;
+            padding: 10px 18px;
+            color: var(--primary);
+            background: var(--primary-light);
+            border: 2px solid var(--primary);
+            border-radius: 8px;
             cursor: pointer;
             font-size: 0.95rem;
-            text-decoration: underline;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .back-selection-btn:hover {
+            background: white;
+            transform: translateX(-3px);
+        }
+
+        .back-selection-btn i {
+            transition: transform 0.2s ease;
+        }
+
+        .back-selection-btn:hover i {
+            transform: translateX(-3px);
+        }
+
+        /* Miglioramento animazioni fade-in */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        /* Miglioramento visivo card */
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        }
+
+        /* Accessibilità migliorata per skip link */
+        .skip-link:focus {
+            clip: auto;
+            height: auto;
+            width: auto;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--primary);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 4px;
+            z-index: 10000;
+            font-weight: 600;
+        }
+
+        /* Miglioramento bottoni principali */
+        .btn-main {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-main:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .btn-main:active {
+            transform: translateY(-1px);
+        }
+
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .booking-choice-container {
+                gap: 12px;
+            }
+
+            .btn-choice {
+                padding: 18px;
+                font-size: 1rem;
+            }
+
+            .btn-choice i {
+                font-size: 1.6rem;
+            }
         }
     </style>
 
@@ -338,12 +492,17 @@
                 </button>
                 
                 <div class="calendar-iframe-container">
+                    <div class="calendar-loading active" id="calendar-loading">
+                        <i class="fas fa-spinner"></i>
+                        <p>Caricamento calendario...</p>
+                    </div>
                     <iframe id="calendar-iframe"
                             src="" 
                             scrolling="no"
                             title="Calendario prenotazioni appuntamenti"
                             sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                            allowtransparency="true"></iframe>
+                            allowtransparency="true"
+                            onload="hideCalendarLoading()"></iframe>
                 </div>
             </div>
 
@@ -504,23 +663,21 @@
     // --- AUTOMATIC YEAR ---
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // --- REPS MODAL LOGIC (New) ---
+    // --- REPS MODAL LOGIC ---
     function toggleRepsModal(show) {
         const modal = document.getElementById('reps-overlay');
         modal.style.display = show ? 'flex' : 'none';
         
-        // Prevent body scroll when modal is open
         if (show) {
             document.body.style.overflow = 'hidden';
         } else {
-            // Restore only if main welcome modal is not active
             if (!document.getElementById('welcome-overlay').classList.contains('active')) {
                 document.body.style.overflow = 'auto';
             }
         }
     }
 
-    // --- CALENDAR LOGIC (New) ---
+    // --- CALENDAR LOGIC (IMPROVED) ---
     const calendarLinks = {
         'brief': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
         'first': 'https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true&hl=it'
@@ -530,31 +687,58 @@
         const uiDiv = document.getElementById('booking-selection-ui');
         const calWrapper = document.getElementById('calendar-wrapper');
         const iframe = document.getElementById('calendar-iframe');
+        const loading = document.getElementById('calendar-loading');
 
         if(calendarLinks[type]) {
+            // Mostra loading
+            loading.classList.add('active');
+            
+            // Carica iframe
             iframe.src = calendarLinks[type];
             uiDiv.style.display = 'none';
             calWrapper.style.display = 'block';
             
             // Scroll delicato per assicurare che l'iframe sia visibile
             setTimeout(() => {
-                const yOffset = -50; 
+                const yOffset = -30; 
                 const y = calWrapper.getBoundingClientRect().top + window.pageYOffset + yOffset;
                 window.scrollTo({top: y, behavior: 'smooth'});
-            }, 100);
+            }, 150);
         }
+    }
+
+    function hideCalendarLoading() {
+        const loading = document.getElementById('calendar-loading');
+        // Piccolo delay per transizione più smooth
+        setTimeout(() => {
+            loading.classList.remove('active');
+        }, 300);
     }
 
     function resetBookingSelection() {
         const uiDiv = document.getElementById('booking-selection-ui');
         const calWrapper = document.getElementById('calendar-wrapper');
         const iframe = document.getElementById('calendar-iframe');
+        const loading = document.getElementById('calendar-loading');
 
-        iframe.src = ""; // Stop iframe loading
+        // Reset stato loading
+        loading.classList.add('active');
+        
+        // Stop iframe loading
+        iframe.src = "";
+        
+        // Mostra UI selezione
         calWrapper.style.display = 'none';
         uiDiv.style.display = 'block';
-    }
 
+        // Scroll indietro alla sezione prenotazioni
+        setTimeout(() => {
+            const bookingSection = document.getElementById('booking-section');
+            const yOffset = -20;
+            const y = bookingSection.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }, 100);
+    }
 
     // --- LANGUAGE MANAGEMENT ---
     const translations = {
@@ -710,6 +894,12 @@
             }
         } catch(e) {}
     });
+
+    // --- PERFORMANCE: Preconnect to Google Calendar ---
+    const preconnectLink = document.createElement('link');
+    preconnectLink.rel = 'preconnect';
+    preconnectLink.href = 'https://calendar.google.com';
+    document.head.appendChild(preconnectLink);
 </script>
 </body>
 </html>
