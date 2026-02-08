@@ -2,21 +2,20 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Dott. Savianu - Carta Intestata (A4 & A5)</title>
+<title>Carta Intestata - Dott. Savianu</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,600;0,700;1,400&family=Inter:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600;700&family=Inter:wght@300;400;500&display=swap');
 
 :root {
-    --black: #000;
-    --gray-dark: #444;
-    --gray-light: #f4f4f4;
-    --border-width: 0.7pt;
+    --primary-color: #1a1a1a; /* Nero morbido per meno affaticamento visivo */
+    --secondary-color: #555555; /* Grigio per info secondarie */
+    --accent-line: #000000;
 }
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-print-color-adjust: exact; }
 
 body {
-    background: #e0e0e0;
+    background: #f0f0f0;
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
@@ -24,195 +23,179 @@ body {
     padding: 20px;
 }
 
-/* --- PAGINA --- */
+/* --- CONFIGURAZIONE PAGINA --- */
 .page {
     background: #fff;
     position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     margin-bottom: 40px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.a4 { width: 210mm; height: 297mm; padding: 18mm 20mm; }
-.a5 { width: 148mm; height: 210mm; padding: 12mm 15mm; }
+/* Formati carta standard */
+.a4 { width: 210mm; min-height: 297mm; padding: 20mm 25mm 15mm 25mm; }
+/* Se serve l'A5 per ricette brevi */
+.a5 { width: 148mm; min-height: 210mm; padding: 15mm 15mm 10mm 15mm; } 
 
-/* --- HEADER --- */
+/* --- HEADER: PULITO E CENTRALE --- */
 header {
+    text-align: left;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--primary-color);
+}
+
+header h1 {
+    font-family: 'Crimson Text', serif;
+    font-size: 24pt;
+    color: var(--primary-color);
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 4px;
+}
+
+header h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 10pt;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--secondary-color);
+    font-weight: 500;
+}
+
+/* --- CORPO DEL DOCUMENTO --- */
+.content {
+    flex-grow: 1; /* Occupa tutto lo spazio disponibile */
+    font-family: 'Crimson Text', serif; /* Serif per leggibilità corpo testo */
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+}
+
+/* --- AREA FIRMA E DATA (IMPORTANTE) --- */
+.signature-area {
+    margin-top: 40px;
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 1pt solid var(--black);
-    padding-bottom: 10px;
-    margin-bottom: 25px;
+    align-items: flex-end;
 }
 
-.doc-identity h1 {
-    font-family: 'Crimson Text', serif;
-    font-size: 22pt;
-    font-weight: 700;
-    color: var(--black);
-    line-height: 1.1;
+.date-place {
+    font-family: 'Inter', sans-serif;
+    font-size: 11pt;
+    color: var(--primary-color);
+    border-bottom: 1px dotted #999;
+    padding-bottom: 5px;
+    min-width: 200px;
 }
 
-.a5 .doc-identity h1 { font-size: 18pt; }
+.doctor-sign {
+    text-align: center;
+    width: 250px;
+}
 
-.doc-identity p {
+.sign-line {
+    border-bottom: 1px solid var(--primary-color);
+    height: 40px; /* Spazio per firma manuale */
+    margin-bottom: 8px;
+}
+
+.doctor-sign p {
     font-size: 9pt;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1.5pt;
-    color: var(--gray-dark);
-    margin-top: 4px;
 }
 
-.contacts {
-    text-align: right;
-    font-size: 8.5pt;
+.doctor-sign span {
+    display: block;
+    font-size: 7pt;
+    color: var(--secondary-color);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+/* --- FOOTER: INFO TECNICHE PICCOLE --- */
+footer {
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+    font-size: 7.5pt;
+    color: var(--secondary-color);
+    font-family: 'Inter', sans-serif;
     line-height: 1.4;
 }
 
-.qr-placeholder {
-    width: 40px;
-    height: 40px;
-    border: 0.7pt solid #aaa;
-    display: inline-block;
-    vertical-align: top;
-    font-size: 6pt;
-    text-align: center;
-    padding-top: 12px;
-    color: #aaa;
-    margin-left: 8px;
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 15px;
 }
 
-/* --- META --- */
-.meta-data {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10pt;
-    margin-bottom: 35px;
+.footer-col strong {
+    color: #000;
+    display: block;
+    margin-bottom: 2px;
 }
 
-/* --- CONTENUTO --- */
-.content-body {
-    min-height: 60%;
-    font-size: 11pt;
-    line-height: 1.6;
-    color: var(--black);
-}
-
-.a5 .content-body { font-size: 10pt; line-height: 1.5; }
-
-/* --- FIRMA --- */
-.signature-section {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-}
-
-.sig-block {
-    text-align: center;
-    width: 220px;
-}
-
-.sig-line {
-    border-bottom: 0.5pt solid var(--black);
-    height: 40px;
-    margin-bottom: 6px;
-}
-
-.sig-label { font-size: 8pt; color: var(--gray-dark); line-height: 1.2; }
-
-/* --- FOOTER --- */
-footer {
-    position: absolute;
-    bottom: 12mm;
-    left: 20mm;
-    right: 20mm;
-    border-top: 0.5pt solid #ccc;
-    padding-top: 8px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 7.5pt;
-    color: #666;
-}
-
-.a5 footer { left: 15mm; right: 15mm; bottom: 8mm; font-size: 7pt; }
-
-/* --- STAMPA --- */
+/* --- MEDIA QUERY PER LA STAMPA --- */
 @media print {
     body { background: none; padding: 0; }
-    .page { box-shadow: none; margin: 0; page-break-after: always; }
-    .qr-placeholder { border-color: #000; }
+    .page { box-shadow: none; margin: 0; width: 100%; height: 100%; border: none; }
+    /* Nasconde elementi del browser se necessario */
+    @page { margin: 0; } 
+    .a4 { padding: 20mm 20mm; } /* Margini sicuri stampante */
 }
 </style>
 </head>
 <body>
 
-<!-- A4 -->
-<div class="page a4">
-<header>
-    <div class="doc-identity">
-        <h1>Dott. Emanuel Savianu</h1>
-        <p>Medico di Medicina Generale</p>
-    </div>
-    <div class="contacts">
-        Arezzo, Via Tullio Innocenti 38<br>
-        T: 0575 1713428 • C: 327 8095905<br>
-        <strong>Dott.Emanuel@Savianu.it</strong>
-        <div class="qr-placeholder">QR WEB</div>
-    </div>
-</header>
+    <div class="page a4">
+        
+        <header>
+            <h1>Dott. Emanuel Savianu</h1>
+            <h2>Medico di Medicina Generale</h2>
+        </header>
 
-<div class="meta-data">
-    <div>Data: Arezzo, __________________</div>
-    <div>Paziente: _________________________________</div>
-</div>
+        <div class="content">
+            <p>&nbsp;</p>
+            </div>
 
-<div class="content-body">
-</div>
-
-<div class="signature-section">
-    <div class="sig-block">
-        <div class="sig-line"></div>
-        <div class="sig-label">
-            Dott. Emanuel Savianu<br>
-            Cod. Reg. 011189 • Ord. Medici AR 3499
+        <div class="signature-area">
+            <div class="date-place">
+                Arezzo, ____________________
+            </div>
+            
+            <div class="doctor-sign">
+                <div class="sign-line"></div> <p>Dott. Emanuel Savianu</p>
+                <span>Medico di Medicina Generale</span>
+            </div>
         </div>
+
+        <footer>
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <strong>Studio Medico</strong>
+                    Via Ubaldo Pasqui 38, Arezzo<br>
+                    Tel: 0575 1713428<br>
+                    Cell: 327 8095905
+                </div>
+                <div class="footer-col">
+                    <strong>Contatti Digitali</strong>
+                    Email: Dott.Emanuel@Savianu.it<br>
+                    PEC: emanuel.savianu@pec.omceoar.it<br>
+                    Web: [Inserire sito se esiste]
+                </div>
+                <div class="footer-col">
+                    <strong>Dati Fiscali & Iscrizione</strong>
+                    P.IVA: 02348320512 • Cod. SDI: JKKZDGR<br>
+                    Ord. Medici AR n. 3499<br>
+                    Cod. Reg. 011189
+                </div>
+            </div>
+        </footer>
+
     </div>
-</div>
-
-<footer>
-    <div>P.IVA 02348320512 • SDI: JKKZDGR</div>
-    <div>PEC: emanuel.savianu@pec.omceoar.it</div>
-</footer>
-</div>
-
-<!-- A5 -->
-<div class="page a5">
-<header>
-    <div class="doc-identity">
-        <h1>Dott. Emanuel Savianu</h1>
-        <p>Medicina Generale</p>
-    </div>
-    <div class="contacts">
-        Tel: 0575 1713428<br>
-        Dott.Emanuel@Savianu.it
-    </div>
-</header>
-
-<div class="content-body">
-</div>
-
-<div class="signature-section">
-    <div class="sig-block">
-        <div class="sig-line"></div>
-        <div class="sig-label">Il Medico</div>
-    </div>
-</div>
-
-<footer>
-    <div>C.R. 011189 • P.IVA 02348320512</div>
-    <div>Arezzo, Via T. Innocenti 38</div>
-</footer>
-</div>
 
 </body>
 </html>
