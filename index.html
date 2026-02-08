@@ -256,8 +256,7 @@
                 Informazione per Informatori Scientifici
             </h3>
             <p style="color: #7f1d1d; margin-bottom: 0;" data-i18n="reps_disclaimer_full">
-                Si informa che il Dott. Emanuel Savianu, per motivi organizzativi e per garantire la priorità dell'attività clinica, <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>. 
-                I canali di contatto dello studio sono riservati esclusivamente alle necessità dei pazienti.
+                Si informa che il Dott. Emanuel Savianu, per motivi organizzativi e per garantire la priorità dell'attività clinica, <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>. I canali di contatto dello studio sono riservati esclusivamente alle necessità dei pazienti.
             </p>
         </section>
 
@@ -308,8 +307,7 @@
                 <p style="color: #c53030; font-weight: 600; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 10px;">
                     <i class="fas fa-ban" style="font-size: 1.2rem;"></i>
                     <span data-i18n="booking_reps_warning">
-                        ATTENZIONE: Non si accettano appuntamenti con Informatori Scientifici. 
-                        Eventuali appuntamenti prenotati verranno cancellati d'ufficio.
+                        ATTENZIONE: Non si accettano appuntamenti con Informatori Scientifici. Eventuali appuntamenti prenotati verranno cancellati d'ufficio.
                     </span>
                 </p>
             </div>
@@ -556,3 +554,162 @@
         calWrapper.style.display = 'none';
         uiDiv.style.display = 'block';
     }
+
+
+    // --- LANGUAGE MANAGEMENT ---
+    const translations = {
+        it: {
+            header_subtitle: "Medico di Medicina Generale - Arezzo",
+            alert_p1: "<i class='fas fa-exclamation-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio e non sei ancora registrato, puoi prenotare il tuo primo appuntamento tramite il tasto 'Prenota Visita'. Durante la nostra prima visita, provvederò personalmente a iscriverti a <strong>MilleBook</strong>.",
+            alert_p2: "<i class='fas fa-check-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> Dopo la prima visita, per richiedere farmaci, inviare referti o prenotare visite, ti invitiamo a utilizzare esclusivamente la piattaforma MilleBook.",
+            services_title: "Servizi Online",
+            millebook_btn: "ACCEDI A MILLEBOOK",
+            millebook_sub: "Il tuo fascicolo sanitario digitale",
+            new_users_title: "Prenotazioni & Modulistica",
+            new_users_desc: "Usa questi tasti per fissare un appuntamento o se hai problemi tecnici con MilleBook.",
+            btn_book: "Prenota Visita",
+            btn_book_sub: "Visite brevi e Nuovi pazienti",
+            btn_drugs: "Modulo Farmaci",
+            btn_drugs_sub: "Se Millebook non funziona",
+            booking_title: "Seleziona il tipo di visita",
+            booking_choose_desc: "Scegli il motivo della visita per aprire il calendario corretto:",
+            privacy_modulo_desc: "Per ridurre i tempi di attesa il giorno della visita, ti invito a leggere l'informativa sul trattamento dei dati.",
+            privacy_modulo_link: "Leggi Informativa Trattamento Dati",
+            emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
+            contacts_title: "Contatti Studio",
+            label_secretary: "Segreteria",
+            label_address: "Indirizzo",
+            btn_map: "Portami qui",
+            hours_title: "Orari Ambulatorio",
+            day_mon: "Lunedì",
+            day_tue: "Martedì",
+            day_wed: "Mercoledì",
+            day_thu: "Giovedì",
+            day_fri: "Venerdì",
+            day_sat_sun: "Sab - Dom",
+            closed: "Chiuso",
+            guard_title: "Continuità Assistenziale",
+            guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
+            guard_label: "Numero Unico (Ex Guardia Medica)",
+            prof_info_title: "Dati Professionali",
+            prof_role: "Medico di Medicina Generale",
+            billing_title: "Dati Fatturazione Elettronica",
+            link_privacy: "Privacy Policy",
+            reps_disclaimer_full: "Si informa che il Dott. Emanuel Savianu, per motivi organizzativi e per garantire la priorità dell'attività clinica, <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>. I canali di contatto dello studio sono riservati esclusivamente alle necessità dei pazienti.",
+            booking_reps_warning: "ATTENZIONE: Non si accettano appuntamenti con Informatori Scientifici. Eventuali appuntamenti prenotati verranno cancellati d'ufficio."
+        },
+        en: {
+            header_subtitle: "General Practitioner - Arezzo",
+            alert_p1: "<i class='fas fa-exclamation-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> <strong>New Patients:</strong> If this is your first time at the practice and you are not registered yet, you can book your first appointment via the 'Book Visit' button. During our first visit, I will personally register you on <strong>MilleBook</strong>.",
+            alert_p2: "<i class='fas fa-check-circle' aria-hidden='true' style='color: var(--primary); margin-right: 8px;'></i> After the first visit, please use the MilleBook platform exclusively to request prescriptions, send reports, or book appointments.",
+            services_title: "Online Services",
+            millebook_btn: "LOGIN TO MILLEBOOK",
+            millebook_sub: "Your digital health record",
+            new_users_title: "Bookings & Forms",
+            new_users_desc: "Use the buttons below to book an appointment or if you have technical issues with the main portal.",
+            btn_book: "Book Visit",
+            btn_book_sub: "Brief visits & New patients",
+            btn_drugs: "Prescription Form",
+            btn_drugs_sub: "If Millebook is down",
+            booking_title: "Select visit type",
+            booking_choose_desc: "Choose the reason for your visit to open the correct calendar:",
+            privacy_modulo_desc: "To reduce waiting times on the day of your visit, please read the data processing policy.",
+            privacy_modulo_link: "Read Data Processing Policy",
+            emergency_112: "For medical emergencies, always contact the Emergency Number 112.",
+            contacts_title: "Office Contacts",
+            label_secretary: "Reception",
+            label_address: "Address",
+            btn_map: "Take me there",
+            hours_title: "Clinic Hours",
+            day_mon: "Monday",
+            day_tue: "Tuesday",
+            day_wed: "Wednesday",
+            day_thu: "Thursday",
+            day_fri: "Friday",
+            day_sat_sun: "Sat - Sun",
+            closed: "Closed",
+            guard_title: "Out-of-Hours Service",
+            guard_desc: "For non-urgent medical assistance during the night, holidays, and pre-holidays.",
+            guard_label: "Toll-free Number",
+            prof_info_title: "Professional Details",
+            prof_role: "General Practitioner",
+            billing_title: "e-Billing Data",
+            link_privacy: "Privacy Policy",
+            reps_disclaimer_full: "Please note that Dr. Emanuel Savianu, for organizational reasons and to prioritize clinical activity, <strong>does not accept appointments with pharmaceutical representatives</strong>. The practice's contact channels are reserved exclusively for patient needs.",
+            booking_reps_warning: "ATTENTION: Appointments with Pharmaceutical Representatives are not accepted. Any booked appointments will be cancelled."
+        }
+    };
+
+    function setLanguage(lang) {
+        const btnIt = document.getElementById('btn-it');
+        const btnEn = document.getElementById('btn-en');
+        
+        btnIt.classList.toggle('active', lang === 'it');
+        btnEn.classList.toggle('active', lang === 'en');
+        btnIt.setAttribute('aria-pressed', lang === 'it');
+        btnEn.setAttribute('aria-pressed', lang === 'en');
+
+        document.documentElement.lang = lang;
+
+        const elements = document.querySelectorAll('[data-i18n]');
+        elements.forEach(element => {
+            const key = element.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                element.innerHTML = translations[lang][key];
+            }
+        });
+
+        try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
+    }
+
+    try {
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang && (savedLang === 'it' || savedLang === 'en')) {
+            setLanguage(savedLang);
+        }
+    } catch (e) {}
+
+    // --- SMOOTH SCROLL & FOCUS ---
+    function showSection(sectionId) {
+        const section = document.getElementById(sectionId + '-section');
+        if(section) {
+            section.classList.remove('hidden');
+            section.classList.add('fade-in');
+            
+            setTimeout(() => {
+                const yOffset = -20;
+                const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                window.scrollTo({ top: y, behavior: 'smooth' });
+            }, 100);
+
+            const firstFocusable = section.querySelector('h2, button, a, input, select, textarea');
+            if (firstFocusable) firstFocusable.focus();
+        }
+    }
+
+    // --- WELCOME MODAL LOGIC ---
+    function closeWelcome() {
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+        try { sessionStorage.setItem('welcomeSeen', 'true'); } catch(e) {}
+    }
+
+    function openWelcome() {
+        const overlay = document.getElementById('welcome-overlay');
+        overlay.classList.add('active');
+        document.body.classList.add('modal-open');
+    }
+
+    window.addEventListener('load', function() {
+        try {
+            if (sessionStorage.getItem('welcomeSeen')) {
+                const overlay = document.getElementById('welcome-overlay');
+                overlay.classList.remove('active');
+                document.body.classList.remove('modal-open');
+            }
+        } catch(e) {}
+    });
+</script>
+</body>
+</html>
