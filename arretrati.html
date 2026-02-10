@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Arretrati ACN 2022-2024</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            padding: 20px;
+        }
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #0056b3;
+            color: white;
+            font-weight: bold;
+        }
+        /* Stile caselle input "rosa" come da originale */
+        input[type="number"] {
+            width: 90%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #ffe6e6; /* Rosa chiaro */
+            text-align: center;
+            font-size: 1em;
+        }
+        input[type="number"]:focus {
+            background-color: #fff;
+            border-color: #0056b3;
+            outline: none;
+        }
+        .result {
+            font-weight: bold;
+            color: #333;
+        }
+        .total-row {
+            background-color: #e9ecef;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .total-cell {
+            color: #d9534f;
+        }
+        .note {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #555;
+            background: #f9f9f9;
+            padding: 10px;
+            border-left: 4px solid #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator-container">
+    <h1>ACN 2022-2024 - Calcolatore Arretrati</h1>
+    <p class="subtitle">Inserisci nelle caselle rosa la media annua dei pazienti e/o le ore annue svolte.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Anno</th>
+                <th>Media Annua Pazienti<br>(Quota Capitaria)</th>
+                <th>Ore Annue Svolte<br>(Quota Oraria)</th>
+                <th>Arretrato<br>Quota Capitaria</th>
+                <th>Arretrato<br>Quota Oraria</th>
+                <th>Totale Arretrato</th>
+            </tr>
+        </thead>
+        <tbody id="calcBody">
+            </tbody>
+        <tfoot>
+            <tr class="total-row">
+                <td colspan="3" style="text-align: right;">TOTALE COMPLESSIVO:</td>
+                <td id="totalCapitaria">€ 0,00</td>
+                <td id="totalOraria">€ 0,00</td>
+                <td class="total-cell" id="grandTotal">€ 0,00</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div class="note">
+        <strong>Nota Bene:</strong> I calcoli sono stime basate sui coefficienti degli arretrati diffusi (es. ~2,72€/assistito per 2022-23). 
+        Gli importi reali potrebbero variare in base alla regione, alle addizionali fiscali e previdenziali. 
+        Gli importi sono da intendersi al lordo.
+    </div>
+</div>
+
+<script>
+    // CONFIGURAZIONE COEFFICIENTI (Modifica qui i valori se cambiano)
+    // Valori stimati in base ai dati FIMMG/SMI (es. 0.82 fisso + 1.90 variabile = 2.72 per 2022/23)
+    const coefficients = {
+        2022: { capitaria: 2.72, oraria: 0.86 }, 
+        2023: { capitaria: 2.72, oraria: 0.86 },
+        2024: { capitaria: 2.72, oraria: 0.86 }, // Valore presunto in attesa di tabella definitiva 2024
+        2025: { capitaria: 0.00, oraria: 0.00 }  // Generalmente il 2025 è l'anno corrente, arretrati forse non applicabili o parziali
+    };
+
+    const years = [2022, 2023, 2024, 2025];
+    const tbody = document.getElementById('calcBody');
+
+    // Inizializza la tabella
+    function initTable() {
+        years.forEach(year => {
+            const tr = document.createElement('tr');
+            
+            // Celle Input
+            const inputPazienti = `<input type="number" min="0" placeholder="0" oninput="calculate()" id="paz_${year}">`;
+            const inputOre = `<input type="number" min="0" placeholder="0" oninput="calculate()" id="ore_${year}">`;
+            
+            // HTML Riga
+            tr.innerHTML = `
+                <td><strong>${year}</strong></td>
+                <td>${inputPazienti}</td>
+                <td>${inputOre}</td>
+                <td class="result" id="res_cap_${year}">€ 0,00</td>
+                <td class="result" id="res_ora_${year}">€ 0,00</td>
+                <td class="result" id="res_tot_${year}">€ 0,00</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+
+    // Funzione di calcolo
+    function calculate() {
+        let grandTotalCap = 0;
+        let grandTotalOra = 0;
+        let grandTotal = 0;
+
+        years.forEach(year => {
+            // Recupera valori input
+            const paz = parseFloat(document.getElementById(`paz_${year}`).value) || 0;
+            const ore = parseFloat(document.getElementById(`ore_${year}`).value) || 0;
+
+            // Recupera coefficienti
+            const coeff = coefficients[year] || { capitaria: 0, oraria: 0 };
+
+            // Calcola parziali
+            const arrCap = paz * coeff.capitaria;
+            const arrOra = ore * coeff.oraria;
+            const rowTot = arrCap + arrOra;
+
+            // Aggiorna UI riga
+            document.getElementById(`res_cap_${year}`).innerText = formatCurrency(arrCap);
+            document.getElementById(`res_ora_${year}`).innerText = formatCurrency(arrOra);
+            document.getElementById(`res_tot_${year}`).innerText = formatCurrency(rowTot);
+
+            // Somma ai totali
+            grandTotalCap += arrCap;
+            grandTotalOra += arrOra;
+            grandTotal += rowTot;
+        });
+
+        // Aggiorna UI totali
+        document.getElementById('totalCapitaria').innerText = formatCurrency(grandTotalCap);
+        document.getElementById('totalOraria').innerText = formatCurrency(grandTotalOra);
+        document.getElementById('grandTotal').innerText = formatCurrency(grandTotal);
+    }
+
+    // Formattazione Euro
+    function formatCurrency(num) {
+        return num.toLocaleString('it-IT', { style: 'currency', currency: 'EUR' });
+    }
+
+    // Avvia
+    initTable();
+</script>
+
+</body>
+</html>
