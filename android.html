@@ -19,21 +19,58 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES --- */
+        /* --- CSS VARIABLES & THEMING --- */
         :root {
+            /* Light Mode Defaults */
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-header: rgba(255, 255, 255, 0.95);
+            --bg-input: #ffffff;
+            --border-color: #e2e8f0;
+            
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --text-on-primary: #ffffff;
+            
             --primary: #0066cc;
             --primary-dark: #004c99;
-            --primary-light: #eff6ff;
+            --primary-light: #eff6ff; /* Background for icons */
+            
             --accent: #10b981;
             --danger: #ef4444;
             --danger-bg: #fef2f2;
-            --bg-page: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --warning-bg: #fffbeb;
+            --warning-border: #fcd34d;
+            --warning-text: #92400e;
+
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
             --radius: 16px;
             --header-height: 60px;
+        }
+
+        /* Dark Mode Overrides */
+        [data-theme="dark"] {
+            --bg-body: #0f172a;
+            --bg-card: #1e293b;
+            --bg-header: rgba(30, 41, 59, 0.95);
+            --bg-input: #334155;
+            --border-color: #334155;
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-on-primary: #ffffff;
+            
+            --primary: #60a5fa; /* Lighter blue for contrast */
+            --primary-dark: #3b82f6;
+            --primary-light: #334155; /* Darker bg for icons */
+            
+            --danger: #f87171;
+            --danger-bg: #450a0a;
+            --warning-bg: #422006;
+            --warning-border: #78350f;
+            --warning-text: #fcd34d;
+
+            --shadow: none; /* Shadows look bad in dark mode, we use borders */
         }
 
         /* --- RESET & BASE --- */
@@ -41,22 +78,24 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-page);
+            background-color: var(--bg-body);
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            padding-bottom: 80px; /* Space for scrolling */
+            padding-bottom: 80px;
             padding-top: var(--header-height);
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         a { text-decoration: none; color: inherit; }
-        button { border: none; background: none; font-family: inherit; cursor: pointer; }
+        button { border: none; background: none; font-family: inherit; cursor: pointer; color: inherit; }
 
-        /* --- HEADER (Sticky) --- */
+        /* --- HEADER --- */
         header {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
+            background: var(--bg-header);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             position: fixed;
             top: 0;
             left: 0;
@@ -64,30 +103,44 @@
             height: var(--header-height);
             z-index: 100;
             padding: 0 20px;
-            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: background 0.3s ease;
         }
 
         .brand h1 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
         .brand p { margin: 0; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .lang-switch { display: flex; gap: 4px; background: var(--bg-page); padding: 3px; border-radius: 20px; border: 1px solid #e2e8f0; }
+        .header-actions { display: flex; align-items: center; gap: 10px; }
+
+        .theme-toggle {
+            width: 32px; height: 32px;
+            display: flex; align-items: center; justify-content: center;
+            background: var(--bg-body);
+            border-radius: 50%;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            font-size: 1rem;
+        }
+
+        .lang-switch { display: flex; gap: 4px; background: var(--bg-body); padding: 3px; border-radius: 20px; border: 1px solid var(--border-color); }
         .lang-btn { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); transition: 0.2s; }
-        .lang-btn.active { background: var(--primary); color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .lang-btn.active { background: var(--primary); color: var(--text-on-primary); }
 
         /* --- CONTAINER --- */
         .container { max-width: 600px; margin: 0 auto; padding: 15px; }
 
-        /* --- CARDS & UI --- */
+        /* --- CARDS --- */
         .card {
             background: var(--bg-card);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             padding: 20px;
             margin-bottom: 20px;
-            border: 1px solid rgba(0,0,0,0.02);
+            border: 1px solid var(--border-color);
+            transition: background 0.3s ease, border 0.3s ease;
         }
 
         .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
@@ -104,27 +157,24 @@
             align-items: flex-start;
             line-height: 1.4;
         }
-        .alert-info { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
-        .alert-danger { background: var(--danger-bg); color: #991b1b; border: 1px solid #fecaca; }
+        .alert-info { background: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
+        .alert-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); }
 
-        /* --- HERO BUTTON (Millebook) --- */
+        /* --- HERO BTN --- */
         .hero-btn {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
+            background: linear-gradient(135deg, #0066cc 0%, #004c99 100%); /* Always Blue gradient */
+            color: white !important;
             padding: 25px;
             border-radius: var(--radius);
             text-align: center;
             box-shadow: 0 10px 20px -5px rgba(0, 102, 204, 0.3);
             margin-bottom: 20px;
             width: 100%;
-            position: relative;
-            overflow: hidden;
         }
-        .hero-btn:active { transform: scale(0.98); }
         .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.95; }
         .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; }
         .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
@@ -133,8 +183,8 @@
         .grid-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         
         .action-btn {
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
             padding: 18px 10px;
             border-radius: var(--radius);
             text-align: center;
@@ -144,33 +194,32 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
-            color: var(--primary-dark);
+            color: var(--text-main);
             height: 100%;
+            transition: transform 0.1s, background 0.2s;
         }
         .action-btn:active { background: var(--primary-light); transform: scale(0.98); }
         .action-btn i { font-size: 1.4rem; color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 50%; }
         .action-btn span { font-weight: 700; font-size: 0.9rem; line-height: 1.2; }
         .action-btn small { font-size: 0.7rem; color: var(--text-muted); line-height: 1.2; }
 
-        /* --- BOOKING SECTION & CALENDAR --- */
-        .booking-choices { display: flex; flex-direction: column; gap: 10px; }
+        /* --- BOOKING & CALENDAR --- */
         .choice-btn {
             display: flex; align-items: center; gap: 15px;
             padding: 15px; border: 2px solid var(--primary);
-            border-radius: 12px; background: white; color: var(--primary);
+            border-radius: 12px; background: var(--bg-card); color: var(--primary);
             font-weight: 600; text-align: left;
+            margin-bottom: 10px;
         }
-        .choice-btn i { font-size: 1.5rem; }
-        
-        /* IFRAME CONTAINER - Critical for Mobile */
+        .choice-btn div div { color: var(--text-main); } 
+
         .calendar-container {
-            display: none; /* Hidden by default */
-            background: white;
+            display: none;
+            background: #ffffff; /* FORCE WHITE background for calendar even in dark mode */
             border-radius: 12px;
             overflow: hidden;
             margin-top: 15px;
             position: relative;
-            /* Extra height to prevent scroll-in-scroll on Android */
             min-height: 1400px; 
             box-shadow: var(--shadow);
         }
@@ -178,17 +227,16 @@
         
         .back-btn {
             display: inline-flex; align-items: center; gap: 5px;
-            background: var(--text-muted); color: white;
+            background: var(--text-muted); color: var(--bg-card);
             padding: 8px 15px; border-radius: 20px; font-size: 0.85rem;
             margin-bottom: 10px;
         }
 
-        /* --- CONTACT LIST --- */
-        .link-list { display: flex; flex-direction: column; gap: 0; }
+        /* --- LISTS --- */
         .link-item {
             display: flex; align-items: center; justify-content: space-between;
             padding: 16px 0;
-            border-bottom: 1px solid #f1f5f9;
+            border-bottom: 1px solid var(--border-color);
             color: var(--text-main);
         }
         .link-item:last-child { border-bottom: none; }
@@ -197,27 +245,28 @@
         .link-item .label { display: block; font-size: 0.75rem; color: var(--text-muted); }
         .link-item .val { display: block; font-weight: 600; font-size: 0.95rem; }
 
-        /* --- HOURS TABLE --- */
-        .hours-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.9rem; }
+        /* --- HOURS --- */
+        .hours-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border-color); font-size: 0.9rem; color: var(--text-main); }
         .hours-row:last-child { border-bottom: none; }
-        .hours-row strong { color: var(--text-main); }
         .closed { color: var(--danger); font-weight: 600; }
 
         /* --- MODALS --- */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
-            z-index: 2000; display: none; /* flex when active */
+            background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
+            z-index: 2000; display: none;
             align-items: center; justify-content: center;
             padding: 20px;
         }
         
         .modal-content {
-            background: white; width: 100%; max-width: 400px;
+            background: var(--bg-card); width: 100%; max-width: 400px;
             border-radius: 20px; padding: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
             animation: slideUp 0.3s ease-out;
             max-height: 90vh; overflow-y: auto; text-align: center;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
         }
 
         @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -226,13 +275,21 @@
             background: var(--primary); color: white;
             padding: 12px 30px; border-radius: 50px;
             font-weight: 600; width: 100%; font-size: 1rem;
-            margin-top: 15px; box-shadow: 0 4px 10px rgba(0,102,204,0.3);
+            margin-top: 15px;
         }
 
         /* --- FOOTER --- */
         footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); }
         .footer-links a { margin: 0 5px; text-decoration: underline; }
-        .billing-tiny { font-size: 0.7rem; color: #94a3b8; margin-top: 10px; }
+
+        /* --- GUARDIA MEDICA --- */
+        .guard-card { border-color: var(--border-color) !important; }
+        .guard-btn {
+            display:block; background: var(--bg-body); 
+            padding:15px; border-radius:12px; text-align:center; 
+            font-weight:700; color:var(--text-main);
+            border: 1px solid var(--border-color);
+        }
 
     </style>
 </head>
@@ -242,10 +299,10 @@
         <div class="modal-content">
             <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
             <h3 style="margin: 0 0 10px 0;">Info Rappresentanti</h3>
-            <p style="font-size: 0.9rem; color: var(--text-main); text-align: justify;">
+            <p style="font-size: 0.9rem; text-align: justify; color: var(--text-main);">
                 Il Dott. Savianu <strong>non riceve Informatori Scientifici su appuntamento</strong>.
                 <br><br>
-                I canali di contatto (telefono, email, Millebook) sono riservati esclusivamente ai pazienti. Eventuali appuntamenti prenotati verranno cancellati.
+                I canali di contatto sono riservati esclusivamente ai pazienti. Eventuali appuntamenti prenotati verranno cancellati.
             </p>
             <button class="btn-accept" style="background: var(--danger);" onclick="closeModal('reps-modal')">Ho capito</button>
         </div>
@@ -262,11 +319,11 @@
                 <small><strong>Urgenze:</strong> Chiama il 112.</small>
             </div>
 
-            <p style="font-size: 0.9rem;">Per migliorare il servizio utilizziamo strumenti digitali:</p>
+            <p style="font-size: 0.9rem; color: var(--text-main);">Per migliorare il servizio utilizziamo strumenti digitali:</p>
             <ul style="font-size: 0.9rem; color: var(--text-main); padding-left: 20px; margin-bottom: 20px;">
-                <li style="margin-bottom: 8px;"><strong>MilleBook:</strong> Per ricette ripetitive, referti e messaggi brevi.</li>
+                <li style="margin-bottom: 8px;"><strong>MilleBook:</strong> Per ricette, referti e messaggi brevi.</li>
                 <li style="margin-bottom: 8px;"><strong>Sito Web:</strong> Per prenotare appuntamenti.</li>
-                <li><strong>Telefono:</strong> Per necessità cliniche reali e pazienti non tecnologici.</li>
+                <li><strong>Telefono:</strong> Per necessità cliniche reali.</li>
             </ul>
 
             <button class="btn-accept" onclick="closeModal('welcome-modal')">Ho letto e accetto</button>
@@ -278,9 +335,16 @@
             <h1>Dott. Emanuel Savianu</h1>
             <p data-i18n="subtitle">Medico di Medicina Generale</p>
         </div>
-        <div class="lang-switch">
-            <button class="lang-btn active" onclick="setLang('it')" id="btn-it">IT</button>
-            <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+        
+        <div class="header-actions">
+            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+
+            <div class="lang-switch">
+                <button class="lang-btn active" onclick="setLang('it')" id="btn-it">IT</button>
+                <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+            </div>
         </div>
     </header>
 
@@ -307,7 +371,7 @@
         </div>
 
         <div class="alert alert-info">
-            <i class="fas fa-info-circle" style="margin-top:2px;"></i>
+            <i class="fas fa-info-circle" style="margin-top:2px; flex-shrink:0;"></i>
             <span data-i18n="new_patient"><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". L'iscrizione a Millebook verrà fatta in studio.</span>
         </div>
 
@@ -344,7 +408,7 @@
                     <i class="fas fa-arrow-left"></i> <span data-i18n="back">Indietro</span>
                 </button>
                 <div class="calendar-container" id="cal-container">
-                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:0;">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:0; color:#333;">
                         <i class="fas fa-spinner fa-spin"></i> Loading...
                     </div>
                     <iframe id="cal-iframe" src="" scrolling="no"></iframe>
@@ -365,7 +429,7 @@
                         <span class="label" data-i18n="secretary">Segreteria</span>
                         <span class="val">0575 171 3428</span>
                     </div>
-                    <i class="fas fa-chevron-right" style="color:#ccc; font-size: 0.8rem;"></i>
+                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
                 </a>
 
                 <a href="https://maps.google.com/?q=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="link-item">
@@ -375,7 +439,7 @@
                         <span class="val">Via Ubaldo Pasqui 38</span>
                         <small style="font-size:0.75rem; color:var(--text-muted);">Arezzo - 1° Piano</small>
                     </div>
-                    <i class="fas fa-chevron-right" style="color:#ccc; font-size: 0.8rem;"></i>
+                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
                 </a>
 
                 <a href="mailto:segreteria@savianu.it" class="link-item">
@@ -384,7 +448,7 @@
                         <span class="label">Email</span>
                         <span class="val" style="font-size: 0.9rem;">segreteria@savianu.it</span>
                     </div>
-                    <i class="fas fa-chevron-right" style="color:#ccc; font-size: 0.8rem;"></i>
+                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
                 </a>
             </div>
         </div>
@@ -394,25 +458,24 @@
                 <i class="far fa-clock"></i>
                 <span data-i18n="hours">Orari Ambulatorio</span>
             </div>
-            <div id="hours-table">
-                </div>
+            <div id="hours-table"></div>
         </div>
 
-        <div class="card" style="border-color: #cbd5e1;">
+        <div class="card guard-card">
             <div class="card-title">
                 <i class="fas fa-moon" style="color: var(--text-muted);"></i>
                 <span data-i18n="guard">Continuità Assistenziale</span>
             </div>
             <p style="font-size: 0.85rem; margin-top:0; color: var(--text-muted);" data-i18n="guard_desc">Notte, Festivi e Prefestivi</p>
-            <a href="tel:116117" style="display:block; background:#f1f5f9; padding:15px; border-radius:12px; text-align:center; font-weight:700; color:var(--text-main);">
+            <a href="tel:116117" class="guard-btn">
                 <i class="fas fa-phone"></i> 116 117
             </a>
         </div>
 
-        <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
-            <p style="font-size: 0.8rem; margin-bottom: 5px;"><strong>Dott. Emanuel Savianu</strong></p>
-            <p class="billing-tiny">
-                P.IVA 02348320512 | SDI JKKZDGR | Ord. Medici AR n. 3499<br>
+        <div style="text-align: center; margin-top: 30px; margin-bottom: 20px; color: var(--text-muted);">
+            <p style="font-size: 0.8rem; margin-bottom: 5px; color: var(--text-main);"><strong>Dott. Emanuel Savianu</strong></p>
+            <p style="font-size: 0.7rem;">
+                P.IVA 02348320512 | SDI JKKZDGR<br>
                 PEC: emanuel.savianu@pec.omceoar.it
             </p>
         </div>
@@ -425,11 +488,47 @@
             <a href="#" onclick="document.getElementById('welcome-modal').style.display='flex'; return false;">Info Legali</a>
             <a href="#" onclick="document.getElementById('reps-modal').style.display='flex'; return false;">Reps</a>
         </div>
-        <p style="margin-top:10px;">&copy; <span id="year">2026</span></p>
+        <p style="margin-top:10px;">© <span id="year">2026</span></p>
     </footer>
 
     <script>
-        // --- CONFIG & DATA ---
+        // --- THEME LOGIC ---
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const icon = document.getElementById('theme-icon');
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+
+            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                icon.className = 'fas fa-sun';
+                metaThemeColor.setAttribute('content', '#0f172a');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                icon.className = 'fas fa-moon';
+                metaThemeColor.setAttribute('content', '#ffffff');
+            }
+        }
+
+        function toggleTheme() {
+            const current = document.documentElement.getAttribute('data-theme');
+            const icon = document.getElementById('theme-icon');
+            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+            
+            if (current === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                icon.className = 'fas fa-moon';
+                metaThemeColor.setAttribute('content', '#ffffff');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                icon.className = 'fas fa-sun';
+                metaThemeColor.setAttribute('content', '#0f172a');
+            }
+        }
+
+        // --- I18N DATA ---
         document.getElementById('year').textContent = new Date().getFullYear();
         
         const i18n = {
@@ -490,14 +589,13 @@
             { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
         ];
 
-        // --- CALENDAR LINKS (From Main Site) ---
+        // --- CALENDAR LINKS ---
         const calLinks = {
             'brief': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
             'first': 'https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true&hl=it'
         };
 
         // --- FUNCTIONS ---
-
         function renderHours() {
             const container = document.getElementById('hours-table');
             let html = '';
@@ -512,20 +610,17 @@
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
             
-            // Update text
             const t = i18n[lang];
             for (const key in t) {
                 const el = document.querySelector(`[data-i18n="${key}"]`);
                 if(el) el.innerHTML = t[key];
             }
-            
-            // Update calendar lang param if needed (advanced)
             localStorage.setItem('lang', lang);
         }
 
         function scrollToBooking() {
             const el = document.getElementById('booking-section');
-            const y = el.getBoundingClientRect().top + window.scrollY - 70; // offset for sticky header
+            const y = el.getBoundingClientRect().top + window.scrollY - 70;
             window.scrollTo({top: y, behavior: 'smooth'});
         }
 
@@ -538,10 +633,8 @@
             ui.style.display = 'none';
             wrapper.style.display = 'block';
             container.style.display = 'block';
-            
             iframe.src = calLinks[type];
             
-            // Wait a moment then scroll to top of calendar
             setTimeout(() => {
                const y = wrapper.getBoundingClientRect().top + window.scrollY - 70;
                window.scrollTo({top: y, behavior: 'smooth'});
@@ -563,16 +656,13 @@
         function checkModals() {
             const now = new Date().getTime();
             
-            // Check Welcome (Expires in 7 days)
             const welcomeSeen = localStorage.getItem('welcome-modal_seen_v2');
             if(!welcomeSeen || (now - welcomeSeen > 7 * 24 * 60 * 60 * 1000)) {
                 document.getElementById('welcome-modal').style.display = 'flex';
             }
 
-            // Check Reps (Only show if not clicked in 30 days)
             const repsSeen = localStorage.getItem('reps-modal_seen_v2');
             if(!repsSeen || (now - repsSeen > 30 * 24 * 60 * 60 * 1000)) {
-                 // Don't show immediately on top of welcome
                  setTimeout(() => {
                      if(document.getElementById('welcome-modal').style.display === 'none') {
                          document.getElementById('reps-modal').style.display = 'flex';
@@ -583,6 +673,7 @@
 
         // --- INIT ---
         window.addEventListener('DOMContentLoaded', () => {
+            initTheme();
             renderHours();
             checkModals();
             
