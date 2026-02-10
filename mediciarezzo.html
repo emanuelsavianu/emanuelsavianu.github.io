@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa Medici Arezzo - Assegnazione AAFFTT</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <style>
+        body { margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        #header {
+            background-color: #005f6b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 1000;
+            position: relative;
+        }
+        #map { height: 90vh; width: 100%; }
+        .info-box {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .info-box strong { color: #005f6b; }
+    </style>
+</head>
+<body>
+
+    <div id="header">
+        <h2>📍 Mappa Assegnazione Medici Arezzo (Nuove AFT 2026)</h2>
+        <small>Posizioni basate sugli Ambiti Territoriali del documento ufficiale (Indirizzi esatti non presenti nel PDF)</small>
+    </div>
+
+    <div id="map"></div>
+
+    <script>
+        // Inizializza la mappa centrata su Arezzo
+        var map = L.map('map').setView([43.4631, 11.8781], 11);
+
+        // Aggiungi il livello visivo (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // --- DATI ESTRATTI DAL PDF (PAGINE 5 e 6 - ZONA ARETINA) ---
+        // Nota: Le coordinate sono approssimate al centro dell'area di competenza indicata nel PDF
+        // Poiché il PDF non ha vie, ho aggiunto un piccolo offset casuale ("sparpagliamento") per non sovrapporre i punti.
+
+        const medici = [
+            [span_1](start_span)// AFT AR 1 & 2 - AREZZO CENTRO (Ovest/Nord)[span_1](end_span)
+            { nome: "APPIANO GIANNICOLA", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "BIVIGNANELLI ELENA", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "BRANDI LAURA", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "FRUSCOLONI GIORGIO", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "GIABBANI LAURA", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "GUERRINI CATIA", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "LODOVICHI GIULIA", tipo: "MMG-APS", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.465, lng: 11.870 },
+            { nome: "CHIOCCIOLI LAURA", tipo: "MMG-RUOLO UNICO", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.470, lng: 11.880 },
+            { nome: "MENCHETTI DONATELLA", tipo: "MMG-RUOLO UNICO", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.470, lng: 11.880 },
+            { nome: "MORI GIULIA", tipo: "MMG-RUOLO UNICO", zona: "AFT AR 1-2 Arezzo Centro", lat: 43.470, lng: 11.880 },
+
+            [span_2](start_span)// AFT AR 3 - AREZZO CENTRO SUD[span_2](end_span)
+            { nome: "MAURIZI GIORGIA", tipo: "MMG-APS", zona: "AFT AR 3 Arezzo Centro Sud", lat: 43.450, lng: 11.885 },
+            { nome: "MOBILIA GLORIA", tipo: "MMG-APS", zona: "AFT AR 3 Arezzo Centro Sud", lat: 43.450, lng: 11.885 },
+            { nome: "MORI SUSANNA", tipo: "MMG-APS", zona: "AFT AR 3 Arezzo Centro Sud", lat: 43.450, lng: 11.885 },
+            { nome: "NARDINI CARLO", tipo: "MMG-APS", zona: "AFT AR 3 Arezzo Centro Sud", lat: 43.450, lng: 11.885 },
+            { nome: "ROSSI TIZIANA", tipo: "MMG-APS", zona: "AFT AR 3 Arezzo Centro Sud", lat: 43.450, lng: 11.885 },
+            { nome: "SACCHI MAURO", tipo: "MMG-APS", zona: "AFT AR 3 Arezzo Centro Sud", lat: 43.450, lng: 11.885 },
+
+            [span_3](start_span)// MMG SUBBIANO, CAPOLONA, CASTIGLION FIBOCCHI[span_3](end_span)
+            { nome: "DRINGOLI SARA", tipo: "MMG-APS", zona: "Subbiano / Capolona", lat: 43.5767, lng: 11.8722 },
+            { nome: "GENOVESI GINEVRA", tipo: "MMG-APS", zona: "Subbiano / Capolona", lat: 43.5767, lng: 11.8722 },
+            { nome: "LUCHERINI ELISA", tipo: "MMG-APS", zona: "Castiglion Fibocchi", lat: 43.5283, lng: 11.7630 },
+            { nome: "NOCCIOLINI FABRIZIO", tipo: "MMG-APS", zona: "Subbiano", lat: 43.5767, lng: 11.8722 },
+            
+            [span_4](start_span)// AFT AR 5 - CIVITELLA, MONTE SAN SAVINO[span_4](end_span)
+            { nome: "NASSINI EDOARDO", tipo: "MMG-APS", zona: "Civitella / M.S. Savino", lat: 43.3333, lng: 11.7250 },
+            { nome: "PAPINI LIANA LIA", tipo: "MMG-APS", zona: "Civitella / M.S. Savino", lat: 43.3333, lng: 11.7250 },
+            { nome: "POZZESI VALENTINA", tipo: "MMG-APS", zona: "Civitella / M.S. Savino", lat: 43.3333, lng: 11.7250 },
+            { nome: "REDI SILVIA", tipo: "MMG-APS", zona: "Civitella / M.S. Savino", lat: 43.3333, lng: 11.7250 },
+            { nome: "VANNI PAOLO", tipo: "MMG-APS", zona: "Civitella / M.S. Savino", lat: 43.3333, lng: 11.7250 },
+
+            [span_5](start_span)// AFT AR 12 - CASTIGLION F.NO, FOIANO, LUCIGNANO[span_5](end_span)
+            { nome: "AGNELLI FABRIZIO", tipo: "MMG-APS", zona: "Castiglion Fiorentino/Foiano", lat: 43.3433, lng: 11.9288 },
+            { nome: "BANELLI GIAN LUCA", tipo: "MMG-APS", zona: "Castiglion Fiorentino/Foiano", lat: 43.3433, lng: 11.9288 },
+            { nome: "GRAZI MATTEO", tipo: "MMG-APS", zona: "Castiglion Fiorentino/Foiano", lat: 43.3433, lng: 11.9288 },
+            { nome: "MIGLIACCI GIULIA", tipo: "MMG-APS", zona: "Castiglion Fiorentino/Foiano", lat: 43.3433, lng: 11.9288 }
+        ];
+
+        // Funzione per generare un offset casuale (per non sovrapporre i punti nella stessa città)
+        function getOffset() {
+            return (Math.random() - 0.5) * 0.015; // Sposta leggermente di circa 500-800 metri
+        }
+
+        // Icona personalizzata per il medico
+        var doctorIcon = L.icon({
+            iconUrl: 'https://cdn-icons-png.flaticon.com/512/3063/3063176.png', // Icona medica generica
+            iconSize: [30, 30],
+            iconAnchor: [15, 30],
+            popupAnchor: [0, -30]
+        });
+
+        // Ciclo per aggiungere i marker alla mappa
+        medici.forEach(function(medico) {
+            // Applica l'offset alle coordinate base
+            var finalLat = medico.lat + getOffset();
+            var finalLng = medico.lng + getOffset();
+
+            var marker = L.marker([finalLat, finalLng], {icon: doctorIcon}).addTo(map);
+
+            var popupContent = `
+                <div class="info-box">
+                    <strong>Dr./Dr.ssa ${medico.nome}</strong><br>
+                    <hr style="margin: 5px 0; border: 0; border-top: 1px solid #ccc;">
+                    <em>${medico.tipo}</em><br>
+                    📍 ${medico.zona}
+                </div>
+            `;
+
+            marker.bindPopup(popupContent);
+        });
+
+    </script>
+</body>
+</html>
