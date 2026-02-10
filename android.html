@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Dott. Emanuel Savianu | App</title>
-    
     <meta name="theme-color" content="#ffffff">
+    
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Prenotazioni e Ricette.">
+    <meta name="application-name" content="Dott. Savianu">
+    
+    <title>Dott. Emanuel Savianu | App</title>
+    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Prenotazioni, Millebook e Ricette.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,17 +21,19 @@
     <style>
         /* --- CSS VARIABLES --- */
         :root {
-            --primary: #0066cc; /* Medical Blue */
+            --primary: #0066cc;
             --primary-dark: #004c99;
             --primary-light: #eff6ff;
-            --accent: #10b981; /* Success Green */
+            --accent: #10b981;
             --danger: #ef4444;
+            --danger-bg: #fef2f2;
             --bg-page: #f8fafc;
             --bg-card: #ffffff;
             --text-main: #1e293b;
             --text-muted: #64748b;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             --radius: 16px;
+            --header-height: 60px;
         }
 
         /* --- RESET & BASE --- */
@@ -40,39 +45,42 @@
             color: var(--text-main);
             margin: 0;
             padding: 0;
-            line-height: 1.5;
+            padding-bottom: 80px; /* Space for scrolling */
+            padding-top: var(--header-height);
             overflow-x: hidden;
-            padding-bottom: 40px; /* Safe area for bottom */
         }
 
         a { text-decoration: none; color: inherit; }
         button { border: none; background: none; font-family: inherit; cursor: pointer; }
 
-        /* --- HEADER --- */
+        /* --- HEADER (Sticky) --- */
         header {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 50;
-            padding: 15px 20px;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
+            left: 0;
+            right: 0;
+            height: var(--header-height);
+            z-index: 100;
+            padding: 0 20px;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .brand h1 { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
-        .brand p { margin: 0; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .brand h1 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .brand p { margin: 0; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
 
-        .lang-switch { display: flex; gap: 5px; background: var(--primary-light); padding: 4px; border-radius: 20px; }
-        .lang-btn { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 600; color: var(--primary); transition: 0.2s; }
-        .lang-btn.active { background: white; color: var(--primary-dark); box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .lang-switch { display: flex; gap: 4px; background: var(--bg-page); padding: 3px; border-radius: 20px; border: 1px solid #e2e8f0; }
+        .lang-btn { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); transition: 0.2s; }
+        .lang-btn.active { background: var(--primary); color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 
         /* --- CONTAINER --- */
-        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
 
-        /* --- CARDS --- */
+        /* --- CARDS & UI --- */
         .card {
             background: var(--bg-card);
             border-radius: var(--radius);
@@ -80,33 +88,26 @@
             padding: 20px;
             margin-bottom: 20px;
             border: 1px solid rgba(0,0,0,0.02);
-            transition: transform 0.2s;
         }
-        
-        .card:active { transform: scale(0.99); }
 
-        .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 1.1rem; font-weight: 700; }
+        .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
         .card-title i { color: var(--primary); }
 
         /* --- ALERTS --- */
         .alert {
-            background: #fff4e5;
-            border-left: 4px solid #f97316;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 0.9rem;
-            margin-bottom: 20px;
-            color: #7c2d12;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            line-height: 1.4;
         }
-        .alert strong { font-weight: 700; }
+        .alert-info { background: #fffbeb; color: #92400e; border: 1px solid #fcd34d; }
+        .alert-danger { background: var(--danger-bg); color: #991b1b; border: 1px solid #fecaca; }
 
-        .alert-reps {
-            background: #fef2f2;
-            border-left: 4px solid var(--danger);
-            color: #991b1b;
-        }
-
-        /* --- MILLEBOOK HERO --- */
+        /* --- HERO BUTTON (Millebook) --- */
         .hero-btn {
             display: flex;
             flex-direction: column;
@@ -117,184 +118,273 @@
             padding: 25px;
             border-radius: var(--radius);
             text-align: center;
-            box-shadow: 0 10px 20px -5px rgba(0, 102, 204, 0.4);
-            margin-bottom: 25px;
+            box-shadow: 0 10px 20px -5px rgba(0, 102, 204, 0.3);
+            margin-bottom: 20px;
             width: 100%;
+            position: relative;
+            overflow: hidden;
         }
-        .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.9; }
-        .hero-btn h2 { margin: 0; font-size: 1.3rem; }
+        .hero-btn:active { transform: scale(0.98); }
+        .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.95; }
+        .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; }
         .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
 
-        /* --- GRID BUTTONS --- */
+        /* --- ACTION GRID --- */
         .grid-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         
         .action-btn {
             background: white;
-            border: 1px solid var(--primary-light);
-            padding: 20px 15px;
+            border: 1px solid #e2e8f0;
+            padding: 18px 10px;
             border-radius: var(--radius);
             text-align: center;
             box-shadow: var(--shadow);
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 8px;
             color: var(--primary-dark);
+            height: 100%;
         }
-        .action-btn i { font-size: 1.5rem; color: var(--primary); background: var(--primary-light); padding: 12px; border-radius: 50%; }
-        .action-btn span { font-weight: 600; font-size: 0.95rem; }
-        .action-btn small { font-size: 0.75rem; color: var(--text-muted); line-height: 1.2; }
+        .action-btn:active { background: var(--primary-light); transform: scale(0.98); }
+        .action-btn i { font-size: 1.4rem; color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 50%; }
+        .action-btn span { font-weight: 700; font-size: 0.9rem; line-height: 1.2; }
+        .action-btn small { font-size: 0.7rem; color: var(--text-muted); line-height: 1.2; }
 
-        /* --- LIST LINKS --- */
-        .link-list { display: flex; flex-direction: column; gap: 10px; }
-        .link-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px;
-            background: var(--bg-page);
-            border-radius: 12px;
-            font-weight: 500;
+        /* --- BOOKING SECTION & CALENDAR --- */
+        .booking-choices { display: flex; flex-direction: column; gap: 10px; }
+        .choice-btn {
+            display: flex; align-items: center; gap: 15px;
+            padding: 15px; border: 2px solid var(--primary);
+            border-radius: 12px; background: white; color: var(--primary);
+            font-weight: 600; text-align: left;
         }
-        .link-item i { margin-right: 10px; color: var(--text-muted); }
+        .choice-btn i { font-size: 1.5rem; }
+        
+        /* IFRAME CONTAINER - Critical for Mobile */
+        .calendar-container {
+            display: none; /* Hidden by default */
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 15px;
+            position: relative;
+            /* Extra height to prevent scroll-in-scroll on Android */
+            min-height: 1400px; 
+            box-shadow: var(--shadow);
+        }
+        .calendar-container iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; border: none; }
+        
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            background: var(--text-muted); color: white;
+            padding: 8px 15px; border-radius: 20px; font-size: 0.85rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- CONTACT LIST --- */
+        .link-list { display: flex; flex-direction: column; gap: 0; }
+        .link-item {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 16px 0;
+            border-bottom: 1px solid #f1f5f9;
+            color: var(--text-main);
+        }
+        .link-item:last-child { border-bottom: none; }
+        .link-item .icon { width: 36px; height: 36px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0; }
+        .link-item .content { flex-grow: 1; }
+        .link-item .label { display: block; font-size: 0.75rem; color: var(--text-muted); }
+        .link-item .val { display: block; font-weight: 600; font-size: 0.95rem; }
+
+        /* --- HOURS TABLE --- */
+        .hours-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed #e2e8f0; font-size: 0.9rem; }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row strong { color: var(--text-main); }
+        .closed { color: var(--danger); font-weight: 600; }
 
         /* --- MODALS --- */
-        .modal-backdrop {
+        .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(4px);
-            z-index: 1000;
-            display: none;
-            align-items: center;
-            justify-content: center;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+            z-index: 2000; display: none; /* flex when active */
+            align-items: center; justify-content: center;
             padding: 20px;
         }
+        
         .modal-content {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            max-width: 450px;
-            width: 100%;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            background: white; width: 100%; max-width: 400px;
+            border-radius: 20px; padding: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
             animation: slideUp 0.3s ease-out;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-        
-        .modal-footer { margin-top: 20px; text-align: center; }
-        
-        .btn-accept {
-            background: var(--primary);
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            width: 100%;
-            font-size: 1rem;
+            max-height: 90vh; overflow-y: auto; text-align: center;
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .btn-accept {
+            background: var(--primary); color: white;
+            padding: 12px 30px; border-radius: 50px;
+            font-weight: 600; width: 100%; font-size: 1rem;
+            margin-top: 15px; box-shadow: 0 4px 10px rgba(0,102,204,0.3);
         }
 
         /* --- FOOTER --- */
-        footer { text-align: center; padding: 20px; font-size: 0.8rem; color: var(--text-muted); }
+        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); }
+        .footer-links a { margin: 0 5px; text-decoration: underline; }
+        .billing-tiny { font-size: 0.7rem; color: #94a3b8; margin-top: 10px; }
 
     </style>
 </head>
 <body>
 
-    <div id="welcome-modal" class="modal-backdrop">
+    <div id="reps-modal" class="modal-overlay">
         <div class="modal-content">
-            <div style="text-align: center; margin-bottom: 20px;">
-                <img src="https://via.placeholder.com/80?text=Dr+S" alt="Logo" style="border-radius: 50%; width: 80px; height: 80px; margin-bottom: 10px;">
-                <h2 style="margin:0;">Benvenuto</h2>
+            <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
+            <h3 style="margin: 0 0 10px 0;">Info Rappresentanti</h3>
+            <p style="font-size: 0.9rem; color: var(--text-main); text-align: justify;">
+                Il Dott. Savianu <strong>non riceve Informatori Scientifici su appuntamento</strong>.
+                <br><br>
+                I canali di contatto (telefono, email, Millebook) sono riservati esclusivamente ai pazienti. Eventuali appuntamenti prenotati verranno cancellati.
+            </p>
+            <button class="btn-accept" style="background: var(--danger);" onclick="closeModal('reps-modal')">Ho capito</button>
+        </div>
+    </div>
+
+    <div id="welcome-modal" class="modal-overlay">
+        <div class="modal-content" style="text-align: left;">
+            <div style="text-align: center; margin-bottom: 15px;">
+                <h2 style="margin:0; color: var(--primary);">Benvenuto</h2>
             </div>
             
-            <div class="alert">
-                <i class="fas fa-info-circle"></i>
-                <strong>Per le Urgenze:</strong> chiamare il 112.
+            <div class="alert alert-danger" style="padding: 10px;">
+                <i class="fas fa-ambulance"></i>
+                <small><strong>Urgenze:</strong> Chiama il 112.</small>
             </div>
 
-            <p style="font-size: 0.95rem; color: var(--text-main);">
-                Per migliorare il servizio, lo studio utilizza strumenti digitali:
-            </p>
-            <ul style="padding-left: 20px; font-size: 0.9rem; color: var(--text-muted); space-y: 10px;">
-                <li><strong>MilleBook:</strong> Per ricette ripetitive e fascicolo.</li>
-                <li><strong>Sito Web:</strong> Per prenotazioni appuntamenti.</li>
-                <li><strong>Telefono:</strong> Solo per necessità cliniche reali.</li>
+            <p style="font-size: 0.9rem;">Per migliorare il servizio utilizziamo strumenti digitali:</p>
+            <ul style="font-size: 0.9rem; color: var(--text-main); padding-left: 20px; margin-bottom: 20px;">
+                <li style="margin-bottom: 8px;"><strong>MilleBook:</strong> Per ricette ripetitive, referti e messaggi brevi.</li>
+                <li style="margin-bottom: 8px;"><strong>Sito Web:</strong> Per prenotare appuntamenti.</li>
+                <li><strong>Telefono:</strong> Per necessità cliniche reali e pazienti non tecnologici.</li>
             </ul>
 
-            <div class="modal-footer">
-                <button class="btn-accept" onclick="closeModal('welcome-modal')">Ho capito</button>
-            </div>
+            <button class="btn-accept" onclick="closeModal('welcome-modal')">Ho letto e accetto</button>
         </div>
     </div>
 
     <header>
         <div class="brand">
             <h1>Dott. Emanuel Savianu</h1>
-            <p>Medico di Medicina Generale</p>
+            <p data-i18n="subtitle">Medico di Medicina Generale</p>
         </div>
         <div class="lang-switch">
-            <button class="lang-btn active" onclick="switchLang('it')">IT</button>
-            <button class="lang-btn" onclick="switchLang('en')">EN</button>
+            <button class="lang-btn active" onclick="setLang('it')" id="btn-it">IT</button>
+            <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
         </div>
     </header>
 
     <div class="container">
 
-        <div id="reps-banner" class="alert alert-reps" style="display:flex; justify-content:space-between; align-items:start;">
-            <div>
-                <strong>Info Rappresentanti:</strong>
-                <span style="display:block; font-size: 0.85rem; margin-top: 5px;">
-                    Il Dott. Savianu non riceve Informatori Scientifici su appuntamento. Si prega di non utilizzare i canali pazienti.
-                </span>
-            </div>
-            <button onclick="closeModal('reps-banner')" style="color: var(--danger); padding: 0 5px;"><i class="fas fa-times"></i></button>
-        </div>
-
-        <a href="https://millebook.it" target="_blank" class="hero-btn">
-            <i class="fas fa-notes-medical"></i>
-            <h2>Accedi a MilleBook</h2>
-            <p>Ricette, Appuntamenti e Fascicolo</p>
+        <a href="https://www.millebook.it/#/login" target="_blank" class="hero-btn">
+            <i class="fas fa-laptop-medical"></i>
+            <h2 data-i18n="millebook">Accedi a MilleBook</h2>
+            <p data-i18n="millebook_sub">Ricette, Referti e Fascicolo</p>
         </a>
 
         <div class="grid-buttons">
-            <a href="https://www.miodottore.it" target="_blank" class="action-btn">
+            <button onclick="scrollToBooking()" class="action-btn">
                 <i class="far fa-calendar-check"></i>
-                <span>Prenota Visita</span>
-                <small>Appuntamenti Online</small>
-            </a>
+                <span data-i18n="book">Prenota Visita</span>
+                <small data-i18n="book_sub">Appuntamenti Online</small>
+            </button>
 
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform" target="_blank" class="action-btn">
                 <i class="fas fa-pills"></i>
-                <span>Modulo Farmaci</span>
-                <small>Se Millebook non va</small>
+                <span data-i18n="drugs">Modulo Farmaci</span>
+                <small data-i18n="drugs_sub">Se Millebook non va</small>
             </a>
+        </div>
+
+        <div class="alert alert-info">
+            <i class="fas fa-info-circle" style="margin-top:2px;"></i>
+            <span data-i18n="new_patient"><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". L'iscrizione a Millebook verrà fatta in studio.</span>
+        </div>
+
+        <div class="card" id="booking-section">
+            <div class="card-title">
+                <i class="far fa-calendar-alt"></i>
+                <span data-i18n="booking_title">Prenotazione Online</span>
+            </div>
+
+            <div style="font-size: 0.8rem; color: var(--danger); margin-bottom: 15px; font-weight: 600;">
+                <i class="fas fa-ban"></i> <span data-i18n="no_reps">No Informatori Scientifici</span>
+            </div>
+
+            <div id="booking-ui" class="booking-choices">
+                <button class="choice-btn" onclick="loadCalendar('brief')">
+                    <i class="fas fa-stopwatch"></i>
+                    <div>
+                        <div data-i18n="visit_brief">Visita Breve</div>
+                        <small style="font-weight:400; color:var(--text-muted);" data-i18n="visit_brief_desc">Sintomi recenti (10 min)</small>
+                    </div>
+                </button>
+                
+                <button class="choice-btn" onclick="loadCalendar('first')">
+                    <i class="fas fa-user-plus"></i>
+                    <div>
+                        <div data-i18n="visit_first">Prima Visita</div>
+                        <small style="font-weight:400; color:var(--text-muted);" data-i18n="visit_first_desc">Nuovi pazienti (20 min)</small>
+                    </div>
+                </button>
+            </div>
+
+            <div id="calendar-wrapper" style="display: none;">
+                <button onclick="resetCalendar()" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> <span data-i18n="back">Indietro</span>
+                </button>
+                <div class="calendar-container" id="cal-container">
+                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:0;">
+                        <i class="fas fa-spinner fa-spin"></i> Loading...
+                    </div>
+                    <iframe id="cal-iframe" src="" scrolling="no"></iframe>
+                </div>
+            </div>
         </div>
 
         <div class="card">
             <div class="card-title">
                 <i class="fas fa-clinic-medical"></i>
-                <span>Contatti Studio</span>
+                <span data-i18n="contacts">Contatti Studio</span>
             </div>
             
             <div class="link-list">
-                <a href="https://www.google.com/maps/search/?api=1&query=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="link-item">
-                    <span><i class="fas fa-map-marker-alt"></i> Via Ubaldo Pasqui 38, Arezzo</span>
-                    <i class="fas fa-chevron-right"></i>
+                <a href="tel:05751713428" class="link-item">
+                    <div class="icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="content">
+                        <span class="label" data-i18n="secretary">Segreteria</span>
+                        <span class="val">0575 171 3428</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:#ccc; font-size: 0.8rem;"></i>
                 </a>
 
-                <a href="tel:05751713428" class="link-item">
-                    <span><i class="fas fa-phone-alt"></i> 0575 171 3428</span>
-                    <i class="fas fa-phone"></i>
+                <a href="https://maps.google.com/?q=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="link-item">
+                    <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="content">
+                        <span class="label" data-i18n="address">Indirizzo</span>
+                        <span class="val">Via Ubaldo Pasqui 38</span>
+                        <small style="font-size:0.75rem; color:var(--text-muted);">Arezzo - 1° Piano</small>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:#ccc; font-size: 0.8rem;"></i>
                 </a>
 
                 <a href="mailto:segreteria@savianu.it" class="link-item">
-                    <span><i class="fas fa-envelope"></i> segreteria@savianu.it</span>
-                    <i class="fas fa-chevron-right"></i>
+                    <div class="icon"><i class="far fa-envelope"></i></div>
+                    <div class="content">
+                        <span class="label">Email</span>
+                        <span class="val" style="font-size: 0.9rem;">segreteria@savianu.it</span>
+                    </div>
+                    <i class="fas fa-chevron-right" style="color:#ccc; font-size: 0.8rem;"></i>
                 </a>
             </div>
         </div>
@@ -302,94 +392,204 @@
         <div class="card">
             <div class="card-title">
                 <i class="far fa-clock"></i>
-                <span>Orari di Apertura</span>
+                <span data-i18n="hours">Orari Ambulatorio</span>
             </div>
-            <div style="font-size: 0.9rem; color: var(--text-main);">
-                <div style="display:flex; justify-content:space-between; padding: 5px 0; border-bottom: 1px dashed #eee;">
-                    <span>Lun, Mer, Ven</span>
-                    <strong>17:00 - 18:30</strong>
+            <div id="hours-table">
                 </div>
-                <div style="display:flex; justify-content:space-between; padding: 5px 0;">
-                    <span>Mar, Gio</span>
-                    <strong>11:30 - 13:00</strong>
-                </div>
+        </div>
+
+        <div class="card" style="border-color: #cbd5e1;">
+            <div class="card-title">
+                <i class="fas fa-moon" style="color: var(--text-muted);"></i>
+                <span data-i18n="guard">Continuità Assistenziale</span>
             </div>
+            <p style="font-size: 0.85rem; margin-top:0; color: var(--text-muted);" data-i18n="guard_desc">Notte, Festivi e Prefestivi</p>
+            <a href="tel:116117" style="display:block; background:#f1f5f9; padding:15px; border-radius:12px; text-align:center; font-weight:700; color:var(--text-main);">
+                <i class="fas fa-phone"></i> 116 117
+            </a>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px; margin-bottom: 20px;">
+            <p style="font-size: 0.8rem; margin-bottom: 5px;"><strong>Dott. Emanuel Savianu</strong></p>
+            <p class="billing-tiny">
+                P.IVA 02348320512 | SDI JKKZDGR | Ord. Medici AR n. 3499<br>
+                PEC: emanuel.savianu@pec.omceoar.it
+            </p>
         </div>
 
     </div>
 
     <footer>
-        <p>&copy; 2024 Dott. Emanuel Savianu<br>Medico di Medicina Generale - Arezzo</p>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy</a>
+            <a href="#" onclick="document.getElementById('welcome-modal').style.display='flex'; return false;">Info Legali</a>
+            <a href="#" onclick="document.getElementById('reps-modal').style.display='flex'; return false;">Reps</a>
+        </div>
+        <p style="margin-top:10px;">&copy; <span id="year">2026</span></p>
     </footer>
 
     <script>
-        // --- TRANSLATION DATA ---
+        // --- CONFIG & DATA ---
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
         const i18n = {
             it: {
-                welcome: "Benvenuto",
+                subtitle: "Medico di Medicina Generale",
                 millebook: "Accedi a MilleBook",
-                millebook_desc: "Ricette, Appuntamenti e Fascicolo",
+                millebook_sub: "Ricette, Referti e Fascicolo",
                 book: "Prenota Visita",
+                book_sub: "Appuntamenti Online",
                 drugs: "Modulo Farmaci",
-                contact: "Contatti Studio",
-                hours: "Orari di Apertura"
+                drugs_sub: "Se Millebook non va",
+                new_patient: "<strong>Nuovi Pazienti:</strong> Prenotate 'Prima Visita'. L'iscrizione a Millebook verrà fatta in studio.",
+                booking_title: "Prenotazione Online",
+                no_reps: "No Informatori Scientifici",
+                visit_brief: "Visita Breve",
+                visit_brief_desc: "Sintomi recenti (10 min)",
+                visit_first: "Prima Visita",
+                visit_first_desc: "Nuovi pazienti (20 min)",
+                back: "Indietro",
+                contacts: "Contatti Studio",
+                secretary: "Segreteria",
+                address: "Indirizzo",
+                hours: "Orari Ambulatorio",
+                guard: "Continuità Assistenziale",
+                guard_desc: "Notte, Festivi e Prefestivi"
             },
             en: {
-                welcome: "Welcome",
+                subtitle: "General Practitioner - Arezzo",
                 millebook: "Login to MilleBook",
-                millebook_desc: "Prescriptions & Records",
-                book: "Book Appointment",
-                drugs: "Drug Request Form",
-                contact: "Contact Info",
-                hours: "Opening Hours"
+                millebook_sub: "Prescriptions & Records",
+                book: "Book Visit",
+                book_sub: "Online Appointments",
+                drugs: "Drug Request",
+                drugs_sub: "If Millebook fails",
+                new_patient: "<strong>New Patients:</strong> Please book 'First Visit'. We will register you on Millebook at the office.",
+                booking_title: "Book Appointment",
+                no_reps: "No Pharma Reps",
+                visit_brief: "Brief Visit",
+                visit_brief_desc: "Recent symptoms (10 min)",
+                visit_first: "First Visit",
+                visit_first_desc: "New patients (20 min)",
+                back: "Back",
+                contacts: "Office Contacts",
+                secretary: "Reception",
+                address: "Address",
+                hours: "Opening Hours",
+                guard: "Out-of-Hours Service",
+                guard_desc: "Night, Holidays & Pre-holidays"
             }
+        };
+
+        const hoursData = [
+            { d: "Lunedì / Mon", t: "17:00 – 18:30" },
+            { d: "Martedì / Tue", t: "11:30 – 13:00" },
+            { d: "Mercoledì / Wed", t: "17:00 – 18:30" },
+            { d: "Giovedì / Thu", t: "11:30 – 13:00" },
+            { d: "Venerdì / Fri", t: "17:00 – 18:30" },
+            { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
+        ];
+
+        // --- CALENDAR LINKS (From Main Site) ---
+        const calLinks = {
+            'brief': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
+            'first': 'https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true&hl=it'
         };
 
         // --- FUNCTIONS ---
 
-        function closeModal(id) {
-            const el = document.getElementById(id);
-            if(el) {
-                el.style.display = 'none';
-                // Save to local storage to not show again for 24h
-                const now = new Date();
-                localStorage.setItem(id + '_closed', now.getTime());
+        function renderHours() {
+            const container = document.getElementById('hours-table');
+            let html = '';
+            hoursData.forEach(h => {
+                const cls = h.cls ? h.cls : '';
+                html += `<div class="hours-row"><strong>${h.d}</strong><span class="${cls}">${h.t}</span></div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function setLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('btn-' + lang).classList.add('active');
+            
+            // Update text
+            const t = i18n[lang];
+            for (const key in t) {
+                const el = document.querySelector(`[data-i18n="${key}"]`);
+                if(el) el.innerHTML = t[key];
             }
+            
+            // Update calendar lang param if needed (advanced)
+            localStorage.setItem('lang', lang);
+        }
+
+        function scrollToBooking() {
+            const el = document.getElementById('booking-section');
+            const y = el.getBoundingClientRect().top + window.scrollY - 70; // offset for sticky header
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }
+
+        function loadCalendar(type) {
+            const ui = document.getElementById('booking-ui');
+            const wrapper = document.getElementById('calendar-wrapper');
+            const container = document.getElementById('cal-container');
+            const iframe = document.getElementById('cal-iframe');
+
+            ui.style.display = 'none';
+            wrapper.style.display = 'block';
+            container.style.display = 'block';
+            
+            iframe.src = calLinks[type];
+            
+            // Wait a moment then scroll to top of calendar
+            setTimeout(() => {
+               const y = wrapper.getBoundingClientRect().top + window.scrollY - 70;
+               window.scrollTo({top: y, behavior: 'smooth'});
+            }, 100);
+        }
+
+        function resetCalendar() {
+            document.getElementById('booking-ui').style.display = 'flex';
+            document.getElementById('calendar-wrapper').style.display = 'none';
+            document.getElementById('cal-iframe').src = "";
+            scrollToBooking();
+        }
+
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+            localStorage.setItem(id + '_seen_v2', new Date().getTime());
         }
 
         function checkModals() {
-            // Check Welcome Modal
-            const welcomeClosed = localStorage.getItem('welcome-modal_closed');
-            if (!welcomeClosed || (new Date().getTime() - welcomeClosed > 86400000)) { // 24 hours
+            const now = new Date().getTime();
+            
+            // Check Welcome (Expires in 7 days)
+            const welcomeSeen = localStorage.getItem('welcome-modal_seen_v2');
+            if(!welcomeSeen || (now - welcomeSeen > 7 * 24 * 60 * 60 * 1000)) {
                 document.getElementById('welcome-modal').style.display = 'flex';
             }
 
-            // Check Reps Banner
-            const repsClosed = localStorage.getItem('reps-banner_closed');
-            if (repsClosed) {
-                document.getElementById('reps-banner').style.display = 'none';
+            // Check Reps (Only show if not clicked in 30 days)
+            const repsSeen = localStorage.getItem('reps-modal_seen_v2');
+            if(!repsSeen || (now - repsSeen > 30 * 24 * 60 * 60 * 1000)) {
+                 // Don't show immediately on top of welcome
+                 setTimeout(() => {
+                     if(document.getElementById('welcome-modal').style.display === 'none') {
+                         document.getElementById('reps-modal').style.display = 'flex';
+                     }
+                 }, 1000);
             }
         }
 
-        function switchLang(lang) {
-            // Update buttons
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            document.querySelector(`button[onclick="switchLang('${lang}')"]`).classList.add('active');
-            
-            // Simple text replacement (expandable)
-            if(lang === 'en') {
-                document.querySelector('.hero-btn h2').innerText = i18n.en.millebook;
-                document.querySelector('.hero-btn p').innerText = i18n.en.millebook_desc;
-            } else {
-                document.querySelector('.hero-btn h2').innerText = i18n.it.millebook;
-                document.querySelector('.hero-btn p').innerText = i18n.it.millebook_desc;
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
+        // --- INIT ---
+        window.addEventListener('DOMContentLoaded', () => {
+            renderHours();
             checkModals();
+            
+            const savedLang = localStorage.getItem('lang');
+            if(savedLang) setLang(savedLang);
         });
+
     </script>
 </body>
 </html>
