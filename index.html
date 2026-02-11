@@ -236,6 +236,11 @@
         .btn-main:active {
             transform: translateY(-1px);
         }
+        
+        /* Stile bottone APP */
+        .btn-app {
+            background: #475569; /* Colore scuro/tecnologico */
+        }
 
         /* Responsive improvements */
         @media (max-width: 768px) {
@@ -337,7 +342,7 @@
                     <h3>3. Urgenze e Contatto Diretto</h3>
                     <p style="margin-bottom: 5px;"><strong>Urgenze vere: chiamare 112.</strong></p>
                     <p style="margin-bottom: 5px;">Se avete necessità di parlare con me chiamatemi al <strong>0575 171 3428</strong>. Se non posso rispondere vi ricontatterò io a breve.</p>
-                    <p>Il cellulare (327 809 5905) va usato <strong>esclusivamente per necessità impellenti</strong>.</p>
+                    <p>Il numero (0575 171 3428) va usato <strong>esclusivamente per necessità impellenti</strong>.</p>
                 </div>
             </div>
 
@@ -348,7 +353,7 @@
                 </div>
                 <div class="faq-item">
                     <span class="faq-q">"Posso chiamarla al cellulare per le ricette o per prendere appuntamenti?"</span>
-                    <span class="faq-a">A meno di problemi tecnici, è preferibile prenotare dal sito o usando Millebook e lasciare il cellulare solo per richieste urgenti.</span>
+                    <span class="faq-a">A meno di problemi tecnici, è preferibile prenotare dal sito o usando Millebook e lasciare il telefono solo per richieste urgenti.</span>
                 </div>
             </div>
         </div>
@@ -447,6 +452,12 @@
                     <i class="fas fa-pills" aria-hidden="true"></i>
                     <span data-i18n="btn_drugs">Modulo Farmaci</span>
                     <small data-i18n="btn_drugs_sub">Se Millebook non funziona</small>
+                </a>
+
+                <a href="android.html" class="btn-main btn-app" aria-label="Installa App">
+                    <i class="fas fa-mobile-alt" aria-hidden="true"></i>
+                    <span data-i18n="btn_app">Installa App</span>
+                    <small data-i18n="btn_app_sub">Versione Mobile</small>
                 </a>
             </div>
         </section>
@@ -547,7 +558,7 @@
             <address class="professional-info">
                 <p><strong>Dott. Emanuel Savianu</strong><br>
                 <span data-i18n="prof_role">Medico di Medicina Generale</span><br>
-                C.R. 011189 nr. 3278095905 | Ord. Medici AR n. 3499<br>
+                C.R. 011189 nr. 0575 171 3428 | Ord. Medici AR n. 3499<br>
                 P.IVA 02348320512 | SDI JKKZDGR<br>
                 via Tullio Innocenti 38, Arezzo<br>
                 <a href="mailto:emanuel.savianu@pec.omceoar.it">emanuel.savianu@pec.omceoar.it</a></p>
@@ -755,6 +766,8 @@
             btn_book_sub: "Visite brevi e Nuovi pazienti",
             btn_drugs: "Modulo Farmaci",
             btn_drugs_sub: "Se Millebook non funziona",
+            btn_app: "Installa App",
+            btn_app_sub: "Versione Mobile",
             booking_title: "Seleziona il tipo di visita",
             booking_choose_desc: "Scegli il motivo della visita per aprire il calendario corretto:",
             privacy_modulo_desc: "Per ridurre i tempi di attesa il giorno della visita, ti invito a leggere l'informativa sul trattamento dei dati.",
@@ -795,6 +808,8 @@
             btn_book_sub: "Brief visits & New patients",
             btn_drugs: "Prescription Form",
             btn_drugs_sub: "If Millebook is down",
+            btn_app: "Install App",
+            btn_app_sub: "Mobile Version",
             booking_title: "Select visit type",
             booking_choose_desc: "Choose the reason for your visit to open the correct calendar:",
             privacy_modulo_desc: "To reduce waiting times on the day of your visit, please read the data processing policy.",
