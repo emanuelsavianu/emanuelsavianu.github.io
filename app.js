@@ -69,6 +69,7 @@ function promptPWAInstall() {
 }
 
 // --- DARK MODE TOGGLE ---
+// Updated to change address bar color
 function toggleDarkMode() {
     const body = document.body;
     const isDark = body.classList.toggle('dark-mode');
@@ -79,9 +80,13 @@ function toggleDarkMode() {
     if (isDark) {
         icon.classList.remove('fa-moon');
         icon.classList.add('fa-sun');
+        // Update Mobile Browser Bar to Dark
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f1419');
     } else {
         icon.classList.remove('fa-sun');
         icon.classList.add('fa-moon');
+        // Update Mobile Browser Bar to Blue
+        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0066cc');
     }
     
     // Save preference
@@ -102,6 +107,8 @@ function initDarkMode() {
             const icon = darkBtn.querySelector('i');
             icon.classList.remove('fa-moon');
             icon.classList.add('fa-sun');
+            // Ensure meta tag is correct on load
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f1419');
         }
     } catch (e) {
         console.log('LocalStorage not available');
