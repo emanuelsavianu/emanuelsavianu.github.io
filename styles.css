@@ -79,11 +79,12 @@ header {
 }
 
 /* Landing Page Background Image */
+/* Changed to local file */
 header::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('https://i.postimg.cc/QxQ0YFXg/43166.jpg');
+    background-image: url('header-bg.jpg');
     background-size: cover;
     background-position: center;
     opacity: 1;
@@ -338,7 +339,8 @@ body.dark-mode .service-divider p {
     width: 100%;
     position: relative;
     height: auto;
-    min-height: 0;
+    /* Added min-height */
+    min-height: 600px;
     background: var(--white);
     border-radius: var(--radius-lg);
     overflow: visible;
