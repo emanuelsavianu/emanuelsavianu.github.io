@@ -213,16 +213,26 @@ h2 { font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700; color: var(--prima
 /* --- SIDEBAR & IMAGES --- */
 .sidebar-logo-container {
     text-align: center;
-    background: var(--white);
+    background: #ffffff; /* Always white background for logo visibility */
     padding: 20px;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
     border: 1px solid var(--border-color);
     margin-bottom: 25px;
-    transition: background 0.3s ease;
+    transition: box-shadow 0.3s ease;
 }
 
-.sidebar-logo-img { max-width: 200px; height: auto; }
+body.dark-mode .sidebar-logo-container {
+    background: #ffffff; /* Keep white in dark mode for logo contrast */
+    border: 2px solid var(--primary);
+}
+
+.sidebar-logo-img { 
+    max-width: 200px; 
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 
 /* --- MILLEBOOK & BUTTONS --- */
 .millebook-wrapper { margin-bottom: 25px; text-align: center; }
@@ -454,12 +464,18 @@ body.dark-mode .contact-row:hover {
 
 .qr-container {
     flex-shrink: 0; 
-    background: #fff; 
+    background: #ffffff; /* Always white for QR code visibility */
     padding: 10px;
     border-radius: 12px; 
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     border: 1px solid var(--border-color);
 }
+
+body.dark-mode .qr-container {
+    background: #ffffff; /* Keep white in dark mode */
+    border: 2px solid var(--primary);
+}
+
 .qr-container img { display: block; width: 150px; height: auto; }
 
 .billing-info-text {
