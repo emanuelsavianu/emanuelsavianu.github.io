@@ -1,5 +1,6 @@
 // Service Worker for Dr. Savianu Medical Website
-const CACHE_NAME = 'savianu-v1';
+// Updated cache name to force refresh styles
+const CACHE_NAME = 'savianu-v2';
 const urlsToCache = [
   '/',
   '/index.html',
