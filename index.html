@@ -23,7 +23,6 @@
     <meta property="og:url" content="https://savianu.it">
     <meta property="og:image" content="https://savianu.it/logo.png">
 
-    <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#0066cc">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -73,7 +72,6 @@
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
-<!-- PWA Install Prompt -->
 <div id="pwa-install-prompt" class="pwa-prompt" style="display: none;">
     <div class="pwa-prompt-content">
         <i class="fas fa-mobile-alt"></i>
@@ -231,13 +229,6 @@
                 <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
             </div>
             
-            <div style="background-color: #fff5f5; border: 1px solid #fc8181; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
-                <p style="color: #c53030; font-weight: 600; font-size: 0.95rem; margin: 0; display: flex; align-items: center; gap: 10px;">
-                    <i class="fas fa-ban" style="font-size: 1.2rem;"></i>
-                    <span data-i18n="booking_reps_warning">ATTENZIONE: Non si accettano appuntamenti con Informatori Scientifici.</span>
-                </p>
-            </div>
-            
             <div id="booking-selection-ui">
                 <p style="margin-bottom: 15px; color: var(--text-medium);" data-i18n="booking_choose_desc">
                     Scegli il motivo della visita per aprire il calendario corretto:
@@ -320,7 +311,7 @@
             </div>
             <div class="billing-flex">
                 <div class="qr-container">
-                    <img src="data:image/png;base64,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" alt="QR Code Fatturazione" width="150" height="150" loading="lazy">
+                    <img src="data:image/png;base64,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" alt="QR Code Fatturazione" width="150" height="150" loading="lazy">
                 </div>
                 <div class="billing-info-text">
                     <div class="billing-item"><strong>P. IVA:</strong> <span>02348320512</span></div>
