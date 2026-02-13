@@ -2,145 +2,70 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Prospetto Ferie Studio Medico 2026</title>
+    <title>Prospetto Ferie Studio Medico 2026 - 7 Medici</title>
     <style>
-        /* Impostazioni di Stampa */
-        @page {
-            size: A4 landscape;
-            margin: 10mm;
-        }
-        @media print {
+        @page { size: A4 landscape; margin: 7mm; }
+        @media print { 
             body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .page-break { page-break-after: always; }
             .no-print { display: none; }
         }
-
-        /* Stile Generale */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 10px;
-            color: #333;
-        }
-
-        h1, h2 {
-            text-align: center;
-            margin: 5px 0;
-            text-transform: uppercase;
-        }
-
-        /* Legenda */
-        .legend-container {
-            border: 2px solid #333;
-            padding: 10px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            background-color: #f9f9f9;
-        }
-        .doctor-slot {
-            margin: 5px 15px;
-            font-size: 14px;
-        }
-        .color-box {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 1px solid #000;
-            margin-right: 5px;
-            vertical-align: middle;
-            background: #fff;
-        }
-
-        /* Tabella Calendario */
-        .month-container {
-            margin-bottom: 30px;
-        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; padding: 5px; color: #222; font-size: 10px; }
+        h1, h2 { text-align: center; margin: 2px 0; text-transform: uppercase; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #2c3e50; padding-bottom: 2px; margin-top: 8px; font-size: 16px; }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            margin-top: 10px;
+        .legend-container {
+            border: 1px solid #444; padding: 5px; margin-bottom: 8px;
+            display: flex; justify-content: space-around; flex-wrap: wrap; background-color: #f8f9fa;
+        }
+        .doctor-slot { margin: 2px 8px; font-weight: bold; font-size: 10px; }
+        .color-box {
+            display: inline-block; width: 14px; height: 14px; border: 1px solid #000;
+            margin-right: 4px; vertical-align: middle; background: #fff;
         }
 
-        th, td {
-            border: 1px solid #444;
-            text-align: center;
-            padding: 0;
-        }
-
-        th {
-            background-color: #eee;
-            font-size: 11px;
-            height: 25px;
-        }
-
-        col.col-label { width: 140px; }
+        table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: 5px; }
+        th, td { border: 1px solid #333; text-align: center; padding: 0; }
+        th { background-color: #dfe6e9; height: 18px; font-size: 9px; }
+        
+        col.col-label { width: 155px; }
 
         /* Righe */
-        .row-ferie {
-            height: 40px;
-            background-color: #fff;
-        }
-        .row-sostituto {
-            height: 25px;
-            background-color: #fcfcfc;
-        }
+        .row-ferie { height: 28px; background-color: #fff; }
+        .row-sost-m { height: 18px; background-color: #f1f9ff; } 
+        .row-sost-p { height: 18px; background-color: #fff9f1; } 
+        .row-amb { height: 20px; background-color: #fdf2ff; }   
+        .row-tel { height: 18px; background-color: #ebfaeb; }   
         
-        .label-cell {
-            font-weight: bold;
-            font-size: 11px;
-            padding: 2px 5px;
-            text-align: left;
-        }
-
-        .label-sub {
-            font-size: 9px;
-            text-align: right;
-            padding-right: 5px;
-            font-style: italic;
-            color: #555;
-            line-height: 1;
-        }
+        .label-cell { font-weight: bold; font-size: 8.5px; padding: 1px 4px; text-align: left; line-height: 1; }
+        .label-sub { font-size: 8px; text-align: right; padding-right: 4px; font-style: italic; color: #444; }
         
-        .day-cell {
-            border-right: 1px solid #444;
-        }
-        
-        .invalid-day {
-            background-color: #ddd;
-            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, transparent);
-            background-size: 10px 10px;
-        }
-
-        .note {
-            font-size: 12px;
-            font-style: italic;
-            margin-top: 5px;
-        }
+        .invalid-day { background-color: #bdc3c7; opacity: 0.5; }
+        .note-box { font-size: 9px; background: #eee; padding: 4px 10px; border-left: 4px solid #2c3e50; margin-bottom: 5px; }
     </style>
 </head>
 <body>
 
-    <div class="no-print" style="background: #ffeb3b; padding: 10px; text-align: center; border: 1px solid #daa520; margin-bottom: 20px;">
-        <strong>ANTEPRIMA:</strong> Per stampare, premi <code>CTRL + P</code>. Seleziona "Layout: Orizzontale".
+    <div class="no-print" style="background: #ffeb3b; padding: 5px; text-align: center; border: 1px solid #daa520; margin-bottom: 5px;">
+        <strong>VERSIONE 7 MEDICI:</strong> Include Claudia e Giulia. Stampa in <b>Orizzontale</b>.
     </div>
 
-    <h1>Prospetto Ferie Studio Medico 2026</h1>
+    <h1>Gestione Sostituzioni 2026 - Gruppo Medico (7)</h1>
+    
     <div class="legend-container">
-        <div style="width: 100%; text-align: center; font-weight: bold; margin-bottom: 10px;">
-            LEGENDA MEDICI (Scegliere un colore per medico)
-        </div>
-        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
-        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
-        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
-        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
-        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
-        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+        <div class="doctor-slot"><span class="color-box"></span> Carlo</div>
+        <div class="doctor-slot"><span class="color-box"></span> Matteo</div>
+        <div class="doctor-slot"><span class="color-box"></span> Emanuel</div>
+        <div class="doctor-slot"><span class="color-box"></span> Renato</div>
+        <div class="doctor-slot"><span class="color-box"></span> Mauro</div>
+        <div class="doctor-slot"><span class="color-box"></span> Claudia</div>
+        <div class="doctor-slot"><span class="color-box"></span> Giulia</div>
+        <div class="doctor-slot" style="color: #666; font-style: italic;">(+ Olmo)</div>
     </div>
-    <p class="note"><strong>Regola:</strong> Max 2 medici assenti contemporaneamente. Indicare i sostituti (Mattina/Pomeriggio) nelle righe dedicate sotto ogni fascia ferie.</p>
+
+    <div class="note-box">
+        <strong>Accordi:</strong> Sostituzione incrociata M/P • Lasciare 2 slot liberi/ambulatorio per assente • Segnare copertura esterna (Olmo/Renato/Mauro) • Tel. (8-10/11).
+    </div>
 
     <div id="calendar-container"></div>
 
@@ -156,47 +81,52 @@
             if (m > 2) monthDiv.classList.add('page-break'); 
 
             let html = `<h2>${monthNames[m]} ${year}</h2>`;
-            html += `<table>`;
-            html += `<colgroup><col class="col-label">`;
+            html += `<table><colgroup><col class="col-label">`;
             for(let i=1; i<=31; i++) html += `<col>`;
-            html += `</colgroup>`;
-
-            // Intestazione
-            html += `<tr><th>DATA</th>`;
+            html += `</colgroup><tr><th>DATA</th>`;
             for (let d = 1; d <= 31; d++) {
                 html += (d <= daysInMonth) ? `<th>${d}</th>` : `<th class="invalid-day"></th>`;
             }
             html += `</tr>`;
 
-            // Generazione Blocchi per Medico 1 e Medico 2
-            for (let i = 1; i <= 2; i++) {
-                // Riga Colore Ferie
-                html += `<tr class="row-ferie"><td class="label-cell" style="background:#eee">ASSENZA (${i})<br><small>Colore Medico</small></td>`;
-                for (let d = 1; d <= 31; d++) {
-                    html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
-                }
-                html += `</tr>`;
-
-                // Riga Sostituto Mattina
-                html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sost. Mattina &#8593;</td>`;
-                for (let d = 1; d <= 31; d++) {
-                    html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
-                }
-                html += `</tr>`;
-
-                // Riga Sostituto Pomeriggio
-                html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sost. Pomeriggio &#8593;</td>`;
-                for (let d = 1; d <= 31; d++) {
-                    html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
-                }
-                html += `</tr>`;
+            // Blocchi Assenze 1 e 2
+            html += renderBlock(1, daysInMonth);
+            html += renderBlock(2, daysInMonth);
+            
+            // Riga Copertura Ambulatorio
+            html += `<tr class="row-amb"><td class="label-cell">🏥 COPERTURA ESTERNA<br><small>(Olmo/Renato/Mauro)</small></td>`;
+            for (let d = 1; d <= 31; d++) {
+                html += (d <= daysInMonth) ? `<td></td>` : `<th class="invalid-day"></th>`;
             }
+            html += `</tr>`;
+
+            // Riga Telefono
+            html += `<tr class="row-tel"><td class="label-cell">📞 REPERIBILITÀ TEL. <small>(8-11)</small></td>`;
+            for (let d = 1; d <= 31; d++) {
+                html += (d <= daysInMonth) ? `<td></td>` : `<th class="invalid-day"></th>`;
+            }
+            html += `</tr>`;
 
             html += `</table>`;
             monthDiv.innerHTML = html;
             container.appendChild(monthDiv);
         }
-    </script>
 
+        function renderBlock(index, daysInMonth) {
+            let block = `<tr class="row-ferie"><td class="label-cell" style="background:#f4f4f4">ASSENZA (${index}) <small>Colore</small></td>`;
+            for (let d = 1; d <= 31; d++) block += (d <= daysInMonth) ? `<td></td>` : `<td class="invalid-day"></td>`;
+            block += `</tr>`;
+            
+            block += `<tr class="row-sost-m"><td class="label-cell label-sub">Sost. MATTINA</td>`;
+            for (let d = 1; d <= 31; d++) block += (d <= daysInMonth) ? `<td></td>` : `<td class="invalid-day"></td>`;
+            block += `</tr>`;
+            
+            block += `<tr class="row-sost-p"><td class="label-cell label-sub">Sost. POMERIGGIO</td>`;
+            for (let d = 1; d <= 31; d++) block += (d <= daysInMonth) ? `<td></td>` : `<td class="invalid-day"></td>`;
+            block += `</tr>`;
+            
+            return block;
+        }
+    </script>
 </body>
 </html>
