@@ -61,7 +61,7 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            table-layout: fixed; /* Colonne larghezza fissa */
+            table-layout: fixed;
             margin-top: 10px;
         }
 
@@ -71,48 +71,44 @@
             padding: 0;
         }
 
-        /* Intestazione Giorni */
         th {
             background-color: #eee;
-            font-size: 12px;
+            font-size: 11px;
             height: 25px;
         }
 
-        /* Colonne: Prima colonna (etichette) più larga */
-        col.col-label { width: 120px; }
-        /* Le altre 31 colonne si dividono lo spazio */
+        col.col-label { width: 140px; }
 
         /* Righe */
         .row-ferie {
-            height: 50px; /* Spazio per colorare */
+            height: 40px;
+            background-color: #fff;
         }
         .row-sostituto {
-            height: 30px; /* Spazio per scrivere nome */
+            height: 25px;
             background-color: #fcfcfc;
         }
         
         .label-cell {
             font-weight: bold;
-            font-size: 12px;
-            padding: 5px;
+            font-size: 11px;
+            padding: 2px 5px;
             text-align: left;
-            background-color: #fff;
         }
 
         .label-sub {
-            font-size: 10px;
+            font-size: 9px;
             text-align: right;
             padding-right: 5px;
             font-style: italic;
-            color: #666;
+            color: #555;
+            line-height: 1;
         }
         
-        /* Celle vuote */
         .day-cell {
             border-right: 1px solid #444;
         }
         
-        /* Giorni inesistenti (es. 30 Febbraio) */
         .invalid-day {
             background-color: #ddd;
             background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, transparent);
@@ -124,13 +120,12 @@
             font-style: italic;
             margin-top: 5px;
         }
-
     </style>
 </head>
 <body>
 
     <div class="no-print" style="background: #ffeb3b; padding: 10px; text-align: center; border: 1px solid #daa520; margin-bottom: 20px;">
-        <strong>ANTEPRIMA:</strong> Per stampare, premi <code>CTRL + P</code> (o CMD + P su Mac). Seleziona "Layout: Orizzontale".
+        <strong>ANTEPRIMA:</strong> Per stampare, premi <code>CTRL + P</code>. Seleziona "Layout: Orizzontale".
     </div>
 
     <h1>Prospetto Ferie Studio Medico 2026</h1>
@@ -145,7 +140,7 @@
         <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
         <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
     </div>
-    <p class="note"><strong>Regola:</strong> Massimo 2 caselle colorate per colonna (max 2 medici assenti contemporaneamente). Indicare sempre il sostituto sotto la casella colorata.</p>
+    <p class="note"><strong>Regola:</strong> Max 2 medici assenti contemporaneamente. Indicare i sostituti (Mattina/Pomeriggio) nelle righe dedicate sotto ogni fascia ferie.</p>
 
     <div id="calendar-container"></div>
 
@@ -154,63 +149,48 @@
         const year = 2026;
         const monthNames = ["", "GENNAIO", "FEBBRAIO", "MARZO", "APRILE", "MAGGIO", "GIUGNO", "LUGLIO", "AGOSTO", "SETTEMBRE", "OTTOBRE", "NOVEMBRE", "DICEMBRE"];
         
-        // Partiamo da Febbraio (mese 2) fino a Dicembre (12)
         for (let m = 2; m <= 12; m++) {
             let daysInMonth = new Date(year, m, 0).getDate();
-            
-            // Creazione blocco mese
             let monthDiv = document.createElement('div');
             monthDiv.className = 'month-container';
-            // Aggiungi page-break ogni 2 mesi o come preferisci. Qui facciamo stare tutto e lasciamo gestire alla stampa
-            // Per leggibilità, meglio un page-break se necessario.
             if (m > 2) monthDiv.classList.add('page-break'); 
 
             let html = `<h2>${monthNames[m]} ${year}</h2>`;
             html += `<table>`;
-            
-            // Gruppo colonne
             html += `<colgroup><col class="col-label">`;
             for(let i=1; i<=31; i++) html += `<col>`;
             html += `</colgroup>`;
 
-            // RIGA 1: Intestazione Giorni
+            // Intestazione
             html += `<tr><th>DATA</th>`;
             for (let d = 1; d <= 31; d++) {
-                if (d <= daysInMonth) {
-                    html += `<th>${d}</th>`;
-                } else {
-                    html += `<th class="invalid-day"></th>`;
+                html += (d <= daysInMonth) ? `<th>${d}</th>` : `<th class="invalid-day"></th>`;
+            }
+            html += `</tr>`;
+
+            // Generazione Blocchi per Medico 1 e Medico 2
+            for (let i = 1; i <= 2; i++) {
+                // Riga Colore Ferie
+                html += `<tr class="row-ferie"><td class="label-cell" style="background:#eee">ASSENZA (${i})<br><small>Colore Medico</small></td>`;
+                for (let d = 1; d <= 31; d++) {
+                    html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
                 }
-            }
-            html += `</tr>`;
+                html += `</tr>`;
 
-            // RIGA 2: Medico 1 (Colore)
-            html += `<tr class="row-ferie"><td class="label-cell">FERIE (1) <br><small>Colorare casella</small></td>`;
-            for (let d = 1; d <= 31; d++) {
-                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
-            }
-            html += `</tr>`;
+                // Riga Sostituto Mattina
+                html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sost. Mattina &#8593;</td>`;
+                for (let d = 1; d <= 31; d++) {
+                    html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+                }
+                html += `</tr>`;
 
-            // RIGA 3: Medico 1 (Sostituto)
-            html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sostituto Rif. &#8593;</td>`;
-            for (let d = 1; d <= 31; d++) {
-                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+                // Riga Sostituto Pomeriggio
+                html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sost. Pomeriggio &#8593;</td>`;
+                for (let d = 1; d <= 31; d++) {
+                    html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+                }
+                html += `</tr>`;
             }
-            html += `</tr>`;
-
-            // RIGA 4: Medico 2 (Colore)
-            html += `<tr class="row-ferie"><td class="label-cell">FERIE (2) <br><small>Colorare casella</small></td>`;
-            for (let d = 1; d <= 31; d++) {
-                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
-            }
-            html += `</tr>`;
-
-            // RIGA 5: Medico 2 (Sostituto)
-            html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sostituto Rif. &#8593;</td>`;
-            for (let d = 1; d <= 31; d++) {
-                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
-            }
-            html += `</tr>`;
 
             html += `</table>`;
             monthDiv.innerHTML = html;
