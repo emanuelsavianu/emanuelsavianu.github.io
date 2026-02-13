@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orari Medici - Centro Ippocrate</title>
+    <style>
+        :root {
+            --primary-color: #0056b3; /* Blu Medico */
+            --accent-color: #e3f2fd; /* Azzurro Chiaro */
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-color: #f4f7f6;
+            --card-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.8rem;
+        }
+
+        p.subtitle {
+            color: var(--text-light);
+            margin-top: 0;
+        }
+
+        /* Stile delle Card Giornaliere */
+        .day-card {
+            background: white;
+            border-radius: 12px;
+            padding: 0;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+            overflow: hidden;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .day-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .day-content {
+            padding: 15px 20px;
+        }
+
+        /* Sezioni Mattina/Pomeriggio */
+        .session-block {
+            margin-bottom: 15px;
+        }
+
+        .session-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .session-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* Righe Orarie */
+        .time-slot {
+            display: flex;
+            margin-bottom: 10px;
+            align-items: baseline;
+        }
+
+        .time {
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            min-width: 100px; /* Larghezza fissa per allineamento */
+            text-align: center;
+            margin-right: 15px;
+        }
+
+        .doctors {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .doctor-name {
+            display: block; /* Ogni dottore su una nuova riga se ce ne sono più di uno */
+            margin-bottom: 2px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Media Query per Cellulari molto piccoli */
+        @media (max-width: 480px) {
+            .time-slot {
+                flex-direction: column;
+            }
+            .time {
+                margin-bottom: 5px;
+                text-align: left;
+                width: auto;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Orari Medici</h1>
+        <p class="subtitle">Centro Ippocrate</p>
+    </header>
+
+    <div class="day-card">
+        <div class="day-header">Lunedì</div>
+        <div class="day-content">
+            <div class="session-block">
+                <div class="session-title">Mattina</div>
+                <div class="time-slot">
+                    <span class="time">11:00 - 11:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott.ssa Guidelli</span>
+                        <span class="doctor-name">Dott. Lacrimini</span>
+                    </div>
+                </div>
+                <div class="time-slot">
+                    <span class="time">12:00 - 12:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Sacchi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="session-block">
+                <div class="session-title">Pomeriggio</div>
+                <div class="time-slot">
+                    <span class="time">17:00 - 17:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Savianu</span>
+                        <span class="doctor-name">Dott. Nardini</span>
+                        <span class="doctor-name">Dott. Corsi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">Martedì</div>
+        <div class="day-content">
+            <div class="session-block">
+                <div class="session-title">Mattina</div>
+                <div class="time-slot">
+                    <span class="time">11:00 - 11:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Sacchi</span>
+                        <span class="doctor-name">Dott. Nardini</span>
+                    </div>
+                </div>
+                <div class="time-slot">
+                    <span class="time">12:00 - 12:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Savianu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="session-block">
+                <div class="session-title">Pomeriggio</div>
+                <div class="time-slot">
+                    <span class="time">17:00 - 17:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Lacrimini</span>
+                        <span class="doctor-name">Dott.ssa Guidelli</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">Mercoledì</div>
+        <div class="day-content">
+            <div class="session-block">
+                <div class="session-title">Mattina</div>
+                <div class="time-slot">
+                    <span class="time">11:00 - 11:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott.ssa Guidelli</span>
+                        <span class="doctor-name">Dott. Nardini</span>
+                    </div>
+                </div>
+            </div>
+            <div class="session-block">
+                <div class="session-title">Pomeriggio</div>
+                <div class="time-slot">
+                    <span class="time">17:00 - 17:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Savianu</span>
+                        <span class="doctor-name">Dott. Corsi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">Giovedì</div>
+        <div class="day-content">
+            <div class="session-block">
+                <div class="session-title">Mattina</div>
+                <div class="time-slot">
+                    <span class="time">11:00 - 11:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Corsi</span>
+                        <span class="doctor-name">Dott. Nardini</span>
+                    </div>
+                </div>
+                <div class="time-slot">
+                    <span class="time">12:00 - 12:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Savianu</span>
+                    </div>
+                </div>
+            </div>
+            <div class="session-block">
+                <div class="session-title">Pomeriggio</div>
+                <div class="time-slot">
+                    <span class="time">17:00 - 17:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Lacrimini</span>
+                        <span class="doctor-name">Dott.ssa Guidelli</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="day-card">
+        <div class="day-header">Venerdì</div>
+        <div class="day-content">
+            <div class="session-block">
+                <div class="session-title">Mattina</div>
+                <div class="time-slot">
+                    <span class="time">11:00 - 11:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Lacrimini</span>
+                        <span class="doctor-name">Dott.ssa Guidelli</span>
+                        <span class="doctor-name">Dott. Corsi</span>
+                    </div>
+                </div>
+            </div>
+            <div class="session-block">
+                <div class="session-title">Pomeriggio</div>
+                <div class="time-slot">
+                    <span class="time">17:00 - 17:30</span>
+                    <div class="doctors">
+                        <span class="doctor-name">Dott. Savianu</span>
+                        <span class="doctor-name">Dott. Nardini</span>
+                        <span class="doctor-name">Dott. Sacchi</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; Centro Ippocrate - Orari aggiornati
+    </footer>
+</div>
+
+</body>
+</html>
