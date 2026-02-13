@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orari Medici - Centro Ippocrate</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+            --morning-bg: #e3f2fd;
+            --afternoon-bg: #fff3e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .schedule-container {
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .day-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+            border-left: 6px solid var(--accent-color);
+        }
+
+        .day-header {
+            background: var(--accent-color);
+            color: white;
+            padding: 12px 20px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .shift-group {
+            padding: 15px;
+        }
+
+        .shift-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #7f8c8d;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 4px;
+        }
+
+        .doctor-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .doctor-row:last-child {
+            border-bottom: none;
+        }
+
+        .time-slot {
+            font-weight: bold;
+            color: var(--accent-color);
+            min-width: 100px;
+        }
+
+        .doctor-name {
+            text-align: right;
+            font-weight: 500;
+        }
+
+        .morning { background-color: var(--morning-bg); }
+        .afternoon { background-color: var(--afternoon-bg); }
+
+    </style>
+</head>
+<body>
+
+    <h1>Orario Medici</h1>
+
+    <div class="schedule-container">
+
+        <div class="day-card">
+            <div class="day-header">Lunedì</div>
+            <div class="shift-group">
+                <div class="shift-title">Mattina (11:00 - 12:30)</div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott.ssa Guidelli [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Lacrimini [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">12:00-12:30</span><span class="doctor-name">Dott. Sacchi [cite: 1]</span></div>
+            </div>
+            <div class="shift-group afternoon">
+                <div class="shift-title">Pomeriggio (17:30 - 18:30)</div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Savianu [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Nardini [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">18:00-18:30</span><span class="doctor-name">Dott. Corsi [cite: 1]</span></div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">Martedì</div>
+            <div class="shift-group">
+                <div class="shift-title">Mattina (11:00 - 12:30)</div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Sacchi [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Nardini [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">12:00-12:30</span><span class="doctor-name">Dott. Savianu [cite: 1]</span></div>
+            </div>
+            <div class="shift-group afternoon">
+                <div class="shift-title">Pomeriggio (17:30 - 18:00)</div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Lacrimini [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott.ssa Guidelli [cite: 1]</span></div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">Mercoledì</div>
+            <div class="shift-group">
+                <div class="shift-title">Mattina (11:00 - 11:30)</div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott.ssa Guidelli [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Nardini [cite: 1]</span></div>
+            </div>
+            <div class="shift-group afternoon">
+                <div class="shift-title">Pomeriggio (17:30 - 18:30)</div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Savianu [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">18:00-18:30</span><span class="doctor-name">Dott. Corsi [cite: 1]</span></div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">Giovedì</div>
+            <div class="shift-group">
+                <div class="shift-title">Mattina (11:00 - 12:30)</div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Corsi [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Nardini [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">12:00-12:30</span><span class="doctor-name">Dott. Savianu </span></div>
+            </div>
+            <div class="shift-group afternoon">
+                <div class="shift-title">Pomeriggio (17:30 - 18:00)</div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Lacrimini [cite: 1]</span></div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott.ssa Guidelli [cite: 1]</span></div>
+            </div>
+        </div>
+
+        <div class="day-card">
+            <div class="day-header">Venerdì</div>
+            <div class="shift-group">
+                <div class="shift-title">Mattina (11:00 - 11:30)</div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Lacrimini [cite: 2]</span></div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott.ssa Guidelli [cite: 2]</span></div>
+                <div class="doctor-row"><span class="time-slot">11:00-11:30</span><span class="doctor-name">Dott. Corsi [cite: 2]</span></div>
+            </div>
+            <div class="shift-group afternoon">
+                <div class="shift-title">Pomeriggio (17:30 - 18:00)</div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Savianu [cite: 2]</span></div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Nardini [cite: 2]</span></div>
+                <div class="doctor-row"><span class="time-slot">17:30-18:00</span><span class="doctor-name">Dott. Sacchi [cite: 2]</span></div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
