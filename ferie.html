@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Prospetto Ferie Studio Medico 2026</title>
+    <style>
+        /* Impostazioni di Stampa */
+        @page {
+            size: A4 landscape;
+            margin: 10mm;
+        }
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .page-break { page-break-after: always; }
+            .no-print { display: none; }
+        }
+
+        /* Stile Generale */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 10px;
+            color: #333;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin: 5px 0;
+            text-transform: uppercase;
+        }
+
+        /* Legenda */
+        .legend-container {
+            border: 2px solid #333;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            background-color: #f9f9f9;
+        }
+        .doctor-slot {
+            margin: 5px 15px;
+            font-size: 14px;
+        }
+        .color-box {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 1px solid #000;
+            margin-right: 5px;
+            vertical-align: middle;
+            background: #fff;
+        }
+
+        /* Tabella Calendario */
+        .month-container {
+            margin-bottom: 30px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed; /* Colonne larghezza fissa */
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #444;
+            text-align: center;
+            padding: 0;
+        }
+
+        /* Intestazione Giorni */
+        th {
+            background-color: #eee;
+            font-size: 12px;
+            height: 25px;
+        }
+
+        /* Colonne: Prima colonna (etichette) più larga */
+        col.col-label { width: 120px; }
+        /* Le altre 31 colonne si dividono lo spazio */
+
+        /* Righe */
+        .row-ferie {
+            height: 50px; /* Spazio per colorare */
+        }
+        .row-sostituto {
+            height: 30px; /* Spazio per scrivere nome */
+            background-color: #fcfcfc;
+        }
+        
+        .label-cell {
+            font-weight: bold;
+            font-size: 12px;
+            padding: 5px;
+            text-align: left;
+            background-color: #fff;
+        }
+
+        .label-sub {
+            font-size: 10px;
+            text-align: right;
+            padding-right: 5px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        /* Celle vuote */
+        .day-cell {
+            border-right: 1px solid #444;
+        }
+        
+        /* Giorni inesistenti (es. 30 Febbraio) */
+        .invalid-day {
+            background-color: #ddd;
+            background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 50%, #ccc 50%, #ccc 75%, transparent 75%, transparent);
+            background-size: 10px 10px;
+        }
+
+        .note {
+            font-size: 12px;
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="no-print" style="background: #ffeb3b; padding: 10px; text-align: center; border: 1px solid #daa520; margin-bottom: 20px;">
+        <strong>ANTEPRIMA:</strong> Per stampare, premi <code>CTRL + P</code> (o CMD + P su Mac). Seleziona "Layout: Orizzontale".
+    </div>
+
+    <h1>Prospetto Ferie Studio Medico 2026</h1>
+    <div class="legend-container">
+        <div style="width: 100%; text-align: center; font-weight: bold; margin-bottom: 10px;">
+            LEGENDA MEDICI (Scegliere un colore per medico)
+        </div>
+        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+        <div class="doctor-slot"><span class="color-box"></span> Dott. __________________</div>
+    </div>
+    <p class="note"><strong>Regola:</strong> Massimo 2 caselle colorate per colonna (max 2 medici assenti contemporaneamente). Indicare sempre il sostituto sotto la casella colorata.</p>
+
+    <div id="calendar-container"></div>
+
+    <script>
+        const container = document.getElementById('calendar-container');
+        const year = 2026;
+        const monthNames = ["", "GENNAIO", "FEBBRAIO", "MARZO", "APRILE", "MAGGIO", "GIUGNO", "LUGLIO", "AGOSTO", "SETTEMBRE", "OTTOBRE", "NOVEMBRE", "DICEMBRE"];
+        
+        // Partiamo da Febbraio (mese 2) fino a Dicembre (12)
+        for (let m = 2; m <= 12; m++) {
+            let daysInMonth = new Date(year, m, 0).getDate();
+            
+            // Creazione blocco mese
+            let monthDiv = document.createElement('div');
+            monthDiv.className = 'month-container';
+            // Aggiungi page-break ogni 2 mesi o come preferisci. Qui facciamo stare tutto e lasciamo gestire alla stampa
+            // Per leggibilità, meglio un page-break se necessario.
+            if (m > 2) monthDiv.classList.add('page-break'); 
+
+            let html = `<h2>${monthNames[m]} ${year}</h2>`;
+            html += `<table>`;
+            
+            // Gruppo colonne
+            html += `<colgroup><col class="col-label">`;
+            for(let i=1; i<=31; i++) html += `<col>`;
+            html += `</colgroup>`;
+
+            // RIGA 1: Intestazione Giorni
+            html += `<tr><th>DATA</th>`;
+            for (let d = 1; d <= 31; d++) {
+                if (d <= daysInMonth) {
+                    html += `<th>${d}</th>`;
+                } else {
+                    html += `<th class="invalid-day"></th>`;
+                }
+            }
+            html += `</tr>`;
+
+            // RIGA 2: Medico 1 (Colore)
+            html += `<tr class="row-ferie"><td class="label-cell">FERIE (1) <br><small>Colorare casella</small></td>`;
+            for (let d = 1; d <= 31; d++) {
+                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+            }
+            html += `</tr>`;
+
+            // RIGA 3: Medico 1 (Sostituto)
+            html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sostituto Rif. &#8593;</td>`;
+            for (let d = 1; d <= 31; d++) {
+                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+            }
+            html += `</tr>`;
+
+            // RIGA 4: Medico 2 (Colore)
+            html += `<tr class="row-ferie"><td class="label-cell">FERIE (2) <br><small>Colorare casella</small></td>`;
+            for (let d = 1; d <= 31; d++) {
+                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+            }
+            html += `</tr>`;
+
+            // RIGA 5: Medico 2 (Sostituto)
+            html += `<tr class="row-sostituto"><td class="label-cell label-sub">Sostituto Rif. &#8593;</td>`;
+            for (let d = 1; d <= 31; d++) {
+                html += (d <= daysInMonth) ? `<td class="day-cell"></td>` : `<td class="invalid-day"></td>`;
+            }
+            html += `</tr>`;
+
+            html += `</table>`;
+            monthDiv.innerHTML = html;
+            container.appendChild(monthDiv);
+        }
+    </script>
+
+</body>
+</html>
