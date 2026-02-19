@@ -1,0 +1,447 @@
+  import React, { useState, useMemo } from 'react';
+import { PlusCircle, Trash2, Calendar, DollarSign, UserPlus, Clock } from 'lucide-react';
+
+// Dati iniziali basati sull'immagine fornita
+const INITIAL_DOCTORS = [
+  { id: '1', name: 'Dott.ssa Guidelli', color: 'bg-purple-300', text: 'text-purple-900' },
+  { id: '2', name: 'Dott. Lacrimini', color: 'bg-yellow-200', text: 'text-yellow-900' },
+  { id: '3', name: 'Dott. Sacchi', color: 'bg-red-400', text: 'text-red-900' },
+  { id: '4', name: 'Dott. Nardini', color: 'bg-green-400', text: 'text-green-900' },
+  { id: '5', name: 'Dott. Savianu', color: 'bg-indigo-300', text: 'text-indigo-900' },
+  { id: '6', name: 'Dott. Corsi', color: 'bg-blue-400', text: 'text-blue-900' },
+  { id: '7', name: 'Nuovo Medico (In arrivo)', color: 'bg-gray-300', text: 'text-gray-800' },
+];
+
+const HOLIDAYS_PER_YEAR = 20;
+const RATE_PER_DAY = 120;
+
+export default function App() {
+  const [records, setRecords] = useState([]);
+  const [date, setDate] = useState('');
+  const [doctorOnLeave, setDoctorOnLeave] = useState('');
+  const [substitute, setSubstitute] = useState('');
+  const [activeTab, setActiveTab] = useState('dashboard');
+
+  // Calcolo automatico delle statistiche
+  const stats = useMemo(() => {
+    return INITIAL_DOCTORS.map(doc => {
+      const holidaysTaken = records.filter(r => r.doctorOnLeave === doc.id).length;
+      const substitutionsDone = records.filter(r => r.substitute === doc.id).length;
+      
+      const remainingHolidays = HOLIDAYS_PER_YEAR - holidaysTaken;
+      const substitutionEarnings = substitutionsDone * RATE_PER_DAY;
+      const unusedHolidaysValue = remainingHolidays * RATE_PER_DAY;
+
+      return {
+        ...doc,
+        holidaysTaken,
+        remainingHolidays,
+        substitutionsDone,
+        substitutionEarnings,
+        unusedHolidaysValue,
+        totalCredit: substitutionEarnings + unusedHolidaysValue
+      };
+    });
+  }, [records]);
+
+  const handleAddRecord = (e) => {
+    e.preventDefault();
+    if (!date || !doctorOnLeave) return;
+    
+    // Prevent substituting oneself
+    if (doctorOnLeave === substitute) {
+      alert("Un medico non può sostituire se stesso!");
+      return;
+    }
+
+    const newRecord = {
+      id: Date.now().toString(),
+      date,
+      doctorOnLeave,
+      substitute: substitute || null,
+    };
+
+    setRecords([...records, newRecord].sort((a, b) => new Date(a.date) - new Date(b.date)));
+    
+    // Reset form parziale
+    setDate('');
+    setDoctorOnLeave('');
+    setSubstitute('');
+  };
+
+  const deleteRecord = (id) => {
+    setRecords(records.filter(r => r.id !== id));
+  };
+
+  const getDocName = (id) => INITIAL_DOCTORS.find(d => d.id === id)?.name || 'Nessuno/Esterno';
+  const getDocBadge = (id) => {
+    const doc = INITIAL_DOCTORS.find(d => d.id === id);
+    if (!doc) return <span className="px-2 py-1 rounded text-xs bg-gray-100 text-gray-600 border">Nessuno / Esterno</span>;
+    return <span className={`px-2 py-1 rounded text-xs font-medium ${doc.color} ${doc.text} shadow-sm border border-black/10`}>{doc.name}</span>;
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50 font-sans text-slate-800 pb-12">
+      {/* Header */}
+      <header className="bg-white border-b border-slate-200 sticky top-0 z-10 shadow-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-2">
+              <div className="bg-blue-600 p-2 rounded-lg text-white">
+                <Calendar size={24} />
+              </div>
+              <h1 className="text-xl font-bold text-slate-900">Gestione Ferie & Sostituzioni</h1>
+            </div>
+            <nav className="flex space-x-4">
+              <button 
+                onClick={() => setActiveTab('dashboard')}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'dashboard' ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:bg-slate-100'}`}
+              >
+                Cruscotto & Calcoli
+              </button>
+              <button 
+                onClick={() => setActiveTab('timetable')}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${activeTab === 'timetable' ? 'bg-blue-50 text-blue-700' : 'text-slate-600 hover:bg-slate-100'}`}
+              >
+                Orario Settimanale
+              </button>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        {activeTab === 'dashboard' && (
+          <>
+            {/* Top Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-center gap-4">
+                <div className="bg-blue-100 p-4 rounded-full text-blue-600"><UserPlus size={24} /></div>
+                <div>
+                  <p className="text-sm font-medium text-slate-500">Medici nel Gruppo</p>
+                  <p className="text-2xl font-bold">7</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-center gap-4">
+                <div className="bg-green-100 p-4 rounded-full text-green-600"><Calendar size={24} /></div>
+                <div>
+                  <p className="text-sm font-medium text-slate-500">Ferie per Medico</p>
+                  <p className="text-2xl font-bold">{HOLIDAYS_PER_YEAR} <span className="text-sm font-normal text-slate-400">giorni/anno</span></p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-center gap-4">
+                <div className="bg-amber-100 p-4 rounded-full text-amber-600"><DollarSign size={24} /></div>
+                <div>
+                  <p className="text-sm font-medium text-slate-500">Valore Giornata</p>
+                  <p className="text-2xl font-bold">€{RATE_PER_DAY}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              
+              {/* Form Inserimento */}
+              <div className="lg:col-span-1 space-y-6">
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                  <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+                    <PlusCircle size={20} className="text-blue-600"/>
+                    Registra Assenza
+                  </h2>
+                  <form onSubmit={handleAddRecord} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Data</label>
+                      <input 
+                        type="date" 
+                        required
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Medico in Ferie</label>
+                      <select 
+                        required
+                        value={doctorOnLeave}
+                        onChange={(e) => setDoctorOnLeave(e.target.value)}
+                        className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white"
+                      >
+                        <option value="">-- Seleziona Medico --</option>
+                        {INITIAL_DOCTORS.map(d => (
+                          <option key={`leave-${d.id}`} value={d.id}>{d.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">Sostituito da (Opzionale)</label>
+                      <select 
+                        value={substitute}
+                        onChange={(e) => setSubstitute(e.target.value)}
+                        className="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all bg-white"
+                      >
+                        <option value="">-- Nessuno / Esterno --</option>
+                        {INITIAL_DOCTORS.map(d => (
+                          <option key={`sub-${d.id}`} value={d.id} disabled={d.id === doctorOnLeave}>{d.name}</option>
+                        ))}
+                      </select>
+                      <p className="text-xs text-slate-500 mt-1">Seleziona chi copre il turno per accreditarli i 120€.</p>
+                    </div>
+                    <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition-colors flex justify-center items-center gap-2 mt-4">
+                      <PlusCircle size={18} /> Aggiungi a registro
+                    </button>
+                  </form>
+                </div>
+
+                {/* Lista Storico */}
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex-1">
+                  <h2 className="text-lg font-bold mb-4">Storico Inserimenti</h2>
+                  {records.length === 0 ? (
+                    <div className="text-center py-8 text-slate-400 border-2 border-dashed border-slate-200 rounded-lg">
+                      Nessuna ferie registrata
+                    </div>
+                  ) : (
+                    <div className="space-y-3 max-h-[400px] overflow-y-auto pr-2">
+                      {records.map(r => (
+                        <div key={r.id} className="flex justify-between items-center p-3 border border-slate-100 bg-slate-50 rounded-lg">
+                          <div>
+                            <p className="font-semibold text-sm">{new Date(r.date).toLocaleDateString('it-IT', { weekday: 'short', day: '2-digit', month: 'short', year: 'numeric' })}</p>
+                            <div className="flex items-center gap-2 mt-1">
+                              <span className="text-xs text-slate-500">Assente:</span> {getDocBadge(r.doctorOnLeave)}
+                            </div>
+                            {r.substitute && (
+                              <div className="flex items-center gap-2 mt-1">
+                                <span className="text-xs text-slate-500">Sostituto:</span> {getDocBadge(r.substitute)}
+                              </div>
+                            )}
+                          </div>
+                          <button 
+                            onClick={() => deleteRecord(r.id)}
+                            className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors"
+                            title="Elimina"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Tabella Riassuntiva dei Calcoli */}
+              <div className="lg:col-span-2">
+                <div className="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+                  <div className="p-6 border-b border-slate-200 bg-slate-50">
+                    <h2 className="text-lg font-bold">Foglio di Calcolo Ferie & Compensi</h2>
+                    <p className="text-sm text-slate-500 mt-1">Valori aggiornati in tempo reale in base agli inserimenti.</p>
+                  </div>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="bg-slate-100 text-slate-600 text-xs uppercase tracking-wider">
+                          <th className="p-4 font-medium border-b border-slate-200">Medico</th>
+                          <th className="p-4 font-medium border-b border-slate-200 text-center">Ferie Prese</th>
+                          <th className="p-4 font-medium border-b border-slate-200 text-center">Ferie Residue</th>
+                          <th className="p-4 font-medium border-b border-slate-200 text-center">Sostituzioni Fatte</th>
+                          <th className="p-4 font-medium border-b border-slate-200 text-right bg-green-50">Compenso Sost.</th>
+                          <th className="p-4 font-medium border-b border-slate-200 text-right bg-blue-50">Valore Ferie Non Godute</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-slate-100 text-sm">
+                        {stats.map(doc => (
+                          <tr key={doc.id} className="hover:bg-slate-50 transition-colors">
+                            <td className="p-4 font-medium">
+                              <div className="flex items-center gap-2">
+                                <div className={`w-3 h-3 rounded-full ${doc.color} border border-black/20`}></div>
+                                {doc.name}
+                              </div>
+                            </td>
+                            <td className="p-4 text-center font-bold text-red-600">{doc.holidaysTaken}</td>
+                            <td className="p-4 text-center">
+                              <span className={`px-2 py-1 rounded-full text-xs font-bold ${doc.remainingHolidays < 5 ? 'bg-red-100 text-red-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                                {doc.remainingHolidays}
+                              </span>
+                            </td>
+                            <td className="p-4 text-center font-bold text-blue-600">{doc.substitutionsDone}</td>
+                            <td className="p-4 text-right font-medium bg-green-50/50 text-green-700">€ {doc.substitutionEarnings}</td>
+                            <td className="p-4 text-right font-medium bg-blue-50/50 text-blue-700">€ {doc.unusedHolidaysValue}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                  <div className="bg-slate-50 p-4 border-t border-slate-200 text-xs text-slate-500">
+                    * <b>Compenso Sostituzioni</b> = Sostituzioni fatte × 120€ <br/>
+                    * <b>Valore Ferie Non Godute</b> = (20 - Ferie prese) × 120€ <br/>
+                    <i>Se un medico sceglie di non sostituire ma di farsi pagare i giorni non goduti, fa riferimento a questa ultima colonna.</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+
+        {/* Orario di Riferimento */}
+        {activeTab === 'timetable' && (
+          <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+            <h2 className="text-xl font-bold mb-6 flex items-center gap-2">
+              <Clock className="text-blue-600" />
+              Orario Strutturato (Dati dall'immagine)
+            </h2>
+            
+            <div className="overflow-x-auto">
+              <table className="w-full border-collapse min-w-[800px]">
+                <thead>
+                  <tr>
+                    <th className="border border-slate-300 bg-slate-100 p-2 w-16"></th>
+                    <th colSpan="7" className="border border-slate-300 bg-slate-50 p-2 text-center text-sm font-semibold">MATTINA (09:30 - 13:00)</th>
+                    <th className="w-4 bg-gray-200 border-y border-slate-300"></th> {/* Spacer */}
+                    <th colSpan="7" className="border border-slate-300 bg-slate-50 p-2 text-center text-sm font-semibold">POMERIGGIO (15:30 - 19:00)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs font-medium text-center">
+                  
+                  {/* LUNEDI */}
+                  <tr>
+                    <td className="border border-slate-300 bg-slate-100 font-bold p-2 text-lg">Lun</td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-purple-300 text-purple-900 border-b border-black/10 py-1">Dott.ssa Guidelli</div>
+                         <div className="bg-yellow-200 text-yellow-900 border-b border-black/10 py-1">Dott. Lacrimini</div>
+                         <div className="flex">
+                           <div className="w-1/2"></div>
+                           <div className="w-1/2 bg-red-400 text-red-900 py-1 border-l border-black/10">Dott. Sacchi (11:00-13:00)</div>
+                         </div>
+                       </div>
+                    </td>
+                    <td className="bg-gray-200 border-y border-slate-300"></td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-indigo-300 text-indigo-900 border-b border-black/10 py-1">Dott. Savianu</div>
+                         <div className="bg-green-400 text-green-900 border-b border-black/10 py-1">Dott. Nardini</div>
+                         <div className="bg-blue-400 text-blue-900 py-1">Dott. Corsi</div>
+                       </div>
+                    </td>
+                  </tr>
+
+                  {/* MARTEDI */}
+                  <tr>
+                    <td className="border border-slate-300 bg-slate-100 font-bold p-2 text-lg">Mar</td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-red-400 text-red-900 border-b border-black/10 py-1">Dott. Sacchi</div>
+                         <div className="flex border-b border-black/10">
+                           <div className="w-[15%]"></div>
+                           <div className="w-[85%] bg-green-400 text-green-900 py-1 border-l border-black/10">Dott. Nardini</div>
+                         </div>
+                         <div className="flex">
+                           <div className="w-[40%]"></div>
+                           <div className="w-[60%] bg-indigo-300 text-indigo-900 py-1 border-l border-black/10">Dott. Savianu</div>
+                         </div>
+                       </div>
+                    </td>
+                    <td className="bg-gray-200 border-y border-slate-300"></td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-yellow-200 text-yellow-900 border-b border-black/10 py-1">Dott. Lacrimini</div>
+                         <div className="bg-purple-300 text-purple-900 py-1">Dott.ssa Guidelli</div>
+                       </div>
+                    </td>
+                  </tr>
+
+                  {/* MERCOLEDI */}
+                  <tr>
+                    <td className="border border-slate-300 bg-slate-100 font-bold p-2 text-lg">Mer</td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-purple-300 text-purple-900 border-b border-black/10 py-1">Dott.ssa Guidelli</div>
+                         <div className="flex">
+                           <div className="w-[15%]"></div>
+                           <div className="w-[70%] bg-green-400 text-green-900 py-1 border-x border-black/10">Dott. Nardini</div>
+                           <div className="w-[15%]"></div>
+                         </div>
+                       </div>
+                    </td>
+                    <td className="bg-gray-200 border-y border-slate-300"></td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="flex border-b border-black/10">
+                            <div className="w-[85%] bg-indigo-300 text-indigo-900 py-1 border-r border-black/10">Dott. Savianu</div>
+                            <div className="w-[15%]"></div>
+                         </div>
+                         <div className="w-full bg-blue-400 text-blue-900 py-1">Dott. Corsi</div>
+                       </div>
+                    </td>
+                  </tr>
+
+                  {/* GIOVEDI */}
+                  <tr>
+                    <td className="border border-slate-300 bg-slate-100 font-bold p-2 text-lg">Gio</td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-blue-400 text-blue-900 border-b border-black/10 py-1">Dott. Corsi</div>
+                         <div className="flex border-b border-black/10">
+                           <div className="w-[15%]"></div>
+                           <div className="w-[70%] bg-green-400 text-green-900 py-1 border-x border-black/10">Dott. Nardini</div>
+                           <div className="w-[15%]"></div>
+                         </div>
+                         <div className="flex">
+                           <div className="w-[40%]"></div>
+                           <div className="w-[60%] bg-indigo-300 text-indigo-900 py-1 border-l border-black/10">Dott. Savianu</div>
+                         </div>
+                       </div>
+                    </td>
+                    <td className="bg-gray-200 border-y border-slate-300"></td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="bg-yellow-200 text-yellow-900 border-b border-black/10 py-1">Dott. Lacrimini</div>
+                         <div className="bg-purple-300 text-purple-900 py-1">Dott.ssa Guidelli</div>
+                       </div>
+                    </td>
+                  </tr>
+
+                   {/* VENERDI */}
+                   <tr>
+                    <td className="border border-slate-300 bg-slate-100 font-bold p-2 text-lg">Ven</td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="flex border-b border-black/10">
+                            <div className="w-[85%] bg-yellow-200 text-yellow-900 py-1 border-r border-black/10">Dott. Lacrimini</div>
+                            <div className="w-[15%] bg-yellow-100"></div>
+                         </div>
+                         <div className="flex border-b border-black/10">
+                            <div className="w-[85%] bg-purple-300 text-purple-900 py-1 border-r border-black/10">Dott.ssa Guidelli</div>
+                            <div className="w-[15%] bg-purple-100"></div>
+                         </div>
+                         <div className="flex">
+                            <div className="w-[30%]"></div>
+                            <div className="w-[70%] bg-blue-400 text-blue-900 py-1 border-l border-black/10">Dott. Corsi</div>
+                         </div>
+                       </div>
+                    </td>
+                    <td className="bg-gray-200 border-y border-slate-300"></td>
+                    <td colSpan="7" className="border border-slate-300 p-0 align-top">
+                       <div className="flex flex-col h-full">
+                         <div className="flex border-b border-black/10">
+                            <div className="w-[80%] bg-indigo-300 text-indigo-900 py-1 border-r border-black/10">Dott. Savianu</div>
+                            <div className="w-[20%]"></div>
+                         </div>
+                         <div className="bg-green-400 text-green-900 border-b border-black/10 py-1">Dott. Nardini</div>
+                         <div className="bg-red-400 text-red-900 py-1">Dott. Sacchi</div>
+                       </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="mt-4 p-4 bg-yellow-50 border border-yellow-200 rounded-lg text-yellow-800 text-sm">
+                <strong>Nota 7° Medico:</strong> L'orario sopra è la trascrizione fedele dell'immagine fornita. Una volta noto l'orario del nuovo medico, potrà essere integrato in questa griglia.
+              </div>
+            </div>
+          </div>
+        )}
+
+      </main>
+    </div>
+  );
+}
