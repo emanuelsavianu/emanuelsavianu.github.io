@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accesso Area Riservata</title>
+    <style>
+        /* Stile generale della pagina */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Stile del riquadro di login */
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Stile dei campi di testo e del bottone */
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            background-color: #0056b3;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #004494;
+        }
+
+        /* Messaggio di errore */
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+
+        /* Area protetta (nascosta di default) */
+        #area-protetta {
+            display: none;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 900px; /* Più largo per ospitare la tabella */
+        }
+
+        /* Stile della Tabella dei Pazienti */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0056b3;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="login-container" id="modulo-login">
+        <h2>Accesso Riservato</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="verificaCredenziali()">Accedi</button>
+        <div class="error-message" id="errore">Username o password errati. Riprova.</div>
+    </div>
+
+    <div id="area-protetta">
+        <h2 style="color: #0056b3;">Registro Gestione Chiamate Frequenti</h2>
+        <p>Lista dei pazienti da monitorare e relative strategie di gestione.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Cognome</th>
+                    <th>Nome</th>
+                    <th>Indirizzo</th>
+                    <th>Motivazione Frequente</th>
+                    <th>Strategia di Gestione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Martini</strong></td>
+                    <td>Gabriella</td>
+                    <td>[...]</td>
+                    <td><em>[Es. Rassicurazione, rinnovo]</em></td>
+                    <td><em>[Es. Risposte brevi e decise]</em></td>
+                </tr>
+                <tr>
+                    <td><strong>Fratini</strong></td>
+                    <td>[...]</td>
+                    <td>Via Giotto 140</td>
+                    <td>[...]</td>
+                    <td>[...]</td>
+                </tr>
+                <tr>
+                    <td><strong>[...]</strong></td>
+                    <td>Anna Maria</td>
+                    <td>[...]</td>
+                    <td><em>(Signora anziana) [...]</em></td>
+                    <td><em>[Es. Farle segnare le cose su un foglio]</em></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button onclick="esci()" style="width: 200px; background-color: #dc3545;">Chiudi in Sicurezza</button>
+    </div>
+
+    <script>
+        function verificaCredenziali() {
+            var user = document.getElementById("username").value;
+            var pass = document.getElementById("password").value;
+            var messaggioErrore = document.getElementById("errore");
+
+            if (user === "allarme" && pass === "78891") {
+                document.getElementById("modulo-login").style.display = "none";
+                document.getElementById("area-protetta").style.display = "block";
+                messaggioErrore.style.display = "none";
+            } else {
+                messaggioErrore.style.display = "block";
+            }
+        }
+
+        function esci() {
+            document.getElementById("username").value = "";
+            document.getElementById("password").value = "";
+            document.getElementById("area-protetta").style.display = "none";
+            document.getElementById("modulo-login").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
