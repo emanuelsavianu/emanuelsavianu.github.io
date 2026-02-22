@@ -116,7 +116,7 @@
                                         {onHoliday.map((h, idx) => {
                                             const doc = INITIAL_DOCTORS.find(doc => doc.id === h.docId);
                                             const shortName = doc.name.replace('Dott.ssa ', '').replace('Dott. ', '');
-                                            return <div key={idx} className={`text-[9px] font-medium px-1 py-0.5 rounded ${doc.color} ${doc.text} truncate shadow-sm leading-tight border border-black/5`} title={doc.name}>Assente: {shortName}</div>
+                                            return <div key={idx} className={`text-[10px] font-bold px-1 py-0.5 rounded ${doc.color} ${doc.text} truncate shadow-sm leading-tight border border-black/5`} title={doc.name}>{shortName}</div>
                                         })}
                                     </div>
                                 </div>
