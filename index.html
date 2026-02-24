@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Medico di Base Arezzo | Dott. Emanuel Savianu (English Speaking GP)</title>
-    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo (Via Ubaldo Pasqui). Prenota visite online, ricette Millebook. English speaking doctor available for tourists.">
-    <meta name="keywords" content="medico di base arezzo, dott emanuel savianu, dottor emanuel savianu, dottor savianu, dottor emanuel, medico di famiglia arezzo, english speaking doctor arezzo, gp arezzo, family doctor arezzo, family medicine arezzo, savianu, dott.savianu, dott. emanuel savianu>
+    <title>Medico di Base Arezzo | Dott. Emanuel Savianu</title>
+    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo (Via Ubaldo Pasqui). Prenota visite online, ricette Millebook.">
     
     <meta name="geo.region" content="IT-AR" />
     <meta name="geo.placename" content="Arezzo" />
@@ -16,12 +15,6 @@
     <meta name="author" content="Dott. Emanuel Savianu">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://savianu.it">
-
-    <meta property="og:title" content="Dott. Emanuel Savianu | Medico di Famiglia Arezzo">
-    <meta property="og:description" content="Medico di Medicina Generale a Arezzo. Prenota la tua visita online. English Speaking GP.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://savianu.it">
-    <meta property="og:image" content="https://savianu.it/logo.png">
 
     <meta name="theme-color" content="#0066cc">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -36,57 +29,25 @@
     
     <link rel="stylesheet" href="styles.css">
 
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Physician",
-      "name": "Dott. Emanuel Savianu",
-      "image": "https://savianu.it/logo.png",
-      "@id": "https://savianu.it",
-      "url": "https://savianu.it",
-      "telephone": "+3905751713428",
-      "email": "segreteria@savianu.it",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Via Ubaldo Pasqui 38",
-        "addressLocality": "Arezzo",
-        "postalCode": "52100",
-        "addressCountry": "IT"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "43.4632",
-        "longitude": "11.8796"
-      },
-      "areaServed": { "@type": "City", "name": "Arezzo" },
-      "openingHoursSpecification": [
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Wednesday", "Friday"], "opens": "17:00", "closes": "18:30" },
-        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday", "Thursday"], "opens": "11:30", "closes": "13:00" }
-      ],
-      "medicalSpecialty": "PrimaryCare",
-      "availableLanguage": ["Italian", "English"]
-    }
-    </script>
+    <style>
+        /* Ingrandisce i bottoni di Google Calendar per i pazienti anziani */
+        .google-calendar-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .google-calendar-container > div {
+            transform: scale(1.15); /* Ingrandimento del 15% */
+            transform-origin: center top;
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body class="modal-open">
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
-
-<div id="pwa-install-prompt" class="pwa-prompt" style="display: none;">
-    <div class="pwa-prompt-content">
-        <i class="fas fa-mobile-alt"></i>
-        <div>
-            <strong data-i18n="pwa_install_title">Installa l'App</strong>
-            <p data-i18n="pwa_install_desc">Aggiungi questo sito alla schermata home per un accesso più rapido</p>
-        </div>
-        <button id="pwa-install-btn" class="pwa-install-button">
-            <i class="fas fa-download"></i> <span data-i18n="pwa_install_btn">Installa</span>
-        </button>
-        <button id="pwa-dismiss-btn" class="pwa-dismiss-button">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
-</div>
 
 <div id="welcome-overlay" class="active" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
     <div class="welcome-card">
@@ -97,7 +58,7 @@
         <div class="welcome-body">
             <p style="margin-bottom: 25px; font-size: 1.05rem;">
                 Sono il <strong>Dott. Emanuel Savianu</strong>. Ho organizzato questo sito per semplificare la vostra vita. 
-                Utilizzando gli strumenti digitali per la routine, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
+                Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
             </p>
 
             <div class="welcome-step">
@@ -112,7 +73,7 @@
                 <div class="step-icon"><i class="far fa-calendar-check"></i></div>
                 <div class="step-content">
                     <h3>2. Prenotazione Appuntamenti</h3>
-                    <p>L'agenda online è sincronizzata in tempo reale. Niente attese al telefono, conferma immediata.</p>
+                    <p>L'agenda online qui sotto vi permette di prenotare col popup senza attese al telefono.</p>
                 </div>
             </div>
 
@@ -121,7 +82,7 @@
                 <div class="step-content">
                     <h3>3. Urgenze e Contatto Diretto</h3>
                     <p style="margin-bottom: 5px;"><strong>Urgenze vere: chiamare 112.</strong></p>
-                    <p style="margin-bottom: 5px;">Se avete necessità di parlare con me chiamatemi al <strong>0575 171 3428</strong>.</p>
+                    <p style="margin-bottom: 5px;">Numero del Dottore: <strong>0575 171 3428</strong>.</p>
                 </div>
             </div>
         </div>
@@ -141,11 +102,8 @@
         <h3 id="reps-title" style="margin-bottom: 15px; font-size: 1.4rem; font-weight: 700;">Informazione per Rappresentanti</h3>
         <p style="margin-bottom: 25px;">
             Si informa che il Dott. Emanuel Savianu <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>.
-            I canali di contatto dello studio sono riservati esclusivamente ai pazienti.
         </p>
-        <button class="btn-reps-close" onclick="toggleRepsModal(false)">
-            Ho capito
-        </button>
+        <button class="btn-reps-close" onclick="toggleRepsModal(false)">Ho capito</button>
     </div>
 </div>
 
@@ -155,9 +113,7 @@
         <span class="lang-separator">|</span>
         <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
         <span class="lang-separator">|</span>
-        <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode">
-            <i class="fas fa-moon"></i>
-        </button>
+        <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
     </nav>
     <div class="header-content">
         <h1>Dott. Emanuel Savianu</h1>
@@ -172,11 +128,11 @@
         <section class="alert-box" role="alert" aria-live="polite">
             <p data-i18n="alert_p1">
                 <i class="fas fa-exclamation-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
-                <strong>Nuovi pazienti:</strong> Se è la tua prima volta in studio, prenota tramite il tasto "Prenota Visita". Provvederò personalmente a iscriverti a <strong>MilleBook</strong>.
+                <strong>Nuovi pazienti:</strong> Prenotate tramite il tasto "Prima Visita". Provvederò personalmente a iscrivervi a <strong>MilleBook</strong> in studio.
             </p>
             <p data-i18n="alert_p2" style="margin-top: 10px;">
                 <i class="fas fa-check-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
-                Dopo la prima visita, usa esclusivamente <strong>MilleBook</strong> per ricette e richieste.
+                Dopo la prima visita, usate esclusivamente <strong>MilleBook</strong> per ricette e richieste.
             </p>
         </section>
 
@@ -198,7 +154,7 @@
                 <p>
                     <i class="fas fa-calendar-alt" aria-hidden="true" style="color: var(--primary);"></i> 
                     <strong data-i18n="new_users_title">Prenotazioni & Modulistica</strong><br>
-                    <span data-i18n="new_users_desc">Usa questi tasti per fissare un appuntamento o se hai problemi tecnici con MilleBook.</span>
+                    <span data-i18n="new_users_desc">Usa i tasti qui sotto.</span>
                 </p>
             </div>
 
@@ -206,20 +162,14 @@
                 <button onclick="showSection('booking')" class="btn-main btn-prenota">
                     <i class="far fa-calendar-check" aria-hidden="true"></i>
                     <span data-i18n="btn_book">Prenota Visita</span>
-                    <small data-i18n="btn_book_sub">Visite brevi e Nuovi pazienti</small>
+                    <small data-i18n="btn_book_sub">Scegli il tipo di visita</small>
                 </button>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform?usp=header" target="_blank" rel="noopener noreferrer" class="btn-main btn-ricette">
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform" target="_blank" rel="noopener noreferrer" class="btn-main btn-ricette">
                     <i class="fas fa-pills" aria-hidden="true"></i>
                     <span data-i18n="btn_drugs">Modulo Farmaci</span>
                     <small data-i18n="btn_drugs_sub">Se Millebook non funziona</small>
                 </a>
-
-                <button onclick="promptPWAInstall()" class="btn-main btn-app">
-                    <i class="fas fa-mobile-alt" aria-hidden="true"></i>
-                    <span data-i18n="btn_app">Installa App</span>
-                    <small data-i18n="btn_app_sub">Versione Mobile</small>
-                </button>
             </div>
         </section>
 
@@ -229,44 +179,66 @@
                 <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
             </div>
             
-            <div id="booking-selection-ui">
-                <p style="margin-bottom: 15px; color: var(--text-medium);" data-i18n="booking_choose_desc">
-                    Scegli il motivo della visita per aprire il calendario corretto:
-                </p>
+            <p style="margin-bottom: 20px; color: var(--text-medium); font-size: 1.1rem; text-align: center;">
+                Tocca uno dei pulsanti qui sotto per aprire il calendario.
+            </p>
 
-                <div class="booking-choice-container">
-                    <button class="btn-choice" onclick="loadCalendar('brief')">
-                        <i class="fas fa-stopwatch"></i>
-                        <span data-i18n="visit_brief">Visita Breve</span>
-                        <small style="font-weight:400; font-size:0.85rem; color:#666;" data-i18n="visit_brief_desc">Per sintomi recenti</small>
-                    </button>
-                    
-                    <button class="btn-choice" onclick="loadCalendar('first')">
-                        <i class="fas fa-user-plus"></i>
-                        <span data-i18n="visit_first">Prima Visita</span>
-                        <small style="font-weight:400; font-size:0.85rem; color:#666;" data-i18n="visit_first_desc">Nuovi pazienti</small>
-                    </button>
+            <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+            <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+            
+            <div class="google-calendar-container">
+                <div>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it',
+                          color: '#0066cc',
+                          label: 'PRIMA VISITA (45 minuti)',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
+                </div>
+
+                <div>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it',
+                          color: '#00b8a9',
+                          label: 'VISITA GENERICA (20 minuti)',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
+                </div>
+
+                <div>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it',
+                          color: '#f57c00',
+                          label: 'VISITA BREVE (10 minuti)',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
                 </div>
             </div>
-
-            <div id="calendar-wrapper" style="display: none;">
-                <button onclick="resetBookingSelection()" class="back-selection-btn">
-                    <i class="fas fa-arrow-left"></i> <span data-i18n="btn_change_visit">Cambia tipo di visita</span>
-                </button>
-                
-                <div class="calendar-iframe-container">
-                    <div class="calendar-loading active" id="calendar-loading">
-                        <i class="fas fa-spinner"></i>
-                        <p data-i18n="loading_calendar">Caricamento calendario...</p>
-                    </div>
-                    <iframe id="calendar-iframe" src="" scrolling="no" title="Calendario prenotazioni" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" allowtransparency="true" onload="hideCalendarLoading()"></iframe>
-                </div>
-            </div>
-
-            <div class="privacy-notice">
-                <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--primary);"></i> <span data-i18n="privacy_modulo_desc">Per ridurre i tempi di attesa, leggi l'informativa.</span></p>
+            <div class="privacy-notice" style="margin-top: 30px;">
+                <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--primary);"></i> Leggi l'informativa privacy.</p>
                 <a href="modulo-privacy.html" target="_blank" rel="noopener noreferrer">
-                    <span data-i18n="privacy_modulo_link">Leggi Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
+                    Informativa Trattamento Dati <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
                 </a>
             </div>
         </section>
@@ -289,38 +261,6 @@
             </div>
         </section>
 
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-id-card" aria-hidden="true"></i>
-                <h2 data-i18n="prof_info_title">Dati Professionali</h2>
-            </div>
-            <address class="professional-info">
-                <p><strong>Dott. Emanuel Savianu</strong><br>
-                <span data-i18n="prof_role">Medico di Medicina Generale</span><br>
-                C.R. 011189 nr. 0575 171 3428 | Ord. Medici AR n. 3499<br>
-                P.IVA 02348320512 | SDI JKKZDGR<br>
-                Via Ubaldo Pasqui 38, Arezzo<br>
-                <a href="mailto:emanuel.savianu@pec.omceoar.it">emanuel.savianu@pec.omceoar.it</a></p>
-            </address>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-qrcode" aria-hidden="true"></i>
-                <h2 data-i18n="billing_title">Dati Fatturazione Elettronica</h2>
-            </div>
-            <div class="billing-flex">
-                <div class="qr-container">
-                    <img src="data:image/png;base64,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" alt="QR Code Fatturazione" width="150" height="150" loading="lazy">
-                </div>
-                <div class="billing-info-text">
-                    <div class="billing-item"><strong>P. IVA:</strong> <span>02348320512</span></div>
-                    <div class="billing-item"><strong>Codice SDI:</strong> <span>JKKZDGR</span></div>
-                    <div class="billing-item"><strong>Sogg. Ric.:</strong> <span>Dott. Emanuel Savianu</span></div>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <aside role="complementary">
@@ -333,22 +273,22 @@
                 <i class="fas fa-address-book" aria-hidden="true"></i>
                 <h2 data-i18n="contacts_title">Contatti Studio</h2>
             </div>
+            
             <a href="tel:05751713428" class="contact-row">
-                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
-                <div><span data-i18n="label_secretary" class="contact-label">Segreteria</span><span class="contact-value">0575 171 3428</span></div>
+                <div class="icon-circle"><i class="fas fa-user-md"></i></div>
+                <div><span data-i18n="label_doctor" class="contact-label">Numero Dott. Savianu</span><span class="contact-value">0575 171 3428</span></div>
             </a>
+            
+            <a href="tel:0575910904" class="contact-row">
+                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                <div><span data-i18n="label_secretary" class="contact-label">Segreteria</span><span class="contact-value">0575 910 904</span></div>
+            </a>
+
             <div style="margin-bottom: 15px;">
                 <a href="https://www.google.com/maps/search/?api=1&query=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-radius: 10px 10px 0 0;">
                     <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
                     <div><span data-i18n="label_address" class="contact-label">Indirizzo</span><span style="display:block;">Via Ubaldo Pasqui 38, Arezzo</span></div>
                 </a>
-                <a href="https://www.google.com/maps/search/?api=1&query=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="btn-main" style="background:var(--primary); font-size: 0.85rem; padding: 8px; margin-top:5px; border-radius:6px; margin-left: 51px; width: auto; display: inline-block;">
-                    <i class="fas fa-location-arrow" style="font-size:1rem; margin-bottom:0; display:inline;"></i> <span data-i18n="btn_map" style="display:inline;">Portami qui</span>
-                </a>
-                <div style="margin-left: 51px; margin-top: 8px; font-size: 0.85rem; color: var(--text-medium); line-height: 1.4;">
-                    <i class="fas fa-bullseye" style="color: var(--primary); margin-right: 5px;"></i> <span data-i18n="doorbell">Campanello:</span> <strong>Studio Medico Ippocrate</strong><br>
-                    <i class="fas fa-layer-group" style="color: var(--primary); margin-right: 5px;"></i> <span data-i18n="floor">Primo Piano</span>
-                </div>
             </div>
             <a href="mailto:segreteria@savianu.it" class="contact-row">
                 <div class="icon-circle"><i class="far fa-envelope"></i></div>
@@ -378,16 +318,9 @@
 
 <footer role="contentinfo">
     <div class="footer-content">
-        <div style="margin-bottom: 25px;">
-            <button onclick="toggleRepsModal(true)" style="background: transparent; border: 1px solid #cbd5e0; padding: 8px 16px; border-radius: 6px; color: #718096; font-size: 0.85rem; cursor: pointer;">
-                <i class="fas fa-info-circle"></i> <span data-i18n="footer_reps">Per offerte commerciali e informatori scientifici</span>
-            </button>
-        </div>
         <p>© <span id="current-year">2026</span> Studio Medico Dott. Emanuel Savianu</p>
         <nav>
-            <a href="#" onclick="openWelcome(); return false;" data-i18n="link_patto">Patto di Collaborazione</a> | 
-            <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a> | 
-            <a href="https://www.omceoar.it/" target="_blank">Ordine dei Medici Arezzo</a>
+            <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
         </nav>
     </div>
 </footer>
