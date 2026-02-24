@@ -11,7 +11,7 @@
     <meta name="application-name" content="Dott. Savianu">
     
     <title>Dott. Emanuel Savianu | App</title>
-    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo. Prenotazioni, Millebook e Ricette.">
+    <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,278 +19,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & THEMING --- */
         :root {
-            /* Light Mode Defaults */
-            --bg-body: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-header: rgba(255, 255, 255, 0.95);
-            --bg-input: #ffffff;
-            --border-color: #e2e8f0;
-            
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --text-on-primary: #ffffff;
-            
-            --primary: #0066cc;
-            --primary-dark: #004c99;
-            --primary-light: #eff6ff; /* Background for icons */
-            
-            --accent: #10b981;
-            --danger: #ef4444;
-            --danger-bg: #fef2f2;
-            --warning-bg: #fffbeb;
-            --warning-border: #fcd34d;
-            --warning-text: #92400e;
-
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-            --radius: 16px;
-            --header-height: 60px;
+            --bg-body: #f8fafc; --bg-card: #ffffff; --bg-header: rgba(255, 255, 255, 0.95);
+            --border-color: #e2e8f0; --text-main: #1e293b; --text-muted: #64748b;
+            --text-on-primary: #ffffff; --primary: #0066cc; --primary-dark: #004c99;
+            --primary-light: #eff6ff; --danger: #ef4444; --danger-bg: #fef2f2;
+            --warning-bg: #fffbeb; --warning-border: #fcd34d; --warning-text: #92400e;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.06); --radius: 16px; --header-height: 60px;
         }
 
-        /* Dark Mode Overrides */
         [data-theme="dark"] {
-            --bg-body: #0f172a;
-            --bg-card: #1e293b;
-            --bg-header: rgba(30, 41, 59, 0.95);
-            --bg-input: #334155;
-            --border-color: #334155;
-            
-            --text-main: #f1f5f9;
-            --text-muted: #94a3b8;
-            --text-on-primary: #ffffff;
-            
-            --primary: #60a5fa; /* Lighter blue for contrast */
-            --primary-dark: #3b82f6;
-            --primary-light: #334155; /* Darker bg for icons */
-            
-            --danger: #f87171;
-            --danger-bg: #450a0a;
-            --warning-bg: #422006;
-            --warning-border: #78350f;
-            --warning-text: #fcd34d;
-
-            --shadow: none; /* Shadows look bad in dark mode, we use borders */
+            --bg-body: #0f172a; --bg-card: #1e293b; --bg-header: rgba(30, 41, 59, 0.95);
+            --border-color: #334155; --text-main: #f1f5f9; --text-muted: #94a3b8;
+            --primary: #60a5fa; --primary-dark: #3b82f6; --primary-light: #334155;
+            --danger: #f87171; --danger-bg: #450a0a; --warning-bg: #422006;
+            --warning-border: #78350f; --warning-text: #fcd34d; --shadow: none;
         }
 
-        /* --- RESET & BASE --- */
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            padding-bottom: 80px;
-            padding-top: var(--header-height);
-            overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg-body); color: var(--text-main); margin: 0; padding: var(--header-height) 0 80px 0; overflow-x: hidden; }
         a { text-decoration: none; color: inherit; }
         button { border: none; background: none; font-family: inherit; cursor: pointer; color: inherit; }
 
-        /* --- HEADER --- */
-        header {
-            background: var(--bg-header);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: var(--header-height);
-            z-index: 100;
-            padding: 0 20px;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.3s ease;
-        }
-
+        header { background: var(--bg-header); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); z-index: 100; padding: 0 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
         .brand h1 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
         .brand p { margin: 0; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
-
         .header-actions { display: flex; align-items: center; gap: 10px; }
-
-        .theme-toggle {
-            width: 32px; height: 32px;
-            display: flex; align-items: center; justify-content: center;
-            background: var(--bg-body);
-            border-radius: 50%;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            font-size: 1rem;
-        }
-
+        .theme-toggle { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--bg-body); border-radius: 50%; border: 1px solid var(--border-color); font-size: 1rem; }
         .lang-switch { display: flex; gap: 4px; background: var(--bg-body); padding: 3px; border-radius: 20px; border: 1px solid var(--border-color); }
-        .lang-btn { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); transition: 0.2s; }
+        .lang-btn { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
         .lang-btn.active { background: var(--primary); color: var(--text-on-primary); }
 
-        /* --- CONTAINER --- */
         .container { max-width: 600px; margin: 0 auto; padding: 15px; }
-
-        /* --- CARDS --- */
-        .card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-            transition: background 0.3s ease, border 0.3s ease;
-        }
-
+        .card { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); }
         .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
         .card-title i { color: var(--primary); }
 
-        /* --- ALERTS --- */
-        .alert {
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-            line-height: 1.4;
-        }
+        .alert { padding: 15px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 15px; display: flex; gap: 12px; align-items: flex-start; line-height: 1.4; }
         .alert-info { background: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
         .alert-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); }
 
-        /* --- HERO BTN --- */
-        .hero-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0066cc 0%, #004c99 100%); /* Always Blue gradient */
-            color: white !important;
-            padding: 25px;
-            border-radius: var(--radius);
-            text-align: center;
-            box-shadow: 0 10px 20px -5px rgba(0, 102, 204, 0.3);
-            margin-bottom: 20px;
-            width: 100%;
-        }
-        .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; opacity: 0.95; }
+        .hero-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; background: linear-gradient(135deg, #0066cc 0%, #004c99 100%); color: white !important; padding: 25px; border-radius: var(--radius); text-align: center; margin-bottom: 20px; width: 100%; }
+        .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; }
         .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; }
-        .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; opacity: 0.9; }
+        .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; }
 
-        /* --- ACTION GRID --- */
         .grid-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
-        
-        .action-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            padding: 18px 10px;
-            border-radius: var(--radius);
-            text-align: center;
-            box-shadow: var(--shadow);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            color: var(--text-main);
-            height: 100%;
-            transition: transform 0.1s, background 0.2s;
-        }
-        .action-btn:active { background: var(--primary-light); transform: scale(0.98); }
+        .action-btn { background: var(--bg-card); border: 1px solid var(--border-color); padding: 18px 10px; border-radius: var(--radius); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-main); }
         .action-btn i { font-size: 1.4rem; color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 50%; }
-        .action-btn span { font-weight: 700; font-size: 0.9rem; line-height: 1.2; }
-        .action-btn small { font-size: 0.7rem; color: var(--text-muted); line-height: 1.2; }
-
-        /* --- BOOKING & CALENDAR --- */
-        .choice-btn {
-            display: flex; align-items: center; gap: 15px;
-            padding: 15px; border: 2px solid var(--primary);
-            border-radius: 12px; background: var(--bg-card); color: var(--primary);
-            font-weight: 600; text-align: left;
-            margin-bottom: 10px;
-        }
-        .choice-btn div div { color: var(--text-main); } 
-
-        .calendar-container {
-            display: none;
-            background: #ffffff; /* FORCE WHITE background for calendar even in dark mode */
-            border-radius: 12px;
-            overflow: hidden;
-            margin-top: 15px;
-            position: relative;
-            min-height: 1400px; 
-            box-shadow: var(--shadow);
-        }
-        .calendar-container iframe { width: 100%; height: 100%; position: absolute; top: 0; left: 0; border: none; }
+        .action-btn span { font-weight: 700; font-size: 0.9rem; }
         
-        .back-btn {
-            display: inline-flex; align-items: center; gap: 5px;
-            background: var(--text-muted); color: var(--bg-card);
-            padding: 8px 15px; border-radius: 20px; font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        /* --- LISTS --- */
-        .link-item {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border-color);
-            color: var(--text-main);
-        }
-        .link-item:last-child { border-bottom: none; }
-        .link-item .icon { width: 36px; height: 36px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; flex-shrink: 0; }
+        .link-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
+        .link-item .icon { width: 36px; height: 36px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
         .link-item .content { flex-grow: 1; }
         .link-item .label { display: block; font-size: 0.75rem; color: var(--text-muted); }
         .link-item .val { display: block; font-weight: 600; font-size: 0.95rem; }
 
-        /* --- HOURS --- */
-        .hours-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border-color); font-size: 0.9rem; color: var(--text-main); }
-        .hours-row:last-child { border-bottom: none; }
+        .hours-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px dashed var(--border-color); font-size: 0.9rem; }
         .closed { color: var(--danger); font-weight: 600; }
 
-        /* --- MODALS --- */
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); backdrop-filter: blur(4px);
-            z-index: 2000; display: none;
-            align-items: center; justify-content: center;
-            padding: 20px;
-        }
-        
-        .modal-content {
-            background: var(--bg-card); width: 100%; max-width: 400px;
-            border-radius: 20px; padding: 25px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-            animation: slideUp 0.3s ease-out;
-            max-height: 90vh; overflow-y: auto; text-align: center;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: var(--bg-card); width: 100%; max-width: 400px; border-radius: 20px; padding: 25px; text-align: center; border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn-accept { background: var(--primary); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 600; width: 100%; font-size: 1rem; margin-top: 15px; }
 
-        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
-        .btn-accept {
-            background: var(--primary); color: white;
-            padding: 12px 30px; border-radius: 50px;
-            font-weight: 600; width: 100%; font-size: 1rem;
-            margin-top: 15px;
-        }
-
-        /* --- FOOTER --- */
         footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); }
-        .footer-links a { margin: 0 5px; text-decoration: underline; }
 
-        /* --- GUARDIA MEDICA --- */
-        .guard-card { border-color: var(--border-color) !important; }
-        .guard-btn {
-            display:block; background: var(--bg-body); 
-            padding:15px; border-radius:12px; text-align:center; 
-            font-weight:700; color:var(--text-main);
-            border: 1px solid var(--border-color);
-        }
-
+        /* Stili per ingrandire i bottoni Google in app mobile */
+        .google-calendar-container { display: flex; flex-direction: column; gap: 15px; align-items: center; padding: 10px 0; }
+        .google-calendar-container > div { transform: scale(1.1); transform-origin: center top; margin-bottom: 10px; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
@@ -299,33 +95,23 @@
         <div class="modal-content">
             <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
             <h3 style="margin: 0 0 10px 0;">Info Rappresentanti</h3>
-            <p style="font-size: 0.9rem; text-align: justify; color: var(--text-main);">
-                Il Dott. Savianu <strong>non riceve Informatori Scientifici su appuntamento</strong>.
-                <br><br>
-                I canali di contatto sono riservati esclusivamente ai pazienti. Eventuali appuntamenti prenotati verranno cancellati.
-            </p>
+            <p style="font-size: 0.9rem; text-align: justify;">Il Dott. Savianu <strong>non riceve Informatori Scientifici su appuntamento</strong>.</p>
             <button class="btn-accept" style="background: var(--danger);" onclick="closeModal('reps-modal')">Ho capito</button>
         </div>
     </div>
 
     <div id="welcome-modal" class="modal-overlay">
         <div class="modal-content" style="text-align: left;">
-            <div style="text-align: center; margin-bottom: 15px;">
-                <h2 style="margin:0; color: var(--primary);">Benvenuto</h2>
-            </div>
-            
+            <h2 style="margin:0 0 15px 0; color: var(--primary); text-align:center;">Benvenuto</h2>
             <div class="alert alert-danger" style="padding: 10px;">
-                <i class="fas fa-ambulance"></i>
-                <small><strong>Urgenze:</strong> Chiama il 112.</small>
+                <i class="fas fa-ambulance"></i><small><strong>Urgenze:</strong> Chiama il 112.</small>
             </div>
-
-            <p style="font-size: 0.9rem; color: var(--text-main);">Per migliorare il servizio utilizziamo strumenti digitali:</p>
-            <ul style="font-size: 0.9rem; color: var(--text-main); padding-left: 20px; margin-bottom: 20px;">
+            <p style="font-size: 0.9rem;">Per migliorare il servizio utilizziamo strumenti digitali:</p>
+            <ul style="font-size: 0.9rem; padding-left: 20px; margin-bottom: 20px;">
                 <li style="margin-bottom: 8px;"><strong>MilleBook:</strong> Per ricette, referti e messaggi brevi.</li>
                 <li style="margin-bottom: 8px;"><strong>Sito Web:</strong> Per prenotare appuntamenti.</li>
-                <li><strong>Telefono:</strong> Per necessità cliniche reali.</li>
+                <li><strong>Telefono:</strong> Per necessità cliniche reali (0575 171 3428).</li>
             </ul>
-
             <button class="btn-accept" onclick="closeModal('welcome-modal')">Ho letto e accetto</button>
         </div>
     </div>
@@ -335,12 +121,8 @@
             <h1>Dott. Emanuel Savianu</h1>
             <p data-i18n="subtitle">Medico di Medicina Generale</p>
         </div>
-        
         <div class="header-actions">
-            <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">
-                <i class="fas fa-moon" id="theme-icon"></i>
-            </button>
-
+            <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
             <div class="lang-switch">
                 <button class="lang-btn active" onclick="setLang('it')" id="btn-it">IT</button>
                 <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
@@ -360,19 +142,16 @@
             <button onclick="scrollToBooking()" class="action-btn">
                 <i class="far fa-calendar-check"></i>
                 <span data-i18n="book">Prenota Visita</span>
-                <small data-i18n="book_sub">Appuntamenti Online</small>
             </button>
-
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform" target="_blank" class="action-btn">
                 <i class="fas fa-pills"></i>
                 <span data-i18n="drugs">Modulo Farmaci</span>
-                <small data-i18n="drugs_sub">Se Millebook non va</small>
             </a>
         </div>
 
         <div class="alert alert-info">
             <i class="fas fa-info-circle" style="margin-top:2px; flex-shrink:0;"></i>
-            <span data-i18n="new_patient"><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". L'iscrizione a Millebook verrà fatta in studio.</span>
+            <span><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscriverò a Millebook in studio.</span>
         </div>
 
         <div class="card" id="booking-section">
@@ -380,155 +159,110 @@
                 <i class="far fa-calendar-alt"></i>
                 <span data-i18n="booking_title">Prenotazione Online</span>
             </div>
+            
+            <p style="font-size: 0.95rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">Tocca un bottone per prenotare.</p>
 
-            <div style="font-size: 0.8rem; color: var(--danger); margin-bottom: 15px; font-weight: 600;">
-                <i class="fas fa-ban"></i> <span data-i18n="no_reps">No Informatori Scientifici</span>
-            </div>
-
-            <div id="booking-ui" class="booking-choices">
-                <button class="choice-btn" onclick="loadCalendar('brief')">
-                    <i class="fas fa-stopwatch"></i>
-                    <div>
-                        <div data-i18n="visit_brief">Visita Breve</div>
-                        <small style="font-weight:400; color:var(--text-muted);" data-i18n="visit_brief_desc">Sintomi recenti (10 min)</small>
-                    </div>
-                </button>
-                
-                <button class="choice-btn" onclick="loadCalendar('first')">
-                    <i class="fas fa-user-plus"></i>
-                    <div>
-                        <div data-i18n="visit_first">Prima Visita</div>
-                        <small style="font-weight:400; color:var(--text-muted);" data-i18n="visit_first_desc">Nuovi pazienti (20 min)</small>
-                    </div>
-                </button>
-            </div>
-
-            <div id="calendar-wrapper" style="display: none;">
-                <button onclick="resetCalendar()" class="back-btn">
-                    <i class="fas fa-arrow-left"></i> <span data-i18n="back">Indietro</span>
-                </button>
-                <div class="calendar-container" id="cal-container">
-                    <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:0; color:#333;">
-                        <i class="fas fa-spinner fa-spin"></i> Loading...
-                    </div>
-                    <iframe id="cal-iframe" src="" scrolling="no"></iframe>
+            <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+            <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+            
+            <div class="google-calendar-container">
+                <div>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it',
+                          color: '#0066cc',
+                          label: 'PRIMA VISITA (45 min)',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
+                </div>
+                <div>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it',
+                          color: '#00b8a9',
+                          label: 'VISITA GENERICA (20 min)',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
+                </div>
+                <div>
+                    <script>
+                    (function() {
+                      var target = document.currentScript;
+                      window.addEventListener('load', function() {
+                        calendar.schedulingButton.load({
+                          url: 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it',
+                          color: '#f57c00',
+                          label: 'VISITA BREVE (10 min)',
+                          target,
+                        });
+                      });
+                    })();
+                    </script>
                 </div>
             </div>
-        </div>
+            </div>
 
         <div class="card">
-            <div class="card-title">
-                <i class="fas fa-clinic-medical"></i>
-                <span data-i18n="contacts">Contatti Studio</span>
-            </div>
+            <div class="card-title"><i class="fas fa-clinic-medical"></i><span data-i18n="contacts">Contatti Studio</span></div>
             
             <div class="link-list">
                 <a href="tel:05751713428" class="link-item">
+                    <div class="icon"><i class="fas fa-user-md"></i></div>
+                    <div class="content"><span class="label" data-i18n="label_doctor">Numero Dott. Savianu</span><span class="val">0575 171 3428</span></div>
+                </a>
+                
+                <a href="tel:0575910904" class="link-item">
                     <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="content">
-                        <span class="label" data-i18n="secretary">Segreteria</span>
-                        <span class="val">0575 171 3428</span>
-                    </div>
-                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
+                    <div class="content"><span class="label" data-i18n="label_secretary">Segreteria</span><span class="val">0575 910 904</span></div>
                 </a>
 
                 <a href="https://maps.google.com/?q=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="link-item">
                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="content">
-                        <span class="label" data-i18n="address">Indirizzo</span>
-                        <span class="val">Via Ubaldo Pasqui 38</span>
-                        <small style="font-size:0.75rem; color:var(--text-muted);">Arezzo - 1° Piano</small>
-                    </div>
-                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
-                </a>
-
-                <a href="mailto:segreteria@savianu.it" class="link-item">
-                    <div class="icon"><i class="far fa-envelope"></i></div>
-                    <div class="content">
-                        <span class="label">Email</span>
-                        <span class="val" style="font-size: 0.9rem;">segreteria@savianu.it</span>
-                    </div>
-                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
+                    <div class="content"><span class="label" data-i18n="address">Indirizzo</span><span class="val">Via Ubaldo Pasqui 38</span></div>
                 </a>
             </div>
         </div>
 
         <div class="card">
-            <div class="card-title">
-                <i class="far fa-clock"></i>
-                <span data-i18n="hours">Orari Ambulatorio</span>
-            </div>
+            <div class="card-title"><i class="far fa-clock"></i><span data-i18n="hours">Orari Ambulatorio</span></div>
             <div id="hours-table"></div>
-        </div>
-
-        <div class="card guard-card">
-            <div class="card-title">
-                <i class="fas fa-moon" style="color: var(--text-muted);"></i>
-                <span data-i18n="guard">Continuità Assistenziale</span>
-            </div>
-            <p style="font-size: 0.85rem; margin-top:0; color: var(--text-muted);" data-i18n="guard_desc">Notte, Festivi e Prefestivi</p>
-            <a href="tel:116117" class="guard-btn">
-                <i class="fas fa-phone"></i> 116 117
-            </a>
-        </div>
-
-        <div style="text-align: center; margin-top: 30px; margin-bottom: 20px; color: var(--text-muted);">
-            <p style="font-size: 0.8rem; margin-bottom: 5px; color: var(--text-main);"><strong>Dott. Emanuel Savianu</strong></p>
-            <p style="font-size: 0.7rem;">
-                P.IVA 02348320512 | SDI JKKZDGR<br>
-                PEC: emanuel.savianu@pec.omceoar.it
-            </p>
         </div>
 
     </div>
 
     <footer>
-        <div class="footer-links">
-            <a href="privacy.html">Privacy</a>
-            <a href="#" onclick="document.getElementById('welcome-modal').style.display='flex'; return false;">Info Legali</a>
-            <a href="#" onclick="document.getElementById('reps-modal').style.display='flex'; return false;">Reps</a>
-        </div>
-        <p style="margin-top:10px;">© <span id="year">2026</span></p>
+        <p>© <span id="year">2026</span> Dott. Emanuel Savianu</p>
     </footer>
 
     <script>
-        // --- THEME LOGIC ---
         function initTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const icon = document.getElementById('theme-icon');
-            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-
-            if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                icon.className = 'fas fa-sun';
-                metaThemeColor.setAttribute('content', '#0f172a');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                icon.className = 'fas fa-moon';
-                metaThemeColor.setAttribute('content', '#ffffff');
-            }
+            const saved = localStorage.getItem('theme');
+            const isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#0f172a' : '#ffffff');
         }
 
         function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const icon = document.getElementById('theme-icon');
-            const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-            
-            if (current === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                icon.className = 'fas fa-moon';
-                metaThemeColor.setAttribute('content', '#ffffff');
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                icon.className = 'fas fa-sun';
-                metaThemeColor.setAttribute('content', '#0f172a');
-            }
+            const isDark = document.documentElement.getAttribute('data-theme') === 'light';
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
+            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#0f172a' : '#ffffff');
         }
 
-        // --- I18N DATA ---
         document.getElementById('year').textContent = new Date().getFullYear();
         
         const i18n = {
@@ -537,115 +271,53 @@
                 millebook: "Accedi a MilleBook",
                 millebook_sub: "Ricette, Referti e Fascicolo",
                 book: "Prenota Visita",
-                book_sub: "Appuntamenti Online",
                 drugs: "Modulo Farmaci",
-                drugs_sub: "Se Millebook non va",
-                new_patient: "<strong>Nuovi Pazienti:</strong> Prenotate 'Prima Visita'. L'iscrizione a Millebook verrà fatta in studio.",
                 booking_title: "Prenotazione Online",
-                no_reps: "No Informatori Scientifici",
-                visit_brief: "Visita Breve",
-                visit_brief_desc: "Sintomi recenti (10 min)",
-                visit_first: "Prima Visita",
-                visit_first_desc: "Nuovi pazienti (20 min)",
-                back: "Indietro",
                 contacts: "Contatti Studio",
-                secretary: "Segreteria",
+                label_doctor: "Numero Dott. Savianu",
+                label_secretary: "Segreteria",
                 address: "Indirizzo",
-                hours: "Orari Ambulatorio",
-                guard: "Continuità Assistenziale",
-                guard_desc: "Notte, Festivi e Prefestivi"
+                hours: "Orari Ambulatorio"
             },
             en: {
                 subtitle: "General Practitioner - Arezzo",
                 millebook: "Login to MilleBook",
                 millebook_sub: "Prescriptions & Records",
                 book: "Book Visit",
-                book_sub: "Online Appointments",
                 drugs: "Drug Request",
-                drugs_sub: "If Millebook fails",
-                new_patient: "<strong>New Patients:</strong> Please book 'First Visit'. We will register you on Millebook at the office.",
                 booking_title: "Book Appointment",
-                no_reps: "No Pharma Reps",
-                visit_brief: "Brief Visit",
-                visit_brief_desc: "Recent symptoms (10 min)",
-                visit_first: "First Visit",
-                visit_first_desc: "New patients (20 min)",
-                back: "Back",
                 contacts: "Office Contacts",
-                secretary: "Reception",
+                label_doctor: "Dr. Savianu Phone",
+                label_secretary: "Reception",
                 address: "Address",
-                hours: "Opening Hours",
-                guard: "Out-of-Hours Service",
-                guard_desc: "Night, Holidays & Pre-holidays"
+                hours: "Opening Hours"
             }
         };
 
         const hoursData = [
-            { d: "Lunedì / Mon", t: "17:00 – 18:30" },
-            { d: "Martedì / Tue", t: "11:30 – 13:00" },
-            { d: "Mercoledì / Wed", t: "17:00 – 18:30" },
-            { d: "Giovedì / Thu", t: "11:30 – 13:00" },
-            { d: "Venerdì / Fri", t: "17:00 – 18:30" },
-            { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
+            { d: "Lunedì / Mon", t: "17:00 – 18:30" }, { d: "Martedì / Tue", t: "11:30 – 13:00" },
+            { d: "Mercoledì / Wed", t: "17:00 – 18:30" }, { d: "Giovedì / Thu", t: "11:30 – 13:00" },
+            { d: "Venerdì / Fri", t: "17:00 – 18:30" }, { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
         ];
 
-        // --- CALENDAR LINKS ---
-        const calLinks = {
-            'brief': 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ03WcJPqa_eny-M9U6KLtqAzHpLTmNFUteypWETGpqmhgWhzASJZNLlorTWOZ3LmN0wi36AINIr?gv=true&hl=it',
-            'first': 'https://calendar.google.com/calendar/appointments/AcZssZ18RVfugwJQ_BmPqV_t7afu_UKp2T9e8WLS6xE=?gv=true&hl=it'
-        };
-
-        // --- FUNCTIONS ---
         function renderHours() {
             const container = document.getElementById('hours-table');
-            let html = '';
-            hoursData.forEach(h => {
-                const cls = h.cls ? h.cls : '';
-                html += `<div class="hours-row"><strong>${h.d}</strong><span class="${cls}">${h.t}</span></div>`;
-            });
-            container.innerHTML = html;
+            container.innerHTML = hoursData.map(h => `<div class="hours-row"><strong>${h.d}</strong><span class="${h.cls||''}">${h.t}</span></div>`).join('');
         }
 
         function setLang(lang) {
             document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
             document.getElementById('btn-' + lang).classList.add('active');
-            
-            const t = i18n[lang];
-            for (const key in t) {
+            for (const key in i18n[lang]) {
                 const el = document.querySelector(`[data-i18n="${key}"]`);
-                if(el) el.innerHTML = t[key];
+                if(el) el.innerHTML = i18n[lang][key];
             }
             localStorage.setItem('lang', lang);
         }
 
         function scrollToBooking() {
             const el = document.getElementById('booking-section');
-            const y = el.getBoundingClientRect().top + window.scrollY - 70;
-            window.scrollTo({top: y, behavior: 'smooth'});
-        }
-
-        function loadCalendar(type) {
-            const ui = document.getElementById('booking-ui');
-            const wrapper = document.getElementById('calendar-wrapper');
-            const container = document.getElementById('cal-container');
-            const iframe = document.getElementById('cal-iframe');
-
-            ui.style.display = 'none';
-            wrapper.style.display = 'block';
-            container.style.display = 'block';
-            iframe.src = calLinks[type];
-            
-            setTimeout(() => {
-               const y = wrapper.getBoundingClientRect().top + window.scrollY - 70;
-               window.scrollTo({top: y, behavior: 'smooth'});
-            }, 100);
-        }
-
-        function resetCalendar() {
-            document.getElementById('booking-ui').style.display = 'flex';
-            document.getElementById('calendar-wrapper').style.display = 'none';
-            document.getElementById('cal-iframe').src = "";
-            scrollToBooking();
+            window.scrollTo({top: el.offsetTop - 70, behavior: 'smooth'});
         }
 
         function closeModal(id) {
@@ -653,34 +325,12 @@
             localStorage.setItem(id + '_seen_v2', new Date().getTime());
         }
 
-        function checkModals() {
-            const now = new Date().getTime();
-            
-            const welcomeSeen = localStorage.getItem('welcome-modal_seen_v2');
-            if(!welcomeSeen || (now - welcomeSeen > 7 * 24 * 60 * 60 * 1000)) {
-                document.getElementById('welcome-modal').style.display = 'flex';
-            }
-
-            const repsSeen = localStorage.getItem('reps-modal_seen_v2');
-            if(!repsSeen || (now - repsSeen > 30 * 24 * 60 * 60 * 1000)) {
-                 setTimeout(() => {
-                     if(document.getElementById('welcome-modal').style.display === 'none') {
-                         document.getElementById('reps-modal').style.display = 'flex';
-                     }
-                 }, 1000);
-            }
-        }
-
-        // --- INIT ---
         window.addEventListener('DOMContentLoaded', () => {
-            initTheme();
-            renderHours();
-            checkModals();
-            
+            initTheme(); renderHours();
+            if(!localStorage.getItem('welcome-modal_seen_v2')) document.getElementById('welcome-modal').style.display = 'flex';
             const savedLang = localStorage.getItem('lang');
             if(savedLang) setLang(savedLang);
         });
-
     </script>
 </body>
 </html>
