@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Dashboard Medico — Studio Ippocrate</title>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<style>
+  :root { --primary: #1a3a4a; --accent: #007c68; --bg: #f4f6f8; }
+  body { background: var(--bg); font-family: 'Lato', sans-serif; padding-bottom: 20px; }
+  
+  .header { background: var(--primary); color: white; padding: 15px 20px; border-radius: 0 0 20px 20px; margin-bottom: 20px;}
+  .stats-row { display: flex; gap: 10px; margin-bottom: 20px; padding: 0 15px;}
+  .stat-card { background: white; flex: 1; padding: 15px; border-radius: 12px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+  .stat-num { font-size: 1.8rem; font-weight: 900; line-height: 1; }
+  
+  .patient-card {
+    background: white; border-radius: 12px; padding: 15px; margin: 0 15px 12px 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); border-left: 5px solid #ccc;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .patient-card.waiting { border-left-color: #e9c46a; }
+  .patient-card.called { border-left-color: var(--accent); background: #f0fdfa; }
+  
+  .time-pill { background: var(--primary); color: white; padding: 4px 10px; border-radius: 8px; font-weight: 700; margin-right: 12px; }
+  
+  .action-btn {
+    border: none; width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; cursor: pointer; transition: 0.2s;
+  }
+  .btn-call { background: #e0f2f1; color: var(--accent); }
+  .btn-done { background: #fce4e4; color: #c0392b; margin-left: 8px; }
+
+  /* Toast notification */
+  .toast-container { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 1000; width: 90%; }
+</style>
+</head>
+<body>
+
+<div class="header shadow-sm">
+  <div class="d-flex justify-content-between align-items-center">
+    <div>
+      <h4 class="mb-0 fw-bold">Dott. R. Corsi</h4>
+      <small class="text-white-50"><i class="bi bi-circle-fill text-success" style="font-size: 0.6rem;"></i> Online</small>
+    </div>
+    <i class="bi bi-person-circle fs-1"></i>
+  </div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-card">
+    <div class="stat-num text-warning" id="countWaiting">2</div>
+    <div class="small fw-bold text-muted">IN ATTESA</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-num text-success" id="countDone">5</div>
+    <div class="small fw-bold text-muted">VISITATI</div>
+  </div>
+</div>
+
+<h6 class="fw-bold px-3 text-muted mb-3 text-uppercase">Coda Pazienti</h6>
+
+<div class="patient-card called" id="paziente1">
+  <div class="d-flex align-items-center">
+    <div class="time-pill">09:00</div>
+    <div>
+      <div class="fw-bold" style="color: var(--accent);">Paziente #14</div>
+      <small class="text-muted">📢 Chiamato nello studio</small>
+    </div>
+  </div>
+  <div class="d-flex">
+    <button class="action-btn btn-done" onclick="concludiVisita('paziente1')" title="Concludi visita"><i class="bi bi-check-lg"></i></button>
+  </div>
+</div>
+
+<div class="patient-card waiting" id="paziente2">
+  <div class="d-flex align-items-center">
+    <div class="time-pill">09:15</div>
+    <div>
+      <div class="fw-bold" style="color: var(--primary);">Paziente #15</div>
+      <small class="text-muted">⏳ In attesa in sala</small>
+    </div>
+  </div>
+  <div class="d-flex">
+    <button class="action-btn btn-call" onclick="chiamaPaziente('paziente2', '#15')" title="Chiama al monitor"><i class="bi bi-megaphone-fill"></i></button>
+  </div>
+</div>
+
+<div class="patient-card waiting" id="paziente3">
+  <div class="d-flex align-items-center">
+    <div class="time-pill">09:30</div>
+    <div>
+      <div class="fw-bold" style="color: var(--primary);">Paziente #16</div>
+      <small class="text-muted">⏳ In attesa in sala</small>
+    </div>
+  </div>
+  <div class="d-flex">
+    <button class="action-btn btn-call" onclick="chiamaPaziente('paziente3', '#16')" title="Chiama al monitor"><i class="bi bi-megaphone-fill"></i></button>
+  </div>
+</div>
+
+<div class="toast-container" id="toastBox"></div>
+
+<script>
+  function mostraToast(messaggio, colore) {
+    const box = document.getElementById('toastBox');
+    box.innerHTML = `<div class="alert alert-${colore} shadow text-center fw-bold">${messaggio}</div>`;
+    setTimeout(() => box.innerHTML = '', 3000);
+  }
+
+  function chiamaPaziente(idCard, numero) {
+    const card = document.getElementById(idCard);
+    card.classList.remove('waiting');
+    card.classList.add('called');
+    card.querySelector('small').innerHTML = '📢 Chiamato nello studio';
+    card.querySelector('.fw-bold').style.color = 'var(--accent)';
+    
+    // Cambia bottone in "Concludi"
+    const btnContainer = card.querySelector('.d-flex:last-child');
+    btnContainer.innerHTML = `<button class="action-btn btn-done" onclick="concludiVisita('${idCard}')"><i class="bi bi-check-lg"></i></button>`;
+    
+    mostraToast(`🔊 Chiamata per Paziente ${numero} inviata al monitor!`, 'success');
+  }
+
+  function concludiVisita(idCard) {
+    const card = document.getElementById(idCard);
+    card.style.display = 'none';
+    
+    // Aggiorna contatori finti
+    let inAttesa = parseInt(document.getElementById('countWaiting').innerText);
+    if(inAttesa > 0) document.getElementById('countWaiting').innerText = inAttesa - 1;
+    
+    let visitati = parseInt(document.getElementById('countDone').innerText);
+    document.getElementById('countDone').innerText = visitati + 1;
+
+    mostraToast(`✅ Visita conclusa. Paziente rimosso dalla coda.`, 'secondary');
+  }
+</script>
+</body>
+</html>
