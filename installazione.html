@@ -148,10 +148,19 @@
     <span class="badge">⚙️ Node.js 18+</span>
     <span class="badge">🔄 PM2 (auto-avvio)</span>
     <span class="badge">📡 Rete WiFi locale</span>
+    <span class="badge" style="background:rgba(0,184,148,.25);border-color:rgba(0,184,148,.4);">🟢 Server: 192.168.0.1</span>
   </div>
 </div>
 
 <div class="page">
+
+  <div class="box success" style="margin-bottom:28px;border-left:6px solid var(--accent);border-radius:14px;padding:20px 24px;">
+    <span class="box-icon" style="font-size:1.8rem;">🟢</span>
+    <div>
+      <p style="font-size:1.1rem;font-weight:900;color:#065f46;margin-bottom:6px;">Installazione completata con successo!</p>
+      <p>Il server Studio Ippocrate è <strong>già operativo</strong> su questo PC. Le sezioni 2–7 della guida sono già state completate. Conserva questo documento come riferimento per i comandi di manutenzione e gli indirizzi da distribuire ai dispositivi dello studio.</p>
+    </div>
+  </div>
 
   <div class="toc">
     <h3>📋 Indice</h3>
@@ -296,21 +305,22 @@
   <!-- ─── SEZIONE 5 ─────────────────────────────────────────────────────────── -->
   <h2 id="avvio">5. Primo avvio (test)</h2>
 
-  <p>Prima di configurare PM2, verifica che tutto funzioni avviando il server direttamente:</p>
-
+  <p>Avvia il server con PM2 nella cartella del progetto:</p>
   <pre><span class="comment"># Assicurati di essere in C:\StudioIppocrate\</span>
-<span class="cmd">node server.js</span></pre>
+<span class="cmd">pm2 start server.js --name "Ippocrate"</span></pre>
 
-  <p>Se tutto è corretto, vedrai nel prompt un output simile a questo:</p>
+  <p>Se tutto è corretto, il prompt mostrerà:</p>
   <div class="pm2-output">
-╔══════════════════════════════════════════════════╗<br>
-║ &nbsp; <span class="green">🏥  STUDIO IPPOCRATE v2.0 — Server avviato!</span> &nbsp; ║<br>
-╠══════════════════════════════════════════════════╣<br>
-║ &nbsp;Tablet check-in: &nbsp;<span class="yellow">http://192.168.1.50:3000/</span> &nbsp; &nbsp; &nbsp; ║<br>
-║ &nbsp;Dashboard medico: <span class="yellow">http://192.168.1.50:3000/medico</span> ║<br>
-║ &nbsp;Monitor sala: &nbsp; &nbsp;<span class="yellow">http://192.168.1.50:3000/monitor</span> ║<br>
-║ &nbsp;Segreteria/Admin: <span class="yellow">http://192.168.1.50:3000/admin</span> &nbsp;║<br>
-╚══════════════════════════════════════════════════╝
+[PM2] Spawning PM2 daemon with pm2_home=<span class="yellow">C:\Users\user\.pm2</span><br>
+[PM2] PM2 Successfully daemonized<br>
+[PM2] Starting <span class="white">C:\StudioIppocrate\server.js</span> in fork_mode (1 instance)<br>
+[PM2] Done.<br>
+<br>
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐<br>
+│ id │ name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ mode &nbsp; &nbsp; │ ↺ &nbsp; &nbsp;│ status &nbsp; &nbsp;│ cpu &nbsp; &nbsp; &nbsp;│ memory &nbsp; │<br>
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤<br>
+│ 0 &nbsp;│ <span class="green">Ippocrate</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ fork &nbsp; &nbsp; │ 0 &nbsp; &nbsp;│ <span class="green">online</span> &nbsp; &nbsp;│ 0% &nbsp; &nbsp; &nbsp; │ 41.2mb &nbsp; │<br>
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
   </div>
 
   <p>Apri Chrome o Edge sul PC della segreteria e vai su <code>http://localhost:3000/admin</code>. Se vedi il pannello segreteria, il server funziona. ✅</p>
@@ -337,11 +347,11 @@
         <strong>Verifica che sia in esecuzione</strong>
         <pre><span class="cmd">pm2 list</span></pre>
         <div class="pm2-output">
-┌─────┬────────────┬──────────┬───────┬──────────┬──────┐<br>
-│ id  │ name       │ status   │ cpu   │ mem      │ ... │<br>
-├─────┼────────────┼──────────┼───────┼──────────┼──────┤<br>
-│ 0   │ <span class="green">Ippocrate</span>  │ <span class="green">online</span>   │ 0%    │ 45mb     │ ... │<br>
-└─────┴────────────┴──────────┴───────┴──────────┴──────┘
+┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐<br>
+│ id │ name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ mode &nbsp; &nbsp; │ ↺ &nbsp; &nbsp;│ status &nbsp; &nbsp;│ cpu &nbsp; &nbsp; &nbsp;│ memory &nbsp; │<br>
+├────┼────────────────────┼──────────┼──────┼───────────┼──────────┼──────────┤<br>
+│ 0 &nbsp;│ <span class="green">Ippocrate</span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; │ fork &nbsp; &nbsp; │ 0 &nbsp; &nbsp;│ <span class="green">online</span> &nbsp; &nbsp;│ 0% &nbsp; &nbsp; &nbsp; │ 60.1mb &nbsp; │<br>
+└────┴────────────────────┴──────────┴──────┴───────────┴──────────┴──────────┘
         </div>
       </div>
     </li>
@@ -350,7 +360,9 @@
       <div class="step-body">
         <strong>Salva la configurazione PM2</strong>
         <pre><span class="cmd">pm2 save</span>
-<span class="comment"># Risposta attesa: [PM2] Saving current process list...</span></pre>
+<span class="comment"># Output atteso:</span>
+[PM2] Saving current process list...
+[PM2] Successfully saved in C:\Users\user\.pm2\dump.pm2</pre>
       </div>
     </li>
   </ol>
@@ -377,53 +389,53 @@
   <!-- ─── SEZIONE 7 ─────────────────────────────────────────────────────────── -->
   <h2 id="autostart">7. Avvio automatico con Windows</h2>
 
-  <p>Per far sì che il server si avvii automaticamente ogni volta che il PC si accende, segui questi passaggi:</p>
+  <p>L'avvio automatico è già stato configurato con successo su questo PC. Il messaggio ricevuto è stato:</p>
 
-  <ol class="step-list">
-    <li>
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <strong>Configura pm2-windows-startup</strong>
-        <pre><span class="cmd">pm2-startup install</span>
-<span class="comment"># Leggi attentamente l'output: potrebbe chiederti</span>
-<span class="comment"># di eseguire un altro comando come Amministratore</span></pre>
-      </div>
-    </li>
-    <li>
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <strong>Alternativa manuale: Task Scheduler Windows</strong>
-        <p>Se pm2-startup dà problemi, usa l'Utilità di pianificazione di Windows:</p>
-        <p>Premi <code>Windows</code>, cerca <em>"Utilità di pianificazione"</em>, apri il programma e crea una nuova attività di base con queste impostazioni:</p>
-        <ul style="margin-top:8px;line-height:2;">
-          <li><strong>Trigger:</strong> All'avvio del computer</li>
-          <li><strong>Azione:</strong> Avvia programma</li>
-          <li><strong>Programma:</strong> <code>pm2</code></li>
-          <li><strong>Argomenti:</strong> <code>resurrect</code></li>
-          <li>Spunta: <em>"Esegui con privilegi più elevati"</em></li>
-        </ul>
-      </div>
-    </li>
-  </ol>
+  <div class="pm2-output">
+C:\StudioIppocrate&gt; <span class="white">pm2-startup install</span><br>
+<span class="green">Successfully added PM2 startup registry entry.</span>
+  </div>
 
   <div class="box success">
     <span class="box-icon">✅</span>
-    <p><strong>Test finale:</strong> Riavvia il PC, aspetta 30 secondi, apri il browser e vai su <code>http://localhost:3000/admin</code>. Se vedi il pannello segreteria senza aver fatto nulla, l'avvio automatico è configurato correttamente.</p>
+    <p>Questo significa che ad ogni avvio del PC, Windows rilancerà automaticamente PM2 con il processo <strong>Ippocrate</strong> già salvato. Non è necessario fare nulla di più.</p>
+  </div>
+
+  <h3>Test di verifica (opzionale)</h3>
+  <p>Per confermare che tutto funzioni dopo un riavvio:</p>
+  <ol style="line-height:2.2;padding-left:20px;">
+    <li>Riavvia il PC</li>
+    <li>Aspetta circa 30 secondi dopo l'avvio del desktop</li>
+    <li>Apri il browser e vai su <code>http://localhost:3000/admin</code></li>
+    <li>Se vedi il pannello segreteria senza aver avviato nulla manualmente → ✅ funziona</li>
+  </ol>
+
+  <div class="box warning">
+    <span class="box-icon">⚠️</span>
+    <p>Se dopo un riavvio il server non parte, esegui nuovamente (come Amministratore):</p>
+    <pre style="margin:8px 0 0"><span class="cmd">pm2 save</span>
+<span class="cmd">pm2-startup install</span></pre>
   </div>
 
   <!-- ─── SEZIONE 8 ─────────────────────────────────────────────────────────── -->
   <h2 id="indirizzi">8. Indirizzi di accesso dalla rete</h2>
 
-  <div class="box info">
+  <div class="box success" style="border-left:6px solid var(--accent);">
     <span class="box-icon">📡</span>
-    <p>Tutti i dispositivi devono essere connessi alla <strong>stessa rete WiFi</strong> dello studio. L'indirizzo IP locale del PC server (mostrato all'avvio — es. <code>192.168.1.50</code>) è quello da usare dagli altri dispositivi.</p>
+    <div>
+      <p style="font-weight:900;color:#065f46;font-size:1rem;margin-bottom:4px;">IP del server confermato: <code style="background:#d1fae5;color:#065f46;font-size:1rem;">192.168.0.1</code></p>
+      <p>Questo è l'indirizzo da usare su tutti i dispositivi dello studio. Rilevato con <code>ipconfig</code> sulla scheda <strong>"Connessione alla rete locale (LAN)"</strong>.</p>
+    </div>
   </div>
 
-  <h3>Come trovare l'IP del PC server</h3>
-  <pre><span class="comment"># Nel Prompt dei Comandi del PC server:</span>
-<span class="cmd">ipconfig</span>
-<span class="comment"># Cerca "Indirizzo IPv4" sotto "Scheda LAN Ethernet" o "WiFi"</span>
-<span class="comment"># Sarà qualcosa come: 192.168.1.50</span></pre>
+  <h3>Output ipconfig del PC server (riferimento)</h3>
+  <div class="pm2-output">
+Scheda Ethernet Connessione alla rete locale (LAN):<br>
+&nbsp;&nbsp; Suffisso DNS specifico per connessione: <span class="yellow">broadband</span><br>
+&nbsp;&nbsp; Indirizzo IPv4. . . . . . . . . . . . : <span class="green">192.168.0.1</span><br>
+&nbsp;&nbsp; Subnet mask . . . . . . . . . . . . . : 255.255.255.0<br>
+&nbsp;&nbsp; Gateway predefinito . . . . . . . . . : 192.168.0.7
+  </div>
 
   <table class="url-table">
     <thead>
@@ -441,30 +453,30 @@
       </tr>
       <tr>
         <td>📱 Tablet check-in</td>
-        <td><code>http://192.168.1.50:3000/</code></td>
-        <td>Sostituisci con il tuo IP</td>
+        <td><code>http://192.168.0.1:3000/</code></td>
+        <td>Pagina principale check-in pazienti</td>
       </tr>
       <tr>
         <td>🩺 PC dei medici</td>
-        <td><code>http://192.168.1.50:3000/medico</code></td>
+        <td><code>http://192.168.0.1:3000/medico</code></td>
         <td>Ogni medico sceglie il proprio nome</td>
       </tr>
       <tr>
         <td>📺 Monitor sala d'attesa</td>
-        <td><code>http://192.168.1.50:3000/monitor</code></td>
-        <td>Metti il browser a schermo intero (F11)</td>
+        <td><code>http://192.168.0.1:3000/monitor</code></td>
+        <td>Premi F11 per schermo intero</td>
       </tr>
       <tr>
         <td>🛡️ Segreteria (da altro PC)</td>
-        <td><code>http://192.168.1.50:3000/admin</code></td>
-        <td>—</td>
+        <td><code>http://192.168.0.1:3000/admin</code></td>
+        <td>Pannello completo di gestione</td>
       </tr>
     </tbody>
   </table>
 
   <div class="box warning">
     <span class="box-icon">💡</span>
-    <p><strong>Consiglio:</strong> Imposta un IP statico sul PC server (da Pannello di controllo → Rete → Proprietà IPv4) in modo che l'indirizzo non cambi mai al riavvio del router.</p>
+    <p><strong>Importante:</strong> L'IP <code>192.168.0.1</code> potrebbe cambiare se il PC si riavvia o il router si resetta. Per renderlo permanente, vai su <em>Pannello di controllo → Centro connessioni di rete → Ethernet → Proprietà → Protocollo Internet versione 4 (TCP/IPv4)</em> e imposta manualmente IP statico <code>192.168.0.1</code>, subnet mask <code>255.255.255.0</code>, gateway <code>192.168.0.7</code>.</p>
   </div>
 
   <!-- ─── SEZIONE 9 ─────────────────────────────────────────────────────────── -->
