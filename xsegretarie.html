@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <title>Promemoria Segreteria</title>
+    <title>Promemoria Segreteria - Studio Medico</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -25,12 +25,14 @@
             border-bottom: 2px dashed #2a9d8f;
             padding-bottom: 10px;
             font-size: 22px;
+            margin-bottom: 30px;
         }
         .card {
             margin-bottom: 20px;
             padding: 15px;
             border: 1px solid #eee;
             border-radius: 10px;
+            background-color: #fff;
         }
         .situazione {
             font-weight: bold;
@@ -41,17 +43,19 @@
         }
         .cosa-dire {
             background-color: #f1f8f7;
-            padding: 10px 15px;
+            padding: 12px 18px;
             border-left: 5px solid #2a9d8f;
             font-style: italic;
             margin-top: 10px;
-            line-height: 1.4;
+            line-height: 1.5;
+            color: #333;
         }
         .nota {
-            font-size: 0.8em;
+            font-size: 0.85em;
             color: #e76f51;
             font-weight: bold;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         footer {
             text-align: center;
@@ -59,55 +63,58 @@
             font-size: 0.9em;
             color: #888;
         }
+        strong {
+            color: #2a9d8f;
+        }
     </style>
 </head>
 <body>
 
 <div class="foglio">
-    <h1>Come rispondere ai pazienti (con il sorriso!)</h1>
+    <h1>Guida Rapida per la Segreteria</h1>
 
     <div class="card">
-        <span class="situazione">📍 Arrivano senza appuntamento</span>
-        <span class="nota">Regola: Niente visita se non è un'emergenza</span>
+        <span class="situazione">📍 Pazienti senza appuntamento</span>
+        <span class="nota">Priorità alla programmazione</span>
         <div class="cosa-dire">
-            "Il Dottore riceve solo su appuntamento per non far aspettare troppo nessuno. Se però non si sente bene proprio ora, lo avviso subito così capiamo se può visitarla subito."
+            "Il Dottore riceve su appuntamento per evitare lunghe attese. Se però non si sente bene, <strong>avviso subito il Medico così capiamo se può visitarla appena finisce con gli appuntamenti fissati.</strong>"
         </div>
     </div>
 
     <div class="card">
-        <span class="situazione">💊 Vogliono le solite ricette</span>
-        <span class="nota">Regola: Usare l'email o il box (48 ore di tempo)</span>
+        <span class="situazione">💊 Richiesta ricette e farmaci</span>
+        <span class="nota">Promuovere il digitale</span>
         <div class="cosa-dire">
-            "Per le medicine che prende sempre, le chiedo di scriverci un'email o lasciarci un foglietto nel box. Così non deve fare la fila e le ricette le trova pronte tra due giorni!"
+            "Per le ricette può scriverci una <strong>Email</strong> o usare <strong>Doctolib</strong>: è il modo più veloce! Le ricette saranno pronte <strong>prima possibile</strong> (al massimo entro due giorni lavorativi)."
         </div>
     </div>
 
     <div class="card">
-        <span class="situazione">🤒 Serve il certificato di malattia</span>
-        <span class="nota">Regola: Deve venire oggi, ma deve aspettare un buco</span>
+        <span class="situazione">🤒 Certificati di malattia (INPS)</span>
+        <span class="nota">Gestione buchi in agenda</span>
         <div class="cosa-dire">
-            "Per la malattia il Medico deve visitarla per forza oggi. La inserisco tra un appuntamento e l'altro, porti un po' di pazienza per l'attesa e la facciamo entrare appena possibile."
+            "Per la malattia è necessaria la visita. Il Dottore la visiterà per il certificato <strong>non appena si libererà dagli appuntamenti già previsti</strong>. Le chiedo di avere un po' di pazienza per l'attesa."
         </div>
     </div>
 
     <div class="card">
-        <span class="situazione">📞 Vogliono parlare al telefono col Medico</span>
-        <span class="nota">Regola: Non si passa il telefono mentre visita</span>
+        <span class="situazione">📋 Visione esami e referti specialistici</span>
+        <span class="nota">Consegna e visione differita</span>
         <div class="cosa-dire">
-            "In questo momento il Dottore sta visitando un'altra persona. Mi lasci pure il suo numero e il motivo: la richiama lui appena finisce le visite, va bene?"
+            "Può <strong>lasciare qui i referti</strong> (o inviarli per email): il Medico li visionerà con calma. Le faremo sapere noi se dopo averli letti sarà necessario fissare un appuntamento."
         </div>
     </div>
 
     <div class="card">
-        <span class="situazione">📋 Vogliono far vedere gli esami "al volo"</span>
-        <span class="nota">Regola: Gli esami si guardano con calma in visita</span>
+        <span class="situazione">📞 Telefonate dirette al Medico</span>
+        <span class="nota">Filtro durante le visite</span>
         <div class="cosa-dire">
-            "Il Dottore preferisce guardare gli esami con calma in studio. Se vuole me li lascia o li spedisce per email, poi le facciamo sapere noi se serve vederci o se va tutto bene."
+            "In questo momento il Dottore sta visitando. Mi lasci pure il suo numero e il motivo della chiamata: la richiamerà lui appena possibile non appena finisce le visite."
         </div>
     </div>
 
     <footer>
-        Gentili ma fermi: così lavoriamo meglio tutti!
+        Lavoriamo insieme per uno studio più ordinato e senza code! ❤️
     </footer>
 </div>
 
