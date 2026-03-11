@@ -24,25 +24,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .toggle-btn {
-            display: block;
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto 30px auto;
-            padding: 15px 20px;
-            background-color: #0056b3;
-            color: white;
-            font-size: 1.1em;
-            font-weight: bold;
-            text-align: center;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        .toggle-btn:hover {
-            background-color: #004494;
-        }
         .quick-summary {
             display: flex;
             flex-direction: column;
@@ -77,7 +58,6 @@
         }
 
         #more-info {
-            display: none;
             background: white;
             padding: 30px;
             border-radius: 8px;
@@ -130,8 +110,6 @@
     <div class="header-image">
         <img src="PIR.png" alt="Infografica Punti di Intervento Rapido (PIR)">
     </div>
-
-    <button class="toggle-btn" onclick="toggleInfo()">Vuoi saperne di più?</button>
 
     <div class="quick-summary">
         <div class="summary-box summary-yes">
@@ -424,20 +402,6 @@
             </li>
         </ul>
     </div>
-
-    <script>
-        function toggleInfo() {
-            var infoDiv = document.getElementById("more-info");
-            var btn = document.querySelector(".toggle-btn");
-            if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
-                infoDiv.style.display = "block";
-                btn.textContent = "Nascondi Guida Operativa";
-            } else {
-                infoDiv.style.display = "none";
-                btn.textContent = "Vuoi saperne di più?";
-            }
-        }
-    </script>
 
 </body>
 </html>
