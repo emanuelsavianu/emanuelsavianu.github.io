@@ -43,12 +43,46 @@
         .toggle-btn:hover {
             background-color: #004494;
         }
+        .quick-summary {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .summary-box {
+            background: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .summary-yes {
+            border-left: 5px solid #28a745;
+        }
+        .summary-no {
+            border-left: 5px solid #dc3545;
+        }
+        .summary-box h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .summary-yes h3 { color: #28a745; }
+        .summary-no h3 { color: #dc3545; }
+        
+        .summary-box ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .summary-box li {
+            margin-bottom: 10px;
+        }
+
         #more-info {
             display: none;
             background: white;
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-top: 20px;
         }
         h1, h2, h3 {
             color: #004494;
@@ -89,21 +123,40 @@
         .caution-box strong {
             color: #856404;
         }
-        ul {
-            margin-bottom: 20px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
     </style>
 </head>
 <body>
 
     <div class="header-image">
-        <img src="PIR.jpg" alt="Infografica Punti di Intervento Rapido (PIR)">
+        <img src="PIR.png" alt="Infografica Punti di Intervento Rapido (PIR)">
     </div>
 
     <button class="toggle-btn" onclick="toggleInfo()">Vuoi saperne di più?</button>
+
+    <div class="quick-summary">
+        <div class="summary-box summary-yes">
+            <h3>🟢 SÌ - COSA POSSIAMO GESTIRE AL PIR (Criteri di Inclusione)</h3>
+            <ul>
+                <li><strong>Dolori acuti:</strong> Coliche sospette (renali o colecisti), dolore addominale da gastroenterite non complicata (anche per flebo reidratante), lombalgie e sciatalgie acute (primo episodio o riacutizzazione).</li>
+                <li><strong>Piccola Traumatologia:</strong> Traumi osteoarticolari senza segni di frattura (contusioni, distorsioni), spalla dolorosa (senza blocco articolare).</li>
+                <li><strong>Problemi cutanei e Ferite:</strong> Ferite superficiali da suturare, morsi di animali (se superficiali e in pz immunocompetenti), ascessi cutanei, orticaria, dermatiti, ustioni lievi (I grado &lt;5%, II grado &lt;1% della superficie corporea).</li>
+                <li><strong>Testa/Collo/Occhi:</strong> Cefalee o emicranie note in fase acuta, odontalgia, otalgia, rimozione tappi di cerume, vertigini periferiche, congiuntiviti ed emorragie congiuntivali senza calo della vista.</li>
+                <li><strong>Varie:</strong> Ritenzione urinaria acuta (con globo da oltre 3h), edemi declivi (anche da scompenso cardiaco), reazioni allergiche lievi, crisi ipertensive asintomatiche, crisi d'ansia in pz noti, febbre/sindromi influenzali (senza criteri di sepsi).</li>
+            </ul>
+        </div>
+
+        <div class="summary-box summary-no">
+            <h3>🔴 NO - RED FLAGS E CRITERI DI ESCLUSIONE (Dritti in PS!)</h3>
+            <ul>
+                <li><strong>Criteri assoluti di esclusione generali:</strong> Dolore toracico, dispnea acuta, cefalea intensa e inusuale con dolore acuto, qualsiasi sintomo di disturbo neurologico acuto.</li>
+                <li><strong>Sui Traumi:</strong> Impotenza funzionale totale, vasti ematomi tesi (soprattutto se il paziente è in TAO/NAO), ferite penetranti o lesioni tendinee sospette.</li>
+                <li><strong>Sulla Febbre:</strong> Febbre &gt;38°C se associata a qSOFA positivo, cefalea nucale, segni di meningismo, SatO2 &lt; 92%, porpora, vomito/diarrea profusi, o in pazienti fragili/immunodepressi.</li>
+                <li><strong>Sul Dolore Lombare:</strong> Se associato a deficit sensitivo/motorio, incontinenza, storia di aneurisma dell'aorta addominale, o insorgenza improvvisa e violenta.</li>
+                <li><strong>Sulle Cefalee:</strong> Insorgenza improvvisa e violenta (thunderclap), insorta dopo sforzo, rigidità nucale, fotofobia, o se il paziente ha storia di aneurisma/neurochirurgia.</li>
+                <li><strong>Sulle Allergie/Dermatologia:</strong> Difficoltà respiratoria (anche solo soggettiva), edema del volto/labbra, eruzione cutanea generalizzata entro 12 ore, ustioni al volto o da agenti chimici.</li>
+            </ul>
+        </div>
+    </div>
 
     <div id="more-info">
         <h1>Guida Operativa per i Punti di Intervento Rapido (PIR)</h1>
