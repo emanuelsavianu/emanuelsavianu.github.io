@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Operativa PIR</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9fbfd;
+        }
+        .header-image {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .toggle-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto 30px auto;
+            padding: 15px 20px;
+            background-color: #0056b3;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toggle-btn:hover {
+            background-color: #004494;
+        }
+        #more-info {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        h1, h2, h3 {
+            color: #004494;
+        }
+        h1 {
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        h2 {
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #dee2e6;
+            text-align: left;
+        }
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #495057;
+        }
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        .caution-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .caution-box strong {
+            color: #856404;
+        }
+        ul {
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header-image">
+        <img src="PIR.jpg" alt="Infografica Punti di Intervento Rapido (PIR)">
+    </div>
+
+    <button class="toggle-btn" onclick="toggleInfo()">Vuoi saperne di più?</button>
+
+    <div id="more-info">
+        <h1>Guida Operativa per i Punti di Intervento Rapido (PIR)</h1>
+        
+        <h2>1. Definizione e Mission del Modello PIR</h2>
+        <p>I Punti di Intervento Rapido (PIR) rappresentano la risposta organizzativa della Regione Toscana (in attuazione della DGR 223 del 02-03-2026 e del DM 77/22) per la gestione delle urgenze differibili di bassa complessità clinico-assistenziale. Il modello è concepito per decongestionare il sistema di emergenza-urgenza attraverso un filtro territoriale strutturato.</p>
+        <p><strong>Obiettivi strategici:</strong></p>
+        <ul>
+            <li><strong>Copertura diurna AFT:</strong> Garantire l'assistenza medica diurna (H12/H24) nelle Case della Comunità tramite i medici del ruolo unico.</li>
+            <li><strong>Riduzione overcrowding PS:</strong> Intercettare i codici minori (4 e 5) per ridurre i tempi di attesa ospedalieri e il fenomeno del boarding.</li>
+            <li><strong>Continuità assistenziale:</strong> Consolidare il raccordo tra MMG/PLS e strutture territoriali per una presa in carico precoce.</li>
+            <li><strong>Integrazione professionale:</strong> Applicare protocolli condivisi tra Medici RUAP, specialisti e infermieri.</li>
+            <li><strong>Efficienza operativa:</strong> Dimissione del paziente, ove possibile, entro 90 minuti dall'accesso.</li>
+        </ul>
+
+        <h2>2. Modelli Operativi e Tipologie di Accesso</h2>
+        <p>In base alla sperimentazione e al quadro normativo vigente, si distinguono tre modelli operativi. L'estensione del modello PIR A è obbligatoria per le Case della Comunità, mentre i modelli B e H sono classificati come buone pratiche.</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipologia</th>
+                    <th>Contesto e Sede</th>
+                    <th>Modalità di Accesso</th>
+                    <th>Classificazione</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>PIR A</strong></td>
+                    <td>Case della Comunità (CdC) Hub/Spoke (contesti urbani).</td>
+                    <td>Filtrato da MMG/PLS o indirizzato dalla Centrale 116117.</td>
+                    <td>Obbligatorio</td>
+                </tr>
+                <tr>
+                    <td><strong>PIR B</strong></td>
+                    <td>Presidi territoriali (aree a bassa densità/carenza MMG).</td>
+                    <td>Diretto (autopresentazione) o mediato da MMG/116117.</td>
+                    <td>Buona pratica</td>
+                </tr>
+                <tr>
+                    <td><strong>PIR H</strong></td>
+                    <td>Prossimità dei Pronto Soccorso (PS) ad alto volume.</td>
+                    <td>Filtrato dall'infermiere di triage del PS.</td>
+                    <td>Buona pratica</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Procedura "Spot Check" (PIR H):</strong> L'accesso al PIR H è regolato da un protocollo di valutazione preliminare condotto dall'infermiere di triage. Tale valutazione si basa su una scheda di valutazione infermieristica dedicata per definire l'eleggibilità clinica. In caso di esito positivo, l'infermiere programma l'accesso all'ambulatorio PIR garantendo al cittadino tempi di attesa ridotti rispetto al percorso di emergenza.</p>
+
+        <h2>3. Personale e Gestione dei Turni</h2>
+        <p>L'equipe opera secondo le disposizioni dell'AIR 2025 (Accordo Integrativo Regionale):</p>
+        <ul>
+            <li><strong>Medici del Ruolo Unico di Assistenza Primaria (RUAP):</strong> Responsabili della valutazione clinica e della gestione del percorso.</li>
+            <li><strong>Infermieri:</strong> Integrati stabilmente nell'equipe con relazione funzionale, prioritariamente nelle CdC (Infermieri di Famiglia e Comunità).</li>
+        </ul>
+        <p><strong>Requisiti e Orari:</strong></p>
+        <ul>
+            <li><strong>Certificazioni:</strong> È mandatorio il possesso dell'attestato BLSD in corso di validità (conseguito o rinnovato da non più di due anni).</li>
+            <li><strong>Articolazione Oraria:</strong> Modulata sui volumi di attività locali: H6, H12 o H16 (H24 nelle Case della Comunità Hub ove richiesto).</li>
+        </ul>
+
+        <h2>4. Compiti del Medico e Procedure Operative</h2>
+        <p>Il Medico RUAP deve attenersi alle seguenti fasi procedurali:</p>
+        <ul>
+            <li><strong>Apertura scheda clinica:</strong> Presa in carico informatizzata con accesso alla scheda sanitaria dell'assistito.</li>
+            <li><strong>Valutazione parametri vitali:</strong> Rilevazione obbligatoria di PA, SaO2, FC, FR e inquadramento clinico.</li>
+            <li><strong>Erogazione prestazioni:</strong> Visita medica, terapie infusionali/sintomatiche, procedure chirurgiche minori (suture, medicazioni), POCT (PCR, emocromo, test rapidi), Telemedicina e Certificazioni (INPS/INAIL).</li>
+            <li><strong>Gestione prescrittiva:</strong> Richiesta di esami specialistici o diagnostica di I livello con Priorità U.</li>
+            <li><strong>Chiusura episodio:</strong> Redazione di una relazione clinica PDF per il repository aziendale e alimentazione del FSE 2.0.</li>
+        </ul>
+        <p><strong>Evoluzioni del percorso:</strong></p>
+        <ul>
+            <li><strong>Chiusura:</strong> Dimissione con indicazioni per il MMG/PLS.</li>
+            <li><strong>Percorso I livello:</strong> Attivazione di slot diagnostici dedicati nella struttura.</li>
+            <li><strong>Invio a DEA:</strong> Trasferimento protetto (trasporto ASL) in caso di instabilità o complessità eccedente le competenze PIR.</li>
+        </ul>
+
+        <h2>5. Ruolo del MMG/PLS e Modalità di Invio</h2>
+        <p>Il Medico di Medicina Generale o il Pediatra di Libera Scelta è il coordinatore clinico del percorso.</p>
+        <ul>
+            <li><strong>Doveri dell'inviante:</strong> Trasmettere quesito clinico, terapia farmacologica in atto, patologie croniche rilevanti, allergie note e necessità amministrative.</li>
+            <li><strong>Canali di invio:</strong> Prenotazione tramite portale regionale ZeroCode o App integrata CUP.</li>
+            <li><strong>Continuità:</strong> MMG/PLS hanno l'obbligo di consultare le relazioni cliniche sul repository per definire il follow-up post-PIR.</li>
+        </ul>
+
+        <h2>6. Casistica Clinica Trattabile (PIR Territoriale - Tabella 1)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Area Problematica</th>
+                    <th>Indicazioni all'Invio</th>
+                    <th>Procedure Eseguibili</th>
+                    <th>Esito/Follow-up</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dolore Addominale</td>
+                    <td>Gastroenterite non complicata, sospetta colica renale/colecisti.</td>
+                    <td>Gestione dolore, test gravidanza, PCR, Eco addome.</td>
+                    <td>Invio II livello o PS.</td>
+                </tr>
+                <tr>
+                    <td>Cefalea/Emicrania</td>
+                    <td>Riacutizzazione senza compromissione d'organo.</td>
+                    <td>Terapia EV, EO neurologico, osservazione.</td>
+                    <td>Follow-up MMG.</td>
+                </tr>
+                <tr>
+                    <td>Rachialgia acuta</td>
+                    <td>Lombosciatalgia senza red flags.</td>
+                    <td>Terapia EV, tipizzazione dolore, EO neurologico.</td>
+                    <td>Follow-up MMG.</td>
+                </tr>
+                <tr>
+                    <td>Edemi declivi</td>
+                    <td>Scompenso noto, sospetta TVP/TVS, edema linfatico.</td>
+                    <td>CUS, ECG, Emogas, bendaggio compressivo.</td>
+                    <td>Fast track TVP/Cardio.</td>
+                </tr>
+                <tr>
+                    <td>Ritenzione Urinaria</td>
+                    <td>Incapacità minzione > 3h con globo vescicale.</td>
+                    <td>Eco ristagno, cateterismo evacuativo.</td>
+                    <td>MMG (secondo diagnosi).</td>
+                </tr>
+                <tr>
+                    <td>Reazione Allergica</td>
+                    <td>Orticaria, eritemi, edemi lievi (senza urgenza).</td>
+                    <td>Antistaminici/Corticosteroidi EV, osservazione.</td>
+                    <td>MMG (secondo diagnosi).</td>
+                </tr>
+                <tr>
+                    <td>Odontalgia acuta</td>
+                    <td>Ascesso dentario, dolore post-implantologia.</td>
+                    <td>Gestione dolore, terapia antibiotica.</td>
+                    <td>MMG/Odontoiatra.</td>
+                </tr>
+                <tr>
+                    <td>Otalgia/Vertigini</td>
+                    <td>Tappo cerume, otite, vertigine periferica.</td>
+                    <td>Otoscopia, manovra Dix Hallpike, antiemetici.</td>
+                    <td>Visita ORL urgente.</td>
+                </tr>
+                <tr>
+                    <td>Lesioni Dermato</td>
+                    <td>Eczema, punture insetti, Herpes Zoster.</td>
+                    <td>POCT, terapia topica, steroidi EV.</td>
+                    <td>MMG.</td>
+                </tr>
+                <tr>
+                    <td>Emorragia congiunt.</td>
+                    <td>Senza alterazione del visus.</td>
+                    <td>ECG, Emogas, monitoraggio PA.</td>
+                    <td>MMG.</td>
+                </tr>
+                <tr>
+                    <td>Crisi Ipertensiva</td>
+                    <td>Senza danno d'organo.</td>
+                    <td>ECG, Emogas, terapia OS/EV, monitoraggio.</td>
+                    <td>Follow-up MMG breve.</td>
+                </tr>
+                <tr>
+                    <td>Ustioni</td>
+                    <td>I grado (&lt;5% SC) o II grado (&lt;1% SC).</td>
+                    <td>Medicazione, antibiotico, gestione dolore.</td>
+                    <td>Amb. Infermieristico.</td>
+                </tr>
+                <tr>
+                    <td>Ferita/Morso</td>
+                    <td>Ferita semplice senza perdita di sostanza.</td>
+                    <td>Sutura, immunoglobuline, valutazione funzionale.</td>
+                    <td>MMG/Centro vaccinale.</td>
+                </tr>
+                <tr>
+                    <td>Febbre/Influenza</td>
+                    <td>Assenza segni sepsi (QSOFA negativo).</td>
+                    <td>PCR, Eco torace, Tampone COVID/Strepto.</td>
+                    <td>MMG.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>7. Casistica Specificata per PIR in Prossimità di PS (PIR H - Tabella 2)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Indicazioni Ammissibili</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Trauma Arti</td>
+                    <td>Strappi muscolari, pubalgia, distorsioni dita, polso, piede e caviglia.</td>
+                </tr>
+                <tr>
+                    <td>Febbre</td>
+                    <td>Malattie esantematiche, faringotonsillite, IVU, gastroenterite, ferite infette (segni iniziali).</td>
+                </tr>
+                <tr>
+                    <td>Ferite</td>
+                    <td>Abrasioni, ferite superficiali da suturare, rimozione punti, zecche, corpi estranei superficiali.</td>
+                </tr>
+                <tr>
+                    <td>Cefalea</td>
+                    <td>Cefalalgico noto, sospetta nevralgia del trigemino.</td>
+                </tr>
+                <tr>
+                    <td>Dermatologia</td>
+                    <td>Ascessi cutanei (incisione/drenaggio), cisti, emorroidi, ragadi, geloni, unghia incarnita.</td>
+                </tr>
+                <tr>
+                    <td>Oculistica</td>
+                    <td>Corpi estranei congiuntivali, irritazione da lenti, congiuntivite.</td>
+                </tr>
+                <tr>
+                    <td>Urologia</td>
+                    <td>Stranguria, disuria, sostituzione/riposizionamento catetere vescicale.</td>
+                </tr>
+                <tr>
+                    <td>Ginecologia</td>
+                    <td>Contraccezione emergenza (pillola giorno dopo), prurito vaginale, dismenorrea.</td>
+                </tr>
+                <tr>
+                    <td>Altri</td>
+                    <td>Singhiozzo, parassitosi, sostituzione SNG, dislocazione PEG (non prima sostituzione).</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>8. Criteri di Esclusione e Red Flags (Mandatorio)</h2>
+        <div class="caution-box">
+            <p><strong>ATTENZIONE: CASI DA INVIARE IMMEDIATAMENTE IN PRONTO SOCCORSO</strong></p>
+            <ul>
+                <li>Dolore toracico (sospetta SCA).</li>
+                <li>Dispnea acuta o grave difficoltà respiratoria.</li>
+                <li>Cefalea intensa e inusuale (insorgenza improvvisa/violenta).</li>
+                <li>Deficit neurologici acuti (motori, sensitivi, alterazione coscienza, afasia).</li>
+            </ul>
+        </div>
+        <p><strong>Criteri di esclusione specifici per patologia:</strong></p>
+        <ul>
+            <li><strong>Febbre:</strong> Esclusione se SpO2 &lt; 92%, Quick-SOFA positivo, segni di meningismo, porpora, o in pazienti con fattori di rischio (neonati, immunodepressi, chirurgia recente &lt; 6 sett.).</li>
+            <li><strong>Traumi/Ematomi:</strong> Esclusione se il paziente è in terapia con NAO/TAO in presenza di vasto ematoma o edema imponente; impotenza funzionale totale.</li>
+            <li><strong>Ferite:</strong> Esclusione per ferite al volto, sospette lesioni tendinee/nervose, ferite vaste/profonde (oltre il muscolo) o penetranti di collo/torace/addome.</li>
+            <li><strong>Addome:</strong> Esclusione mandatoria in caso di addome non trattabile o secrezioni purulente (ambito ostetrico-ginecologico).</li>
+            <li><strong>Cefalea:</strong> Esclusione se insorta dopo sforzo, associata a rigidità nucale o fotofobia.</li>
+            <li><strong>Ustioni:</strong> Esclusione per ustioni chimiche o di II grado estese.</li>
+        </ul>
+
+        <h2>9. Monitoraggio e Informatizzazione</h2>
+        <p>Il sistema PIR è integrato nell'ecosistema digitale regionale per garantire tracciabilità e governo clinico.</p>
+        <ul>
+            <li><strong>Infrastruttura:</strong> La soluzione software è migrata su CloudSST (budget dedicato di € 160.000,00 gestito da ESTAR) per garantire performance e integrazione con Centrale 116117 e COT.</li>
+            <li><strong>Integrazione FSE:</strong> Obbligo di alimentazione del Fascicolo Sanitario Elettronico 2.0 per ogni episodio.</li>
+            <li><strong>Indicatori di Impatto (Tabella 3):</strong>
+                <ul>
+                    <li>Percentuale di pazienti dimessi dal PIR entro 90 minuti.</li>
+                    <li>Rapporto pazienti inviati a II livello / Totale dimessi.</li>
+                    <li>Tasso di re-accessi nelle 48 ore successive (indicatore di appropriatezza).</li>
+                    <li>Rapporto pazienti inviati da PS a PIR H / Accessi totali PS per codici minori.</li>
+                    <li>Volume di invii filtrati da MMG tramite ZeroCode.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        function toggleInfo() {
+            var infoDiv = document.getElementById("more-info");
+            var btn = document.querySelector(".toggle-btn");
+            if (infoDiv.style.display === "none" || infoDiv.style.display === "") {
+                infoDiv.style.display = "block";
+                btn.textContent = "Nascondi Guida Operativa";
+            } else {
+                infoDiv.style.display = "none";
+                btn.textContent = "Vuoi saperne di più?";
+            }
+        }
+    </script>
+
+</body>
+</html>
