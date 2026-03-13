@@ -353,8 +353,9 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      // Registers the SW and prevents browser caching of the sw.js file
-      navigator.serviceWorker.register('/sw.js?v=' + new Date().getTime())
+      // Fixed: Removed the dynamic timestamp. 
+      // If you ever need to bust the cache manually, use a static version like '/sw.js?v=4'
+      navigator.serviceWorker.register('/sw.js')
         .then(registration => {
           console.log('ServiceWorker successfully registered');
         })
@@ -363,7 +364,7 @@
         });
     });
 
-    // Automatically reload the page if the service worker updates
+    // Automatically reload the page only when a legitimate update happens
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (!refreshing) {
@@ -373,6 +374,5 @@
     });
   }
 </script>
-
 </body>
 </html>
