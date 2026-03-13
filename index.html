@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Medico di Famiglia Arezzo | Dott. Emanuel Savianu</title>
+    <title>Medico di Base Arezzo | Dott. Emanuel Savianu</title>
     <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo (Via Ubaldo Pasqui). Prenota visite online, ricette Millebook.">
     
     <meta name="geo.region" content="IT-AR" />
@@ -119,6 +119,9 @@
     <div class="header-content">
         <h1>Dott. Emanuel Savianu</h1>
         <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
+        <a href="tel:+390575910904" class="btn-telefono-header">
+            <i class="fas fa-phone-alt"></i> Chiama lo studio: 0575 910 904
+        </a>
     </div>
 </header>
 
@@ -134,6 +137,10 @@
             <p data-i18n="alert_p2" style="margin-top: 10px;">
                 <i class="fas fa-check-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
                 Dopo la prima visita, usate esclusivamente <strong>MilleBook</strong> per ricette e richieste.
+            </p>
+            <p style="margin-top: 10px; color: var(--danger);">
+                <i class="fas fa-comment-slash" aria-hidden="true" style="margin-right: 8px;"></i>
+                <strong>Nota Bene:</strong> Il Dottore non risponde a richieste cliniche tramite WhatsApp o SMS personali. Si prega di usare MilleBook o chiamare la segreteria.
             </p>
         </section>
 
@@ -172,9 +179,15 @@
                 <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
             </div>
             
-            <p style="margin-bottom: 20px; color: var(--text-medium); font-size: 1.1rem; text-align: center;">
-                Tocca uno dei pulsanti qui sotto per aprire il calendario.
-            </p>
+            <div class="booking-guide" style="background: var(--bg-gradient-1); padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid var(--primary);">
+                <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: var(--primary-dark);">Come prenotare:</h3>
+                <ol style="margin-left: 20px; color: var(--text-medium); line-height: 1.8;">
+                    <li>Clicca il pulsante del tipo di visita qui sotto.</li>
+                    <li>Scegli il giorno e l'orario disponibile sul calendario.</li>
+                    <li>Inserisci Nome, Cognome e un indirizzo Email.</li>
+                    <li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>
+                </ol>
+            </div>
 
             <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
             <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
@@ -234,6 +247,23 @@
                     Informativa Trattamento Dati <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
                 </a>
             </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                <h2>Cosa portare alla visita & Link Utili</h2>
+            </div>
+            <p style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordarsi di portare:</p>
+            <ul style="margin-left: 20px; margin-bottom: 25px; color: var(--text-medium); line-height: 1.8;">
+                <li>Tessera Sanitaria e/o Codice Fiscale</li>
+                <li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li>
+                <li>Eventuali esami, referti specialistici o lettere di dimissioni precedenti</li>
+            </ul>
+            <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="background: #e11d48; flex-direction: row; gap: 10px; padding: 15px;">
+                <i class="fas fa-external-link-alt" style="margin:0; font-size: 1.4rem;"></i>
+                <span>CUP Toscana (Prenota Esami Online)</span>
+            </a>
         </section>
 
         <div class="urgency-wrapper">
@@ -319,20 +349,21 @@
 </footer>
 
 <script src="app.js"></script>
-    <script>
+
+<script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      // Register the service worker and add a timestamp to bust browser caching
+      // Registers the SW and prevents browser caching of the sw.js file
       navigator.serviceWorker.register('/sw.js?v=' + new Date().getTime())
         .then(registration => {
-          console.log('ServiceWorker registered:', registration.scope);
+          console.log('ServiceWorker successfully registered');
         })
         .catch(error => {
           console.log('ServiceWorker registration failed:', error);
         });
     });
 
-    // PRO FEATURE: Automatically reload the page if the service worker updates
+    // Automatically reload the page if the service worker updates
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (!refreshing) {
@@ -342,5 +373,6 @@
     });
   }
 </script>
+
 </body>
 </html>
