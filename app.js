@@ -3,7 +3,8 @@
 // =================================================================
 
 // --- AUTOMATIC YEAR ---
-document.getElementById('current-year').textContent = new Date().getFullYear();
+const yearEl = document.getElementById('current-year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // --- DARK MODE TOGGLE ---
 function toggleDarkMode() {
@@ -11,15 +12,22 @@ function toggleDarkMode() {
     const isDark = body.classList.toggle('dark-mode');
     const darkBtn = document.getElementById('btn-dark');
     
-    const icon = darkBtn.querySelector('i');
-    if (isDark) {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f1419');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-        document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0066cc');
+    if (darkBtn) {
+        const icon = darkBtn.querySelector('i');
+        if (icon) {
+            if (isDark) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+        }
+    }
+    
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+        themeMeta.setAttribute('content', isDark ? '#0f1419' : '#0066cc');
     }
     
     try {
@@ -35,10 +43,15 @@ function initDarkMode() {
         if (darkMode === 'enabled') {
             document.body.classList.add('dark-mode');
             const darkBtn = document.getElementById('btn-dark');
-            const icon = darkBtn.querySelector('i');
-            icon.classList.remove('fa-moon');
-            icon.classList.add('fa-sun');
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0f1419');
+            if (darkBtn) {
+                const icon = darkBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-moon');
+                    icon.classList.add('fa-sun');
+                }
+            }
+            const themeMeta = document.querySelector('meta[name="theme-color"]');
+            if (themeMeta) themeMeta.setAttribute('content', '#0f1419');
         }
     } catch (e) {}
 }
@@ -50,10 +63,10 @@ function toggleRepsModal(show) {
     const modal = document.getElementById('reps-overlay');
     const overlay = document.getElementById('welcome-overlay');
     
-    if (show) {
+    if (show && modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
-    } else {
+    } else if (modal) {
         modal.style.display = 'none';
         if (!overlay || !overlay.classList.contains('active')) {
             document.body.style.overflow = 'auto';
@@ -130,8 +143,8 @@ const translations = {
 function setLanguage(lang) {
     const btnIt = document.getElementById('btn-it');
     const btnEn = document.getElementById('btn-en');
-    btnIt.classList.toggle('active', lang === 'it');
-    btnEn.classList.toggle('active', lang === 'en');
+    if (btnIt) btnIt.classList.toggle('active', lang === 'it');
+    if (btnEn) btnEn.classList.toggle('active', lang === 'en');
     document.documentElement.lang = lang;
 
     document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -162,13 +175,15 @@ function showSection(sectionId) {
 
 // --- WELCOME MODAL ---
 function closeWelcome() {
-    document.getElementById('welcome-overlay').classList.remove('active');
+    const overlay = document.getElementById('welcome-overlay');
+    if (overlay) overlay.classList.remove('active');
     document.body.classList.remove('modal-open');
     try { sessionStorage.setItem('welcomeSeen', 'true'); } catch(e) {}
 }
 
 function openWelcome() {
-    document.getElementById('welcome-overlay').classList.add('active');
+    const overlay = document.getElementById('welcome-overlay');
+    if (overlay) overlay.classList.add('active');
     document.body.classList.add('modal-open');
 }
 

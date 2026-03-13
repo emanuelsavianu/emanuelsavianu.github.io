@@ -1,13 +1,13 @@
 // Service Worker for Dr. Savianu Medical Website
-// Updated CACHE_NAME to v3 to force a reset of previous caches
-const CACHE_NAME = 'savianu-v3';
+// Updated CACHE_NAME to v4 to force a reset of previous caches
+const CACHE_NAME = 'savianu-v4';
 const urlsToCache = [
   '/',
   '/index.html',
   '/styles.css',
   '/app.js',
   '/logo.png'
-]; // Removed external fonts/icons from pre-cache to prevent cross-origin cache errors
+]; // Removed external fonts from pre-cache to prevent cross-origin errors
 
 // Install event - force immediate activation
 self.addEventListener('install', event => {
@@ -34,7 +34,6 @@ self.addEventListener('activate', event => {
 
 // Fetch event - Network-First Strategy
 self.addEventListener('fetch', event => {
-  // Only handle GET requests (ignore POSTs, etc.)
   if (event.request.method !== 'GET') return;
 
   event.respondWith(
