@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<title>Carta Intestata – Dott. Emanuel Savianu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* =====================================================
+   VARIABILI & RESET (Ottimizzato per B/N Laser)
+   ===================================================== */
+:root {
+    --ink:      #000000;   /* Nero puro per massima nitidezza laser */
+    --sub:      #4a4a4a;   /* Grigio scuro per testi secondari (ottima resa laser) */
+    --rule:     #000000;
+    --rule-lt:  #cccccc;
+    --accent:   #000000;   /* Sostituito l'oro con il nero per evitare grigi impastati */
+    --bg:       #eef0f2;   /* Sfondo neutro per lo schermo */
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+/* =====================================================
+   SCHERMO – contenitore pagine
+   ===================================================== */
+body {
+    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 20px 60px;
+    gap: 0;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+/* =====================================================
+   TOOLBAR (nascosta in stampa)
+   ===================================================== */
+.toolbar {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 28px;
+    align-items: center;
+    background: #ffffff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.toolbar label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-right: 8px;
+}
+
+.btn-format {
+    padding: 8px 20px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: all .2s ease;
+    color: var(--sub);
+}
+
+.btn-format.active,
+.btn-format:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+}
+
+.btn-print {
+    padding: 8px 22px;
+    background: #000000;
+    color: #fff;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-left: 12px;
+    transition: background .2s;
+}
+
+.btn-print:hover { background: #333; }
+
+/* =====================================================
+   PAGINA BASE
+   ===================================================== */
+.page {
+    background: #fff;
+    position: relative;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
+}
+
+/* A4 */
+.page.a4 {
+    width:  210mm;
+    height: 297mm;
+    padding: 24mm 28mm 18mm 28mm;
+}
+
+/* A5 */
+.page.a5 {
+    width:  148mm;
+    height: 210mm;
+    padding: 18mm 20mm 14mm 20mm;
+}
+
+/* =====================================================
+   DECORAZIONE LATERALE SINISTRA
+   ===================================================== */
+.page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; /* Assottigliata per maggiore eleganza */
+    height: 100%;
+    background: var(--accent);
+}
+
+/* =====================================================
+   HEADER
+   ===================================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--rule);
+    margin-bottom: 0;
+}
+
+.header-name h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 28pt;
+    color: var(--ink);
+    letter-spacing: -.5px;
+    line-height: 0.95;
+}
+
+.header-name h2 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 500;
+    letter-spacing: .25em;
+    text-transform: uppercase;
+    color: var(--sub);
+    margin-top: 8px;
+}
+
+.header-contact {
+    text-align: right;
+    font-size: 7.5pt;
+    color: var(--ink);
+    line-height: 1.6;
+}
+
+.header-contact strong {
+    font-weight: 600;
+    display: block;
+    font-size: 7.5pt;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+/* A5 adattamenti */
+.a5 .header-name h1  { font-size: 22pt; }
+.a5 .header-name h2  { font-size: 7.5pt; margin-top: 6px; }
+.a5 .header-contact  { font-size: 7pt; }
+.a5 .header-contact strong { font-size: 7pt; }
+
+/* =====================================================
+   CORPO DEL DOCUMENTO
+   ===================================================== */
+.content {
+    flex: 1 1 auto;
+    font-size: 11pt;
+    line-height: 1.8;
+    color: var(--ink);
+    margin-top: 24px;
+    overflow: hidden;
+}
+
+.medical-fields {
+    margin-bottom: 24px;
+    font-size: 10pt;
+}
+
+.medical-fields p {
+    margin-bottom: 8px;
+}
+
+.medical-fields span {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    margin-right: 8px;
+    font-size: 9pt;
+}
+
+.a5 .content { font-size: 10pt; margin-top: 18px; }
+.a5 .medical-fields { font-size: 9pt; margin-bottom: 18px; }
+
+/* =====================================================
+   AREA FIRMA
+   ===================================================== */
+.signature-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 30px;
+    margin-bottom: 24px;
+    flex-shrink: 0;
+}
+
+.date-place {
+    font-size: 10pt;
+    color: var(--ink);
+    padding-bottom: 4px;
+    min-width: 180px;
+    border-bottom: 1px dotted var(--sub);
+}
+
+.doctor-sign {
+    text-align: center;
+    width: 220px;
+}
+
+.sign-line {
+    border-bottom: 1px dotted var(--sub);
+    height: 40px;
+    margin-bottom: 6px;
+}
+
+.doctor-sign p {
+    font-size: 8.5pt;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    color: var(--ink);
+}
+
+.doctor-sign span {
+    display: block;
+    font-size: 7.5pt;
+    color: var(--sub);
+    margin-top: 2px;
+}
+
+/* A5 */
+.a5 .date-place   { font-size: 9pt; min-width: 140px; }
+.a5 .doctor-sign  { width: 170px; }
+.a5 .doctor-sign p { font-size: 7.5pt; }
+.a5 .signature-area { margin-top: 20px; margin-bottom: 16px; }
+
+/* =====================================================
+   FOOTER
+   ===================================================== */
+footer {
+    border-top: 1px solid var(--rule-lt);
+    padding-top: 12px;
+    font-size: 7.5pt;
+    color: var(--sub);
+    line-height: 1.6;
+    flex-shrink: 0;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+}
+
+.a5 .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.footer-col strong {
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-size: 7pt;
+    margin-bottom: 4px;
+}
+
+/* =====================================================
+   VISIBILITÀ PAGINE
+   ===================================================== */
+body.show-a4 .page.a5,
+body.show-a5 .page.a4 {
+    display: none;
+}
+
+/* =====================================================
+   STAMPA (Forza contrasto in B/N)
+   ===================================================== */
+@media print {
+    body {
+        background: none;
+        padding: 0;
+        margin: 0;
+        display: block;
+    }
+
+    .toolbar { display: none !important; }
+
+    .page {
+        box-shadow: none;
+        margin: 0;
+    }
+
+    body.show-a4 .page.a4 {
+        width: 210mm;
+        height: 297mm;
+        page-break-after: avoid;
+    }
+
+    body.show-a5 .page.a5 {
+        width: 148mm;
+        height: 210mm;
+        page-break-after: avoid;
+    }
+
+    body.show-a4 .page.a5,
+    body.show-a5 .page.a4 {
+        display: none !important;
+    }
+}
+</style>
+</head>
+<body class="show-a4">
+
+<div class="toolbar">
+    <label>Formato:</label>
+    <button class="btn-format active" id="btnA4" onclick="setFormat('a4')">Formato A4</button>
+    <button class="btn-format"        id="btnA5" onclick="setFormat('a5')">Formato A5</button>
+    <button class="btn-print" onclick="window.print()">Stampa / Esporta PDF</button>
+</div>
+
+<div class="page a4">
+    <header>
+        <div class="header-name">
+            <h1>Dott. Emanuel Savianu</h1>
+            <h2>Medico di Medicina Generale</h2>
+        </div>
+        <div class="header-contact">
+            <strong>Recapiti</strong>
+            Via Ubaldo Pasqui 38, Arezzo<br>
+            Tel. 0575 1713428 &nbsp;|&nbsp; Cell. 327 8095905<br>
+            Dott.Emanuel@Savianu.it<br>
+            PEC: emanuel.savianu@pec.omceoar.it
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="medical-fields">
+            <p><span>Paziente:</span> ___________________________________________________________</p>
+            <p><span>Oggetto:</span> ___________________________________________________________</p>
+        </div>
+        </div>
+
+    <div class="signature-area">
+        <div class="date-place">Arezzo, lì ____________________</div>
+        <div class="doctor-sign">
+            <div class="sign-line"></div>
+            <p>Dott. Emanuel Savianu</p>
+            <span>Medico di Medicina Generale</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <strong>Studio Medico</strong>
+                Via Ubaldo Pasqui 38<br>
+                52100 Arezzo (AR)<br>
+                Tel. 0575 1713428 &nbsp;· &nbsp;Cell. 327 8095905
+            </div>
+            <div class="footer-col">
+                <strong>Contatti Digitali</strong>
+                Dott.Emanuel@Savianu.it<br>
+                PEC: emanuel.savianu@pec.omceoar.it<br>
+                savianu.it
+            </div>
+            <div class="footer-col">
+                <strong>Dati Fiscali &amp; Iscrizione</strong>
+                P.IVA 02348320512 &nbsp;·&nbsp; SDI JKKZDGR<br>
+                Ord. Medici di Arezzo n. 3499<br>
+                Cod. Reg. 011189
+            </div>
+        </div>
+    </footer>
+</div>
+
+<div class="page a5">
+    <header>
+        <div class="header-name">
+            <h1>Dott. Emanuel Savianu</h1>
+            <h2>Medico di Medicina Generale</h2>
+        </div>
+        <div class="header-contact">
+            <strong>Contatti</strong>
+            Via Ubaldo Pasqui 38, Arezzo<br>
+            Tel. 0575 1713428<br>
+            Cell. 327 8095905
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="medical-fields">
+            <p><span>Paziente:</span> ______________________________________</p>
+            <p><span>Oggetto:</span> ______________________________________</p>
+        </div>
+        </div>
+
+    <div class="signature-area">
+        <div class="date-place">Arezzo, lì _______________</div>
+        <div class="doctor-sign">
+            <div class="sign-line"></div>
+            <p>Dott. Emanuel Savianu</p>
+            <span>Medico di M.G.</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <strong>Studio &amp; Recapiti</strong>
+                Via Ubaldo Pasqui 38, Arezzo<br>
+                Tel. 0575 1713428 &nbsp;·&nbsp; Cell. 327 8095905<br>
+                savianu.it
+            </div>
+            <div class="footer-col" style="text-align:right;">
+                <strong>Dati Professionali</strong>
+                P.IVA 02348320512 &nbsp;·&nbsp; SDI JKKZDGR<br>
+                Dott.Emanuel@Savianu.it<br>
+                PEC: emanuel.savianu@pec.omceoar.it
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script>
+function setFormat(fmt) {
+    document.body.classList.remove('show-a4','show-a5');
+    document.body.classList.add('show-' + fmt);
+
+    document.getElementById('btnA4').classList.toggle('active', fmt === 'a4');
+    document.getElementById('btnA5').classList.toggle('active', fmt === 'a5');
+
+    let style = document.getElementById('dynamic-page-size');
+    if (!style) {
+        style = document.createElement('style');
+        style.id = 'dynamic-page-size';
+        document.head.appendChild(style);
+    }
+    const sizes = { a4: '210mm 297mm', a5: '148mm 210mm' };
+    style.textContent = `@page { size: ${sizes[fmt]}; margin: 0; }`;
+}
+
+setFormat('a4');
+</script>
+
+</body>
+</html>
