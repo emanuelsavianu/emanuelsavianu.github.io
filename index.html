@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Medico di Base Arezzo | Dott. Emanuel Savianu</title>
+    <title>Medico di Famiglia Arezzo | Dott. Emanuel Savianu</title>
     <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo (Via Ubaldo Pasqui). Prenota visite online, ricette Millebook.">
     
     <meta name="geo.region" content="IT-AR" />
@@ -319,5 +319,28 @@
 </footer>
 
 <script src="app.js"></script>
+    <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      // Register the service worker and add a timestamp to bust browser caching
+      navigator.serviceWorker.register('/sw.js?v=' + new Date().getTime())
+        .then(registration => {
+          console.log('ServiceWorker registered:', registration.scope);
+        })
+        .catch(error => {
+          console.log('ServiceWorker registration failed:', error);
+        });
+    });
+
+    // PRO FEATURE: Automatically reload the page if the service worker updates
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) {
+        window.location.reload();
+        refreshing = true;
+      }
+    });
+  }
+</script>
 </body>
 </html>
