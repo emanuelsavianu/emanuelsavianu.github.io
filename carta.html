@@ -10,15 +10,15 @@
 <style>
 
 /* =====================================================
-   VARIABILI & RESET (Ottimizzato per B/N Laser)
+   VARIABILI & RESET
    ===================================================== */
 :root {
-    --ink:      #000000;   /* Nero puro per massima nitidezza laser */
-    --sub:      #4a4a4a;   /* Grigio scuro per testi secondari (ottima resa laser) */
+    --ink:      #000000;
+    --sub:      #4a4a4a;
     --rule:     #000000;
     --rule-lt:  #cccccc;
-    --accent:   #000000;   /* Sostituito l'oro con il nero per evitare grigi impastati */
-    --bg:       #eef0f2;   /* Sfondo neutro per lo schermo */
+    --accent:   #000000;
+    --bg:       #eef0f2;
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -61,10 +61,8 @@ body {
     margin-right: 8px;
 }
 
-.btn-format {
+.btn-format, .btn-print {
     padding: 8px 20px;
-    border: 1px solid #ddd;
-    background: #f9f9f9;
     font-family: 'DM Sans', sans-serif;
     font-size: 13px;
     font-weight: 500;
@@ -72,29 +70,25 @@ body {
     cursor: pointer;
     border-radius: 4px;
     transition: all .2s ease;
+}
+
+.btn-format {
+    border: 1px solid #ddd;
+    background: #f9f9f9;
     color: var(--sub);
 }
 
-.btn-format.active,
-.btn-format:hover {
+.btn-format.active, .btn-format:hover {
     background: var(--ink);
     border-color: var(--ink);
     color: #fff;
 }
 
 .btn-print {
-    padding: 8px 22px;
     background: #000000;
     color: #fff;
     border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: .05em;
-    cursor: pointer;
-    border-radius: 4px;
     margin-left: 12px;
-    transition: background .2s;
 }
 
 .btn-print:hover { background: #333; }
@@ -125,14 +119,12 @@ body {
     padding: 18mm 20mm 14mm 20mm;
 }
 
-/* =====================================================
-   DECORAZIONE LATERALE SINISTRA
-   ===================================================== */
+/* Decorazione laterale */
 .page::before {
     content: '';
     position: absolute;
     top: 0; left: 0;
-    width: 3px; /* Assottigliata per maggiore eleganza */
+    width: 3px;
     height: 100%;
     background: var(--accent);
 }
@@ -168,30 +160,11 @@ header {
     margin-top: 8px;
 }
 
-.header-contact {
-    text-align: right;
-    font-size: 7.5pt;
-    color: var(--ink);
-    line-height: 1.6;
-}
-
-.header-contact strong {
-    font-weight: 600;
-    display: block;
-    font-size: 7.5pt;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-}
-
-/* A5 adattamenti */
 .a5 .header-name h1  { font-size: 22pt; }
 .a5 .header-name h2  { font-size: 7.5pt; margin-top: 6px; }
-.a5 .header-contact  { font-size: 7pt; }
-.a5 .header-contact strong { font-size: 7pt; }
 
 /* =====================================================
-   CORPO DEL DOCUMENTO
+   CORPO DEL DOCUMENTO & CAMPI COMPILABILI
    ===================================================== */
 .content {
     flex: 1 1 auto;
@@ -199,15 +172,18 @@ header {
     line-height: 1.8;
     color: var(--ink);
     margin-top: 24px;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .medical-fields {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     font-size: 10pt;
 }
 
-.medical-fields p {
+.field-row {
+    display: flex;
+    align-items: center;
     margin-bottom: 8px;
 }
 
@@ -217,10 +193,42 @@ header {
     letter-spacing: .05em;
     margin-right: 8px;
     font-size: 9pt;
+    white-space: nowrap;
+}
+
+.input-field {
+    flex: 1;
+    border: none;
+    border-bottom: 1px dotted var(--rule-lt);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11pt;
+    color: var(--ink);
+    outline: none;
+    padding: 2px 0;
+}
+
+.input-field:focus {
+    border-bottom: 1px solid var(--ink);
+}
+
+.main-body {
+    flex: 1;
+    outline: none;
+    margin-top: 10px;
+    white-space: pre-wrap;
+    min-height: 150px;
+}
+
+.main-body[contenteditable="true"]:empty:before {
+    content: "Scrivi qui il testo del documento...";
+    color: #999;
+    font-style: italic;
 }
 
 .a5 .content { font-size: 10pt; margin-top: 18px; }
-.a5 .medical-fields { font-size: 9pt; margin-bottom: 18px; }
+.a5 .medical-fields { font-size: 9pt; }
+.a5 .input-field { font-size: 10pt; }
 
 /* =====================================================
    AREA FIRMA
@@ -235,11 +243,10 @@ header {
 }
 
 .date-place {
-    font-size: 10pt;
+    font-size: 11pt;
     color: var(--ink);
-    padding-bottom: 4px;
-    min-width: 180px;
-    border-bottom: 1px dotted var(--sub);
+    padding-bottom: 14px; /* Allineamento visivo con la firma */
+    width: 220px;
 }
 
 .doctor-sign {
@@ -269,7 +276,7 @@ header {
 }
 
 /* A5 */
-.a5 .date-place   { font-size: 9pt; min-width: 140px; }
+.a5 .date-place   { font-size: 10pt; width: 170px; padding-bottom: 12px; }
 .a5 .doctor-sign  { width: 170px; }
 .a5 .doctor-sign p { font-size: 7.5pt; }
 .a5 .signature-area { margin-top: 20px; margin-bottom: 16px; }
@@ -308,47 +315,23 @@ footer {
 }
 
 /* =====================================================
-   VISIBILITÀ PAGINE
+   VISIBILITÀ E STAMPA
    ===================================================== */
 body.show-a4 .page.a5,
-body.show-a5 .page.a4 {
-    display: none;
-}
+body.show-a5 .page.a4 { display: none; }
 
-/* =====================================================
-   STAMPA (Forza contrasto in B/N)
-   ===================================================== */
 @media print {
-    body {
-        background: none;
-        padding: 0;
-        margin: 0;
-        display: block;
-    }
-
+    body { background: none; padding: 0; margin: 0; display: block; }
     .toolbar { display: none !important; }
+    .page { box-shadow: none; margin: 0; }
+    
+    /* Rimuove i bordi dai campi compilabili in stampa */
+    .input-field { border-bottom: none !important; }
+    .main-body[contenteditable="true"]:empty:before { content: "" !important; }
 
-    .page {
-        box-shadow: none;
-        margin: 0;
-    }
-
-    body.show-a4 .page.a4 {
-        width: 210mm;
-        height: 297mm;
-        page-break-after: avoid;
-    }
-
-    body.show-a5 .page.a5 {
-        width: 148mm;
-        height: 210mm;
-        page-break-after: avoid;
-    }
-
-    body.show-a4 .page.a5,
-    body.show-a5 .page.a4 {
-        display: none !important;
-    }
+    body.show-a4 .page.a4 { width: 210mm; height: 297mm; page-break-after: avoid; }
+    body.show-a5 .page.a5 { width: 148mm; height: 210mm; page-break-after: avoid; }
+    body.show-a4 .page.a5, body.show-a5 .page.a4 { display: none !important; }
 }
 </style>
 </head>
@@ -367,24 +350,25 @@ body.show-a5 .page.a4 {
             <h1>Dott. Emanuel Savianu</h1>
             <h2>Medico di Medicina Generale</h2>
         </div>
-        <div class="header-contact">
-            <strong>Recapiti</strong>
-            Via Ubaldo Pasqui 38, Arezzo<br>
-            Tel. 0575 1713428 &nbsp;|&nbsp; Cell. 327 8095905<br>
-            Dott.Emanuel@Savianu.it<br>
-            PEC: emanuel.savianu@pec.omceoar.it
-        </div>
     </header>
 
     <div class="content">
         <div class="medical-fields">
-            <p><span>Paziente:</span> ___________________________________________________________</p>
-            <p><span>Oggetto:</span> ___________________________________________________________</p>
+            <div class="field-row">
+                <span>Paziente:</span>
+                <input type="text" class="input-field" tabindex="1" placeholder="Nome e Cognome">
+            </div>
+            <div class="field-row">
+                <span>Oggetto:</span>
+                <input type="text" class="input-field" tabindex="2" placeholder="Motivo del certificato">
+            </div>
         </div>
-        </div>
+        
+        <div class="main-body" contenteditable="true" tabindex="3"></div>
+    </div>
 
     <div class="signature-area">
-        <div class="date-place">Arezzo, lì ____________________</div>
+        <div class="date-place">Arezzo, lì <span class="auto-date"></span></div>
         <div class="doctor-sign">
             <div class="sign-line"></div>
             <p>Dott. Emanuel Savianu</p>
@@ -395,14 +379,15 @@ body.show-a5 .page.a4 {
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <strong>Studio Medico</strong>
+                <strong>Recapiti</strong>
                 Via Ubaldo Pasqui 38<br>
                 52100 Arezzo (AR)<br>
-                Tel. 0575 1713428 &nbsp;· &nbsp;Cell. 327 8095905
+                Segreteria: 0575 910 904<br>
+                Dottore: 0575 171 3428
             </div>
             <div class="footer-col">
                 <strong>Contatti Digitali</strong>
-                Dott.Emanuel@Savianu.it<br>
+                emanuel@savianu.it<br>
                 PEC: emanuel.savianu@pec.omceoar.it<br>
                 savianu.it
             </div>
@@ -422,23 +407,25 @@ body.show-a5 .page.a4 {
             <h1>Dott. Emanuel Savianu</h1>
             <h2>Medico di Medicina Generale</h2>
         </div>
-        <div class="header-contact">
-            <strong>Contatti</strong>
-            Via Ubaldo Pasqui 38, Arezzo<br>
-            Tel. 0575 1713428<br>
-            Cell. 327 8095905
-        </div>
     </header>
 
     <div class="content">
         <div class="medical-fields">
-            <p><span>Paziente:</span> ______________________________________</p>
-            <p><span>Oggetto:</span> ______________________________________</p>
+            <div class="field-row">
+                <span>Paziente:</span>
+                <input type="text" class="input-field" tabindex="1" placeholder="Nome e Cognome">
+            </div>
+            <div class="field-row">
+                <span>Oggetto:</span>
+                <input type="text" class="input-field" tabindex="2" placeholder="Motivo">
+            </div>
         </div>
-        </div>
+        
+        <div class="main-body" contenteditable="true" tabindex="3"></div>
+    </div>
 
     <div class="signature-area">
-        <div class="date-place">Arezzo, lì _______________</div>
+        <div class="date-place">Arezzo, lì <span class="auto-date"></span></div>
         <div class="doctor-sign">
             <div class="sign-line"></div>
             <p>Dott. Emanuel Savianu</p>
@@ -449,15 +436,16 @@ body.show-a5 .page.a4 {
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <strong>Studio &amp; Recapiti</strong>
+                <strong>Recapiti</strong>
                 Via Ubaldo Pasqui 38, Arezzo<br>
-                Tel. 0575 1713428 &nbsp;·&nbsp; Cell. 327 8095905<br>
+                Segreteria: 0575 910 904<br>
+                Dottore: 0575 171 3428<br>
                 savianu.it
             </div>
             <div class="footer-col" style="text-align:right;">
                 <strong>Dati Professionali</strong>
                 P.IVA 02348320512 &nbsp;·&nbsp; SDI JKKZDGR<br>
-                Dott.Emanuel@Savianu.it<br>
+                emanuel@savianu.it<br>
                 PEC: emanuel.savianu@pec.omceoar.it
             </div>
         </div>
@@ -465,6 +453,7 @@ body.show-a5 .page.a4 {
 </div>
 
 <script>
+// Gestione Formato
 function setFormat(fmt) {
     document.body.classList.remove('show-a4','show-a5');
     document.body.classList.add('show-' + fmt);
@@ -481,6 +470,19 @@ function setFormat(fmt) {
     const sizes = { a4: '210mm 297mm', a5: '148mm 210mm' };
     style.textContent = `@page { size: ${sizes[fmt]}; margin: 0; }`;
 }
+
+// Inizializzazione data automatica
+document.addEventListener('DOMContentLoaded', () => {
+    const dateSpans = document.querySelectorAll('.auto-date');
+    const today = new Date();
+    // Formatta la data come "14 marzo 2026"
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    const formattedDate = today.toLocaleDateString('it-IT', options);
+    
+    dateSpans.forEach(span => {
+        span.textContent = formattedDate;
+    });
+});
 
 setFormat('a4');
 </script>
