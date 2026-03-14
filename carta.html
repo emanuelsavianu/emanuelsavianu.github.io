@@ -8,13 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-
 /* =====================================================
-   VARIABILI & RESET (Ottimizzato per Laser BN)
+   VARIABILI & RESET
    ===================================================== */
 :root {
     --ink:      #000000;
-    --sub:      #333333; /* Grigio scuro per miglior resa su laser */
+    --sub:      #333333;
     --rule:     #000000;
     --rule-lt:  #cccccc;
     --bg-screen: #f4f4f4;
@@ -28,81 +27,57 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 20px;
+    padding: 20px;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
 }
 
-/* =====================================================
-   TOOLBAR
-   ===================================================== */
 .toolbar {
     display: flex;
     gap: 12px;
-    margin-bottom: 28px;
+    margin-bottom: 20px;
     align-items: center;
     background: #fff;
-    padding: 12px 24px;
+    padding: 10px 20px;
     border-radius: 8px;
     border: 1px solid #ddd;
 }
 
 .btn-format, .btn-print {
-    padding: 8px 20px;
-    font-family: 'DM Sans', sans-serif;
+    padding: 6px 15px;
     font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     border-radius: 4px;
-    transition: all .2s ease;
 }
 
-.btn-format {
-    border: 1px solid #ddd;
-    background: #f9f9f9;
-    color: var(--sub);
-}
-
-.btn-format.active {
-    background: var(--ink);
-    border-color: var(--ink);
-    color: #fff;
-}
-
-.btn-print {
-    background: #000;
-    color: #fff;
-    border: none;
-    margin-left: 12px;
-}
+.btn-format { border: 1px solid #ddd; background: #f9f9f9; }
+.btn-format.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.btn-print { background: #000; color: #fff; border: none; }
 
 /* =====================================================
-   STRUTTURA PAGINA
+   STRUTTURA PAGINA (OTTIMIZZATA SPAZIO)
    ===================================================== */
 .page {
     background: #fff;
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1); /* Solo a schermo */
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
 }
 
-/* A4 */
 .page.a4 {
     width: 210mm;
     height: 297mm;
-    padding: 24mm 25mm 18mm 25mm;
+    padding: 15mm 20mm 12mm 20mm;
 }
 
-/* A5 */
 .page.a5 {
     width: 148mm;
     height: 210mm;
-    padding: 15mm 15mm 12mm 15mm;
+    padding: 10mm 12mm 10mm 12mm; /* Ridotto per A5 */
 }
 
-/* Linea decorativa laterale sottile per laser */
 .page::before {
     content: '';
     position: absolute;
@@ -112,49 +87,52 @@ body {
     background: var(--ink);
 }
 
-/* =====================================================
-   HEADER & SPAZIATURA RICHIESTA
-   ===================================================== */
 header {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding-bottom: 12px;
+    padding-bottom: 8px;
     border-bottom: 1.5pt solid var(--rule);
 }
 
 .header-name h1 {
     font-family: 'Playfair Display', serif;
     font-weight: 600;
-    font-size: 26pt;
-    line-height: 1;
+    font-size: 24pt;
+    line-height: 0.9;
 }
 
 .header-name h2 {
-    font-size: 8pt;
+    font-size: 7.5pt;
     font-weight: 500;
     letter-spacing: .2em;
     text-transform: uppercase;
-    margin-top: 6px;
+    margin-top: 4px;
 }
 
-/* Spaziature dinamiche tra Header, Paziente e Oggetto */
-.page.a4 .content { margin-top: 45px; } /* Più spazio in A4 */
-.page.a5 .content { margin-top: 25px; } /* Meno spazio in A5 */
+/* Griglia campi compattata */
+.medical-fields {
+    margin-top: 15px;
+}
 
-.page.a4 .field-row { margin-bottom: 18px; } /* Distanza tra Paziente e Oggetto in A4 */
-.page.a5 .field-row { margin-bottom: 10px; } /* Distanza tra Paziente e Oggetto in A5 */
+.field-row {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
 
-.a5 .header-name h1 { font-size: 20pt; }
+.a5 .medical-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
 
-/* =====================================================
-   CORPO
-   ===================================================== */
 .medical-fields span {
     font-weight: 600;
     text-transform: uppercase;
-    font-size: 8.5pt;
-    margin-right: 10px;
+    font-size: 8pt;
+    margin-right: 6px;
+    white-space: nowrap;
 }
 
 .input-field {
@@ -162,17 +140,16 @@ header {
     border: none;
     border-bottom: 0.5pt solid var(--rule-lt);
     font-family: 'DM Sans', sans-serif;
-    font-size: 11pt;
-    padding: 2px 0;
+    font-size: 10.5pt;
+    padding: 0;
 }
 
 .main-body {
     flex: 1;
-    margin-top: 20px;
-    line-height: 1.6;
-    font-size: 11pt;
+    margin-top: 15px;
+    line-height: 1.5;
+    font-size: 10.5pt;
     outline: none;
-    min-height: 100px;
 }
 
 /* =====================================================
@@ -181,21 +158,22 @@ header {
 .signature-area {
     display: flex;
     justify-content: space-between;
-    margin-top: 40px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 9pt;
 }
 
 .sign-line {
     border-bottom: 0.5pt solid var(--ink);
-    height: 35px;
-    margin-bottom: 8px;
-    width: 200px;
+    height: 25px;
+    margin-bottom: 5px;
+    width: 180px;
 }
 
 footer {
     border-top: 0.5pt solid var(--rule-lt);
-    padding-top: 12px;
-    font-size: 7.5pt;
+    padding-top: 8px;
+    font-size: 7pt;
     color: var(--sub);
 }
 
@@ -205,7 +183,7 @@ footer {
     gap: 10px;
 }
 
-.a5 .footer-grid { grid-template-columns: 1fr 1fr; }
+.a5 .footer-grid { grid-template-columns: 1.2fr 0.8fr; }
 
 /* =====================================================
    STAMPA
@@ -218,15 +196,15 @@ body.show-a5 .page.a4 { display: none; }
     .toolbar { display: none !important; }
     .page { box-shadow: none; border: none; }
     .input-field { border-bottom: none !important; }
-    .page::before { -webkit-print-color-adjust: exact; }
 }
 </style>
 </head>
-<body class="show-a5"> <div class="toolbar">
-    <label>Formato:</label>
-    <button class="btn-format" id="btnA4" onclick="setFormat('a4')">Formato A4</button>
-    <button class="btn-format active" id="btnA5" onclick="setFormat('a5')">Formato A5</button>
-    <button class="btn-print" onclick="window.print()">Stampa Documento</button>
+<body class="show-a5">
+
+<div class="toolbar">
+    <button class="btn-format" id="btnA4" onclick="setFormat('a4')">A4</button>
+    <button class="btn-format active" id="btnA5" onclick="setFormat('a5')">A5</button>
+    <button class="btn-print" onclick="window.print()">Stampa</button>
 </div>
 
 <div class="page a4">
@@ -247,33 +225,20 @@ body.show-a5 .page.a4 { display: none; }
                 <input type="text" class="input-field" placeholder="Motivo del certificato">
             </div>
         </div>
-        <div class="main-body" contenteditable="true"></div>
+        <div class="main-body" contenteditable="true"> Scrivi qui il referto...</div>
     </div>
     <div class="signature-area">
         <div class="date-place">Arezzo, lì <span class="auto-date"></span></div>
         <div class="doctor-sign">
             <div class="sign-line"></div>
             <p><strong>Dott. Emanuel Savianu</strong></p>
-            <span style="font-size: 7pt;">Medico di Medicina Generale</span>
         </div>
     </div>
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
-                <strong>Recapiti</strong>
-                Via Ubaldo Pasqui 38, Arezzo (AR)<br>
-                Segreteria: 0575 910 904 | Mob: 0575 171 3428
-            </div>
-            <div class="footer-col">
-                <strong>Digitale</strong>
-                emanuel@savianu.it<br>
-                PEC: emanuel.savianu@pec.omceoar.it
-            </div>
-            <div class="footer-col">
-                <strong>Dati Legali</strong>
-                P.IVA 02348320512 | SDI JKKZDGR<br>
-                Ord. Medici AR n. 3499
-            </div>
+            <div class="footer-col"><strong>Recapiti:</strong> Via Ubaldo Pasqui 38, Arezzo | Tel: 0575 910 904</div>
+            <div class="footer-col"><strong>Digitale:</strong> emanuel@savianu.it | PEC: emanuel.savianu@pec.omceoar.it</div>
+            <div class="footer-col"><strong>Legali:</strong> P.IVA 02348320512 | Ord. Medici AR n. 3499</div>
         </div>
     </footer>
 </div>
@@ -281,7 +246,7 @@ body.show-a5 .page.a4 { display: none; }
 <div class="page a5">
     <header>
         <div class="header-name">
-            <h1>Dott. Emanuel Savianu</h1>
+            <h1 style="font-size:20pt">Dott. Emanuel Savianu</h1>
             <h2>Medico di Medicina Generale</h2>
         </div>
     </header>
@@ -307,14 +272,8 @@ body.show-a5 .page.a4 { display: none; }
     </div>
     <footer>
         <div class="footer-grid">
-            <div class="footer-col">
-                <strong>Studio:</strong> Via Ubaldo Pasqui 38, AR<br>
-                <strong>Tel:</strong> 0575 910 904 | savianu.it
-            </div>
-            <div class="footer-col" style="text-align:right">
-                P.IVA 02348320512<br>
-                Ord. Medici Arezzo n. 3499
-            </div>
+            <div class="footer-col">Via Ubaldo Pasqui 38, AR - Tel: 0575 910 904</div>
+            <div class="footer-col" style="text-align:right">P.IVA 02348320512 - Albo AR 3499</div>
         </div>
     </footer>
 </div>
@@ -324,21 +283,18 @@ function setFormat(fmt) {
     document.body.className = 'show-' + fmt;
     document.getElementById('btnA4').classList.toggle('active', fmt === 'a4');
     document.getElementById('btnA5').classList.toggle('active', fmt === 'a5');
-    
     let style = document.getElementById('dynamic-page-size') || document.createElement('style');
     style.id = 'dynamic-page-size';
     const sizes = { a4: '210mm 297mm', a5: '148mm 210mm' };
     style.textContent = `@page { size: ${sizes[fmt]}; margin: 0; }`;
     document.head.appendChild(style);
 }
-
 document.addEventListener('DOMContentLoaded', () => {
     const today = new Date();
     const formattedDate = today.toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
     document.querySelectorAll('.auto-date').forEach(s => s.textContent = formattedDate);
-    setFormat('a5'); // Forza l'inizializzazione su A5
+    setFormat('a5');
 });
 </script>
-
 </body>
 </html>
