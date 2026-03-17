@@ -43,6 +43,21 @@
             transform-origin: center top;
             margin-bottom: 10px;
         }
+        
+        /* Modifiche per uniformare il bottone di prenotazione con quello di Millebook */
+        .btn-prenota-large {
+            background: linear-gradient(135deg, #3385d6 0%, #004c99 100%);
+            width: 100%; padding: 30px; border-radius: var(--radius-lg);
+            color: white; box-shadow: 0 8px 20px rgba(0, 102, 204, 0.25);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            transition: transform 0.2s, box-shadow 0.2s; border: 2px solid #0066cc;
+            text-align: center; border: none; cursor: pointer;
+        }
+        .btn-prenota-large:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(0, 102, 204, 0.35); color: white;}
+        .btn-prenota-large:active { transform: scale(0.98); box-shadow: 0 4px 10px rgba(0, 102, 204, 0.2); }
+        .btn-prenota-large i { font-size: 2.5rem; margin-bottom: 10px; color: #e1f5fe; }
+        .btn-prenota-large span { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: 0.5px; }
+        .btn-prenota-large small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 400; }
     </style>
 </head>
 <body class="modal-open">
@@ -61,6 +76,15 @@
         </div>
         
         <div class="welcome-body">
+            
+            <div class="welcome-step urgency-highlight" style="background: #fffbeb; border-left: 4px solid #f59e0b; margin-bottom: 25px;">
+                <div class="step-icon" style="background: #fef3c7; color: #d97706;"><i class="fas fa-info-circle"></i></div>
+                <div class="step-content">
+                    <h3 style="color: #b45309;">Avviso Trasferimento</h3>
+                    <p style="font-weight: bold; font-size: 1.05rem; color: #b45309;">Dal venerdì 27 Aprile, il dott. Savianu si trasferirà insieme al resto dello Studio Medico Ippocrate in Piazza Saione 3.</p>
+                </div>
+            </div>
+
             <p style="margin-bottom: 25px; font-size: 1.05rem;">
                 Sono il <strong>Dott. Emanuel Savianu</strong>. Ho organizzato questo sito per semplificare la vostra vita. 
                 Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
@@ -70,7 +94,7 @@
                 <div class="step-icon" style="background: #dcfce7; color: #16a34a;"><i class="fas fa-question-circle"></i></div>
                 <div class="step-content">
                     <h3 style="color: #15803d;">0. Prima di tutto: Leggi le FAQ</h3>
-                    <p>Il 90% delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href="faq.html" style="text-decoration:underline; font-weight: bold;">Domande Frequenti</a></strong>. Consultale prima di chiamare!</p>
+                    <p>La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href="faq.html" style="text-decoration:underline; font-weight: bold;">Domande Frequenti</a></strong>. Consultale prima di chiamare!</p>
                 </div>
             </div>
 
@@ -143,6 +167,10 @@
     <main role="main" id="main-content">
         
         <section class="alert-box" role="alert" aria-live="polite">
+            <p style="margin-bottom: 15px; color: #b45309; font-size: 1.1rem;">
+                <i class="fas fa-info-circle" aria-hidden="true" style="margin-right: 8px;"></i>
+                <strong>Avviso Importante:</strong> Dal venerdì 27 Aprile, il dott. Savianu si trasferirà insieme al resto dello Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.
+            </p>
             <p data-i18n="alert_p1">
                 <i class="fas fa-exclamation-circle" aria-hidden="true" style="color: var(--primary); margin-right: 8px;"></i>
                 <strong>Nuovi pazienti:</strong> Prenotate tramite il tasto "Prima Visita". Provvederò personalmente a iscrivervi a <strong>MilleBook</strong> in studio.
@@ -169,26 +197,18 @@
                     <span data-i18n="btn_faq_main">Leggi prima le FAQ (Domande Frequenti)</span>
                 </a>
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;">
-                    Trovi subito le risposte all'80% dei dubbi più comuni (certificati, esenzioni, impegnative).
+                    Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).
                 </p>
             </div>
 
-            <div class="action-grid btn-secondary-group" style="margin-bottom: 25px;">
-                <button onclick="showTriage()" class="btn-main btn-prenota">
+            <div class="action-grid" style="margin-bottom: 25px; align-items: stretch;">
+                <button onclick="showTriage()" class="btn-prenota-large">
                     <i class="far fa-calendar-check" aria-hidden="true"></i>
-                    <span data-i18n="btn_book">Prenota Visita</span>
+                    <span data-i18n="btn_book">PRENOTA VISITA</span>
                     <small data-i18n="btn_book_sub">Scegli il giorno e l'orario</small>
                 </button>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform" target="_blank" rel="noopener noreferrer" class="btn-main btn-ricette">
-                    <i class="fas fa-pills" aria-hidden="true"></i>
-                    <span data-i18n="btn_drugs">Modulo Farmaci</span>
-                    <small data-i18n="btn_drugs_sub">Se Millebook non funziona</small>
-                </a>
-            </div>
-
-            <div class="millebook-wrapper">
-                <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="btn-millebook" aria-label="Accedi a MilleBook">
+                <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="btn-millebook" aria-label="Accedi a MilleBook" style="height: 100%; margin-bottom: 0;">
                     <i class="fas fa-laptop-medical" aria-hidden="true"></i>
                     <span data-i18n="millebook_btn">ACCEDI A MILLEBOOK</span>
                     <small data-i18n="millebook_sub">Il tuo fascicolo sanitario digitale</small>
@@ -290,7 +310,7 @@
             </div>
             <div class="privacy-notice" style="margin-top: 30px;">
                 <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--primary);"></i> Leggi l'informativa privacy.</p>
-                <a href="modulo-privacy.html" target="_blank" rel="noopener noreferrer">
+                <a href="privacy.html" target="_blank" rel="noopener noreferrer">
                     Informativa Trattamento Dati <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
                 </a>
             </div>
@@ -311,6 +331,10 @@
                 <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="background: #e11d48; flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
                     <i class="fas fa-external-link-alt" style="margin:0; font-size: 1.4rem;"></i>
                     <span>Accedi al CUP Toscana</span>
+                </a>
+                <a href="https://fse.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="background: #0ea5e9; flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
+                    <i class="fas fa-folder-open" style="margin:0; font-size: 1.4rem;"></i>
+                    <span>Fascicolo Sanitario</span>
                 </a>
             </div>
         </section>
@@ -359,7 +383,7 @@
             <div style="margin-bottom: 15px;">
                 <a href="https://www.google.com/maps/search/?api=1&query=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-radius: 10px 10px 0 0;">
                     <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-                    <div><span data-i18n="label_address" class="contact-label">Indirizzo</span><span style="display:block;">Via Ubaldo Pasqui 38, Arezzo</span></div>
+                    <div><span data-i18n="label_address" class="contact-label">Indirizzo</span><span style="display:block;">Piazza Saione 3, Arezzo</span></div>
                 </a>
             </div>
             <a href="mailto:segreteria@savianu.it" class="contact-row">
@@ -393,7 +417,7 @@
                 <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e informazioni burocratiche.</p>
                 <table class="hours-table">
                     <tbody>
-                        <tr><td class="day">Lun - Ven</td><td class="time">09:00 – 12:00<br>15:00 – 18:00</td></tr>
+                        <tr><td class="day">Lun - Ven</td><td class="time">09:30 – 12:30<br>15:30 – 19:00</td></tr>
                     </tbody>
                 </table>
             </div>
