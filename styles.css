@@ -219,7 +219,6 @@ body.dark-mode .sidebar-logo-container { background: #ffffff; border: 2px solid 
 .btn-ricette { background: var(--accent); }
 .btn-app { background: #475569; }
 
-/* Nuovo Banner FAQ */
 .faq-banner-btn {
     background: #6366f1;
     flex-direction: row; gap: 10px; padding: 18px;
@@ -227,10 +226,6 @@ body.dark-mode .sidebar-logo-container { background: #ffffff; border: 2px solid 
 }
 .faq-banner-btn i { font-size: 1.5rem; margin: 0 !important; }
 .faq-banner-btn span { font-weight: 700; font-size: 1.15rem; }
-
-.btn-secondary-group .btn-main i { font-size: 1.8rem; margin-bottom: 8px; }
-.btn-secondary-group .btn-main span { font-weight: 600; font-size: clamp(0.9rem, 2vw, 1rem); }
-.btn-secondary-group .btn-main small { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
 
 /* --- ALERTS & URGENCY --- */
 .alert-box {
@@ -313,87 +308,4 @@ body.dark-mode #welcome-overlay, body.dark-mode #reps-overlay { background-color
 .welcome-card, .reps-card {
     background: var(--bg-gradient-2); width: 100%; max-width: 700px;
     max-height: 90vh; overflow-y: auto; border-radius: 20px;
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-    position: relative; display: flex; flex-direction: column; border: 1px solid var(--border-color);
-}
-.reps-card { max-width: 500px; padding: 30px; text-align: center; }
-
-.welcome-header {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: white; padding: 30px; text-align: center; border-radius: 20px 20px 0 0;
-}
-.welcome-header h2 { color: white; margin: 0; font-size: 1.8rem; }
-.welcome-body { padding: 30px; color: var(--text-dark); }
-.welcome-step { margin-bottom: 25px; display: flex; gap: 15px; align-items: flex-start; }
-
-.step-icon {
-    background: #eef6ff; color: var(--primary); width: 40px; height: 40px;
-    border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-size: 1.2rem; flex-shrink: 0;
-}
-body.dark-mode .step-icon { background: #1e2938; }
-
-.step-content h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 5px; }
-.step-content p { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 0; }
-
-.urgency-highlight { background-color: #fef2f2; border-left: 4px solid var(--danger); padding: 15px; border-radius: 4px; }
-body.dark-mode .urgency-highlight { background-color: #2d1a1a; }
-.urgency-highlight .step-icon { background: #fee2e2; color: var(--danger); }
-body.dark-mode .urgency-highlight .step-icon { background: #4a2020; }
-.urgency-highlight h3 { color: #991b1b; }
-body.dark-mode .urgency-highlight h3 { color: #fca5a5; }
-
-.welcome-footer {
-    padding: 20px 30px 30px; text-align: center; border-top: 1px solid var(--border-color); 
-    background: var(--bg-gradient-2); border-radius: 0 0 20px 20px; position: sticky; bottom: 0;
-}
-
-.btn-accept, .btn-reps-close {
-    background: var(--primary); color: white; border: none; padding: 15px 40px;
-    border-radius: 50px; font-size: 1.1rem; font-weight: 600; cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3); transition: transform 0.2s, box-shadow 0.2s;
-    display: inline-flex; align-items: center; gap: 10px; justify-content: center;
-}
-.btn-accept:hover, .btn-reps-close:hover {
-    background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-}
-.btn-accept:active, .btn-reps-close:active { transform: scale(0.98); }
-
-/* --- FLOATING FAQ BUTTON --- */
-.floating-faq {
-    position: fixed; bottom: 30px; right: 30px;
-    background-color: #6366f1; color: white; border-radius: 50px;
-    padding: 15px 25px; display: flex; align-items: center; gap: 10px;
-    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4); z-index: 9999;
-    font-weight: 700; font-size: 1.1rem; border: 2px solid white;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.floating-faq:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.6);
-    color: white; opacity: 1;
-}
-@media (max-width: 768px) {
-    .floating-faq { bottom: 20px; right: 20px; padding: 12px 18px; border-width: 1px;}
-    .floating-faq-text { display: none; }
-    .floating-faq i { font-size: 1.5rem; margin: 0; }
-}
-
-/* --- FOOTER & UTILS --- */
-footer {
-    text-align: center; padding: 40px 20px; font-size: 0.85rem;
-    color: var(--text-medium); background: var(--white); border-top: 1px solid var(--border-color);
-}
-.footer-content { max-width: 1000px; margin: 0 auto; }
-footer a { color: var(--primary); }
-
-.hidden { display: none !important; }
-.fade-in { animation: fadeIn 0.5s; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-.privacy-notice {
-    margin-top: 20px; padding: 15px; background: var(--bg-gradient-1);
-    border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.9rem;
-}
-.privacy-notice a { color: var(--primary); text-decoration: underline; }
-.privacy-notice a:hover { color: var(--primary-dark); }
+    box-shadow: 0 25px 5
