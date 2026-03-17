@@ -149,26 +149,36 @@
                 <i class="fas fa-mouse-pointer" aria-hidden="true"></i>
                 <h2 data-i18n="services_title">Servizi Online</h2>
             </div>
-            
-            <div class="millebook-wrapper" style="margin-bottom: 30px;">
-                <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="btn-millebook" aria-label="Accedi a MilleBook">
-                    <i class="fas fa-laptop-medical" aria-hidden="true"></i>
-                    <span data-i18n="millebook_btn">ACCEDI A MILLEBOOK</span>
-                    <small data-i18n="millebook_sub">Il tuo fascicolo sanitario digitale</small>
+
+            <div style="margin-bottom: 25px;">
+                <a href="faq.html" class="btn-main" style="background: #6366f1; width: 100%; flex-direction: row; gap: 10px; padding: 15px; justify-content: center;">
+                    <i class="fas fa-question-circle" style="margin:0; font-size: 1.4rem;"></i>
+                    <span data-i18n="btn_faq" style="font-weight: bold; font-size: 1.1rem;">Leggi prima le FAQ (Domande Frequenti)</span>
                 </a>
+                <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;">
+                    Trovi subito le risposte all'80% dei dubbi piu comuni (certificati, esenzioni, impegnative).
+                </p>
             </div>
 
-            <div class="action-grid btn-secondary-group">
-                <button onclick="showSection('booking')" class="btn-main btn-prenota">
+            <div class="action-grid btn-secondary-group" style="margin-bottom: 25px;">
+                <button onclick="showBookingTriage()" class="btn-main btn-prenota">
                     <i class="far fa-calendar-check" aria-hidden="true"></i>
                     <span data-i18n="btn_book">Prenota Visita</span>
-                    <small data-i18n="btn_book_sub">Scegli il tipo di visita</small>
+                    <small data-i18n="btn_book_sub">Scegli il giorno e l'orario</small>
                 </button>
 
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform" target="_blank" rel="noopener noreferrer" class="btn-main btn-ricette">
                     <i class="fas fa-pills" aria-hidden="true"></i>
                     <span data-i18n="btn_drugs">Modulo Farmaci</span>
                     <small data-i18n="btn_drugs_sub">Se Millebook non funziona</small>
+                </a>
+            </div>
+
+            <div class="millebook-wrapper">
+                <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="btn-millebook" aria-label="Accedi a MilleBook">
+                    <i class="fas fa-laptop-medical" aria-hidden="true"></i>
+                    <span data-i18n="millebook_btn">ACCEDI A MILLEBOOK</span>
+                    <small data-i18n="millebook_sub">Il tuo fascicolo sanitario digitale</small>
                 </a>
             </div>
         </section>
@@ -254,20 +264,16 @@
                 <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                 <h2>Cosa portare alla visita & Link Utili</h2>
             </div>
-            <p style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordarsi di portare:</p>
+            <p style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordati sempre di portare:</p>
             <ul style="margin-left: 20px; margin-bottom: 25px; color: var(--text-medium); line-height: 1.8;">
                 <li>Tessera Sanitaria e/o Codice Fiscale</li>
                 <li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li>
                 <li>Eventuali esami, referti specialistici o lettere di dimissioni precedenti</li>
             </ul>
             <div class="action-grid" style="margin-bottom: 0;">
-                <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="background: #e11d48; flex-direction: row; gap: 10px; padding: 15px;">
+                <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="background: #e11d48; flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
                     <i class="fas fa-external-link-alt" style="margin:0; font-size: 1.4rem;"></i>
-                    <span>CUP Toscana</span>
-                </a>
-                <a href="faq.html" class="btn-main" style="background: #6366f1; flex-direction: row; gap: 10px; padding: 15px;">
-                    <i class="fas fa-question-circle" style="margin:0; font-size: 1.4rem;"></i>
-                    <span data-i18n="btn_faq">FAQ Pazienti</span>
+                    <span>Accedi al CUP Toscana</span>
                 </a>
             </div>
         </section>
