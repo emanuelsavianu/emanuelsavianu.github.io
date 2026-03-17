@@ -85,8 +85,6 @@ const translations = {
         millebook_sub: "Il tuo fascicolo sanitario digitale",
         btn_book: "Prenota Visita",
         btn_book_sub: "Scegli il giorno e l'orario",
-        btn_drugs: "Modulo Farmaci",
-        btn_drugs_sub: "Se Millebook non funziona",
         btn_faq_main: "Leggi prima le FAQ (Domande Frequenti)",
         booking_title: "Seleziona il tipo di visita",
         emergency_112: "Per urgenze ed emergenze mediche, contattare il 112.",
@@ -114,8 +112,6 @@ const translations = {
         millebook_sub: "Your digital health record",
         btn_book: "Book Visit",
         btn_book_sub: "Choose date and time",
-        btn_drugs: "Prescription Form",
-        btn_drugs_sub: "If Millebook is down",
         btn_faq_main: "Read the FAQ first (Frequently Asked Questions)",
         booking_title: "Select visit type",
         emergency_112: "For medical emergencies, contact 112.",
@@ -174,7 +170,6 @@ function showTriage() {
     const triage = document.getElementById('triage-section');
     const booking = document.getElementById('booking-section');
     
-    // Nascondi i calendari se aperti precedentemente
     if (booking) booking.classList.add('hidden'); 
     
     if(triage) {
@@ -190,8 +185,8 @@ function showTriage() {
 
 function proceedToBooking() {
     const triage = document.getElementById('triage-section');
-    if(triage) triage.classList.add('hidden'); // Nascondi il triage
-    showSection('booking'); // Mostra i calendari
+    if(triage) triage.classList.add('hidden');
+    showSection('booking');
 }
 
 // --- WELCOME MODAL ---
