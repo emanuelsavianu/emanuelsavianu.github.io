@@ -83,21 +83,18 @@ const translations = {
         services_title: "Servizi Online",
         millebook_btn: "ACCEDI A MILLEBOOK",
         millebook_sub: "Il tuo fascicolo sanitario digitale",
-        new_users_title: "Prenotazioni & Modulistica",
-        new_users_desc: "Usa i tasti qui sotto.",
         btn_book: "Prenota Visita",
-        btn_book_sub: "Scegli il tipo di visita",
+        btn_book_sub: "Scegli il giorno e l'orario",
         btn_drugs: "Modulo Farmaci",
         btn_drugs_sub: "Se Millebook non funziona",
-        btn_faq: "FAQ Pazienti",
+        btn_faq_main: "Leggi prima le FAQ (Domande Frequenti)",
         booking_title: "Seleziona il tipo di visita",
-        booking_choose_desc: "Tocca uno dei pulsanti qui sotto per aprire il calendario:",
-        emergency_112: "Per urgenze mediche, contattare il 112.",
+        emergency_112: "Per urgenze ed emergenze mediche, contattare il 112.",
         contacts_title: "Contatti Studio",
         label_doctor: "Numero Dott. Savianu",
         label_secretary: "Segreteria",
         label_address: "Indirizzo",
-        hours_title: "Orari Ambulatorio",
+        hours_title: "Orari di Visita",
         day_mon: "Lunedì",
         day_tue: "Martedì",
         day_wed: "Mercoledì",
@@ -106,7 +103,7 @@ const translations = {
         day_sat_sun: "Sab - Dom",
         closed: "Chiuso",
         guard_title: "Continuità Assistenziale",
-        guard_desc: "Per assistenza non urgente (notte, festivi)."
+        guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi."
     },
     en: {
         header_subtitle: "General Practitioner - Arezzo",
@@ -115,15 +112,12 @@ const translations = {
         services_title: "Online Services",
         millebook_btn: "LOGIN TO MILLEBOOK",
         millebook_sub: "Your digital health record",
-        new_users_title: "Bookings & Forms",
-        new_users_desc: "Use the buttons below.",
         btn_book: "Book Visit",
-        btn_book_sub: "Choose visit type",
+        btn_book_sub: "Choose date and time",
         btn_drugs: "Prescription Form",
         btn_drugs_sub: "If Millebook is down",
-        btn_faq: "Patient FAQ",
+        btn_faq_main: "Read the FAQ first (Frequently Asked Questions)",
         booking_title: "Select visit type",
-        booking_choose_desc: "Tap a button below to open the calendar:",
         emergency_112: "For medical emergencies, contact 112.",
         contacts_title: "Office Contacts",
         label_doctor: "Dr. Savianu Phone",
@@ -173,6 +167,31 @@ function showSection(sectionId) {
             window.scrollTo({ top: y, behavior: 'smooth' });
         }, 100);
     }
+}
+
+// --- TRIAGE LOGIC ---
+function showTriage() {
+    const triage = document.getElementById('triage-section');
+    const booking = document.getElementById('booking-section');
+    
+    // Nascondi i calendari se aperti precedentemente
+    if (booking) booking.classList.add('hidden'); 
+    
+    if(triage) {
+        triage.classList.remove('hidden');
+        triage.classList.add('fade-in');
+        setTimeout(() => {
+            const yOffset = -20;
+            const y = triage.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }, 100);
+    }
+}
+
+function proceedToBooking() {
+    const triage = document.getElementById('triage-section');
+    if(triage) triage.classList.add('hidden'); // Nascondi il triage
+    showSection('booking'); // Mostra i calendari
 }
 
 // --- WELCOME MODAL ---

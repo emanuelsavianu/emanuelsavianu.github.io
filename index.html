@@ -49,6 +49,11 @@
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
+<a href="faq.html" class="floating-faq" aria-label="Domande Frequenti">
+    <i class="fas fa-question-circle"></i>
+    <span class="floating-faq-text">FAQ</span>
+</a>
+
 <div id="welcome-overlay" class="active" role="dialog" aria-modal="true" aria-labelledby="welcome-title">
     <div class="welcome-card">
         <div class="welcome-header">
@@ -60,6 +65,14 @@
                 Sono il <strong>Dott. Emanuel Savianu</strong>. Ho organizzato questo sito per semplificare la vostra vita. 
                 Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
             </p>
+
+            <div class="welcome-step" style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #22c55e;">
+                <div class="step-icon" style="background: #dcfce7; color: #16a34a;"><i class="fas fa-question-circle"></i></div>
+                <div class="step-content">
+                    <h3 style="color: #15803d;">0. Prima di tutto: Leggi le FAQ</h3>
+                    <p>Il 90% delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href="faq.html" style="text-decoration:underline; font-weight: bold;">Domande Frequenti</a></strong>. Consultale prima di chiamare!</p>
+                </div>
+            </div>
 
             <div class="welcome-step">
                 <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
@@ -73,7 +86,7 @@
                 <div class="step-icon"><i class="far fa-calendar-check"></i></div>
                 <div class="step-content">
                     <h3>2. Prenotazione Appuntamenti</h3>
-                    <p>L'agenda online qui sotto vi permette di prenotare col popup senza attese al telefono.</p>
+                    <p>L'agenda online vi permette di prenotare la visita senza attese al telefono.</p>
                 </div>
             </div>
 
@@ -149,19 +162,19 @@
                 <i class="fas fa-mouse-pointer" aria-hidden="true"></i>
                 <h2 data-i18n="services_title">Servizi Online</h2>
             </div>
-
+            
             <div style="margin-bottom: 25px;">
-                <a href="faq.html" class="btn-main" style="background: #6366f1; width: 100%; flex-direction: row; gap: 10px; padding: 15px; justify-content: center;">
-                    <i class="fas fa-question-circle" style="margin:0; font-size: 1.4rem;"></i>
-                    <span data-i18n="btn_faq" style="font-weight: bold; font-size: 1.1rem;">Leggi prima le FAQ (Domande Frequenti)</span>
+                <a href="faq.html" class="btn-main faq-banner-btn">
+                    <i class="fas fa-question-circle"></i>
+                    <span data-i18n="btn_faq_main">Leggi prima le FAQ (Domande Frequenti)</span>
                 </a>
                 <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;">
-                    Trovi subito le risposte all'80% dei dubbi piu comuni (certificati, esenzioni, impegnative).
+                    Trovi subito le risposte all'80% dei dubbi più comuni (certificati, esenzioni, impegnative).
                 </p>
             </div>
 
             <div class="action-grid btn-secondary-group" style="margin-bottom: 25px;">
-                <button onclick="showBookingTriage()" class="btn-main btn-prenota">
+                <button onclick="showTriage()" class="btn-main btn-prenota">
                     <i class="far fa-calendar-check" aria-hidden="true"></i>
                     <span data-i18n="btn_book">Prenota Visita</span>
                     <small data-i18n="btn_book_sub">Scegli il giorno e l'orario</small>
@@ -180,6 +193,30 @@
                     <span data-i18n="millebook_btn">ACCEDI A MILLEBOOK</span>
                     <small data-i18n="millebook_sub">Il tuo fascicolo sanitario digitale</small>
                 </a>
+            </div>
+        </section>
+
+        <section id="triage-section" class="card hidden triage-card" aria-labelledby="triage-title">
+            <div class="card-header">
+                <i class="fas fa-user-md" aria-hidden="true"></i>
+                <h2 id="triage-title">Cosa ti serve esattamente?</h2>
+            </div>
+            <p style="font-size: 1.05rem; color: var(--text-medium); margin-bottom: 15px;">
+                Per ottimizzare i tempi e permettermi di curare al meglio chi sta male, ti chiedo di fare una scelta:
+            </p>
+            <div class="triage-options">
+                <div class="triage-option">
+                    <div class="triage-icon" style="color: var(--accent);"><i class="fas fa-file-prescription"></i></div>
+                    <h3>Solo Ricette o Burocrazia?</h3>
+                    <p>Non occupare uno spazio visita se ti servono solo farmaci continuativi, impegnative per esami di controllo o certificati continuativi.</p>
+                    <a href="https://www.millebook.it/#/login" target="_blank" class="btn-main" style="background: var(--accent); padding: 12px;">Usa Millebook</a>
+                </div>
+                <div class="triage-option">
+                    <div class="triage-icon" style="color: var(--primary);"><i class="fas fa-stethoscope"></i></div>
+                    <h3>Problema Medico da Valutare?</h3>
+                    <p>Hai sintomi nuovi, un peggioramento di una malattia cronica o necessiti di una visita medica in ambulatorio.</p>
+                    <button onclick="proceedToBooking()" class="btn-main btn-prenota" style="padding: 12px;">Procedi alla Prenotazione</button>
+                </div>
             </div>
         </section>
 
@@ -264,7 +301,7 @@
                 <i class="fas fa-clipboard-list" aria-hidden="true"></i>
                 <h2>Cosa portare alla visita & Link Utili</h2>
             </div>
-            <p style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordati sempre di portare:</p>
+            <p style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordarsi di portare:</p>
             <ul style="margin-left: 20px; margin-bottom: 25px; color: var(--text-medium); line-height: 1.8;">
                 <li>Tessera Sanitaria e/o Codice Fiscale</li>
                 <li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li>
@@ -332,10 +369,11 @@
         </section>
 
         <section class="card">
-            <div class="card-header">
+            <div class="card-header" style="margin-bottom: 10px;">
                 <i class="far fa-clock" aria-hidden="true"></i>
-                <h2 data-i18n="hours_title">Orari Ambulatorio</h2>
+                <h2 data-i18n="hours_title">Orari di Visita</h2>
             </div>
+            <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Il medico riceve esclusivamente previo appuntamento.</p>
             <table class="hours-table">
                 <tbody>
                     <tr><td class="day" data-i18n="day_mon">Lunedì</td><td class="time">17:00 – 18:30</td></tr>
@@ -346,6 +384,19 @@
                     <tr><td class="day closed-day" data-i18n="day_sat_sun">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
                 </tbody>
             </table>
+
+            <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+                    <i class="fas fa-headset" style="color: var(--primary); font-size: 1.2rem;"></i>
+                    <h3 style="font-size: 1.1rem; color: var(--primary-dark); font-weight: 700;">Orari Segreteria</h3>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e informazioni burocratiche.</p>
+                <table class="hours-table">
+                    <tbody>
+                        <tr><td class="day">Lun - Ven</td><td class="time">09:00 – 12:00<br>15:00 – 18:00</td></tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </aside>
 
@@ -353,9 +404,9 @@
 
 <footer role="contentinfo">
     <div class="footer-content">
-        <p>&copy; <span id="current-year">2026</span> Studio Medico Dott. Emanuel Savianu</p>
+        <p>© <span id="current-year">2026</span> Studio Medico Dott. Emanuel Savianu</p>
         <nav>
-            <a href="faq.html">FAQ</a> &middot;
+            <a href="faq.html">FAQ</a> ·
             <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
         </nav>
     </div>
@@ -366,8 +417,6 @@
 <script>
   if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      // Fixed: Removed the dynamic timestamp. 
-      // If you ever need to bust the cache manually, use a static version like '/sw.js?v=4'
       navigator.serviceWorker.register('/sw.js')
         .then(registration => {
           console.log('ServiceWorker successfully registered');
@@ -377,7 +426,6 @@
         });
     });
 
-    // Automatically reload the page only when a legitimate update happens
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
       if (!refreshing) {
