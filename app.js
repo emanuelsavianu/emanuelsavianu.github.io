@@ -83,7 +83,7 @@ const translations = {
         services_title: "Servizi Online",
         millebook_btn: "ACCEDI A MILLEBOOK",
         millebook_sub: "Il tuo fascicolo sanitario digitale",
-        btn_book: "Prenota Visita",
+        btn_book: "PRENOTA VISITA",
         btn_book_sub: "Scegli il giorno e l'orario",
         btn_faq_main: "Leggi prima le FAQ (Domande Frequenti)",
         booking_title: "Seleziona il tipo di visita",
@@ -110,7 +110,7 @@ const translations = {
         services_title: "Online Services",
         millebook_btn: "LOGIN TO MILLEBOOK",
         millebook_sub: "Your digital health record",
-        btn_book: "Book Visit",
+        btn_book: "BOOK VISIT",
         btn_book_sub: "Choose date and time",
         btn_faq_main: "Read the FAQ first (Frequently Asked Questions)",
         booking_title: "Select visit type",
@@ -170,6 +170,7 @@ function showTriage() {
     const triage = document.getElementById('triage-section');
     const booking = document.getElementById('booking-section');
     
+    // Nascondi i calendari se aperti precedentemente
     if (booking) booking.classList.add('hidden'); 
     
     if(triage) {
@@ -185,8 +186,8 @@ function showTriage() {
 
 function proceedToBooking() {
     const triage = document.getElementById('triage-section');
-    if(triage) triage.classList.add('hidden');
-    showSection('booking');
+    if(triage) triage.classList.add('hidden'); // Nascondi il triage
+    showSection('booking'); // Mostra i calendari
 }
 
 // --- WELCOME MODAL ---
