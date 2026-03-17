@@ -30,17 +30,19 @@
     <link rel="stylesheet" href="styles.css">
 
     <style>
-        /* Ingrandisce i bottoni di Google Calendar per i pazienti anziani */
+        /* Contenitore ottimizzato per evitare il bug del popup su smartphone */
         .google-calendar-container {
             display: flex;
             flex-direction: column;
             gap: 20px;
             align-items: center;
             padding: 20px 0;
+            width: 100%;
         }
         .google-calendar-container > div {
-            transform: scale(1.15); /* Ingrandimento del 15% */
-            transform-origin: center top;
+            width: 100%;
+            display: flex;
+            justify-content: center;
             margin-bottom: 10px;
         }
         
@@ -268,7 +270,7 @@
                         calendar.schedulingButton.load({
                           url: 'https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome',
                           color: '#0066cc',
-                          label: 'PRIMA VISITA (45 minuti)',
+                          label: 'PRIMA VISITA (Per nuovi pazienti)',
                           target,
                         });
                       });
@@ -284,7 +286,7 @@
                         calendar.schedulingButton.load({
                           url: 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome',
                           color: '#00b8a9',
-                          label: 'VISITA GENERICA (20 minuti)',
+                          label: 'VISITA ORDINARIA (Controlli e problemi non urgenti)',
                           target,
                         });
                       });
@@ -300,7 +302,7 @@
                         calendar.schedulingButton.load({
                           url: 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome',
                           color: '#f57c00',
-                          label: 'VISITA BREVE (10 minuti)',
+                          label: 'SINTOMI RECENTI (Urgenze e visite non rimandabili)',
                           target,
                         });
                       });
