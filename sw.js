@@ -1,9 +1,11 @@
 // Service Worker for Dr. Savianu Medical Website
 // Updated CACHE_NAME to v4 to force a reset of previous caches
-const CACHE_NAME = 'savianu-v4';
+const CACHE_NAME = 'savianu-v5';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/faq.html',
+  '/android.html',
   '/styles.css',
   '/app.js',
   '/logo.png'
