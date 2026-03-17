@@ -159,9 +159,20 @@
 
         footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 80px; }
 
-        /* FIX CSS PER IL CALENDARIO CHE SI STRINGEVA */
-        .google-calendar-container { display: flex; flex-direction: column; gap: 15px; align-items: center; padding: 10px 0; width: 100%; }
-        .google-calendar-container > div { margin-bottom: 10px; width: 100%; display: flex; justify-content: center; }
+        /* --- CALENDAR CUSTOM BUTTONS --- */
+        .cal-services-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
+        .btn-cal-service { display: flex; align-items: center; gap: 15px; background: var(--bg-card); border: 2px solid var(--border-color); padding: 15px; border-radius: 12px; text-align: left; color: var(--text-main); text-decoration: none; }
+        .btn-cal-service.prima { border-left: 5px solid #0066cc; }
+        .btn-cal-service.ordinaria { border-left: 5px solid #00b8a9; }
+        .btn-cal-service.breve { border-left: 5px solid #f57c00; }
+        
+        .cal-icon-wrapper { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+        .btn-cal-service.prima .cal-icon-wrapper { background: rgba(0, 102, 204, 0.1); color: #0066cc; }
+        .btn-cal-service.ordinaria .cal-icon-wrapper { background: rgba(0, 184, 169, 0.1); color: #00b8a9; }
+        .btn-cal-service.breve .cal-icon-wrapper { background: rgba(245, 124, 0, 0.1); color: #f57c00; }
+        
+        .cal-text h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
+        .cal-text p { margin: 4px 0 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; }
     </style>
 </head>
 <body>
@@ -233,7 +244,7 @@
 
         <div class="alert alert-info">
             <i class="fas fa-info-circle" style="margin-top:2px; flex-shrink:0;"></i>
-            <span><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscrivero a Millebook in studio.</span>
+            <span><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscriverò a Millebook in studio.</span>
         </div>
 
         <div class="card" id="booking-section">
@@ -244,55 +255,30 @@
 
             <p style="font-size: 0.95rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">Tocca un bottone per prenotare.</p>
 
-            <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-            <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+            <div class="cal-services-grid">
+                <a href="https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service prima">
+                    <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
+                    <div class="cal-text">
+                        <h3>Prima Visita</h3>
+                        <p>Solo per i nuovi pazienti (45 min)</p>
+                    </div>
+                </a>
+                
+                <a href="https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service ordinaria">
+                    <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
+                    <div class="cal-text">
+                        <h3>Visita Ordinaria</h3>
+                        <p>Controlli e visione esami (20 min)</p>
+                    </div>
+                </a>
 
-            <div class="google-calendar-container">
-                <div>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome',
-                          color: '#0066cc',
-                          label: 'PRIMA VISITA (Per nuovi pazienti)',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                </div>
-                <div>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome',
-                          color: '#00b8a9',
-                          label: 'VISITA ORDINARIA (Controlli e problemi non urgenti)',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                </div>
-                <div>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome',
-                          color: '#f57c00',
-                          label: 'SINTOMI RECENTI (Urgenze e visite non rimandabili)',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                </div>
+                <a href="https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service breve">
+                    <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
+                    <div class="cal-text">
+                        <h3>Sintomi Recenti</h3>
+                        <p>Urgenze non gravi, certificati INPS (10 min)</p>
+                    </div>
+                </a>
             </div>
         </div>
 
@@ -386,7 +372,6 @@
                 millebook: "Accedi a MilleBook",
                 millebook_sub: "Ricette, Referti e Fascicolo",
                 book: "Prenota Visita",
-                drugs: "Modulo Farmaci",
                 booking_title: "Prenotazione Online",
                 contacts: "Contatti Studio",
                 label_doctor: "Numero Dott. Savianu",
@@ -399,7 +384,6 @@
                 millebook: "Login to MilleBook",
                 millebook_sub: "Prescriptions & Records",
                 book: "Book Visit",
-                drugs: "Drug Request",
                 booking_title: "Book Appointment",
                 contacts: "Office Contacts",
                 label_doctor: "Dr. Savianu Phone",
