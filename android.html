@@ -113,7 +113,7 @@
         .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; }
         .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; }
 
-        .grid-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .grid-buttons { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; }
         .action-btn { background: var(--bg-card); border: 1px solid var(--border-color); padding: 18px 10px; border-radius: var(--radius); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-main); }
         .action-btn i { font-size: 1.4rem; color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 50%; }
         .action-btn span { font-weight: 700; font-size: 0.9rem; }
@@ -159,13 +159,13 @@
 
         footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 80px; }
 
-        .google-calendar-container { display: flex; flex-direction: column; gap: 15px; align-items: center; padding: 10px 0; }
-        .google-calendar-container > div { transform: scale(1.1); transform-origin: center top; margin-bottom: 10px; width: 100%; text-align: center; }
+        /* FIX CSS PER IL CALENDARIO CHE SI STRINGEVA */
+        .google-calendar-container { display: flex; flex-direction: column; gap: 15px; align-items: center; padding: 10px 0; width: 100%; }
+        .google-calendar-container > div { margin-bottom: 10px; width: 100%; display: flex; justify-content: center; }
     </style>
 </head>
 <body>
 
-    <!-- SPLASH SCREEN: sfondo bianco fisso per visibilita logo -->
     <div id="splash-screen">
         <img src="logo.png" alt="Dott. Savianu">
         <div class="splash-name">Dott. Emanuel Savianu</div>
@@ -229,10 +229,6 @@
                 <i class="far fa-calendar-check"></i>
                 <span data-i18n="book">Prenota Visita</span>
             </button>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdA0q3DTX626NOO1a9ZuWrYrlbMkuyzmKSahGuV-geIzpcYBg/viewform" target="_blank" class="action-btn">
-                <i class="fas fa-pills"></i>
-                <span data-i18n="drugs">Modulo Farmaci</span>
-            </a>
         </div>
 
         <div class="alert alert-info">
@@ -260,7 +256,7 @@
                         calendar.schedulingButton.load({
                           url: 'https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome',
                           color: '#0066cc',
-                          label: 'PRIMA VISITA (45 min)',
+                          label: 'PRIMA VISITA (Per nuovi pazienti)',
                           target,
                         });
                       });
@@ -275,7 +271,7 @@
                         calendar.schedulingButton.load({
                           url: 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome',
                           color: '#00b8a9',
-                          label: 'VISITA GENERICA (20 min)',
+                          label: 'VISITA ORDINARIA (Controlli e problemi non urgenti)',
                           target,
                         });
                       });
@@ -290,7 +286,7 @@
                         calendar.schedulingButton.load({
                           url: 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome',
                           color: '#f57c00',
-                          label: 'VISITA BREVE (10 min)',
+                          label: 'SINTOMI RECENTI (Urgenze e visite non rimandabili)',
                           target,
                         });
                       });
@@ -318,7 +314,7 @@
 
                 <a href="https://maps.google.com/?q=Via+Ubaldo+Pasqui+38+Arezzo" target="_blank" class="link-item">
                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="content"><span class="label" data-i18n="address">Indirizzo</span><span class="val">Via Ubaldo Pasqui 38</span></div>
+                    <div class="content"><span class="label" data-i18n="address">Indirizzo</span><span class="val">Piazza Saione 3</span></div>
                     <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
                 </a>
             </div>
@@ -351,7 +347,7 @@
     </nav>
 
     <footer>
-        <p>&copy; <span id="year">2026</span> Dott. Emanuel Savianu</p>
+        <p>© <span id="year">2026</span> Dott. Emanuel Savianu</p>
     </footer>
 
     <script>
