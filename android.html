@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#ffffff">
-    
+
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="application-name" content="Dott. Savianu">
-    
+
     <title>Dott. Emanuel Savianu | App</title>
     <meta name="description" content="Studio Medico Dott. Emanuel Savianu a Arezzo.">
 
@@ -41,7 +41,56 @@
         a { text-decoration: none; color: inherit; }
         button { border: none; background: none; font-family: inherit; cursor: pointer; color: inherit; }
 
+        /* --- SPLASH SCREEN --- */
+        #splash-screen {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 9999;
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            transition: opacity 0.4s ease;
+        }
+        #splash-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        #splash-screen img {
+            width: 120px;
+            height: auto;
+            border-radius: 20px;
+            background: #ffffff;
+            padding: 8px;
+        }
+        #splash-screen .splash-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0066cc;
+            letter-spacing: 0.3px;
+        }
+        #splash-screen .splash-sub {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: -12px;
+        }
+        #splash-screen .splash-loader {
+            width: 32px;
+            height: 32px;
+            border: 3px solid #e2e8f0;
+            border-top-color: #0066cc;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-top: 10px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* --- HEADER --- */
         header { background: var(--bg-header); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); z-index: 100; padding: 0 20px; border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; }
+        .brand { display: flex; align-items: center; gap: 12px; }
+        .brand-logo { width: 36px; height: 36px; border-radius: 10px; background: #ffffff; padding: 2px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
         .brand h1 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
         .brand p { margin: 0; font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
         .header-actions { display: flex; align-items: center; gap: 10px; }
@@ -68,7 +117,7 @@
         .action-btn { background: var(--bg-card); border: 1px solid var(--border-color); padding: 18px 10px; border-radius: var(--radius); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-main); }
         .action-btn i { font-size: 1.4rem; color: var(--primary); background: var(--primary-light); padding: 10px; border-radius: 50%; }
         .action-btn span { font-weight: 700; font-size: 0.9rem; }
-        
+
         .link-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
         .link-item .icon { width: 36px; height: 36px; background: var(--primary-light); color: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
         .link-item .content { flex-grow: 1; }
@@ -82,14 +131,47 @@
         .modal-content { background: var(--bg-card); width: 100%; max-width: 400px; border-radius: 20px; padding: 25px; text-align: left; border: 1px solid var(--border-color); color: var(--text-main); }
         .btn-accept { background: var(--primary); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 600; width: 100%; font-size: 1rem; margin-top: 15px; text-align: center; }
 
-        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); }
+        /* --- BOTTOM NAV --- */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            height: 64px;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 100;
+            padding-bottom: env(safe-area-inset-bottom, 0);
+        }
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding: 8px 12px;
+        }
+        .nav-item.active { color: var(--primary); }
+        .nav-item i { font-size: 1.2rem; }
 
-        /* Stili per ingrandire i bottoni Google in app mobile */
+        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 80px; }
+
         .google-calendar-container { display: flex; flex-direction: column; gap: 15px; align-items: center; padding: 10px 0; }
         .google-calendar-container > div { transform: scale(1.1); transform-origin: center top; margin-bottom: 10px; width: 100%; text-align: center; }
     </style>
 </head>
 <body>
+
+    <!-- SPLASH SCREEN: sfondo bianco fisso per visibilita logo -->
+    <div id="splash-screen">
+        <img src="logo.png" alt="Dott. Savianu">
+        <div class="splash-name">Dott. Emanuel Savianu</div>
+        <div class="splash-sub">Medico di Medicina Generale</div>
+        <div class="splash-loader"></div>
+    </div>
 
     <div id="reps-modal" class="modal-overlay">
         <div class="modal-content" style="text-align: center;">
@@ -119,8 +201,11 @@
 
     <header>
         <div class="brand">
-            <h1>Dott. Emanuel Savianu</h1>
-            <p data-i18n="subtitle">Medico di Medicina Generale</p>
+            <img src="logo.png" alt="" class="brand-logo">
+            <div>
+                <h1>Dott. Emanuel Savianu</h1>
+                <p data-i18n="subtitle">Medico di Medicina Generale</p>
+            </div>
         </div>
         <div class="header-actions">
             <button class="theme-toggle" onclick="toggleTheme()"><i class="fas fa-moon" id="theme-icon"></i></button>
@@ -152,7 +237,7 @@
 
         <div class="alert alert-info">
             <i class="fas fa-info-circle" style="margin-top:2px; flex-shrink:0;"></i>
-            <span><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscriverò a Millebook in studio.</span>
+            <span><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscrivero a Millebook in studio.</span>
         </div>
 
         <div class="card" id="booking-section">
@@ -160,12 +245,12 @@
                 <i class="far fa-calendar-alt"></i>
                 <span data-i18n="booking_title">Prenotazione Online</span>
             </div>
-            
+
             <p style="font-size: 0.95rem; color: var(--text-muted); text-align:center; margin-bottom:15px;">Tocca un bottone per prenotare.</p>
 
             <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
             <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-            
+
             <div class="google-calendar-container">
                 <div>
                     <script>
@@ -213,11 +298,11 @@
                     </script>
                 </div>
             </div>
-            </div>
+        </div>
 
         <div class="card">
             <div class="card-title"><i class="fas fa-clinic-medical"></i><span data-i18n="contacts">Contatti Studio</span></div>
-            
+
             <div class="link-list">
                 <a href="tel:0575910904" class="link-item">
                     <div class="icon"><i class="fas fa-phone-alt"></i></div>
@@ -246,11 +331,41 @@
 
     </div>
 
+    <nav class="bottom-nav">
+        <a href="android.html" class="nav-item active">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="faq.html" class="nav-item">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ</span>
+        </a>
+        <a href="https://www.millebook.it/#/login" target="_blank" class="nav-item">
+            <i class="fas fa-laptop-medical"></i>
+            <span>MilleBook</span>
+        </a>
+        <a href="tel:0575910904" class="nav-item">
+            <i class="fas fa-phone-alt"></i>
+            <span>Chiama</span>
+        </a>
+    </nav>
+
     <footer>
-        <p>© <span id="year">2026</span> Dott. Emanuel Savianu</p>
+        <p>&copy; <span id="year">2026</span> Dott. Emanuel Savianu</p>
     </footer>
 
     <script>
+        // --- SPLASH SCREEN ---
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                var splash = document.getElementById('splash-screen');
+                if (splash) {
+                    splash.classList.add('fade-out');
+                    setTimeout(function() { splash.remove(); }, 400);
+                }
+            }, 800);
+        });
+
         function initTheme() {
             const saved = localStorage.getItem('theme');
             const isDark = saved === 'dark' || (!saved && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -268,7 +383,7 @@
         }
 
         document.getElementById('year').textContent = new Date().getFullYear();
-        
+
         const i18n = {
             it: {
                 subtitle: "Medico di Medicina Generale",
@@ -284,7 +399,7 @@
                 hours: "Orari Ambulatorio"
             },
             en: {
-                subtitle: "General Practitioner - Arezzo",
+                subtitle: "General Practitioner",
                 millebook: "Login to MilleBook",
                 millebook_sub: "Prescriptions & Records",
                 book: "Book Visit",
@@ -299,28 +414,28 @@
         };
 
         const hoursData = [
-            { d: "Lunedì / Mon", t: "17:00 – 18:30" }, { d: "Martedì / Tue", t: "11:30 – 13:00" },
-            { d: "Mercoledì / Wed", t: "17:00 – 18:30" }, { d: "Giovedì / Thu", t: "11:30 – 13:00" },
-            { d: "Venerdì / Fri", t: "17:00 – 18:30" }, { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
+            { d: "Lunedi / Mon", t: "17:00 - 18:30" }, { d: "Martedi / Tue", t: "11:30 - 13:00" },
+            { d: "Mercoledi / Wed", t: "17:00 - 18:30" }, { d: "Giovedi / Thu", t: "11:30 - 13:00" },
+            { d: "Venerdi / Fri", t: "17:00 - 18:30" }, { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
         ];
 
         function renderHours() {
             const container = document.getElementById('hours-table');
-            container.innerHTML = hoursData.map(h => `<div class="hours-row"><strong>${h.d}</strong><span class="${h.cls||''}">${h.t}</span></div>`).join('');
+            container.innerHTML = hoursData.map(h => '<div class="hours-row"><strong>' + h.d + '</strong><span class="' + (h.cls||'') + '">' + h.t + '</span></div>').join('');
         }
 
         function setLang(lang) {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
             document.getElementById('btn-' + lang).classList.add('active');
-            for (const key in i18n[lang]) {
-                const el = document.querySelector(`[data-i18n="${key}"]`);
+            for (var key in i18n[lang]) {
+                var el = document.querySelector('[data-i18n="' + key + '"]');
                 if(el) el.innerHTML = i18n[lang][key];
             }
             localStorage.setItem('lang', lang);
         }
 
         function scrollToBooking() {
-            const el = document.getElementById('booking-section');
+            var el = document.getElementById('booking-section');
             window.scrollTo({top: el.offsetTop - 70, behavior: 'smooth'});
         }
 
@@ -329,10 +444,10 @@
             localStorage.setItem(id + '_seen_v2', new Date().getTime());
         }
 
-        window.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', function() {
             initTheme(); renderHours();
             if(!localStorage.getItem('welcome-modal_seen_v2')) document.getElementById('welcome-modal').style.display = 'flex';
-            const savedLang = localStorage.getItem('lang');
+            var savedLang = localStorage.getItem('lang');
             if(savedLang) setLang(savedLang);
         });
     </script>
