@@ -27,24 +27,9 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Serif:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=6">
 
     <style>
-        /* Ingrandisce i bottoni di Google Calendar per i pazienti anziani */
-        .google-calendar-container {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            padding: 20px 0;
-        }
-        .google-calendar-container > div {
-            transform: scale(1.15); /* Ingrandimento del 15% */
-            transform-origin: center top;
-            margin-bottom: 10px;
-        }
-        
-        /* Modifiche per uniformare il bottone di prenotazione con quello di Millebook */
         .btn-prenota-large {
             background: linear-gradient(135deg, #3385d6 0%, #004c99 100%);
             width: 100%; padding: 30px; border-radius: var(--radius-lg);
@@ -77,11 +62,11 @@
         
         <div class="welcome-body">
             
-            <div class="welcome-step urgency-highlight" style="background: #fffbeb; border-left: 4px solid #f59e0b; margin-bottom: 25px;">
-                <div class="step-icon" style="background: #fef3c7; color: #d97706;"><i class="fas fa-info-circle"></i></div>
+            <div class="welcome-step notice-transfer" style="margin-bottom: 25px;">
+                <div class="step-icon"><i class="fas fa-info-circle"></i></div>
                 <div class="step-content">
-                    <h3 style="color: #b45309;">Avviso Trasferimento</h3>
-                    <p style="font-weight: bold; font-size: 1.05rem; color: #b45309;">Dal venerdì 27 Aprile, il dott. Savianu si trasferirà insieme al resto dello Studio Medico Ippocrate in Piazza Saione 3.</p>
+                    <h3>Avviso Trasferimento</h3>
+                    <p>Dal venerdì 27 Aprile, il dott. Savianu si trasferirà insieme al resto dello Studio Medico Ippocrate in Piazza Saione 3.</p>
                 </div>
             </div>
 
@@ -90,10 +75,10 @@
                 Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
             </p>
 
-            <div class="welcome-step" style="background: #f0fdf4; padding: 15px; border-radius: 8px; border-left: 4px solid #22c55e;">
-                <div class="step-icon" style="background: #dcfce7; color: #16a34a;"><i class="fas fa-question-circle"></i></div>
+            <div class="welcome-step notice-readfaq">
+                <div class="step-icon"><i class="fas fa-question-circle"></i></div>
                 <div class="step-content">
-                    <h3 style="color: #15803d;">0. Prima di tutto: Leggi le FAQ</h3>
+                    <h3>0. Prima di tutto: Leggi le FAQ</h3>
                     <p>La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href="faq.html" style="text-decoration:underline; font-weight: bold;">Domande Frequenti</a></strong>. Consultale prima di chiamare!</p>
                 </div>
             </div>
@@ -114,10 +99,10 @@
                 </div>
             </div>
 
-            <div class="welcome-step urgency-highlight">
-                <div class="step-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="welcome-step" style="background-color: #fef2f2; border-left: 4px solid var(--danger); padding: 15px; border-radius: 4px;">
+                <div class="step-icon" style="background: #fee2e2; color: var(--danger);"><i class="fas fa-phone-alt"></i></div>
                 <div class="step-content">
-                    <h3>3. Urgenze e Contatto Diretto</h3>
+                    <h3 style="color: #991b1b;">3. Urgenze e Contatto Diretto</h3>
                     <p style="margin-bottom: 5px; font-size: 1.05rem;">Segreteria: <strong>0575 910 904</strong></p>
                     <p style="margin-bottom: 5px; color: #991b1b;"><strong>Urgenze vere: chiamare 112.</strong></p>
                     <p style="margin-bottom: 0px; font-size: 0.85rem; color: #666;">Numero del Dottore: 0575 171 3428</p>
@@ -167,7 +152,7 @@
     <main role="main" id="main-content">
         
         <section class="alert-box" role="alert" aria-live="polite">
-            <p style="margin-bottom: 15px; color: #b45309; font-size: 1.1rem;">
+            <p style="margin-bottom: 15px; font-size: 1.1rem; color: var(--warning);">
                 <i class="fas fa-info-circle" aria-hidden="true" style="margin-right: 8px;"></i>
                 <strong>Avviso Importante:</strong> Dal venerdì 27 Aprile, il dott. Savianu si trasferirà insieme al resto dello Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.
             </p>
@@ -228,7 +213,7 @@
                 <div class="triage-option">
                     <div class="triage-icon" style="color: var(--accent);"><i class="fas fa-file-prescription"></i></div>
                     <h3>Solo Ricette o Burocrazia?</h3>
-                    <p>Non occupare uno spazio visita se ti servono solo farmaci continuativi, impegnative per esami di controllo o certificati continuativi.</p>
+                    <p>Non occupare uno spazio visita se ti servono solo farmaci continuativi o ricette per esami di controllo.</p>
                     <a href="https://www.millebook.it/#/login" target="_blank" class="btn-main" style="background: var(--accent); padding: 12px;">Usa Millebook</a>
                 </div>
                 <div class="triage-option">
@@ -255,59 +240,33 @@
                     <li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>
                 </ol>
             </div>
-
-            <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-            <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
             
-            <div class="google-calendar-container">
-                <div>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome',
-                          color: '#0066cc',
-                          label: 'PRIMA VISITA (45 minuti)',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                </div>
+            <div class="cal-services-grid">
+                <a href="https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service prima">
+                    <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
+                    <div class="cal-text">
+                        <h3>Prima Visita (Nuovi Pazienti)</h3>
+                        <p>Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (45 min)</p>
+                    </div>
+                </a>
+                
+                <a href="https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service ordinaria">
+                    <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
+                    <div class="cal-text">
+                        <h3>Visita Ordinaria</h3>
+                        <p>Controlli e problemi non urgenti. (20 min)</p>
+                    </div>
+                </a>
 
-                <div>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome',
-                          color: '#00b8a9',
-                          label: 'VISITA GENERICA (20 minuti)',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                </div>
-
-                <div>
-                    <script>
-                    (function() {
-                      var target = document.currentScript;
-                      window.addEventListener('load', function() {
-                        calendar.schedulingButton.load({
-                          url: 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome',
-                          color: '#f57c00',
-                          label: 'VISITA BREVE (10 minuti)',
-                          target,
-                        });
-                      });
-                    })();
-                    </script>
-                </div>
+                <a href="https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service breve">
+                    <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
+                    <div class="cal-text">
+                        <h3>Sintomi Recenti</h3>
+                        <p>Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)</p>
+                    </div>
+                </a>
             </div>
+
             <div class="privacy-notice" style="margin-top: 30px;">
                 <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--primary);"></i> Leggi l'informativa privacy.</p>
                 <a href="privacy.html" target="_blank" rel="noopener noreferrer">
@@ -436,7 +395,7 @@
     </div>
 </footer>
 
-<script src="app.js"></script>
+<script src="app.js?v=6"></script>
 
 <script>
   if ('serviceWorker' in navigator) {

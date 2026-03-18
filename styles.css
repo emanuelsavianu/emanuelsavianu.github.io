@@ -216,10 +216,9 @@ body.dark-mode .sidebar-logo-container { background: #ffffff; border: 2px solid 
 .btn-main:active { transform: scale(0.98); box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
 
 .btn-prenota { background: var(--primary-light); } 
-.btn-ricette { background: var(--accent); }
 .btn-app { background: #475569; }
 
-/* Nuovo Banner FAQ */
+/* Banner FAQ */
 .faq-banner-btn {
     background: #6366f1;
     flex-direction: row; gap: 10px; padding: 18px;
@@ -228,22 +227,69 @@ body.dark-mode .sidebar-logo-container { background: #ffffff; border: 2px solid 
 .faq-banner-btn i { font-size: 1.5rem; margin: 0 !important; }
 .faq-banner-btn span { font-weight: 700; font-size: 1.15rem; }
 
-.btn-secondary-group .btn-main i { font-size: 1.8rem; margin-bottom: 8px; }
-.btn-secondary-group .btn-main span { font-weight: 600; font-size: clamp(0.9rem, 2vw, 1rem); }
-.btn-secondary-group .btn-main small { font-size: 0.8rem; opacity: 0.9; margin-top: 4px; }
+/* --- CALENDAR CUSTOM BUTTONS --- */
+.cal-services-grid {
+    display: grid; grid-template-columns: 1fr; gap: 15px; margin-top: 20px;
+}
+.btn-cal-service {
+    display: flex; align-items: center; justify-content: flex-start; gap: 15px;
+    background: var(--white); border: 2px solid var(--border-color);
+    padding: 15px 20px; border-radius: var(--radius-lg); text-align: left;
+    transition: all 0.2s ease; box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    color: var(--text-dark); text-decoration: none;
+}
+.btn-cal-service:hover {
+    border-color: var(--primary); transform: translateY(-2px);
+    box-shadow: var(--shadow-md); opacity: 1; color: var(--text-dark);
+}
+.btn-cal-service.prima { border-left: 6px solid #0066cc; }
+.btn-cal-service.ordinaria { border-left: 6px solid #00b8a9; }
+.btn-cal-service.breve { border-left: 6px solid #f57c00; }
 
-/* --- ALERTS & URGENCY --- */
+.cal-icon-wrapper {
+    width: 45px; height: 45px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+}
+.btn-cal-service.prima .cal-icon-wrapper { background: rgba(0, 102, 204, 0.1); color: #0066cc; }
+.btn-cal-service.ordinaria .cal-icon-wrapper { background: rgba(0, 184, 169, 0.1); color: #00b8a9; }
+.btn-cal-service.breve .cal-icon-wrapper { background: rgba(245, 124, 0, 0.1); color: #f57c00; }
+
+body.dark-mode .btn-cal-service { background: var(--bg-gradient-2); color: var(--text-dark); }
+body.dark-mode .btn-cal-service:hover { color: var(--text-dark); }
+
+.cal-text h3 { margin: 0; font-size: 1.1rem; font-weight: 700; color: var(--text-dark); }
+.cal-text p { margin: 4px 0 0; font-size: 0.85rem; color: var(--text-medium); line-height: 1.3; }
+
+/* --- NOTICES & HIGHLIGHTS (Dark Mode Fixes) --- */
+.notice-transfer { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 15px; border-radius: 8px; }
+.notice-transfer .step-icon { background: #fef3c7; color: #d97706; }
+.notice-transfer h3 { color: #b45309; }
+.notice-transfer p { color: #b45309; font-weight: bold; font-size: 1.05rem; }
+
+body.dark-mode .notice-transfer { background: #3b2a00; border-left-color: #f59e0b; }
+body.dark-mode .notice-transfer .step-icon { background: #593f00; color: #fbbf24; }
+body.dark-mode .notice-transfer h3, body.dark-mode .notice-transfer p { color: #fcd34d; }
+
+.notice-readfaq { background: #f0fdf4; border-left: 4px solid #22c55e; padding: 15px; border-radius: 8px; }
+.notice-readfaq .step-icon { background: #dcfce7; color: #16a34a; }
+.notice-readfaq h3 { color: #15803d; }
+
+body.dark-mode .notice-readfaq { background: #022c16; border-left-color: #22c55e; }
+body.dark-mode .notice-readfaq .step-icon { background: #064e3b; color: #34d399; }
+body.dark-mode .notice-readfaq h3 { color: #6ee7b7; }
+
 .alert-box {
     background-color: #f1f8fe; border-left: 5px solid var(--primary);
     padding: 20px; margin-bottom: 25px; border-radius: 8px;
     color: var(--text-dark); font-size: clamp(0.9rem, 2vw, 1rem);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05); line-height: 1.6;
 }
-
 body.dark-mode .alert-box { background-color: #1a2332; }
 .alert-box p { margin-bottom: 10px; }
 .alert-box p:last-child { margin-bottom: 0; }
+body.dark-mode .alert-box p strong { color: #e4e6eb; }
 
+/* --- ALERTS & URGENCY --- */
 .urgency-wrapper { margin-top: 30px; margin-bottom: 25px; }
 
 .alert-emergency {
@@ -252,7 +298,6 @@ body.dark-mode .alert-box { background-color: #1a2332; }
     font-weight: 600; display: flex; align-items: center; justify-content: center;
     gap: 15px; box-shadow: var(--shadow-md); font-size: clamp(0.9rem, 2vw, 1rem);
 }
-
 body.dark-mode .alert-emergency { background-color: #2d1a1a; color: #fca5a5; }
 .alert-emergency i { font-size: 1.8rem; color: var(--danger); flex-shrink: 0; }
 
@@ -335,13 +380,6 @@ body.dark-mode .step-icon { background: #1e2938; }
 
 .step-content h3 { font-size: 1.1rem; color: var(--primary-dark); margin-bottom: 5px; }
 .step-content p { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 0; }
-
-.urgency-highlight { background-color: #fef2f2; border-left: 4px solid var(--danger); padding: 15px; border-radius: 4px; }
-body.dark-mode .urgency-highlight { background-color: #2d1a1a; }
-.urgency-highlight .step-icon { background: #fee2e2; color: var(--danger); }
-body.dark-mode .urgency-highlight .step-icon { background: #4a2020; }
-.urgency-highlight h3 { color: #991b1b; }
-body.dark-mode .urgency-highlight h3 { color: #fca5a5; }
 
 .welcome-footer {
     padding: 20px 30px 30px; text-align: center; border-top: 1px solid var(--border-color); 
