@@ -1,6 +1,6 @@
 // Service Worker for Dr. Savianu Medical Website
-// Updated CACHE_NAME to v4 to force a reset of previous caches
-const CACHE_NAME = 'savianu-v5';
+// Updated CACHE_NAME to v6 to force a reset of previous caches and clear the Modulo Farmaci
+const CACHE_NAME = 'savianu-v6';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -9,7 +9,7 @@ const urlsToCache = [
   '/styles.css',
   '/app.js',
   '/logo.png'
-]; // Removed external fonts from pre-cache to prevent cross-origin errors
+];
 
 // Install event - force immediate activation
 self.addEventListener('install', event => {
