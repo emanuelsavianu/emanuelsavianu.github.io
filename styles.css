@@ -27,17 +27,17 @@
 
 /* Dark Mode Variables (Navy & Gold Theme) */
 body.dark-mode {
-    --primary: #c29b57;        /* Gold becomes primary */
-    --primary-dark: #e0b976;
-    --primary-light: #a37c38;
-    --accent: #c29b57;           
+    --primary: #1f3659;        /* Deep Navy for UI elements to maintain contrast */
+    --primary-dark: #e0b976;   /* Gold for headings */
+    --primary-light: #2a4a73;  /* Lighter blue for active states */
+    --accent: #e0b976;         /* Bright Gold */
     --bg-gradient-1: #0a1628;  /* Very Dark Navy */
-    --bg-gradient-2: #1a2f4c;  /* Standard Navy */
+    --bg-gradient-2: #11223a;  /* Standard Navy */
     --text-dark: #f3efe6;      /* Cream text */
     --text-medium: #cbd5e1;
-    --white: #11223a;
+    --white: #162438;          /* Card backgrounds */
     --border-color: #285078;
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -187,15 +187,6 @@ body.dark-mode .card:hover { box-shadow: 0 12px 30px rgba(194, 155, 87, 0.1); }
 h2 { font-size: clamp(1.2rem, 3vw, 1.4rem); font-weight: 700; color: var(--primary-dark); }
 body.dark-mode h2 { color: var(--accent); }
 
-/* --- SIDEBAR & IMAGES --- */
-.sidebar-logo-container {
-    text-align: center; background: #ffffff; padding: 20px;
-    border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
-    border: 2px solid var(--accent); margin-bottom: 25px; transition: box-shadow 0.3s ease;
-}
-
-body.dark-mode .sidebar-logo-container { background: #ffffff; border: 2px solid var(--accent); }
-.sidebar-logo-img { max-width: 200px; height: auto; display: block; margin: 0 auto; }
 
 /* --- BUTTONS & ACTIONS --- */
 .millebook-wrapper { margin-bottom: 25px; text-align: center; }
@@ -448,25 +439,6 @@ footer a { color: var(--accent); font-weight: bold; }
 .privacy-notice a { color: var(--primary); text-decoration: underline; font-weight: bold;}
 .privacy-notice a:hover { color: var(--accent); }
 
-/* --- HEADER LOGO --- */
-.header-logo-icon {
-    width: 72px;
-    height: auto;
-    margin-bottom: 14px;
-    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.45));
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* --- SIDEBAR LOGO SWITCHING (LIGHT / DARK) --- */
-.logo-dark { display: none; }
-body.dark-mode .logo-light { display: none; }
-body.dark-mode .logo-dark { display: block; }
-body.dark-mode .sidebar-logo-container {
-    background: #0a1628;
-    border-color: var(--accent);
-}
 
 /* --- WELCOME MODAL: EMERGENCY STEP DARK MODE FIX --- */
 .welcome-step-emergency {
@@ -483,3 +455,30 @@ body.dark-mode .welcome-step-emergency h3 { color: #ff6b6b; }
 body.dark-mode .welcome-step-emergency p { color: #cbd5e1; }
 body.dark-mode .welcome-step-emergency p strong { color: #f3efe6; }
 body.dark-mode .welcome-step-emergency p b { color: #ff6b6b; }
+
+/* --- HEADER LOGO TOGGLE --- */
+.header-logo {
+    height: clamp(50px, 8vw, 80px); /* Scales well on mobile and desktop */
+    width: auto;
+    object-fit: contain;
+}
+.dark-mode-logo { 
+    display: none; 
+}
+body.dark-mode .dark-mode-logo { 
+    display: block; 
+}
+body.dark-mode .light-mode-logo { 
+    display: none; 
+}
+
+/* --- DARK MODE TEXT CONTRAST UTILITY --- */
+.text-primary { 
+    color: var(--primary); 
+}
+body.dark-mode .text-primary { 
+    color: var(--accent) !important; 
+}
+body.dark-mode .btn-cal-service.prima .cal-icon-wrapper {
+    color: var(--accent);
+}
