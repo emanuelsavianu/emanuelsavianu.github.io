@@ -170,7 +170,7 @@
 <div id="reps-overlay" role="dialog" aria-modal="true" aria-labelledby="reps-title">
     <div class="reps-card">
         <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 20px;"></i>
-        <h3 id="reps-title" style="margin-bottom: 15px; font-size: 1.4rem; font-weight: 700; color: var(--primary);">Informazione per Rappresentanti</h3>
+        <h3 id="reps-title" class="text-primary" style="margin-bottom: 15px; font-size: 1.4rem; font-weight: 700;">Informazione per Rappresentanti</h3>
         <p style="margin-bottom: 25px;">
             Si informa che il Dr. Savianu Emanuel <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>.
         </p>
@@ -187,8 +187,11 @@
         <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
     </nav>
     <div class="header-content">
-        <img src="bronzelogo.png" alt="Studio Medico Ippocrate" class="header-logo-icon">
-        <h1>Dr. Savianu Emanuel</h1>
+        <div class="header-title-wrapper" style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 5px;">
+            <img src="bronzelogo.png" alt="Logo Studio Medico" class="header-logo light-mode-logo">
+            <img src="bronzelogo.png" alt="Logo Studio Medico" class="header-logo dark-mode-logo">
+        </div>
+        <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
         <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
         <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
         <a href="tel:+390575910904" class="btn-telefono-header">
@@ -202,22 +205,9 @@
     <main role="main" id="main-content">
         
         <section class="alert-box" role="alert" aria-live="polite">
-            <p style="margin-bottom: 15px; font-size: 1.1rem; color: var(--primary);">
+            <p class="text-primary" style="margin-bottom: 15px; font-size: 1.1rem;">
                 <i class="fas fa-info-circle" aria-hidden="true" style="margin-right: 8px;"></i>
-                <strong>Avviso Sede:</strong> Il Dr. Savianu visita presso lo Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.
-            </p>
-            <p data-i18n="alert_p1">
-                <i class="fas fa-exclamation-circle" aria-hidden="true" style="color: var(--accent); margin-right: 8px;"></i>
-                <strong>Nuovi pazienti:</strong> Prenotate tramite il tasto "Prima Visita". Provvederò personalmente a iscrivervi a <strong>MilleBook</strong> in studio.
-            </p>
-            <p data-i18n="alert_p2" style="margin-top: 10px;">
-                <i class="fas fa-check-circle" aria-hidden="true" style="color: var(--accent); margin-right: 8px;"></i>
-                Dopo la prima visita, usate esclusivamente <strong>MilleBook</strong> per ricette e richieste.
-            </p>
-            <p style="margin-top: 10px; color: var(--danger);">
-                <i class="fas fa-comment-slash" aria-hidden="true" style="margin-right: 8px;"></i>
-                <strong>Nota Bene:</strong> Il Dottore non risponde a richieste cliniche tramite WhatsApp o SMS personali.
-            </p>
+                <strong>Avviso Sede:</strong>&nbsp;Dal 27 Aprile 2026, il dottor Savianu insieme al resto dello&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Studio Medico Ippocrate visiterà&nbsp;<strong>Piazza Saione 3</strong>.</p>
         </section>
 
         <section class="card">
@@ -282,7 +272,7 @@
             </div>
             
             <div class="booking-guide" style="background: var(--bg-gradient-1); padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid var(--accent);">
-                <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: var(--primary);">Come prenotare:</h3>
+                <h3 class="text-primary" style="font-size: 1.1rem; margin-bottom: 15px;">Come prenotare:</h3>
                 <ol style="margin-left: 20px; color: var(--text-medium); line-height: 1.8;">
                     <li>Clicca il pulsante del tipo di visita qui sotto.</li>
                     <li>Scegli il giorno e l'orario disponibile sul calendario.</li>
@@ -369,10 +359,6 @@
     </main>
 
     <aside role="complementary">
-        <div class="sidebar-logo-container">
-            <img src="bluelogo.png" alt="Studio Medico Ippocrate Arezzo" class="sidebar-logo-img logo-light">
-            <img src="bronzelogo.png" alt="Studio Medico Ippocrate Arezzo" class="sidebar-logo-img logo-dark">
-        </div>
 
         <section class="card">
             <div class="card-header">
@@ -382,7 +368,7 @@
             
             <a href="tel:0575910904" class="contact-row">
                 <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
-                <div><span data-i18n="label_secretary" class="contact-label">Segreteria e Appuntamenti</span><span class="contact-value" style="color: var(--primary);">0575 910 904</span></div>
+                <div><span data-i18n="label_secretary" class="contact-label">Segreteria e Appuntamenti</span><span class="contact-value text-primary">0575 910 904</span></div>
             </a>
 
             <a href="tel:05751713428" class="contact-row">
@@ -419,7 +405,7 @@
             <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                     <i class="fas fa-headset" style="color: var(--accent); font-size: 1.2rem;"></i>
-                    <h3 style="font-size: 1.1rem; color: var(--primary); font-weight: 700;">Orari Segreteria</h3>
+                    <h3 class="text-primary" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria</h3>
                 </div>
                 <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e info.</p>
                 <table class="hours-table">
@@ -435,7 +421,7 @@
 
 <footer role="contentinfo">
     <div class="footer-content">
-        <p>© <span id="current-year">2026</span> Studio Medico Ippocrate - Dr. Savianu Emanuel</p>
+        <p>© <span id="current-year">2026</span>&nbsp;- Dr. Savianu Emanuel</p>
         <nav style="margin-top: 10px;">
             <a href="faq.html">FAQ</a> ·
             <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
