@@ -274,7 +274,7 @@ body.dark-mode .btn-cal-service.breve .cal-icon-wrapper { background: #2d1a1a; c
 .notice-transfer h3 { color: var(--primary); }
 .notice-transfer p { color: var(--primary-dark); font-weight: bold; font-size: 1.05rem; }
 
-body.dark-mode .notice-transfer { background: var(--primary-dark); border-left-color: var(--accent); }
+body.dark-mode .notice-transfer { background: var(--bg-gradient-2); border-left-color: var(--accent); }
 body.dark-mode .notice-transfer .step-icon { background: var(--primary); color: var(--accent); }
 body.dark-mode .notice-transfer h3, body.dark-mode .notice-transfer p { color: var(--accent); }
 
@@ -284,7 +284,7 @@ body.dark-mode .notice-transfer h3, body.dark-mode .notice-transfer p { color: v
     color: var(--text-dark); font-size: clamp(0.9rem, 2vw, 1rem);
     box-shadow: 0 2px 5px rgba(0,0,0,0.05); line-height: 1.6;
 }
-body.dark-mode .alert-box { background-color: var(--primary-dark); }
+body.dark-mode .alert-box { background-color: var(--bg-gradient-2); }
 .alert-box p { margin-bottom: 10px; }
 .alert-box p:last-child { margin-bottom: 0; }
 body.dark-mode .alert-box p strong { color: #e4e6eb; }
@@ -439,7 +439,6 @@ footer a { color: var(--accent); font-weight: bold; }
 .privacy-notice a { color: var(--primary); text-decoration: underline; font-weight: bold;}
 .privacy-notice a:hover { color: var(--accent); }
 
-
 /* --- WELCOME MODAL: EMERGENCY STEP DARK MODE FIX --- */
 .welcome-step-emergency {
     background-color: #fff0f0;
@@ -455,22 +454,6 @@ body.dark-mode .welcome-step-emergency h3 { color: #ff6b6b; }
 body.dark-mode .welcome-step-emergency p { color: #cbd5e1; }
 body.dark-mode .welcome-step-emergency p strong { color: #f3efe6; }
 body.dark-mode .welcome-step-emergency p b { color: #ff6b6b; }
-
-/* --- HEADER LOGO TOGGLE --- */
-.header-logo {
-    height: clamp(50px, 8vw, 80px); /* Scales well on mobile and desktop */
-    width: auto;
-    object-fit: contain;
-}
-.dark-mode-logo { 
-    display: none; 
-}
-body.dark-mode .dark-mode-logo { 
-    display: block; 
-}
-body.dark-mode .light-mode-logo { 
-    display: none; 
-}
 
 /* --- DARK MODE TEXT CONTRAST UTILITY --- */
 .text-primary { 
