@@ -99,58 +99,230 @@ function toggleRepsModal(show) {
 // --- LANGUAGE MANAGEMENT ---
 const translations = {
     it: {
+        // Header
         header_subtitle: "Medico di Medicina Generale - Arezzo",
-        alert_p1: "<i class='fas fa-exclamation-circle'></i> <strong>Nuovi pazienti:</strong> Prenotate tramite 'Prima Visita'. Vi iscriverò a <strong>MilleBook</strong> in ambulatorio.",
-        alert_p2: "<i class='fas fa-check-circle'></i> Dopo la prima visita, usate esclusivamente MilleBook.",
+
+        // Alert box (index.html)
+        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Trasferimento:</strong> Dal 27 Aprile 2026, il dottor Savianu visiterà in <strong>Piazza Saione 3</strong>.",
+
+        // Services section
         services_title: "Servizi Online",
-        millebook_btn: "ACCEDI A MILLEBOOK",
-        millebook_sub: "Il tuo fascicolo sanitario digitale",
+        btn_faq_main: "Leggi prima le FAQ (Domande Frequenti)",
         btn_book: "PRENOTA VISITA",
         btn_book_sub: "Scegli il giorno e l'orario",
-        btn_faq_main: "Leggi prima le FAQ (Domande Frequenti)",
+        millebook_btn: "ACCEDI A MILLEBOOK",
+        millebook_sub: "Il tuo fascicolo sanitario digitale",
+
+        // Triage section
+        triage_title: "Cosa ti serve esattamente?",
+        triage_desc: "Per ottimizzare i tempi e permettermi di curare al meglio chi sta male, ti chiedo di fare una scelta:",
+        triage_opt1_title: "Solo Ricette o Burocrazia?",
+        triage_opt1_desc: "Non occupare uno spazio visita se ti servono solo farmaci continuativi o ricette per esami di controllo.",
+        triage_opt1_btn: "Usa Millebook",
+        triage_opt2_title: "Problema Medico da Valutare?",
+        triage_opt2_desc: "Hai sintomi nuovi, un peggioramento di una malattia cronica o necessiti di una visita medica in ambulatorio.",
+        triage_opt2_btn: "Procedi alla Prenotazione",
+
+        // Booking section
         booking_title: "Seleziona il tipo di visita",
-        emergency_112: "Per urgenze ed emergenze mediche, contattare il 112.",
+        booking_guide_title: "Come prenotare:",
+        booking_guide_steps: "<li>Clicca il pulsante del tipo di visita qui sotto.</li><li>Scegli il giorno e l'orario disponibile sul calendario.</li><li>Inserisci Nome, Cognome e un indirizzo Email.</li><li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>",
+        cal_prima_title: "Prima Visita (Nuovi Pazienti)",
+        cal_prima_desc: "Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)",
+        cal_ord_title: "Visita Ordinaria",
+        cal_ord_desc: "Controlli e problemi non urgenti. (20 min)",
+        cal_breve_title: "Sintomi Recenti",
+        cal_breve_desc: "Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)",
+        privacy_notice_text: "Leggi l'informativa privacy.",
+        privacy_notice_link: "Informativa Trattamento Dati",
+
+        // Visit info section
+        visit_info_title: "Cosa portare alla visita &amp; Link Utili",
+        visit_info_desc: "Per la visita in ambulatorio, ricordarsi di portare:",
+        visit_info_items: "<li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li><li>Eventuali esami, referti specialistici o lettere di dimissioni precedenti</li>",
+        btn_cup: "Accedi al CUP Toscana",
+        btn_fse: "Fascicolo Sanitario",
+
+        // Emergency & out-of-hours
+        emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
+        guard_title: "Continuità Assistenziale (ex-Guardia Medica)",
+        guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
+
+        // Contacts
         contacts_title: "Contatti Studio",
-        label_doctor: "Numero Dott. Savianu",
-        label_secretary: "Segreteria",
-        label_address: "Indirizzo",
-        hours_title: "Orari di Visita",
-        day_mon: "Lunedì",
-        day_tue: "Martedì",
-        day_wed: "Mercoledì",
-        day_thu: "Giovedì",
-        day_fri: "Venerdì",
+        label_secretary: "Segreteria e Appuntamenti",
+        label_doctor: "Tel. Personale (Solo Urgenze)",
+        label_address: "Studio Medico Ippocrate",
+        label_email: "Email",
+
+        // Hours
+        hours_title: "Orari di Studio",
+        appt_only: "Solo su appuntamento",
+        hours_day1: "Lun · Mer · Ven",
+        hours_day2: "Mar · Gio",
         day_sat_sun: "Sab - Dom",
         closed: "Chiuso",
-        guard_title: "Continuità Assistenziale",
-        guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi."
+        hours_secretary_title: "Orari Segreteria",
+        hours_secretary_desc: "Per appuntamenti telefonici e info.",
+
+        // Footer
+        link_privacy: "Privacy Policy",
+
+        // Welcome modal
+        welcome_transfer_title: "Nuova Sede Studio",
+        welcome_transfer_desc: "Il Dott. Savianu si è trasferito insieme allo Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.",
+        welcome_intro: "Benvenuti. Ho organizzato questo sito per semplificare la vostra vita. Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.",
+        welcome_step0_title: "0. Prima di tutto: Leggi le FAQ",
+        welcome_step0_desc: "La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Domande Frequenti</a></strong>. Consultale prima di chiamare!",
+        welcome_step1_title: "1. Canale Preferenziale: Millebook",
+        welcome_step1_desc: "Usatelo per <strong>farmaci continuativi</strong>, messaggi brevi e visione ricette. È il metodo più veloce.",
+        welcome_step2_title: "2. Prenotazione Appuntamenti",
+        welcome_step2_desc: "L'agenda online vi permette di prenotare la visita senza attese al telefono.",
+        welcome_step3_title: "3. Urgenze e Contatto Diretto",
+        welcome_step3_p1: "Segreteria: <strong>0575 910 904</strong>",
+        welcome_step3_p2: "<strong>Urgenze vere: chiamare 112 / 116 117.</strong>",
+        welcome_step3_p3: "Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.",
+        welcome_btn: "<span>Ho letto e accetto</span><i class='fas fa-arrow-right'></i>",
+
+        // FAQ page
+        faq_hero_title: "<i class='fas fa-question-circle' style='margin-right: 10px;'></i>FAQ per i Pazienti",
+        faq_hero_desc: "Risposte alle domande più comuni sullo studio medico",
+        faq_back: "<i class='fas fa-arrow-left'></i> Torna al sito principale",
+        faq_nav_prenotazioni: "Prenotazioni",
+        faq_nav_ricette: "Ricette",
+        faq_nav_certificati: "Certificati",
+        faq_nav_referti: "Referti",
+        faq_nav_millebook: "MilleBook",
+        faq_nav_nuovi: "Nuovi Pazienti",
+        faq_nav_urgenze: "Urgenze",
+        faq_nav_varie: "Servizi",
+        faq_sec_prenotazioni: "<i class='far fa-calendar-check'></i> Prenotazioni e Appuntamenti",
+        faq_sec_ricette: "<i class='fas fa-pills'></i> Ricette e Farmaci",
+        faq_q1: "Come prenoto una visita?",
+        faq_a1: "Il modo più semplice e veloce è tramite il <strong>sito web</strong>:<ul><li>Vai su <a href='index.html'>savianu.it</a> e clicca \"Prenota Visita\"</li><li>Scegli il tipo: <strong>Prima Visita</strong>, <strong>Visita Ordinaria</strong> o <strong>Sintomi Recenti</strong></li><li>Seleziona giorno e orario dal calendario</li><li>Inserisci nome, cognome ed email per la conferma</li></ul><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
+        faq_q2: "Posso venire senza appuntamento?",
+        faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.<br><br>Se non state bene e non riuscite a prenotare, presentatevi comunque: la segreteria avviserà il medico che vi contatterà non appena libero dagli appuntamenti già previsti.",
+        faq_q3: "Quali sono gli orari dell'ambulatorio?",
+        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì, Mercoledì, Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Martedì, Giovedì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
+        faq_q4: "Come annullo o sposto un appuntamento?",
+        faq_a4: "Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.<br><br>Se non trovate l'email, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
+        faq_q5: "Come richiedo la ricetta per i farmaci che prendo regolarmente?",
+        faq_a5: "Il metodo preferenziale è <strong>MilleBook</strong>:<ul><li>Accedete a <a href='https://www.millebook.it/#/login' target='_blank'>millebook.it</a></li><li>Inviate un messaggio con il nome dei farmaci necessari</li><li>Le ricette saranno pronte <strong>entro due giorni lavorativi</strong> e visibili su MilleBook</li></ul><div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
+        faq_cta_title: "Non hai trovato la risposta?",
+        faq_cta_desc: "Contatta la segreteria o accedi a MilleBook per comunicare con il medico."
     },
     en: {
+        // Header
         header_subtitle: "General Practitioner - Arezzo",
-        alert_p1: "<i class='fas fa-exclamation-circle'></i> <strong>New Patients:</strong> Book via 'First Visit'. I will register you on <strong>MilleBook</strong>.",
-        alert_p2: "<i class='fas fa-check-circle'></i> After the first visit, please use MilleBook exclusively.",
+
+        // Alert box (index.html)
+        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Relocation:</strong> From 27 April 2026, Dr. Savianu will be visiting at <strong>Piazza Saione 3</strong>.",
+
+        // Services section
         services_title: "Online Services",
-        millebook_btn: "LOGIN TO MILLEBOOK",
-        millebook_sub: "Your digital health record",
+        btn_faq_main: "Read the FAQ first (Frequently Asked Questions)",
         btn_book: "BOOK VISIT",
         btn_book_sub: "Choose date and time",
-        btn_faq_main: "Read the FAQ first (Frequently Asked Questions)",
+        millebook_btn: "LOGIN TO MILLEBOOK",
+        millebook_sub: "Your digital health record",
+
+        // Triage section
+        triage_title: "What do you need exactly?",
+        triage_desc: "To optimise appointment slots and ensure the best care for patients who are unwell, please make a choice:",
+        triage_opt1_title: "Only Prescriptions or Paperwork?",
+        triage_opt1_desc: "Don't take up a visit slot if you only need repeat prescriptions or routine referrals.",
+        triage_opt1_btn: "Use Millebook",
+        triage_opt2_title: "A Medical Problem to Assess?",
+        triage_opt2_desc: "You have new symptoms, a worsening chronic condition, or you need an in-person medical examination.",
+        triage_opt2_btn: "Proceed to Booking",
+
+        // Booking section
         booking_title: "Select visit type",
-        emergency_112: "For medical emergencies, contact 112.",
+        booking_guide_title: "How to book:",
+        booking_guide_steps: "<li>Click the button for the visit type below.</li><li>Choose an available day and time from the calendar.</li><li>Enter your first name, surname, and an email address.</li><li>Click <strong>Confirm</strong> (you will receive a confirmation email).</li>",
+        cal_prima_title: "First Visit (New Patients)",
+        cal_prima_desc: "For new patients only. Bring documents, tests, reports and exemptions. (30 min)",
+        cal_ord_title: "Standard Visit",
+        cal_ord_desc: "Check-ups and non-urgent issues. (20 min)",
+        cal_breve_title: "Recent Symptoms",
+        cal_breve_desc: "Urgent but non-emergency visits, acute illness, INPS sick leave certificates. (10 min)",
+        privacy_notice_text: "Please read the privacy policy.",
+        privacy_notice_link: "Data Processing Policy",
+
+        // Visit info section
+        visit_info_title: "What to Bring &amp; Useful Links",
+        visit_info_desc: "For your in-office visit, please remember to bring:",
+        visit_info_items: "<li>An up-to-date list of all medications you take regularly</li><li>Any previous tests, specialist reports, or hospital discharge letters</li>",
+        btn_cup: "Book via CUP Toscana",
+        btn_fse: "Health Record (FSE)",
+
+        // Emergency & out-of-hours
+        emergency_112: "For medical emergencies, always call the emergency number 112.",
+        guard_title: "Out-of-Hours Service (ex-Guardia Medica)",
+        guard_desc: "For non-urgent medical assistance during nights, public holidays and pre-holidays.",
+
+        // Contacts
         contacts_title: "Office Contacts",
-        label_doctor: "Dr. Savianu Phone",
-        label_secretary: "Reception",
-        label_address: "Address",
+        label_secretary: "Reception &amp; Appointments",
+        label_doctor: "Personal Phone (Emergencies only)",
+        label_address: "Studio Medico Ippocrate",
+        label_email: "Email",
+
+        // Hours
         hours_title: "Clinic Hours",
-        day_mon: "Monday",
-        day_tue: "Tuesday",
-        day_wed: "Wednesday",
-        day_thu: "Thursday",
-        day_fri: "Friday",
+        appt_only: "By appointment only",
+        hours_day1: "Mon · Wed · Fri",
+        hours_day2: "Tue · Thu",
         day_sat_sun: "Sat - Sun",
         closed: "Closed",
-        guard_title: "Out-of-Hours Service",
-        guard_desc: "For non-urgent assistance (nights, holidays)."
+        hours_secretary_title: "Reception Hours",
+        hours_secretary_desc: "For phone appointments and enquiries.",
+
+        // Footer
+        link_privacy: "Privacy Policy",
+
+        // Welcome modal
+        welcome_transfer_title: "New Office Location",
+        welcome_transfer_desc: "Dr. Savianu has relocated with Studio Medico Ippocrate to <strong>Piazza Saione 3</strong>.",
+        welcome_intro: "Welcome. This website is designed to make your life easier. By using the digital tools available, you allow me to focus my full attention on in-person medical consultations.",
+        welcome_step0_title: "0. First of all: Read the FAQ",
+        welcome_step0_desc: "Most answers about certificates, prescriptions and exemptions can be found in the <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Frequently Asked Questions</a></strong>. Check there before calling!",
+        welcome_step1_title: "1. Preferred Channel: Millebook",
+        welcome_step1_desc: "Use it for <strong>repeat prescriptions</strong>, short messages and viewing your prescriptions. It's the fastest method.",
+        welcome_step2_title: "2. Appointment Booking",
+        welcome_step2_desc: "The online calendar lets you book a visit without waiting on the phone.",
+        welcome_step3_title: "3. Urgent Matters &amp; Direct Contact",
+        welcome_step3_p1: "Reception: <strong>0575 910 904</strong>",
+        welcome_step3_p2: "<strong>True emergencies: call 112 / 116 117.</strong>",
+        welcome_step3_p3: "The doctor's direct number (0575 171 3428) is reserved for genuine emergencies only.",
+        welcome_btn: "<span>I have read and accept</span><i class='fas fa-arrow-right'></i>",
+
+        // FAQ page
+        faq_hero_title: "<i class='fas fa-question-circle' style='margin-right: 10px;'></i>FAQ for Patients",
+        faq_hero_desc: "Answers to the most common questions about the practice",
+        faq_back: "<i class='fas fa-arrow-left'></i> Back to main site",
+        faq_nav_prenotazioni: "Appointments",
+        faq_nav_ricette: "Prescriptions",
+        faq_nav_certificati: "Certificates",
+        faq_nav_referti: "Test Results",
+        faq_nav_millebook: "MilleBook",
+        faq_nav_nuovi: "New Patients",
+        faq_nav_urgenze: "Emergencies",
+        faq_nav_varie: "Services",
+        faq_sec_prenotazioni: "<i class='far fa-calendar-check'></i> Appointments &amp; Bookings",
+        faq_sec_ricette: "<i class='fas fa-pills'></i> Prescriptions &amp; Medications",
+        faq_q1: "How do I book a visit?",
+        faq_a1: "The simplest and fastest way is through the <strong>website</strong>:<ul><li>Go to <a href='index.html'>savianu.it</a> and click \"Book Visit\"</li><li>Choose the type: <strong>First Visit</strong>, <strong>Standard Visit</strong>, or <strong>Recent Symptoms</strong></li><li>Select a day and time from the calendar</li><li>Enter your name, surname and email for confirmation</li></ul><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
+        faq_q2: "Can I come without an appointment?",
+        faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book online, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
+        faq_q3: "What are the clinic opening hours?",
+        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday, Wednesday, Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Tuesday, Thursday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
+        faq_q4: "How do I cancel or reschedule an appointment?",
+        faq_a4: "Your confirmation email contains a link to <strong>modify or cancel</strong> the appointment directly in the calendar.<br><br>If you cannot find the email, please call reception on <strong>0575 910 904</strong> with reasonable notice.",
+        faq_q5: "How do I request a prescription for my regular medications?",
+        faq_a5: "The preferred method is <strong>MilleBook</strong>:<ul><li>Log in at <a href='https://www.millebook.it/#/login' target='_blank'>millebook.it</a></li><li>Send a message listing the medications you need</li><li>Prescriptions will be ready <strong>within two working days</strong> and visible on MilleBook</li></ul><div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
+        faq_cta_title: "Didn't find the answer?",
+        faq_cta_desc: "Contact reception or log in to MilleBook to send a message to the doctor."
     }
 };
 
