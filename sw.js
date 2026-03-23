@@ -1,11 +1,16 @@
 // Service Worker for Dr. Savianu Medical Website
 // Updated CACHE_NAME to v6 to force a reset of previous caches and clear the Modulo Farmaci
-const CACHE_NAME = 'savianu-v6';
+const CACHE_NAME = 'savianu-v36';
 const urlsToCache = [
   '/',
   '/index.html',
   '/faq.html',
   '/android.html',
+  '/ferie.html',
+  '/installazione.html',
+  '/calcolatore-ferie.html',
+  '/privacy.html',
+  '/offline.html',
   '/styles.css',
   '/app.js',
   '/logo.png'
@@ -48,6 +53,6 @@ self.addEventListener('fetch', event => {
         });
         return response;
       })
-      .catch(() => caches.match(event.request)) // Fallback to cache if offline
+      .catch(() => caches.match(event.request) || caches.match('/offline.html')) // Fallback to cache, then offline page
   );
 });

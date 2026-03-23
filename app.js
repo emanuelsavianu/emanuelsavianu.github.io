@@ -110,11 +110,11 @@ const translations = {
 
         // Services section
         services_title: "Servizi Online",
-        btn_faq_main: "Leggi prima le FAQ (Domande Frequenti)",
-        btn_book: "PRENOTA VISITA",
-        btn_book_sub: "Scegli il giorno e l'orario",
-        millebook_btn: "ACCEDI A MILLEBOOK",
-        millebook_sub: "Il tuo fascicolo sanitario digitale",
+        btn_faq_main: "Hai dubbi? Leggi prima le FAQ",
+        btn_book: "Prenota una visita",
+        btn_book_sub: "Scegli giorno e orario",
+        millebook_btn: "Richiedi farmaci o ricette",
+        millebook_sub: "Accedi a Millebook — il canale preferenziale",
 
         // Triage section
         triage_title: "Cosa ti serve esattamente?",
@@ -173,7 +173,7 @@ const translations = {
 
         // Welcome modal
         welcome_transfer_title: "Nuova Sede Studio",
-        welcome_transfer_desc: "Il Dott. Savianu si è trasferito insieme allo Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.",
+        welcome_transfer_desc: "Dal 27 Aprile 2026, il Dott. Savianu si trasferirà in <strong>Piazza Saione 3</strong>. Attualmente: <strong>Via Ubaldo Pasqui 38</strong>.",
         welcome_intro: "Benvenuti. Ho organizzato questo sito per semplificare la vostra vita. Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.",
         welcome_step0_title: "0. Prima di tutto: Leggi le FAQ",
         welcome_step0_desc: "La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Domande Frequenti</a></strong>. Consultale prima di chiamare!",
@@ -206,7 +206,7 @@ const translations = {
         faq_q2: "Posso venire senza appuntamento?",
         faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.<br><br>Se non state bene e non riuscite a prenotare, presentatevi comunque: la segreteria avviserà il medico che vi contatterà non appena libero dagli appuntamenti già previsti.",
         faq_q3: "Quali sono gli orari dell'ambulatorio?",
-        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì, Mercoledì, Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Martedì, Giovedì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
+        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì, Mercoledì, Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Martedì, Giovedì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Via Ubaldo Pasqui 38, Arezzo (dal 27/04/2026: Piazza Saione 3)</div>",
         faq_q4: "Come annullo o sposto un appuntamento?",
         faq_a4: "Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.<br><br>Se non trovate l'email, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
         faq_q5: "Come richiedo la ricetta per i farmaci che prendo regolarmente?",
@@ -244,11 +244,11 @@ const translations = {
 
         // Services section
         services_title: "Online Services",
-        btn_faq_main: "Read the FAQ first (Frequently Asked Questions)",
-        btn_book: "BOOK VISIT",
+        btn_faq_main: "Have questions? Read the FAQ first",
+        btn_book: "Book a visit",
         btn_book_sub: "Choose date and time",
-        millebook_btn: "LOGIN TO MILLEBOOK",
-        millebook_sub: "Your digital health record",
+        millebook_btn: "Request prescriptions or medications",
+        millebook_sub: "Access Millebook — the preferred channel",
 
         // Triage section
         triage_title: "What do you need exactly?",
@@ -307,7 +307,7 @@ const translations = {
 
         // Welcome modal
         welcome_transfer_title: "New Office Location",
-        welcome_transfer_desc: "Dr. Savianu has relocated with Studio Medico Ippocrate to <strong>Piazza Saione 3</strong>.",
+        welcome_transfer_desc: "From 27 April 2026, Dr. Savianu will move to <strong>Piazza Saione 3</strong>. Current address: <strong>Via Ubaldo Pasqui 38</strong>.",
         welcome_intro: "Welcome. This website is designed to make your life easier. By using the digital tools available, you allow me to focus my full attention on in-person medical consultations.",
         welcome_step0_title: "0. First of all: Read the FAQ",
         welcome_step0_desc: "Most answers about certificates, prescriptions and exemptions can be found in the <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Frequently Asked Questions</a></strong>. Check there before calling!",
@@ -340,7 +340,7 @@ const translations = {
         faq_q2: "Can I come without an appointment?",
         faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book online, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
         faq_q3: "What are the clinic opening hours?",
-        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday, Wednesday, Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Tuesday, Thursday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
+        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday, Wednesday, Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Tuesday, Thursday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Via Ubaldo Pasqui 38, Arezzo (dal 27/04/2026: Piazza Saione 3)</div>",
         faq_q4: "How do I cancel or reschedule an appointment?",
         faq_a4: "Your confirmation email contains a link to <strong>modify or cancel</strong> the appointment directly in the calendar.<br><br>If you cannot find the email, please call reception on <strong>0575 910 904</strong> with reasonable notice.",
         faq_q5: "How do I request a prescription for my regular medications?",
@@ -440,6 +440,31 @@ function openWelcome() {
     document.body.classList.add('modal-open');
 }
 
+// --- FOCUS TRAP ---
+function trapFocus(modal) {
+    const focusable = modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    first.focus();
+    modal.addEventListener('keydown', function handler(e) {
+        if (e.key !== 'Tab') {
+            if (e.key === 'Escape') { closeWelcome(); modal.removeEventListener('keydown', handler); }
+            return;
+        }
+        if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+}
+
 window.addEventListener('load', function() {
-    if (sessionStorage.getItem('welcomeSeen')) closeWelcome();
+    if (sessionStorage.getItem('welcomeSeen')) {
+        closeWelcome();
+    } else {
+        const modal = document.querySelector('.welcome-card');
+        if (modal) trapFocus(modal);
+    }
 });

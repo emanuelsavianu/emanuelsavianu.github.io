@@ -19,7 +19,7 @@
     --border-color: #d1c7b3;   /* Cream border */
     --shadow-md: 0 8px 24px rgba(26, 47, 76, 0.12);
     --radius-lg: 12px;         /* Sharper borders for classic look */
-    --danger: #ff0000;         /* Emergency Red */
+    --danger: #dc2626;         /* Emergency Red */
     --warning: #c29b57;        /* Gold */
     
     /* New Brand Fonts */
@@ -91,10 +91,6 @@ header::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url('header-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    opacity: 1;
     z-index: 0;
 }
 
@@ -500,3 +496,68 @@ body.dark-mode .sidebar-logo-img {
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
     opacity: 0.85;
 }
+
+/* --- BTN PRENOTA LARGE (shared by index + ferie) --- */
+.btn-prenota-large {
+    background: var(--primary);
+    width: 100%; padding: 30px; border-radius: var(--radius-lg);
+    color: var(--accent); box-shadow: 0 8px 20px rgba(26, 47, 76, 0.25);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    border: 2px solid var(--accent);
+    text-align: center; cursor: pointer;
+}
+.btn-prenota-large:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(194, 155, 87, 0.35);
+    background: var(--accent);
+    color: var(--primary);
+}
+.btn-prenota-large:hover i { color: var(--primary); }
+.btn-prenota-large:active { transform: scale(0.98); box-shadow: 0 4px 10px rgba(26, 47, 76, 0.2); }
+.btn-prenota-large i { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent); transition: color 0.2s; }
+.btn-prenota-large span { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: 0.5px; }
+.btn-prenota-large small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 500; }
+
+/* --- MOBILE APP BANNER (index only, hidden on desktop) --- */
+.mobile-app-banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding: 13px 24px;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 1000;
+    transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.mobile-app-banner:hover {
+    background: linear-gradient(135deg, var(--accent) 0%, #a37c38 100%);
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+    opacity: 1;
+}
+.mobile-app-banner i { font-size: 1rem; }
+.mobile-app-banner .banner-arrow { font-size: 0.65rem; opacity: 0.75; }
+@media (min-width: 768px) { .mobile-app-banner { display: none !important; } }
+
+/* --- NOTICE: READ FAQ (welcome modal) --- */
+.notice-readfaq {
+    background: #eff6ff;
+    border-left: 4px solid var(--primary-light);
+    padding: 15px;
+    border-radius: 8px;
+}
+.notice-readfaq .step-icon { background: var(--primary-light); color: white; }
+.notice-readfaq h3 { color: var(--primary); }
+body.dark-mode .notice-readfaq { background: var(--bg-gradient-2); border-left-color: var(--primary-light); }
+body.dark-mode .notice-readfaq h3 { color: var(--accent); }
