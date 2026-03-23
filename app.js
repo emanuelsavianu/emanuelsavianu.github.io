@@ -99,6 +99,9 @@ function toggleRepsModal(show) {
 // --- LANGUAGE MANAGEMENT ---
 const translations = {
     it: {
+        // Mobile banner
+        mobile_app_banner: "Apri la versione App",
+
         // Header
         header_subtitle: "Medico di Medicina Generale - Arezzo",
 
@@ -230,6 +233,9 @@ const translations = {
         faq_cta_desc: "Contatta la segreteria o accedi a MilleBook per comunicare con il medico."
     },
     en: {
+        // Mobile banner
+        mobile_app_banner: "Open the App version",
+
         // Header
         header_subtitle: "General Practitioner - Arezzo",
 
