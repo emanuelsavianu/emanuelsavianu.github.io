@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(grep -E \"\\\\.\\(html|css|js|json|xml|txt|md\\)$\")"
+      "Bash(grep -E \"\\\\.\\(html|css|js|json|xml|txt|md\\)$\")",
+      "Bash(mkdir -p /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/.claude/skills/new-page)",
+      "Bash(mkdir -p /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/.claude/agents)",
+      "Bash(grep -h \"fa-\" /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/*.html /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/app.js)",
+      "Bash(grep -n \"font-weight.*800\\\\|font-weight: 800\\\\|wght.*800\\\\|fw-800\" /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/styles.css /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/*.html)",
+      "Bash(grep -n \"font-weight.*500\\\\|font-weight: 500\" /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/styles.css /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/*.html)",
+      "Bash(grep -oh 'fa[srab] fa-[a-z-]*' /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/*.html /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/app.js)",
+      "Bash(grep:*)",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(sed -i 's|https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css|https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css\"\" rel=\"\"stylesheet\"\">\\\\n    <link rel=\"\"stylesheet\"\" href=\"\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css\"\" rel=\"\"stylesheet\"\">\\\\n    <link rel=\"\"stylesheet\"\" href=\"\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css|g' /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/$f)",
+      "Bash(done)",
+      "Read(//c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/**)"
     ]
   }
 }
