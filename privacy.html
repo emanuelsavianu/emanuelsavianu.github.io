@@ -3,14 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Privacy Policy - Dott. Emanuel Savianu</title>
     <style>
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        h2 { color: #2980b9; margin-top: 30px; }
-        .box { background: #f9f9f9; padding: 15px; border-left: 5px solid #3498db; margin: 20px 0; }
-        a { color: #3498db; text-decoration: none; }
-        .btn-back { display: inline-block; margin-top: 20px; padding: 10px 20px; background: #333; color: #fff; border-radius: 5px; }
+        :root {
+            --bg: #ffffff;
+            --bg-alt: #f9f9f9;
+            --text: #333333;
+            --heading1: #2c3e50;
+            --heading2: #2980b9;
+            --accent: #3498db;
+            --border: #3498db;
+            --btn-bg: #1a2f4c;
+            --btn-color: #c29b57;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0a1628;
+                --bg-alt: #11223a;
+                --text: #e8e2d2;
+                --heading1: #c29b57;
+                --heading2: #c29b57;
+                --accent: #c29b57;
+                --border: #c29b57;
+                --btn-bg: #162438;
+                --btn-color: #c29b57;
+            }
+        }
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); max-width: 800px; margin: 0 auto; padding: 20px; transition: background 0.3s, color 0.3s; }
+        h1 { color: var(--heading1); border-bottom: 2px solid var(--border); padding-bottom: 10px; }
+        h2 { color: var(--heading2); margin-top: 30px; }
+        h3 { color: var(--text); }
+        .box { background: var(--bg-alt); padding: 15px; border-left: 5px solid var(--border); margin: 20px 0; border-radius: 4px; }
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .btn-back { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--btn-bg); color: var(--btn-color); border-radius: 5px; border: 1px solid var(--border); }
+        .btn-back:hover { text-decoration: none; opacity: 0.85; }
+        strong { color: var(--heading1); }
     </style>
 </head>
 <body>
@@ -25,7 +54,7 @@
     <h2>1. Titolare del Trattamento</h2>
     <p>
         <strong>Dott. Emanuel Savianu</strong><br>
-        Indirizzo: Via Ubaldo Pasqui 38, Arezzo<br>
+        Indirizzo: Piazza Saione 3, Arezzo<br>
         Email: segreteria@savianu.it<br>
         Telefono: 0575 171 3428
     </p>
