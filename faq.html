@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
 
     <title>FAQ Pazienti | Dr. Savianu Emanuel</title>
     <meta name="description" content="Domande frequenti per i pazienti dello Studio Medico Ippocrate - Arezzo. Ricette, certificati, prenotazioni, orari.">
@@ -238,6 +239,17 @@
             .faq-question { padding: 15px; font-size: 0.95rem; }
             .faq-answer-inner { padding: 0 15px 15px; padding-top: 12px; }
         }
+
+        /* --- DARK MODE OVERRIDES (FAQ-specific) --- */
+        body.dark-mode .faq-section-title { color: var(--accent); }
+        body.dark-mode .faq-question { color: var(--accent); }
+        body.dark-mode .faq-question:hover { color: var(--text-dark); }
+        body.dark-mode .faq-answer-inner strong { color: var(--accent); }
+        body.dark-mode .faq-answer-inner .highlight-box { background: var(--bg-gradient-2); }
+        body.dark-mode .back-link { color: var(--accent); }
+        body.dark-mode .faq-nav a { color: var(--accent); background: var(--bg-gradient-2); }
+        body.dark-mode .faq-nav a:hover { background: var(--accent); color: var(--primary-dark); }
+        body.dark-mode .faq-answer-inner td[style*="color: var(--primary)"] { color: var(--text-dark) !important; }
     </style>
 </head>
 <body>
@@ -322,8 +334,8 @@
             <div class="faq-answer">
                 <div class="faq-answer-inner">
                     <table style="width:100%; border-collapse: collapse;">
-                        <tr><td style="padding: 6px 0; font-weight: 600;">Lunedì, Mercoledì, Venerdì</td><td style="text-align:right; color: var(--primary);">16:00 - 19:00</td></tr>
-                        <tr><td style="padding: 6px 0; font-weight: 600;">Martedì, Giovedì</td><td style="text-align:right; color: var(--primary);">10:00 - 13:00</td></tr>
+                        <tr><td style="padding: 6px 0; font-weight: 600;">Lunedì, Mercoledì, Venerdì</td><td style="text-align:right; color: var(--text-dark); font-weight: 700;">16:00 - 19:00</td></tr>
+                        <tr><td style="padding: 6px 0; font-weight: 600;">Martedì, Giovedì</td><td style="text-align:right; color: var(--text-dark); font-weight: 700;">10:00 - 13:00</td></tr>
                         <tr><td style="padding: 6px 0; font-weight: 600; color: var(--danger);">Sabato - Domenica</td><td style="text-align:right; color: var(--danger);">Chiuso</td></tr>
                     </table>
                     <div class="highlight-box">

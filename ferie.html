@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <meta name="color-scheme" content="light dark">
+
     <title>Medico di Base Arezzo | Dott. Emanuel Savianu</title>
     <meta name="description" content="Studio Medico Ippocrate - Dott. Emanuel Savianu a Arezzo (Piazza Saione 3). Prenota visite online, ricette Millebook.">
     
@@ -108,13 +109,13 @@
                 </div>
             </div>
 
-            <div class="welcome-step" style="background-color: #fff0f0; border-left: 4px solid var(--danger); padding: 15px; border-radius: 4px;">
+            <div class="welcome-step welcome-step-emergency">
                 <div class="step-icon" style="background: var(--danger); color: white;"><i class="fas fa-phone-alt"></i></div>
                 <div class="step-content">
                     <h3 style="color: var(--danger);">3. Urgenze e Contatto Diretto</h3>
                     <p style="margin-bottom: 5px; font-size: 1.05rem;">Segreteria: <strong>0575 910 904</strong></p>
                     <p style="margin-bottom: 5px; color: var(--danger);"><strong>Urgenze vere: chiamare 112 / 116 117.</strong></p>
-                    <p style="margin-bottom: 0px; font-size: 0.85rem; color: #666;">Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.</p>
+                    <p style="margin-bottom: 0px; font-size: 0.85rem; color: var(--text-medium);">Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.</p>
                 </div>
             </div>
         </div>
@@ -131,7 +132,7 @@
 <div id="reps-overlay" role="dialog" aria-modal="true" aria-labelledby="reps-title">
     <div class="reps-card">
         <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 20px;"></i>
-        <h3 id="reps-title" style="margin-bottom: 15px; font-size: 1.4rem; font-weight: 700; color: var(--primary);">Informazione per Rappresentanti</h3>
+        <h3 id="reps-title" class="text-primary" style="margin-bottom: 15px; font-size: 1.4rem; font-weight: 700;">Informazione per Rappresentanti</h3>
         <p style="margin-bottom: 25px;">
             Si informa che il Dr. Savianu Emanuel <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>.
         </p>
@@ -162,7 +163,7 @@
     <main role="main" id="main-content">
         
         <section class="alert-box" role="alert" aria-live="polite">
-            <p style="margin-bottom: 15px; font-size: 1.1rem; color: var(--primary);">
+            <p class="text-primary" style="margin-bottom: 15px; font-size: 1.1rem;">
                 <i class="fas fa-info-circle" aria-hidden="true" style="margin-right: 8px;"></i>
                 <strong>Avviso Sede:</strong> Il Dr. Savianu visita presso lo Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.
             </p>
@@ -242,7 +243,7 @@
             </div>
             
             <div class="booking-guide" style="background: var(--bg-gradient-1); padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid var(--accent);">
-                <h3 style="font-size: 1.1rem; margin-bottom: 15px; color: var(--primary);">Come prenotare:</h3>
+                <h3 class="text-primary" style="font-size: 1.1rem; margin-bottom: 15px;">Come prenotare:</h3>
                 <ol style="margin-left: 20px; color: var(--text-medium); line-height: 1.8;">
                     <li>Clicca il pulsante del tipo di visita qui sotto.</li>
                     <li>Scegli il giorno e l'orario disponibile sul calendario.</li>
@@ -342,7 +343,7 @@
             
             <a href="tel:0575910904" class="contact-row">
                 <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
-                <div><span data-i18n="label_secretary" class="contact-label">Segreteria e Appuntamenti</span><span class="contact-value" style="color: var(--primary);">0575 910 904</span></div>
+                <div><span data-i18n="label_secretary" class="contact-label">Segreteria e Appuntamenti</span><span class="contact-value text-primary">0575 910 904</span></div>
             </a>
 
             <a href="tel:05751713428" class="contact-row">
@@ -379,7 +380,7 @@
             <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                     <i class="fas fa-headset" style="color: var(--accent); font-size: 1.2rem;"></i>
-                    <h3 style="font-size: 1.1rem; color: var(--primary); font-weight: 700;">Orari Segreteria</h3>
+                    <h3 class="text-primary" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria</h3>
                 </div>
                 <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e info.</p>
                 <table class="hours-table">

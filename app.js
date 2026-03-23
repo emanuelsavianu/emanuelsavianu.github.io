@@ -27,7 +27,7 @@ function toggleDarkMode() {
     
     const themeMeta = document.querySelector('meta[name="theme-color"]');
     if (themeMeta) {
-        themeMeta.setAttribute('content', isDark ? '#0f1419' : '#0066cc');
+        themeMeta.setAttribute('content', isDark ? '#0a1628' : '#1a2f4c');
     }
     
     try {
@@ -39,8 +39,11 @@ function toggleDarkMode() {
 
 function initDarkMode() {
     try {
-        const darkMode = localStorage.getItem('darkMode');
-        if (darkMode === 'enabled') {
+        const saved = localStorage.getItem('darkMode');
+        const prefersD = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const shouldBeDark = saved === 'enabled' || (saved === null && prefersD);
+
+        if (shouldBeDark) {
             document.body.classList.add('dark-mode');
             const darkBtn = document.getElementById('btn-dark');
             if (darkBtn) {
@@ -51,8 +54,27 @@ function initDarkMode() {
                 }
             }
             const themeMeta = document.querySelector('meta[name="theme-color"]');
-            if (themeMeta) themeMeta.setAttribute('content', '#0f1419');
+            if (themeMeta) themeMeta.setAttribute('content', '#0a1628');
         }
+
+        // React to OS-level changes at runtime
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+            if (localStorage.getItem('darkMode') === null) {
+                if (e.matches) {
+                    document.body.classList.add('dark-mode');
+                    const icon = document.querySelector('#btn-dark i');
+                    if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
+                    const m = document.querySelector('meta[name="theme-color"]');
+                    if (m) m.setAttribute('content', '#0a1628');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    const icon = document.querySelector('#btn-dark i');
+                    if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
+                    const m = document.querySelector('meta[name="theme-color"]');
+                    if (m) m.setAttribute('content', '#1a2f4c');
+                }
+            }
+        });
     } catch (e) {}
 }
 
