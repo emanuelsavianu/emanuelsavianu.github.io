@@ -4,6 +4,8 @@
 
 /* --- CRITICAL VARIABLES & RESET --- */
 :root {
+    color-scheme: light dark;
+
     /* New Brand Identity Colors */
     --primary: #1a2f4c;        /* Navy Blue */
     --primary-dark: #0f1a2a;   /* Darker Navy */
@@ -464,4 +466,37 @@ body.dark-mode .text-primary {
 }
 body.dark-mode .btn-cal-service.prima .cal-icon-wrapper {
     color: var(--accent);
+}
+
+/* --- DARK MODE: INLINE STYLE OVERRIDES --- */
+/* Triage section uses inline color: var(--primary-light) which is dark navy in dark mode */
+body.dark-mode .triage-icon { color: var(--accent) !important; }
+body.dark-mode .triage-option h3 { color: var(--accent) !important; }
+body.dark-mode .triage-option .btn-main { background: var(--primary-light) !important; }
+
+/* Booking guide heading */
+body.dark-mode .booking-guide h3 { color: var(--accent) !important; }
+
+/* Contact value with inline color: var(--primary) */
+body.dark-mode .contact-value { color: var(--text-dark) !important; }
+
+/* Inline h3 colors using var(--primary) */
+body.dark-mode .card h3[style*="color: var(--primary)"] { color: var(--accent) !important; }
+
+/* --- SIDEBAR LOGO --- */
+.sidebar-logo-container {
+    text-align: center;
+    padding: 20px 0 10px;
+}
+.sidebar-logo-img {
+    max-width: 120px;
+    height: auto;
+    border-radius: 12px;
+    opacity: 0.92;
+    filter: drop-shadow(0 2px 8px rgba(26, 47, 76, 0.2));
+    transition: opacity 0.3s;
+}
+body.dark-mode .sidebar-logo-img {
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+    opacity: 0.85;
 }
