@@ -114,53 +114,53 @@
             <div class="welcome-step notice-transfer" style="margin-bottom: 25px;">
                 <div class="step-icon"><i class="fas fa-info-circle"></i></div>
                 <div class="step-content">
-                    <h3>Nuova Sede Studio</h3>
-                    <p>Il Dott. Savianu si è trasferito insieme allo Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.</p>
+                    <h3 data-i18n="welcome_transfer_title">Nuova Sede Studio</h3>
+                    <p data-i18n="welcome_transfer_desc">Il Dott. Savianu si è trasferito insieme allo Studio Medico Ippocrate in <strong>Piazza Saione 3</strong>.</p>
                 </div>
             </div>
 
-            <p style="margin-bottom: 25px; font-size: 1.05rem;">
-                Benvenuti. Ho organizzato questo sito per semplificare la vostra vita. 
+            <p data-i18n="welcome_intro" style="margin-bottom: 25px; font-size: 1.05rem;">
+                Benvenuti. Ho organizzato questo sito per semplificare la vostra vita.
                 Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
             </p>
 
             <div class="welcome-step notice-readfaq">
                 <div class="step-icon"><i class="fas fa-question-circle"></i></div>
                 <div class="step-content">
-                    <h3>0. Prima di tutto: Leggi le FAQ</h3>
-                    <p>La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href="faq.html" style="text-decoration:underline; font-weight: bold;">Domande Frequenti</a></strong>. Consultale prima di chiamare!</p>
+                    <h3 data-i18n="welcome_step0_title">0. Prima di tutto: Leggi le FAQ</h3>
+                    <p data-i18n="welcome_step0_desc">La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href="faq.html" style="text-decoration:underline; font-weight: bold;">Domande Frequenti</a></strong>. Consultale prima di chiamare!</p>
                 </div>
             </div>
 
             <div class="welcome-step">
                 <div class="step-icon"><i class="fas fa-mobile-alt"></i></div>
                 <div class="step-content">
-                    <h3>1. Canale Preferenziale: Millebook</h3>
-                    <p>Usatelo per <strong>farmaci continuativi</strong>, messaggi brevi e visione ricette. È il metodo più veloce.</p>
+                    <h3 data-i18n="welcome_step1_title">1. Canale Preferenziale: Millebook</h3>
+                    <p data-i18n="welcome_step1_desc">Usatelo per <strong>farmaci continuativi</strong>, messaggi brevi e visione ricette. È il metodo più veloce.</p>
                 </div>
             </div>
 
             <div class="welcome-step">
                 <div class="step-icon"><i class="far fa-calendar-check"></i></div>
                 <div class="step-content">
-                    <h3>2. Prenotazione Appuntamenti</h3>
-                    <p>L'agenda online vi permette di prenotare la visita senza attese al telefono.</p>
+                    <h3 data-i18n="welcome_step2_title">2. Prenotazione Appuntamenti</h3>
+                    <p data-i18n="welcome_step2_desc">L'agenda online vi permette di prenotare la visita senza attese al telefono.</p>
                 </div>
             </div>
 
             <div class="welcome-step welcome-step-emergency">
                 <div class="step-icon" style="background: var(--danger); color: white;"><i class="fas fa-phone-alt"></i></div>
                 <div class="step-content">
-                    <h3 style="color: var(--danger);">3. Urgenze e Contatto Diretto</h3>
-                    <p style="margin-bottom: 5px; font-size: 1.05rem;">Segreteria: <strong>0575 910 904</strong></p>
-                    <p style="margin-bottom: 5px; color: var(--danger);"><strong>Urgenze vere: chiamare 112 / 116 117.</strong></p>
-                    <p style="margin-bottom: 0px; font-size: 0.85rem; color: var(--text-medium);">Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.</p>
+                    <h3 data-i18n="welcome_step3_title" style="color: var(--danger);">3. Urgenze e Contatto Diretto</h3>
+                    <p data-i18n="welcome_step3_p1" style="margin-bottom: 5px; font-size: 1.05rem;">Segreteria: <strong>0575 910 904</strong></p>
+                    <p data-i18n="welcome_step3_p2" style="margin-bottom: 5px; color: var(--danger);"><strong>Urgenze vere: chiamare 112 / 116 117.</strong></p>
+                    <p data-i18n="welcome_step3_p3" style="margin-bottom: 0px; font-size: 0.85rem; color: var(--text-medium);">Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.</p>
                 </div>
             </div>
         </div>
 
         <div class="welcome-footer">
-            <button class="btn-accept" onclick="closeWelcome()">
+            <button class="btn-accept" data-i18n="welcome_btn" onclick="closeWelcome()">
                 <span>Ho letto e accetto</span>
                 <i class="fas fa-arrow-right"></i>
             </button>
@@ -202,9 +202,9 @@
     <main role="main" id="main-content">
         
         <section class="alert-box" role="alert" aria-live="polite">
-            <p class="text-primary" style="margin-bottom: 15px; font-size: 1.1rem;">
+            <p class="text-primary" data-i18n="alert_notice" style="margin-bottom: 15px; font-size: 1.1rem;">
                 <i class="fas fa-info-circle" aria-hidden="true" style="margin-right: 8px;"></i>
-                <strong>Avviso Sede:</strong> Dal 27 Aprile 2026, il dottor Savianu insieme al resto dello Studio Medico Ippocrate visiterà <strong>Piazza Saione 3</strong>.
+                <strong>Trasferimento:</strong> Dal 27 Aprile 2026, il dottor Savianu visiterà in <strong>Piazza Saione 3</strong>.
             </p>
         </section>
 
@@ -242,23 +242,23 @@
         <section id="triage-section" class="card hidden triage-card" aria-labelledby="triage-title">
             <div class="card-header">
                 <i class="fas fa-user-md" aria-hidden="true"></i>
-                <h2 id="triage-title">Cosa ti serve esattamente?</h2>
+                <h2 id="triage-title" data-i18n="triage_title">Cosa ti serve esattamente?</h2>
             </div>
-            <p style="font-size: 1.05rem; color: var(--text-medium); margin-bottom: 15px;">
+            <p data-i18n="triage_desc" style="font-size: 1.05rem; color: var(--text-medium); margin-bottom: 15px;">
                 Per ottimizzare i tempi e permettermi di curare al meglio chi sta male, ti chiedo di fare una scelta:
             </p>
             <div class="triage-options">
                 <div class="triage-option">
                     <div class="triage-icon" style="color: var(--primary-light);"><i class="fas fa-file-prescription"></i></div>
-                    <h3 style="color: var(--primary-light);">Solo Ricette o Burocrazia?</h3>
-                    <p>Non occupare uno spazio visita se ti servono solo farmaci continuativi o ricette per esami di controllo.</p>
-                    <a href="https://www.millebook.it/#/login" target="_blank" class="btn-main" style="background: var(--primary-light); padding: 12px; border: 1px solid var(--accent);">Usa Millebook</a>
+                    <h3 data-i18n="triage_opt1_title" style="color: var(--primary-light);">Solo Ricette o Burocrazia?</h3>
+                    <p data-i18n="triage_opt1_desc">Non occupare uno spazio visita se ti servono solo farmaci continuativi o ricette per esami di controllo.</p>
+                    <a href="https://www.millebook.it/#/login" target="_blank" data-i18n="triage_opt1_btn" class="btn-main" style="background: var(--primary-light); padding: 12px; border: 1px solid var(--accent);">Usa Millebook</a>
                 </div>
                 <div class="triage-option">
                     <div class="triage-icon" style="color: var(--accent);"><i class="fas fa-stethoscope"></i></div>
-                    <h3>Problema Medico da Valutare?</h3>
-                    <p>Hai sintomi nuovi, un peggioramento di una malattia cronica o necessiti di una visita medica in ambulatorio.</p>
-                    <button onclick="proceedToBooking()" class="btn-main btn-prenota" style="padding: 12px; background: var(--primary); color: var(--accent);">Procedi alla Prenotazione</button>
+                    <h3 data-i18n="triage_opt2_title">Problema Medico da Valutare?</h3>
+                    <p data-i18n="triage_opt2_desc">Hai sintomi nuovi, un peggioramento di una malattia cronica o necessiti di una visita medica in ambulatorio.</p>
+                    <button onclick="proceedToBooking()" data-i18n="triage_opt2_btn" class="btn-main btn-prenota" style="padding: 12px; background: var(--primary); color: var(--accent);">Procedi alla Prenotazione</button>
                 </div>
             </div>
         </section>
@@ -270,45 +270,45 @@
             </div>
             
             <div class="booking-guide" style="background: var(--bg-gradient-1); padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid var(--accent);">
-                <h3 class="text-primary" style="font-size: 1.1rem; margin-bottom: 15px;">Come prenotare:</h3>
-                <ol style="margin-left: 20px; color: var(--text-medium); line-height: 1.8;">
+                <h3 class="text-primary" data-i18n="booking_guide_title" style="font-size: 1.1rem; margin-bottom: 15px;">Come prenotare:</h3>
+                <ol data-i18n="booking_guide_steps" style="margin-left: 20px; color: var(--text-medium); line-height: 1.8;">
                     <li>Clicca il pulsante del tipo di visita qui sotto.</li>
                     <li>Scegli il giorno e l'orario disponibile sul calendario.</li>
                     <li>Inserisci Nome, Cognome e un indirizzo Email.</li>
                     <li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>
                 </ol>
             </div>
-            
+
             <div class="cal-services-grid">
                 <a href="https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service prima">
                     <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
                     <div class="cal-text">
-                        <h3>Prima Visita (Nuovi Pazienti)</h3>
-                        <p>Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)</p>
+                        <h3 data-i18n="cal_prima_title">Prima Visita (Nuovi Pazienti)</h3>
+                        <p data-i18n="cal_prima_desc">Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)</p>
                     </div>
                 </a>
-                
+
                 <a href="https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service ordinaria">
                     <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
                     <div class="cal-text">
-                        <h3>Visita Ordinaria</h3>
-                        <p>Controlli e problemi non urgenti. (20 min)</p>
+                        <h3 data-i18n="cal_ord_title">Visita Ordinaria</h3>
+                        <p data-i18n="cal_ord_desc">Controlli e problemi non urgenti. (20 min)</p>
                     </div>
                 </a>
 
                 <a href="https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service breve">
                     <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
                     <div class="cal-text">
-                        <h3>Sintomi Recenti</h3>
-                        <p>Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)</p>
+                        <h3 data-i18n="cal_breve_title">Sintomi Recenti</h3>
+                        <p data-i18n="cal_breve_desc">Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)</p>
                     </div>
                 </a>
             </div>
 
             <div class="privacy-notice" style="margin-top: 30px;">
-                <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> Leggi l'informativa privacy.</p>
+                <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> <span data-i18n="privacy_notice_text">Leggi l'informativa privacy.</span></p>
                 <a href="privacy.html" target="_blank" rel="noopener noreferrer">
-                    Informativa Trattamento Dati <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
+                    <span data-i18n="privacy_notice_link">Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
                 </a>
             </div>
         </section>
@@ -316,22 +316,21 @@
         <section class="card">
             <div class="card-header">
                 <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                <h2>Cosa portare alla visita & Link Utili</h2>
+                <h2 data-i18n="visit_info_title">Cosa portare alla visita &amp; Link Utili</h2>
             </div>
-            <p style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordarsi di portare:</p>
-            <ul style="margin-left: 20px; margin-bottom: 25px; color: var(--text-medium); line-height: 1.8;">
-                <li>Tessera Sanitaria e/o Codice Fiscale</li>
+            <p data-i18n="visit_info_desc" style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordarsi di portare:</p>
+            <ul data-i18n="visit_info_items" style="margin-left: 20px; margin-bottom: 25px; color: var(--text-medium); line-height: 1.8;">
                 <li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li>
                 <li>Eventuali esami, referti specialistici o lettere di dimissioni precedenti</li>
             </ul>
             <div class="action-grid" style="margin-bottom: 0;">
                 <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
                     <i class="fas fa-external-link-alt" style="margin:0; font-size: 1.4rem;"></i>
-                    <span>Accedi al CUP Toscana</span>
+                    <span data-i18n="btn_cup">Accedi al CUP Toscana</span>
                 </a>
                 <a href="https://fse.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
                     <i class="fas fa-folder-open" style="margin:0; font-size: 1.4rem;"></i>
-                    <span>Fascicolo Sanitario</span>
+                    <span data-i18n="btn_fse">Fascicolo Sanitario</span>
                 </a>
             </div>
         </section>
@@ -346,7 +345,7 @@
         <section class="card">
             <div class="card-header">
                 <i class="fas fa-moon" aria-hidden="true"></i>
-                <h2 data-i18n="guard_title">Continuità Assistenziale</h2>
+                <h2 data-i18n="guard_title">Continuità Assistenziale (ex-Guardia Medica)</h2>
             </div>
             <p data-i18n="guard_desc" style="margin-bottom:10px;">Per assistenza medica non urgente durante la notte, i festivi e prefestivi.</p>
             <div style="font-size: 2rem; font-weight: 800; color: var(--accent);">
@@ -382,7 +381,7 @@
             </div>
             <a href="mailto:segreteria@savianu.it" class="contact-row">
                 <div class="icon-circle"><i class="far fa-envelope"></i></div>
-                <div><span class="contact-label">Email</span><span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span></div>
+                <div><span data-i18n="label_email" class="contact-label">Email</span><span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span></div>
             </a>
         </section>
 
@@ -391,11 +390,11 @@
                 <i class="far fa-clock" aria-hidden="true"></i>
                 <h2 data-i18n="hours_title">Orari di Studio</h2>
             </div>
-            <p style="font-size: 0.85rem; color: var(--danger); font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">Solo su appuntamento</p>
+            <p data-i18n="appt_only" style="font-size: 0.85rem; color: var(--danger); font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">Solo su appuntamento</p>
             <table class="hours-table">
                 <tbody>
-                    <tr><td class="day">Lun · Mer · Ven</td><td class="time">16:00 – 19:00</td></tr>
-                    <tr><td class="day">Mar · Gio</td><td class="time">10:00 – 13:00</td></tr>
+                    <tr><td class="day" data-i18n="hours_day1">Lun · Mer · Ven</td><td class="time">16:00 – 19:00</td></tr>
+                    <tr><td class="day" data-i18n="hours_day2">Mar · Gio</td><td class="time">10:00 – 13:00</td></tr>
                     <tr><td class="day closed-day" data-i18n="day_sat_sun">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
                 </tbody>
             </table>
@@ -403,9 +402,9 @@
             <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                     <i class="fas fa-headset" style="color: var(--accent); font-size: 1.2rem;"></i>
-                    <h3 class="text-primary" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria</h3>
+                    <h3 class="text-primary" data-i18n="hours_secretary_title" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria</h3>
                 </div>
-                <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e info.</p>
+                <p data-i18n="hours_secretary_desc" style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e info.</p>
                 <table class="hours-table">
                     <tbody>
                         <tr><td class="day">Lun - Ven</td><td class="time">09:30 – 12:30<br>15:30 – 19:00</td></tr>

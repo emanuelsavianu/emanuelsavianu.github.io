@@ -271,33 +271,33 @@
 <div class="faq-container">
 
     <div class="faq-hero">
-        <h1><i class="fas fa-question-circle" style="margin-right: 10px;"></i>FAQ per i Pazienti</h1>
-        <p>Risposte alle domande più comuni sullo studio medico</p>
+        <h1 data-i18n="faq_hero_title"><i class="fas fa-question-circle" style="margin-right: 10px;"></i>FAQ per i Pazienti</h1>
+        <p data-i18n="faq_hero_desc">Risposte alle domande più comuni sullo studio medico</p>
     </div>
 
-    <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Torna al sito principale</a>
+    <a href="index.html" data-i18n="faq_back" class="back-link"><i class="fas fa-arrow-left"></i> Torna al sito principale</a>
 
     <nav class="faq-nav" aria-label="Navigazione FAQ">
-        <a href="#prenotazioni">Prenotazioni</a>
-        <a href="#ricette">Ricette</a>
-        <a href="#certificati">Certificati</a>
-        <a href="#referti">Referti</a>
-        <a href="#millebook">MilleBook</a>
-        <a href="#nuovi">Nuovi Pazienti</a>
-        <a href="#urgenze">Urgenze</a>
-        <a href="#varie">Servizi</a>
+        <a href="#prenotazioni" data-i18n="faq_nav_prenotazioni">Prenotazioni</a>
+        <a href="#ricette" data-i18n="faq_nav_ricette">Ricette</a>
+        <a href="#certificati" data-i18n="faq_nav_certificati">Certificati</a>
+        <a href="#referti" data-i18n="faq_nav_referti">Referti</a>
+        <a href="#millebook" data-i18n="faq_nav_millebook">MilleBook</a>
+        <a href="#nuovi" data-i18n="faq_nav_nuovi">Nuovi Pazienti</a>
+        <a href="#urgenze" data-i18n="faq_nav_urgenze">Urgenze</a>
+        <a href="#varie" data-i18n="faq_nav_varie">Servizi</a>
     </nav>
 
     <section class="faq-section" id="prenotazioni">
-        <h2 class="faq-section-title"><i class="far fa-calendar-check"></i> Prenotazioni e Appuntamenti</h2>
+        <h2 class="faq-section-title" data-i18n="faq_sec_prenotazioni"><i class="far fa-calendar-check"></i> Prenotazioni e Appuntamenti</h2>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Come prenoto una visita?</span>
+                <span data-i18n="faq_q1">Come prenoto una visita?</span>
                 <i class="fas fa-chevron-down chevron"></i>
             </div>
             <div class="faq-answer">
-                <div class="faq-answer-inner">
+                <div class="faq-answer-inner" data-i18n="faq_a1">
                     Il modo più semplice e veloce è tramite il <strong>sito web</strong>:
                     <ul>
                         <li>Vai su <a href="index.html">savianu.it</a> e clicca "Prenota Visita"</li>
@@ -314,11 +314,11 @@
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Posso venire senza appuntamento?</span>
+                <span data-i18n="faq_q2">Posso venire senza appuntamento?</span>
                 <i class="fas fa-chevron-down chevron"></i>
             </div>
             <div class="faq-answer">
-                <div class="faq-answer-inner">
+                <div class="faq-answer-inner" data-i18n="faq_a2">
                     Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.
                     <br><br>
                     Se non state bene e non riuscite a prenotare, presentatevi comunque: la segreteria avviserà il medico che vi contatterà non appena libero dagli appuntamenti già previsti.
@@ -328,11 +328,11 @@
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Quali sono gli orari dell'ambulatorio?</span>
+                <span data-i18n="faq_q3">Quali sono gli orari dell'ambulatorio?</span>
                 <i class="fas fa-chevron-down chevron"></i>
             </div>
             <div class="faq-answer">
-                <div class="faq-answer-inner">
+                <div class="faq-answer-inner" data-i18n="faq_a3">
                     <table style="width:100%; border-collapse: collapse;">
                         <tr><td style="padding: 6px 0; font-weight: 600;">Lunedì, Mercoledì, Venerdì</td><td style="text-align:right; color: var(--text-dark); font-weight: 700;">16:00 - 19:00</td></tr>
                         <tr><td style="padding: 6px 0; font-weight: 600;">Martedì, Giovedì</td><td style="text-align:right; color: var(--text-dark); font-weight: 700;">10:00 - 13:00</td></tr>
@@ -347,11 +347,11 @@
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Come annullo o sposto un appuntamento?</span>
+                <span data-i18n="faq_q4">Come annullo o sposto un appuntamento?</span>
                 <i class="fas fa-chevron-down chevron"></i>
             </div>
             <div class="faq-answer">
-                <div class="faq-answer-inner">
+                <div class="faq-answer-inner" data-i18n="faq_a4">
                     Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.
                     <br><br>
                     Se non trovate l'email, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.
@@ -360,17 +360,16 @@
         </div>
     </section>
 
-    <!-- Content for remaining sections is structurally identical, skipped for brevity but would retain all your original text, just styled perfectly now. -->
     <section class="faq-section" id="ricette">
-        <h2 class="faq-section-title"><i class="fas fa-pills"></i> Ricette e Farmaci</h2>
+        <h2 class="faq-section-title" data-i18n="faq_sec_ricette"><i class="fas fa-pills"></i> Ricette e Farmaci</h2>
 
         <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-                <span>Come richiedo la ricetta per i farmaci che prendo regolarmente?</span>
+                <span data-i18n="faq_q5">Come richiedo la ricetta per i farmaci che prendo regolarmente?</span>
                 <i class="fas fa-chevron-down chevron"></i>
             </div>
             <div class="faq-answer">
-                <div class="faq-answer-inner">
+                <div class="faq-answer-inner" data-i18n="faq_a5">
                     Il metodo preferenziale è <strong>MilleBook</strong>:
                     <ul>
                         <li>Accedete a <a href="https://www.millebook.it/#/login" target="_blank">millebook.it</a></li>
@@ -386,8 +385,8 @@
     </section>
 
     <div class="faq-cta">
-        <h3>Non hai trovato la risposta?</h3>
-        <p>Contatta la segreteria o accedi a MilleBook per comunicare con il medico.</p>
+        <h3 data-i18n="faq_cta_title">Non hai trovato la risposta?</h3>
+        <p data-i18n="faq_cta_desc">Contatta la segreteria o accedi a MilleBook per comunicare con il medico.</p>
         <div class="faq-cta-buttons">
             <a href="tel:0575910904" class="btn-white"><i class="fas fa-phone-alt"></i> 0575 910 904</a>
             <a href="https://www.millebook.it/#/login" target="_blank" class="btn-outline-white"><i class="fas fa-laptop-medical"></i> MilleBook</a>
