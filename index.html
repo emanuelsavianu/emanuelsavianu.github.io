@@ -119,11 +119,7 @@
                 </div>
             </div>
 
-            <p data-i18n="welcome_intro" style="margin-bottom: 25px; font-size: 1.05rem;">
-                Benvenuti. Ho organizzato questo sito per semplificare la vostra vita.
-                Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.
-            </p>
-
+    
             <div class="welcome-step notice-readfaq">
                 <div class="step-icon"><i class="fas fa-question-circle"></i></div>
                 <div class="step-content">
@@ -153,15 +149,15 @@
                 <div class="step-content">
                     <h3 data-i18n="welcome_step3_title" style="color: var(--danger);">3. Urgenze e Contatto Diretto</h3>
                     <p data-i18n="welcome_step3_p1" style="margin-bottom: 5px; font-size: 1.05rem;">Segreteria: <strong>0575 910 904</strong></p>
-                    <p data-i18n="welcome_step3_p2" style="margin-bottom: 5px; color: var(--danger);"><strong>Urgenze vere: chiamare 112 / 116 117.</strong></p>
-                    <p data-i18n="welcome_step3_p3" style="margin-bottom: 0px; font-size: 0.85rem; color: var(--text-medium);">Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.</p>
+                    <p data-i18n="welcome_step3_p2" style="margin-bottom: 5px; color: var(--danger);"><strong>Urgenze vere: chiamare 112.</strong></p>
+                    <p data-i18n="welcome_step3_p3" style="margin-bottom: 0px; font-size: 0.85rem; color: var(--text-medium);">Il numero del Dottore (0575 171 3428) è riservato solo a problematiche non differibili.</p>
                 </div>
             </div>
         </div>
 
         <div class="welcome-footer">
             <button class="btn-accept" data-i18n="welcome_btn" onclick="closeWelcome()">
-                <span>Ho letto e accetto</span>
+                <span>Ho letto e compreso</span>
                 <i class="fas fa-arrow-right"></i>
             </button>
         </div>
@@ -326,7 +322,7 @@
             <div class="action-grid" style="margin-bottom: 0;">
                 <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
                     <i class="fas fa-external-link-alt" style="margin:0; font-size: 1.4rem;"></i>
-                    <span data-i18n="btn_cup">Accedi al CUP Toscana</span>
+                    <span data-i18n="btn_cup">CUP Toscana</span>
                 </a>
                 <a href="https://fse.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
                     <i class="fas fa-folder-open" style="margin:0; font-size: 1.4rem;"></i>
@@ -395,16 +391,15 @@
                 <tbody>
                     <tr><td class="day" data-i18n="hours_day1">Lun · Mer · Ven</td><td class="time">16:00 – 19:00</td></tr>
                     <tr><td class="day" data-i18n="hours_day2">Mar · Gio</td><td class="time">10:00 – 13:00</td></tr>
-                    <tr><td class="day closed-day" data-i18n="day_sat_sun">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
+                    <tr><td class="day" data-i18n="day">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
                 </tbody>
             </table>
 
             <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                     <i class="fas fa-headset" style="color: var(--accent); font-size: 1.2rem;"></i>
-                    <h3 class="text-primary" data-i18n="hours_secretary_title" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria</h3>
+                    <h3 class="text-primary" data-i18n="hours_secretary_title" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria - 0575 910 904</h3>
                 </div>
-                <p data-i18n="hours_secretary_desc" style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 15px;">Per appuntamenti telefonici e info.</p>
                 <table class="hours-table">
                     <tbody>
                         <tr><td class="day">Lun - Ven</td><td class="time">09:30 – 12:30<br>15:30 – 19:00</td></tr>
