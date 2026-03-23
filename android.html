@@ -224,7 +224,7 @@
 
         <div class="alert alert-info">
             <i class="fas fa-info-circle" style="margin-top:2px; flex-shrink:0;"></i>
-            <span><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscriverò a Millebook in studio.</span>
+            <span data-i18n="new_patients_alert"><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscriverò a Millebook in studio.</span>
         </div>
 
         <div class="card" id="booking-section">
@@ -233,30 +233,30 @@
                 <span data-i18n="booking_title">Prenotazione Online</span>
             </div>
 
-            <p style="font-size: 0.95rem; color: var(--text-muted); text-align:center; margin-bottom:15px; font-weight: 600;">Tocca un bottone per prenotare.</p>
+            <p style="font-size: 0.95rem; color: var(--text-muted); text-align:center; margin-bottom:15px; font-weight: 600;" data-i18n="tap_to_book">Tocca un bottone per prenotare.</p>
 
             <div class="cal-services-grid">
                 <a href="https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service prima">
                     <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
                     <div class="cal-text">
-                        <h3>Prima Visita</h3>
-                        <p>Solo per i nuovi pazienti (45 min)</p>
+                        <h3 data-i18n="cal_prima_title">Prima Visita</h3>
+                        <p data-i18n="cal_prima_sub">Solo per i nuovi pazienti (45 min)</p>
                     </div>
                 </a>
-                
+
                 <a href="https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service ordinaria">
                     <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
                     <div class="cal-text">
-                        <h3>Visita Ordinaria</h3>
-                        <p>Controlli e visione esami (20 min)</p>
+                        <h3 data-i18n="cal_ord_title">Visita Ordinaria</h3>
+                        <p data-i18n="cal_ord_sub">Controlli e visione esami (20 min)</p>
                     </div>
                 </a>
 
                 <a href="https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service breve">
                     <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
                     <div class="cal-text">
-                        <h3>Sintomi Recenti</h3>
-                        <p>Urgenze non gravi, certificati INPS (10 min)</p>
+                        <h3 data-i18n="cal_breve_title">Sintomi Recenti</h3>
+                        <p data-i18n="cal_breve_sub">Urgenze non gravi, certificati INPS (10 min)</p>
                     </div>
                 </a>
             </div>
@@ -288,10 +288,35 @@
 
         <div class="card">
             <div class="card-title"><i class="far fa-clock"></i><span data-i18n="hours">Orari di Studio</span></div>
-            <p style="font-size: 0.8rem; color: var(--danger); font-weight: bold; margin-bottom: 10px; text-transform: uppercase;">Solo su appuntamento</p>
+            <p style="font-size: 0.8rem; color: var(--danger); font-weight: bold; margin-bottom: 10px; text-transform: uppercase;" data-i18n="appt_only">Solo su appuntamento</p>
             <div id="hours-table"></div>
         </div>
 
+    </div>
+
+    <!-- PWA Install Banner (Android/Chrome) -->
+    <div id="install-banner" style="display:none; position:fixed; bottom:64px; left:0; right:0; z-index:98; padding:10px 15px; background:var(--bg-card); border-top:2px solid var(--accent); box-shadow:0 -4px 16px rgba(0,0,0,0.18);">
+        <div style="display:flex; align-items:center; gap:10px; max-width:600px; margin:0 auto;">
+            <img src="logo_1A2F4C (1).png" alt="" style="width:38px; height:38px; border-radius:8px; background:var(--primary); padding:2px;">
+            <div style="flex:1; min-width:0;">
+                <div style="font-weight:700; font-size:0.85rem;" data-i18n="install_title">Installa l'App</div>
+                <div style="font-size:0.72rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" data-i18n="install_sub">Aggiungila alla schermata Home</div>
+            </div>
+            <button onclick="triggerInstall()" style="background:var(--primary); color:var(--accent); border:2px solid var(--accent); padding:8px 14px; border-radius:20px; font-weight:700; font-size:0.8rem; white-space:nowrap; font-family:inherit;" data-i18n="install_btn">Installa</button>
+            <button onclick="dismissInstall()" style="background:none; border:none; color:var(--text-muted); font-size:1.4rem; line-height:1; padding:4px 6px; cursor:pointer;">×</button>
+        </div>
+    </div>
+
+    <!-- PWA Install Banner (iOS Safari) -->
+    <div id="install-banner-ios" style="display:none; position:fixed; bottom:64px; left:0; right:0; z-index:98; padding:10px 15px; background:var(--bg-card); border-top:2px solid var(--accent); box-shadow:0 -4px 16px rgba(0,0,0,0.18);">
+        <div style="display:flex; align-items:flex-start; gap:10px; max-width:600px; margin:0 auto;">
+            <img src="logo_1A2F4C (1).png" alt="" style="width:38px; height:38px; border-radius:8px; background:var(--primary); padding:2px; flex-shrink:0;">
+            <div style="flex:1;">
+                <div style="font-weight:700; font-size:0.85rem; margin-bottom:3px;" data-i18n="install_title">Installa l'App</div>
+                <div style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;" data-i18n="ios_install_sub">Tocca <i class="fas fa-share-from-square"></i> poi "Aggiungi a Home"</div>
+            </div>
+            <button onclick="dismissInstall()" style="background:none; border:none; color:var(--text-muted); font-size:1.4rem; line-height:1; padding:4px 6px; cursor:pointer; flex-shrink:0;">×</button>
+        </div>
     </div>
 
     <nav class="bottom-nav">
@@ -309,7 +334,7 @@
         </a>
         <a href="tel:0575910904" class="nav-item">
             <i class="fas fa-phone-alt"></i>
-            <span>Chiama</span>
+            <span data-i18n="nav_call">Chiama</span>
         </a>
     </nav>
 
@@ -366,11 +391,25 @@
                 millebook_sub: "Ricette, Referti e Fascicolo",
                 book: "Prenota Visita",
                 booking_title: "Prenotazione Online",
+                tap_to_book: "Tocca un bottone per prenotare.",
                 contacts: "Contatti Studio",
                 label_doctor: "Tel. Personale (Solo Urgenze)",
                 label_secretary: "Segreteria e Appuntamenti",
                 address: "Studio Medico Ippocrate",
-                hours: "Orari di Studio"
+                hours: "Orari di Studio",
+                appt_only: "Solo su appuntamento",
+                new_patients_alert: "<strong>Nuovi Pazienti:</strong> Prenotate \"Prima Visita\". Vi iscriver\u00f2 a Millebook in studio.",
+                cal_prima_title: "Prima Visita",
+                cal_prima_sub: "Solo per i nuovi pazienti (45 min)",
+                cal_ord_title: "Visita Ordinaria",
+                cal_ord_sub: "Controlli e visione esami (20 min)",
+                cal_breve_title: "Sintomi Recenti",
+                cal_breve_sub: "Urgenze non gravi, certificati INPS (10 min)",
+                nav_call: "Chiama",
+                install_title: "Installa l'App",
+                install_sub: "Aggiungila alla schermata Home",
+                install_btn: "Installa",
+                ios_install_sub: "Tocca <i class='fas fa-share-from-square'></i> poi \"Aggiungi a Home\""
             },
             en: {
                 subtitle: "Studio Medico Ippocrate",
@@ -378,11 +417,25 @@
                 millebook_sub: "Prescriptions & Records",
                 book: "Book Visit",
                 booking_title: "Book Appointment",
+                tap_to_book: "Tap a button to book your appointment.",
                 contacts: "Office Contacts",
                 label_doctor: "Dr. Savianu (Emergencies only)",
                 label_secretary: "Reception & Appointments",
                 address: "Clinic Address",
-                hours: "Opening Hours"
+                hours: "Opening Hours",
+                appt_only: "By appointment only",
+                new_patients_alert: "<strong>New Patients:</strong> Book a \u2018First Visit\u2019. I will enrol you in Millebook at the clinic.",
+                cal_prima_title: "First Visit",
+                cal_prima_sub: "For new patients only (45 min)",
+                cal_ord_title: "Standard Visit",
+                cal_ord_sub: "Check-ups and test reviews (20 min)",
+                cal_breve_title: "Recent Symptoms",
+                cal_breve_sub: "Non-urgent cases, INPS certificates (10 min)",
+                nav_call: "Call",
+                install_title: "Install the App",
+                install_sub: "Add it to your Home Screen",
+                install_btn: "Install",
+                ios_install_sub: "Tap <i class='fas fa-share-from-square'></i> then \"Add to Home Screen\""
             }
         };
 
@@ -404,7 +457,7 @@
                 var el = document.querySelector('[data-i18n="' + key + '"]');
                 if(el) el.innerHTML = i18n[lang][key];
             }
-            localStorage.setItem('lang', lang);
+            localStorage.setItem('preferredLanguage', lang);
         }
 
         function scrollToBooking() {
@@ -420,9 +473,66 @@
         window.addEventListener('DOMContentLoaded', function() {
             initTheme(); renderHours();
             if(!localStorage.getItem('welcome-modal_seen_v3')) document.getElementById('welcome-modal').style.display = 'flex';
-            var savedLang = localStorage.getItem('lang');
+            var savedLang = localStorage.getItem('preferredLanguage');
             if(savedLang) setLang(savedLang);
+            initInstallPrompt();
         });
+
+        // --- PWA INSTALL PROMPT ---
+        var deferredInstallPrompt = null;
+
+        function isInStandaloneMode() {
+            return window.matchMedia('(display-mode: standalone)').matches ||
+                   window.navigator.standalone === true;
+        }
+
+        function isIOS() {
+            return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+        }
+
+        function initInstallPrompt() {
+            if (isInStandaloneMode()) return; // Already installed as app
+            if (localStorage.getItem('installDismissed')) return;
+
+            if (isIOS()) {
+                // iOS Safari: show manual instructions
+                var banner = document.getElementById('install-banner-ios');
+                if (banner) banner.style.display = 'block';
+            }
+        }
+
+        window.addEventListener('beforeinstallprompt', function(e) {
+            e.preventDefault();
+            deferredInstallPrompt = e;
+            if (isInStandaloneMode() || localStorage.getItem('installDismissed')) return;
+            var banner = document.getElementById('install-banner');
+            if (banner) banner.style.display = 'block';
+        });
+
+        window.addEventListener('appinstalled', function() {
+            var banner = document.getElementById('install-banner');
+            if (banner) banner.style.display = 'none';
+            deferredInstallPrompt = null;
+        });
+
+        function triggerInstall() {
+            if (!deferredInstallPrompt) return;
+            deferredInstallPrompt.prompt();
+            deferredInstallPrompt.userChoice.then(function(result) {
+                if (result.outcome === 'accepted') {
+                    var banner = document.getElementById('install-banner');
+                    if (banner) banner.style.display = 'none';
+                }
+                deferredInstallPrompt = null;
+            });
+        }
+
+        function dismissInstall() {
+            document.getElementById('install-banner').style.display = 'none';
+            var iosBanner = document.getElementById('install-banner-ios');
+            if (iosBanner) iosBanner.style.display = 'none';
+            localStorage.setItem('installDismissed', '1');
+        }
     </script>
 </body>
 </html>
