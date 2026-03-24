@@ -196,7 +196,7 @@ const translations = {
         faq_nav_nuovi: "Nuovi Pazienti",
         faq_nav_urgenze: "Urgenze",
         faq_nav_varie: "Servizi",
-        faq_sec_prenotazioni: "<i class='far fa-calendar-check'></i> Prenotazioni e Appuntamenti",
+        faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Prenotazioni e Appuntamenti",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Ricette e Farmaci",
         faq_q1: "Come prenoto una visita?",
         faq_a1: "Il modo più semplice e veloce è tramite il <strong>sito web</strong>:<ul><li>Vai su <a href='index.html'>savianu.it</a> e clicca \"Prenota Visita\"</li><li>Scegli il tipo: <strong>Prima Visita</strong>, <strong>Visita Ordinaria</strong> o <strong>Sintomi Recenti</strong></li><li>Seleziona giorno e orario dal calendario</li><li>Inserisci nome, cognome ed email per la conferma</li></ul><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
@@ -320,7 +320,7 @@ const translations = {
         faq_nav_nuovi: "New Patients",
         faq_nav_urgenze: "Emergencies",
         faq_nav_varie: "Services",
-        faq_sec_prenotazioni: "<i class='far fa-calendar-check'></i> Appointments &amp; Bookings",
+        faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Appointments &amp; Bookings",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Prescriptions &amp; Medications",
         faq_q1: "How do I book a visit?",
         faq_a1: "The simplest and fastest way is through the <strong>website</strong>:<ul><li>Go to <a href='index.html'>savianu.it</a> and click \"Book Visit\"</li><li>Choose the type: <strong>First Visit</strong>, <strong>Standard Visit</strong>, or <strong>Recent Symptoms</strong></li><li>Select a day and time from the calendar</li><li>Enter your name, surname and email for confirmation</li></ul><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
@@ -383,7 +383,8 @@ function showSection(sectionId) {
         setTimeout(() => {
             const yOffset = -20;
             const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
+            const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: y, behavior: noMotion ? 'auto' : 'smooth' });
         }, 100);
     }
 }
@@ -670,7 +671,8 @@ function selectVisitType(type, url) {
     // Scroll to checklist
     setTimeout(function() {
         var y = checklist.getBoundingClientRect().top + window.pageYOffset - 20;
-        window.scrollTo({ top: y, behavior: 'smooth' });
+        var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: y, behavior: noMotion ? 'auto' : 'smooth' });
     }, 150);
 }
 
