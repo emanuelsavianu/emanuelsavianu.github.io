@@ -16,6 +16,9 @@
     <meta name="author" content="Dott. Emanuel Savianu">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://savianu.it/">
+    <!-- Security: referrer policy and permissions (meta fallback; add HTTP headers via Cloudflare for full effect) -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
 
     <meta name="theme-color" content="#1a2f4c">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,9 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css">
-    
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
 
     <!-- JSON-LD MedicalBusiness -->
     <script type="application/ld+json">
@@ -67,8 +68,8 @@
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": "43.4632",
-        "longitude": "11.8796"
+        "latitude": 43.4632,
+        "longitude": 11.8796
       },
       "medicalSpecialty": "GeneralPractice",
       "areaServed": "Arezzo",
@@ -104,7 +105,9 @@
           "closes": "19:00"
         }
       ],
-      "sameAs": "https://www.millebook.it/#/login"
+      "sameAs": [
+        "https://www.millebook.it/#/login"
+      ]
     }
     </script>
 
@@ -166,7 +169,7 @@
             </div>
 
             <div class="welcome-step">
-                <div class="step-icon"><i class="far fa-calendar-check"></i></div>
+                <div class="step-icon"><i class="fas fa-calendar-check"></i></div>
                 <div class="step-content">
                     <h3 data-i18n="welcome_step2_title">2. Prenotazione Appuntamenti</h3>
                     <p data-i18n="welcome_step2_desc">L'agenda online vi permette di prenotare la visita senza attese al telefono.</p>
@@ -262,7 +265,7 @@
 
             <div class="action-grid" style="margin-bottom: 25px; align-items: stretch;">
                 <button onclick="startBooking()" class="btn-prenota-large">
-                    <i class="far fa-calendar-check" aria-hidden="true"></i>
+                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
                     <span data-i18n="btn_book">Prenota una visita</span>
                     <small data-i18n="btn_book_sub">Scegli giorno e orario</small>
                 </button>
@@ -277,7 +280,7 @@
 
         <section id="booking-section" class="card hidden" aria-labelledby="booking-title">
             <div class="card-header">
-                <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                 <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
             </div>
             
@@ -398,14 +401,17 @@
                 </a>
             </div>
             <a href="mailto:segreteria@savianu.it" class="contact-row">
-                <div class="icon-circle"><i class="far fa-envelope"></i></div>
+                <div class="icon-circle"><i class="fas fa-envelope"></i></div>
                 <div><span data-i18n="label_email" class="contact-label">Email</span><span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span></div>
             </a>
+            <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 6px;">
+                Per privacy, non inviare dettagli clinici via email: usa Millebook o la visita in studio.
+            </p>
         </section>
 
         <section class="card">
             <div class="card-header" style="margin-bottom: 10px;">
-                <i class="far fa-clock" aria-hidden="true"></i>
+                <i class="fas fa-clock" aria-hidden="true"></i>
                 <h2 data-i18n="hours_title">Orari di Studio</h2>
             </div>
             <p data-i18n="appt_only" style="font-size: 0.85rem; color: var(--danger); font-weight: bold; margin-bottom: 15px; text-transform: uppercase;">Solo su appuntamento</p>
@@ -443,26 +449,78 @@
     </div>
 </footer>
 
-<script src="app.js?v=8"></script>
+<!-- Mobile Quick Actions Bar (Task B) -->
+<nav class="quick-actions-bar" aria-label="Azioni rapide">
+    <a href="tel:+390575910904" class="qa-item" aria-label="Chiama la segreteria">
+        <i class="fas fa-phone-alt" aria-hidden="true"></i>
+        <span>Chiama</span>
+    </a>
+    <button class="qa-item" onclick="startBooking()" aria-label="Prenota una visita">
+        <i class="fas fa-calendar-check" aria-hidden="true"></i>
+        <span>Prenota</span>
+    </button>
+    <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="qa-item" aria-label="Apri Millebook">
+        <i class="fas fa-laptop-medical" aria-hidden="true"></i>
+        <span>Millebook</span>
+    </a>
+    <a href="faq.html" class="qa-item" aria-label="Domande frequenti">
+        <i class="fas fa-question-circle" aria-hidden="true"></i>
+        <span>FAQ</span>
+    </a>
+    <a href="mailto:segreteria@savianu.it" class="qa-item" aria-label="Scrivi una email alla segreteria">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+        <span>Email</span>
+    </a>
+</nav>
+
+<!-- SW Update Toast (Task D) -->
+<div id="sw-update-toast" role="status" aria-live="polite" aria-atomic="true">
+    <span>Aggiornamento disponibile</span>
+    <button class="sw-toast-btn" id="sw-update-btn">Aggiorna ora</button>
+</div>
+
+<script src="app.js?v=9"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
+    let pendingWorker = null;
+
     window.addEventListener('load', () => {
       navigator.serviceWorker.register('/sw.js')
         .then(registration => {
-          console.log('ServiceWorker successfully registered');
+          // New SW waiting (page already had one active)
+          if (registration.waiting) showUpdateToast(registration.waiting);
+
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                showUpdateToast(newWorker);
+              }
+            });
+          });
         })
         .catch(error => {
           console.log('ServiceWorker registration failed:', error);
         });
     });
 
+    function showUpdateToast(worker) {
+      pendingWorker = worker;
+      const toast = document.getElementById('sw-update-toast');
+      if (toast) toast.classList.add('visible');
+    }
+
+    document.getElementById('sw-update-btn')?.addEventListener('click', () => {
+      if (pendingWorker) {
+        pendingWorker.postMessage({ type: 'SKIP_WAITING' });
+      }
+    });
+
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing) {
-        window.location.reload();
-        refreshing = true;
-      }
+      if (!refreshing) { refreshing = true; window.location.reload(); }
     });
   }
 </script>

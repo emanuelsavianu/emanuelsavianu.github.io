@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="color-scheme" content="light dark">
     <meta name="theme-color" content="#1a2f4c">
 
@@ -14,6 +14,9 @@
     <title>Dr. Savianu Emanuel | App</title>
     <meta name="description" content="Guida rapida per usare la versione App del sito Dr. Savianu: installazione, accesso rapido e funzioni principali.">
     <link rel="canonical" href="https://savianu.it/android.html">
+    <meta name="robots" content="index, follow">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="it_IT">
     <meta property="og:site_name" content="Studio Medico Ippocrate">
@@ -32,7 +35,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css">
 
     <style>
         :root {
@@ -231,7 +233,7 @@
 
         <div class="grid-buttons">
             <button onclick="scrollToBooking()" class="action-btn">
-                <i class="far fa-calendar-check"></i>
+                <i class="fas fa-calendar-check"></i>
                 <span data-i18n="book">Prenota Visita</span>
             </button>
         </div>
@@ -243,7 +245,7 @@
 
         <div class="card" id="booking-section">
             <div class="card-title">
-                <i class="far fa-calendar-alt"></i>
+                <i class="fas fa-calendar-alt"></i>
                 <span data-i18n="booking_title">Prenotazione Online</span>
             </div>
 
@@ -301,7 +303,7 @@
         </div>
 
         <div class="card">
-            <div class="card-title"><i class="far fa-clock"></i><span data-i18n="hours">Orari di Studio</span></div>
+            <div class="card-title"><i class="fas fa-clock"></i><span data-i18n="hours">Orari di Studio</span></div>
             <p style="font-size: 0.8rem; color: var(--danger); font-weight: bold; margin-bottom: 10px; text-transform: uppercase;" data-i18n="appt_only">Solo su appuntamento</p>
             <div id="hours-table"></div>
         </div>

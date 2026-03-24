@@ -1,6 +1,6 @@
 // Service Worker for Dr. Savianu Medical Website
-// Cache version bumped to v54 after page removals
-const CACHE_NAME = 'savianu-v54';
+// Cache version bumped to v75 for metadata/accessibility refresh
+const CACHE_NAME = 'savianu-v75';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -59,9 +59,15 @@ function cacheFirst(request) {
     .catch(() => caches.match('/offline.html'));
 }
 
-// Install event - force immediate activation
+// Message handler — page sends SKIP_WAITING to activate update toast-triggered SW
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+});
+
+// Install event — do NOT skipWaiting here; let the update toast control activation
 self.addEventListener('install', event => {
-  self.skipWaiting(); 
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
