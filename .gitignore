@@ -1,0 +1,16 @@
+# Node dependencies
+node_modules/
+cloudflare/node_modules/
+
+# Wrangler cache and auth
+cloudflare/.wrangler/
+cloudflare/node_modules/.cache/
+
+# Environment files (never commit secrets)
+.env
+.env.local
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
