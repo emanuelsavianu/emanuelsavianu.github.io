@@ -1,20 +1,63 @@
 // Service Worker for Dr. Savianu Medical Website
-// Updated CACHE_NAME to v6 to force a reset of previous caches and clear the Modulo Farmaci
-const CACHE_NAME = 'savianu-v42';
+// Cache version bumped to v54 after page removals
+const CACHE_NAME = 'savianu-v54';
 const urlsToCache = [
   '/',
   '/index.html',
   '/faq.html',
   '/android.html',
-  '/ferie.html',
-  '/installazione.html',
-  '/calcolatore-ferie.html',
   '/privacy.html',
   '/offline.html',
   '/styles.css',
   '/app.js',
   '/logo.png'
 ];
+
+// Helper: Check if request is same-origin
+function isSameOrigin(requestUrl) {
+  const url = new URL(requestUrl);
+  return url.origin === self.location.origin;
+}
+
+// Helper: NetworkFirst strategy (try network first, fallback to cache)
+function networkFirst(request) {
+  return fetch(request)
+    .then(response => {
+      // Cache only successful responses (status 200-299)
+      if (response && response.status >= 200 && response.status < 300) {
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(request, responseClone);
+        });
+      }
+      return response;
+    })
+    .catch(() => {
+      return caches.match(request) || caches.match('/offline.html');
+    });
+}
+
+// Helper: CacheFirst strategy (try cache first, fallback to network)
+function cacheFirst(request) {
+  return caches.match(request)
+    .then(response => {
+      if (response) {
+        return response;
+      }
+      return fetch(request)
+        .then(response => {
+          // Cache only successful responses
+          if (response && response.status >= 200 && response.status < 300) {
+            const responseClone = response.clone();
+            caches.open(CACHE_NAME).then(cache => {
+              cache.put(request, responseClone);
+            });
+          }
+          return response;
+        });
+    })
+    .catch(() => caches.match('/offline.html'));
+}
 
 // Install event - force immediate activation
 self.addEventListener('install', event => {
@@ -39,20 +82,22 @@ self.addEventListener('activate', event => {
   );
 });
 
-// Fetch event - Network-First Strategy
+// Fetch event - Strategic routing based on request type
 self.addEventListener('fetch', event => {
+  // Only handle GET requests
   if (event.request.method !== 'GET') return;
 
+  // Only cache same-origin requests
+  if (!isSameOrigin(event.request.url)) return;
+
+  // Detect request type
+  const isNavigation = event.request.mode === 'navigate';
+  const isStaticAsset = ['style', 'script', 'image', 'font'].includes(event.request.destination);
+
+  // Route to appropriate strategy
   event.respondWith(
-    fetch(event.request)
-      .then(response => {
-        // Update cache with the freshest version
-        const responseClone = response.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(event.request, responseClone);
-        });
-        return response;
-      })
-      .catch(() => caches.match(event.request) || caches.match('/offline.html')) // Fallback to cache, then offline page
+    isNavigation || !isStaticAsset
+      ? networkFirst(event.request)
+      : cacheFirst(event.request)
   );
 });

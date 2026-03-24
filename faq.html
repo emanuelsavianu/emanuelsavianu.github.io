@@ -12,6 +12,17 @@
     <meta name="geo.placename" content="Arezzo" />
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://savianu.it/faq.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="Studio Medico Ippocrate">
+    <meta property="og:title" content="FAQ Pazienti | Dr. Savianu Emanuel">
+    <meta property="og:description" content="FAQ pazienti dello Studio Medico Ippocrate ad Arezzo: prenotazioni, ricette, certificati, urgenze e contatti.">
+    <meta property="og:url" content="https://savianu.it/faq.html">
+    <meta property="og:image" content="https://savianu.it/logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAQ Pazienti | Dr. Savianu Emanuel">
+    <meta name="twitter:description" content="FAQ pazienti dello Studio Medico Ippocrate ad Arezzo: prenotazioni, ricette, certificati, urgenze e contatti.">
+    <meta name="twitter:image" content="https://savianu.it/logo.png">
 
     <meta name="theme-color" content="#1a2f4c">
     <link rel="manifest" href="manifest.json">
@@ -133,6 +144,11 @@
             color: var(--primary);
             gap: 12px;
             user-select: none;
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: left;
+            font-family: inherit;
         }
         .faq-question:hover {
             color: var(--accent);
@@ -253,6 +269,49 @@
         body.dark-mode .faq-nav a:hover { background: var(--accent); color: var(--primary-dark); }
         body.dark-mode .faq-answer-inner td[style*="color: var(--primary)"] { color: var(--text-dark) !important; }
     </style>
+
+    <!-- JSON-LD FAQPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Come prenoto una visita?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il modo più semplice è tramite il sito web savianu.it cliccando \"Prenota Visita\". Scegli il tipo di visita, seleziona giorno e orario dal calendario, inserisci nome, cognome ed email. In alternativa, chiama la segreteria al 0575 910 904 durante gli orari di ambulatorio."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Posso venire senza appuntamento?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il Dottore riceve solo su appuntamento per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente. Se non state bene e non riuscite a prenotare, presentatevi comunque: la segreteria avviserà il medico che vi contatterà non appena libero."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Come richiedo la ricetta per i farmaci continuativi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Il metodo preferenziale è MilleBook: accedete a millebook.it, inviate un messaggio con il nome dei farmaci necessari, le ricette saranno pronte entro due giorni lavorativi e visibili su MilleBook. Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Cosa faccio in caso di emergenza?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In caso di emergenza medica chiamare sempre il 112. Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la Continuità Assistenziale (ex Guardia Medica) al numero 116 117. Il numero personale del Dottore è riservato esclusivamente alle urgenze reali durante l'orario lavorativo."
+          }
+        }
+      ]
+    }
+    </script>
+
 </head>
 <body>
 
@@ -265,7 +324,7 @@
         <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
     </nav>
     <div class="header-content">
-        <h1 style="font-family: 'Playball', cursive;">Domande Frequenti</h1>
+        <p style="font-family: 'Playball', cursive; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 5px; line-height: 1.2; color: #ffffff;">Domande Frequenti</p>
         <p style="font-family: 'Montserrat', sans-serif;">Tutto quello che serve sapere, senza telefonare</p>
     </div>
 </header>
@@ -290,7 +349,7 @@
     </div>
 
     <div class="faq-hero">
-        <h1 data-i18n="faq_hero_title"><i class="fas fa-question-circle" style="margin-right: 10px;"></i>FAQ per i Pazienti</h1>
+        <p data-i18n="faq_hero_title" style="font-size: clamp(1.5rem, 4vw, 2rem); font-weight: 700; margin-bottom: 8px; color: var(--accent); font-family: var(--font-sans);"><i class="fas fa-question-circle" style="margin-right: 10px;"></i>FAQ per i Pazienti</p>
         <p data-i18n="faq_hero_desc">Risposte alle domande più comuni sullo studio medico</p>
     </div>
 
@@ -311,11 +370,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_prenotazioni"><i class="far fa-calendar-check"></i> Prenotazioni e Appuntamenti</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a1">
                 <span data-i18n="faq_q1">Come prenoto una visita?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a1">
                 <div class="faq-answer-inner" data-i18n="faq_a1">
                     Il modo più semplice e veloce è tramite il <strong>sito web</strong>:
                     <ul>
@@ -332,11 +391,11 @@
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a2">
                 <span data-i18n="faq_q2">Posso venire senza appuntamento?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a2">
                 <div class="faq-answer-inner" data-i18n="faq_a2">
                     Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.
                     <br><br>
@@ -346,11 +405,11 @@
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a3">
                 <span data-i18n="faq_q3">Quali sono gli orari dell'ambulatorio?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a3">
                 <div class="faq-answer-inner" data-i18n="faq_a3">
                     <table style="width:100%; border-collapse: collapse;">
                         <tr><td style="padding: 6px 0; font-weight: 600;">Lunedì, Mercoledì, Venerdì</td><td style="text-align:right; color: var(--text-dark); font-weight: 700;">16:00 - 19:00</td></tr>
@@ -365,11 +424,11 @@
         </div>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a4">
                 <span data-i18n="faq_q4">Come annullo o sposto un appuntamento?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a4">
                 <div class="faq-answer-inner" data-i18n="faq_a4">
                     Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.
                     <br><br>
@@ -383,11 +442,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_ricette"><i class="fas fa-pills"></i> Ricette e Farmaci</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a5">
                 <span data-i18n="faq_q5">Come richiedo la ricetta per i farmaci che prendo regolarmente?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a5">
                 <div class="faq-answer-inner" data-i18n="faq_a5">
                     Il metodo preferenziale è <strong>MilleBook</strong>:
                     <ul>
@@ -407,11 +466,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_certificati"><i class="fas fa-file-medical"></i> Certificati</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a6">
                 <span data-i18n="faq_q6">Come richiedo un certificato medico?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a6">
                 <div class="faq-answer-inner" data-i18n="faq_a6">
                     I certificati standard (per sport non agonistico, assenza scolastica, ecc.) si richiedono durante la visita in ambulatorio o tramite <strong>MilleBook</strong> per i casi più semplici.<br><br>
                     Presentarsi con la documentazione necessaria: il certificato viene emesso direttamente in ambulatorio.
@@ -427,11 +486,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_referti"><i class="fas fa-flask"></i> Referti ed Esami</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a7">
                 <span data-i18n="faq_q7">Come accedo ai miei referti?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a7">
                 <div class="faq-answer-inner" data-i18n="faq_a7">
                     I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>
                     Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, prenotate una visita ordinaria.
@@ -444,11 +503,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_millebook"><i class="fas fa-laptop-medical"></i> MilleBook</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a8">
                 <span data-i18n="faq_q8">Come mi iscrivo a MilleBook?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a8">
                 <div class="faq-answer-inner" data-i18n="faq_a8">
                     Per registrarsi a MilleBook:
                     <ul>
@@ -467,11 +526,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_nuovi"><i class="fas fa-user-plus"></i> Nuovi Pazienti</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a9">
                 <span data-i18n="faq_q9">Come mi iscrivo come nuovo paziente?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a9">
                 <div class="faq-answer-inner" data-i18n="faq_a9">
                     <ul>
                         <li>Avere residenza o domicilio nel territorio di Arezzo</li>
@@ -490,11 +549,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_urgenze"><i class="fas fa-ambulance"></i> Urgenze e Fuori Orario</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a10">
                 <span data-i18n="faq_q10">Cosa faccio in caso di emergenza?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a10">
                 <div class="faq-answer-inner" data-i18n="faq_a10">
                     In caso di emergenza medica chiamare sempre il <strong>112</strong>.<br><br>
                     Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la <strong>Continuità Assistenziale</strong> (ex Guardia Medica) al numero <strong>116 117</strong>.
@@ -510,11 +569,11 @@
         <h2 class="faq-section-title" data-i18n="faq_sec_varie"><i class="fas fa-stethoscope"></i> Altri Servizi</h2>
 
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a11">
                 <span data-i18n="faq_q11">Come richiedo un'impegnativa per esami o visite specialistiche?</span>
                 <i class="fas fa-chevron-down chevron"></i>
-            </div>
-            <div class="faq-answer">
+            </button>
+            <div class="faq-answer" id="faq-a11">
                 <div class="faq-answer-inner" data-i18n="faq_a11">
                     Le impegnative per esami del sangue, radiografie o visite specialistiche si richiedono durante la visita in ambulatorio.<br><br>
                     Per esami di controllo già programmati (es. controllo annuale), potete farne richiesta tramite <strong>MilleBook</strong> senza bisogno di una visita.
@@ -558,13 +617,18 @@
 
         // Close all others
         document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+            var openButton = openItem.querySelector('.faq-question');
             openItem.classList.remove('open');
             openItem.querySelector('.faq-answer').style.maxHeight = null;
+            if (openButton) {
+                openButton.setAttribute('aria-expanded', 'false');
+            }
         });
 
         if (!isOpen) {
             item.classList.add('open');
             answer.style.maxHeight = answer.scrollHeight + 'px';
+            el.setAttribute('aria-expanded', 'true');
         }
     }
 
