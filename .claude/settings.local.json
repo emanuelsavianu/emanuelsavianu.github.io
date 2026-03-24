@@ -17,7 +17,13 @@
       "Bash(git:*)",
       "Bash(echo \"exit: $?\")",
       "Bash(echo \"Status: $?\")",
-      "Skill(commit-commands:commit)"
+      "Skill(commit-commands:commit)",
+      "Bash(node --check sw.js)",
+      "Bash(node --check app.js)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx wrangler:*)",
+      "Bash(ls c:UsersemanuDocumentsemanuelsavianu.github.io/*.png)"
     ]
   }
 }

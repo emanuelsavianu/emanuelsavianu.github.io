@@ -18,7 +18,7 @@
     <link rel="canonical" href="https://savianu.it/">
     <!-- Security: referrer policy and permissions (meta fallback; add HTTP headers via Cloudflare for full effect) -->
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
     <meta name="theme-color" content="#1a2f4c">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -196,16 +196,6 @@
     </div>
 </div>
 
-<div id="reps-overlay" role="dialog" aria-modal="true" aria-labelledby="reps-title">
-    <div class="reps-card">
-        <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 20px;"></i>
-        <h3 id="reps-title" class="text-primary" style="margin-bottom: 15px; font-size: 1.4rem; font-weight: 700;">Informazione per Rappresentanti</h3>
-        <p style="margin-bottom: 25px;">
-            Si informa che il Dr. Savianu Emanuel <strong>non accetta appuntamenti con informatori scientifici del farmaco</strong>.
-        </p>
-        <button class="btn-reps-close" onclick="toggleRepsModal(false)">Ho capito</button>
-    </div>
-</div>
 
 <header role="banner">
     <nav class="lang-switch" aria-label="Language selector">
@@ -229,21 +219,11 @@
 
     <main role="main" id="main-content">
         
-        <section class="alert-box" role="alert" aria-live="polite">
-            <p class="text-primary" data-i18n="alert_notice" style="margin-bottom: 15px; font-size: 1.1rem;">
-                <i class="fas fa-info-circle" aria-hidden="true" style="margin-right: 8px;"></i>
-                <strong>Trasferimento:</strong> Dal 27 Aprile 2026, il dottor Savianu visiterà in <strong>Piazza Saione 3</strong>.
-            </p>
-        </section>
-
         <section id="flowchart-section" class="card">
             <div class="card-header">
                 <i class="fas fa-route" aria-hidden="true"></i>
                 <h2>Di cosa hai bisogno?</h2>
             </div>
-            <p style="font-size:1rem; color:var(--text-medium); margin-bottom:18px;">
-                Scegli la situazione che ti descrive meglio per sapere subito cosa fare.
-            </p>
             <div id="flow-step"></div>
         </section>
 
@@ -479,6 +459,7 @@
     <button class="sw-toast-btn" id="sw-update-btn">Aggiorna ora</button>
 </div>
 
+<script src="config.js"></script>
 <script src="app.js?v=9"></script>
 
 <script>

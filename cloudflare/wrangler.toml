@@ -1,0 +1,19 @@
+# Cloudflare Wrangler configuration — savianu.it security worker
+# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name        = "savianu-security-headers"
+main        = "worker.js"
+compatibility_date = "2024-01-01"
+
+# ── Routes ────────────────────────────────────────────────────────────────────
+# Replace YOUR_ZONE_ID with the Zone ID from the Cloudflare dashboard
+# (Websites → savianu.it → Overview → right column → Zone ID).
+#
+# The route pattern below catches every request to savianu.it.
+
+[[routes]]
+pattern = "savianu.it/*"
+zone_name = "savianu.it"
+# zone_id = "YOUR_ZONE_ID"   # alternative to zone_name
+
+# ── No KV, Durable Objects, or bindings needed ────────────────────────────────

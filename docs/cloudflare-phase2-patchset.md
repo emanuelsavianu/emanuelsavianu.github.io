@@ -17,7 +17,7 @@ Apply these headers to HTML responses:
 - `Referrer-Policy: strict-origin-when-cross-origin`
 - `X-Content-Type-Options: nosniff`
 - `X-Frame-Options: DENY`
-- `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()`
+- `Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()`
 - `Strict-Transport-Security: max-age=31536000; includeSubDomains; preload`
 
 Notes:
@@ -48,7 +48,7 @@ export default {
       newHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
       newHeaders.set("X-Content-Type-Options", "nosniff");
       newHeaders.set("X-Frame-Options", "DENY");
-      newHeaders.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()");
+      newHeaders.set("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
       newHeaders.set("Content-Security-Policy", "default-src 'self'; script-src 'self' 'unsafe-inline' https://calendar.app.google https://calendar.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; frame-src https://calendar.google.com https://calendar.app.google; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests");
       newHeaders.set("Strict-Transport-Security", "max-age=31536000; includeSubDomains; preload");
     }
