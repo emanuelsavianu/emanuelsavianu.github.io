@@ -455,51 +455,34 @@ const FLOWCHART = {
     root: {
         q: '',
         options: [
-            { label: '<i class="fas fa-pills"></i> Farmaco, ricetta o impegnativa', next: 'end_millebook' },
-            { label: '<i class="fas fa-stethoscope"></i> Un sintomo o problema da valutare', next: 'sintomo' },
-            { label: '<i class="fas fa-moon"></i> È notte, weekend o festivo', next: 'end_116' },
-            { label: '<i class="fas fa-file-alt"></i> Certificato, burocrazia o altra domanda', next: 'end_faq' },
-            { label: '<i class="fas fa-calendar-plus"></i> Prenotare una visita', next: 'end_prenota' },
+            { label: '<i class="fas fa-calendar-check"></i> Voglio prenotare una visita', next: 'end_prenota' },
+            { label: '<i class="fas fa-pills"></i> Ho bisogno di farmaci o ricette', next: 'end_millebook' },
+            { label: '<i class="fas fa-moon"></i> È sera, notte o weekend', next: 'end_116' },
+            { label: '<i class="fas fa-question-circle"></i> Ho un\'altra domanda', next: 'end_faq' },
         ]
     },
-    sintomo: {
-        q: 'Può aspettare qualche giorno?',
-        warning: '<i class="fas fa-exclamation-triangle"></i> Pericolo di vita o emergenza grave? Chiama il <strong>112</strong> subito.',
-        options: [
-            { label: '<i class="fas fa-check"></i> Sì, qualche giorno va bene', next: 'end_ordinaria' },
-            { label: '<i class="fas fa-clock"></i> No, non può aspettare', next: 'end_breve' },
-        ]
+    end_prenota: {
+        end: true,
+        icon: 'fas fa-calendar-check',
+        color: 'var(--primary)',
+        title: 'Prenota una visita',
+        desc: 'Scegli il tipo di visita qui sotto e poi seleziona giorno e orario sul calendario.',
+        action: { label: 'Scegli il tipo di visita', type: 'scroll_booking' }
     },
     end_millebook: {
         end: true,
         icon: 'fas fa-laptop-medical',
         color: 'var(--primary)',
         title: 'Usa Millebook',
-        desc: 'Richiedi farmaci continuativi, ricette o impegnative di controllo direttamente da Millebook — senza occupare uno slot visita.',
+        desc: 'Richiedi farmaci continuativi, ricette o impegnative direttamente da Millebook — senza bisogno di una visita.',
         action: { label: 'Apri Millebook', href: 'https://www.millebook.it/#/login', external: true }
-    },
-    end_ordinaria: {
-        end: true,
-        icon: 'fas fa-calendar-check',
-        color: 'var(--accent)',
-        title: 'Prenota una Visita Ordinaria',
-        desc: 'Hai tempo — prenota una visita ordinaria (20 min) per controlli e problemi non urgenti.',
-        action: { label: 'Prenota Visita Ordinaria', type: 'booking', visitType: 'ordinaria' }
-    },
-    end_breve: {
-        end: true,
-        icon: 'fas fa-clock',
-        color: '#e67e22',
-        title: 'Prenota Sintomi Recenti',
-        desc: 'Non può aspettare — prenota il tipo "Sintomi Recenti" (10 min) per problemi acuti non rimandabili.',
-        action: { label: 'Prenota Sintomi Recenti', type: 'booking', visitType: 'breve' }
     },
     end_116: {
         end: true,
         icon: 'fas fa-moon',
         color: '#6c757d',
         title: 'Chiama il 116 117',
-        desc: 'Per assistenza medica non urgente fuori orario (notte, weekend, festivi): Continuità Assistenziale.',
+        desc: 'Per assistenza medica non urgente fuori orario (sera, notte, weekend, festivi): Continuità Assistenziale.',
         action: { label: 'Chiama 116 117', href: 'tel:116117' }
     },
     end_faq: {
@@ -509,14 +492,6 @@ const FLOWCHART = {
         title: 'Leggi le FAQ',
         desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
         action: { label: 'Vai alle FAQ', href: 'faq.html' }
-    },
-    end_prenota: {
-        end: true,
-        icon: 'fas fa-calendar-plus',
-        color: 'var(--primary)',
-        title: 'Prenota una visita',
-        desc: 'Scegli il tipo di visita più adatto alle tue necessità.',
-        action: { label: 'Seleziona il tipo di visita', type: 'scroll_booking' }
     }
 };
 
@@ -574,35 +549,6 @@ if (document.getElementById('flow-step')) {
     renderFlowStep('root');
 }
 
-// --- PRE-APPOINTMENT CHECKLIST ---
-const CHECKLIST_DATA = {
-    prima: {
-        title: 'Prima Visita — Cosa portare:',
-        items: [
-            'Tessera sanitaria / codice fiscale',
-            'Documento d\'identità',
-            'Esenzioni ticket (se presenti)',
-            'Lista aggiornata dei farmaci assunti regolarmente',
-            'Referti, esami e lettere di dimissione precedenti',
-        ]
-    },
-    ordinaria: {
-        title: 'Visita Ordinaria — Cosa portare:',
-        items: [
-            'Tessera sanitaria',
-            'Lista aggiornata dei farmaci assunti',
-            'Esami o referti recenti (se pertinenti al motivo della visita)',
-        ]
-    },
-    breve: {
-        title: 'Sintomi Recenti — Cosa portare:',
-        items: [
-            'Tessera sanitaria',
-            'Descrizione dei sintomi e data di inizio',
-        ]
-    }
-};
-
 function selectVisitType(type, url) {
     // Highlight selected button
     document.querySelectorAll('.btn-cal-service').forEach(function(btn) {
@@ -611,37 +557,8 @@ function selectVisitType(type, url) {
     var activeBtn = document.querySelector('.btn-cal-service.' + type);
     if (activeBtn) activeBtn.classList.add('selected');
 
-    // Render checklist
-    var checklist = document.getElementById('visit-checklist');
-    var confirmLink = document.getElementById('checklist-confirm');
-    if (!checklist || !confirmLink) return;
-
-    var data = CHECKLIST_DATA[type];
-    if (!data) return;
-
-    var itemsHTML = data.items.map(function(item) {
-        return '<li><label><input type="checkbox"> ' + item + '</label></li>';
-    }).join('');
-
-    checklist.innerHTML = '<h3 class="checklist-title">' + data.title + '</h3>'
-        + '<ul class="checklist-items">' + itemsHTML + '</ul>';
-
-    confirmLink.href = url;
-    confirmLink.removeAttribute('hidden');
-    checklist.removeAttribute('hidden');
-
-    // Show and scroll to booking section if not already visible
-    var bookingSection = document.getElementById('booking-section');
-    if (bookingSection && bookingSection.classList.contains('hidden')) {
-        startBooking();
-    }
-
-    // Scroll to checklist
-    setTimeout(function() {
-        var y = checklist.getBoundingClientRect().top + window.pageYOffset - 20;
-        var noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        window.scrollTo({ top: y, behavior: noMotion ? 'auto' : 'smooth' });
-    }, 150);
+    // Open calendar directly
+    window.open(url, '_blank', 'noopener,noreferrer');
 }
 
 window.addEventListener('load', function() {
