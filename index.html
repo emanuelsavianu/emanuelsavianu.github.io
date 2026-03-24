@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css">
     
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
 
 </head>
 <body>
@@ -41,6 +41,12 @@
     <span data-i18n="mobile_app_banner">Apri la versione App</span>
     <i class="fas fa-chevron-right banner-arrow"></i>
 </a>
+
+<div id="ferie-banner" hidden role="alert" aria-live="polite">
+    <i class="fas fa-umbrella-beach"></i>
+    <span id="ferie-banner-text"></span>
+    <button id="ferie-banner-close" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>
+</div>
 
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
@@ -151,6 +157,17 @@
             </p>
         </section>
 
+        <section id="flowchart-section" class="card">
+            <div class="card-header">
+                <i class="fas fa-route" aria-hidden="true"></i>
+                <h2>Di cosa hai bisogno?</h2>
+            </div>
+            <p style="font-size:1rem; color:var(--text-medium); margin-bottom:18px;">
+                Scegli la situazione che ti descrive meglio per sapere subito cosa fare.
+            </p>
+            <div id="flow-step"></div>
+        </section>
+
         <section class="card">
             <div class="card-header">
                 <i class="fas fa-mouse-pointer" aria-hidden="true"></i>
@@ -168,7 +185,7 @@
             </div>
 
             <div class="action-grid" style="margin-bottom: 25px; align-items: stretch;">
-                <button onclick="showTriage()" class="btn-prenota-large">
+                <button onclick="startBooking()" class="btn-prenota-large">
                     <i class="far fa-calendar-check" aria-hidden="true"></i>
                     <span data-i18n="btn_book">Prenota una visita</span>
                     <small data-i18n="btn_book_sub">Scegli giorno e orario</small>
@@ -182,37 +199,10 @@
             </div>
         </section>
 
-        <section id="triage-section" class="card hidden triage-card" aria-labelledby="triage-title">
-            <div class="card-header">
-                <i class="fas fa-user-md" aria-hidden="true"></i>
-                <h2 id="triage-title" data-i18n="triage_title">Cosa ti serve esattamente?</h2>
-            </div>
-            <p data-i18n="triage_desc" style="font-size: 1.05rem; color: var(--text-medium); margin-bottom: 15px;">
-                Per ottimizzare i tempi e permettermi di curare al meglio chi sta male, ti chiedo di fare una scelta:
-            </p>
-            <div class="triage-options">
-                <div class="triage-option">
-                    <div class="triage-icon" style="color: var(--primary-light);"><i class="fas fa-file-prescription"></i></div>
-                    <h3 data-i18n="triage_opt1_title" style="color: var(--primary-light);">Solo Ricette o Burocrazia?</h3>
-                    <p data-i18n="triage_opt1_desc">Non occupare uno spazio visita se ti servono solo farmaci continuativi o ricette per esami di controllo.</p>
-                    <a href="https://www.millebook.it/#/login" target="_blank" data-i18n="triage_opt1_btn" class="btn-main" style="background: var(--primary-light); padding: 12px; border: 1px solid var(--accent);">Usa Millebook</a>
-                </div>
-                <div class="triage-option">
-                    <div class="triage-icon" style="color: var(--accent);"><i class="fas fa-stethoscope"></i></div>
-                    <h3 data-i18n="triage_opt2_title">Problema Medico da Valutare?</h3>
-                    <p data-i18n="triage_opt2_desc">Hai sintomi nuovi, un peggioramento di una malattia cronica o necessiti di una visita medica in ambulatorio.</p>
-                    <button onclick="proceedToBooking()" data-i18n="triage_opt2_btn" class="btn-main btn-prenota" style="padding: 12px; background: var(--primary); color: var(--accent);">Procedi alla Prenotazione</button>
-                </div>
-            </div>
-        </section>
-
         <section id="booking-section" class="card hidden" aria-labelledby="booking-title">
             <div class="card-header">
                 <i class="far fa-calendar-alt" aria-hidden="true"></i>
                 <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
-                <button onclick="showTriage()" style="margin-left: auto; background: none; border: 1px solid var(--border-color); color: var(--text-medium); border-radius: 20px; padding: 5px 14px; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap;">
-                    <i class="fas fa-arrow-left"></i> Torna indietro
-                </button>
             </div>
             
             <div class="booking-guide" style="background: var(--bg-gradient-1); padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid var(--accent);">
@@ -226,30 +216,36 @@
             </div>
 
             <div class="cal-services-grid">
-                <a href="https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service prima">
+                <button onclick="selectVisitType('prima','https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome')" class="btn-cal-service prima">
                     <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
                     <div class="cal-text">
                         <h3 data-i18n="cal_prima_title">Prima Visita (Nuovi Pazienti)</h3>
                         <p data-i18n="cal_prima_desc">Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)</p>
                     </div>
-                </a>
+                </button>
 
-                <a href="https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service ordinaria">
+                <button onclick="selectVisitType('ordinaria','https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome')" class="btn-cal-service ordinaria">
                     <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
                     <div class="cal-text">
                         <h3 data-i18n="cal_ord_title">Visita Ordinaria</h3>
                         <p data-i18n="cal_ord_desc">Controlli e problemi non urgenti. (20 min)</p>
                     </div>
-                </a>
+                </button>
 
-                <a href="https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome" target="_blank" class="btn-cal-service breve">
+                <button onclick="selectVisitType('breve','https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome')" class="btn-cal-service breve">
                     <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
                     <div class="cal-text">
                         <h3 data-i18n="cal_breve_title">Sintomi Recenti</h3>
                         <p data-i18n="cal_breve_desc">Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)</p>
                     </div>
-                </a>
+                </button>
             </div>
+
+            <div id="visit-checklist" hidden style="margin-top: 24px;"></div>
+            <a id="checklist-confirm" hidden href="#" target="_blank" rel="noopener noreferrer" class="btn-main" style="display:flex; align-items:center; gap:10px; justify-content:center; margin-top:16px; background:var(--primary); color:var(--accent); font-size:1.05rem;">
+                <i class="fas fa-calendar-check"></i>
+                <span>Procedi alla prenotazione &rarr;</span>
+            </a>
 
             <div class="privacy-notice" style="margin-top: 30px;">
                 <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> <span data-i18n="privacy_notice_text">Leggi l'informativa privacy.</span></p>
@@ -371,7 +367,7 @@
     </div>
 </footer>
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 
 <script>
   if ('serviceWorker' in navigator) {

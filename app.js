@@ -1,4 +1,11 @@
 // =================================================================
+// FERIE / ASSENZE CONFIG — edit these dates to show the absence banner
+// =================================================================
+const ASSENZE = [
+    // { from: "2026-08-01", to: "2026-08-31", note: "Il dottore è in ferie. Rientro previsto: 1 Settembre." },
+];
+
+// =================================================================
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
 // =================================================================
 
@@ -115,16 +122,6 @@ const translations = {
         btn_book_sub: "Scegli giorno e orario",
         millebook_btn: "Richiedi farmaci o ricette",
         millebook_sub: "Accedi a Millebook — il canale preferenziale",
-
-        // Triage section
-        triage_title: "Cosa ti serve esattamente?",
-        triage_desc: "Per ottimizzare i tempi e permettermi di curare al meglio chi sta male, ti chiedo di fare una scelta:",
-        triage_opt1_title: "Solo Ricette o Burocrazia?",
-        triage_opt1_desc: "Non occupare uno spazio visita se ti servono solo farmaci continuativi o ricette per esami di controllo.",
-        triage_opt1_btn: "Usa Millebook",
-        triage_opt2_title: "Problema Medico da Valutare?",
-        triage_opt2_desc: "Hai sintomi nuovi, un peggioramento di una malattia cronica o necessiti di una visita medica in ambulatorio.",
-        triage_opt2_btn: "Procedi alla Prenotazione",
 
         // Booking section
         booking_title: "Seleziona il tipo di visita",
@@ -249,16 +246,6 @@ const translations = {
         btn_book_sub: "Choose date and time",
         millebook_btn: "Request prescriptions or medications",
         millebook_sub: "Access Millebook — the preferred channel",
-
-        // Triage section
-        triage_title: "What do you need exactly?",
-        triage_desc: "To optimise appointment slots and ensure the best care for patients who are unwell, please make a choice:",
-        triage_opt1_title: "Only Prescriptions or Paperwork?",
-        triage_opt1_desc: "Don't take up a visit slot if you only need repeat prescriptions or routine referrals.",
-        triage_opt1_btn: "Use Millebook",
-        triage_opt2_title: "A Medical Problem to Assess?",
-        triage_opt2_desc: "You have new symptoms, a worsening chronic condition, or you need an in-person medical examination.",
-        triage_opt2_btn: "Proceed to Booking",
 
         // Booking section
         booking_title: "Select visit type",
@@ -401,31 +388,6 @@ function showSection(sectionId) {
     }
 }
 
-// --- TRIAGE LOGIC ---
-function showTriage() {
-    const triage = document.getElementById('triage-section');
-    const booking = document.getElementById('booking-section');
-    
-    // Nascondi i calendari se aperti precedentemente
-    if (booking) booking.classList.add('hidden'); 
-    
-    if(triage) {
-        triage.classList.remove('hidden');
-        triage.classList.add('fade-in');
-        setTimeout(() => {
-            const yOffset = -20;
-            const y = triage.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: y, behavior: 'smooth' });
-        }, 100);
-    }
-}
-
-function proceedToBooking() {
-    const triage = document.getElementById('triage-section');
-    if(triage) triage.classList.add('hidden'); // Nascondi il triage
-    showSection('booking'); // Mostra i calendari
-}
-
 // --- WELCOME MODAL ---
 function closeWelcome() {
     const overlay = document.getElementById('welcome-overlay');
@@ -458,6 +420,258 @@ function trapFocus(modal) {
             if (document.activeElement === last) { e.preventDefault(); first.focus(); }
         }
     });
+}
+
+// --- OPEN/CLOSED BADGE ---
+(function() {
+    const SCHEDULE = {
+        1: [{ from: 16, to: 19 }],  // Mon
+        2: [{ from: 10, to: 13 }],  // Tue
+        3: [{ from: 16, to: 19 }],  // Wed
+        4: [{ from: 10, to: 13 }],  // Thu
+        5: [{ from: 16, to: 19 }],  // Fri
+    };
+    const now = new Date();
+    const day = now.getDay();
+    const hour = now.getHours() + now.getMinutes() / 60;
+    const slots = SCHEDULE[day] || [];
+    const isOpen = slots.some(s => hour >= s.from && hour < s.to);
+
+    const anchor = document.querySelector('[data-i18n="hours_title"]');
+    if (!anchor) return;
+    const badge = document.createElement('span');
+    badge.className = isOpen ? 'badge-open' : 'badge-closed';
+    const lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
+    const openLabel = lang === 'en' ? 'Open now' : 'Aperto ora';
+    const closedLabel = lang === 'en' ? 'Closed' : 'Chiuso';
+    badge.innerHTML = isOpen
+        ? '<i class="fas fa-circle"></i> ' + openLabel
+        : '<i class="fas fa-circle"></i> ' + closedLabel;
+    anchor.parentNode.appendChild(badge);
+})();
+
+// --- FERIE BANNER LOGIC ---
+(function() {
+    const banner = document.getElementById('ferie-banner');
+    const textEl = document.getElementById('ferie-banner-text');
+    if (!banner || !textEl) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const active = ASSENZE.find(a => {
+        const from = new Date(a.from);
+        const to = new Date(a.to);
+        to.setHours(23, 59, 59, 999);
+        return today >= from && today <= to;
+    });
+
+    if (!active) return;
+
+    try {
+        if (sessionStorage.getItem('ferie-dismissed-' + active.from)) return;
+    } catch(e) {}
+
+    textEl.textContent = active.note;
+    banner.removeAttribute('hidden');
+})();
+
+function dismissFerieBanner() {
+    const banner = document.getElementById('ferie-banner');
+    if (banner) banner.setAttribute('hidden', '');
+    try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const active = ASSENZE.find(a => {
+            const from = new Date(a.from);
+            const to = new Date(a.to);
+            to.setHours(23, 59, 59, 999);
+            return today >= from && today <= to;
+        });
+        if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
+    } catch(e) {}
+}
+
+// --- DECISION FLOWCHART ---
+const FLOWCHART = {
+    root: {
+        q: 'Di cosa hai bisogno?',
+        options: [
+            { label: '<i class="fas fa-pills"></i> Farmaco, ricetta o impegnativa', next: 'end_millebook' },
+            { label: '<i class="fas fa-stethoscope"></i> Un sintomo o problema da valutare', next: 'sintomo' },
+            { label: '<i class="fas fa-moon"></i> È notte, weekend o festivo', next: 'end_116' },
+            { label: '<i class="fas fa-file-alt"></i> Certificato, burocrazia o altra domanda', next: 'end_faq' },
+        ]
+    },
+    sintomo: {
+        q: 'Può aspettare qualche giorno?',
+        warning: '<i class="fas fa-exclamation-triangle"></i> Pericolo di vita o emergenza grave? Chiama il <strong>112</strong> subito.',
+        options: [
+            { label: '<i class="fas fa-check"></i> Sì, qualche giorno va bene', next: 'end_ordinaria' },
+            { label: '<i class="fas fa-clock"></i> No, non può aspettare', next: 'end_breve' },
+        ]
+    },
+    end_millebook: {
+        end: true,
+        icon: 'fas fa-laptop-medical',
+        color: 'var(--primary)',
+        title: 'Usa Millebook',
+        desc: 'Richiedi farmaci continuativi, ricette o impegnative di controllo direttamente da Millebook — senza occupare uno slot visita.',
+        action: { label: 'Apri Millebook', href: 'https://www.millebook.it/#/login', external: true }
+    },
+    end_ordinaria: {
+        end: true,
+        icon: 'fas fa-calendar-check',
+        color: 'var(--accent)',
+        title: 'Prenota una Visita Ordinaria',
+        desc: 'Hai tempo — prenota una visita ordinaria (20 min) per controlli e problemi non urgenti.',
+        action: { label: 'Prenota Visita Ordinaria', type: 'booking', visitType: 'ordinaria' }
+    },
+    end_breve: {
+        end: true,
+        icon: 'fas fa-clock',
+        color: '#e67e22',
+        title: 'Prenota Sintomi Recenti',
+        desc: 'Non può aspettare — prenota il tipo "Sintomi Recenti" (10 min) per problemi acuti non rimandabili.',
+        action: { label: 'Prenota Sintomi Recenti', type: 'booking', visitType: 'breve' }
+    },
+    end_116: {
+        end: true,
+        icon: 'fas fa-moon',
+        color: '#6c757d',
+        title: 'Chiama il 116 117',
+        desc: 'Per assistenza medica non urgente fuori orario (notte, weekend, festivi): Continuità Assistenziale.',
+        action: { label: 'Chiama 116 117', href: 'tel:116117' }
+    },
+    end_faq: {
+        end: true,
+        icon: 'fas fa-question-circle',
+        color: 'var(--primary-light)',
+        title: 'Leggi le FAQ',
+        desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
+        action: { label: 'Vai alle FAQ', href: 'faq.html' }
+    }
+};
+
+function renderFlowStep(stepKey) {
+    const step = FLOWCHART[stepKey];
+    if (!step) return;
+    const container = document.getElementById('flow-step');
+    if (!container) return;
+
+    if (step.end) {
+        let actionHTML = '';
+        const a = step.action;
+        if (a.type === 'booking') {
+            const url = a.visitType === 'ordinaria'
+                ? 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome'
+                : 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome';
+            actionHTML = `<button class="flow-action-btn" onclick="selectVisitType('${a.visitType}','${url}')">${a.label}</button>`;
+        } else {
+            const target = a.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+            actionHTML = `<a class="flow-action-btn" href="${a.href}"${target}>${a.label}</a>`;
+        }
+        container.innerHTML = `
+            <div class="flow-end-card" style="border-color:${step.color}">
+                <div class="flow-end-icon" style="color:${step.color}"><i class="${step.icon}"></i></div>
+                <h3 class="flow-end-title" style="color:${step.color}">${step.title}</h3>
+                <p class="flow-end-desc">${step.desc}</p>
+                ${actionHTML}
+                <button class="flow-restart-btn" onclick="renderFlowStep('root')">↩ Ricomincia</button>
+            </div>`;
+    } else {
+        const warningHTML = step.warning
+            ? `<div class="flow-warning">${step.warning}</div>`
+            : '';
+        const btns = step.options.map(o =>
+            `<button class="flow-option-btn" onclick="renderFlowStep('${o.next}')">${o.label}</button>`
+        ).join('');
+        container.innerHTML = `
+            <div class="flow-question-card">
+                ${warningHTML}
+                <p class="flow-question">${step.q}</p>
+                <div class="flow-options">${btns}</div>
+                ${stepKey !== 'root' ? '<button class="flow-restart-btn" onclick="renderFlowStep(\'root\')">↩ Ricomincia</button>' : ''}
+            </div>`;
+    }
+}
+
+function startBooking() {
+    showSection('booking');
+}
+
+// Init flowchart on page load if the section exists
+if (document.getElementById('flow-step')) {
+    renderFlowStep('root');
+}
+
+// --- PRE-APPOINTMENT CHECKLIST ---
+const CHECKLIST_DATA = {
+    prima: {
+        title: 'Prima Visita — Cosa portare:',
+        items: [
+            'Tessera sanitaria / codice fiscale',
+            'Documento d\'identità',
+            'Esenzioni ticket (se presenti)',
+            'Lista aggiornata dei farmaci assunti regolarmente',
+            'Referti, esami e lettere di dimissione precedenti',
+        ]
+    },
+    ordinaria: {
+        title: 'Visita Ordinaria — Cosa portare:',
+        items: [
+            'Tessera sanitaria',
+            'Lista aggiornata dei farmaci assunti',
+            'Esami o referti recenti (se pertinenti al motivo della visita)',
+        ]
+    },
+    breve: {
+        title: 'Sintomi Recenti — Cosa portare:',
+        items: [
+            'Tessera sanitaria',
+            'Descrizione dei sintomi e data di inizio',
+        ]
+    }
+};
+
+function selectVisitType(type, url) {
+    // Highlight selected button
+    document.querySelectorAll('.btn-cal-service').forEach(function(btn) {
+        btn.classList.remove('selected');
+    });
+    var activeBtn = document.querySelector('.btn-cal-service.' + type);
+    if (activeBtn) activeBtn.classList.add('selected');
+
+    // Render checklist
+    var checklist = document.getElementById('visit-checklist');
+    var confirmLink = document.getElementById('checklist-confirm');
+    if (!checklist || !confirmLink) return;
+
+    var data = CHECKLIST_DATA[type];
+    if (!data) return;
+
+    var itemsHTML = data.items.map(function(item) {
+        return '<li><label><input type="checkbox"> ' + item + '</label></li>';
+    }).join('');
+
+    checklist.innerHTML = '<h3 class="checklist-title">' + data.title + '</h3>'
+        + '<ul class="checklist-items">' + itemsHTML + '</ul>';
+
+    confirmLink.href = url;
+    confirmLink.removeAttribute('hidden');
+    checklist.removeAttribute('hidden');
+
+    // Show and scroll to booking section if not already visible
+    var bookingSection = document.getElementById('booking-section');
+    if (bookingSection && bookingSection.classList.contains('hidden')) {
+        startBooking();
+    }
+
+    // Scroll to checklist
+    setTimeout(function() {
+        var y = checklist.getBoundingClientRect().top + window.pageYOffset - 20;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }, 150);
 }
 
 window.addEventListener('load', function() {

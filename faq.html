@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css">
 
-    <link rel="stylesheet" href="styles.css?v=7">
+    <link rel="stylesheet" href="styles.css?v=8">
 
     <style>
         /* FAQ-specific styles */
@@ -271,6 +271,23 @@
 </header>
 
 <div class="faq-container">
+
+    <div class="faq-search-wrapper">
+        <label for="faq-search" class="sr-only">Cerca nelle FAQ</label>
+        <div class="faq-search-inner">
+            <i class="fas fa-search faq-search-icon"></i>
+            <input
+                type="search"
+                id="faq-search"
+                placeholder="Cerca nelle FAQ..."
+                autocomplete="off"
+                aria-label="Cerca nelle domande frequenti"
+            >
+        </div>
+        <p id="faq-no-results" hidden style="text-align:center; padding:20px; color:var(--text-medium);">
+            Nessuna domanda trovata — contatta la segreteria al <strong>0575 910 904</strong>.
+        </p>
+    </div>
 
     <div class="faq-hero">
         <h1 data-i18n="faq_hero_title"><i class="fas fa-question-circle" style="margin-right: 10px;"></i>FAQ per i Pazienti</h1>
@@ -530,7 +547,7 @@
     </div>
 </footer>
 
-<script src="app.js?v=7"></script>
+<script src="app.js?v=8"></script>
 
 <script>
     // FAQ accordion
@@ -562,6 +579,26 @@
             }
         });
     });
+
+    // FAQ search
+    var faqSearch = document.getElementById('faq-search');
+    var faqNoResults = document.getElementById('faq-no-results');
+    if (faqSearch) {
+        faqSearch.addEventListener('input', function() {
+            var q = this.value.trim().toLowerCase();
+            var items = document.querySelectorAll('.faq-item');
+            var visible = 0;
+            items.forEach(function(item) {
+                var text = item.textContent.toLowerCase();
+                var match = !q || text.indexOf(q) !== -1;
+                item.style.display = match ? '' : 'none';
+                if (match) visible++;
+            });
+            if (faqNoResults) {
+                faqNoResults.hidden = (visible > 0 || !q);
+            }
+        });
+    }
 </script>
 
 </body>
