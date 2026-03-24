@@ -770,3 +770,253 @@ body.dark-mode #faq-search { background: var(--bg-gradient-2); color: var(--text
 }
 body.dark-mode .checklist-title { color: var(--accent); }
 body.dark-mode .btn-cal-service.selected { outline-color: var(--accent); }
+
+/* =================================================================
+   TASK A — ACCESSIBILITY: REDUCED MOTION + FOCUS VISIBLE
+   ================================================================= */
+
+/* Disable non-essential animations/transitions for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto !important; }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Keyboard-visible focus ring for all interactive elements */
+button:focus-visible,
+[role="button"]:focus-visible,
+.btn-prenota-large:focus-visible,
+.btn-millebook:focus-visible,
+.btn-accept:focus-visible,
+.btn-reps-close:focus-visible,
+.lang-btn:focus-visible,
+.flow-option-btn:focus-visible,
+.flow-action-btn:focus-visible,
+.flow-restart-btn:focus-visible,
+.floating-faq:focus-visible,
+.contact-row:focus-visible,
+.mobile-app-banner:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* Dark mode: flow option buttons readable text */
+body.dark-mode .flow-option-btn { color: var(--text-dark); }
+body.dark-mode .flow-option-btn:hover { color: var(--primary-dark); }
+body.dark-mode .flow-restart-btn:hover { color: var(--accent); }
+
+/* =================================================================
+   TASK B — MOBILE QUICK ACTIONS BAR
+   ================================================================= */
+
+.quick-actions-bar {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    background: var(--primary);
+    border-top: 2px solid var(--accent);
+    padding: 6px 4px env(safe-area-inset-bottom, 0px);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.35);
+}
+
+@media (max-width: 768px) {
+    .quick-actions-bar { display: flex; justify-content: space-around; align-items: center; }
+    /* Body padding so content is not hidden behind the bar */
+    body { padding-bottom: 74px; }
+    /* Lift floating FAQ above the quick-actions bar */
+    .floating-faq { bottom: 84px; }
+}
+
+body.dark-mode .quick-actions-bar {
+    background: var(--bg-gradient-2);
+    border-top-color: var(--accent);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.6);
+}
+
+.qa-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    padding: 6px 8px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-radius: var(--radius-md);
+    transition: color 0.2s, background 0.2s;
+    text-decoration: none;
+    min-width: 52px;
+    text-align: center;
+    line-height: 1.2;
+    -webkit-tap-highlight-color: transparent;
+}
+.qa-item i { font-size: 1.2rem; color: var(--accent); transition: color 0.2s; display: block; }
+.qa-item:hover, .qa-item:active { color: var(--accent); background: rgba(194,155,87,0.12); opacity: 1; }
+.qa-item:hover i, .qa-item:active i { color: #ffffff; }
+.qa-item:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+/* =================================================================
+   TASK D — SW UPDATE TOAST
+   ================================================================= */
+
+#sw-update-toast {
+    position: fixed;
+    bottom: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateY(16px);
+    background: var(--primary);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 50px;
+    padding: 12px 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    z-index: 99999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+    white-space: nowrap;
+    pointer-events: none;
+}
+#sw-update-toast.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
+}
+#sw-update-toast .sw-toast-btn {
+    background: var(--accent);
+    color: var(--primary);
+    border: none;
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-weight: 700;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    font-family: var(--font-sans);
+}
+#sw-update-toast .sw-toast-btn:hover { opacity: 0.85; }
+body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
+@media (max-width: 768px) { #sw-update-toast { bottom: 84px; font-size: 0.8rem; } }
+@media (prefers-reduced-motion: reduce) { #sw-update-toast { transition: opacity 0.01ms; } }
+
+/* =================================================================
+   ANDROID PAGE SPECIFIC STYLES
+   ================================================================= */
+
+.is-android-page {
+    --bg-body: #f3efe6;
+    --bg-card: #ffffff;
+    --bg-header: rgba(26, 47, 76, 0.95);
+    --header-height: 65px;
+    --text-muted: var(--text-medium);
+}
+
+body.dark-mode.is-android-page {
+    --bg-body: #0a1628;
+    --bg-card: #11223a;
+    --bg-header: rgba(10, 22, 40, 0.95);
+}
+
+/* Android modal overlay */
+.is-android-page .modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(26,47,76,0.85); z-index: 2000;
+    display: none; align-items: center; justify-content: center; padding: 20px;
+}
+.is-android-page .modal-content {
+    background: var(--bg-card); width: 100%; max-width: 400px;
+    border-radius: 16px; padding: 25px; border: 2px solid var(--accent); color: var(--text-dark);
+}
+.is-android-page .btn-accept {
+    background: var(--primary); color: var(--accent); border: 2px solid var(--accent);
+    padding: 12px 30px; border-radius: 50px; font-weight: 700; width: 100%;
+    font-size: 1rem; margin-top: 15px; text-align: center; cursor: pointer;
+    font-family: var(--font-sans);
+}
+
+/* Logo theme switching */
+.is-android-page .logo-dark { display: none; }
+body.dark-mode.is-android-page .logo-dark { display: block; }
+body.dark-mode.is-android-page .logo-light { display: none; }
+
+.is-android-page {
+    background-color: var(--bg-body);
+    padding: var(--header-height) 0 80px 0;
+}
+
+.is-android-page header {
+    background: var(--bg-header);
+    backdrop-filter: blur(12px);
+    position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
+    z-index: 100; padding: 0 15px; border-bottom: 2px solid var(--accent);
+    display: flex; justify-content: space-between; align-items: center;
+    text-align: left;
+}
+
+.is-android-page header::after { display: none; }
+
+.is-android-page .brand { display: flex; align-items: center; gap: 12px; }
+.is-android-page .brand-logo { width: 40px; height: 40px; border-radius: 8px; }
+.is-android-page .brand h1 { margin: 0; font-family: 'Playball', cursive; font-size: 1.4rem; color: var(--accent); text-shadow: none; }
+.is-android-page .brand p { margin: 0; font-size: 0.65rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-shadow: none; }
+
+.is-android-page .hero-btn {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    background: var(--primary); color: var(--accent) !important; border: 2px solid var(--accent);
+    padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 20px; width: 100%;
+}
+.is-android-page .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; }
+.is-android-page .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
+.is-android-page .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; color: white;}
+
+.is-android-page .grid-buttons { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; }
+.is-android-page .action-btn { background: var(--bg-card); border: 2px solid var(--accent); padding: 18px 10px; border-radius: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-dark); font-weight: bold; }
+.is-android-page .action-btn i { font-size: 1.4rem; color: var(--accent); background: var(--primary); padding: 12px; border-radius: 50%; }
+
+.is-android-page .link-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-color); color: var(--text-dark); }
+.is-android-page .link-item .icon { width: 36px; height: 36px; background: var(--primary); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
+.is-android-page .link-item .label { display: block; font-size: 0.75rem; color: var(--text-medium); font-weight: bold; text-transform: uppercase;}
+.is-android-page .link-item .val { display: block; font-weight: 700; font-size: 1rem; }
+
+.is-android-page .bottom-nav {
+    position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
+    background: var(--bg-card); border-top: 2px solid var(--border-color);
+    display: flex; justify-content: space-around; align-items: center;
+    z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0);
+}
+.is-android-page .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.65rem; font-weight: 700; color: var(--text-medium); padding: 8px 12px; }
+.is-android-page .nav-item.active { color: var(--accent); }
+
+/* Android Splash */
+.is-android-page #splash-screen {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;
+    background: var(--primary); display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 20px; transition: opacity 0.4s ease;
+}
+.is-android-page #splash-screen.fade-out { opacity: 0; pointer-events: none; }
+.is-android-page #splash-screen img { width: 140px; height: auto; border-radius: 20px; }
+.is-android-page #splash-screen .splash-name { font-family: 'Playball', cursive; font-size: 2.2rem; color: var(--accent); }
+
+body.dark-mode.is-android-page #splash-screen { background: #0a1628; }
+body.dark-mode.is-android-page .hero-btn { background: #1f3659; }
+body.dark-mode.is-android-page .action-btn i,
+body.dark-mode.is-android-page .link-item .icon { background: #1f3659; }

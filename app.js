@@ -1,11 +1,4 @@
 // =================================================================
-// FERIE / ASSENZE CONFIG — edit these dates to show the absence banner
-// =================================================================
-const ASSENZE = [
-    // { from: "2026-08-01", to: "2026-08-31", note: "Il dottore è in ferie. Rientro previsto: 1 Settembre." },
-];
-
-// =================================================================
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
 // =================================================================
 
@@ -87,21 +80,6 @@ function initDarkMode() {
 
 initDarkMode();
 
-// --- REPS MODAL LOGIC ---
-function toggleRepsModal(show) {
-    const modal = document.getElementById('reps-overlay');
-    const overlay = document.getElementById('welcome-overlay');
-    
-    if (show && modal) {
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    } else if (modal) {
-        modal.style.display = 'none';
-        if (!overlay || !overlay.classList.contains('active')) {
-            document.body.style.overflow = 'auto';
-        }
-    }
-}
 
 // --- LANGUAGE MANAGEMENT ---
 const translations = {
@@ -201,7 +179,7 @@ const translations = {
         faq_q1: "Come prenoto una visita?",
         faq_a1: "Il modo più semplice e veloce è tramite il <strong>sito web</strong>:<ul><li>Vai su <a href='index.html'>savianu.it</a> e clicca \"Prenota Visita\"</li><li>Scegli il tipo: <strong>Prima Visita</strong>, <strong>Visita Ordinaria</strong> o <strong>Sintomi Recenti</strong></li><li>Seleziona giorno e orario dal calendario</li><li>Inserisci nome, cognome ed email per la conferma</li></ul><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
         faq_q2: "Posso venire senza appuntamento?",
-        faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.<br><br>Se non state bene e non riuscite a prenotare, presentatevi comunque: la segreteria avviserà il medico che vi contatterà non appena libero dagli appuntamenti già previsti.",
+        faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.",
         faq_q3: "Quali sono gli orari dell'ambulatorio?",
         faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì, Mercoledì, Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Martedì, Giovedì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Via Ubaldo Pasqui 38, Arezzo (dal 27/04/2026: Piazza Saione 3)</div>",
         faq_q4: "Come annullo o sposto un appuntamento?",
@@ -425,13 +403,7 @@ function trapFocus(modal) {
 
 // --- OPEN/CLOSED BADGE ---
 (function() {
-    const SCHEDULE = {
-        1: [{ from: 16, to: 19 }],  // Mon
-        2: [{ from: 10, to: 13 }],  // Tue
-        3: [{ from: 16, to: 19 }],  // Wed
-        4: [{ from: 10, to: 13 }],  // Thu
-        5: [{ from: 16, to: 19 }],  // Fri
-    };
+    const SCHEDULE = CONFIG.SCHEDULE;
     const now = new Date();
     const day = now.getDay();
     const hour = now.getHours() + now.getMinutes() / 60;
@@ -457,15 +429,7 @@ function trapFocus(modal) {
     const textEl = document.getElementById('ferie-banner-text');
     if (!banner || !textEl) return;
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
-    const active = ASSENZE.find(a => {
-        const from = new Date(a.from);
-        const to = new Date(a.to);
-        to.setHours(23, 59, 59, 999);
-        return today >= from && today <= to;
-    });
+    const active = CONFIG.getActiveAbsence();
 
     if (!active) return;
 
@@ -481,14 +445,7 @@ function dismissFerieBanner() {
     const banner = document.getElementById('ferie-banner');
     if (banner) banner.setAttribute('hidden', '');
     try {
-        const today = new Date();
-        today.setHours(0, 0, 0, 0);
-        const active = ASSENZE.find(a => {
-            const from = new Date(a.from);
-            const to = new Date(a.to);
-            to.setHours(23, 59, 59, 999);
-            return today >= from && today <= to;
-        });
+        const active = CONFIG.getActiveAbsence();
         if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
     } catch(e) {}
 }
@@ -496,12 +453,13 @@ function dismissFerieBanner() {
 // --- DECISION FLOWCHART ---
 const FLOWCHART = {
     root: {
-        q: 'Di cosa hai bisogno?',
+        q: '',
         options: [
             { label: '<i class="fas fa-pills"></i> Farmaco, ricetta o impegnativa', next: 'end_millebook' },
             { label: '<i class="fas fa-stethoscope"></i> Un sintomo o problema da valutare', next: 'sintomo' },
             { label: '<i class="fas fa-moon"></i> È notte, weekend o festivo', next: 'end_116' },
             { label: '<i class="fas fa-file-alt"></i> Certificato, burocrazia o altra domanda', next: 'end_faq' },
+            { label: '<i class="fas fa-calendar-plus"></i> Prenotare una visita', next: 'end_prenota' },
         ]
     },
     sintomo: {
@@ -551,6 +509,14 @@ const FLOWCHART = {
         title: 'Leggi le FAQ',
         desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
         action: { label: 'Vai alle FAQ', href: 'faq.html' }
+    },
+    end_prenota: {
+        end: true,
+        icon: 'fas fa-calendar-plus',
+        color: 'var(--primary)',
+        title: 'Prenota una visita',
+        desc: 'Scegli il tipo di visita più adatto alle tue necessità.',
+        action: { label: 'Seleziona il tipo di visita', type: 'scroll_booking' }
     }
 };
 
@@ -563,7 +529,9 @@ function renderFlowStep(stepKey) {
     if (step.end) {
         let actionHTML = '';
         const a = step.action;
-        if (a.type === 'booking') {
+        if (a.type === 'scroll_booking') {
+            actionHTML = `<button class="flow-action-btn" onclick="startBooking()">${a.label}</button>`;
+        } else if (a.type === 'booking') {
             const url = a.visitType === 'ordinaria'
                 ? 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome'
                 : 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome';
@@ -590,7 +558,7 @@ function renderFlowStep(stepKey) {
         container.innerHTML = `
             <div class="flow-question-card">
                 ${warningHTML}
-                <p class="flow-question">${step.q}</p>
+                ${step.q ? `<p class="flow-question">${step.q}</p>` : ''}
                 <div class="flow-options">${btns}</div>
                 ${stepKey !== 'root' ? '<button class="flow-restart-btn" onclick="renderFlowStep(\'root\')">↩ Ricomincia</button>' : ''}
             </div>`;
