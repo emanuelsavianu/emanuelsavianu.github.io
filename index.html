@@ -300,38 +300,10 @@
                 </button>
             </div>
 
-            <div id="visit-checklist" hidden style="margin-top: 24px;"></div>
-            <a id="checklist-confirm" hidden href="#" target="_blank" rel="noopener noreferrer" class="btn-main" style="display:flex; align-items:center; gap:10px; justify-content:center; margin-top:16px; background:var(--primary); color:var(--accent); font-size:1.05rem;">
-                <i class="fas fa-calendar-check"></i>
-                <span>Procedi alla prenotazione &rarr;</span>
-            </a>
-
             <div class="privacy-notice" style="margin-top: 30px;">
                 <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> <span data-i18n="privacy_notice_text">Leggi l'informativa privacy.</span></p>
                 <a href="privacy.html" target="_blank" rel="noopener noreferrer">
                     <span data-i18n="privacy_notice_link">Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
-                </a>
-            </div>
-        </section>
-
-        <section class="card">
-            <div class="card-header">
-                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                <h2 data-i18n="visit_info_title">Cosa portare alla visita &amp; Link Utili</h2>
-            </div>
-            <p data-i18n="visit_info_desc" style="margin-bottom: 15px; font-weight: 600;">Per la visita in ambulatorio, ricordarsi di portare:</p>
-            <ul data-i18n="visit_info_items" style="margin-left: 20px; margin-bottom: 25px; color: var(--text-medium); line-height: 1.8;">
-                <li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li>
-                <li>Eventuali esami, referti specialistici o lettere di dimissioni precedenti</li>
-            </ul>
-            <div class="action-grid" style="margin-bottom: 0;">
-                <a href="https://prenota.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
-                    <i class="fas fa-external-link-alt" style="margin:0; font-size: 1.4rem;"></i>
-                    <span data-i18n="btn_cup">CUP Toscana</span>
-                </a>
-                <a href="https://fse.sanita.toscana.it/" target="_blank" rel="noopener noreferrer" class="btn-main btn-app" style="flex-direction: row; gap: 10px; padding: 15px; width: 100%; justify-content: center;">
-                    <i class="fas fa-folder-open" style="margin:0; font-size: 1.4rem;"></i>
-                    <span data-i18n="btn_fse">Fascicolo Sanitario</span>
                 </a>
             </div>
         </section>
@@ -453,55 +425,15 @@
     </a>
 </nav>
 
-<!-- SW Update Toast (Task D) -->
-<div id="sw-update-toast" role="status" aria-live="polite" aria-atomic="true">
-    <span>Aggiornamento disponibile</span>
-    <button class="sw-toast-btn" id="sw-update-btn">Aggiorna ora</button>
-</div>
-
 <script src="config.js"></script>
 <script src="app.js?v=9"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
-    let pendingWorker = null;
-
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          // New SW waiting (page already had one active)
-          if (registration.waiting) showUpdateToast(registration.waiting);
-
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (!newWorker) return;
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                showUpdateToast(newWorker);
-              }
-            });
-          });
-        })
-        .catch(error => {
-          console.log('ServiceWorker registration failed:', error);
-        });
-    });
-
-    function showUpdateToast(worker) {
-      pendingWorker = worker;
-      const toast = document.getElementById('sw-update-toast');
-      if (toast) toast.classList.add('visible');
-    }
-
-    document.getElementById('sw-update-btn')?.addEventListener('click', () => {
-      if (pendingWorker) {
-        pendingWorker.postMessage({ type: 'SKIP_WAITING' });
-      }
-    });
-
-    let refreshing = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing) { refreshing = true; window.location.reload(); }
+      navigator.serviceWorker.register('/sw.js').catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
     });
   }
 </script>
