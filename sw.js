@@ -1,6 +1,6 @@
 // Service Worker for Dr. Savianu Medical Website
 // Updated CACHE_NAME to v6 to force a reset of previous caches and clear the Modulo Farmaci
-const CACHE_NAME = 'savianu-v36';
+const CACHE_NAME = 'savianu-v42';
 const urlsToCache = [
   '/',
   '/index.html',
