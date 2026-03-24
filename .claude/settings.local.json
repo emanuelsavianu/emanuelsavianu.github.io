@@ -13,7 +13,11 @@
       "Bash(do)",
       "Bash(sed -i 's|https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css|https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css\"\" rel=\"\"stylesheet\"\">\\\\n    <link rel=\"\"stylesheet\"\" href=\"\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css\"\" rel=\"\"stylesheet\"\">\\\\n    <link rel=\"\"stylesheet\"\" href=\"\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/regular.min.css|g' /c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/$f)",
       "Bash(done)",
-      "Read(//c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/**)"
+      "Read(//c/Users/emanu/Documents/GitHub/emanuelsavianu.github.io/**)",
+      "Bash(git:*)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(echo \"Status: $?\")",
+      "Skill(commit-commands:commit)"
     ]
   }
 }
