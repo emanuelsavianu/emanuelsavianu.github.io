@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nessuna connessione | Dr. Savianu</title>
+    <meta name="robots" content="noindex">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Playball&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #1a2f4c; --accent: #c29b57; --bg: #f3efe6; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg);
+            color: var(--primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border: 2px solid var(--accent);
+            border-radius: 16px;
+            padding: 40px 30px;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(26,47,76,0.12);
+        }
+        .icon { font-size: 3rem; margin-bottom: 20px; }
+        h1 { font-family: 'Playball', cursive; font-size: 1.8rem; color: var(--primary); margin-bottom: 10px; }
+        p { font-size: 1rem; color: #4a5568; line-height: 1.6; margin-bottom: 20px; }
+        .contacts { background: #f3efe6; border-radius: 10px; padding: 15px; margin-bottom: 25px; text-align: left; }
+        .contacts p { margin-bottom: 8px; font-size: 0.95rem; }
+        .contacts strong { color: var(--primary); }
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon">📡</div>
+        <h1>Nessuna connessione</h1>
+        <p>Non è possibile caricare la pagina perché non sei connesso a internet.</p>
+
+        <div class="contacts">
+            <p>📞 <strong>Segreteria:</strong> <a href="tel:0575910904">0575 910 904</a></p>
+            <p>🏥 <strong>Studio:</strong> Via Ubaldo Pasqui 38, Arezzo</p>
+            <p>🚨 <strong>Emergenze:</strong> <a href="tel:112">112</a> · Guardia Medica: <a href="tel:116117">116 117</a></p>
+        </div>
+
+        <a href="/" class="btn" onclick="location.reload(); return false;">Riprova</a>
+    </div>
+</body>
+</html>

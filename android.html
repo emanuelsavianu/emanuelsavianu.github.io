@@ -16,7 +16,7 @@
     <link rel="canonical" href="https://savianu.it/android.html">
     <meta name="robots" content="index, follow">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="it_IT">
     <meta property="og:site_name" content="Studio Medico Ippocrate">
@@ -35,157 +35,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-
-    <style>
-        :root {
-            /* New Brand Identity */
-            --bg-body: #f3efe6; 
-            --bg-card: #ffffff; 
-            --bg-header: rgba(26, 47, 76, 0.95); /* Navy Header */
-            --border-color: #d1c7b3; 
-            --text-main: #1a2f4c; 
-            --text-muted: #4a5568;
-            --text-on-primary: #1a2f4c; 
-            --primary: #1a2f4c; 
-            --primary-dark: #0f1a2a; 
-            --primary-light: #285078; 
-            --accent: #c29b57; /* Gold */
-            --danger: #ff0000; 
-            --danger-bg: #fff0f0;
-            --warning-bg: #fdfaf4; 
-            --warning-border: #c29b57; 
-            --warning-text: #1a2f4c;
-            --shadow: 0 4px 12px rgba(26, 47, 76, 0.1); 
-            --radius: 12px; 
-            --header-height: 65px;
-        }
-
-        [data-theme="dark"] {
-            --bg-body: #0a1628; 
-            --bg-card: #11223a; 
-            --bg-header: rgba(10, 22, 40, 0.95);
-            --border-color: #285078; 
-            --text-main: #f3efe6; 
-            --text-muted: #cbd5e1;
-            --primary: #c29b57; 
-            --primary-dark: #e0b976; 
-            --primary-light: #a37c38;
-            --accent: #c29b57;
-            --danger: #ff6b6b; 
-            --danger-bg: #2d1a1a; 
-            --warning-bg: #1a2f4c;
-            --warning-border: #c29b57; 
-            --warning-text: #c29b57; 
-            --shadow: none;
-        }
-
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Montserrat', sans-serif; background-color: var(--bg-body); color: var(--text-main); margin: 0; padding: var(--header-height) 0 80px 0; overflow-x: hidden; }
-        a { text-decoration: none; color: inherit; }
-        button { border: none; background: none; font-family: inherit; cursor: pointer; color: inherit; }
-
-        /* --- SPLASH SCREEN --- */
-        #splash-screen {
-            position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;
-            background: var(--primary); display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 20px; transition: opacity 0.4s ease;
-        }
-        #splash-screen.fade-out { opacity: 0; pointer-events: none; }
-        #splash-screen img { width: 140px; height: auto; border-radius: 20px; background: transparent; padding: 0; }
-        #splash-screen .splash-name { font-family: 'Playball', cursive; font-size: 2.2rem; color: var(--accent); letter-spacing: 0.5px; }
-        #splash-screen .splash-sub { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #ffffff; margin-top: -12px; }
-        #splash-screen .splash-loader { width: 32px; height: 32px; border: 3px solid rgba(194, 155, 87, 0.3); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; margin-top: 10px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* --- HEADER --- */
-        header { background: var(--bg-header); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); position: fixed; top: 0; left: 0; right: 0; height: var(--header-height); z-index: 100; padding: 0 15px; border-bottom: 2px solid var(--accent); display: flex; justify-content: space-between; align-items: center; }
-        .brand { display: flex; align-items: center; gap: 12px; }
-        .brand-logo { width: 40px; height: 40px; border-radius: 8px; background: transparent; }
-        .brand h1 { margin: 0; font-family: 'Playball', cursive; font-size: 1.4rem; color: var(--accent); }
-        .brand p { margin: 0; font-size: 0.65rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; }
-        .header-actions { display: flex; align-items: center; gap: 8px; }
-        .theme-toggle { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: transparent; border-radius: 50%; border: 1px solid var(--accent); font-size: 1rem; color: var(--accent); }
-        .lang-switch { display: flex; gap: 4px; background: rgba(0,0,0,0.2); padding: 3px; border-radius: 20px; border: 1px solid var(--accent); }
-        .lang-btn { padding: 4px 10px; border-radius: 15px; font-size: 0.75rem; font-weight: 700; color: rgba(255,255,255,0.7); }
-        .lang-btn.active { background: var(--accent); color: var(--primary); }
-
-        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
-        .card { background: var(--bg-card); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); }
-        .card-title { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; font-size: 1.1rem; font-weight: 700; color: var(--text-main); }
-        .card-title i { color: var(--accent); background: var(--primary); padding: 8px; border-radius: 8px;}
-
-        .alert { padding: 15px; border-radius: 12px; font-size: 0.9rem; margin-bottom: 15px; display: flex; gap: 12px; align-items: flex-start; line-height: 1.4; }
-        .alert-info { background: var(--warning-bg); color: var(--warning-text); border: 1px solid var(--warning-border); }
-        .alert-danger { background: var(--danger-bg); color: var(--danger); border: 1px solid var(--danger); }
-
-        .hero-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; background: var(--primary); color: var(--accent) !important; border: 2px solid var(--accent); padding: 25px; border-radius: var(--radius); text-align: center; margin-bottom: 20px; width: 100%; box-shadow: var(--shadow); }
-        .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; }
-        .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; }
-        .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; color: white;}
-
-        .grid-buttons { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; }
-        .action-btn { background: var(--bg-card); border: 2px solid var(--accent); padding: 18px 10px; border-radius: var(--radius); text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-main); font-weight: bold; }
-        .action-btn i { font-size: 1.4rem; color: var(--accent); background: var(--primary); padding: 12px; border-radius: 50%; }
-
-        .link-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-color); color: var(--text-main); }
-        .link-item .icon { width: 36px; height: 36px; background: var(--primary); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
-        .link-item .content { flex-grow: 1; }
-        .link-item .label { display: block; font-size: 0.75rem; color: var(--text-muted); font-weight: bold; text-transform: uppercase;}
-        .link-item .val { display: block; font-weight: 700; font-size: 1rem; }
-
-        .hours-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--border-color); font-size: 0.9rem; }
-        .hours-row strong { color: var(--primary); }
-        .closed { color: var(--danger); font-weight: 700; }
-
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26,47,76,0.85); z-index: 2000; display: none; align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: var(--bg-card); width: 100%; max-width: 400px; border-radius: 16px; padding: 25px; text-align: left; border: 2px solid var(--accent); color: var(--text-main); }
-        .btn-accept { background: var(--primary); color: var(--accent); border: 2px solid var(--accent); padding: 12px 30px; border-radius: 50px; font-weight: 700; width: 100%; font-size: 1rem; margin-top: 15px; text-align: center; }
-
-        /* --- BOTTOM NAV --- */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
-            background: var(--bg-card); border-top: 2px solid var(--border-color);
-            display: flex; justify-content: space-around; align-items: center;
-            z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0);
-        }
-        .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.65rem; font-weight: 700; color: var(--text-muted); padding: 8px 12px; }
-        .nav-item.active { color: var(--accent); }
-        .nav-item i { font-size: 1.2rem; color: inherit;}
-
-        footer { text-align: center; padding: 20px; font-size: 0.75rem; color: var(--text-muted); padding-bottom: 80px; }
-
-        /* --- CALENDAR CUSTOM BUTTONS --- */
-        .cal-services-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 15px; }
-        .btn-cal-service { display: flex; align-items: center; gap: 15px; background: var(--bg-card); border: 2px solid var(--border-color); padding: 15px; border-radius: 12px; text-align: left; color: var(--text-main); text-decoration: none; }
-        .btn-cal-service.prima { border-left: 5px solid var(--primary); }
-        .btn-cal-service.ordinaria { border-left: 5px solid var(--accent); }
-        .btn-cal-service.breve { border-left: 5px solid var(--danger); }
-        
-        .cal-icon-wrapper { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-        .btn-cal-service.prima .cal-icon-wrapper { background: var(--primary); color: var(--accent); }
-        .btn-cal-service.ordinaria .cal-icon-wrapper { background: var(--warning-bg); color: var(--accent); }
-        .btn-cal-service.breve .cal-icon-wrapper { background: var(--danger-bg); color: var(--danger); }
-        
-        .cal-text h3 { margin: 0; font-size: 1rem; font-weight: 700; color: var(--text-main); }
-        .cal-text p { margin: 4px 0 0; font-size: 0.8rem; color: var(--text-muted); line-height: 1.3; }
-    </style>
+    <link rel="stylesheet" href="styles.css?v=9">
 </head>
-<body>
+<body class="is-android-page">
 
     <div id="splash-screen">
-        <img src="logo_1A2F4C (1).png" alt="Dr. Savianu">
         <div class="splash-name">Dr. Savianu Emanuel</div>
         <div class="splash-sub">Studio Medico Ippocrate</div>
         <div class="splash-loader"></div>
-    </div>
-
-    <div id="reps-modal" class="modal-overlay">
-        <div class="modal-content" style="text-align: center;">
-            <i class="fas fa-briefcase-medical" style="font-size: 3rem; color: var(--danger); margin-bottom: 15px;"></i>
-            <h3 style="margin: 0 0 10px 0; color: var(--primary);">Info Rappresentanti</h3>
-            <p style="font-size: 0.9rem; text-align: justify;">Il Dr. Savianu <strong>non riceve Informatori Scientifici su appuntamento</strong>.</p>
-            <button class="btn-accept" style="background: var(--danger); color: white; border-color: var(--danger);" onclick="closeModal('reps-modal')">Ho capito</button>
-        </div>
     </div>
 
     <div id="welcome-modal" class="modal-overlay">
@@ -208,7 +65,8 @@
 
     <header>
         <div class="brand">
-            <img src="logo_1A2F4C (1).png" alt="" class="brand-logo" style="background: white; padding: 2px;">
+            <img src="bluelogo.png" alt="" class="brand-logo logo-light">
+            <img src="bronzelogo.png" alt="" class="brand-logo logo-dark">
             <div>
                 <h1>Dr. Savianu Emanuel</h1>
                 <p data-i18n="subtitle">Studio Medico Ippocrate</p>
@@ -223,6 +81,12 @@
         </div>
     </header>
 
+    <div id="ferie-banner" style="display:none; background:var(--accent); color:var(--primary); padding:10px 15px; text-align:center; font-size:0.85rem; font-weight:700; border-bottom:1px solid var(--primary-dark); position:relative;">
+        <i class="fas fa-info-circle"></i>
+        <span id="ferie-banner-text"></span>
+        <button onclick="dismissFerieBanner()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:1.2rem; font-weight:bold;">&times;</button>
+    </div>
+
     <div class="container">
 
         <a href="https://www.millebook.it/#/login" target="_blank" class="hero-btn">
@@ -236,11 +100,6 @@
                 <i class="fas fa-calendar-check"></i>
                 <span data-i18n="book">Prenota Visita</span>
             </button>
-        </div>
-
-        <div class="alert alert-info">
-            <i class="fas fa-info-circle" style="margin-top:2px; flex-shrink:0;"></i>
-            <span data-i18n="new_patients_alert"><strong>Nuovi Pazienti:</strong> Prenotate "Prima Visita". Vi iscriverò a Millebook in studio.</span>
         </div>
 
         <div class="card" id="booking-section">
@@ -313,7 +172,8 @@
     <!-- PWA Install Banner (Android/Chrome) -->
     <div id="install-banner" style="display:none; position:fixed; bottom:64px; left:0; right:0; z-index:98; padding:10px 15px; background:var(--bg-card); border-top:2px solid var(--accent); box-shadow:0 -4px 16px rgba(0,0,0,0.18);">
         <div style="display:flex; align-items:center; gap:10px; max-width:600px; margin:0 auto;">
-            <img src="logo_1A2F4C (1).png" alt="" style="width:38px; height:38px; border-radius:8px; background:var(--primary); padding:2px;">
+            <img src="bluelogo.png" alt="" class="logo-light" style="width:38px;height:38px;border-radius:8px;flex-shrink:0;">
+            <img src="bronzelogo.png" alt="" class="logo-dark" style="width:38px;height:38px;border-radius:8px;flex-shrink:0;">
             <div style="flex:1; min-width:0;">
                 <div style="font-weight:700; font-size:0.85rem;" data-i18n="install_title">Installa l'App</div>
                 <div style="font-size:0.72rem; color:var(--text-muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;" data-i18n="install_sub">Aggiungila alla schermata Home</div>
@@ -326,7 +186,8 @@
     <!-- PWA Install Banner (iOS Safari) -->
     <div id="install-banner-ios" style="display:none; position:fixed; bottom:64px; left:0; right:0; z-index:98; padding:10px 15px; background:var(--bg-card); border-top:2px solid var(--accent); box-shadow:0 -4px 16px rgba(0,0,0,0.18);">
         <div style="display:flex; align-items:flex-start; gap:10px; max-width:600px; margin:0 auto;">
-            <img src="logo_1A2F4C (1).png" alt="" style="width:38px; height:38px; border-radius:8px; background:var(--primary); padding:2px; flex-shrink:0;">
+            <img src="bluelogo.png" alt="" class="logo-light" style="width:38px;height:38px;border-radius:8px;flex-shrink:0;">
+            <img src="bronzelogo.png" alt="" class="logo-dark" style="width:38px;height:38px;border-radius:8px;flex-shrink:0;">
             <div style="flex:1;">
                 <div style="font-weight:700; font-size:0.85rem; margin-bottom:3px;" data-i18n="install_title">Installa l'App</div>
                 <div style="font-size:0.75rem; color:var(--text-muted); line-height:1.4;" data-i18n="ios_install_sub">Tocca <i class="fas fa-share-from-square"></i> poi "Aggiungi a Home"</div>
@@ -358,197 +219,7 @@
         <p>© <span id="year">2026</span> Studio Medico Ippocrate - Dr. Savianu Emanuel</p>
     </footer>
 
-    <script>
-        // --- SPLASH SCREEN ---
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                var splash = document.getElementById('splash-screen');
-                if (splash) {
-                    splash.classList.add('fade-out');
-                    setTimeout(function() { splash.remove(); }, 400);
-                }
-            }, 800);
-        });
-
-        function initTheme() {
-            // Uses same localStorage key as the main site ('darkMode') for cross-page sync
-            const saved = localStorage.getItem('darkMode');
-            const prefersD = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const isDark = saved === 'enabled' || (saved === null && prefersD);
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#0a1628' : '#1a2f4c');
-
-            // React to OS-level changes at runtime (only when no manual preference saved)
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-                if (localStorage.getItem('darkMode') === null) {
-                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                    document.getElementById('theme-icon').className = e.matches ? 'fas fa-sun' : 'fas fa-moon';
-                    document.querySelector('meta[name="theme-color"]').setAttribute('content', e.matches ? '#0a1628' : '#1a2f4c');
-                }
-            });
-        }
-
-        function toggleTheme() {
-            const isDark = document.documentElement.getAttribute('data-theme') === 'light';
-            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            // Sync with main site localStorage key
-            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
-            document.getElementById('theme-icon').className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-            document.querySelector('meta[name="theme-color"]').setAttribute('content', isDark ? '#0a1628' : '#1a2f4c');
-        }
-
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        const i18n = {
-            it: {
-                subtitle: "Studio Medico Ippocrate",
-                millebook: "Accedi a MilleBook",
-                millebook_sub: "Ricette, Referti e Fascicolo",
-                book: "Prenota Visita",
-                booking_title: "Prenotazione Online",
-                tap_to_book: "Tocca un bottone per prenotare.",
-                contacts: "Contatti Studio",
-                label_doctor: "Tel. Personale (Solo Urgenze)",
-                label_secretary: "Segreteria e Appuntamenti",
-                address: "Studio Medico Ippocrate",
-                hours: "Orari di Studio",
-                appt_only: "Solo su appuntamento",
-                new_patients_alert: "<strong>Nuovi Pazienti:</strong> Prenotate \"Prima Visita\". Vi iscriver\u00f2 a Millebook in studio.",
-                cal_prima_title: "Prima Visita",
-                cal_prima_sub: "Solo per i nuovi pazienti (45 min)",
-                cal_ord_title: "Visita Ordinaria",
-                cal_ord_sub: "Controlli e visione esami (20 min)",
-                cal_breve_title: "Sintomi Recenti",
-                cal_breve_sub: "Urgenze non gravi, certificati INPS (10 min)",
-                nav_call: "Chiama",
-                install_title: "Installa l'App",
-                install_sub: "Aggiungila alla schermata Home",
-                install_btn: "Installa",
-                ios_install_sub: "Tocca <i class='fas fa-share-from-square'></i> poi \"Aggiungi a Home\""
-            },
-            en: {
-                subtitle: "Studio Medico Ippocrate",
-                millebook: "Login to MilleBook",
-                millebook_sub: "Prescriptions & Records",
-                book: "Book Visit",
-                booking_title: "Book Appointment",
-                tap_to_book: "Tap a button to book your appointment.",
-                contacts: "Office Contacts",
-                label_doctor: "Dr. Savianu (Emergencies only)",
-                label_secretary: "Reception & Appointments",
-                address: "Clinic Address",
-                hours: "Opening Hours",
-                appt_only: "By appointment only",
-                new_patients_alert: "<strong>New Patients:</strong> Book a \u2018First Visit\u2019. I will enrol you in Millebook at the clinic.",
-                cal_prima_title: "First Visit",
-                cal_prima_sub: "For new patients only (45 min)",
-                cal_ord_title: "Standard Visit",
-                cal_ord_sub: "Check-ups and test reviews (20 min)",
-                cal_breve_title: "Recent Symptoms",
-                cal_breve_sub: "Non-urgent cases, INPS certificates (10 min)",
-                nav_call: "Call",
-                install_title: "Install the App",
-                install_sub: "Add it to your Home Screen",
-                install_btn: "Install",
-                ios_install_sub: "Tap <i class='fas fa-share-from-square'></i> then \"Add to Home Screen\""
-            }
-        };
-
-        const hoursData = [
-            { d: "Lun·Mer·Ven / Mon·Wed·Fri", t: "16:00 - 19:00" }, 
-            { d: "Mar·Gio / Tue·Thu", t: "10:00 - 13:00" },
-            { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
-        ];
-
-        function renderHours() {
-            const container = document.getElementById('hours-table');
-            container.innerHTML = hoursData.map(h => '<div class="hours-row"><strong>' + h.d + '</strong><span class="' + (h.cls||'') + '">' + h.t + '</span></div>').join('');
-        }
-
-        function setLang(lang) {
-            document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.remove('active'); });
-            document.getElementById('btn-' + lang).classList.add('active');
-            for (var key in i18n[lang]) {
-                var el = document.querySelector('[data-i18n="' + key + '"]');
-                if(el) el.innerHTML = i18n[lang][key];
-            }
-            localStorage.setItem('preferredLanguage', lang);
-        }
-
-        function scrollToBooking() {
-            var el = document.getElementById('booking-section');
-            window.scrollTo({top: el.offsetTop - 70, behavior: 'smooth'});
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).style.display = 'none';
-            localStorage.setItem(id + '_seen_v3', new Date().getTime());
-        }
-
-        window.addEventListener('DOMContentLoaded', function() {
-            initTheme(); renderHours();
-            if(!localStorage.getItem('welcome-modal_seen_v3')) document.getElementById('welcome-modal').style.display = 'flex';
-            var savedLang = localStorage.getItem('preferredLanguage');
-            if(savedLang) setLang(savedLang);
-            initInstallPrompt();
-        });
-
-        // --- PWA INSTALL PROMPT ---
-        var deferredInstallPrompt = null;
-
-        function isInStandaloneMode() {
-            return window.matchMedia('(display-mode: standalone)').matches ||
-                   window.navigator.standalone === true;
-        }
-
-        function isIOS() {
-            return /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-        }
-
-        function initInstallPrompt() {
-            if (isInStandaloneMode()) return; // Already installed as app
-            if (localStorage.getItem('installDismissed')) return;
-
-            if (isIOS()) {
-                // iOS Safari: show manual instructions
-                var banner = document.getElementById('install-banner-ios');
-                if (banner) banner.style.display = 'block';
-            }
-        }
-
-        window.addEventListener('beforeinstallprompt', function(e) {
-            e.preventDefault();
-            deferredInstallPrompt = e;
-            if (isInStandaloneMode() || localStorage.getItem('installDismissed')) return;
-            var banner = document.getElementById('install-banner');
-            if (banner) banner.style.display = 'block';
-        });
-
-        window.addEventListener('appinstalled', function() {
-            var banner = document.getElementById('install-banner');
-            if (banner) banner.style.display = 'none';
-            deferredInstallPrompt = null;
-        });
-
-        function triggerInstall() {
-            if (!deferredInstallPrompt) return;
-            deferredInstallPrompt.prompt();
-            deferredInstallPrompt.userChoice.then(function(result) {
-                if (result.outcome === 'accepted') {
-                    var banner = document.getElementById('install-banner');
-                    if (banner) banner.style.display = 'none';
-                }
-                deferredInstallPrompt = null;
-            });
-        }
-
-        function dismissInstall() {
-            document.getElementById('install-banner').style.display = 'none';
-            var iosBanner = document.getElementById('install-banner-ios');
-            if (iosBanner) iosBanner.style.display = 'none';
-            localStorage.setItem('installDismissed', '1');
-        }
-    </script>
+    <script src="config.js"></script>
+    <script src="android.js"></script>
 </body>
 </html>
