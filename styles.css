@@ -1020,3 +1020,104 @@ body.dark-mode.is-android-page #splash-screen { background: #0a1628; }
 body.dark-mode.is-android-page .hero-btn { background: #1f3659; }
 body.dark-mode.is-android-page .action-btn i,
 body.dark-mode.is-android-page .link-item .icon { background: #1f3659; }
+
+/* =================================================================
+   LARGE TEXT ACCESSIBILITY MODE
+   ================================================================= */
+
+/* Banner */
+#large-text-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background: #f0f4f8;
+    border-bottom: 3px solid #d1d5db;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: #555;
+    gap: 12px;
+    transition: background 0.3s, border-color 0.3s;
+    position: relative;
+    z-index: 10000;
+}
+#large-text-banner.hidden { display: none; }
+#large-text-banner.active {
+    background: #fffbea;
+    border-bottom-color: #c9a227;
+    color: #7a6000;
+    font-weight: 600;
+}
+.large-text-btn {
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 8px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+#large-text-banner:not(.active) .large-text-btn {
+    background: var(--primary);
+    color: white;
+    border: 2px solid var(--primary);
+}
+#large-text-banner.active .large-text-btn {
+    background: white;
+    color: #7a6000;
+    border: 2px solid #c9a227;
+}
+
+/* Dark mode variants */
+body.dark-mode #large-text-banner {
+    background: #1a2f4c;
+    border-bottom-color: #285078;
+    color: var(--text-medium);
+}
+body.dark-mode #large-text-banner.active {
+    background: #2a2000;
+    border-bottom-color: var(--accent);
+    color: var(--accent);
+}
+body.dark-mode #large-text-banner:not(.active) .large-text-btn {
+    background: var(--accent);
+    color: var(--primary);
+    border-color: var(--accent);
+}
+body.dark-mode #large-text-banner.active .large-text-btn {
+    background: transparent;
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Large text mode — scale base font size */
+html:has(body.large-text) { font-size: 22px; }
+
+/* Additional overrides for elements that need more than font scaling */
+body.large-text .flow-option-btn {
+    padding: 16px 20px;
+    min-height: 64px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+}
+body.large-text .flow-action-btn {
+    font-size: 1.1rem;
+    padding: 18px 24px;
+}
+body.large-text .btn-cal-service {
+    padding: 20px;
+}
+body.large-text .cal-text h3 { font-size: 1.2rem; }
+body.large-text .cal-text p  { font-size: 0.95rem; line-height: 1.6; }
+body.large-text .contact-value { font-size: 1.2rem; }
+body.large-text .contact-label { font-size: 0.9rem; }
+body.large-text .hours-table td { font-size: 1.05rem; padding: 12px 0; }
+body.large-text .step-content h3 { font-size: 1.2rem; }
+body.large-text .step-content p  { font-size: 1rem; line-height: 1.7; }
+body.large-text .qa-item {
+    font-size: 0.72rem;
+    gap: 5px;
+    padding: 8px 10px;
+}
+body.large-text .qa-item i { font-size: 1.35rem; }
