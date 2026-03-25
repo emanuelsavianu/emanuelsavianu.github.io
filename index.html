@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
 
     <!-- JSON-LD MedicalBusiness -->
     <script type="application/ld+json">
@@ -114,6 +114,11 @@
 </head>
 <body>
 <script>if (!sessionStorage.getItem('welcomeSeen')) document.body.classList.add('modal-open');</script>
+
+<div id="large-text-banner" role="region" aria-label="Accessibilità testo">
+    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
+    <button id="large-text-toggle-btn" class="large-text-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
+</div>
 
 <a href="android.html" class="mobile-app-banner">
     <i class="fas fa-mobile-screen-button"></i>
