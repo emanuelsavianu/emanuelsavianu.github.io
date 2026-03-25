@@ -20,7 +20,7 @@ A **PostToolUse hook** runs `node .claude/scripts/bump-sw.js` after every Edit/W
 
 ## Asset Cache-Busting
 
-`styles.css` and `app.js` are linked with `?v=N` (e.g. `styles.css?v=9`). **Manually increment this version** in all HTML files when changing those files, so browsers pick up the new version.
+`styles.css` and `app.js` are linked with `?v=N`. **Manually increment this version in all three HTML files** (`index.html`, `faq.html`, `android.html`) when changing those files. Keep all three in sync on the same version number.
 
 ## i18n
 
@@ -32,7 +32,7 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 
 ## Operational Changes
 
-- **Vacation/absence banner**: edit `CONFIG.ASSENZE` in `config.js` (YYYY-MM-DD dates)
+- **Vacation/absence/relocation banner**: edit `CONFIG.ASSENZE` in `config.js` (YYYY-MM-DD dates). The `note` field is free text — used for both holiday notices and address transfers. The `#ferie-banner` icon (`fa-umbrella-beach` for holidays, `fa-location-dot` for transfers) and color should match the message type.
 - **Clinic hours badge**: edit `CONFIG.SCHEDULE` in `config.js`
 - **Booking calendar URLs**: inside `selectVisitType()` calls in `index.html` (Google Calendar links)
 - **Address/contact changes**: update `index.html`, `app.js` translations, and JSON-LD in `<head>`
