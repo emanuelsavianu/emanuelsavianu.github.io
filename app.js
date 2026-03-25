@@ -87,15 +87,18 @@ function updateLargeTextBanner(isActive) {
     var label  = document.getElementById('large-text-banner-label');
     var btn    = document.getElementById('large-text-toggle-btn');
     if (!banner || !label || !btn) return;
+    
+    var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
+    
     if (isActive) {
         banner.classList.add('active');
         banner.classList.remove('hidden');
-        label.textContent = '✓ Testo grande attivo';
-        btn.textContent   = 'A− Normale';
+        label.textContent = translations[lang]?.large_text_active || translations['it'].large_text_active;
+        btn.textContent   = translations[lang]?.large_text_btn_active || translations['it'].large_text_btn_active;
     } else {
         banner.classList.remove('active');
-        label.textContent = '🔤 Difficoltà a leggere?';
-        btn.textContent   = 'A+ Testo Grande';
+        label.textContent = translations[lang]?.large_text_inactive || translations['it'].large_text_inactive;
+        btn.textContent   = translations[lang]?.large_text_btn_inactive || translations['it'].large_text_btn_inactive;
     }
 }
 
@@ -248,7 +251,56 @@ const translations = {
         faq_q11: "Come richiedo un'impegnativa per esami o visite specialistiche?",
         faq_a11: "Le impegnative per esami del sangue, radiografie o visite specialistiche si richiedono durante la visita in ambulatorio.<br><br>Per esami di controllo già programmati (es. controllo annuale), potete farne richiesta tramite <strong>MilleBook</strong> senza bisogno di una visita.<div class='highlight-box'>Per prenotare esami tramite il SSN, utilizzate il <strong>CUP Toscana</strong> una volta ottenuta l'impegnativa.</div>",
         faq_cta_title: "Non hai trovato la risposta?",
-        faq_cta_desc: "Contatta la segreteria o accedi a MilleBook per comunicare con il medico."
+        faq_cta_desc: "Contatta la segreteria o accedi a MilleBook per comunicare con il medico.",
+
+        // Flowchart
+        flowchart_title: "Di cosa hai bisogno?",
+        flowchart_opt_book: '<i class="fas fa-calendar-check"></i> Voglio prenotare una visita',
+        flowchart_opt_meds: '<i class="fas fa-pills"></i> Ho bisogno di farmaci o ricette',
+        flowchart_opt_night: '<i class="fas fa-moon"></i> È sera, notte o weekend',
+        flowchart_opt_faq: '<i class="fas fa-question-circle"></i> Ho un\'altra domanda',
+        flowchart_end_book_title: 'Prenota una visita',
+        flowchart_end_book_desc: 'Scegli il tipo di visita qui sotto e poi seleziona giorno e orario sul calendario.',
+        flowchart_end_book_action: 'Scegli il tipo di visita',
+        flowchart_end_millebook_title: 'Usa Millebook',
+        flowchart_end_millebook_desc: 'Richiedi farmaci continuativi, ricette o impegnative direttamente da Millebook — senza bisogno di una visita.',
+        flowchart_end_millebook_action: 'Apri Millebook',
+        flowchart_end_116_title: 'Chiama il 116 117',
+        flowchart_end_116_desc: 'Per assistenza medica non urgente fuori orario (sera, notte, weekend, festivi): Continuità Assistenziale.',
+        flowchart_end_116_action: 'Chiama 116 117',
+        flowchart_end_faq_title: 'Leggi le FAQ',
+        flowchart_end_faq_desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
+        flowchart_end_faq_action: 'Vai alle FAQ',
+        flowchart_restart: '↩ Ricomincia',
+
+        // Quick actions bar
+        qa_call: 'Chiama',
+        qa_book: 'Prenota',
+        qa_millebook: 'Millebook',
+        qa_home: 'Home',
+        qa_email: 'Email',
+
+        // FAQ page extras
+        faq_search_placeholder: 'Cerca nelle FAQ...',
+        faq_search_label: 'Cerca nelle FAQ',
+        faq_no_results: 'Nessuna domanda trovata — contatta la segreteria al 0575 910 904.',
+        faq_header_title: 'Domande Frequenti',
+        faq_header_desc: 'Risposte alle domande più comuni',
+
+        // SW update toast
+        sw_update_available: 'Aggiornamento disponibile',
+        sw_update_now: 'Aggiorna ora',
+
+        // Misc hardcoded
+        service_banner_desc: 'Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).',
+        email_privacy_notice: 'Per privacy, non inviare dettagli clinici via email: usa Millebook o la visita in studio.',
+        secretary_hours_label: 'Orari Segreteria - 0575 910 904',
+
+        // Large text banner
+        large_text_inactive: '🔤 Difficoltà a leggere?',
+        large_text_btn_inactive: 'A+ Testo Grande',
+        large_text_active: '✓ Testo grande attivo',
+        large_text_btn_active: 'A− Normale'
     },
     en: {
         // Mobile banner
@@ -372,7 +424,56 @@ const translations = {
         faq_q11: "How do I get a referral for tests or specialist appointments?",
         faq_a11: "Referrals for blood tests, X-rays, or specialist visits must be requested during an in-person clinic visit.<br><br>For already-planned routine tests (e.g. annual check-up), you can request them via <strong>MilleBook</strong> without needing an appointment.<div class='highlight-box'>To book tests through the NHS, use <strong>CUP Toscana</strong> once you have your referral.</div>",
         faq_cta_title: "Didn't find the answer?",
-        faq_cta_desc: "Contact reception or log in to MilleBook to send a message to the doctor."
+        faq_cta_desc: "Contact reception or log in to MilleBook to send a message to the doctor.",
+
+        // Flowchart
+        flowchart_title: "What do you need?",
+        flowchart_opt_book: '<i class="fas fa-calendar-check"></i> I want to book a visit',
+        flowchart_opt_meds: '<i class="fas fa-pills"></i> I need prescriptions or medications',
+        flowchart_opt_night: '<i class="fas fa-moon"></i> It\'s evening, night or weekend',
+        flowchart_opt_faq: '<i class="fas fa-question-circle"></i> I have another question',
+        flowchart_end_book_title: 'Book a visit',
+        flowchart_end_book_desc: 'Choose the type of visit below and then select a day and time from the calendar.',
+        flowchart_end_book_action: 'Choose visit type',
+        flowchart_end_millebook_title: 'Use Millebook',
+        flowchart_end_millebook_desc: 'Request repeat medications, prescriptions or referrals directly via Millebook — no appointment needed.',
+        flowchart_end_millebook_action: 'Open Millebook',
+        flowchart_end_116_title: 'Call 116 117',
+        flowchart_end_116_desc: 'For non-urgent medical assistance outside hours (evenings, nights, weekends, holidays): Out-of-Hours Service.',
+        flowchart_end_116_action: 'Call 116 117',
+        flowchart_end_faq_title: 'Read the FAQ',
+        flowchart_end_faq_desc: 'Find immediate answers about certificates, exemptions, test results and bureaucracy in the frequently asked questions.',
+        flowchart_end_faq_action: 'Go to FAQ',
+        flowchart_restart: '↩ Start over',
+
+        // Quick actions bar
+        qa_call: 'Call',
+        qa_book: 'Book',
+        qa_millebook: 'Millebook',
+        qa_home: 'Home',
+        qa_email: 'Email',
+
+        // FAQ page extras
+        faq_search_placeholder: 'Search the FAQ...',
+        faq_search_label: 'Search the FAQ',
+        faq_no_results: 'No questions found — contact reception on 0575 910 904.',
+        faq_header_title: 'Frequently Asked Questions',
+        faq_header_desc: 'Answers to the most common questions',
+
+        // SW update toast
+        sw_update_available: 'Update available',
+        sw_update_now: 'Update now',
+
+        // Misc hardcoded
+        service_banner_desc: 'Find immediate answers to common questions (certificates, exemptions, referrals).',
+        email_privacy_notice: 'For privacy reasons, do not send clinical details via email: use Millebook or an in-office visit.',
+        secretary_hours_label: 'Reception Hours - 0575 910 904',
+
+        // Large text banner
+        large_text_inactive: '🔤 Difficulty reading?',
+        large_text_btn_inactive: 'A+ Large Text',
+        large_text_active: '✓ Large text active',
+        large_text_btn_active: 'A− Normal'
     }
 };
 
@@ -387,7 +488,16 @@ function setLanguage(lang) {
         const key = el.getAttribute('data-i18n');
         if (translations[lang]?.[key]) el.innerHTML = translations[lang][key];
     });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+    });
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
+    
+    if (document.getElementById('flow-step')) {
+        renderFlowStep('root');
+    }
+    updateLargeTextBanner(document.body.classList.contains('large-text'));
 }
 
 try {
@@ -494,91 +604,96 @@ function dismissFerieBanner() {
 }
 
 // --- DECISION FLOWCHART ---
-const FLOWCHART = {
-    root: {
-        q: '',
-        options: [
-            { label: '<i class="fas fa-calendar-check"></i> Voglio prenotare una visita', next: 'end_prenota' },
-            { label: '<i class="fas fa-pills"></i> Ho bisogno di farmaci o ricette', next: 'end_millebook' },
-            { label: '<i class="fas fa-moon"></i> È sera, notte o weekend', next: 'end_116' },
-            { label: '<i class="fas fa-question-circle"></i> Ho un\'altra domanda', next: 'end_faq' },
-        ]
-    },
-    end_prenota: {
-        end: true,
-        icon: 'fas fa-calendar-check',
-        color: 'var(--primary)',
-        title: 'Prenota una visita',
-        desc: 'Scegli il tipo di visita qui sotto e poi seleziona giorno e orario sul calendario.',
-        action: { label: 'Scegli il tipo di visita', type: 'scroll_booking' }
-    },
-    end_millebook: {
-        end: true,
-        icon: 'fas fa-laptop-medical',
-        color: 'var(--primary)',
-        title: 'Usa Millebook',
-        desc: 'Richiedi farmaci continuativi, ricette o impegnative direttamente da Millebook — senza bisogno di una visita.',
-        action: { label: 'Apri Millebook', href: 'https://www.millebook.it/#/login', external: true }
-    },
-    end_116: {
-        end: true,
-        icon: 'fas fa-moon',
-        color: '#6c757d',
-        title: 'Chiama il 116 117',
-        desc: 'Per assistenza medica non urgente fuori orario (sera, notte, weekend, festivi): Continuità Assistenziale.',
-        action: { label: 'Chiama 116 117', href: 'tel:116117' }
-    },
-    end_faq: {
-        end: true,
-        icon: 'fas fa-question-circle',
-        color: 'var(--primary-light)',
-        title: 'Leggi le FAQ',
-        desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
-        action: { label: 'Vai alle FAQ', href: 'faq.html' }
-    }
-};
+function getFlowLabel(lang, key) {
+    return translations[lang]?.[key] || translations['it'][key] || '';
+}
 
 function renderFlowStep(stepKey) {
-    const step = FLOWCHART[stepKey];
-    if (!step) return;
+    const lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
     const container = document.getElementById('flow-step');
     if (!container) return;
 
+    const steps = {
+        root: {
+            q: '',
+            options: [
+                { labelKey: 'flowchart_opt_book', next: 'end_prenota' },
+                { labelKey: 'flowchart_opt_meds', next: 'end_millebook' },
+                { labelKey: 'flowchart_opt_night', next: 'end_116' },
+                { labelKey: 'flowchart_opt_faq', next: 'end_faq' },
+            ]
+        },
+        end_prenota: {
+            end: true,
+            icon: 'fas fa-calendar-check',
+            color: 'var(--primary)',
+            titleKey: 'flowchart_end_book_title',
+            descKey: 'flowchart_end_book_desc',
+            actionKey: 'flowchart_end_book_action',
+            actionType: 'scroll_booking'
+        },
+        end_millebook: {
+            end: true,
+            icon: 'fas fa-laptop-medical',
+            color: 'var(--primary)',
+            titleKey: 'flowchart_end_millebook_title',
+            descKey: 'flowchart_end_millebook_desc',
+            actionKey: 'flowchart_end_millebook_action',
+            actionType: 'link',
+            href: 'https://www.millebook.it/#/login',
+            external: true
+        },
+        end_116: {
+            end: true,
+            icon: 'fas fa-moon',
+            color: '#6c757d',
+            titleKey: 'flowchart_end_116_title',
+            descKey: 'flowchart_end_116_desc',
+            actionKey: 'flowchart_end_116_action',
+            actionType: 'link',
+            href: 'tel:116117'
+        },
+        end_faq: {
+            end: true,
+            icon: 'fas fa-question-circle',
+            color: 'var(--primary-light)',
+            titleKey: 'flowchart_end_faq_title',
+            descKey: 'flowchart_end_faq_desc',
+            actionKey: 'flowchart_end_faq_action',
+            actionType: 'link',
+            href: 'faq.html'
+        }
+    };
+
+    const step = steps[stepKey];
+    if (!step) return;
+
     if (step.end) {
         let actionHTML = '';
-        const a = step.action;
-        if (a.type === 'scroll_booking') {
-            actionHTML = `<button class="flow-action-btn" onclick="startBooking()">${a.label}</button>`;
-        } else if (a.type === 'booking') {
-            const url = a.visitType === 'ordinaria'
-                ? 'https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome'
-                : 'https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome';
-            actionHTML = `<button class="flow-action-btn" onclick="selectVisitType('${a.visitType}','${url}')">${a.label}</button>`;
+        const actionLabel = getFlowLabel(lang, step.actionKey);
+        if (step.actionType === 'scroll_booking') {
+            actionHTML = `<button class="flow-action-btn" onclick="startBooking()">${actionLabel}</button>`;
         } else {
-            const target = a.external ? ' target="_blank" rel="noopener noreferrer"' : '';
-            actionHTML = `<a class="flow-action-btn" href="${a.href}"${target}>${a.label}</a>`;
+            const target = step.external ? ' target="_blank" rel="noopener noreferrer"' : '';
+            actionHTML = `<a class="flow-action-btn" href="${step.href}"${target}>${actionLabel}</a>`;
         }
         container.innerHTML = `
             <div class="flow-end-card" style="border-color:${step.color}">
                 <div class="flow-end-icon" style="color:${step.color}"><i class="${step.icon}"></i></div>
-                <h3 class="flow-end-title" style="color:${step.color}">${step.title}</h3>
-                <p class="flow-end-desc">${step.desc}</p>
+                <h3 class="flow-end-title" style="color:${step.color}">${getFlowLabel(lang, step.titleKey)}</h3>
+                <p class="flow-end-desc">${getFlowLabel(lang, step.descKey)}</p>
                 ${actionHTML}
-                <button class="flow-restart-btn" onclick="renderFlowStep('root')">↩ Ricomincia</button>
+                <button class="flow-restart-btn" onclick="renderFlowStep('root')">${getFlowLabel(lang, 'flowchart_restart')}</button>
             </div>`;
     } else {
-        const warningHTML = step.warning
-            ? `<div class="flow-warning">${step.warning}</div>`
-            : '';
         const btns = step.options.map(o =>
-            `<button class="flow-option-btn" onclick="renderFlowStep('${o.next}')">${o.label}</button>`
+            `<button class="flow-option-btn" onclick="renderFlowStep('${o.next}')">${getFlowLabel(lang, o.labelKey)}</button>`
         ).join('');
         container.innerHTML = `
             <div class="flow-question-card">
-                ${warningHTML}
                 ${step.q ? `<p class="flow-question">${step.q}</p>` : ''}
                 <div class="flow-options">${btns}</div>
-                ${stepKey !== 'root' ? '<button class="flow-restart-btn" onclick="renderFlowStep(\'root\')">↩ Ricomincia</button>' : ''}
+                ${stepKey !== 'root' ? `<button class="flow-restart-btn" onclick="renderFlowStep('root')">${getFlowLabel(lang, 'flowchart_restart')}</button>` : ''}
             </div>`;
     }
 }
