@@ -116,8 +116,8 @@
 <script>if (!sessionStorage.getItem('welcomeSeen')) document.body.classList.add('modal-open');</script>
 
 <div id="large-text-banner" role="region" aria-label="Accessibilità testo">
-    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
-    <button id="large-text-toggle-btn" class="large-text-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
+    <span id="large-text-banner-label" data-i18n="large_text_inactive">🔤 Difficoltà a leggere?</span>
+    <button id="large-text-toggle-btn" class="large-text-btn" onclick="toggleLargeText()" data-i18n="large_text_btn_inactive">A+ Testo Grande</button>
 </div>
 
 <a href="android.html" class="mobile-app-banner">
@@ -227,7 +227,7 @@
         <section id="flowchart-section" class="card">
             <div class="card-header">
                 <i class="fas fa-route" aria-hidden="true"></i>
-                <h2>Di cosa hai bisogno?</h2>
+                <h2 data-i18n="flowchart_title">Di cosa hai bisogno?</h2>
             </div>
             <div id="flow-step"></div>
         </section>
@@ -243,7 +243,7 @@
                     <i class="fas fa-question-circle"></i>
                     <span data-i18n="btn_faq_main">Hai dubbi? Leggi prima le FAQ</span>
                 </a>
-                <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;">
+                <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;" data-i18n="service_banner_desc">
                     Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).
                 </p>
             </div>
@@ -361,7 +361,7 @@
                 <div class="icon-circle"><i class="fas fa-envelope"></i></div>
                 <div><span data-i18n="label_email" class="contact-label">Email</span><span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span></div>
             </a>
-            <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 6px;">
+            <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 6px;" data-i18n="email_privacy_notice">
                 Per privacy, non inviare dettagli clinici via email: usa Millebook o la visita in studio.
             </p>
         </section>
@@ -383,7 +383,7 @@
             <div style="margin-top: 25px; padding-top: 20px; border-top: 1px dashed var(--border-color);">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 10px;">
                     <i class="fas fa-headset" style="color: var(--accent); font-size: 1.2rem;"></i>
-                    <h3 class="text-primary" data-i18n="hours_secretary_title" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria - 0575 910 904</h3>
+                    <h3 class="text-primary" data-i18n="secretary_hours_label" style="font-size: 1.1rem; font-weight: 700;">Orari Segreteria - 0575 910 904</h3>
                 </div>
                 <table class="hours-table">
                     <tbody>
@@ -410,15 +410,15 @@
 <nav class="quick-actions-bar" aria-label="Azioni rapide">
     <a href="tel:+390575910904" class="qa-item" aria-label="Chiama la segreteria">
         <i class="fas fa-phone-alt" aria-hidden="true"></i>
-        <span>Chiama</span>
+        <span data-i18n="qa_call">Chiama</span>
     </a>
     <button class="qa-item" onclick="startBooking()" aria-label="Prenota una visita">
         <i class="fas fa-calendar-check" aria-hidden="true"></i>
-        <span>Prenota</span>
+        <span data-i18n="qa_book">Prenota</span>
     </button>
     <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="qa-item" aria-label="Apri Millebook">
         <i class="fas fa-laptop-medical" aria-hidden="true"></i>
-        <span>Millebook</span>
+        <span data-i18n="qa_millebook">Millebook</span>
     </a>
     <a href="faq.html" class="qa-item" aria-label="Domande frequenti">
         <i class="fas fa-question-circle" aria-hidden="true"></i>
@@ -426,7 +426,7 @@
     </a>
     <a href="mailto:segreteria@savianu.it" class="qa-item" aria-label="Scrivi una email alla segreteria">
         <i class="fas fa-envelope" aria-hidden="true"></i>
-        <span>Email</span>
+        <span data-i18n="qa_email">Email</span>
     </a>
 </nav>
 
