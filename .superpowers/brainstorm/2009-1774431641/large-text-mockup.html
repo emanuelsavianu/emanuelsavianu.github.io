@@ -1,0 +1,78 @@
+<h2>Modalità Testo Grande — confronto</h2>
+<p class="subtitle">A sinistra: normale. A destra: testo grande attivo. Dove mettere il toggle?</p>
+
+<div class="split" style="gap:20px; margin-bottom:32px;">
+
+  <!-- NORMAL -->
+  <div class="mockup">
+    <div class="mockup-header">Normale</div>
+    <div class="mockup-body" style="padding:12px; font-family: sans-serif;">
+      <div style="display:flex; gap:8px; justify-content:flex-end; margin-bottom:8px; font-size:12px; color:#888;">
+        ITA | ENG | 🌙 | <span style="border:1px solid #aaa; padding:2px 6px; border-radius:4px; font-size:11px;">A+</span>
+      </div>
+      <div style="font-size:13px; font-weight:700; color:#1a2f4c; margin-bottom:4px;">Dr. Savianu Emanuel</div>
+      <div style="font-size:10px; color:#888; margin-bottom:10px;">Medico di Medicina Generale – Arezzo</div>
+
+      <div style="background:#f0f4f8; border-radius:6px; padding:10px; margin-bottom:8px;">
+        <div style="font-size:11px; font-weight:600; margin-bottom:6px;">Di cosa hai bisogno?</div>
+        <div style="display:flex; flex-direction:column; gap:5px;">
+          <button style="font-size:11px; padding:7px 10px; border-radius:5px; border:1px solid #1a2f4c; background:white; text-align:left;">📅 Voglio prenotare una visita</button>
+          <button style="font-size:11px; padding:7px 10px; border-radius:5px; border:1px solid #1a2f4c; background:white; text-align:left;">💊 Ho bisogno di farmaci o ricette</button>
+          <button style="font-size:11px; padding:7px 10px; border-radius:5px; border:1px solid #1a2f4c; background:white; text-align:left;">🌙 È sera, notte o weekend</button>
+          <button style="font-size:11px; padding:7px 10px; border-radius:5px; border:1px solid #1a2f4c; background:white; text-align:left;">❓ Ho un'altra domanda</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LARGE TEXT -->
+  <div class="mockup">
+    <div class="mockup-header">Testo Grande attivo ✓</div>
+    <div class="mockup-body" style="padding:12px; font-family: sans-serif;">
+      <div style="display:flex; gap:8px; justify-content:flex-end; margin-bottom:8px; font-size:12px; color:#888;">
+        ITA | ENG | 🌙 | <span style="border:2px solid #c9a227; padding:3px 8px; border-radius:4px; font-size:12px; font-weight:700; color:#c9a227; background:#fffbea;">A+</span>
+      </div>
+      <div style="font-size:17px; font-weight:700; color:#1a2f4c; margin-bottom:4px;">Dr. Savianu Emanuel</div>
+      <div style="font-size:13px; color:#888; margin-bottom:10px;">Medico di Medicina Generale – Arezzo</div>
+
+      <div style="background:#f0f4f8; border-radius:6px; padding:10px; margin-bottom:8px;">
+        <div style="font-size:15px; font-weight:600; margin-bottom:8px;">Di cosa hai bisogno?</div>
+        <div style="display:flex; flex-direction:column; gap:8px;">
+          <button style="font-size:15px; padding:14px 14px; border-radius:8px; border:2px solid #1a2f4c; background:white; text-align:left; font-weight:600;">📅 Voglio prenotare una visita</button>
+          <button style="font-size:15px; padding:14px 14px; border-radius:8px; border:2px solid #1a2f4c; background:white; text-align:left; font-weight:600;">💊 Ho bisogno di farmaci o ricette</button>
+          <button style="font-size:15px; padding:14px 14px; border-radius:8px; border:2px solid #1a2f4c; background:white; text-align:left; font-weight:600;">🌙 È sera, notte o weekend</button>
+          <button style="font-size:15px; padding:14px 14px; border-radius:8px; border:2px solid #1a2f4c; background:white; text-align:left; font-weight:600;">❓ Ho un'altra domanda</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="section">
+  <h3>Dove mettere il toggle "A+"?</h3>
+  <p class="subtitle">Seleziona la posizione che preferisci</p>
+  <div class="options">
+    <div class="option" data-choice="nav" onclick="toggleSelect(this)">
+      <div class="letter">1</div>
+      <div class="content">
+        <h3>Nella barra header (ITA | ENG | 🌙 | A+)</h3>
+        <p>Vicino al dark mode, stesso stile. Compatto, sempre visibile ma discreto.</p>
+      </div>
+    </div>
+    <div class="option" data-choice="banner" onclick="toggleSelect(this)">
+      <div class="letter">2</div>
+      <div class="content">
+        <h3>Banner in cima alla pagina</h3>
+        <p>"Difficoltà a leggere? → <u>Attiva testo grande</u>" — più visibile, impossibile da perdere, ma occupa spazio.</p>
+      </div>
+    </div>
+    <div class="option" data-choice="float" onclick="toggleSelect(this)">
+      <div class="letter">3</div>
+      <div class="content">
+        <h3>Pulsante fisso in basso a sinistra</h3>
+        <p>Sempre raggiungibile durante lo scroll, come il bottone FAQ. Ma aggiunge un elemento alla UI.</p>
+      </div>
+    </div>
+  </div>
+</div>

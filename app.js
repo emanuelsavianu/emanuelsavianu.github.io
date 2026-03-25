@@ -81,6 +81,49 @@ function initDarkMode() {
 initDarkMode();
 
 
+// --- LARGE TEXT ACCESSIBILITY MODE ---
+function updateLargeTextBanner(isActive) {
+    var banner = document.getElementById('large-text-banner');
+    var label  = document.getElementById('large-text-banner-label');
+    var btn    = document.getElementById('large-text-toggle-btn');
+    if (!banner || !label || !btn) return;
+    if (isActive) {
+        banner.classList.add('active');
+        banner.classList.remove('hidden');
+        label.textContent = '✓ Testo grande attivo';
+        btn.textContent   = 'A− Normale';
+    } else {
+        banner.classList.remove('active');
+        label.textContent = '🔤 Difficoltà a leggere?';
+        btn.textContent   = 'A+ Testo Grande';
+    }
+}
+
+function toggleLargeText() {
+    var isActive = document.body.classList.toggle('large-text');
+    try { localStorage.setItem('largeText', isActive ? 'enabled' : 'disabled'); } catch(e) {}
+    updateLargeTextBanner(isActive);
+}
+
+function initLargeText() {
+    try {
+        if (localStorage.getItem('largeText') === 'enabled') {
+            document.body.classList.add('large-text');
+            updateLargeTextBanner(true);
+        }
+    } catch(e) {}
+    // Hide banner on first scroll only if large text is NOT active
+    window.addEventListener('scroll', function() {
+        if (!document.body.classList.contains('large-text')) {
+            var banner = document.getElementById('large-text-banner');
+            if (banner) banner.classList.add('hidden');
+        }
+    }, { once: true });
+}
+
+initLargeText();
+
+
 // --- LANGUAGE MANAGEMENT ---
 const translations = {
     it: {

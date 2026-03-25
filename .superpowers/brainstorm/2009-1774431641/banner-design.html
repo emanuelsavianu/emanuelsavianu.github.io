@@ -1,0 +1,63 @@
+<h2>Design del banner accessibilità</h2>
+<p class="subtitle">Stato normale (sopra) e stato attivo (sotto). Ti sembra giusto?</p>
+
+<div class="section">
+  <h3>Banner — testo normale</h3>
+  <div style="background:#f8f9fa; border-bottom: 3px solid #e0e0e0; padding: 10px 20px; display:flex; align-items:center; justify-content:space-between; font-family:sans-serif; border-radius:6px; margin-bottom:6px;">
+    <span style="font-size:14px; color:#555;">
+      🔤 Difficoltà a leggere?
+    </span>
+    <button style="font-size:13px; font-weight:700; background:#1a2f4c; color:white; border:none; padding:8px 16px; border-radius:20px; cursor:pointer;">
+      A+ &nbsp;Testo Grande
+    </button>
+  </div>
+  <p style="font-size:12px; color:#888; margin:0;">Si nasconde dopo il primo scroll (o dopo il click), non intasa la pagina.</p>
+</div>
+
+<div class="section">
+  <h3>Banner — testo grande attivo</h3>
+  <div style="background:#fffbea; border-bottom: 3px solid #c9a227; padding: 10px 20px; display:flex; align-items:center; justify-content:space-between; font-family:sans-serif; border-radius:6px; margin-bottom:6px;">
+    <span style="font-size:14px; color:#7a6000; font-weight:600;">
+      ✓ Testo grande attivo
+    </span>
+    <button style="font-size:13px; font-weight:700; background:white; color:#7a6000; border:2px solid #c9a227; padding:8px 16px; border-radius:20px; cursor:pointer;">
+      A− &nbsp;Normale
+    </button>
+  </div>
+  <p style="font-size:12px; color:#888; margin:0;">Quando attivo rimane visibile (serve per disattivarlo).</p>
+</div>
+
+<div class="section">
+  <h3>Cosa cambia in modalità A+</h3>
+  <div style="font-family:sans-serif; display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+    <div style="background:#f0f4f8; padding:12px; border-radius:8px;">
+      <div style="font-size:11px; color:#888; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Normale</div>
+      <p style="font-size:15px; margin:0 0 8px;">Testo corpo: 15–16px</p>
+      <p style="font-size:13px; margin:0 0 8px; color:#555;">Testo secondario: 13px</p>
+      <button style="font-size:13px; padding:10px 14px; border-radius:6px; border:1px solid #1a2f4c; background:white; width:100%;">Bottone flowchart</button>
+    </div>
+    <div style="background:#fffbea; padding:12px; border-radius:8px; border:2px solid #c9a227;">
+      <div style="font-size:11px; color:#7a6000; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">Testo Grande</div>
+      <p style="font-size:20px; margin:0 0 8px; font-weight:600;">Testo corpo: 20px</p>
+      <p style="font-size:17px; margin:0 0 8px; color:#555;">Testo secondario: 17px</p>
+      <button style="font-size:18px; padding:16px 14px; border-radius:8px; border:2px solid #1a2f4c; background:white; width:100%; font-weight:600;">Bottone flowchart</button>
+    </div>
+  </div>
+</div>
+
+<div class="options" style="margin-top:24px;">
+  <div class="option" data-choice="approve" onclick="toggleSelect(this)">
+    <div class="letter">✓</div>
+    <div class="content">
+      <h3>Sì, va bene — procedi con l'implementazione</h3>
+      <p>Banner in cima, toggle giallo quando attivo, font +30%, bottoni più grandi.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="revise" onclick="toggleSelect(this)">
+    <div class="letter">✎</div>
+    <div class="content">
+      <h3>Modifica qualcosa</h3>
+      <p>Dimmi cosa cambiare (colori, dimensioni, comportamento del banner...).</p>
+    </div>
+  </div>
+</div>

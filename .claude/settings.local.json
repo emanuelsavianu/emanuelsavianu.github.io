@@ -23,7 +23,8 @@
       "Bash(npm init:*)",
       "Bash(npm install:*)",
       "Bash(npx wrangler:*)",
-      "Bash(ls c:UsersemanuDocumentsemanuelsavianu.github.io/*.png)"
+      "Bash(ls c:UsersemanuDocumentsemanuelsavianu.github.io/*.png)",
+      "Bash(bash \"C:/Users/emanu/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.5/skills/brainstorming/scripts/start-server.sh\" --project-dir \"C:/Users/emanu/Documents/GitHub/emanuelsavianu.github.io\")"
     ]
   }
 }
