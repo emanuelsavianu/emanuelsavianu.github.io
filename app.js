@@ -131,7 +131,7 @@ initLargeText();
 const translations = {
     it: {
         // Mobile banner
-        mobile_app_banner: "Apri la versione App",
+        mobile_app_banner: "Installa sul telefono (Accesso Rapido)",
 
         // Header
         header_subtitle: "Medico di Medicina Generale - Arezzo",
@@ -146,6 +146,16 @@ const translations = {
         btn_book_sub: "Scegli giorno e orario",
         millebook_btn: "Richiedi farmaci o ricette",
         millebook_sub: "Accedi a Millebook — il canale preferenziale",
+
+        // Guida Rapida
+        guida_rapida_label: "📋 Guida Rapida",
+        guida_rapida_dismiss: "✕ Ho capito",
+        guida_row1_title: "Urgenze: chiama il 112",
+        guida_row1_desc: "Segreteria: <a href=\"tel:0575910904\">0575 910 904</a> — per problemi non urgenti.",
+        guida_row2_title: "Ricette e farmaci → Millebook",
+        guida_row2_desc: "Il metodo più veloce per richiedere farmaci continuativi.",
+        guida_row3_title: "Non sai da dove iniziare?",
+        guida_row3_desc: "Usa lo strumento <strong>\"Di cosa hai bisogno?\"</strong> qui sotto.",
 
         // Booking section
         booking_title: "Seleziona il tipo di visita",
@@ -304,7 +314,7 @@ const translations = {
     },
     en: {
         // Mobile banner
-        mobile_app_banner: "Open the App version",
+        mobile_app_banner: "Install on your phone (Quick Access)",
 
         // Header
         header_subtitle: "General Practitioner - Arezzo",
@@ -319,6 +329,16 @@ const translations = {
         btn_book_sub: "Choose date and time",
         millebook_btn: "Request prescriptions or medications",
         millebook_sub: "Access Millebook — the preferred channel",
+
+        // Guida Rapida
+        guida_rapida_label: "📋 Quick Guide",
+        guida_rapida_dismiss: "✕ Got it",
+        guida_row1_title: "Emergencies: call 112",
+        guida_row1_desc: "Reception: <a href=\"tel:0575910904\">0575 910 904</a> — for non-urgent matters.",
+        guida_row2_title: "Prescriptions & medications → Millebook",
+        guida_row2_desc: "The fastest way to request repeat prescriptions.",
+        guida_row3_title: "Not sure where to start?",
+        guida_row3_desc: "Use the <strong>\"What do you need?\"</strong> tool below.",
 
         // Booking section
         booking_title: "Select visit type",
@@ -520,21 +540,26 @@ function showSection(sectionId) {
     }
 }
 
-// --- WELCOME MODAL ---
-function closeWelcome() {
-    const overlay = document.getElementById('welcome-overlay');
-    if (overlay) overlay.classList.remove('active');
-    document.body.classList.remove('modal-open');
-    try { sessionStorage.setItem('welcomeSeen', 'true'); } catch(e) {}
+// --- GUIDA RAPIDA ---
+function initGuidaRapida() {
+    var card = document.getElementById('guida-rapida');
+    if (!card) return;
+    try {
+        if (localStorage.getItem('guidaRapidaSeen') === '1') {
+            card.classList.add('hidden');
+        }
+    } catch(e) {}
 }
 
-function openWelcome() {
-    const overlay = document.getElementById('welcome-overlay');
-    if (overlay) overlay.classList.add('active');
-    document.body.classList.add('modal-open');
+function dismissGuidaRapida() {
+    var card = document.getElementById('guida-rapida');
+    if (card) card.classList.add('hidden');
+    try { localStorage.setItem('guidaRapidaSeen', '1'); } catch(e) {}
 }
 
-// --- FOCUS TRAP ---
+initGuidaRapida();
+
+// --- FOCUS TRAP (kept for reps modal) ---
 function trapFocus(modal) {
     const focusable = modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
     if (!focusable.length) return;
@@ -543,7 +568,6 @@ function trapFocus(modal) {
     first.focus();
     modal.addEventListener('keydown', function handler(e) {
         if (e.key !== 'Tab') {
-            if (e.key === 'Escape') { closeWelcome(); modal.removeEventListener('keydown', handler); }
             return;
         }
         if (e.shiftKey) {
@@ -707,23 +731,78 @@ if (document.getElementById('flow-step')) {
     renderFlowStep('root');
 }
 
-function selectVisitType(type, url) {
-    // Highlight selected button
-    document.querySelectorAll('.btn-cal-service').forEach(function(btn) {
-        btn.classList.remove('selected');
-    });
-    var activeBtn = document.querySelector('.btn-cal-service.' + type);
-    if (activeBtn) activeBtn.classList.add('selected');
+var _bookingUrl = '';
 
-    // Open calendar directly
-    window.open(url, '_blank', 'noopener,noreferrer');
+function selectVisitType(type, url) {
+    _bookingUrl = url;
+    var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
+
+    var visitMeta = {
+        prima: {
+            icon: 'fas fa-user-plus',
+            titleKey: 'cal_prima_title',
+            checklist: [
+                { icon: '📁', text: lang === 'it' ? 'Cartella Clinica completa (da chiedere al precedente Medico di Famiglia)' : 'Complete Medical Record (request from your previous GP)' },
+                { icon: '📋', text: lang === 'it' ? 'Eventuali piani terapeutici' : 'Any active treatment plans' },
+                { icon: '🏷️', text: lang === 'it' ? 'Esenzioni attive (se presenti)' : 'Active exemptions (if applicable)' }
+            ],
+            note: lang === 'it' ? '⏱ Durata stimata: 30 minuti. Si prega di arrivare puntuali.' : '⏱ Estimated duration: 30 minutes. Please arrive on time.'
+        },
+        ordinaria: {
+            icon: 'fas fa-stethoscope',
+            titleKey: 'cal_ord_title',
+            checklist: [
+                { icon: '📄', text: lang === 'it' ? 'Porta eventuali esami o referti recenti pertinenti alla visita' : 'Bring any recent test results or reports relevant to the visit' }
+            ],
+            note: lang === 'it' ? '⏱ Durata stimata: 20 minuti.' : '⏱ Estimated duration: 20 minutes.'
+        },
+        breve: {
+            icon: 'fas fa-clock',
+            titleKey: 'cal_breve_title',
+            checklist: [
+                { icon: 'ℹ️', text: lang === 'it' ? 'Nessun documento necessario — descrivi i sintomi al dottore durante la visita' : 'No documents needed — describe your symptoms to the doctor during the visit' }
+            ],
+            note: lang === 'it' ? '⏱ Durata stimata: 10 minuti.' : '⏱ Estimated duration: 10 minutes.'
+        }
+    };
+
+    var meta = visitMeta[type];
+    if (!meta) return;
+
+    var t = translations[lang] || translations['it'];
+    var visitTitle = t[meta.titleKey] || type;
+
+    var checklistItems = meta.checklist.map(function(item) {
+        return '<div class="checklist-item"><span class="checklist-item-icon">' + item.icon + '</span><span>' + item.text + '</span></div>';
+    }).join('');
+
+    var grid = document.querySelector('.cal-services-grid');
+    var checklist = document.getElementById('booking-checklist');
+    if (!grid || !checklist) return;
+
+    checklist.innerHTML =
+        '<div class="checklist-visit-header">' +
+            '<i class="' + meta.icon + '" style="color:var(--accent);font-size:1.3rem;flex-shrink:0;"></i>' +
+            '<h4>' + visitTitle + '</h4>' +
+        '</div>' +
+        (meta.checklist.length > 1 || meta.checklist[0].icon !== 'ℹ️' ? '<div class="checklist-label">' + (lang === 'it' ? '✅ Cosa portare alla visita:' : '✅ What to bring:') + '</div>' : '') +
+        '<div class="checklist-items">' + checklistItems + '</div>' +
+        '<div class="checklist-note">' + meta.note + '</div>' +
+        '<button class="btn-proceed-booking" onclick="proceedToBooking()">📅 ' + (lang === 'it' ? 'Procedi alla prenotazione' : 'Proceed to booking') + '</button>' +
+        '<button class="btn-change-visit" onclick="resetBookingGrid()">↩ ' + (lang === 'it' ? 'Cambia tipo di visita' : 'Change visit type') + '</button>';
+
+    grid.classList.add('hidden');
+    checklist.classList.remove('hidden');
 }
 
-window.addEventListener('load', function() {
-    if (sessionStorage.getItem('welcomeSeen')) {
-        closeWelcome();
-    } else {
-        const modal = document.querySelector('.welcome-card');
-        if (modal) trapFocus(modal);
-    }
-});
+function proceedToBooking() {
+    if (_bookingUrl) window.open(_bookingUrl, '_blank', 'noopener,noreferrer');
+}
+
+function resetBookingGrid() {
+    var grid = document.querySelector('.cal-services-grid');
+    var checklist = document.getElementById('booking-checklist');
+    if (grid) grid.classList.remove('hidden');
+    if (checklist) checklist.classList.add('hidden');
+    _bookingUrl = '';
+}
