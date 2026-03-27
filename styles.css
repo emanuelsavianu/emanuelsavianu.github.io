@@ -144,6 +144,7 @@ header p {
     padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     display: flex; gap: 10px; align-items: center;
 }
+@media (max-width: 599px) { .lang-switch { display: none; } }
 
 .lang-btn {
     background: none; border: none; color: rgba(255, 255, 255, 0.7);
@@ -345,16 +346,126 @@ body.dark-mode .triage-option { background: var(--bg-gradient-2); }
 body.dark-mode .triage-option h3 { color: var(--accent); }
 .triage-option p { font-size: 0.95rem; color: var(--text-medium); margin-bottom: 25px; line-height: 1.5; }
 
-/* --- MODALS (WELCOME & REPS) --- */
-#welcome-overlay, #reps-overlay {
+/* --- GUIDA RAPIDA (inline quick guide, replaces welcome modal) --- */
+#guida-rapida {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 25px;
+    box-shadow: var(--shadow-md);
+    animation: fadeIn 0.3s ease;
+}
+#guida-rapida.hidden { display: none; }
+.guida-rapida-header {
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid var(--accent);
+}
+.guida-rapida-header span { font-size: 0.85rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); }
+.btn-guida-dismiss {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.35);
+    color: white; border-radius: 6px;
+    padding: 5px 14px; font-size: 0.8rem;
+    font-weight: 700; cursor: pointer;
+    transition: background 0.2s;
+}
+.btn-guida-dismiss:hover { background: rgba(255,255,255,0.25); }
+.guida-rapida-body { padding: 0 20px; }
+.guida-row {
+    display: flex; align-items: flex-start; gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--bg-gradient-2);
+}
+.guida-row:last-child { border-bottom: none; }
+.guida-row-icon {
+    width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+.guida-row-icon.red { background: #fff0f0; color: var(--danger); }
+.guida-row-icon.blue { background: var(--bg-gradient-1); color: var(--primary); }
+.guida-row-icon.gold { background: #fdfaf4; color: var(--accent); }
+.guida-row-text h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin: 0 0 3px; }
+.guida-row-text p { font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.4; }
+.guida-row-text a { color: var(--danger); font-weight: 700; }
+body.dark-mode #guida-rapida { background: var(--white); border-color: var(--border-color); }
+body.dark-mode .guida-row { border-bottom-color: var(--primary); }
+body.dark-mode .guida-row-icon.red { background: #2d1a1a; }
+body.dark-mode .guida-row-icon.blue { background: var(--primary); }
+body.dark-mode .guida-row-icon.gold { background: #1a2f4c; }
+body.dark-mode .guida-row-text h4 { color: var(--text-dark); }
+
+/* --- BOOKING CHECKLIST --- */
+#booking-checklist {
+    margin-top: 20px;
+}
+#booking-checklist.hidden { display: none; }
+.checklist-visit-header {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg-gradient-1);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--primary);
+}
+.checklist-visit-header h4 { font-size: 1rem; font-weight: 700; color: var(--primary); margin: 0; }
+.checklist-label {
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 1px; color: var(--accent); margin-bottom: 10px;
+}
+.checklist-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid var(--bg-gradient-2);
+    font-size: 0.95rem; color: var(--text-dark); line-height: 1.4;
+}
+.checklist-item:last-child { border-bottom: none; }
+.checklist-item-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.checklist-note {
+    font-size: 0.85rem; color: var(--text-medium);
+    background: var(--bg-gradient-1);
+    border-radius: 6px; padding: 10px 14px;
+    margin-top: 12px; border-left: 3px solid var(--accent);
+}
+.btn-proceed-booking {
+    display: block; width: 100%;
+    background: var(--primary); color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 50px; padding: 16px;
+    font-size: 1.05rem; font-weight: 700; cursor: pointer;
+    margin-top: 18px; text-align: center;
+    transition: background 0.2s, color 0.2s;
+}
+.btn-proceed-booking:hover { background: var(--accent); color: var(--primary); }
+.btn-change-visit {
+    display: block; width: 100%;
+    background: none; color: var(--text-medium);
+    border: 1px solid var(--border-color);
+    border-radius: 50px; padding: 12px;
+    font-size: 0.9rem; cursor: pointer;
+    margin-top: 10px; text-align: center;
+    transition: border-color 0.2s, color 0.2s;
+}
+.btn-change-visit:hover { border-color: var(--primary); color: var(--primary); }
+body.dark-mode .checklist-visit-header { background: var(--primary); }
+body.dark-mode .checklist-visit-header h4 { color: var(--accent); }
+body.dark-mode .checklist-item { border-bottom-color: var(--primary); color: var(--text-dark); }
+body.dark-mode .checklist-note { background: var(--bg-gradient-2); }
+
+/* --- MODALS (REPS) --- */
+#reps-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background-color: rgba(26, 47, 76, 0.85); backdrop-filter: blur(5px);
     z-index: 10000; display: flex; justify-content: center; align-items: center;
     padding: 20px; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s;
 }
 
-body.dark-mode #welcome-overlay, body.dark-mode #reps-overlay { background-color: rgba(0, 0, 0, 0.9); }
-#welcome-overlay.active, #reps-overlay[style*="display: flex"] { opacity: 1; visibility: visible; }
+body.dark-mode #reps-overlay { background-color: rgba(0, 0, 0, 0.9); }
+#reps-overlay[style*="display: flex"] { opacity: 1; visibility: visible; }
 
 .welcome-card, .reps-card {
     background: var(--white); width: 100%; max-width: 700px;
@@ -682,9 +793,12 @@ body.dark-mode .flow-warning { background: #3a2e00; color: #ffd060; border-color
 }
 .flow-action-btn:hover { opacity: 0.85; }
 .flow-restart-btn {
-    background: none;
-    border: none;
-    color: var(--text-medium);
+    background: var(--bg-gradient-1);
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-dark);
+    font-size: 1rem;
+    padding: 12px 20px;
     font-size: 0.85rem;
     cursor: pointer;
     padding: 4px 0;
@@ -846,10 +960,10 @@ body.dark-mode .quick-actions-bar {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 3px;
-    padding: 6px 8px;
+    gap: 5px;
+    padding: 8px 10px;
     color: rgba(255,255,255,0.75);
-    font-size: 0.58rem;
+    font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.4px;
     text-transform: uppercase;
@@ -860,9 +974,11 @@ body.dark-mode .quick-actions-bar {
     transition: color 0.2s, background 0.2s;
     text-decoration: none;
     min-width: 52px;
+    min-height: 44px;
     text-align: center;
     line-height: 1.2;
     -webkit-tap-highlight-color: transparent;
+    justify-content: center;
 }
 .qa-item i { font-size: 1.2rem; color: var(--accent); transition: color 0.2s; display: block; }
 .qa-item:hover, .qa-item:active { color: var(--accent); background: rgba(194,155,87,0.12); opacity: 1; }
