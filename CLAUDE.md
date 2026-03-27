@@ -14,6 +14,21 @@ Static HTML/CSS/JS medical practice website deployed at **savianu.it** via GitHu
 | `faq.html` | FAQ page |
 | `cloudflare/worker.js` | Cloudflare Worker (rate limiting, security headers) |
 
+## Quick Start
+
+No build step required. Open `index.html` directly in a browser to test locally. All functionality works from the filesystem.
+
+## Testing
+
+- **Local testing**: Open `index.html` in a browser (Firefox, Chrome, Safari)
+- **Mobile testing**: Use Chrome DevTools device emulation or test on actual devices
+- **Dark mode**: Toggle via the theme button in the header
+- **Internationalization**: Switch languages via the ITA | ENG selector and verify `data-i18n` attributes render correctly
+
+## Deployment
+
+The site is deployed via **GitHub Pages** (automatic on push to `main`) and fronted by **Cloudflare** for caching, security headers, and rate limiting. No manual deployment steps needed — commits to `main` deploy instantly.
+
 ## Automation (Critical)
 
 A **PostToolUse hook** runs `node .claude/scripts/bump-sw.js` after every Edit/Write. It auto-increments the `savianu-vN` cache key in `sw.js`. **Do not manually bump sw.js cache version.**
@@ -39,7 +54,7 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 
 ## Gotchas
 
-- The welcome modal shows on every new session (controlled by `sessionStorage`). It is intentional.
+- The welcome modal has been removed. In its place is the `#guida-rapida` inline card at the top of `<main>`. It is dismissed permanently via `localStorage` (`guidaRapidaSeen=1`). `dismissGuidaRapida()` in `app.js` handles this.
 - `xsegretarie.html` is a private staff page — not linked from the main site.
 - The Cloudflare `node_modules/` folder is gitignored but large — don't accidentally re-add it.
 - Font Awesome is loaded as two separate files (`fontawesome.min.css` + `solid.min.css`) on `index.html`, but as `all.min.css` on other pages — keep consistent per page.
