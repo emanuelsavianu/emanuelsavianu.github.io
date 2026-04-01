@@ -160,21 +160,7 @@
 
     <main role="main" id="main-content">
 
-
-        <section id="flowchart-section" class="card">
-            <div class="card-header">
-                <i class="fas fa-route" aria-hidden="true"></i>
-                <h2 data-i18n="flowchart_title">Di cosa hai bisogno?</h2>
-            </div>
-            <div id="flow-step"></div>
-        </section>
-
         <section class="card">
-            <div class="card-header">
-                <i class="fas fa-mouse-pointer" aria-hidden="true"></i>
-                <h2 data-i18n="services_title">Servizi Online</h2>
-            </div>
-            
             <div style="margin-bottom: 25px;">
                 <a href="faq.html" class="btn-main faq-banner-btn">
                     <i class="fas fa-question-circle"></i>
@@ -184,30 +170,12 @@
                     Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).
                 </p>
             </div>
-
-            <div class="action-grid" style="margin-bottom: 25px; align-items: stretch;">
-                <button onclick="startBooking()" class="btn-prenota-large">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                    <span data-i18n="btn_book">Prenota una visita</span>
-                    <small data-i18n="btn_book_sub">Scegli giorno e orario</small>
-                </button>
-            </div>
         </section>
 
-        <section id="booking-section" class="card hidden" aria-labelledby="booking-title">
+        <section id="booking-section" class="card" aria-labelledby="booking-title">
             <div class="card-header">
                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
                 <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
-            </div>
-            
-            <div class="booking-guide" style="background: var(--bg-gradient-1); padding: 20px; border-radius: 8px; margin-bottom: 30px; border-left: 4px solid var(--accent);">
-                <h3 class="text-primary" data-i18n="booking_guide_title" style="font-size: 1.1rem; margin-bottom: 15px;">Come prenotare:</h3>
-                <ol data-i18n="booking_guide_steps" style="margin-left: 20px; color: var(--text-medium); line-height: 1.8;">
-                    <li>Clicca il pulsante del tipo di visita qui sotto.</li>
-                    <li>Scegli giorno e orario disponibile sul calendario.</li>
-                    <li>Inserisci Nome, Cognome e un indirizzo Email.</li>
-                    <li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>
-                </ol>
             </div>
 
             <div class="cal-services-grid">
@@ -353,10 +321,6 @@
         <i class="fas fa-phone-alt" aria-hidden="true"></i>
         <span data-i18n="qa_call">Chiama</span>
     </a>
-    <button class="qa-item" onclick="startBooking()" aria-label="Prenota una visita">
-        <i class="fas fa-calendar-check" aria-hidden="true"></i>
-        <span data-i18n="qa_book">Prenota</span>
-    </button>
     <a href="faq.html" class="qa-item" aria-label="Domande frequenti">
         <i class="fas fa-question-circle" aria-hidden="true"></i>
         <span>FAQ</span>
