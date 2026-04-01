@@ -6,8 +6,8 @@ Static HTML/CSS/JS medical practice website deployed at **savianu.it** via GitHu
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Main page (flowchart, booking, contacts, hours) |
-| `app.js` | All JS: dark mode, i18n, flowchart, welcome modal, booking |
+| `index.html` | Main page (FAQ banner, booking, contacts, hours) |
+| `app.js` | All JS: dark mode, i18n, booking with dynamic checklists, language switching |
 | `config.js` | **Edit here for operational changes**: clinic hours (`SCHEDULE`) and vacation/absence banners (`ASSENZE`) |
 | `styles.css` | All styles |
 | `sw.js` | Service worker — cache version auto-bumped by hook |
@@ -41,6 +41,8 @@ A **PostToolUse hook** runs `node .claude/scripts/bump-sw.js` after every Edit/W
 
 All user-facing text uses `data-i18n` attributes on HTML elements. Translations for both `it` and `en` live in the `translations` object at the top of `app.js`. When adding new visible text, add entries for **both languages**.
 
+**Critical:** When modifying visit descriptions in `visitMeta` (inside `selectVisitType()`), update both the Italian and English blocks—they're in separate locations (~line 682 and ~line 713). Use `grep -n "cal_privata"` to verify both exist.
+
 ## New Pages
 
 Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct HTML template. After creating a new major page, add it to the `urlsToCache` array in `sw.js`.
@@ -49,6 +51,7 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 
 - **Vacation/absence/relocation banner**: edit `CONFIG.ASSENZE` in `config.js` (YYYY-MM-DD dates). The `note` field is free text — used for both holiday notices and address transfers. The `#ferie-banner` icon (`fa-umbrella-beach` for holidays, `fa-location-dot` for transfers) and color should match the message type.
 - **Clinic hours badge**: edit `CONFIG.SCHEDULE` in `config.js`
+- **Visit types & what to bring**: Modify the `visitMeta` object in `selectVisitType()` (app.js, ~line 682). The checklist is generated from the `checklist` array; the `note` field shows duration/details. **Keep descriptions in both `index.html` and `app.js` in sync.**
 - **Booking calendar URLs**: inside `selectVisitType()` calls in `index.html` (Google Calendar links)
 - **Address/contact changes**: update `index.html`, `app.js` translations, and JSON-LD in `<head>`
 
