@@ -144,18 +144,7 @@ const translations = {
         btn_faq_main: "Hai dubbi? Leggi prima le FAQ",
         btn_book: "Prenota una visita",
         btn_book_sub: "Scegli giorno e orario",
-        millebook_btn: "Richiedi farmaci o ricette",
-        millebook_sub: "Accedi a Millebook — il canale preferenziale",
 
-        // Guida Rapida
-        guida_rapida_label: "📋 Guida Rapida",
-        guida_rapida_dismiss: "✕ Ho capito",
-        guida_row1_title: "Urgenze: chiama il 112",
-        guida_row1_desc: "Segreteria: <a href=\"tel:0575910904\">0575 910 904</a> — per problemi non urgenti.",
-        guida_row2_title: "Ricette e farmaci → Millebook",
-        guida_row2_desc: "Il metodo più veloce per richiedere farmaci continuativi.",
-        guida_row3_title: "Non sai da dove iniziare?",
-        guida_row3_desc: "Usa lo strumento <strong>\"Di cosa hai bisogno?\"</strong> qui sotto.",
 
         // Booking section
         booking_title: "Seleziona il tipo di visita",
@@ -208,14 +197,16 @@ const translations = {
         welcome_intro: "Benvenuti. Ho organizzato questo sito per semplificare la vostra vita. Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.",
         welcome_step0_title: "0. Prima di tutto: Leggi le FAQ",
         welcome_step0_desc: "La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Domande Frequenti</a></strong>. Consultale prima di chiamare!",
-        welcome_step1_title: "1. Canale Preferenziale: Millebook",
-        welcome_step1_desc: "Usatelo per <strong>farmaci continuativi</strong>, messaggi brevi e visione ricette. È il metodo più veloce.",
-        welcome_step2_title: "2. Prenotazione Appuntamenti",
-        welcome_step2_desc: "L'agenda online vi permette di prenotare la visita senza attese al telefono.",
-        welcome_step3_title: "3. Urgenze e Contatto Diretto",
-        welcome_step3_p1: "Segreteria: <strong>0575 910 904</strong>",
-        welcome_step3_p2: "<strong>Urgenze vere: chiamare 112 / 116 117.</strong>",
-        welcome_step3_p3: "Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.",
+        welcome_step1_title: "1. Prenotazione Appuntamenti",
+        welcome_step1_desc: "L'agenda online vi permette di prenotare la visita senza attese al telefono.",
+        welcome_step2_title: "2. Urgenze e Contatto Diretto",
+        welcome_step2_p1: "Segreteria: <strong>0575 910 904</strong>",
+        welcome_step2_p2: "<strong>Urgenze vere: chiamare 112 / 116 117.</strong>",
+        welcome_step2_p3: "Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.",
+        welcome_step3_title: "",
+        welcome_step3_p1: "",
+        welcome_step3_p2: "",
+        welcome_step3_p3: "",
         welcome_btn: "<span>Ho letto e accetto</span><i class='fas fa-arrow-right'></i>",
 
         // FAQ page
@@ -226,7 +217,6 @@ const translations = {
         faq_nav_ricette: "Ricette",
         faq_nav_certificati: "Certificati",
         faq_nav_referti: "Referti",
-        faq_nav_millebook: "MilleBook",
         faq_nav_nuovi: "Nuovi Pazienti",
         faq_nav_urgenze: "Urgenze",
         faq_nav_varie: "Servizi",
@@ -241,40 +231,33 @@ const translations = {
         faq_q4: "Come annullo o sposto un appuntamento?",
         faq_a4: "Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.<br><br>Se non trovate l'email, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
         faq_q5: "Come richiedo la ricetta per i farmaci che prendo regolarmente?",
-        faq_a5: "Il metodo preferenziale è <strong>MilleBook</strong>:<ul><li>Accedete a <a href='https://www.millebook.it/#/login' target='_blank'>millebook.it</a></li><li>Inviate un messaggio con il nome dei farmaci necessari</li><li>Le ricette saranno pronte <strong>entro due giorni lavorativi</strong> e visibili su MilleBook</li></ul><div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
+        faq_a5: "Potete richiederla contattando la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio, oppure durante una visita in studio.<div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
         faq_sec_certificati: "<i class='fas fa-file-medical'></i> Certificati",
         faq_sec_referti: "<i class='fas fa-flask'></i> Referti ed Esami",
-        faq_sec_millebook: "<i class='fas fa-laptop-medical'></i> MilleBook",
         faq_sec_nuovi: "<i class='fas fa-user-plus'></i> Nuovi Pazienti",
         faq_sec_urgenze: "<i class='fas fa-ambulance'></i> Urgenze e Fuori Orario",
         faq_sec_varie: "<i class='fas fa-stethoscope'></i> Altri Servizi",
         faq_q6: "Come richiedo un certificato medico?",
-        faq_a6: "I certificati standard (per sport non agonistico, assenza scolastica, ecc.) si richiedono durante la visita in ambulatorio o tramite <strong>MilleBook</strong> per i casi più semplici.<br><br>Presentarsi con la documentazione necessaria: il certificato viene emesso direttamente in ambulatorio.<div class='highlight-box'><strong>Certificati INPS malattia:</strong> Richiedono una visita. Prenotare selezionando \"Sintomi Recenti\".</div>",
+        faq_a6: "I certificati si richiedono durante una visita in ambulatorio o telefonando la segreteria al <strong>0575 910 904</strong>.<br><br>Presentarsi con la documentazione necessaria: il certificato viene emesso direttamente in ambulatorio.<div class='highlight-box'><strong>Certificati INPS malattia:</strong> Richiedono una visita. Prenotare selezionando \"Sintomi Recenti\".</div>",
         faq_q7: "Come accedo ai miei referti?",
         faq_a7: "I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, prenotate una visita ordinaria.",
-        faq_q8: "Come mi iscrivo a MilleBook?",
-        faq_a8: "Per registrarsi a MilleBook:<ul><li>Chiedete le credenziali in segreteria oppure alla prima visita</li><li>Riceverete email e password per accedere a <a href='https://www.millebook.it/#/login' target='_blank'>millebook.it</a></li></ul><div class='highlight-box'>MilleBook è il canale preferenziale per richiedere ricette, inviare messaggi al medico e visualizzare documenti.</div>",
         faq_q9: "Come mi iscrivo come nuovo paziente?",
         faq_a9: "Per iscriversi come nuovo paziente occorre:<ul><li>Avere residenza o domicilio nel territorio di Arezzo</li><li>Presentarsi in segreteria con <strong>tessera sanitaria</strong> e <strong>documento d'identità</strong></li></ul>Dopo la registrazione, prenotare la prima visita selezionando <strong>\"Prima Visita (Nuovi Pazienti)\"</strong> (30 min).<div class='highlight-box'>Portare alla prima visita: lista farmaci, esami precedenti, referti e codice esenzione se presente.</div>",
         faq_q10: "Cosa faccio in caso di emergenza?",
         faq_a10: "In caso di emergenza medica chiamare sempre il <strong>112</strong>.<br><br>Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la <strong>Continuità Assistenziale</strong> (ex Guardia Medica) al numero <strong>116 117</strong>.<div class='highlight-box'>Il numero personale del Dottore (0575 171 3428) è riservato esclusivamente alle urgenze reali durante l'orario lavorativo.</div>",
         faq_q11: "Come richiedo un'impegnativa per esami o visite specialistiche?",
-        faq_a11: "Le impegnative per esami del sangue, radiografie o visite specialistiche si richiedono durante la visita in ambulatorio.<br><br>Per esami di controllo già programmati (es. controllo annuale), potete farne richiesta tramite <strong>MilleBook</strong> senza bisogno di una visita.<div class='highlight-box'>Per prenotare esami tramite il SSN, utilizzate il <strong>CUP Toscana</strong> una volta ottenuta l'impegnativa.</div>",
+        faq_a11: "Le impegnative per esami del sangue, radiografie o visite specialistiche si richiedono durante la visita in ambulatorio o contattando la segreteria al <strong>0575 910 904</strong>.<div class='highlight-box'>Per prenotare esami tramite il SSN, utilizzate il <strong>CUP Toscana</strong> una volta ottenuta l'impegnativa.</div>",
         faq_cta_title: "Non hai trovato la risposta?",
-        faq_cta_desc: "Contatta la segreteria o accedi a MilleBook per comunicare con il medico.",
+        faq_cta_desc: "Contatta la segreteria al 0575 910 904 per comunicare con il medico.",
 
         // Flowchart
         flowchart_title: "Di cosa hai bisogno?",
         flowchart_opt_book: '<i class="fas fa-calendar-check"></i> Voglio prenotare una visita',
-        flowchart_opt_meds: '<i class="fas fa-pills"></i> Ho bisogno di farmaci o ricette',
         flowchart_opt_night: '<i class="fas fa-moon"></i> È sera, notte o weekend',
         flowchart_opt_faq: '<i class="fas fa-question-circle"></i> Ho un\'altra domanda',
         flowchart_end_book_title: 'Prenota una visita',
         flowchart_end_book_desc: 'Scegli il tipo di visita qui sotto e poi seleziona giorno e orario sul calendario.',
         flowchart_end_book_action: 'Scegli il tipo di visita',
-        flowchart_end_millebook_title: 'Usa Millebook',
-        flowchart_end_millebook_desc: 'Richiedi farmaci continuativi, ricette o impegnative direttamente da Millebook — senza bisogno di una visita.',
-        flowchart_end_millebook_action: 'Apri Millebook',
         flowchart_end_116_title: 'Chiama il 116 117',
         flowchart_end_116_desc: 'Per assistenza medica non urgente fuori orario (sera, notte, weekend, festivi): Continuità Assistenziale.',
         flowchart_end_116_action: 'Chiama 116 117',
@@ -282,11 +265,12 @@ const translations = {
         flowchart_end_faq_desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
         flowchart_end_faq_action: 'Vai alle FAQ',
         flowchart_restart: '↩ Ricomincia',
+        cal_privata_title: 'Visita Privata',
+        cal_privata_desc: 'Consulti e certificati privati. (Non pazienti del dott. Savianu)',
 
         // Quick actions bar
         qa_call: 'Chiama',
         qa_book: 'Prenota',
-        qa_millebook: 'Millebook',
         qa_home: 'Home',
         qa_email: 'Email',
 
@@ -303,7 +287,7 @@ const translations = {
 
         // Misc hardcoded
         service_banner_desc: 'Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).',
-        email_privacy_notice: 'Per privacy, non inviare dettagli clinici via email: usa Millebook o la visita in studio.',
+        email_privacy_notice: 'Per privacy, non inviare dettagli clinici via email: usa la visita in studio.',
         secretary_hours_label: 'Orari Segreteria - 0575 910 904',
 
         // Large text banner
@@ -327,18 +311,7 @@ const translations = {
         btn_faq_main: "Have questions? Read the FAQ first",
         btn_book: "Book a visit",
         btn_book_sub: "Choose date and time",
-        millebook_btn: "Request prescriptions or medications",
-        millebook_sub: "Access Millebook — the preferred channel",
 
-        // Guida Rapida
-        guida_rapida_label: "📋 Quick Guide",
-        guida_rapida_dismiss: "✕ Got it",
-        guida_row1_title: "Emergencies: call 112",
-        guida_row1_desc: "Reception: <a href=\"tel:0575910904\">0575 910 904</a> — for non-urgent matters.",
-        guida_row2_title: "Prescriptions & medications → Millebook",
-        guida_row2_desc: "The fastest way to request repeat prescriptions.",
-        guida_row3_title: "Not sure where to start?",
-        guida_row3_desc: "Use the <strong>\"What do you need?\"</strong> tool below.",
 
         // Booking section
         booking_title: "Select visit type",
@@ -391,14 +364,16 @@ const translations = {
         welcome_intro: "Welcome. This website is designed to make your life easier. By using the digital tools available, you allow me to focus my full attention on in-person medical consultations.",
         welcome_step0_title: "0. First of all: Read the FAQ",
         welcome_step0_desc: "Most answers about certificates, prescriptions and exemptions can be found in the <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Frequently Asked Questions</a></strong>. Check there before calling!",
-        welcome_step1_title: "1. Preferred Channel: Millebook",
-        welcome_step1_desc: "Use it for <strong>repeat prescriptions</strong>, short messages and viewing your prescriptions. It's the fastest method.",
-        welcome_step2_title: "2. Appointment Booking",
-        welcome_step2_desc: "The online calendar lets you book a visit without waiting on the phone.",
-        welcome_step3_title: "3. Urgent Matters &amp; Direct Contact",
-        welcome_step3_p1: "Reception: <strong>0575 910 904</strong>",
-        welcome_step3_p2: "<strong>True emergencies: call 112 / 116 117.</strong>",
-        welcome_step3_p3: "The doctor's direct number (0575 171 3428) is reserved for genuine emergencies only.",
+        welcome_step1_title: "1. Appointment Booking",
+        welcome_step1_desc: "The online calendar lets you book a visit without waiting on the phone.",
+        welcome_step2_title: "2. Urgent Matters &amp; Direct Contact",
+        welcome_step2_p1: "Reception: <strong>0575 910 904</strong>",
+        welcome_step2_p2: "<strong>True emergencies: call 112 / 116 117.</strong>",
+        welcome_step2_p3: "The doctor's direct number (0575 171 3428) is reserved for genuine emergencies only.",
+        welcome_step3_title: "",
+        welcome_step3_p1: "",
+        welcome_step3_p2: "",
+        welcome_step3_p3: "",
         welcome_btn: "<span>I have read and accept</span><i class='fas fa-arrow-right'></i>",
 
         // FAQ page
@@ -409,7 +384,6 @@ const translations = {
         faq_nav_ricette: "Prescriptions",
         faq_nav_certificati: "Certificates",
         faq_nav_referti: "Test Results",
-        faq_nav_millebook: "MilleBook",
         faq_nav_nuovi: "New Patients",
         faq_nav_urgenze: "Emergencies",
         faq_nav_varie: "Services",
@@ -424,40 +398,33 @@ const translations = {
         faq_q4: "How do I cancel or reschedule an appointment?",
         faq_a4: "Your confirmation email contains a link to <strong>modify or cancel</strong> the appointment directly in the calendar.<br><br>If you cannot find the email, please call reception on <strong>0575 910 904</strong> with reasonable notice.",
         faq_q5: "How do I request a prescription for my regular medications?",
-        faq_a5: "The preferred method is <strong>MilleBook</strong>:<ul><li>Log in at <a href='https://www.millebook.it/#/login' target='_blank'>millebook.it</a></li><li>Send a message listing the medications you need</li><li>Prescriptions will be ready <strong>within two working days</strong> and visible on MilleBook</li></ul><div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
+        faq_a5: "You can request a prescription by calling reception on <strong>0575 910 904</strong> during clinic hours, or during an in-office visit.<div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
         faq_sec_certificati: "<i class='fas fa-file-medical'></i> Certificates",
         faq_sec_referti: "<i class='fas fa-flask'></i> Test Results &amp; Referrals",
-        faq_sec_millebook: "<i class='fas fa-laptop-medical'></i> MilleBook",
         faq_sec_nuovi: "<i class='fas fa-user-plus'></i> New Patients",
         faq_sec_urgenze: "<i class='fas fa-ambulance'></i> Emergencies &amp; Out-of-Hours",
         faq_sec_varie: "<i class='fas fa-stethoscope'></i> Other Services",
         faq_q6: "How do I request a medical certificate?",
-        faq_a6: "Standard certificates (for non-competitive sport, school absences, etc.) can be requested during a clinic visit or via <strong>MilleBook</strong> for straightforward cases.<br><br>Bring any relevant documents; the certificate is issued on the spot at the clinic.<div class='highlight-box'><strong>INPS sick leave certificates</strong> require an in-person visit. Book by selecting \"Recent Symptoms\".</div>",
+        faq_a6: "Certificates can be requested during a clinic visit or by calling reception on <strong>0575 910 904</strong>.<br><br>Bring any relevant documents; the certificate is issued on the spot at the clinic.<div class='highlight-box'><strong>INPS sick leave certificates</strong> require an in-person visit. Book by selecting \"Recent Symptoms\".</div>",
         faq_q7: "How do I access my test results?",
         faq_a7: "Test results are available on the <strong>Electronic Health Record (FSE)</strong>, accessible at salute.toscana.it using SPID or CIE.<br><br>The doctor can review and discuss results during a visit. If you have questions about a result, book a standard appointment.",
-        faq_q8: "How do I sign up for MilleBook?",
-        faq_a8: "To register for MilleBook:<ul><li>Ask for your credentials at reception or during your first visit</li><li>You will receive an email and password to log in at <a href='https://www.millebook.it/#/login' target='_blank'>millebook.it</a></li></ul><div class='highlight-box'>MilleBook is the preferred channel for requesting prescriptions, sending messages to the doctor, and viewing documents.</div>",
         faq_q9: "How do I register as a new patient?",
         faq_a9: "To register as a new patient you must:<ul><li>Reside or be domiciled in the Arezzo area</li><li>Present yourself at reception with your <strong>health card (tessera sanitaria)</strong> and <strong>photo ID</strong></li></ul>After registration, book your first appointment by selecting <strong>\"First Visit (New Patients)\"</strong> (30 min).<div class='highlight-box'>Bring to your first visit: a list of your current medications, previous test results, specialist reports, and your exemption code if applicable.</div>",
         faq_q10: "What do I do in an emergency?",
         faq_a10: "In a medical emergency always call <strong>112</strong>.<br><br>For urgent but non-emergency situations outside clinic hours, contact the <strong>Out-of-Hours Service</strong> (Continuità Assistenziale) on <strong>116 117</strong>.<div class='highlight-box'>The doctor's personal number (0575 171 3428) is reserved for genuine emergencies during working hours only.</div>",
         faq_q11: "How do I get a referral for tests or specialist appointments?",
-        faq_a11: "Referrals for blood tests, X-rays, or specialist visits must be requested during an in-person clinic visit.<br><br>For already-planned routine tests (e.g. annual check-up), you can request them via <strong>MilleBook</strong> without needing an appointment.<div class='highlight-box'>To book tests through the NHS, use <strong>CUP Toscana</strong> once you have your referral.</div>",
+        faq_a11: "Referrals for blood tests, X-rays, or specialist visits must be requested during an in-person clinic visit or by calling reception on <strong>0575 910 904</strong>.<div class='highlight-box'>To book tests through the NHS, use <strong>CUP Toscana</strong> once you have your referral.</div>",
         faq_cta_title: "Didn't find the answer?",
-        faq_cta_desc: "Contact reception or log in to MilleBook to send a message to the doctor.",
+        faq_cta_desc: "Contact reception on 0575 910 904 to send a message to the doctor.",
 
         // Flowchart
         flowchart_title: "What do you need?",
         flowchart_opt_book: '<i class="fas fa-calendar-check"></i> I want to book a visit',
-        flowchart_opt_meds: '<i class="fas fa-pills"></i> I need prescriptions or medications',
         flowchart_opt_night: '<i class="fas fa-moon"></i> It\'s evening, night or weekend',
         flowchart_opt_faq: '<i class="fas fa-question-circle"></i> I have another question',
         flowchart_end_book_title: 'Book a visit',
         flowchart_end_book_desc: 'Choose the type of visit below and then select a day and time from the calendar.',
         flowchart_end_book_action: 'Choose visit type',
-        flowchart_end_millebook_title: 'Use Millebook',
-        flowchart_end_millebook_desc: 'Request repeat medications, prescriptions or referrals directly via Millebook — no appointment needed.',
-        flowchart_end_millebook_action: 'Open Millebook',
         flowchart_end_116_title: 'Call 116 117',
         flowchart_end_116_desc: 'For non-urgent medical assistance outside hours (evenings, nights, weekends, holidays): Out-of-Hours Service.',
         flowchart_end_116_action: 'Call 116 117',
@@ -469,7 +436,6 @@ const translations = {
         // Quick actions bar
         qa_call: 'Call',
         qa_book: 'Book',
-        qa_millebook: 'Millebook',
         qa_home: 'Home',
         qa_email: 'Email',
 
@@ -486,7 +452,7 @@ const translations = {
 
         // Misc hardcoded
         service_banner_desc: 'Find immediate answers to common questions (certificates, exemptions, referrals).',
-        email_privacy_notice: 'For privacy reasons, do not send clinical details via email: use Millebook or an in-office visit.',
+        email_privacy_notice: 'For privacy reasons, do not send clinical details via email: use an in-office visit.',
         secretary_hours_label: 'Reception Hours - 0575 910 904',
 
         // Large text banner
@@ -642,7 +608,6 @@ function renderFlowStep(stepKey) {
             q: '',
             options: [
                 { labelKey: 'flowchart_opt_book', next: 'end_prenota' },
-                { labelKey: 'flowchart_opt_meds', next: 'end_millebook' },
                 { labelKey: 'flowchart_opt_night', next: 'end_116' },
                 { labelKey: 'flowchart_opt_faq', next: 'end_faq' },
             ]
@@ -655,17 +620,6 @@ function renderFlowStep(stepKey) {
             descKey: 'flowchart_end_book_desc',
             actionKey: 'flowchart_end_book_action',
             actionType: 'scroll_booking'
-        },
-        end_millebook: {
-            end: true,
-            icon: 'fas fa-laptop-medical',
-            color: 'var(--primary)',
-            titleKey: 'flowchart_end_millebook_title',
-            descKey: 'flowchart_end_millebook_desc',
-            actionKey: 'flowchart_end_millebook_action',
-            actionType: 'link',
-            href: 'https://www.millebook.it/#/login',
-            external: true
         },
         end_116: {
             end: true,
@@ -763,6 +717,14 @@ function selectVisitType(type, url) {
                 { icon: 'ℹ️', text: lang === 'it' ? 'Nessun documento necessario — descrivi i sintomi al dottore durante la visita' : 'No documents needed — describe your symptoms to the doctor during the visit' }
             ],
             note: lang === 'it' ? '⏱ Durata stimata: 10 minuti.' : '⏱ Estimated duration: 10 minutes.'
+        },
+        privata: {
+            icon: 'fas fa-user-tie',
+            titleKey: 'cal_privata_title',
+            checklist: [
+                { icon: 'ℹ️', text: lang === 'it' ? 'Consulti, certificati privati e prestazioni non coperte dal SSN' : 'Private consultations, certificates and non-NHS services' }
+            ],
+            note: lang === 'it' ? '⏱ Contattare per disponibilità.' : '⏱ Contact for availability.'
         }
     };
 
