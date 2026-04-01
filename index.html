@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
 
     <title>Medico di Famiglia Arezzo | Dott. Emanuel Savianu</title>
-    <meta name="description" content="Studio Medico Ippocrate - Dott. Emanuel Savianu a Arezzo (Via Ubaldo Pasqui 38). Prenota visite online, ricette Millebook.">
+    <meta name="description" content="Studio Medico Ippocrate - Dott. Emanuel Savianu a Arezzo (Via Ubaldo Pasqui 38). Prenota visite online, consulti privati.">
     
     <meta name="geo.region" content="IT-AR" />
     <meta name="geo.placename" content="Arezzo" />
@@ -105,9 +105,7 @@
           "closes": "19:00"
         }
       ],
-      "sameAs": [
-        "https://www.millebook.it/#/login"
-      ]
+      "sameAs": []
     }
     </script>
 
@@ -162,35 +160,6 @@
 
     <main role="main" id="main-content">
 
-        <div id="guida-rapida" role="region" aria-label="Guida Rapida">
-            <div class="guida-rapida-header">
-                <span data-i18n="guida_rapida_label">📋 Guida Rapida</span>
-                <button class="btn-guida-dismiss" onclick="dismissGuidaRapida()" data-i18n="guida_rapida_dismiss">✕ Ho capito</button>
-            </div>
-            <div class="guida-rapida-body">
-                <div class="guida-row">
-                    <div class="guida-row-icon red"><i class="fas fa-phone-alt"></i></div>
-                    <div class="guida-row-text">
-                        <h4 data-i18n="guida_row1_title">Urgenze: chiama il 112</h4>
-                        <p data-i18n="guida_row1_desc">Segreteria: <a href="tel:0575910904">0575 910 904</a> — per problemi non urgenti.</p>
-                    </div>
-                </div>
-                <div class="guida-row">
-                    <div class="guida-row-icon blue"><i class="fas fa-laptop-medical"></i></div>
-                    <div class="guida-row-text">
-                        <h4 data-i18n="guida_row2_title">Ricette e farmaci → Millebook</h4>
-                        <p data-i18n="guida_row2_desc">Il metodo più veloce per richiedere farmaci continuativi.</p>
-                    </div>
-                </div>
-                <div class="guida-row">
-                    <div class="guida-row-icon gold"><i class="fas fa-route"></i></div>
-                    <div class="guida-row-text">
-                        <h4 data-i18n="guida_row3_title">Non sai da dove iniziare?</h4>
-                        <p data-i18n="guida_row3_desc">Usa lo strumento <strong>"Di cosa hai bisogno?"</strong> qui sotto.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <section id="flowchart-section" class="card">
             <div class="card-header">
@@ -222,12 +191,6 @@
                     <span data-i18n="btn_book">Prenota una visita</span>
                     <small data-i18n="btn_book_sub">Scegli giorno e orario</small>
                 </button>
-
-                <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="btn-millebook" aria-label="Accedi a MilleBook per ricette e farmaci" style="height: 100%; margin-bottom: 0;">
-                    <i class="fas fa-laptop-medical" aria-hidden="true"></i>
-                    <span><strong style="font-size:1.2em;">Ricette</strong> &amp; farmaci → Millebook</span>
-                    <small data-i18n="millebook_sub">Accedi a Millebook — il canale preferenziale</small>
-                </a>
             </div>
         </section>
 
@@ -269,6 +232,14 @@
                     <div class="cal-text">
                         <h3 data-i18n="cal_breve_title">Sintomi Recenti</h3>
                         <p data-i18n="cal_breve_desc">Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)</p>
+                    </div>
+                </button>
+
+                <button onclick="selectVisitType('privata','https://calendar.google.com/calendar/appointments/schedules/AcZssZ3doNfY80zH2XLETLNnYnaqXyu6ImECj_O5_WciNc6aBVZKQbtGYBK57W1g84TT7bvrHMUFzOhn?gv=true')" class="btn-cal-service privata">
+                    <div class="cal-icon-wrapper"><i class="fas fa-user-tie"></i></div>
+                    <div class="cal-text">
+                        <h3 data-i18n="cal_privata_title">Visita Privata</h3>
+                        <p data-i18n="cal_privata_desc">Consulti e certificati privati. <span style="font-size: 0.85em;">(Non pazienti del dott. Savianu)</span></p>
                     </div>
                 </button>
             </div>
@@ -332,7 +303,7 @@
                 <div><span data-i18n="label_email" class="contact-label">Email</span><span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span></div>
             </a>
             <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 6px;" data-i18n="email_privacy_notice">
-                Per privacy, non inviare dettagli clinici via email: usa Millebook o la visita in studio.
+                Per privacy, non inviare dettagli clinici via email: usa la visita in studio.
             </p>
         </section>
 
@@ -386,10 +357,6 @@
         <i class="fas fa-calendar-check" aria-hidden="true"></i>
         <span data-i18n="qa_book">Prenota</span>
     </button>
-    <a href="https://www.millebook.it/#/login" target="_blank" rel="noopener noreferrer" class="qa-item" aria-label="Apri Millebook">
-        <i class="fas fa-laptop-medical" aria-hidden="true"></i>
-        <span data-i18n="qa_millebook">Millebook</span>
-    </a>
     <a href="faq.html" class="qa-item" aria-label="Domande frequenti">
         <i class="fas fa-question-circle" aria-hidden="true"></i>
         <span>FAQ</span>
