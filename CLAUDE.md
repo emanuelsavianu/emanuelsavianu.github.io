@@ -60,4 +60,4 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 - The welcome modal has been removed. In its place is the `#guida-rapida` inline card at the top of `<main>`. It is dismissed permanently via `localStorage` (`guidaRapidaSeen=1`). `dismissGuidaRapida()` in `app.js` handles this.
 - `xsegretarie.html` is a private staff page — not linked from the main site.
 - The Cloudflare `node_modules/` folder is gitignored but large — don't accidentally re-add it.
-- Font Awesome is loaded as two separate files (`fontawesome.min.css` + `solid.min.css`) on `index.html`, but as `all.min.css` on other pages — keep consistent per page.
+- Font Awesome: All pages load as two separate files (`fontawesome.min.css` + `solid.min.css`). Keep consistent across all HTML files.
