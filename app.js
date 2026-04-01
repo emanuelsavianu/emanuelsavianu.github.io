@@ -479,10 +479,7 @@ function setLanguage(lang) {
         if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
     });
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
-    
-    if (document.getElementById('flow-step')) {
-        renderFlowStep('root');
-    }
+
     updateLargeTextBanner(document.body.classList.contains('large-text'));
 }
 
@@ -674,15 +671,6 @@ function renderFlowStep(stepKey) {
                 ${stepKey !== 'root' ? `<button class="flow-restart-btn" onclick="renderFlowStep('root')">${getFlowLabel(lang, 'flowchart_restart')}</button>` : ''}
             </div>`;
     }
-}
-
-function startBooking() {
-    showSection('booking');
-}
-
-// Init flowchart on page load if the section exists
-if (document.getElementById('flow-step')) {
-    renderFlowStep('root');
 }
 
 var _bookingUrl = '';
