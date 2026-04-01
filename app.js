@@ -710,9 +710,11 @@ function selectVisitType(type, url) {
             icon: 'fas fa-user-tie',
             titleKey: 'cal_privata_title',
             checklist: [
-                { icon: 'ℹ️', text: lang === 'it' ? 'Consulti, certificati privati e prestazioni non coperte dal SSN' : 'Private consultations, certificates and non-NHS services' }
+                { icon: '🆔', text: lang === 'it' ? 'Carta d\'identità' : 'Photo ID' },
+                { icon: '🏥', text: lang === 'it' ? 'Tessera Sanitaria' : 'Health Insurance Card' },
+                { icon: '📁', text: lang === 'it' ? 'Cartella Clinica Completa preferibilmente in formato digitale, con tutte le visite specialistiche, referti, esami diagnostici' : 'Complete Medical Record preferably in digital format, with all specialist visits, reports, and diagnostic tests' }
             ],
-            note: lang === 'it' ? '⏱ Contattare per disponibilità.' : '⏱ Contact for availability.'
+            note: lang === 'it' ? '⏱ Durata stimata: un\'ora.' : '⏱ Estimated duration: one hour.'
         }
     };
 
