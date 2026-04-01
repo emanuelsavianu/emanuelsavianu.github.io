@@ -323,6 +323,8 @@ const translations = {
         cal_ord_desc: "Check-ups and non-urgent issues. (20 min)",
         cal_breve_title: "Recent Symptoms",
         cal_breve_desc: "Urgent but non-emergency visits, acute illness, INPS sick leave certificates. (10 min)",
+        cal_privata_title: "Private Visit",
+        cal_privata_desc: "Private consultations and certificates. (Non-patients of Dr. Savianu)",
         privacy_notice_text: "Please read the privacy policy.",
         privacy_notice_link: "Data Processing Policy",
 
