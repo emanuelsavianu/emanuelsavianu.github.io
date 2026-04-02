@@ -144,7 +144,48 @@ header p {
     padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     display: flex; gap: 10px; align-items: center;
 }
-@media (max-width: 599px) { .lang-switch { display: none; } }
+/* Mobile: de-absolutify and show as a compact strip at the bottom of the header */
+@media (max-width: 599px) {
+    /* Stack header as a column so controls appear below the title */
+    header {
+        padding: 20px 20px 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .header-content { order: 1; width: 100%; }
+
+    .lang-switch {
+        order: 2;
+        position: relative;       /* exits absolute flow, becomes a flex item */
+        z-index: 3;               /* above header::after overlay (z-index:1) */
+        margin-top: 18px;
+        padding: 8px 18px;
+        border-radius: 30px;
+        gap: 14px;
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(194, 155, 87, 0.4);
+    }
+
+    /* ITA/ENG manual buttons are redundant on mobile — Google Translate covers all */
+    #btn-it, #btn-en { display: none; }
+
+    /* Remove separators; rely on gap for spacing */
+    .lang-switch .lang-separator { display: none; }
+
+    /* Larger touch targets for elderly users */
+    #btn-dark {
+        font-size: 1.1rem;
+        padding: 6px 12px;
+        min-height: 36px;
+        min-width: 36px;
+    }
+
+    /* Slightly larger translate widget text on mobile */
+    #google_translate_element .goog-te-gadget-simple { font-size: 1rem !important; }
+    #google_translate_element .goog-te-gadget-simple a,
+    #google_translate_element .goog-te-gadget-simple span { font-size: 1rem !important; }
+}
 
 .lang-btn {
     background: none; border: none; color: rgba(255, 255, 255, 0.7);
