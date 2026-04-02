@@ -144,19 +144,19 @@ header p {
     padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     display: flex; gap: 10px; align-items: center;
 }
-/* Mobile: de-absolutify and show as a compact strip at the bottom of the header */
+/* Mobile: de-absolutify and show as a compact strip at the bottom of the header.
+   Scoped to :not(.is-android-page) — android has its own fixed header layout. */
 @media (max-width: 599px) {
-    /* Stack header as a column so controls appear below the title */
-    header {
+    body:not(.is-android-page) header {
         padding: 20px 20px 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        overflow: visible; /* allow Google Translate dropdown to escape if it opens upward */
+        overflow: visible; /* allow translate dropdown to escape if it opens upward */
     }
-    .header-content { order: 1; width: 100%; }
+    body:not(.is-android-page) .header-content { order: 1; width: 100%; }
 
-    .lang-switch {
+    body:not(.is-android-page) .lang-switch {
         order: 2;
         position: relative;       /* exits absolute flow, becomes a flex item */
         z-index: 3;               /* above header::after overlay (z-index:1) */
@@ -171,7 +171,7 @@ header p {
     }
 
     /* Hide separators — they look broken when items wrap */
-    .lang-switch .lang-separator { display: none; }
+    body:not(.is-android-page) .lang-switch .lang-separator { display: none; }
 
     /* Larger touch targets for elderly users */
     #btn-dark {
@@ -181,7 +181,6 @@ header p {
         min-width: 36px;
     }
 
-    /* Keep translate widget text same size as lang buttons */
     #google_translate_element .goog-te-gadget-simple { font-size: 0.9rem !important; }
     #google_translate_element .goog-te-gadget-simple a,
     #google_translate_element .goog-te-gadget-simple span { font-size: 0.9rem !important; }
@@ -218,15 +217,17 @@ header p {
 }
 /* hide the Google logo inside the widget */
 #google_translate_element .goog-te-gadget-simple img { display: none !important; }
-/* Dropdown that opens — must float above everything including .container (z-index:10) */
-.goog-te-menu-frame {
+/* Dropdown iframe — float above everything, and pin to right edge of viewport
+   so the multi-column language list never overflows off-screen to the right. */
+.goog-te-menu-frame,
+iframe.goog-te-menu-frame {
     box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
     border-radius: 8px !important;
     z-index: 99999 !important;
+    right: 0 !important;   /* override Google's inline left:Xpx that pushes it off-screen */
+    left: auto !important;
 }
-/* The outer wrapper Google injects also needs elevation */
 .goog-te-menu-value { white-space: nowrap; }
-iframe.goog-te-menu-frame { z-index: 99999 !important; }
 
 /* --- LAYOUT GRID --- */
 .container {
