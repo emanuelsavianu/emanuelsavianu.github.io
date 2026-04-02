@@ -152,6 +152,7 @@ header p {
         display: flex;
         flex-direction: column;
         align-items: center;
+        overflow: visible; /* allow Google Translate dropdown to escape if it opens upward */
     }
     .header-content { order: 1; width: 100%; }
 
@@ -160,31 +161,30 @@ header p {
         position: relative;       /* exits absolute flow, becomes a flex item */
         z-index: 3;               /* above header::after overlay (z-index:1) */
         margin-top: 18px;
-        padding: 8px 18px;
+        padding: 8px 14px;
         border-radius: 30px;
-        gap: 14px;
+        gap: 8px;
+        flex-wrap: wrap;          /* wrap to second line if too wide for small screens */
+        justify-content: center;
         background: rgba(255, 255, 255, 0.1);
         border-color: rgba(194, 155, 87, 0.4);
     }
 
-    /* ITA/ENG manual buttons are redundant on mobile — Google Translate covers all */
-    #btn-it, #btn-en { display: none; }
-
-    /* Remove separators; rely on gap for spacing */
+    /* Hide separators — they look broken when items wrap */
     .lang-switch .lang-separator { display: none; }
 
     /* Larger touch targets for elderly users */
     #btn-dark {
         font-size: 1.1rem;
-        padding: 6px 12px;
+        padding: 6px 10px;
         min-height: 36px;
         min-width: 36px;
     }
 
-    /* Slightly larger translate widget text on mobile */
-    #google_translate_element .goog-te-gadget-simple { font-size: 1rem !important; }
+    /* Keep translate widget text same size as lang buttons */
+    #google_translate_element .goog-te-gadget-simple { font-size: 0.9rem !important; }
     #google_translate_element .goog-te-gadget-simple a,
-    #google_translate_element .goog-te-gadget-simple span { font-size: 1rem !important; }
+    #google_translate_element .goog-te-gadget-simple span { font-size: 0.9rem !important; }
 }
 
 .lang-btn {
@@ -218,8 +218,15 @@ header p {
 }
 /* hide the Google logo inside the widget */
 #google_translate_element .goog-te-gadget-simple img { display: none !important; }
-/* dropdown that opens */
-.goog-te-menu-frame { box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; border-radius: 8px !important; }
+/* Dropdown that opens — must float above everything including .container (z-index:10) */
+.goog-te-menu-frame {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+    border-radius: 8px !important;
+    z-index: 99999 !important;
+}
+/* The outer wrapper Google injects also needs elevation */
+.goog-te-menu-value { white-space: nowrap; }
+iframe.goog-te-menu-frame { z-index: 99999 !important; }
 
 /* --- LAYOUT GRID --- */
 .container {
