@@ -61,3 +61,6 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 - `xsegretarie.html` is a private staff page — not linked from the main site.
 - The Cloudflare `node_modules/` folder is gitignored but large — don't accidentally re-add it.
 - Font Awesome: All pages load as two separate files (`fontawesome.min.css` + `solid.min.css`). Keep consistent across all HTML files.
+- **Google Translate widget**: Dropdown needs `z-index: 99999 !important` to float above `.container` (z-index: 10); on mobile with responsive controls, use `flex-wrap: wrap; justify-content: center` to allow wrapping, hide separators (they break visually across lines). Initialize script must load AFTER config.js/app.js to avoid blocking critical resources.
+- **Mobile header responsiveness**: When re-layouting header controls from absolute positioning to flex stacking, add `overflow: visible` to header so dropdowns/overlays can escape viewport bounds.
+- **CSS cache-busting**: Manually bump `styles.css?v=N` in index.html, faq.html, AND android.html together (keep all three in sync). PostToolUse hook handles sw.js auto-bumping only.
