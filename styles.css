@@ -156,6 +156,30 @@ header p {
 .lang-btn.active { color: var(--accent); }
 .lang-separator { color: rgba(255,255,255,0.3); }
 
+/* --- GOOGLE TRANSLATE WIDGET --- */
+#google_translate_element .goog-te-gadget-simple {
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+    font-size: 0.9rem !important;
+    font-family: inherit !important;
+}
+#google_translate_element .goog-te-gadget-simple a,
+#google_translate_element .goog-te-gadget-simple span {
+    color: rgba(255,255,255,0.7) !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-family: inherit !important;
+}
+#google_translate_element .goog-te-gadget-simple a:hover span {
+    color: var(--accent) !important;
+}
+/* hide the Google logo inside the widget */
+#google_translate_element .goog-te-gadget-simple img { display: none !important; }
+/* dropdown that opens */
+.goog-te-menu-frame { box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important; border-radius: 8px !important; }
+
 /* --- LAYOUT GRID --- */
 .container {
     max-width: 1100px; margin: -60px auto 60px; padding: 0 20px;
