@@ -12,6 +12,10 @@ Static HTML/CSS/JS medical practice website deployed at **savianu.it** via GitHu
 | `styles.css` | All styles |
 | `sw.js` | Service worker — cache version auto-bumped by hook |
 | `faq.html` | FAQ page |
+| `android.html` | PWA app entry point (separate UX from index.html) |
+| `android.js` | PWA-specific JS: splash screen, install banner, welcome modal |
+| `offline.html` | Service worker offline fallback page |
+| `dottori.html` | "Area Colleghi" — private page for medical colleagues (not linked publicly) |
 | `cloudflare/worker.js` | Cloudflare Worker (rate limiting, security headers) |
 
 ## Quick Start
@@ -57,10 +61,11 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 
 ## Gotchas
 
-- The welcome modal has been removed. In its place is the `#guida-rapida` inline card at the top of `<main>`. It is dismissed permanently via `localStorage` (`guidaRapidaSeen=1`). `dismissGuidaRapida()` in `app.js` handles this.
+- The **welcome modal is removed from `index.html`** but still exists in `android.html` (shown on first app launch, dismissed via `closeModal()`). The `#guida-rapida` card logic exists in `app.js` (~line 510) and `styles.css` but the HTML element is currently absent from `index.html` — don't add it without intentionally re-enabling the feature.
 - `xsegretarie.html` is a private staff page — not linked from the main site.
 - The Cloudflare `node_modules/` folder is gitignored but large — don't accidentally re-add it.
 - Font Awesome: All pages load as two separate files (`fontawesome.min.css` + `solid.min.css`). Keep consistent across all HTML files.
 - **Google Translate widget**: Dropdown needs `z-index: 99999 !important` to float above `.container` (z-index: 10); on mobile with responsive controls, use `flex-wrap: wrap; justify-content: center` to allow wrapping, hide separators (they break visually across lines). Initialize script must load AFTER config.js/app.js to avoid blocking critical resources.
 - **Mobile header responsiveness**: When re-layouting header controls from absolute positioning to flex stacking, add `overflow: visible` to header so dropdowns/overlays can escape viewport bounds.
-- **CSS cache-busting**: Manually bump `styles.css?v=N` in index.html, faq.html, AND android.html together (keep all three in sync). PostToolUse hook handles sw.js auto-bumping only.
+- **File Structure**: `index.html` and `faq.html` are responsive website pages (one codebase, adapts to all screens via media queries). `android.html` is a separate PWA entry point with app-optimized UX (splash screen, install banner, app nav). They share CSS/JS but serve different purposes — don't consolidate. PWA manifest.json points to android.html as start_url; web users land on index.html.
+- **Language Strategy**: ITA/ENG buttons are native site functionality (set user's language preference). Google Translate widget is *for additional languages beyond Italian and English* — ensure both stay visible on mobile (use `flex-wrap: wrap`) so patients can choose native mode or translate to other languages.
