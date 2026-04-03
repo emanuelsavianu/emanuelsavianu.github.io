@@ -1160,15 +1160,16 @@ body.dark-mode.is-android-page .logo-light { display: none; }
     position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
     z-index: 100; padding: 0 15px; border-bottom: 2px solid var(--accent);
     display: flex; justify-content: space-between; align-items: center;
-    text-align: left;
+    text-align: left; overflow: visible; gap: 8px;
 }
 
 .is-android-page header::after { display: none; }
 
-.is-android-page .brand { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-.is-android-page .brand-logo { width: 40px; height: 40px; border-radius: 8px; }
-.is-android-page .brand h1 { margin: 0; font-family: 'Playball', cursive; font-size: 1.4rem; color: var(--accent); text-shadow: none; }
-.is-android-page .brand p { margin: 0; font-size: 0.65rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-shadow: none; }
+.is-android-page .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 1; min-width: 0; }
+.is-android-page .brand-logo { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; }
+.is-android-page .brand > div { min-width: 0; overflow: hidden; }
+.is-android-page .brand h1 { margin: 0; font-family: 'Playball', cursive; font-size: 1.2rem; color: var(--accent); text-shadow: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.is-android-page .brand p { margin: 0; font-size: 0.6rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-shadow: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 .is-android-page .header-actions {
     display: flex; align-items: center; gap: 8px; flex-shrink: 0;
