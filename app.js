@@ -265,8 +265,8 @@ const translations = {
         flowchart_end_faq_desc: 'Trovi risposte immediate su certificati, esenzioni, referti e burocrazia nelle domande frequenti.',
         flowchart_end_faq_action: 'Vai alle FAQ',
         flowchart_restart: '↩ Ricomincia',
-        cal_privata_title: 'Visita Privata',
-        cal_privata_desc: 'Consulti e certificati privati. (Non pazienti del dott. Savianu) (1 ora)',
+        cal_privata_title: 'Consulenze e visite private (non sono un assistito)',
+        cal_privata_desc: 'Consulti e certificati privati.',
 
         // Quick actions bar
         qa_call: 'Chiama',
@@ -323,8 +323,8 @@ const translations = {
         cal_ord_desc: "Check-ups and non-urgent issues. (20 min)",
         cal_breve_title: "Recent Symptoms",
         cal_breve_desc: "Urgent but non-emergency visits, acute illness, INPS sick leave certificates. (10 min)",
-        cal_privata_title: "Private Visit",
-        cal_privata_desc: "Private consultations and certificates. (Non-patients of Dr. Savianu) (1 hour)",
+        cal_privata_title: "Private Consultations and Visits (I am not an existing patient)",
+        cal_privata_desc: "Private consultations and certificates.",
         privacy_notice_text: "Please read the privacy policy.",
         privacy_notice_link: "Data Processing Policy",
 
