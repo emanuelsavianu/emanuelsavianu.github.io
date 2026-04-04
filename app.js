@@ -760,3 +760,13 @@ function resetBookingGrid() {
     if (checklist) checklist.classList.add('hidden');
     _bookingUrl = '';
 }
+
+function openPrivateVisitBooking() {
+    if (window.calendar && window.calendar.schedulingButton) {
+        window.calendar.schedulingButton.load({
+            url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1B_CFbVVkgJyLRQHZbycem1FEBy-DRubtJQrIvxm9DBt80Sm2jwvR6W2I73m1qEpjLLsstVXh5?gv=true',
+            color: '#039BE5',
+            label: 'Fissa un appuntamento',
+        });
+    }
+}
