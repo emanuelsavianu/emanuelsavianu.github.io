@@ -26,6 +26,10 @@
     <meta name="apple-mobile-web-app-title" content="Dr. Savianu">
     <link rel="manifest" href="manifest.json">
 
+    <!-- Google Calendar Appointment Scheduling Button -->
+    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://savianu.it/">
@@ -139,14 +143,8 @@
 
 
 <header role="banner">
-    <nav class="lang-switch" aria-label="Language selector">
-        <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
-        <span class="lang-separator">|</span>
-        <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
-        <span class="lang-separator">|</span>
+    <nav class="lang-switch" aria-label="Controls">
         <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
-        <span class="lang-separator">|</span>
-        <div id="google_translate_element"></div>
     </nav>
     <div class="header-content">
         <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
@@ -205,13 +203,13 @@
                     </div>
                 </button>
 
-                <a href="https://dottemanuelsavianu.it/visite-private.html" class="btn-cal-service privata">
+                <button onclick="openPrivateVisitBooking()" class="btn-cal-service privata">
                     <div class="cal-icon-wrapper"><i class="fas fa-user-tie"></i></div>
                     <div class="cal-text">
                         <h3 data-i18n="cal_privata_title">Consulenze e visite private (non sono un assistito)</h3>
                         <p data-i18n="cal_privata_desc">Consulti e certificati privati.</p>
                     </div>
-                </a>
+                </button>
             </div>
 
             <div id="booking-checklist" class="hidden"></div>
