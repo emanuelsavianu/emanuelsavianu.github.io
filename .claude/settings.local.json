@@ -29,7 +29,8 @@
       "Bash(bash \"C:\\\\Users\\\\emanu\\\\.claude\\\\plugins\\\\cache\\\\claude-plugins-official\\\\superpowers\\\\5.0.6\\\\skills\\\\brainstorming\\\\scripts\\\\start-server.sh\" --project-dir \"C:\\\\Users\\\\emanu\\\\Documents\\\\GitHub\\\\emanuelsavianu.github.io\" 2>&1)",
       "Bash(ls:*)",
       "mcp__plugin_playwright_playwright__browser_navigate",
-      "Bash(rtk git:*)"
+      "Bash(rtk git:*)",
+      "WebFetch(domain:developers.google.com)"
     ]
   }
 }
