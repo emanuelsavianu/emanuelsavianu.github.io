@@ -70,8 +70,21 @@ export default {
     // Pass the request to the origin as-is
     const response = await fetch(request);
 
-    // Only modify HTML responses — leave CSS, JS, images, fonts untouched
+    const url = new URL(request.url);
     const contentType = response.headers.get('Content-Type') || '';
+
+    // Fix sitemap.xml MIME type (GitHub Pages may serve as plain text)
+    if (url.pathname === '/sitemap.xml') {
+      const newHeaders = new Headers(response.headers);
+      newHeaders.set('Content-Type', 'application/xml; charset=UTF-8');
+      return new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: newHeaders,
+      });
+    }
+
+    // Only modify HTML responses — leave CSS, JS, images, fonts untouched
     if (!contentType.includes('text/html')) {
       return response;
     }
