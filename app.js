@@ -681,6 +681,11 @@ function selectVisitType(type, url) {
     _bookingUrl = url;
     var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
 
+    if (type === 'breve') {
+        proceedToBooking();
+        return;
+    }
+
     var visitMeta = {
         prima: {
             icon: 'fas fa-user-plus',
@@ -703,10 +708,8 @@ function selectVisitType(type, url) {
         breve: {
             icon: 'fas fa-clock',
             titleKey: 'cal_breve_title',
-            checklist: [
-                { icon: 'ℹ️', text: lang === 'it' ? 'Nessun documento necessario — descrivi i sintomi al dottore durante la visita' : 'No documents needed — describe your symptoms to the doctor during the visit' }
-            ],
-            note: lang === 'it' ? '⏱ Durata stimata: 10 minuti.' : '⏱ Estimated duration: 10 minutes.'
+            checklist: [],
+            note: ''
         },
         privata: {
             icon: 'fas fa-user-tie',
