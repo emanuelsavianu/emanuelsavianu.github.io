@@ -143,7 +143,11 @@
 
 
 <header role="banner">
-    <nav class="lang-switch" aria-label="Controls">
+    <nav class="lang-switch" aria-label="Language and controls">
+        <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
+        <span class="lang-separator">|</span>
+        <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
+        <span class="lang-separator">|</span>
         <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
     </nav>
     <div class="header-content">
