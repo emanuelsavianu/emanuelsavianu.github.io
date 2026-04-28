@@ -231,7 +231,7 @@ const translations = {
         faq_q4: "Come annullo o sposto un appuntamento?",
         faq_a4: "Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.<br><br>Se non trovate l'email, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
         faq_q5: "Come richiedo la ricetta per i farmaci che prendo regolarmente?",
-        faq_a5: "Potete richiederla contattando la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio, oppure durante una visita in studio.<div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
+        faq_a5: "Potete richiederla nei seguenti modi:<ul><li>Contattando la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio</li><li>Scrivendo a <strong><a href='mailto:studiomedicoippocratearezzo@gmail.com' style='color: var(--accent); font-weight: 700;'>studiomedicoippocratearezzo@gmail.com</a></strong></li><li>Durante una visita in studio</li></ul><div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
         faq_sec_certificati: "<i class='fas fa-file-medical'></i> Certificati",
         faq_sec_referti: "<i class='fas fa-flask'></i> Referti ed Esami",
         faq_sec_nuovi: "<i class='fas fa-user-plus'></i> Nuovi Pazienti",
@@ -289,6 +289,7 @@ const translations = {
         service_banner_desc: 'Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).',
         email_privacy_notice: 'Per privacy, non inviare dettagli clinici via email: usa la visita in studio.',
         secretary_hours_label: 'Orari Segreteria - 0575 910 904',
+        prescription_request_header: 'Per richiedere la ricetta per i farmaci assunti abitualmente:',
 
         // Large text banner
         large_text_inactive: '🔤 Difficoltà a leggere?',
@@ -400,7 +401,7 @@ const translations = {
         faq_q4: "How do I cancel or reschedule an appointment?",
         faq_a4: "Your confirmation email contains a link to <strong>modify or cancel</strong> the appointment directly in the calendar.<br><br>If you cannot find the email, please call reception on <strong>0575 910 904</strong> with reasonable notice.",
         faq_q5: "How do I request a prescription for my regular medications?",
-        faq_a5: "You can request a prescription by calling reception on <strong>0575 910 904</strong> during clinic hours, or during an in-office visit.<div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
+        faq_a5: "You can request a prescription in the following ways:<ul><li>Call reception on <strong>0575 910 904</strong> during clinic hours</li><li>Email <strong><a href='mailto:studiomedicoippocratearezzo@gmail.com' style='color: var(--accent); font-weight: 700;'>studiomedicoippocratearezzo@gmail.com</a></strong></li><li>During an in-office visit</li></ul><div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
         faq_sec_certificati: "<i class='fas fa-file-medical'></i> Certificates",
         faq_sec_referti: "<i class='fas fa-flask'></i> Test Results &amp; Referrals",
         faq_sec_nuovi: "<i class='fas fa-user-plus'></i> New Patients",
@@ -456,6 +457,7 @@ const translations = {
         service_banner_desc: 'Find immediate answers to common questions (certificates, exemptions, referrals).',
         email_privacy_notice: 'For privacy reasons, do not send clinical details via email: use an in-office visit.',
         secretary_hours_label: 'Reception Hours - 0575 910 904',
+        prescription_request_header: 'To request a prescription for your regular medications:',
 
         // Large text banner
         large_text_inactive: '🔤 Difficulty reading?',
