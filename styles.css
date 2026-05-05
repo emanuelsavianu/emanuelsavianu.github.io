@@ -234,6 +234,7 @@ iframe.goog-te-menu-frame {
     max-width: 1100px; margin: -60px auto 60px; padding: 0 20px;
     display: grid; grid-template-columns: 1fr; gap: 25px; position: relative; z-index: 10;
 }
+.container > * { min-width: 0; }
 
 @media (min-width: 900px) { .container { grid-template-columns: 2fr 1fr; } }
 
@@ -248,7 +249,7 @@ iframe.goog-te-menu-frame {
 body.dark-mode .card:hover { box-shadow: 0 12px 30px rgba(194, 155, 87, 0.1); }
 
 .card-header {
-    display: flex; align-items: center; gap: 12px;
+    display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
     margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px solid var(--bg-gradient-1);
 }
 
