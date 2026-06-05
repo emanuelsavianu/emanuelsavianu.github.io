@@ -25,10 +25,10 @@ class SiteHeader extends HTMLElement {
       '<div id="ferie-banner" hidden role="alert" aria-live="polite">' +
         '<i class="fas fa-location-dot"></i>' +
         '<span id="ferie-banner-text"></span>' +
-        '<button id="ferie-banner-close" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>' +
+        '<button id="ferie-banner-close" data-i18n-aria-label="ferie_banner_close_label" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>' +
       '</div>' +
-      '<a href="#main-content" class="skip-link">Vai al contenuto principale</a>' +
-      '<a href="faq.html" class="floating-faq" aria-label="Domande Frequenti">' +
+      '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>' +
+      '<a href="faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
         '<i class="fas fa-question-circle"></i>' +
         '<span class="floating-faq-text">FAQ</span>' +
       '</a>'
@@ -52,15 +52,15 @@ class SiteFooter extends HTMLElement {
 
     this.insertAdjacentHTML('afterend',
       '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
-        '<a href="tel:+390575910904" class="qa-item" aria-label="Chiama la segreteria">' +
+        '<a href="tel:+390575910904" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria">' +
           '<i class="fas fa-phone-alt" aria-hidden="true"></i>' +
           '<span data-i18n="qa_call">Chiama</span>' +
         '</a>' +
-        '<a href="faq.html" class="qa-item" aria-label="Domande frequenti">' +
+        '<a href="faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti">' +
           '<i class="fas fa-question-circle" aria-hidden="true"></i>' +
           '<span>FAQ</span>' +
         '</a>' +
-        '<a href="mailto:segreteria@savianu.it" class="qa-item" aria-label="Scrivi una email alla segreteria">' +
+        '<a href="mailto:segreteria@savianu.it" class="qa-item" data-i18n-aria-label="qa_email_label" aria-label="Scrivi una email alla segreteria">' +
           '<i class="fas fa-envelope" aria-hidden="true"></i>' +
           '<span data-i18n="qa_email">Email</span>' +
         '</a>' +
@@ -262,6 +262,7 @@ const translations = {
         hours_day1: "Lun · Mer · Ven",
         hours_day2: "Mar · Gio",
         day_sat_sun: "Sab - Dom",
+        hours_lun_ven: "Lun - Ven",
         closed: "Chiuso",
         hours_secretary_title: "Orari Segreteria",
         hours_secretary_desc: "Per appuntamenti telefonici e info.",
@@ -373,7 +374,18 @@ const translations = {
         large_text_inactive: '🔤 Difficoltà a leggere?',
         large_text_btn_inactive: 'A+ Testo Grande',
         large_text_active: '✓ Testo grande attivo',
-        large_text_btn_active: 'A− Normale'
+        large_text_btn_active: 'A− Normale',
+
+        // Accessibility — aria-label i18n
+        skip_link: 'Vai al contenuto principale',
+        ferie_banner_close_label: 'Chiudi avviso ferie',
+        floating_faq_label: 'Domande Frequenti',
+        qa_call_label: 'Chiama la segreteria',
+        qa_faq_label: 'Domande frequenti',
+        qa_email_label: 'Scrivi una email alla segreteria',
+
+        // Footer
+        footer_malattia_link: 'Certificato di malattia: chi deve farlo?'
     },
     en: {
         // Mobile banner
@@ -432,6 +444,7 @@ const translations = {
         hours_day1: "Mon · Wed · Fri",
         hours_day2: "Tue · Thu",
         day_sat_sun: "Sat - Sun",
+        hours_lun_ven: "Mon - Fri",
         closed: "Closed",
         hours_secretary_title: "Reception Hours",
         hours_secretary_desc: "For phone appointments and enquiries.",
@@ -541,7 +554,18 @@ const translations = {
         large_text_inactive: '🔤 Difficulty reading?',
         large_text_btn_inactive: 'A+ Large Text',
         large_text_active: '✓ Large text active',
-        large_text_btn_active: 'A− Normal'
+        large_text_btn_active: 'A− Normal',
+
+        // Accessibility — aria-label i18n
+        skip_link: 'Skip to main content',
+        ferie_banner_close_label: 'Dismiss holiday notice',
+        floating_faq_label: 'Frequently Asked Questions',
+        qa_call_label: 'Call reception',
+        qa_faq_label: 'Frequently Asked Questions',
+        qa_email_label: 'Email reception',
+
+        // Footer
+        footer_malattia_link: 'Sick leave certificate: who should issue it?'
     }
 };
 
@@ -559,6 +583,10 @@ function setLanguage(lang) {
     document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
         const key = el.getAttribute('data-i18n-placeholder');
         if (translations[lang]?.[key]) el.placeholder = translations[lang][key];
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
+        const key = el.getAttribute('data-i18n-aria-label');
+        if (translations[lang]?.[key]) el.setAttribute('aria-label', translations[lang][key]);
     });
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
 

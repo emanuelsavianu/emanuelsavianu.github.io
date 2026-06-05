@@ -116,6 +116,7 @@
             <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
             <span class="lang-separator">|</span>
             <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
+            <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
         </nav>
         <div class="header-content">
             <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
@@ -266,7 +267,7 @@
                 <tbody>
                     <tr><td class="day" data-i18n="hours_day1">Lun · Mer · Ven</td><td class="time">16:00 – 19:00</td></tr>
                     <tr><td class="day" data-i18n="hours_day2">Mar · Gio</td><td class="time">10:00 – 13:00</td></tr>
-                    <tr><td class="day" data-i18n="day">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
+                    <tr><td class="day" data-i18n="day_sat_sun">Sab - Dom</td><td class="time" data-i18n="closed">Chiuso</td></tr>
                 </tbody>
             </table>
 
@@ -277,7 +278,7 @@
                 </div>
                 <table class="hours-table">
                     <tbody>
-                        <tr><td class="day">Lun - Ven</td><td class="time">09:30 – 12:30<br>15:30 – 19:00</td></tr>
+                        <tr><td class="day" data-i18n="hours_lun_ven">Lun - Ven</td><td class="time">09:30 – 12:30<br>15:30 – 19:00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -292,7 +293,7 @@
             <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
             <nav style="margin-top: 10px;">
                 <a href="faq.html">FAQ</a> ·
-                <a href="malattia.html">Certificato di malattia: chi deve farlo?</a> ·
+                <a href="malattia.html" data-i18n="footer_malattia_link">Certificato di malattia: chi deve farlo?</a> ·
                 <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
             </nav>
         </div>
