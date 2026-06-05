@@ -755,7 +755,13 @@ function selectVisitType(type, url) {
 }
 
 function proceedToBooking() {
-    if (_bookingUrl) window.open(_bookingUrl, '_blank', 'noopener,noreferrer');
+    if (_bookingUrl) {
+        let finalUrl = _bookingUrl;
+        if (!finalUrl.includes('mode=AGENDA')) {
+            finalUrl += finalUrl.includes('?') ? '&mode=AGENDA' : '?mode=AGENDA';
+        }
+        window.open(finalUrl, '_blank', 'noopener,noreferrer');
+    }
 }
 
 function resetBookingGrid() {
