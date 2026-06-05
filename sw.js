@@ -10,6 +10,7 @@ const PRECACHE_URLS = [
   '/styles.css',
   '/app.js',
   '/config.js',
+  '/manifest.json',
   '/logo.png',
   '/bluelogo.png',
   '/bronzelogo.png'
@@ -50,7 +51,12 @@ async function networkFirst(request) {
     return response;
   } catch (e) {
     const cachedResponse = await caches.match(request);
-    return cachedResponse || caches.match('/offline.html');
+    if (cachedResponse) return cachedResponse;
+    // offline.html solo per navigazione HTML, non per JS/CSS/immagini
+    if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
+      return caches.match('/offline.html');
+    }
+    return new Response('', { status: 408, statusText: 'Network Error/Offline' });
   }
 }
 
