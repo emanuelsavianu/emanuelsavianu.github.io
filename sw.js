@@ -1,113 +1,106 @@
-// Service Worker for Dr. Savianu Medical Website
-// Cache version bumped to v75 for metadata/accessibility refresh
-const CACHE_NAME = 'savianu-v305';
-const urlsToCache = [
+// Service Worker — Dr. Savianu Medical Website
+// Strategie: Stale-While-Revalidate per HTML, Cache-First per img/font, Network-First per JS/CSS
+const CACHE_NAME = 'savianu-v306';
+
+const PRECACHE_URLS = [
   '/',
   '/index.html',
   '/faq.html',
-  '/android.html',
-  '/privacy.html',
   '/offline.html',
   '/styles.css',
   '/app.js',
   '/config.js',
-  '/android.js',
   '/logo.png',
   '/bluelogo.png',
   '/bronzelogo.png'
 ];
 
-// Helper: Check if request is same-origin
-function isSameOrigin(requestUrl) {
-  const url = new URL(requestUrl);
-  return url.origin === self.location.origin;
+function isSameOrigin(url) {
+  return new URL(url).origin === self.location.origin;
 }
 
-// Helper: NetworkFirst strategy (try network first, fallback to cache)
-function networkFirst(request) {
-  return fetch(request)
-    .then(response => {
-      // Cache only successful responses (status 200-299)
-      if (response && response.status >= 200 && response.status < 300) {
-        const responseClone = response.clone();
-        caches.open(CACHE_NAME).then(cache => {
-          cache.put(request, responseClone);
-        });
-      }
-      return response;
-    })
-    .catch(() => {
-      return caches.match(request) || caches.match('/offline.html');
-    });
+// Cache-First: per risorse statiche immutabili (immagini, font)
+async function cacheFirst(request) {
+  const cache = await caches.open(CACHE_NAME);
+  const cachedResponse = await cache.match(request);
+  if (cachedResponse) return cachedResponse;
+
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) {
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch (e) {
+    if (request.destination === 'image') {
+      return new Response('', { status: 408, statusText: 'Offline' });
+    }
+    return caches.match('/offline.html');
+  }
 }
 
-// Helper: CacheFirst strategy (try cache first, fallback to network)
-function cacheFirst(request) {
-  return caches.match(request)
-    .then(response => {
-      if (response) {
-        return response;
-      }
-      return fetch(request)
-        .then(response => {
-          // Cache only successful responses
-          if (response && response.status >= 200 && response.status < 300) {
-            const responseClone = response.clone();
-            caches.open(CACHE_NAME).then(cache => {
-              cache.put(request, responseClone);
-            });
-          }
-          return response;
-        });
-    })
-    .catch(() => caches.match('/offline.html'));
+// Network-First: per JS/CSS (priorità alla rete, fallback cache)
+async function networkFirst(request) {
+  try {
+    const response = await fetch(request);
+    if (response && response.ok) {
+      const cache = await caches.open(CACHE_NAME);
+      cache.put(request, response.clone());
+    }
+    return response;
+  } catch (e) {
+    const cachedResponse = await caches.match(request);
+    return cachedResponse || caches.match('/offline.html');
+  }
 }
 
-// Message handler — page sends SKIP_WAITING to activate update toast-triggered SW
+// Messaggi dalla pagina (SKIP_WAITING per l'update toast)
 self.addEventListener('message', event => {
   if (event.data && event.data.type === 'SKIP_WAITING') {
     self.skipWaiting();
   }
 });
 
-// Install event — do NOT skipWaiting here; let the update toast control activation
+// Install: pre-cache risorse essenziali
 self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then(cache => cache.addAll(PRECACHE_URLS))
   );
 });
 
-// Activate event - clean up old caches and take control
+// Activate: pulizia cache vecchie + controllo immediato dei client
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
-        cacheNames.map(cacheName => {
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
-        })
+        cacheNames
+          .filter(name => name !== CACHE_NAME)
+          .map(name => caches.delete(name))
       );
     }).then(() => self.clients.claim())
   );
 });
 
-// Fetch event - Strategic routing based on request type
+// Fetch: routing strategico per tipo di risorsa
 self.addEventListener('fetch', event => {
-  // Only handle GET requests
   if (event.request.method !== 'GET') return;
-
-  // Only cache same-origin requests
   if (!isSameOrigin(event.request.url)) return;
 
-  // Detect request type
-  const isNavigation = event.request.mode === 'navigate';
-  const isStaticAsset = ['style', 'script', 'image', 'font'].includes(event.request.destination);
+  const { destination, mode } = event.request;
 
-  // Route to appropriate strategy
-  event.respondWith(
-    isNavigation || !isStaticAsset
-      ? networkFirst(event.request)
-      : cacheFirst(event.request)
-  );
+  // HTML (navigazione): Network-First — priorità ai dati aggiornati (assenze, orari)
+  // Cache come fallback solo in assenza di rete
+  if (mode === 'navigate' || destination === 'document') {
+    event.respondWith(networkFirst(event.request));
+    return;
+  }
+
+  // Immagini e font: Cache-First
+  if (destination === 'image' || destination === 'font') {
+    event.respondWith(cacheFirst(event.request));
+    return;
+  }
+
+  // JS, CSS e tutto il resto: Network-First
+  event.respondWith(networkFirst(event.request));
 });
