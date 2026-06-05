@@ -57,7 +57,7 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 - **Clinic hours badge**: edit `CONFIG.SCHEDULE` in `config.js`
 - **Visit types & what to bring**: Modify the `visitMeta` object in `selectVisitType()` (app.js, ~line 682). The checklist is generated from the `checklist` array; the `note` field shows duration/details. **Keep descriptions in both `index.html` and `app.js` in sync.**
 - **Booking calendar URLs**: inside `selectVisitType()` calls in `index.html` (Google Calendar links)
-- **Address/contact changes**: update `index.html`, `app.js` translations, and JSON-LD in `<head>`
+- **Address/contact changes**: update all of `index.html`, `faq.html`, `android.html`, `privacy.html`, `offline.html`, and `app.js` (both IT and ENG translation blocks). Include: meta description, JSON-LD, Google Maps links, and all address displays. Verify completion: `grep -r "old_address" .` returns no results.
 
 ## Gotchas
 
