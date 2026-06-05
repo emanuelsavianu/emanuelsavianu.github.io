@@ -2,6 +2,84 @@
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
 // =================================================================
 
+// --- WEB COMPONENTS (Light DOM) ---
+// Header e footer condivisi tra index.html e faq.html.
+// Usano insertAdjacentHTML per iniettare elementi extra senza cancellare il
+// contenuto statico delle pagine (che preserva <h1> per SEO e crawler).
+// Il contenuto statico resta nel DOM — il componente lo arricchisce, non lo sostituisce.
+class SiteHeader extends HTMLElement {
+  connectedCallback() {
+    if (this.dataset.rendered === '1') return;
+    this.dataset.rendered = '1';
+
+    this.insertAdjacentHTML('beforebegin',
+      '<div id="large-text-banner" role="region" aria-label="Accessibilità testo">' +
+        '<span id="large-text-banner-label" data-i18n="large_text_inactive">🔤 Difficoltà a leggere?</span>' +
+        '<button id="large-text-toggle-btn" class="large-text-btn" onclick="toggleLargeText()" data-i18n="large_text_btn_inactive">A+ Testo Grande</button>' +
+      '</div>' +
+      '<a href="android.html" class="mobile-app-banner">' +
+        '<i class="fas fa-mobile-screen-button"></i>' +
+        '<span data-i18n="mobile_app_banner">Apri la versione App</span>' +
+        '<i class="fas fa-chevron-right banner-arrow"></i>' +
+      '</a>' +
+      '<div id="ferie-banner" hidden role="alert" aria-live="polite">' +
+        '<i class="fas fa-location-dot"></i>' +
+        '<span id="ferie-banner-text"></span>' +
+        '<button id="ferie-banner-close" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>' +
+      '</div>' +
+      '<a href="#main-content" class="skip-link">Vai al contenuto principale</a>' +
+      '<a href="faq.html" class="floating-faq" aria-label="Domande Frequenti">' +
+        '<i class="fas fa-question-circle"></i>' +
+        '<span class="floating-faq-text">FAQ</span>' +
+      '</a>'
+    );
+
+    // Aggiorna i18n sugli elementi appena iniettati dopo che il resto dello script è stato caricato
+    Promise.resolve().then(function() {
+      if (typeof setLanguage === 'function') {
+        var lang = 'it';
+        try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch(e) {}
+        setLanguage(lang);
+      }
+    });
+  }
+}
+
+class SiteFooter extends HTMLElement {
+  connectedCallback() {
+    if (this.dataset.rendered === '1') return;
+    this.dataset.rendered = '1';
+
+    this.insertAdjacentHTML('afterend',
+      '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
+        '<a href="tel:+390575910904" class="qa-item" aria-label="Chiama la segreteria">' +
+          '<i class="fas fa-phone-alt" aria-hidden="true"></i>' +
+          '<span data-i18n="qa_call">Chiama</span>' +
+        '</a>' +
+        '<a href="faq.html" class="qa-item" aria-label="Domande frequenti">' +
+          '<i class="fas fa-question-circle" aria-hidden="true"></i>' +
+          '<span>FAQ</span>' +
+        '</a>' +
+        '<a href="mailto:segreteria@savianu.it" class="qa-item" aria-label="Scrivi una email alla segreteria">' +
+          '<i class="fas fa-envelope" aria-hidden="true"></i>' +
+          '<span data-i18n="qa_email">Email</span>' +
+        '</a>' +
+      '</nav>'
+    );
+
+    Promise.resolve().then(function() {
+      if (typeof setLanguage === 'function') {
+        var lang = 'it';
+        try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch(e) {}
+        setLanguage(lang);
+      }
+    });
+  }
+}
+
+customElements.define('site-header', SiteHeader);
+customElements.define('site-footer', SiteFooter);
+
 // --- AUTOMATIC YEAR ---
 const yearEl = document.getElementById('current-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
