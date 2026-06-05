@@ -53,15 +53,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
     <link rel="stylesheet" href="styles.css?v=19">
 
-    <!-- JSON-LD MedicalBusiness -->
+    <!-- JSON-LD Physician -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "MedicalBusiness",
-      "name": "Studio Medico Ippocrate - Dott. Emanuel Savianu",
+      "@type": "Physician",
+      "name": "Dott. Emanuel Savianu",
+      "additionalName": "Studio Medico Ippocrate",
       "url": "https://savianu.it/",
       "telephone": "+39 0575 910 904",
       "email": "segreteria@savianu.it",
+      "image": "https://savianu.it/logo.png",
+      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento, certificati, ricette.",
+      "medicalSpecialty": "GeneralPractice",
+      "areaServed": {
+        "@type": "City",
+        "name": "Arezzo"
+      },
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "Piazza Saione 3",
@@ -75,90 +83,50 @@
         "latitude": 43.4632,
         "longitude": 11.8796
       },
-      "medicalSpecialty": "GeneralPractice",
-      "areaServed": "Arezzo",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Monday",
+          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
           "opens": "16:00",
           "closes": "19:00"
         },
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Tuesday",
+          "dayOfWeek": ["Tuesday", "Thursday"],
           "opens": "10:00",
           "closes": "13:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Wednesday",
-          "opens": "16:00",
-          "closes": "19:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Thursday",
-          "opens": "10:00",
-          "closes": "13:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "opens": "16:00",
-          "closes": "19:00"
         }
       ],
-      "sameAs": []
+      "sameAs": [],
+      "priceRange": "\u20ac\u20ac",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Cash, Credit Card",
+      "availableLanguage": ["it", "en"]
     }
     </script>
 
 </head>
 <body>
 
-<div id="large-text-banner" role="region" aria-label="Accessibilità testo">
-    <span id="large-text-banner-label" data-i18n="large_text_inactive">🔤 Difficoltà a leggere?</span>
-    <button id="large-text-toggle-btn" class="large-text-btn" onclick="toggleLargeText()" data-i18n="large_text_btn_inactive">A+ Testo Grande</button>
-</div>
-
-<a href="android.html" class="mobile-app-banner">
-    <i class="fas fa-mobile-screen-button"></i>
-    <span data-i18n="mobile_app_banner">Apri la versione App</span>
-    <i class="fas fa-chevron-right banner-arrow"></i>
-</a>
-
-<div id="ferie-banner" hidden role="alert" aria-live="polite">
-    <i class="fas fa-location-dot"></i>
-    <span id="ferie-banner-text"></span>
-    <button id="ferie-banner-close" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>
-</div>
-
-<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
-
-<a href="faq.html" class="floating-faq" aria-label="Domande Frequenti">
-    <i class="fas fa-question-circle"></i>
-    <span class="floating-faq-text">FAQ</span>
-</a>
-
-
-
-<header role="banner">
-    <nav class="lang-switch" aria-label="Language and controls">
-        <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
-        <span class="lang-separator">|</span>
-        <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
-        <span class="lang-separator">|</span>
-        <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
-    </nav>
-    <div class="header-content">
-        <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
-        <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
-        <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
-        <a href="tel:+390575910904" class="btn-telefono-header">
-            <i class="fas fa-phone-alt"></i> Segreteria: 0575 910 904
-        </a>
-    </div>
-</header>
+<site-header>
+    <header role="banner">
+        <nav class="lang-switch" aria-label="Language and controls">
+            <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
+            <span class="lang-separator">|</span>
+            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
+            <span class="lang-separator">|</span>
+            <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
+        </nav>
+        <div class="header-content">
+            <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
+            <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
+            <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
+            <a href="tel:+390575910904" class="btn-telefono-header">
+                <i class="fas fa-phone-alt"></i> Segreteria: 0575 910 904
+            </a>
+        </div>
+    </header>
+</site-header>
 
 <div class="container">
 
@@ -318,32 +286,18 @@
 
 </div>
 
-<footer role="contentinfo">
-    <div class="footer-content">
-        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
-        <nav style="margin-top: 10px;">
-            <a href="faq.html">FAQ</a> ·
-            <a href="malattia.html">Certificato di malattia: chi deve farlo?</a> ·
-            <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
-        </nav>
-    </div>
-</footer>
-
-<!-- Mobile Quick Actions Bar (Task B) -->
-<nav class="quick-actions-bar" aria-label="Azioni rapide">
-    <a href="tel:+390575910904" class="qa-item" aria-label="Chiama la segreteria">
-        <i class="fas fa-phone-alt" aria-hidden="true"></i>
-        <span data-i18n="qa_call">Chiama</span>
-    </a>
-    <a href="faq.html" class="qa-item" aria-label="Domande frequenti">
-        <i class="fas fa-question-circle" aria-hidden="true"></i>
-        <span>FAQ</span>
-    </a>
-    <a href="mailto:segreteria@savianu.it" class="qa-item" aria-label="Scrivi una email alla segreteria">
-        <i class="fas fa-envelope" aria-hidden="true"></i>
-        <span data-i18n="qa_email">Email</span>
-    </a>
-</nav>
+<site-footer>
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+            <nav style="margin-top: 10px;">
+                <a href="faq.html">FAQ</a> ·
+                <a href="malattia.html">Certificato di malattia: chi deve farlo?</a> ·
+                <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+</site-footer>
 
 <script src="config.js"></script>
 <script src="app.js?v=12"></script>

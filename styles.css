@@ -78,6 +78,9 @@ a:focus-visible {
 }
 .skip-link:focus { top: 0; }
 
+/* Custom Elements: display block per evitare problematiche inline/block */
+site-header, site-footer { display: block; }
+
 /* --- HEADER / LANDING PAGE --- */
 header {
     background-color: var(--primary); 
@@ -1344,6 +1347,107 @@ body.large-text .btn-cal-service {
     padding: 20px;
 }
 body.large-text .cal-text h3 { font-size: 1.2rem; }
+
+/* =================================================================
+   LARGE TEXT MODE — SCALING COMPLETO WCAG AA
+   ================================================================= */
+
+/* Variabili Large Text Mode */
+body.large-text {
+    --spacing-card-padding: 36px;
+    --touch-target-min: 48px;
+}
+
+/* Scaling tipografico completo */
+body.large-text p,
+body.large-text li,
+body.large-text td,
+body.large-text th,
+body.large-text label,
+body.large-text input,
+body.large-text select,
+body.large-text textarea,
+body.large-text .contact-value,
+body.large-text .contact-label,
+body.large-text .checklist-item,
+body.large-text .cal-text p,
+body.large-text .privacy-notice,
+body.large-text .alert-box,
+body.large-text .faq-search-inner input,
+body.large-text footer,
+body.large-text .hours-table td,
+body.large-text .step-content p,
+body.large-text .triage-option p,
+body.large-text .guida-row-text p,
+body.large-text .guida-row-text h4 {
+    font-size: 1.1rem;
+    line-height: 1.65;
+}
+
+body.large-text h2 { font-size: clamp(1.5rem, 4vw, 1.8rem); }
+body.large-text h3 { font-size: 1.35rem; }
+body.large-text h4 { font-size: 1.2rem; }
+
+/* Touch target minimo 48px (WCAG 2.2 Target Size) */
+body.large-text .lang-btn,
+body.large-text .btn-cal-service,
+body.large-text .qa-item,
+body.large-text .flow-option-btn,
+body.large-text .flow-action-btn,
+body.large-text .flow-restart-btn,
+body.large-text .btn-proceed-booking,
+body.large-text .btn-change-visit,
+body.large-text .btn-telefono-header,
+body.large-text .btn-accept,
+body.large-text .btn-reps-close,
+body.large-text .btn-main,
+body.large-text .faq-banner-btn,
+body.large-text .large-text-btn,
+body.large-text #ferie-banner-close,
+body.large-text .btn-guida-dismiss,
+body.large-text .back-link {
+    min-height: var(--touch-target-min);
+    min-width: var(--touch-target-min);
+    font-size: 1.1rem;
+    padding: 14px 24px;
+}
+
+/* Link sottolineati in LTM (distinguibili anche senza colore) */
+body.large-text a:not(.btn-cal-service):not(.contact-row):not(.qa-item):not(.mobile-app-banner):not(.floating-faq) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+/* Spaziature aumentate */
+body.large-text .card { padding: var(--spacing-card-padding); }
+body.large-text .checklist-item { padding: 14px 0; gap: 14px; }
+body.large-text footer a {
+    display: inline-block;
+    padding: 6px 10px;
+    margin: 4px;
+}
+
+/* Focus ring più spesso */
+body.large-text *:focus-visible {
+    outline-width: 4px;
+    outline-offset: 4px;
+}
+
+/* Contrasto WCAG AA su sfondo cream (#f3efe6) — ratio >= 4.5:1 */
+body.large-text .contact-label,
+body.large-text .checklist-note,
+body.large-text .privacy-notice,
+body.large-text footer,
+body.large-text .text-medium,
+body.large-text [style*="color: var(--text-medium)"] {
+    color: #334155;
+}
+
+/* Dark mode LTM contrast */
+body.dark-mode.large-text .text-medium,
+body.dark-mode.large-text [style*="color: var(--text-medium)"] {
+    color: #e2e8f0;
+}
 body.large-text .cal-text p  { font-size: 0.95rem; line-height: 1.6; }
 body.large-text .contact-value { font-size: 1.2rem; }
 body.large-text .contact-label { font-size: 0.9rem; }
