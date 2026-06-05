@@ -1,6 +1,6 @@
 // Service Worker for Dr. Savianu Medical Website
 // Cache version bumped to v75 for metadata/accessibility refresh
-const CACHE_NAME = 'savianu-v304';
+const CACHE_NAME = 'savianu-v305';
 const urlsToCache = [
   '/',
   '/index.html',
