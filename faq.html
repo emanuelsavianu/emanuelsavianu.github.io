@@ -278,6 +278,19 @@
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
+      "provider": {
+        "@type": "Physician",
+        "name": "Dott. Emanuel Savianu",
+        "url": "https://savianu.it/",
+        "image": "https://savianu.it/logo.png",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Piazza Saione 3",
+          "addressLocality": "Arezzo",
+          "postalCode": "52100",
+          "addressCountry": "IT"
+        }
+      },
       "mainEntity": [
         {
           "@type": "Question",
@@ -326,6 +339,7 @@
             <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
             <span class="lang-separator">|</span>
             <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
+            <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
         </nav>
         <div class="header-content">
             <h1 style="font-family: 'Playball', cursive; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 5px; line-height: 1.2; color: #ffffff;" data-i18n="faq_header_title">Domande Frequenti</h1>
@@ -346,7 +360,6 @@
                 data-i18n-placeholder="faq_search_placeholder"
                 placeholder="Cerca nelle FAQ..."
                 autocomplete="off"
-                aria-label="Cerca nelle domande frequenti"
             >
         </div>
         <p id="faq-no-results" hidden style="text-align:center; padding:20px; color:var(--text-medium);" data-i18n="faq_no_results">
@@ -575,7 +588,7 @@
             <p>© <span id="current-year">2026</span> Studio Medico Ippocrate - Dr. Savianu Emanuel</p>
             <nav style="margin-top:10px;">
                 <a href="index.html">Home</a> ·
-                <a href="privacy.html">Privacy Policy</a>
+                <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
             </nav>
         </div>
     </footer>
