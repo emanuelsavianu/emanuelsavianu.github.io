@@ -6,11 +6,11 @@ const CONFIG = {
     // Clinic hours (used for the badge logic)
     // 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri
     SCHEDULE: {
-        1: [{ from: 16, to: 19 }],  // Mon
-        2: [{ from: 10, to: 13 }],  // Tue
-        3: [{ from: 16, to: 19 }],  // Wed
-        4: [{ from: 10, to: 13 }],  // Thu
-        5: [{ from: 16, to: 19 }],  // Fri
+        1: [{ from: 9.5, to: 12.5 }, { from: 16, to: 19 }],  // Mon
+        2: [{ from: 9.5, to: 12.5 }, { from: 16, to: 19 }],  // Tue
+        3: [{ from: 9.5, to: 12.5 }, { from: 16, to: 19 }],  // Wed
+        4: [{ from: 9.5, to: 12.5 }, { from: 16, to: 19 }],  // Thu
+        5: [{ from: 9.5, to: 12.5 }, { from: 16, to: 19 }],  // Fri
     },
 
     DOCTOLIB: {

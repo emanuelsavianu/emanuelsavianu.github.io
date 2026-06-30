@@ -52,8 +52,7 @@ const i18n = {
         label_doctor: "Tel. Personale (Solo Urgenze)",
         label_secretary: "Segreteria e Appuntamenti",
         address: "Studio Medico Ippocrate",
-        hours: "Orari di Studio",
-        appt_only: "Solo su appuntamento",
+        hours: "Orari Segreteria - 0575 910 904",
         new_patients_alert: "<strong>Nuovi Pazienti:</strong> Prenotate \"Prima Visita\" su Doctolib. Vi iscriver\u00f2 all'assistenza in studio.",
         cal_prima_title: "Prima Visita",
         cal_prima_sub: "Solo per i nuovi pazienti (45 min)",
@@ -77,8 +76,7 @@ const i18n = {
         label_doctor: "Dr. Savianu (Emergencies only)",
         label_secretary: "Reception & Appointments",
         address: "Clinic Address",
-        hours: "Opening Hours",
-        appt_only: "By appointment only",
+        hours: "Reception Hours - 0575 910 904",
         new_patients_alert: "<strong>New Patients:</strong> Book a \u2018First Visit\u2019 on Doctolib. I will register you at the clinic.",
         cal_prima_title: "First Visit",
         cal_prima_sub: "For new patients only (45 min)",
@@ -95,9 +93,7 @@ const i18n = {
 };
 
 const hoursData = [
-    { d: "Lun·Mer·Ven / Mon·Wed·Fri", t: "16:00 - 19:00" }, 
-    { d: "Mar·Gio / Tue·Thu", t: "10:00 - 13:00" },
-    { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
+    { d: "Lun-Ven / Mon-Fri", t: "09:30 - 12:30<br>16:00 - 19:00" }
 ];
 
 function renderHours() {
