@@ -63,7 +63,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="stylesheet" href="styles.css?v=21">
 </head>
 <body class="is-android-page">
 
@@ -111,12 +111,6 @@
         </div>
     </header>
 
-    <div id="ferie-banner" style="display:none; background:var(--accent); color:var(--primary); padding:10px 15px; text-align:center; font-size:0.85rem; font-weight:700; border-bottom:1px solid var(--primary-dark); position:relative;">
-        <i class="fas fa-info-circle"></i>
-        <span id="ferie-banner-text"></span>
-        <button onclick="dismissFerieBanner()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:1.2rem; font-weight:bold;">&times;</button>
-    </div>
-
     <div id="doctolib-banner" style="display:flex; align-items:center; gap:10px; background:#fff8e1; color:#5d4037; border-bottom:2px solid #f9a825; padding:12px 15px; font-weight:600; font-size:0.85rem; width:100%; box-sizing:border-box; z-index:999; flex-wrap:wrap; line-height:1.5;">
         <i class="fas fa-info-circle" style="flex-shrink:0; font-size:1.1rem; color:#f9a825;"></i>
         <span id="doctolib-banner-text" style="flex:1; min-width:0;"></span>
@@ -161,12 +155,16 @@
             <div class="card-title"><i class="fas fa-clinic-medical"></i><span data-i18n="contacts">Contatti Studio</span></div>
 
             <div class="link-list">
+                <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="link-item" style="border:2px solid var(--accent); background:var(--primary);">
+                    <div class="icon" style="background:var(--accent); color:var(--primary);"><i class="fas fa-calendar-check"></i></div>
+                    <div class="content"><span class="label" data-i18n="label_doctolib_contacts">Appuntamenti, Messaggi, Rinnovi Farmaci</span><span class="val" style="color:var(--accent);">tramite Doctolib</span></div>
+                    <i class="fas fa-chevron-right" style="color:var(--accent); font-size: 0.8rem;"></i>
+                </a>
                 <a href="tel:0575910904" class="link-item">
                     <div class="icon"><i class="fas fa-phone-alt"></i></div>
-                    <div class="content"><span class="label" data-i18n="label_secretary">Segreteria e Appuntamenti</span><span class="val" style="color: var(--primary);">0575 910 904</span></div>
+                    <div class="content"><span class="label" data-i18n="label_secretary_fallback">Segreteria (solo se non puoi usare Doctolib)</span><span class="val" style="color: var(--primary);">0575 910 904</span></div>
                     <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
                 </a>
-
                 <a href="https://maps.google.com/?q=Studio+Medico+Ippocrate+Arezzo" target="_blank" class="link-item">
                     <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
                     <div class="content"><span class="label" data-i18n="address">Studio Medico Ippocrate</span><span class="val">Piazza Saione 3, Arezzo</span></div>
