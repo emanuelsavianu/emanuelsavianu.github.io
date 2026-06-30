@@ -1,7 +1,5 @@
 User-agent: *
 Allow: /
-Disallow: /dottori.html
-Disallow: /xsegretarie.html
 Disallow: /offline.html
 Disallow: /cloudflare/
 Disallow: /.superpowers/

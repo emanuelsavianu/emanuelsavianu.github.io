@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
 
     <title>Medico di Famiglia Arezzo | Dott. Emanuel Savianu</title>
-    <meta name="description" content="Studio Medico Ippocrate - Dott. Emanuel Savianu a Arezzo (Piazza Saione 3). Prenota visite online, consulti privati.">
+    <meta name="description" content="Studio Medico Ippocrate - Dott. Emanuel Savianu a Arezzo (Piazza Saione 3). Prenota visite su Doctolib, consulti privati.">
     
     <meta name="geo.region" content="IT-AR" />
     <meta name="geo.placename" content="Arezzo" />
@@ -26,24 +26,20 @@
     <meta name="apple-mobile-web-app-title" content="Dr. Savianu">
     <link rel="manifest" href="manifest.json">
 
-    <!-- Google Calendar Appointment Scheduling Button -->
-    <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
-    <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
-
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://savianu.it/">
     <meta property="og:locale" content="it_IT">
     <meta property="og:site_name" content="Studio Medico Ippocrate">
     <meta property="og:title" content="Medico di Famiglia Arezzo | Dott. Emanuel Savianu">
-    <meta property="og:description" content="Studio Medico Ippocrate ad Arezzo: prenotazioni online, FAQ pazienti, ricette e contatti utili.">
+    <meta property="og:description" content="Studio Medico Ippocrate ad Arezzo: prenotazioni tramite Doctolib, FAQ pazienti, ricette e contatti utili.">
     <meta property="og:image" content="https://savianu.it/logo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://savianu.it/">
     <meta name="twitter:title" content="Medico di Famiglia Arezzo | Dott. Emanuel Savianu">
-    <meta name="twitter:description" content="Studio Medico Ippocrate ad Arezzo: prenotazioni online, FAQ pazienti, ricette e contatti utili.">
+    <meta name="twitter:description" content="Studio Medico Ippocrate ad Arezzo: prenotazioni tramite Doctolib, FAQ pazienti, ricette e contatti utili.">
     <meta name="twitter:image" content="https://savianu.it/logo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=19">
+    <link rel="stylesheet" href="styles.css?v=20">
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
@@ -62,9 +58,9 @@
       "additionalName": "Studio Medico Ippocrate",
       "url": "https://savianu.it/",
       "telephone": "+39 0575 910 904",
-      "email": "segreteria@savianu.it",
+      "sameAs": ["https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu"],
       "image": "https://savianu.it/logo.png",
-      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento, certificati, ricette.",
+      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette.",
       "medicalSpecialty": "GeneralPractice",
       "areaServed": {
         "@type": "City",
@@ -97,7 +93,6 @@
           "closes": "13:00"
         }
       ],
-      "sameAs": [],
       "priceRange": "\u20ac\u20ac",
       "currenciesAccepted": "EUR",
       "paymentAccepted": "Cash, Credit Card",
@@ -107,6 +102,18 @@
 
 </head>
 <body>
+
+<div id="doctolib-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h2 data-i18n="doctolib_modal_title">Avviso Importante</h2>
+        <p class="modal-subtitle">STUDIO MEDICO IPPOCRATE</p>
+        <div class="alert alert-danger" style="padding: 10px; text-align: center;">
+            <i class="fas fa-ambulance"></i><small><strong>Urgenze:</strong> Chiama il 112 / 116 117.</small>
+        </div>
+        <div class="modal-text" data-i18n="doctolib_modal_text">Gentili assistiti...</div>
+        <button class="btn-accept" onclick="closeDoctolibModal()" data-i18n="doctolib_modal_btn">Ho letto</button>
+    </div>
+</div>
 
 <site-header>
     <header role="banner">
@@ -146,11 +153,11 @@
             <div style="padding-top: 15px; border-top: 1px dashed var(--border-color);">
                 <p style="font-size: 0.9rem; color: var(--text-medium); margin-bottom: 8px;">
                     <i class="fas fa-prescription-bottle" aria-hidden="true" style="color: var(--accent); margin-right: 8px;"></i>
-                    <span data-i18n="prescription_request_header">Per richiedere la ricetta per i farmaci assunti abitualmente:</span>
+                    <span>Per richiedere la ricetta per i farmaci assunti abitualmente o inviare un messaggio al medico, usa <strong>Doctolib</strong>:</span>
                 </p>
-                <a href="mailto:studiomedicoippocratearezzo@gmail.com" style="display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 28px;">
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 28px;">
                     <i class="fas fa-envelope"></i>
-                    <span>studiomedicoippocratearezzo@gmail.com</span>
+                    <span>Invia richiesta su Doctolib</span>
                 </a>
             </div>
         </section>
@@ -158,33 +165,23 @@
         <section id="booking-section" class="card" aria-labelledby="booking-title">
             <div class="card-header">
                 <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                <h2 id="booking-title" data-i18n="booking_title">Seleziona il tipo di visita</h2>
+                <h2 id="booking-title" data-i18n="booking_title">Prenotazione su Doctolib</h2>
             </div>
 
-            <div class="cal-services-grid">
-                <button onclick="selectVisitType('prima','https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe%2FRome&mode=AGENDA')" class="btn-cal-service prima">
-                    <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_prima_title">Prima Visita (Nuovi Pazienti)</h3>
-                        <p data-i18n="cal_prima_desc">Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)</p>
-                    </div>
-                </button>
+            <div class="doctolib-cta-grid">
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
+                    <i class="fas fa-calendar-check"></i>
+                    <span class="cta-title" data-i18n="cta_book_doctolib">Prenota appuntamento</span>
+                    <span class="cta-sub" data-i18n="cta_book_doctolib_sub">Scegli giorno e orario su Doctolib</span>
+                </a>
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
+                    <i class="fas fa-envelope"></i>
+                    <span class="cta-title" data-i18n="cta_message_doctolib">Invia messaggio / Richiedi ricetta</span>
+                    <span class="cta-sub" data-i18n="cta_message_doctolib_sub">Comunica col medico tramite Doctolib</span>
+                </a>
+            </div>
 
-                <button onclick="selectVisitType('ordinaria','https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe%2FRome&mode=AGENDA')" class="btn-cal-service ordinaria">
-                    <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_ord_title">Visita Ordinaria</h3>
-                        <p data-i18n="cal_ord_desc">Controlli e problemi non urgenti. (20 min)</p>
-                    </div>
-                </button>
-
-                <button onclick="selectVisitType('breve','https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe%2FRome&mode=AGENDA')" class="btn-cal-service breve">
-                    <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_breve_title">Sintomi Recenti</h3>
-                        <p data-i18n="cal_breve_desc">Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)</p>
-                    </div>
-                </button>
+            <div style="margin-top:30px;">
                 <a href="https://dottemanuelsavianu.it/visite-private.html" target="_blank" rel="noopener noreferrer" class="btn-cal-service privata">
                     <div class="cal-icon-wrapper"><i class="fas fa-user-tie"></i></div>
                     <div class="cal-text">
@@ -193,8 +190,6 @@
                     </div>
                 </a>
             </div>
-
-            <div id="booking-checklist" class="hidden"></div>
 
             <div class="privacy-notice" style="margin-top: 30px;">
                 <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> <span data-i18n="privacy_notice_text">Leggi l'informativa privacy.</span></p>
@@ -237,23 +232,18 @@
                 <div><span data-i18n="label_secretary" class="contact-label">Segreteria e Appuntamenti</span><span class="contact-value text-primary">0575 910 904</span></div>
             </a>
 
-            <a href="tel:05751713428" class="contact-row">
-                <div class="icon-circle"><i class="fas fa-user-md"></i></div>
-                <div><span data-i18n="label_doctor" class="contact-label">Tel. Personale (Solo Urgenze)</span><span class="contact-value" style="font-size: 0.95rem; font-weight: 500;">0575 171 3428</span></div>
-            </a>
-
             <div style="margin-bottom: 15px;">
                 <a href="https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-radius: 10px 10px 0 0;">
                     <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
                     <div><span data-i18n="label_address" class="contact-label">Studio Medico Ippocrate</span><span style="display:block;">Piazza Saione 3, Arezzo</span></div>
                 </a>
             </div>
-            <a href="mailto:segreteria@savianu.it" class="contact-row">
-                <div class="icon-circle"><i class="fas fa-envelope"></i></div>
-                <div><span data-i18n="label_email" class="contact-label">Email</span><span class="contact-value" style="font-size:0.85rem;">segreteria@savianu.it</span></div>
+            <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="contact-row" style="margin-bottom: 0; border-radius: 0 0 10px 10px;">
+                <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
+                <div><span class="contact-label">Doctolib</span><span style="display:block; color:var(--accent); font-weight:600;">tinyurl.com/Savianu</span></div>
             </a>
-            <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 6px;" data-i18n="email_privacy_notice">
-                Per privacy, non inviare dettagli clinici via email: usa la visita in studio.
+            <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 10px;">
+                Per comunicazioni mediche usa Doctolib o la visita in studio.
             </p>
         </section>
 
@@ -301,7 +291,7 @@
 </site-footer>
 
 <script src="config.js"></script>
-<script src="app.js?v=12"></script>
+<script src="app.js?v=13"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
