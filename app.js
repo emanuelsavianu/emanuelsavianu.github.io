@@ -211,15 +211,7 @@ const translations = {
         label_email: "Email",
 
         // Hours
-        hours_title: "Orari di Studio",
-        appt_only: "Solo su appuntamento",
-        hours_day1: "Lun · Mer · Ven",
-        hours_day2: "Mar · Gio",
-        day_sat_sun: "Sab - Dom",
         hours_lun_ven: "Lun - Ven",
-        closed: "Chiuso",
-        hours_secretary_title: "Orari Segreteria",
-        hours_secretary_desc: "Per appuntamenti telefonici e info.",
 
         // Footer
         link_privacy: "Privacy Policy",
@@ -401,15 +393,7 @@ const translations = {
         label_email: "Email",
 
         // Hours
-        hours_title: "Clinic Hours",
-        appt_only: "By appointment only",
-        hours_day1: "Mon · Wed · Fri",
-        hours_day2: "Tue · Thu",
-        day_sat_sun: "Sat - Sun",
         hours_lun_ven: "Mon - Fri",
-        closed: "Closed",
-        hours_secretary_title: "Reception Hours",
-        hours_secretary_desc: "For phone appointments and enquiries.",
 
         // Footer
         link_privacy: "Privacy Policy",
@@ -626,7 +610,7 @@ function trapFocus(modal) {
     const slots = SCHEDULE[day] || [];
     const isOpen = slots.some(s => hour >= s.from && hour < s.to);
 
-    const anchor = document.querySelector('[data-i18n="hours_title"]');
+    const anchor = document.querySelector('[data-i18n="secretary_hours_label"]');
     if (!anchor) return;
     const badge = document.createElement('span');
     badge.className = isOpen ? 'badge-open' : 'badge-closed';
