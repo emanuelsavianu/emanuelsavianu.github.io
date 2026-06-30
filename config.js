@@ -21,6 +21,12 @@ const CONFIG = {
         3: [{ from: 16, to: 19 }],  // Wed
         4: [{ from: 10, to: 13 }],  // Thu
         5: [{ from: 16, to: 19 }],  // Fri
+    },
+
+    DOCTOLIB: {
+        booking: 'https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile',
+        patientRequest: 'https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message',
+        profile: 'https://tinyurl.com/Savianu'
     }
 };
 

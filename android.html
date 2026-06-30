@@ -63,7 +63,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=19">
+    <link rel="stylesheet" href="styles.css?v=20">
 </head>
 <body class="is-android-page">
 
@@ -75,19 +75,21 @@
 
     <div id="welcome-modal" class="modal-overlay">
         <div class="modal-content">
-            <h2 style="margin:0 0 5px 0; color: var(--primary); text-align:center; font-family: 'Playball', cursive; font-size: 2rem;">Benvenuti</h2>
+            <h2 style="margin:0 0 5px 0; color: var(--primary); text-align:center; font-family: 'Playball', cursive; font-size: 2rem;">Avviso Importante</h2>
             <p style="text-align:center; font-size:0.8rem; font-weight:bold; letter-spacing:1px; margin-bottom: 15px;">STUDIO MEDICO IPPOCRATE</p>
             <div class="alert alert-danger" style="padding: 10px; text-align: center;">
                 <i class="fas fa-ambulance"></i><small><strong>Urgenze:</strong> Chiama il 112 / 116 117.</small>
             </div>
-            <p style="font-size: 0.9rem;">Per comunicazioni e richieste al dottore:</p>
-            <ul style="font-size: 0.9rem; padding-left: 20px; margin-bottom: 20px;">
-                <li style="margin-bottom: 8px;"><strong>Email:</strong> segreteria@savianu.it (canale preferenziale)</li>
-                <li style="margin-bottom: 8px;"><strong>Sito Web:</strong> Per prenotare appuntamenti.</li>
-                <li style="margin-bottom: 8px;"><strong>Segreteria:</strong> 0575 910 904</li>
-                <li><span style="font-size: 0.85rem; color: var(--danger);">Il cellulare è riservato solo alle urgenze.</span></li>
-            </ul>
-            <button class="btn-accept" onclick="closeModal('welcome-modal')">Ho letto e accetto</button>
+            <p style="font-size: 0.9rem;">
+                Gentili assistiti, per motivi legati alla privacy e gestione dei dati sensibili dei pazienti dal 30 giugno 2026 non sarà più possibile utilizzare EMail o prendere appuntamenti direttamente dal sito savianu.it.
+            </p>
+            <p style="font-size: 0.9rem;">
+                Potete richiedere farmaci continuativi, inviare richieste o consigli medici o prenotare un appuntamento scaricando l'applicazione gratuita <strong>Doctolib</strong> o direttamente dal sito Doctolib.it.
+            </p>
+            <p style="text-align:center; font-size:1rem; margin:15px 0;">
+                <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;font-size:1.1rem;">clicca qui → tinyurl.com/Savianu</a>
+            </p>
+            <button class="btn-accept" onclick="closeModal('welcome-modal')">Ho letto</button>
         </div>
     </div>
 
@@ -115,12 +117,17 @@
         <button onclick="dismissFerieBanner()" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); font-size:1.2rem; font-weight:bold;">&times;</button>
     </div>
 
+    <div id="doctolib-banner" style="display:flex; align-items:center; gap:10px; background:#fff8e1; color:#5d4037; border-bottom:2px solid #f9a825; padding:12px 15px; font-weight:600; font-size:0.85rem; width:100%; box-sizing:border-box; z-index:999; flex-wrap:wrap; line-height:1.5;">
+        <i class="fas fa-info-circle" style="flex-shrink:0; font-size:1.1rem; color:#f9a825;"></i>
+        <span id="doctolib-banner-text" style="flex:1; min-width:0;"></span>
+    </div>
+
     <div class="container">
 
-        <a href="mailto:segreteria@savianu.it" class="hero-btn">
+        <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" class="hero-btn">
             <i class="fas fa-envelope"></i>
-            <h2>Contattaci</h2>
-            <p>Richieste e comunicazioni al dottore</p>
+            <h2>Messaggio al Medico</h2>
+            <p>Richieste e comunicazioni via Doctolib</p>
         </a>
 
         <div class="grid-buttons">
@@ -133,34 +140,19 @@
         <div class="card" id="booking-section">
             <div class="card-title">
                 <i class="fas fa-calendar-alt"></i>
-                <span data-i18n="booking_title">Prenotazione Online</span>
+                <span data-i18n="booking_title">Prenotazione su Doctolib</span>
             </div>
 
-            <p style="font-size: 0.95rem; color: var(--text-muted); text-align:center; margin-bottom:15px; font-weight: 600;" data-i18n="tap_to_book">Tocca un bottone per prenotare.</p>
-
-            <div class="cal-services-grid">
-                <a href="https://calendar.app.google/tuFm2ZZSnsHvn5F19?hl=it&ctz=Europe/Rome&mode=AGENDA" target="_blank" class="btn-cal-service prima">
-                    <div class="cal-icon-wrapper"><i class="fas fa-user-plus"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_prima_title">Prima Visita</h3>
-                        <p data-i18n="cal_prima_sub">Solo per i nuovi pazienti (45 min)</p>
-                    </div>
+            <div class="doctolib-cta-grid">
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
+                    <i class="fas fa-calendar-check"></i>
+                    <span class="cta-title">Prenota appuntamento</span>
+                    <span class="cta-sub">Scegli giorno e orario su Doctolib</span>
                 </a>
-
-                <a href="https://calendar.app.google/qgWNNbUKJHLa2GnKA?hl=it&ctz=Europe/Rome&mode=AGENDA" target="_blank" class="btn-cal-service ordinaria">
-                    <div class="cal-icon-wrapper"><i class="fas fa-stethoscope"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_ord_title">Visita Ordinaria</h3>
-                        <p data-i18n="cal_ord_sub">Controlli e visione esami (20 min)</p>
-                    </div>
-                </a>
-
-                <a href="https://calendar.app.google/C57sv4LCP9w3Cxe49?hl=it&ctz=Europe/Rome&mode=AGENDA" target="_blank" class="btn-cal-service breve">
-                    <div class="cal-icon-wrapper"><i class="fas fa-clock"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_breve_title">Sintomi Recenti</h3>
-                        <p data-i18n="cal_breve_sub">Urgenze non gravi, certificati INPS (10 min)</p>
-                    </div>
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
+                    <i class="fas fa-envelope"></i>
+                    <span class="cta-title">Invia messaggio / Richiedi ricetta</span>
+                    <span class="cta-sub">Comunica col medico tramite Doctolib</span>
                 </a>
             </div>
         </div>
@@ -172,12 +164,6 @@
                 <a href="tel:0575910904" class="link-item">
                     <div class="icon"><i class="fas fa-phone-alt"></i></div>
                     <div class="content"><span class="label" data-i18n="label_secretary">Segreteria e Appuntamenti</span><span class="val" style="color: var(--primary);">0575 910 904</span></div>
-                    <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
-                </a>
-
-                <a href="tel:05751713428" class="link-item">
-                    <div class="icon"><i class="fas fa-user-md"></i></div>
-                    <div class="content"><span class="label" data-i18n="label_doctor">Tel. Personale (Solo Urgenze)</span><span class="val" style="font-size: 0.85rem; font-weight: normal;">0575 171 3428</span></div>
                     <i class="fas fa-chevron-right" style="color:var(--text-muted); font-size: 0.8rem;"></i>
                 </a>
 
@@ -233,9 +219,9 @@
             <i class="fas fa-question-circle"></i>
             <span>FAQ</span>
         </a>
-        <a href="mailto:segreteria@savianu.it" class="nav-item">
-            <i class="fas fa-envelope"></i>
-            <span>Email</span>
+        <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="nav-item">
+            <i class="fas fa-calendar-check"></i>
+            <span>Doctolib</span>
         </a>
         <a href="tel:0575910904" class="nav-item">
             <i class="fas fa-phone-alt"></i>

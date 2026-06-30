@@ -266,22 +266,6 @@ body.dark-mode h2 { color: var(--accent); }
 
 
 /* --- BUTTONS & ACTIONS --- */
-.millebook-wrapper { margin-bottom: 25px; text-align: center; }
-
-.btn-millebook {
-    background: var(--primary-light);
-    width: 100%; padding: 30px; border-radius: var(--radius-lg);
-    color: white; box-shadow: 0 8px 20px rgba(40, 80, 120, 0.25);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    transition: transform 0.2s, box-shadow 0.2s; border: 2px solid var(--accent);
-}
-
-.btn-millebook:hover { transform: translateY(-4px); box-shadow: 0 12px 25px rgba(40, 80, 120, 0.35); }
-.btn-millebook:active { transform: scale(0.98); box-shadow: 0 4px 10px rgba(40, 80, 120, 0.2); }
-.btn-millebook i { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent); }
-.btn-millebook span { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: 0.5px; }
-.btn-millebook small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 500; }
-
 .action-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
 @media (min-width: 600px) { .action-grid { grid-template-columns: 1fr 1fr; } }
 
@@ -816,6 +800,149 @@ body.dark-mode #ferie-banner { background: #0d1e30; color: #a8c8e8; border-botto
 body.dark-mode #ferie-banner i { color: #a8c8e8; }
 body.dark-mode #ferie-banner-close { border-color: #a8c8e8; color: #a8c8e8; }
 
+/* --- DOCTOLIB BANNER --- */
+#doctolib-banner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fff8e1;
+    color: #5d4037;
+    border-bottom: 2px solid #f9a825;
+    padding: 12px 20px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    width: 100%;
+    box-sizing: border-box;
+    z-index: 999;
+    flex-wrap: wrap;
+    line-height: 1.5;
+}
+#doctolib-banner i { flex-shrink: 0; font-size: 1.1rem; color: #f9a825; }
+#doctolib-banner span { flex: 1; min-width: 0; }
+body.dark-mode #doctolib-banner { background: #2a1f0a; color: #ffd54f; border-bottom-color: #f9a825; }
+body.dark-mode #doctolib-banner i { color: #ffd54f; }
+
+#doctolib-banner .doctolib-banner-link {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: underline;
+    white-space: nowrap;
+}
+body.dark-mode #doctolib-banner .doctolib-banner-link { color: #ffd54f; }
+
+/* --- DOCTOLIB CTA BUTTONS --- */
+.doctolib-cta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 20px;
+}
+@media (max-width: 500px) {
+    .doctolib-cta-grid { grid-template-columns: 1fr; }
+}
+.doctolib-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 25px 20px;
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    border: 2px solid var(--border-color);
+    text-decoration: none;
+    color: var(--text-dark);
+    text-align: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+.doctolib-cta:hover {
+    border-color: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    opacity: 1;
+    color: var(--text-dark);
+}
+.doctolib-cta i {
+    font-size: 2rem;
+    color: var(--accent);
+}
+.doctolib-cta .cta-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+.doctolib-cta .cta-sub {
+    font-size: 0.85rem;
+    color: var(--text-medium);
+    line-height: 1.3;
+}
+body.dark-mode .doctolib-cta { background: var(--bg-gradient-2); color: var(--text-dark); }
+body.dark-mode .doctolib-cta:hover { color: var(--text-dark); }
+
+/* --- DOCTOLIB MODAL --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26,47,76,0.85);
+    z-index: 2000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal-content {
+    background: var(--bg-card);
+    width: 100%;
+    max-width: 420px;
+    border-radius: 16px;
+    padding: 25px;
+    border: 2px solid var(--accent);
+    color: var(--text-dark);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-content h2 {
+    margin: 0 0 5px 0;
+    color: var(--primary);
+    text-align: center;
+    font-family: 'Playball', cursive;
+    font-size: 1.8rem;
+}
+.modal-content .modal-subtitle {
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+.modal-content .modal-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+.modal-content .modal-link {
+    color: var(--accent);
+    font-weight: 700;
+    text-decoration: underline;
+}
+.btn-accept {
+    background: var(--primary);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 12px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    width: 100%;
+    font-size: 1rem;
+    margin-top: 15px;
+    text-align: center;
+    cursor: pointer;
+    font-family: var(--font-sans);
+}
+
 /* --- FLOWCHART --- */
 .flow-question-card, .flow-end-card {
     background: var(--white);
@@ -989,7 +1116,7 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 .btn-prenota-large:focus-visible,
-.btn-millebook:focus-visible,
+/* .btn-millebook:focus-visible removed */
 .btn-accept:focus-visible,
 .btn-reps-close:focus-visible,
 .lang-btn:focus-visible,
