@@ -894,7 +894,7 @@ body.dark-mode .doctolib-cta:hover { color: var(--text-dark); }
     padding: 20px;
 }
 .modal-content {
-    background: var(--bg-card);
+    background: var(--white);
     width: 100%;
     max-width: 420px;
     border-radius: 16px;
