@@ -47,6 +47,8 @@ const i18n = {
         book: "Prenota su Doctolib",
         booking_title: "Prenotazione su Doctolib",
         contacts: "Contatti Studio",
+        label_doctolib_contacts: "Appuntamenti, Messaggi, Rinnovi Farmaci",
+        label_secretary_fallback: "Segreteria (solo se non puoi usare Doctolib)",
         label_doctor: "Tel. Personale (Solo Urgenze)",
         label_secretary: "Segreteria e Appuntamenti",
         address: "Studio Medico Ippocrate",
@@ -70,6 +72,8 @@ const i18n = {
         book: "Book on Doctolib",
         booking_title: "Book on Doctolib",
         contacts: "Office Contacts",
+        label_doctolib_contacts: "Appointments, Messages, Prescription Renewals",
+        label_secretary_fallback: "Reception (only if you cannot use Doctolib)",
         label_doctor: "Dr. Savianu (Emergencies only)",
         label_secretary: "Reception & Appointments",
         address: "Clinic Address",
@@ -95,33 +99,6 @@ const hoursData = [
     { d: "Mar·Gio / Tue·Thu", t: "10:00 - 13:00" },
     { d: "Sab-Dom / Sat-Sun", t: "Chiuso / Closed", cls: "closed" }
 ];
-
-function initFerieBanner() {
-    if (typeof CONFIG === 'undefined' || typeof CONFIG.getActiveAbsence !== 'function') return;
-    const banner = document.getElementById('ferie-banner');
-    const textEl = document.getElementById('ferie-banner-text');
-    if (!banner || !textEl) return;
-
-    const active = CONFIG.getActiveAbsence();
-
-    if (!active) return;
-
-    try {
-        if (sessionStorage.getItem('ferie-dismissed-' + active.from)) return;
-    } catch(e) {}
-
-    textEl.textContent = active.note;
-    banner.style.display = 'block';
-}
-
-function dismissFerieBanner() {
-    const banner = document.getElementById('ferie-banner');
-    if (banner) banner.style.display = 'none';
-    try {
-        const active = CONFIG.getActiveAbsence();
-        if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
-    } catch(e) {}
-}
 
 function renderHours() {
     const container = document.getElementById('hours-table');
@@ -163,7 +140,7 @@ function initDoctolibBanner() {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    initTheme(); renderHours(); initFerieBanner(); initDoctolibBanner();
+    initTheme(); renderHours(); initDoctolibBanner();
     if(!localStorage.getItem('welcome-modal_seen_v4')) {
         const modal = document.getElementById('welcome-modal');
         if (modal) modal.style.display = 'flex';

@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=20">
+    <link rel="stylesheet" href="styles.css?v=21">
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
@@ -227,24 +227,24 @@
                 <h2 data-i18n="contacts_title">Contatti Studio</h2>
             </div>
             
-            <a href="tel:0575910904" class="contact-row">
-                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
-                <div><span data-i18n="label_secretary" class="contact-label">Segreteria e Appuntamenti</span><span class="contact-value text-primary">0575 910 904</span></div>
+            <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="contact-row" style="border:2px solid var(--accent); margin-bottom:0; border-radius:10px 10px 0 0;">
+                <div class="icon-circle" style="background:var(--accent); color:var(--primary);"><i class="fas fa-calendar-check"></i></div>
+                <div>
+                    <span data-i18n="label_doctolib_contacts" class="contact-label" style="font-size:1rem;">Appuntamenti, Messaggi, Rinnovi Farmaci</span>
+                    <span style="display:block; font-size:0.8rem; color:var(--accent); font-weight:600;">tramite Doctolib</span>
+                </div>
+                <i class="fas fa-chevron-right" style="margin-left:auto; color:var(--accent);"></i>
             </a>
-
-            <div style="margin-bottom: 15px;">
-                <a href="https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" class="contact-row" style="margin-bottom: 0; border-radius: 10px 10px 0 0;">
+            <a href="tel:0575910904" class="contact-row" style="margin-bottom:15px; border-radius:0 0 10px 10px;">
+                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                <div><span data-i18n="label_secretary_fallback" class="contact-label">Segreteria (solo se non puoi usare Doctolib)</span><span class="contact-value text-primary">0575 910 904</span></div>
+            </a>
+            <div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" class="contact-row" style="margin-bottom:0; border-radius:10px;">
                     <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
                     <div><span data-i18n="label_address" class="contact-label">Studio Medico Ippocrate</span><span style="display:block;">Piazza Saione 3, Arezzo</span></div>
                 </a>
             </div>
-            <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="contact-row" style="margin-bottom: 0; border-radius: 0 0 10px 10px;">
-                <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
-                <div><span class="contact-label">Doctolib</span><span style="display:block; color:var(--accent); font-weight:600;">tinyurl.com/Savianu</span></div>
-            </a>
-            <p style="font-size: 0.8rem; color: var(--text-medium); margin-top: 10px;">
-                Per comunicazioni mediche usa Doctolib o la visita in studio.
-            </p>
         </section>
 
         <section class="card">
@@ -291,7 +291,7 @@
 </site-footer>
 
 <script src="config.js"></script>
-<script src="app.js?v=13"></script>
+<script src="app.js?v=14"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
