@@ -327,7 +327,7 @@ const translations = {
         // Doctolib announcement
         doctolib_banner_text: 'Dal 30 giugno 2026 non si accettano più prenotazioni via email o sito savianu.it. Utilizza <strong>Doctolib</strong> per prenotazioni e richieste.',
         doctolib_modal_title: 'Avviso Importante',
-        doctolib_modal_text: 'Gentili assistiti, per motivi legati alla privacy e gestione dei dati sensibili dei pazienti dal 30 giugno 2026 non sarà più possibile utilizzare mail o prendere appuntamenti direttamente dal mio sito savianu.it.<br><br>Potete richiedere farmaci continuativi, inviare richieste o consigli medici o prenotare un appuntamento scaricando l\'applicazione gratuita Doctolib o direttamente dal sito Doctolib.it:<br><br><a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;font-size:1.1rem;">clicca qui → tinyurl.com/Savianu</a>',
+        doctolib_modal_text: 'Gentili assistiti, per motivi legati alla privacy e gestione dei dati sensibili dei pazienti dal 30 giugno 2026 non sarà più possibile utilizzare mail o prendere appuntamenti direttamente dal mio sito savianu.it.<br><br>Potete richiedere farmaci continuativi, inviare richieste o consigli medici o prenotare un appuntamento scaricando l\'applicazione gratuita Doctolib o direttamente dal sito Doctolib.it:<br><br><a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="display:block; background:var(--accent); color:#fff; text-align:center; padding:14px 20px; border-radius:8px; font-weight:700; font-size:1.2rem; text-decoration:none; margin:15px 0;">clicca qui</a>',
         doctolib_modal_btn: 'Ho letto',
 
         // CTA buttons
