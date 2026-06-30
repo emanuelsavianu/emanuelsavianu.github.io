@@ -44,18 +44,15 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 const i18n = {
     it: {
         subtitle: "Studio Medico Ippocrate",
-        millebook: "Accedi a MilleBook",
-        millebook_sub: "Ricette, Referti e Fascicolo",
-        book: "Prenota Visita",
-        booking_title: "Prenotazione Online",
-        tap_to_book: "Tocca un bottone per prenotare.",
+        book: "Prenota su Doctolib",
+        booking_title: "Prenotazione su Doctolib",
         contacts: "Contatti Studio",
         label_doctor: "Tel. Personale (Solo Urgenze)",
         label_secretary: "Segreteria e Appuntamenti",
         address: "Studio Medico Ippocrate",
         hours: "Orari di Studio",
         appt_only: "Solo su appuntamento",
-        new_patients_alert: "<strong>Nuovi Pazienti:</strong> Prenotate \"Prima Visita\". Vi iscriver\u00f2 a Millebook in studio.",
+        new_patients_alert: "<strong>Nuovi Pazienti:</strong> Prenotate \"Prima Visita\" su Doctolib. Vi iscriver\u00f2 all'assistenza in studio.",
         cal_prima_title: "Prima Visita",
         cal_prima_sub: "Solo per i nuovi pazienti (45 min)",
         cal_ord_title: "Visita Ordinaria",
@@ -70,18 +67,15 @@ const i18n = {
     },
     en: {
         subtitle: "Studio Medico Ippocrate",
-        millebook: "Login to MilleBook",
-        millebook_sub: "Prescriptions & Records",
-        book: "Book Visit",
-        booking_title: "Book Appointment",
-        tap_to_book: "Tap a button to book your appointment.",
+        book: "Book on Doctolib",
+        booking_title: "Book on Doctolib",
         contacts: "Office Contacts",
         label_doctor: "Dr. Savianu (Emergencies only)",
         label_secretary: "Reception & Appointments",
         address: "Clinic Address",
         hours: "Opening Hours",
         appt_only: "By appointment only",
-        new_patients_alert: "<strong>New Patients:</strong> Book a \u2018First Visit\u2019. I will enrol you in Millebook at the clinic.",
+        new_patients_alert: "<strong>New Patients:</strong> Book a \u2018First Visit\u2019 on Doctolib. I will register you at the clinic.",
         cal_prima_title: "First Visit",
         cal_prima_sub: "For new patients only (45 min)",
         cal_ord_title: "Standard Visit",
@@ -154,12 +148,23 @@ function scrollToBooking() {
 function closeModal(id) {
     const el = document.getElementById(id);
     if (el) el.style.display = 'none';
-    localStorage.setItem(id + '_seen_v3', new Date().getTime());
+    localStorage.setItem(id + '_seen_v4', new Date().getTime());
+}
+
+function initDoctolibBanner() {
+    var banner = document.getElementById('doctolib-banner');
+    var textEl = document.getElementById('doctolib-banner-text');
+    if (!banner || !textEl) return;
+    var lang = localStorage.getItem('preferredLanguage') || 'it';
+    var doctolibText = lang === 'it'
+        ? 'Dal 30 giugno 2026 non si accettano più prenotazioni via email o sito savianu.it. Utilizza <strong>Doctolib</strong> per prenotazioni e richieste.'
+        : 'From 30 June 2026, bookings via email or savianu.it are no longer accepted. Use <strong>Doctolib</strong> for appointments and requests.';
+    textEl.innerHTML = doctolibText + ' <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;text-decoration:underline;white-space:nowrap;">' + (lang === 'it' ? 'Clicca qui' : 'Click here') + ' →</a>';
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-    initTheme(); renderHours(); initFerieBanner();
-    if(!localStorage.getItem('welcome-modal_seen_v3')) {
+    initTheme(); renderHours(); initFerieBanner(); initDoctolibBanner();
+    if(!localStorage.getItem('welcome-modal_seen_v4')) {
         const modal = document.getElementById('welcome-modal');
         if (modal) modal.style.display = 'flex';
     }

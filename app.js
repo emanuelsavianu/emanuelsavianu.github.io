@@ -27,6 +27,10 @@ class SiteHeader extends HTMLElement {
         '<span id="ferie-banner-text"></span>' +
         '<button id="ferie-banner-close" data-i18n-aria-label="ferie_banner_close_label" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>' +
       '</div>' +
+      '<div id="doctolib-banner">' +
+        '<i class="fas fa-info-circle"></i>' +
+        '<span id="doctolib-banner-text"></span>' +
+      '</div>' +
       '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>' +
       '<a href="faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
         '<i class="fas fa-question-circle"></i>' +
@@ -60,9 +64,9 @@ class SiteFooter extends HTMLElement {
           '<i class="fas fa-question-circle" aria-hidden="true"></i>' +
           '<span>FAQ</span>' +
         '</a>' +
-        '<a href="mailto:segreteria@savianu.it" class="qa-item" data-i18n-aria-label="qa_email_label" aria-label="Scrivi una email alla segreteria">' +
-          '<i class="fas fa-envelope" aria-hidden="true"></i>' +
-          '<span data-i18n="qa_email">Email</span>' +
+        '<a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib">' +
+          '<i class="fas fa-calendar-check" aria-hidden="true"></i>' +
+          '<span data-i18n="qa_doctolib">Doctolib</span>' +
         '</a>' +
       '</nav>'
     );
@@ -225,9 +229,9 @@ const translations = {
 
 
         // Booking section
-        booking_title: "Seleziona il tipo di visita",
-        booking_guide_title: "Come prenotare:",
-        booking_guide_steps: "<li>Clicca il pulsante del tipo di visita qui sotto.</li><li>Scegli il giorno e l'orario disponibile sul calendario.</li><li>Inserisci Nome, Cognome e un indirizzo Email.</li><li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>",
+        booking_title: "Prenotazione su Doctolib",
+        booking_guide_title: "Scegli cosa fare:",
+        booking_guide_steps: "",
         cal_prima_title: "Prima Visita (Nuovi Pazienti)",
         cal_prima_desc: "Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)",
         cal_ord_title: "Visita Ordinaria",
@@ -281,7 +285,7 @@ const translations = {
         welcome_step2_title: "2. Urgenze e Contatto Diretto",
         welcome_step2_p1: "Segreteria: <strong>0575 910 904</strong>",
         welcome_step2_p2: "<strong>Urgenze vere: chiamare 112 / 116 117.</strong>",
-        welcome_step2_p3: "Il numero del Dottore (0575 171 3428) è riservato solo alle urgenze.",
+        welcome_step2_p3: "",
         welcome_step3_title: "",
         welcome_step3_p1: "",
         welcome_step3_p2: "",
@@ -302,15 +306,15 @@ const translations = {
         faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Prenotazioni e Appuntamenti",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Ricette e Farmaci",
         faq_q1: "Come prenoto una visita?",
-        faq_a1: "Il modo più semplice e veloce è tramite il <strong>sito web</strong>:<ul><li>Vai su <a href='index.html'>savianu.it</a> e clicca \"Prenota Visita\"</li><li>Scegli il tipo: <strong>Prima Visita</strong>, <strong>Visita Ordinaria</strong> o <strong>Sintomi Recenti</strong></li><li>Seleziona giorno e orario dal calendario</li><li>Inserisci nome, cognome ed email per la conferma</li></ul><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
+        faq_a1: "Le prenotazioni avvengono tramite <strong>Doctolib</strong>:<ul><li>Clicca \"Prenota su Doctolib\" qui sotto o vai su <a href='index.html'>savianu.it</a></li><li>Scegli il tipo di visita nell'app Doctolib</li><li>Conferma l'appuntamento</li></ul><div class='highlight-box'><a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Clicca qui per prenotare →</a></div><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
         faq_q2: "Posso venire senza appuntamento?",
         faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.",
         faq_q3: "Quali sono gli orari dell'ambulatorio?",
         faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì, Mercoledì, Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Martedì, Giovedì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
         faq_q4: "Come annullo o sposto un appuntamento?",
-        faq_a4: "Nell'email di conferma troverete un link per <strong>modificare o cancellare</strong> l'appuntamento direttamente dal calendario.<br><br>Se non trovate l'email, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
+        faq_a4: "Per modificare o cancellare un appuntamento, aprite la conferma nell'app Doctolib o accedete al vostro account su Doctolib.it.<br><br>In alternativa, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
         faq_q5: "Come richiedo la ricetta per i farmaci che prendo regolarmente?",
-        faq_a5: "Potete richiederla nei seguenti modi:<ul><li>Contattando la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio</li><li>Scrivendo a <strong><a href='mailto:studiomedicoippocratearezzo@gmail.com' style='color: var(--accent); font-weight: 700;'>studiomedicoippocratearezzo@gmail.com</a></strong></li><li>Durante una visita in studio</li></ul><div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
+        faq_a5: "Potete richiederla tramite <strong>Doctolib</strong> (inviando un messaggio al medico) o nei seguenti modi:<ul><li>Contattando la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio</li><li>Durante una visita in studio</li></ul><div class='highlight-box'><a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Invia richiesta su Doctolib →</a></div><div class='highlight-box'><strong>Importante:</strong> Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema, potete ritirarle in qualsiasi farmacia comunicando il codice fiscale.</div>",
         faq_sec_certificati: "<i class='fas fa-file-medical'></i> Certificati",
         faq_sec_referti: "<i class='fas fa-flask'></i> Referti ed Esami",
         faq_sec_nuovi: "<i class='fas fa-user-plus'></i> Nuovi Pazienti",
@@ -321,9 +325,9 @@ const translations = {
         faq_q7: "Come accedo ai miei referti?",
         faq_a7: "I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, prenotate una visita ordinaria.",
         faq_q9: "Come mi iscrivo come nuovo paziente?",
-        faq_a9: "Per iscriversi come nuovo paziente occorre:<ul><li>Avere residenza o domicilio nel territorio di Arezzo</li><li>Presentarsi in segreteria con <strong>tessera sanitaria</strong> e <strong>documento d'identità</strong></li></ul>Dopo la registrazione, prenotare la prima visita selezionando <strong>\"Prima Visita (Nuovi Pazienti)\"</strong> (30 min).<div class='highlight-box'>Portare alla prima visita: lista farmaci, esami precedenti, referti e codice esenzione se presente.</div>",
+        faq_a9: "Per iscriversi come nuovo paziente occorre:<ul><li>Avere residenza o domicilio nel territorio di Arezzo</li><li>Presentarsi in segreteria con <strong>tessera sanitaria</strong> e <strong>documento d'identità</strong></li></ul>Dopo la registrazione, prenotare la prima visita su <strong>Doctolib</strong> scegliendo il tipo di visita appropriato.<div class='highlight-box'>Portare alla prima visita: lista farmaci, esami precedenti, referti e codice esenzione se presente.</div>",
         faq_q10: "Cosa faccio in caso di emergenza?",
-        faq_a10: "In caso di emergenza medica chiamare sempre il <strong>112</strong>.<br><br>Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la <strong>Continuità Assistenziale</strong> (ex Guardia Medica) al numero <strong>116 117</strong>.<div class='highlight-box'>Il numero personale del Dottore (0575 171 3428) è riservato esclusivamente alle urgenze reali durante l'orario lavorativo.</div>",
+        faq_a10: "In caso di emergenza medica chiamare sempre il <strong>112</strong>.<br><br>Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la <strong>Continuità Assistenziale</strong> (ex Guardia Medica) al numero <strong>116 117</strong>.",
         faq_q11: "Come richiedo un'impegnativa per esami o visite specialistiche?",
         faq_a11: "Le impegnative per esami del sangue, radiografie o visite specialistiche si richiedono durante la visita in ambulatorio o contattando la segreteria al <strong>0575 910 904</strong>.<div class='highlight-box'>Per prenotare esami tramite il SSN, utilizzate il <strong>CUP Toscana</strong> una volta ottenuta l'impegnativa.</div>",
         faq_cta_title: "Non hai trovato la risposta?",
@@ -335,8 +339,8 @@ const translations = {
         flowchart_opt_night: '<i class="fas fa-moon"></i> È sera, notte o weekend',
         flowchart_opt_faq: '<i class="fas fa-question-circle"></i> Ho un\'altra domanda',
         flowchart_end_book_title: 'Prenota una visita',
-        flowchart_end_book_desc: 'Scegli il tipo di visita qui sotto e poi seleziona giorno e orario sul calendario.',
-        flowchart_end_book_action: 'Scegli il tipo di visita',
+        flowchart_end_book_desc: 'Clicca "Prenota su Doctolib" qui sotto per scegliere il tipo di visita e prenotare.',
+        flowchart_end_book_action: 'Prenota su Doctolib',
         flowchart_end_116_title: 'Chiama il 116 117',
         flowchart_end_116_desc: 'Per assistenza medica non urgente fuori orario (sera, notte, weekend, festivi): Continuità Assistenziale.',
         flowchart_end_116_action: 'Chiama 116 117',
@@ -351,7 +355,7 @@ const translations = {
         qa_call: 'Chiama',
         qa_book: 'Prenota',
         qa_home: 'Home',
-        qa_email: 'Email',
+        qa_email: 'Doctolib',
 
         // FAQ page extras
         faq_search_placeholder: 'Cerca nelle FAQ...',
@@ -366,7 +370,7 @@ const translations = {
 
         // Misc hardcoded
         service_banner_desc: 'Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).',
-        email_privacy_notice: 'Per privacy, non inviare dettagli clinici via email: usa la visita in studio.',
+        email_privacy_notice: 'Per comunicazioni mediche usa Doctolib o la visita in studio.',
         secretary_hours_label: 'Orari Segreteria - 0575 910 904',
         prescription_request_header: 'Per richiedere la ricetta per i farmaci assunti abitualmente:',
 
@@ -382,7 +386,20 @@ const translations = {
         floating_faq_label: 'Domande Frequenti',
         qa_call_label: 'Chiama la segreteria',
         qa_faq_label: 'Domande frequenti',
-        qa_email_label: 'Scrivi una email alla segreteria',
+        qa_email_label: 'Apri Doctolib',
+        qa_doctolib_label: 'Apri Doctolib',
+
+        // Doctolib announcement
+        doctolib_banner_text: 'Dal 30 giugno 2026 non si accettano più prenotazioni via email o sito savianu.it. Utilizza <strong>Doctolib</strong> per prenotazioni e richieste.',
+        doctolib_modal_title: 'Avviso Importante',
+        doctolib_modal_text: 'Gentili assistiti, per motivi legati alla privacy e gestione dei dati sensibili dei pazienti dal 30 giugno 2026 non sarà più possibile utilizzare EMail o prendere appuntamenti direttamente dal mio sito savianu.it.<br><br>Potete richiedere farmaci continuativi, inviare richieste o consigli medici o prenotare un appuntamento scaricando l\'applicazione gratuita Doctolib o direttamente dal sito Doctolib.it:<br><br><a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;font-size:1.1rem;">clicca qui → tinyurl.com/Savianu</a>',
+        doctolib_modal_btn: 'Ho letto',
+
+        // CTA buttons
+        cta_book_doctolib: 'Prenota appuntamento',
+        cta_book_doctolib_sub: 'Scegli giorno e orario su Doctolib',
+        cta_message_doctolib: 'Invia messaggio / Richiedi ricetta',
+        cta_message_doctolib_sub: 'Comunica col medico tramite Doctolib',
 
         // Footer
         footer_malattia_link: 'Certificato di malattia: chi deve farlo?'
@@ -405,9 +422,9 @@ const translations = {
 
 
         // Booking section
-        booking_title: "Select visit type",
-        booking_guide_title: "How to book:",
-        booking_guide_steps: "<li>Click the button for the visit type below.</li><li>Choose an available day and time from the calendar.</li><li>Enter your first name, surname, and an email address.</li><li>Click <strong>Confirm</strong> (you will receive a confirmation email).</li>",
+        booking_title: "Book on Doctolib",
+        booking_guide_title: "Choose what to do:",
+        booking_guide_steps: "",
         cal_prima_title: "First Visit (New Patients)",
         cal_prima_desc: "For new patients only. Bring documents, tests, reports and exemptions. (30 min)",
         cal_ord_title: "Standard Visit",
@@ -463,7 +480,7 @@ const translations = {
         welcome_step2_title: "2. Urgent Matters &amp; Direct Contact",
         welcome_step2_p1: "Reception: <strong>0575 910 904</strong>",
         welcome_step2_p2: "<strong>True emergencies: call 112 / 116 117.</strong>",
-        welcome_step2_p3: "The doctor's direct number (0575 171 3428) is reserved for genuine emergencies only.",
+        welcome_step2_p3: "",
         welcome_step3_title: "",
         welcome_step3_p1: "",
         welcome_step3_p2: "",
@@ -484,15 +501,15 @@ const translations = {
         faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Appointments &amp; Bookings",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Prescriptions &amp; Medications",
         faq_q1: "How do I book a visit?",
-        faq_a1: "The simplest and fastest way is through the <strong>website</strong>:<ul><li>Go to <a href='index.html'>savianu.it</a> and click \"Book Visit\"</li><li>Choose the type: <strong>First Visit</strong>, <strong>Standard Visit</strong>, or <strong>Recent Symptoms</strong></li><li>Select a day and time from the calendar</li><li>Enter your name, surname and email for confirmation</li></ul><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
+        faq_a1: "Book your appointment through <strong>Doctolib</strong>:<ul><li>Click \"Book on Doctolib\" below or go to <a href='index.html'>savianu.it</a></li><li>Choose the visit type in the Doctolib app</li><li>Confirm your appointment</li></ul><div class='highlight-box'><a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Click here to book →</a></div><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
         faq_q2: "Can I come without an appointment?",
         faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book online, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
         faq_q3: "What are the clinic opening hours?",
         faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday, Wednesday, Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Tuesday, Thursday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
         faq_q4: "How do I cancel or reschedule an appointment?",
-        faq_a4: "Your confirmation email contains a link to <strong>modify or cancel</strong> the appointment directly in the calendar.<br><br>If you cannot find the email, please call reception on <strong>0575 910 904</strong> with reasonable notice.",
+        faq_a4: "To <strong>modify or cancel</strong> an appointment, open your confirmation in the Doctolib app or log in to your account at Doctolib.it.<br><br>Alternatively, call reception on <strong>0575 910 904</strong> with reasonable notice.",
         faq_q5: "How do I request a prescription for my regular medications?",
-        faq_a5: "You can request a prescription in the following ways:<ul><li>Call reception on <strong>0575 910 904</strong> during clinic hours</li><li>Email <strong><a href='mailto:studiomedicoippocratearezzo@gmail.com' style='color: var(--accent); font-weight: 700;'>studiomedicoippocratearezzo@gmail.com</a></strong></li><li>During an in-office visit</li></ul><div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
+        faq_a5: "You can request a prescription via <strong>Doctolib</strong> (send a message to the doctor) or:<ul><li>Call reception on <strong>0575 910 904</strong> during clinic hours</li><li>During an in-office visit</li></ul><div class='highlight-box'><a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Send a request on Doctolib →</a></div><div class='highlight-box'><strong>Important:</strong> Electronic prescriptions (NRE) are sent directly to the system — you can collect them at any pharmacy by providing your tax ID (Codice Fiscale).</div>",
         faq_sec_certificati: "<i class='fas fa-file-medical'></i> Certificates",
         faq_sec_referti: "<i class='fas fa-flask'></i> Test Results &amp; Referrals",
         faq_sec_nuovi: "<i class='fas fa-user-plus'></i> New Patients",
@@ -503,9 +520,9 @@ const translations = {
         faq_q7: "How do I access my test results?",
         faq_a7: "Test results are available on the <strong>Electronic Health Record (FSE)</strong>, accessible at salute.toscana.it using SPID or CIE.<br><br>The doctor can review and discuss results during a visit. If you have questions about a result, book a standard appointment.",
         faq_q9: "How do I register as a new patient?",
-        faq_a9: "To register as a new patient you must:<ul><li>Reside or be domiciled in the Arezzo area</li><li>Present yourself at reception with your <strong>health card (tessera sanitaria)</strong> and <strong>photo ID</strong></li></ul>After registration, book your first appointment by selecting <strong>\"First Visit (New Patients)\"</strong> (30 min).<div class='highlight-box'>Bring to your first visit: a list of your current medications, previous test results, specialist reports, and your exemption code if applicable.</div>",
+        faq_a9: "To register as a new patient you must:<ul><li>Reside or be domiciled in the Arezzo area</li><li>Present yourself at reception with your <strong>health card (tessera sanitaria)</strong> and <strong>photo ID</strong></li></ul>After registration, book your first appointment on <strong>Doctolib</strong> by selecting the appropriate visit type.<div class='highlight-box'>Bring to your first visit: a list of your current medications, previous test results, specialist reports, and your exemption code if applicable.</div>",
         faq_q10: "What do I do in an emergency?",
-        faq_a10: "In a medical emergency always call <strong>112</strong>.<br><br>For urgent but non-emergency situations outside clinic hours, contact the <strong>Out-of-Hours Service</strong> (Continuità Assistenziale) on <strong>116 117</strong>.<div class='highlight-box'>The doctor's personal number (0575 171 3428) is reserved for genuine emergencies during working hours only.</div>",
+        faq_a10: "In a medical emergency always call <strong>112</strong>.<br><br>For urgent but non-emergency situations outside clinic hours, contact the <strong>Out-of-Hours Service</strong> (Continuità Assistenziale) on <strong>116 117</strong>.",
         faq_q11: "How do I get a referral for tests or specialist appointments?",
         faq_a11: "Referrals for blood tests, X-rays, or specialist visits must be requested during an in-person clinic visit or by calling reception on <strong>0575 910 904</strong>.<div class='highlight-box'>To book tests through the NHS, use <strong>CUP Toscana</strong> once you have your referral.</div>",
         faq_cta_title: "Didn't find the answer?",
@@ -517,8 +534,8 @@ const translations = {
         flowchart_opt_night: '<i class="fas fa-moon"></i> It\'s evening, night or weekend',
         flowchart_opt_faq: '<i class="fas fa-question-circle"></i> I have another question',
         flowchart_end_book_title: 'Book a visit',
-        flowchart_end_book_desc: 'Choose the type of visit below and then select a day and time from the calendar.',
-        flowchart_end_book_action: 'Choose visit type',
+        flowchart_end_book_desc: 'Click "Book on Doctolib" below to choose the visit type and book.',
+        flowchart_end_book_action: 'Book on Doctolib',
         flowchart_end_116_title: 'Call 116 117',
         flowchart_end_116_desc: 'For non-urgent medical assistance outside hours (evenings, nights, weekends, holidays): Out-of-Hours Service.',
         flowchart_end_116_action: 'Call 116 117',
@@ -531,7 +548,7 @@ const translations = {
         qa_call: 'Call',
         qa_book: 'Book',
         qa_home: 'Home',
-        qa_email: 'Email',
+        qa_email: 'Doctolib',
 
         // FAQ page extras
         faq_search_placeholder: 'Search the FAQ...',
@@ -546,7 +563,7 @@ const translations = {
 
         // Misc hardcoded
         service_banner_desc: 'Find immediate answers to common questions (certificates, exemptions, referrals).',
-        email_privacy_notice: 'For privacy reasons, do not send clinical details via email: use an in-office visit.',
+        email_privacy_notice: 'For medical communications use Doctolib or an in-office visit.',
         secretary_hours_label: 'Reception Hours - 0575 910 904',
         prescription_request_header: 'To request a prescription for your regular medications:',
 
@@ -562,7 +579,20 @@ const translations = {
         floating_faq_label: 'Frequently Asked Questions',
         qa_call_label: 'Call reception',
         qa_faq_label: 'Frequently Asked Questions',
-        qa_email_label: 'Email reception',
+        qa_email_label: 'Open Doctolib',
+        qa_doctolib_label: 'Open Doctolib',
+
+        // Doctolib announcement
+        doctolib_banner_text: 'From 30 June 2026, bookings via email or the savianu.it website are no longer accepted. Use <strong>Doctolib</strong> for appointments and requests.',
+        doctolib_modal_title: 'Important Notice',
+        doctolib_modal_text: 'Dear patients, for privacy reasons and the management of sensitive patient data, from 30 June 2026 it will no longer be possible to use Email or book appointments directly from my website savianu.it.<br><br>You can request repeat prescriptions, send medical inquiries, or book an appointment by downloading the free Doctolib app or directly from Doctolib.it:<br><br><a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;font-size:1.1rem;">click here → tinyurl.com/Savianu</a>',
+        doctolib_modal_btn: 'I understand',
+
+        // CTA buttons
+        cta_book_doctolib: 'Book an appointment',
+        cta_book_doctolib_sub: 'Choose date and time on Doctolib',
+        cta_message_doctolib: 'Send a message / Request prescription',
+        cta_message_doctolib_sub: 'Contact the doctor via Doctolib',
 
         // Footer
         footer_malattia_link: 'Sick leave certificate: who should issue it?'
@@ -700,6 +730,39 @@ function dismissFerieBanner() {
     } catch(e) {}
 }
 
+// --- DOCTOLIB BANNER LOGIC ---
+(function() {
+    const banner = document.getElementById('doctolib-banner');
+    const textEl = document.getElementById('doctolib-banner-text');
+    if (!banner || !textEl) return;
+    var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
+    var t = translations[lang] || translations['it'];
+    textEl.innerHTML = t.doctolib_banner_text + ' <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="doctolib-banner-link">' + (lang === 'it' ? 'Clicca qui' : 'Click here') + ' →</a>';
+})();
+
+// --- DOCTOLIB WELCOME MODAL ---
+function closeDoctolibModal() {
+    const modal = document.getElementById('doctolib-modal');
+    if (modal) modal.style.display = 'none';
+    try {
+        localStorage.setItem('doctolib-modal_seen', '1');
+    } catch(e) {}
+}
+
+(function() {
+    const modal = document.getElementById('doctolib-modal');
+    if (!modal) return;
+    try {
+        if (localStorage.getItem('doctolib-modal_seen')) return;
+    } catch(e) {}
+    modal.style.display = 'flex';
+})();
+
+function startBooking() {
+    var el = document.getElementById('booking-section');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
 // --- DECISION FLOWCHART ---
 function getFlowLabel(lang, key) {
     return translations[lang]?.[key] || translations['it'][key] || '';
@@ -783,98 +846,5 @@ function renderFlowStep(stepKey) {
     }
 }
 
-var _bookingUrl = '';
 
-function selectVisitType(type, url) {
-    _bookingUrl = url;
-    var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
-
-    if (type === 'breve') {
-        proceedToBooking();
-        return;
-    }
-
-    var visitMeta = {
-        prima: {
-            icon: 'fas fa-user-plus',
-            titleKey: 'cal_prima_title',
-            checklist: [
-                { icon: '📁', text: lang === 'it' ? 'Cartella Clinica completa (da chiedere al precedente Medico di Famiglia)' : 'Complete Medical Record (request from your previous GP)' },
-                { icon: '📋', text: lang === 'it' ? 'Eventuali piani terapeutici' : 'Any active treatment plans' },
-                { icon: '🏷️', text: lang === 'it' ? 'Esenzioni attive (se presenti)' : 'Active exemptions (if applicable)' }
-            ],
-            note: lang === 'it' ? '⏱ Durata stimata: 30 minuti. Si prega di arrivare puntuali.' : '⏱ Estimated duration: 30 minutes. Please arrive on time.'
-        },
-        ordinaria: {
-            icon: 'fas fa-stethoscope',
-            titleKey: 'cal_ord_title',
-            checklist: [
-                { icon: '📄', text: lang === 'it' ? 'Porta eventuali esami o referti recenti pertinenti alla visita' : 'Bring any recent test results or reports relevant to the visit' }
-            ],
-            note: lang === 'it' ? '⏱ Durata stimata: 20 minuti.' : '⏱ Estimated duration: 20 minutes.'
-        },
-        breve: {
-            icon: 'fas fa-clock',
-            titleKey: 'cal_breve_title',
-            checklist: [],
-            note: ''
-        },
-        privata: {
-            icon: 'fas fa-user-tie',
-            titleKey: 'cal_privata_title',
-            checklist: [
-                { icon: '🆔', text: lang === 'it' ? 'Carta d\'identità' : 'Photo ID' },
-                { icon: '🏥', text: lang === 'it' ? 'Tessera Sanitaria' : 'Health Insurance Card' },
-                { icon: '📁', text: lang === 'it' ? 'Cartella Clinica Completa preferibilmente in formato digitale, con tutte le visite specialistiche, referti, esami diagnostici' : 'Complete Medical Record preferably in digital format, with all specialist visits, reports, and diagnostic tests' }
-            ],
-            note: lang === 'it' ? '⏱ Durata stimata: un\'ora.' : '⏱ Estimated duration: one hour.'
-        }
-    };
-
-    var meta = visitMeta[type];
-    if (!meta) return;
-
-    var t = translations[lang] || translations['it'];
-    var visitTitle = t[meta.titleKey] || type;
-
-    var checklistItems = meta.checklist.map(function(item) {
-        return '<div class="checklist-item"><span class="checklist-item-icon">' + item.icon + '</span><span>' + item.text + '</span></div>';
-    }).join('');
-
-    var grid = document.querySelector('.cal-services-grid');
-    var checklist = document.getElementById('booking-checklist');
-    if (!grid || !checklist) return;
-
-    checklist.innerHTML =
-        '<div class="checklist-visit-header">' +
-            '<i class="' + meta.icon + '" style="color:var(--accent);font-size:1.3rem;flex-shrink:0;"></i>' +
-            '<h4>' + visitTitle + '</h4>' +
-        '</div>' +
-        (meta.checklist.length > 1 || meta.checklist[0].icon !== 'ℹ️' ? '<div class="checklist-label">' + (lang === 'it' ? '✅ Cosa portare alla visita:' : '✅ What to bring:') + '</div>' : '') +
-        '<div class="checklist-items">' + checklistItems + '</div>' +
-        '<div class="checklist-note">' + meta.note + '</div>' +
-        '<button class="btn-proceed-booking" onclick="proceedToBooking()">📅 ' + (lang === 'it' ? 'Procedi alla prenotazione' : 'Proceed to booking') + '</button>' +
-        '<button class="btn-change-visit" onclick="resetBookingGrid()">↩ ' + (lang === 'it' ? 'Cambia tipo di visita' : 'Change visit type') + '</button>';
-
-    grid.classList.add('hidden');
-    checklist.classList.remove('hidden');
-}
-
-function proceedToBooking() {
-    if (_bookingUrl) {
-        let finalUrl = _bookingUrl;
-        if (!finalUrl.includes('mode=AGENDA')) {
-            finalUrl += finalUrl.includes('?') ? '&mode=AGENDA' : '?mode=AGENDA';
-        }
-        window.open(finalUrl, '_blank', 'noopener,noreferrer');
-    }
-}
-
-function resetBookingGrid() {
-    var grid = document.querySelector('.cal-services-grid');
-    var checklist = document.getElementById('booking-checklist');
-    if (grid) grid.classList.remove('hidden');
-    if (checklist) checklist.classList.add('hidden');
-    _bookingUrl = '';
-}
 
