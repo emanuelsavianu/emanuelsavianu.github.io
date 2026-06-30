@@ -13,20 +13,11 @@ class SiteHeader extends HTMLElement {
     this.dataset.rendered = '1';
 
     this.insertAdjacentHTML('beforebegin',
-      '<div id="large-text-banner" role="region" aria-label="Accessibilità testo">' +
-        '<span id="large-text-banner-label" data-i18n="large_text_inactive">🔤 Difficoltà a leggere?</span>' +
-        '<button id="large-text-toggle-btn" class="large-text-btn" onclick="toggleLargeText()" data-i18n="large_text_btn_inactive">A+ Testo Grande</button>' +
-      '</div>' +
       '<a href="android.html" class="mobile-app-banner">' +
         '<i class="fas fa-mobile-screen-button"></i>' +
         '<span data-i18n="mobile_app_banner">Apri la versione App</span>' +
         '<i class="fas fa-chevron-right banner-arrow"></i>' +
       '</a>' +
-      '<div id="ferie-banner" hidden role="alert" aria-live="polite">' +
-        '<i class="fas fa-location-dot"></i>' +
-        '<span id="ferie-banner-text"></span>' +
-        '<button id="ferie-banner-close" data-i18n-aria-label="ferie_banner_close_label" aria-label="Chiudi avviso ferie" onclick="dismissFerieBanner()">×</button>' +
-      '</div>' +
       '<div id="doctolib-banner">' +
         '<i class="fas fa-info-circle"></i>' +
         '<span id="doctolib-banner-text"></span>' +
@@ -163,50 +154,7 @@ function initDarkMode() {
 initDarkMode();
 
 
-// --- LARGE TEXT ACCESSIBILITY MODE ---
-function updateLargeTextBanner(isActive) {
-    var banner = document.getElementById('large-text-banner');
-    var label  = document.getElementById('large-text-banner-label');
-    var btn    = document.getElementById('large-text-toggle-btn');
-    if (!banner || !label || !btn) return;
-    
-    var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
-    
-    if (isActive) {
-        banner.classList.add('active');
-        banner.classList.remove('hidden');
-        label.textContent = translations[lang]?.large_text_active || translations['it'].large_text_active;
-        btn.textContent   = translations[lang]?.large_text_btn_active || translations['it'].large_text_btn_active;
-    } else {
-        banner.classList.remove('active');
-        label.textContent = translations[lang]?.large_text_inactive || translations['it'].large_text_inactive;
-        btn.textContent   = translations[lang]?.large_text_btn_inactive || translations['it'].large_text_btn_inactive;
-    }
-}
 
-function toggleLargeText() {
-    var isActive = document.body.classList.toggle('large-text');
-    try { localStorage.setItem('largeText', isActive ? 'enabled' : 'disabled'); } catch(e) {}
-    updateLargeTextBanner(isActive);
-}
-
-function initLargeText() {
-    try {
-        if (localStorage.getItem('largeText') === 'enabled') {
-            document.body.classList.add('large-text');
-            updateLargeTextBanner(true);
-        }
-    } catch(e) {}
-    // Hide banner on first scroll only if large text is NOT active
-    window.addEventListener('scroll', function() {
-        if (!document.body.classList.contains('large-text')) {
-            var banner = document.getElementById('large-text-banner');
-            if (banner) banner.classList.add('hidden');
-        }
-    }, { once: true });
-}
-
-initLargeText();
 
 
 // --- LANGUAGE MANAGEMENT ---
@@ -255,6 +203,8 @@ const translations = {
 
         // Contacts
         contacts_title: "Contatti Studio",
+        label_doctolib_contacts: "Appuntamenti, Messaggi, Rinnovi Farmaci",
+        label_secretary_fallback: "Segreteria (solo se non puoi usare Doctolib)",
         label_secretary: "Segreteria e Appuntamenti",
         label_doctor: "Tel. Personale (Solo Urgenze)",
         label_address: "Studio Medico Ippocrate",
@@ -321,9 +271,9 @@ const translations = {
         faq_sec_urgenze: "<i class='fas fa-ambulance'></i> Urgenze e Fuori Orario",
         faq_sec_varie: "<i class='fas fa-stethoscope'></i> Altri Servizi",
         faq_q6: "Come richiedo un certificato medico?",
-        faq_a6: "I certificati si richiedono durante una visita in ambulatorio o telefonando la segreteria al <strong>0575 910 904</strong>.<br><br>Presentarsi con la documentazione necessaria: il certificato viene emesso direttamente in ambulatorio.<div class='highlight-box'><strong>Certificati INPS malattia:</strong> Richiedono una visita. Prenotare selezionando \"Sintomi Recenti\".</div>",
+        faq_a6: "I certificati si richiedono durante una visita in ambulatorio o telefonando la segreteria al <strong>0575 910 904</strong>.<br><br>Presentarsi con la documentazione necessaria: il certificato viene emesso direttamente in ambulatorio.<div class='highlight-box'><strong>Certificati INPS malattia:</strong> Richiedono una visita. <a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Prenotare su Doctolib →</a></div>",
         faq_q7: "Come accedo ai miei referti?",
-        faq_a7: "I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, prenotate una visita ordinaria.",
+        faq_a7: "I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, <a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>prenotate una visita su Doctolib →</a>",
         faq_q9: "Come mi iscrivo come nuovo paziente?",
         faq_a9: "Per iscriversi come nuovo paziente occorre:<ul><li>Avere residenza o domicilio nel territorio di Arezzo</li><li>Presentarsi in segreteria con <strong>tessera sanitaria</strong> e <strong>documento d'identità</strong></li></ul>Dopo la registrazione, prenotare la prima visita su <strong>Doctolib</strong> scegliendo il tipo di visita appropriato.<div class='highlight-box'>Portare alla prima visita: lista farmaci, esami precedenti, referti e codice esenzione se presente.</div>",
         faq_q10: "Cosa faccio in caso di emergenza?",
@@ -374,15 +324,8 @@ const translations = {
         secretary_hours_label: 'Orari Segreteria - 0575 910 904',
         prescription_request_header: 'Per richiedere la ricetta per i farmaci assunti abitualmente:',
 
-        // Large text banner
-        large_text_inactive: '🔤 Difficoltà a leggere?',
-        large_text_btn_inactive: 'A+ Testo Grande',
-        large_text_active: '✓ Testo grande attivo',
-        large_text_btn_active: 'A− Normale',
-
         // Accessibility — aria-label i18n
         skip_link: 'Vai al contenuto principale',
-        ferie_banner_close_label: 'Chiudi avviso ferie',
         floating_faq_label: 'Domande Frequenti',
         qa_call_label: 'Chiama la segreteria',
         qa_faq_label: 'Domande frequenti',
@@ -450,6 +393,8 @@ const translations = {
 
         // Contacts
         contacts_title: "Office Contacts",
+        label_doctolib_contacts: "Appointments, Messages, Prescription Renewals",
+        label_secretary_fallback: "Reception (only if you cannot use Doctolib)",
         label_secretary: "Reception &amp; Appointments",
         label_doctor: "Personal Phone (Emergencies only)",
         label_address: "Studio Medico Ippocrate",
@@ -503,7 +448,7 @@ const translations = {
         faq_q1: "How do I book a visit?",
         faq_a1: "Book your appointment through <strong>Doctolib</strong>:<ul><li>Click \"Book on Doctolib\" below or go to <a href='index.html'>savianu.it</a></li><li>Choose the visit type in the Doctolib app</li><li>Confirm your appointment</li></ul><div class='highlight-box'><a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Click here to book →</a></div><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
         faq_q2: "Can I come without an appointment?",
-        faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book online, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
+        faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book via Doctolib, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
         faq_q3: "What are the clinic opening hours?",
         faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday, Wednesday, Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Tuesday, Thursday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
         faq_q4: "How do I cancel or reschedule an appointment?",
@@ -516,9 +461,9 @@ const translations = {
         faq_sec_urgenze: "<i class='fas fa-ambulance'></i> Emergencies &amp; Out-of-Hours",
         faq_sec_varie: "<i class='fas fa-stethoscope'></i> Other Services",
         faq_q6: "How do I request a medical certificate?",
-        faq_a6: "Certificates can be requested during a clinic visit or by calling reception on <strong>0575 910 904</strong>.<br><br>Bring any relevant documents; the certificate is issued on the spot at the clinic.<div class='highlight-box'><strong>INPS sick leave certificates</strong> require an in-person visit. Book by selecting \"Recent Symptoms\".</div>",
+        faq_a6: "Certificates can be requested during a clinic visit or by calling reception on <strong>0575 910 904</strong>.<br><br>Bring any relevant documents; the certificate is issued on the spot at the clinic.<div class='highlight-box'><strong>INPS sick leave certificates</strong> require an in-person visit. <a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Book on Doctolib →</a></div>",
         faq_q7: "How do I access my test results?",
-        faq_a7: "Test results are available on the <strong>Electronic Health Record (FSE)</strong>, accessible at salute.toscana.it using SPID or CIE.<br><br>The doctor can review and discuss results during a visit. If you have questions about a result, book a standard appointment.",
+        faq_a7: "Test results are available on the <strong>Electronic Health Record (FSE)</strong>, accessible at salute.toscana.it using SPID or CIE.<br><br>The doctor can review and discuss results during a visit. If you have questions about a result, <a href='https://tinyurl.com/Savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>book an appointment on Doctolib →</a>",
         faq_q9: "How do I register as a new patient?",
         faq_a9: "To register as a new patient you must:<ul><li>Reside or be domiciled in the Arezzo area</li><li>Present yourself at reception with your <strong>health card (tessera sanitaria)</strong> and <strong>photo ID</strong></li></ul>After registration, book your first appointment on <strong>Doctolib</strong> by selecting the appropriate visit type.<div class='highlight-box'>Bring to your first visit: a list of your current medications, previous test results, specialist reports, and your exemption code if applicable.</div>",
         faq_q10: "What do I do in an emergency?",
@@ -567,15 +512,8 @@ const translations = {
         secretary_hours_label: 'Reception Hours - 0575 910 904',
         prescription_request_header: 'To request a prescription for your regular medications:',
 
-        // Large text banner
-        large_text_inactive: '🔤 Difficulty reading?',
-        large_text_btn_inactive: 'A+ Large Text',
-        large_text_active: '✓ Large text active',
-        large_text_btn_active: 'A− Normal',
-
         // Accessibility — aria-label i18n
         skip_link: 'Skip to main content',
-        ferie_banner_close_label: 'Dismiss holiday notice',
         floating_faq_label: 'Frequently Asked Questions',
         qa_call_label: 'Call reception',
         qa_faq_label: 'Frequently Asked Questions',
@@ -619,8 +557,6 @@ function setLanguage(lang) {
         if (translations[lang]?.[key]) el.setAttribute('aria-label', translations[lang][key]);
     });
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
-
-    updateLargeTextBanner(document.body.classList.contains('large-text'));
 }
 
 try {
@@ -702,33 +638,6 @@ function trapFocus(modal) {
         : '<i class="fas fa-circle"></i> ' + closedLabel;
     anchor.parentNode.appendChild(badge);
 })();
-
-// --- FERIE BANNER LOGIC ---
-(function() {
-    const banner = document.getElementById('ferie-banner');
-    const textEl = document.getElementById('ferie-banner-text');
-    if (!banner || !textEl) return;
-
-    const active = CONFIG.getActiveAbsence();
-
-    if (!active) return;
-
-    try {
-        if (sessionStorage.getItem('ferie-dismissed-' + active.from)) return;
-    } catch(e) {}
-
-    textEl.textContent = active.note;
-    banner.removeAttribute('hidden');
-})();
-
-function dismissFerieBanner() {
-    const banner = document.getElementById('ferie-banner');
-    if (banner) banner.setAttribute('hidden', '');
-    try {
-        const active = CONFIG.getActiveAbsence();
-        if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
-    } catch(e) {}
-}
 
 // --- DOCTOLIB BANNER LOGIC ---
 (function() {
