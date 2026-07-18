@@ -310,6 +310,10 @@ const translations = {
         sw_update_available: 'Aggiornamento disponibile',
         sw_update_now: 'Aggiorna ora',
 
+        // Certificato INPS
+        cert_inps_btn: 'Sei qui per un certificato per l\'INPS? Premi qui',
+        cert_inps_desc: '<strong style="color: var(--primary);">Certificato Invalidità Civile, Accompagnamento e Legge 104 ad Arezzo</strong><br><br>Il Dott. Emanuel Savianu, Certificatore Telematico INPS autorizzato, fornisce il nuovo Certificato Medico Introduttivo necessario per la domanda di invalidità civile, Legge 104 e accompagnamento ad Arezzo e provincia (D.Lgs. 62/2024). Esperienza come medico di categoria ANMIC nelle commissioni Medico-Legali.',
+
         // Misc hardcoded
         service_banner_desc: 'Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).',
         email_privacy_notice: 'Per comunicazioni mediche usa Doctolib o la visita in studio.',
@@ -489,6 +493,10 @@ const translations = {
         // SW update toast
         sw_update_available: 'Update available',
         sw_update_now: 'Update now',
+
+        // Certificato INPS
+        cert_inps_btn: 'INPS certificate? Click here',
+        cert_inps_desc: '<strong style="color: var(--primary);">Civil Disability, Attendance Allowance and Law 104 Certificate in Arezzo</strong><br><br>Dr. Emanuel Savianu, authorized INPS Telematic Certifier, provides the new Introductory Medical Certificate required for civil disability, Law 104 and attendance allowance applications in Arezzo and province (Legislative Decree 62/2024). Experience as ANMIC category doctor in Medico-Legal commissions.',
 
         // Misc hardcoded
         service_banner_desc: 'Find immediate answers to common questions (certificates, exemptions, referrals).',
