@@ -2,7 +2,7 @@
   "name": "Studio Medico Dr. Savianu",
   "short_name": "Dr. Savianu",
   "description": "Studio Medico Dott. Emanuel Savianu - Medico di Medicina Generale Arezzo",
-  "start_url": "/android.html",
+  "start_url": "/",
   "display": "standalone",
   "background_color": "#1a2f4c",
   "theme_color": "#1a2f4c",
