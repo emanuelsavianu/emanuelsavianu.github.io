@@ -633,6 +633,20 @@ body.dark-mode .welcome-step-emergency p b { color: #ff6b6b; }
 body.dark-mode .text-primary { 
     color: var(--accent) !important; 
 }
+
+/* 116117 info boxes */
+.box-info {
+    background: var(--bg-gradient-1); padding: 20px; border-radius: var(--radius-md);
+    border-left: 4px solid #22c55e; height: 100%;
+}
+.box-danger {
+    background: #fff0f0; padding: 20px; border-radius: var(--radius-md);
+    border-left: 4px solid var(--danger); height: 100%;
+}
+body.dark-mode .box-danger {
+    background: #2d1a1a;
+    border-left-color: #ff6b6b;
+}
 body.dark-mode .btn-cal-service.prima .cal-icon-wrapper {
     color: var(--accent);
 }
