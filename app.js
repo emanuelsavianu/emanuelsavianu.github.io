@@ -198,8 +198,19 @@ const translations = {
 
         // Emergency & out-of-hours
         emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
-        guard_title: "Continuità Assistenziale (ex-Guardia Medica)",
-        guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
+        title_116117: "116 117 — Assistenza Sanitaria Non Urgente",
+        cta_116117_main: "CHIAMA IL 116 117",
+        note_116117_free: "(Numero gratuito, sempre attivo 24 ore su 24)",
+        desc_116117_operator: "Un medico o un operatore ti aiuterà a capire cosa fare.",
+        when_call_116117: "✅ QUANDO CHIAMARE IL 116 117:",
+        item_when_1: "Per consigli medici quando il tuo dottore non c'è.",
+        item_when_2: "Per la Guardia Medica (di notte, nei weekend e festivi).",
+        item_when_3: "Per informazioni sui servizi sanitari della zona.",
+        when_not_call_116117: "❌ QUANDO NON CHIAMARE IL 116 117:",
+        item_not_emergency: "<strong>Emergenze gravi:</strong> Chiama subito il <strong>112</strong>.",
+        item_not_booking: "<strong>Per prenotare esami o visite:</strong> Chiama il CUP (<strong>800 575 575</strong>) o vai in farmacia.",
+        aside_116117_prompt: "Segreteria chiusa o non risponde? Non trovi il medico?",
+        aside_116117_sub: "Numero gratuito, sempre attivo 24 ore su 24",
 
         // Contacts
         contacts_title: "Contatti Studio",
@@ -384,8 +395,19 @@ const translations = {
 
         // Emergency & out-of-hours
         emergency_112: "For medical emergencies, always call the emergency number 112.",
-        guard_title: "Out-of-Hours Service (ex-Guardia Medica)",
-        guard_desc: "For non-urgent medical assistance during nights, public holidays and pre-holidays.",
+        title_116117: "116 117 — Non-Urgent Health Care",
+        cta_116117_main: "CALL 116 117",
+        note_116117_free: "(Free, 24/7 service)",
+        desc_116117_operator: "A doctor or operator will help you.",
+        when_call_116117: "✅ WHEN TO CALL 116 117:",
+        item_when_1: "For medical advice when your doctor is unavailable.",
+        item_when_2: "For the out-of-hours doctor service (nights, weekends, holidays).",
+        item_when_3: "For information about local health services.",
+        when_not_call_116117: "❌ WHEN NOT TO CALL 116 117:",
+        item_not_emergency: "<strong>Serious emergencies:</strong> Call <strong>112</strong> immediately.",
+        item_not_booking: "<strong>To book exams or visits:</strong> Call CUP (<strong>800 575 575</strong>) or go to a pharmacy.",
+        aside_116117_prompt: "Office closed or unreachable? Can't find your doctor?",
+        aside_116117_sub: "Free, 24/7 service",
 
         // Contacts
         contacts_title: "Office Contacts",
