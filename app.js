@@ -13,11 +13,6 @@ class SiteHeader extends HTMLElement {
     this.dataset.rendered = '1';
 
     this.insertAdjacentHTML('beforebegin',
-      '<a href="android.html" class="mobile-app-banner">' +
-        '<i class="fas fa-mobile-screen-button"></i>' +
-        '<span data-i18n="mobile_app_banner">Apri la versione App</span>' +
-        '<i class="fas fa-chevron-right banner-arrow"></i>' +
-      '</a>' +
       '<div id="doctolib-banner">' +
         '<i class="fas fa-info-circle"></i>' +
         '<span id="doctolib-banner-text"></span>' +
@@ -160,9 +155,6 @@ initDarkMode();
 // --- LANGUAGE MANAGEMENT ---
 const translations = {
     it: {
-        // Mobile banner
-        mobile_app_banner: "Installa sul telefono (Accesso Rapido)",
-
         // Header
         header_subtitle: "Medico di Medicina Generale - Arezzo",
 
@@ -355,9 +347,6 @@ const translations = {
         footer_malattia_link: 'Certificato di malattia: chi deve farlo?'
     },
     en: {
-        // Mobile banner
-        mobile_app_banner: "Install on your phone (Quick Access)",
-
         // Header
         header_subtitle: "General Practitioner - Arezzo",
 

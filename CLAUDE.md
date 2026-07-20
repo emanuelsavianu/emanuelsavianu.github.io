@@ -12,8 +12,6 @@ Static HTML/CSS/JS medical practice website deployed at **savianu.it** via GitHu
 | `styles.css` | All styles |
 | `sw.js` | Service worker — cache version auto-bumped by hook |
 | `faq.html` | FAQ page |
-| `android.html` | PWA app entry point (separate UX from index.html) |
-| `android.js` | PWA-specific JS: splash screen, install banner, welcome modal |
 | `offline.html` | Service worker offline fallback page |
 | `dottori.html` | "Area Colleghi" — private page for medical colleagues (not linked publicly) |
 | `cloudflare/worker.js` | Cloudflare Worker (rate limiting, security headers) |
@@ -39,7 +37,7 @@ A **PostToolUse hook** runs `node .claude/scripts/bump-sw.js` after every Edit/W
 
 ## Asset Cache-Busting
 
-`styles.css` and `app.js` are linked with `?v=N`. **Manually increment this version in all three HTML files** (`index.html`, `faq.html`, `android.html`) when changing those files. Keep all three in sync on the same version number.
+`styles.css` and `app.js` are linked with `?v=N`. **Manually increment this version in both HTML files** (`index.html`, `faq.html`) when changing those files. Keep both in sync on the same version number.
 
 ## i18n
 
@@ -57,15 +55,14 @@ Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct H
 - **Clinic hours badge**: edit `CONFIG.SCHEDULE` in `config.js`
 - **Visit types & what to bring**: Modify the `visitMeta` object in `selectVisitType()` (app.js, ~line 682). The checklist is generated from the `checklist` array; the `note` field shows duration/details. **Keep descriptions in both `index.html` and `app.js` in sync.**
 - **Booking calendar URLs**: inside `selectVisitType()` calls in `index.html` (Google Calendar links)
-- **Address/contact changes**: update all of `index.html`, `faq.html`, `android.html`, `privacy.html`, `offline.html`, and `app.js` (both IT and ENG translation blocks). Include: meta description, JSON-LD, Google Maps links, and all address displays. Verify completion: `grep -r "old_address" .` returns no results.
+- **Address/contact changes**: update all of `index.html`, `faq.html`, `privacy.html`, `offline.html`, and `app.js` (both IT and ENG translation blocks). Include: meta description, JSON-LD, Google Maps links, and all address displays. Verify completion: `grep -r "old_address" .` returns no results.
 
 ## Gotchas
 
-- The **welcome modal is removed from `index.html`** but still exists in `android.html` (shown on first app launch, dismissed via `closeModal()`). The `#guida-rapida` card logic exists in `app.js` (~line 510) and `styles.css` but the HTML element is currently absent from `index.html` — don't add it without intentionally re-enabling the feature.
+- The `#guida-rapida` card logic exists in `app.js` (~line 510) and `styles.css` but the HTML element is currently absent from the pages — don't add it without intentionally re-enabling the feature.
 - `xsegretarie.html` is a private staff page — not linked from the main site.
 - The Cloudflare `node_modules/` folder is gitignored but large — don't accidentally re-add it.
 - Font Awesome: All pages load as two separate files (`fontawesome.min.css` + `solid.min.css`). Keep consistent across all HTML files.
 - **Google Translate widget**: Dropdown needs `z-index: 99999 !important` to float above `.container` (z-index: 10); on mobile with responsive controls, use `flex-wrap: wrap; justify-content: center` to allow wrapping, hide separators (they break visually across lines). Initialize script must load AFTER config.js/app.js to avoid blocking critical resources.
-- **Mobile header responsiveness**: When re-layouting header controls from absolute positioning to flex stacking, add `overflow: visible` to header so dropdowns/overlays can escape viewport bounds. **For android.html on narrow screens (≤375px):** header flex children must not all have `flex-shrink: 0`—use `flex-shrink: 1; min-width: 0` on `.brand` plus text truncation (`text-overflow: ellipsis`) to prevent overlap.
-- **File Structure**: `index.html` and `faq.html` are responsive website pages (one codebase, adapts to all screens via media queries). `android.html` is a separate PWA entry point with app-optimized UX (splash screen, install banner, app nav). They share CSS/JS but serve different purposes — don't consolidate. PWA manifest.json points to android.html as start_url; web users land on index.html.
+- **Mobile header responsiveness**: When re-layouting header controls from absolute positioning to flex stacking, add `overflow: visible` to header so dropdowns/overlays can escape viewport bounds.
 - **Language Strategy**: ITA/ENG buttons are native site functionality (set user's language preference). Google Translate widget is *for additional languages beyond Italian and English* — ensure both stay visible on mobile (use `flex-wrap: wrap`) so patients can choose native mode or translate to other languages.
