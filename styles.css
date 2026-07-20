@@ -147,19 +147,18 @@ header p {
     padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     display: flex; gap: 10px; align-items: center;
 }
-/* Mobile: de-absolutify and show as a compact strip at the bottom of the header.
-   Scoped to :not(.is-android-page) — android has its own fixed header layout. */
+/* Mobile: de-absolutify and show as a compact strip at the bottom of the header. */
 @media (max-width: 599px) {
-    body:not(.is-android-page) header {
+    body header {
         padding: 20px 20px 80px;
         display: flex;
         flex-direction: column;
         align-items: center;
         overflow: visible; /* allow translate dropdown to escape if it opens upward */
     }
-    body:not(.is-android-page) .header-content { order: 1; width: 100%; }
+    body .header-content { order: 1; width: 100%; }
 
-    body:not(.is-android-page) .lang-switch {
+    body .lang-switch {
         order: 2;
         position: relative;       /* exits absolute flow, becomes a flex item */
         z-index: 3;               /* above header::after overlay (z-index:1) */
@@ -174,7 +173,7 @@ header p {
     }
 
     /* Hide separators — they look broken when items wrap */
-    body:not(.is-android-page) .lang-switch .lang-separator { display: none; }
+    body .lang-switch .lang-separator { display: none; }
 
     /* Larger touch targets for elderly users */
     #btn-dark {
@@ -706,37 +705,6 @@ body.dark-mode .sidebar-logo-img {
 .btn-prenota-large span { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: 0.5px; }
 .btn-prenota-large small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 500; }
 
-/* --- MOBILE APP BANNER (index only, hidden on desktop) --- */
-.mobile-app-banner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    color: var(--accent);
-    border-bottom: 2px solid var(--accent);
-    padding: 13px 24px;
-    font-weight: 700;
-    font-family: var(--font-sans);
-    font-size: 0.78rem;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    z-index: 1000;
-    transition: background 0.2s, color 0.2s, border-color 0.2s;
-}
-.mobile-app-banner:hover {
-    background: linear-gradient(135deg, var(--accent) 0%, #a37c38 100%);
-    color: var(--primary);
-    border-bottom-color: var(--primary);
-    opacity: 1;
-}
-.mobile-app-banner i { font-size: 1rem; }
-.mobile-app-banner .banner-arrow { font-size: 0.65rem; opacity: 0.75; }
-@media (min-width: 768px) { .mobile-app-banner { display: none !important; } }
-
 /* --- NOTICE: READ FAQ (welcome modal) --- */
 .notice-readfaq {
     background: #eff6ff;
@@ -1101,8 +1069,7 @@ textarea:focus-visible,
 .flow-action-btn:focus-visible,
 .flow-restart-btn:focus-visible,
 .floating-faq:focus-visible,
-.contact-row:focus-visible,
-.mobile-app-banner:focus-visible {
+.contact-row:focus-visible {
     outline: 3px solid var(--accent);
     outline-offset: 3px;
     border-radius: 4px;
@@ -1224,133 +1191,5 @@ body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
 @media (max-width: 768px) { #sw-update-toast { bottom: 84px; font-size: 0.8rem; } }
 @media (prefers-reduced-motion: reduce) { #sw-update-toast { transition: opacity 0.01ms; } }
 
-/* =================================================================
-   ANDROID PAGE SPECIFIC STYLES
-   ================================================================= */
 
-.is-android-page {
-    --bg-body: #f3efe6;
-    --bg-card: #ffffff;
-    --bg-header: rgba(26, 47, 76, 0.95);
-    --header-height: 65px;
-    --text-muted: var(--text-medium);
-}
-
-body.dark-mode.is-android-page {
-    --bg-body: #0a1628;
-    --bg-card: #11223a;
-    --bg-header: rgba(10, 22, 40, 0.95);
-}
-
-/* Android modal overlay */
-.is-android-page .modal-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(26,47,76,0.85); z-index: 2000;
-    display: none; align-items: center; justify-content: center; padding: 20px;
-}
-.is-android-page .modal-content {
-    background: var(--bg-card); width: 100%; max-width: 400px;
-    border-radius: 16px; padding: 25px; border: 2px solid var(--accent); color: var(--text-dark);
-}
-.is-android-page .btn-accept {
-    background: var(--primary); color: var(--accent); border: 2px solid var(--accent);
-    padding: 12px 30px; border-radius: 50px; font-weight: 700; width: 100%;
-    font-size: 1rem; margin-top: 15px; text-align: center; cursor: pointer;
-    font-family: var(--font-sans);
-}
-
-/* Logo theme switching */
-.is-android-page .logo-dark { display: none; }
-body.dark-mode.is-android-page .logo-dark { display: block; }
-body.dark-mode.is-android-page .logo-light { display: none; }
-
-.is-android-page {
-    background-color: var(--bg-body);
-    padding: var(--header-height) 0 80px 0;
-}
-
-.is-android-page header {
-    background: var(--bg-header);
-    backdrop-filter: blur(12px);
-    position: fixed; top: 0; left: 0; right: 0; height: var(--header-height);
-    z-index: 100; padding: 0 15px; border-bottom: 2px solid var(--accent);
-    display: flex; justify-content: space-between; align-items: center;
-    text-align: left; overflow: visible; gap: 8px;
-}
-
-.is-android-page header::after { display: none; }
-
-.is-android-page .brand { display: flex; align-items: center; gap: 10px; flex-shrink: 1; min-width: 0; }
-.is-android-page .brand-logo { width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0; }
-.is-android-page .brand > div { min-width: 0; overflow: hidden; }
-.is-android-page .brand h1 { margin: 0; font-family: 'Playball', cursive; font-size: 1.2rem; color: var(--accent); text-shadow: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.is-android-page .brand p { margin: 0; font-size: 0.6rem; color: #ffffff; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; text-shadow: none; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-
-.is-android-page .header-actions {
-    display: flex; align-items: center; gap: 8px; flex-shrink: 0;
-}
-
-.is-android-page .theme-toggle {
-    background: none; border: none; color: var(--accent); font-size: 1.1rem;
-    cursor: pointer; padding: 6px; display: flex; align-items: center;
-    transition: transform 0.2s, opacity 0.2s;
-}
-.is-android-page .theme-toggle:hover { opacity: 0.8; }
-.is-android-page .theme-toggle:active { transform: scale(0.9); }
-
-.is-android-page .lang-switch {
-    position: relative !important; top: auto !important; right: auto !important;
-    background: none; border: 1px solid rgba(194, 155, 87, 0.4); border-radius: 20px;
-    padding: 4px 10px; gap: 6px; z-index: auto;
-    backdrop-filter: none;
-}
-
-.is-android-page .lang-btn {
-    padding: 4px 8px; font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.7); transition: color 0.2s;
-}
-.is-android-page .lang-btn:hover { color: var(--accent); }
-.is-android-page .lang-btn.active { color: var(--accent); font-weight: 700; }
-
-.is-android-page .hero-btn {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    background: var(--primary); color: var(--accent) !important; border: 2px solid var(--accent);
-    padding: 25px; border-radius: 12px; text-align: center; margin-bottom: 20px; width: 100%;
-}
-.is-android-page .hero-btn i { font-size: 2.5rem; margin-bottom: 10px; }
-.is-android-page .hero-btn h2 { margin: 0; font-size: 1.3rem; font-weight: 700; color: var(--accent); }
-.is-android-page .hero-btn p { margin: 5px 0 0; font-size: 0.9rem; color: white;}
-
-.is-android-page .grid-buttons { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; }
-.is-android-page .action-btn { background: var(--bg-card); border: 2px solid var(--accent); padding: 18px 10px; border-radius: 12px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--text-dark); font-weight: bold; }
-.is-android-page .action-btn i { font-size: 1.4rem; color: var(--accent); background: var(--primary); padding: 12px; border-radius: 50%; }
-
-.is-android-page .link-item { display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid var(--border-color); color: var(--text-dark); }
-.is-android-page .link-item .icon { width: 36px; height: 36px; background: var(--primary); color: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
-.is-android-page .link-item .label { display: block; font-size: 0.75rem; color: var(--text-medium); font-weight: bold; text-transform: uppercase;}
-.is-android-page .link-item .val { display: block; font-weight: 700; font-size: 1rem; }
-
-.is-android-page .bottom-nav {
-    position: fixed; bottom: 0; left: 0; right: 0; height: 64px;
-    background: var(--bg-card); border-top: 2px solid var(--border-color);
-    display: flex; justify-content: space-around; align-items: center;
-    z-index: 100; padding-bottom: env(safe-area-inset-bottom, 0);
-}
-.is-android-page .nav-item { display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 0.65rem; font-weight: 700; color: var(--text-medium); padding: 8px 12px; }
-.is-android-page .nav-item.active { color: var(--accent); }
-
-/* Android Splash */
-.is-android-page #splash-screen {
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 9999;
-    background: var(--primary); display: flex; flex-direction: column;
-    align-items: center; justify-content: center; gap: 20px; transition: opacity 0.4s ease;
-}
-.is-android-page #splash-screen.fade-out { opacity: 0; pointer-events: none; }
-.is-android-page #splash-screen img { width: 140px; height: auto; border-radius: 20px; }
-.is-android-page #splash-screen .splash-name { font-family: 'Playball', cursive; font-size: 2.2rem; color: var(--accent); }
-
-body.dark-mode.is-android-page #splash-screen { background: #0a1628; }
-body.dark-mode.is-android-page .hero-btn { background: #1f3659; }
-body.dark-mode.is-android-page .action-btn i,
-body.dark-mode.is-android-page .link-item .icon { background: #1f3659; }
 
