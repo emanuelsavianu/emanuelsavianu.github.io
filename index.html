@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=21">
+    <link rel="stylesheet" href="styles.css?v=22">
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
@@ -221,15 +221,42 @@
             </aside>
         </div>
 
-        <section class="card">
+        <section class="card fade-in" aria-labelledby="title-116117">
             <div class="card-header">
-                <i class="fas fa-moon" aria-hidden="true"></i>
-                <h2 data-i18n="guard_title">Continuità Assistenziale (ex-Guardia Medica)</h2>
+                <i class="fas fa-phone-volume" aria-hidden="true"></i>
+                <h2 id="title-116117" data-i18n="title_116117">116 117 — Assistenza Sanitaria Non Urgente</h2>
             </div>
-            <p data-i18n="guard_desc" style="margin-bottom:10px;">Per assistenza medica non urgente durante la notte, i festivi e prefestivi.</p>
-            <a href="tel:116117" class="btn-telefono-header" style="margin-top: 10px; display: inline-flex;">
-                <i class="fas fa-phone-volume"></i> 116 117
-            </a>
+
+            <div style="margin-bottom: 25px;">
+                <p style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 8px;">
+                    👉 <span data-i18n="cta_116117_main">CHIAMA IL 116 117</span>
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 12px;" data-i18n="note_116117_free">
+                    (Numero gratuito, sempre attivo 24 ore su 24)
+                </p>
+                <p style="color: var(--text-medium); line-height: 1.7;" data-i18n="desc_116117_operator">
+                    Un medico o un operatore ti aiuterà a capire cosa fare.
+                </p>
+            </div>
+
+            <div class="action-grid" style="gap: 20px; margin-bottom: 5px;">
+                <div class="box-info">
+                    <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: #16a34a;" data-i18n="when_call_116117">✅ QUANDO CHIAMARE IL 116 117:</p>
+                    <ul style="margin-left: 18px; color: var(--text-medium); line-height: 1.7; font-size: 0.95rem;">
+                        <li style="margin-bottom: 6px;" data-i18n="item_when_1">Per consigli medici quando il tuo dottore non c'è.</li>
+                        <li style="margin-bottom: 6px;" data-i18n="item_when_2">Per la Guardia Medica (di notte, nei weekend e festivi).</li>
+                        <li data-i18n="item_when_3">Per informazioni sui servizi sanitari della zona.</li>
+                    </ul>
+                </div>
+
+                <div class="box-danger">
+                    <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--danger);" data-i18n="when_not_call_116117">❌ QUANDO NON CHIAMARE IL 116 117:</p>
+                    <ul style="margin-left: 18px; color: var(--text-medium); line-height: 1.7; font-size: 0.95rem;">
+                        <li style="margin-bottom: 6px;" data-i18n="item_not_emergency"><strong>Emergenze gravi:</strong> Chiama subito il <strong>112</strong>.</li>
+                        <li data-i18n="item_not_booking"><strong>Per prenotare esami o visite:</strong> Chiama il CUP (<strong>800 575 575</strong>) o vai in farmacia.</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
     </main>
@@ -273,6 +300,19 @@
                 </tbody>
             </table>
         </section>
+
+        <section class="card" style="text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 6px;" data-i18n="aside_116117_prompt">
+                <i class="fas fa-phone-volume" style="color: var(--accent);"></i>
+                Segreteria chiusa o non risponde? Non trovi il medico?
+            </p>
+            <a href="tel:116117" style="display: inline-block; font-size: 1.4rem; font-weight: 800; color: var(--accent);">
+                116 117
+            </a>
+            <p style="font-size: 0.75rem; color: var(--text-medium); margin-top: 4px;" data-i18n="aside_116117_sub">
+                Numero gratuito, sempre attivo 24 ore su 24
+            </p>
+        </section>
     </aside>
 
 </div>
@@ -291,7 +331,7 @@
 </site-footer>
 
 <script src="config.js?v=1"></script>
-<script src="app.js?v=14"></script>
+<script src="app.js?v=15"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
