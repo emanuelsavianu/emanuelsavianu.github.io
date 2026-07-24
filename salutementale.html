@@ -3,94 +3,85 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Poster Salute Mentale</title>
+<title>Informativa Salute Mentale — USL Toscana Sud Est (Arezzo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
   :root {
+    --navy-dark: #0F203C;
     --nhs-blue: #005A9C;
-    --navy-dark: #12284C;
-    --teal-bg: #EAF4F4;
+    --teal-soft: #EBF5F5;
     --accent-teal: #00A896;
-    --accent-gold: #D9A036;
-    --gold-light: #F4E8C1;
+    --accent-gold: #D99B26;
+    --gold-light: #F9EECB;
     --card-bg: #FFFFFF;
-    --text-dark: #1D2A3A;
+    --text-dark: #1A202C;
     --text-muted: #4A5568;
-    --border-color: #CBD5E0;
+    --border-color: #E2E8F0;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  @page {
-    size: A3 portrait;
-    margin: 0;
-  }
-
-  html, body {
-    width: 297mm;
-    min-height: 420mm;
-    font-family: 'Montserrat', sans-serif;
-    background: #F7FAFC;
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    background: #F0F4F8;
     color: var(--text-dark);
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    line-height: 1.5;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
   }
 
+  /* Contenitore ottimizzato per PC / Schermo */
   .poster-container {
-    width: 297mm;
-    min-height: 420mm;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 1200px;
     background: #FFFFFF;
-    position: relative;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
     overflow: hidden;
   }
 
-  /* ============ HEADER SECTION ============ */
+  /* ============ HEADER ============ */
   .header {
     background: var(--navy-dark);
     color: white;
-    padding: 12mm 16mm 10mm 16mm;
+    padding: 2.5rem 3rem 2rem 3rem;
     position: relative;
-    border-bottom: 4px solid var(--accent-gold);
-  }
-
-  .header::after {
-    content: "";
-    position: absolute;
-    top: -20mm;
-    right: -20mm;
-    width: 90mm;
-    height: 90mm;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 50%;
-    pointer-events: none;
+    border-bottom: 5px solid var(--accent-gold);
   }
 
   .top-badge {
     display: inline-flex;
     align-items: center;
-    gap: 2mm;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 1.5mm 5mm;
-    border-radius: 20px;
-    font-size: 10pt;
-    font-weight: 600;
-    letter-spacing: 0.5px;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
     color: var(--gold-light);
-    margin-bottom: 4mm;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.5px;
   }
 
   .main-title {
-    font-size: 34pt;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 800;
-    line-height: 1.1;
+    line-height: 1.15;
     letter-spacing: -0.5px;
-    margin-bottom: 5mm;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
   }
 
   .main-title span {
@@ -100,11 +91,11 @@
   .title-translations {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 4mm;
-    background: rgba(0, 0, 0, 0.2);
-    padding: 4mm 6mm;
-    border-radius: 4mm;
-    border-left: 3px solid var(--accent-gold);
+    gap: 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-gold);
   }
 
   .lang-box {
@@ -113,36 +104,37 @@
   }
 
   .lang-tag {
-    font-size: 7.5pt;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     color: var(--accent-gold);
     letter-spacing: 1px;
+    margin-bottom: 4px;
   }
 
   .lang-text {
-    font-size: 11pt;
+    font-size: 1.05rem;
     font-weight: 600;
-    color: #E2E8F0;
-    line-height: 1.25;
+    color: #EDF2F7;
+    line-height: 1.3;
   }
 
-  .lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; font-size: 11.5pt; }
-  .lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; font-size: 12pt; direction: rtl; text-align: right; }
+  .lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; }
+  .lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; }
 
-  /* ============ HERO STRIP ============ */
+  /* ============ HERO BANNER ============ */
   .hero-banner {
-    background: var(--teal-bg);
-    padding: 7mm 16mm;
+    background: var(--teal-soft);
+    padding: 1.8rem 3rem;
     display: flex;
     align-items: center;
-    gap: 8mm;
-    border-bottom: 1.5px solid var(--border-color);
+    gap: 2rem;
+    border-bottom: 1px solid var(--border-color);
   }
 
-  .hero-illustration {
-    width: 32mm;
-    height: 32mm;
+  .hero-icon {
+    width: 80px;
+    height: 80px;
     flex-shrink: 0;
   }
 
@@ -151,49 +143,57 @@
   }
 
   .hero-it {
-    font-size: 14pt;
+    font-size: 1.25rem;
     font-weight: 800;
     color: var(--navy-dark);
-    line-height: 1.3;
+    line-height: 1.35;
   }
 
   .hero-en {
-    font-size: 10.5pt;
+    font-size: 1.05rem;
     font-weight: 600;
     color: var(--nhs-blue);
-    margin-top: 1mm;
+    margin-top: 4px;
     font-style: italic;
   }
 
   .hero-multilang {
-    margin-top: 2mm;
+    margin-top: 8px;
     display: flex;
-    gap: 8mm;
-    font-size: 9.5pt;
+    gap: 1.5rem;
+    font-size: 0.95rem;
     color: var(--text-muted);
   }
 
   .hero-multilang .bn { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; color: #2D3748; }
   .hero-multilang .ur { font-family: 'Noto Sans Arabic', sans-serif; font-weight: 600; color: #2D3748; direction: rtl; }
 
-  /* ============ CONTENT WRAPPER ============ */
+  /* ============ BODY CONTENT ============ */
   .content-body {
-    padding: 7mm 16mm 0 16mm;
-    flex: 1;
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+
+  .section-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .section-header {
     display: inline-flex;
     align-items: center;
-    gap: 3mm;
+    gap: 8px;
     background: var(--nhs-blue);
     color: white;
-    padding: 2mm 6mm;
-    border-radius: 20px;
-    font-size: 11pt;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.95rem;
     font-weight: 800;
     letter-spacing: 0.5px;
-    margin-bottom: 4mm;
+    margin-bottom: 1.2rem;
   }
 
   .section-header.gold {
@@ -202,139 +202,152 @@
   }
 
   .section-header .sub-en {
-    font-size: 9pt;
+    font-size: 0.85rem;
     font-weight: 500;
     opacity: 0.9;
   }
 
-  /* ============ NORMALIZATION BOX ============ */
+  /* NORMALIZATION STRIP */
   .norm-box {
+    width: 100%;
     background: #F8FAFC;
     border: 1.5px solid #CBD5E0;
     border-left: 5px solid var(--nhs-blue);
-    border-radius: 4mm;
-    padding: 4mm 6mm;
-    margin-bottom: 6mm;
+    border-radius: 12px;
+    padding: 1.5rem;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5mm;
+    gap: 1.5rem;
   }
 
   .norm-item {
     display: flex;
     align-items: flex-start;
-    gap: 3.5mm;
+    gap: 12px;
   }
 
   .norm-icon {
-    width: 10mm;
-    height: 10mm;
+    width: 36px;
+    height: 36px;
     flex-shrink: 0;
   }
 
-  .norm-text-it { font-size: 10pt; font-weight: 700; color: var(--navy-dark); line-height: 1.2; }
-  .norm-text-en { font-size: 8.5pt; font-weight: 500; color: var(--text-muted); font-style: italic; }
+  .norm-text-it { font-size: 1rem; font-weight: 700; color: var(--navy-dark); line-height: 1.3; }
+  .norm-text-en { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); font-style: italic; margin-top: 2px; }
 
-  /* ============ WARNING CARDS GRID ============ */
+  /* WARNING CARDS GRID */
   .cards-grid {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 4.5mm;
-    margin-bottom: 6mm;
+    gap: 1.2rem;
   }
 
   .card {
     background: var(--card-bg);
     border: 1.5px solid #E2E8F0;
     border-top: 4px solid var(--accent-gold);
-    border-radius: 4mm;
-    padding: 4.5mm 3.5mm;
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
   }
 
   .card-icon {
-    width: 18mm;
-    height: 18mm;
-    margin-bottom: 3mm;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
   }
 
   .card-title-it {
-    font-size: 10pt;
+    font-size: 1rem;
     font-weight: 700;
     color: var(--navy-dark);
-    line-height: 1.25;
-    margin-bottom: 1.5mm;
+    line-height: 1.3;
+    margin-bottom: 4px;
   }
 
   .card-title-en {
-    font-size: 8.5pt;
+    font-size: 0.85rem;
     font-weight: 500;
     color: var(--text-muted);
     font-style: italic;
     line-height: 1.2;
-    margin-bottom: 2mm;
+    margin-bottom: 1rem;
   }
 
   .card-extra {
-    font-size: 8pt;
-    line-height: 1.2;
-    padding-top: 2mm;
+    font-size: 0.82rem;
+    line-height: 1.3;
+    padding-top: 0.8rem;
     border-top: 1px dashed #E2E8F0;
     width: 100%;
+    margin-top: auto;
   }
 
-  .card-extra .bn { font-family: 'Noto Sans Bengali', sans-serif; color: #4A5568; display: block; }
+  .card-extra .bn { font-family: 'Noto Sans Bengali', sans-serif; color: #4A5568; display: block; margin-bottom: 2px; }
   .card-extra .ur { font-family: 'Noto Sans Arabic', sans-serif; color: #4A5568; display: block; direction: rtl; }
 
-  /* ============ ACTION BOXES ============ */
+  /* ACTION BOXES */
   .action-grid {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5mm;
-    margin-bottom: 6mm;
+    gap: 1.5rem;
   }
 
   .action-card {
     background: var(--navy-dark);
     color: white;
-    border-radius: 4mm;
-    padding: 5mm 4.5mm;
+    border-radius: 12px;
+    padding: 1.8rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+  }
+
+  .action-card:hover {
+    transform: translateY(-3px);
   }
 
   .action-icon {
-    width: 16mm;
-    height: 16mm;
-    margin-bottom: 2.5mm;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
   }
 
   .action-it {
-    font-size: 10.5pt;
+    font-size: 1.05rem;
     font-weight: 700;
-    line-height: 1.25;
-    margin-bottom: 1mm;
+    line-height: 1.3;
+    margin-bottom: 4px;
   }
 
   .action-en {
-    font-size: 8.5pt;
+    font-size: 0.88rem;
     color: var(--gold-light);
     font-style: italic;
-    margin-bottom: 2mm;
+    margin-bottom: 1rem;
   }
 
   .action-detail {
-    font-size: 8.5pt;
-    background: rgba(255, 255, 255, 0.12);
-    padding: 1.5mm 3mm;
-    border-radius: 3mm;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
     width: 100%;
     margin-top: auto;
   }
@@ -343,16 +356,15 @@
   .footer {
     background: var(--nhs-blue);
     color: white;
-    padding: 6mm 16mm 7mm 16mm;
-    margin-top: auto;
+    padding: 2.2rem 3rem;
   }
 
   .footer-header {
     text-align: center;
-    font-size: 9pt;
+    font-size: 0.95rem;
     font-weight: 700;
     letter-spacing: 0.8px;
-    margin-bottom: 4mm;
+    margin-bottom: 1.5rem;
     text-transform: uppercase;
     color: var(--gold-light);
   }
@@ -360,24 +372,25 @@
   .contact-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 5mm;
+    gap: 1.5rem;
   }
 
   .contact-card {
     background: white;
     color: var(--text-dark);
-    border-radius: 3mm;
-    padding: 3.5mm 4mm;
+    border-radius: 10px;
+    padding: 1.2rem 1.2rem;
     display: flex;
     align-items: center;
-    gap: 3.5mm;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
   }
 
   .contact-icon-box {
-    width: 12mm;
-    height: 12mm;
+    width: 46px;
+    height: 46px;
     border-radius: 50%;
-    background: var(--teal-bg);
+    background: var(--teal-soft);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -385,8 +398,8 @@
   }
 
   .contact-icon-box svg {
-    width: 7mm;
-    height: 7mm;
+    width: 24px;
+    height: 24px;
   }
 
   .contact-info {
@@ -395,23 +408,58 @@
   }
 
   .contact-name {
-    font-size: 9.5pt;
+    font-size: 0.95rem;
     font-weight: 800;
     color: var(--navy-dark);
-    line-height: 1.15;
+    line-height: 1.2;
   }
 
   .contact-sub {
-    font-size: 8pt;
+    font-size: 0.82rem;
     color: var(--text-muted);
     font-weight: 600;
-    margin-top: 0.5mm;
+    margin-top: 2px;
   }
 
   .contact-phone {
-    font-size: 9pt;
-    font-weight: 700;
+    font-size: 0.9rem;
+    font-weight: 800;
     color: var(--nhs-blue);
+    margin-top: 4px;
+  }
+
+  /* ============ RESPONSIVITÀ PER TABLET E SMARTPHONE ============ */
+  @media (max-width: 992px) {
+    .title-translations, .norm-box, .action-grid, .contact-row {
+      grid-template-columns: 1fr;
+    }
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .header, .hero-banner, .content-body, .footer {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-banner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-multilang {
+      justify-content: center;
+    }
+  }
+
+  /* ============ STAMPA (FORMATO A3) ============ */
+  @media print {
+    @page { size: A3 portrait; margin: 0; }
+    body { background: transparent; padding: 0; }
+    .poster-container { width: 297mm; min-height: 420mm; border-radius: 0; box-shadow: none; }
   }
 </style>
 </head>
@@ -423,7 +471,7 @@
   <header class="header">
     <div class="top-badge">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-       · Arezzo (SSN)
+      Azienda USL Toscana Sud Est · Arezzo (SSN)
     </div>
     
     <h1 class="main-title">Anche la mente<br>si può <span>curare</span></h1>
@@ -446,12 +494,11 @@
 
   <!-- ============ HERO BANNER ============ -->
   <section class="hero-banner">
-    <svg class="hero-illustration" viewBox="0 0 120 120" fill="none">
-      <circle cx="60" cy="60" r="56" fill="#005A9C" opacity="0.1"/>
-      <path d="M60 25 C40 25 30 40 30 55 C30 70 42 78 48 82 L48 95 L72 95 L72 82 C78 78 90 70 90 55 C90 40 80 25 60 25 Z" stroke="#12284C" stroke-width="4" fill="#FFFFFF" stroke-linejoin="round"/>
-      <!-- Glowing heart/mind inside -->
-      <path d="M60 42 C55 36 46 38 46 46 C46 54 60 64 60 64 C60 64 74 54 74 46 C74 38 65 36 60 42 Z" fill="#D9A036"/>
-      <path d="M48 102 L72 102" stroke="#12284C" stroke-width="4" stroke-linecap="round"/>
+    <svg class="hero-icon" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" fill="#005A9C" opacity="0.1"/>
+      <path d="M50 20 C32 20 24 32 24 46 C24 60 35 68 40 72 L40 84 L60 84 L60 72 C65 68 76 60 76 46 C76 32 68 20 50 20 Z" stroke="#0F203C" stroke-width="3.5" fill="#FFFFFF" stroke-linejoin="round"/>
+      <path d="M50 35 C45 30 36 32 36 40 C36 48 50 58 50 58 C50 58 64 48 64 40 C64 32 55 30 50 35 Z" fill="#D99B26"/>
+      <path d="M40 90 L60 90" stroke="#0F203C" stroke-width="3.5" stroke-linecap="round"/>
     </svg>
     
     <div class="hero-content">
@@ -467,171 +514,179 @@
   <!-- ============ BODY CONTENT ============ -->
   <main class="content-body">
 
-    <div class="norm-box">
-      <div class="norm-item">
-        <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="18" fill="#EAF4F4"/>
-          <path d="M12 24 C14 20 18 19 20 22 C22 19 26 20 28 24" stroke="#005A9C" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="14" cy="15" r="2" fill="#12284C"/>
-          <circle cx="26" cy="15" r="2" fill="#12284C"/>
-        </svg>
-        <div>
-          <div class="norm-text-it">È normale sentirsi tristi, in ansia o preoccupati.</div>
-          <div class="norm-text-en">It's normal to feel sad, anxious or worried sometimes.</div>
-        </div>
+    <!-- NORMALIZATION -->
+    <div class="section-block">
+      <div class="section-header">
+        <span>VA BENE COSÌ</span>
+        <span class="sub-en">· IT'S OK TO FEEL THIS WAY</span>
       </div>
 
-      <div class="norm-item">
-        <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="18" fill="#EAF4F4"/>
-          <path d="M12 18 Q20 10 28 18" stroke="#00A896" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-          <path d="M14 26 C18 23 22 23 26 26" stroke="#12284C" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <div>
-          <div class="norm-text-it">Parlarne non è una debolezza, è il primo passo.</div>
-          <div class="norm-text-en">Talking about it is not weakness, it's the first step.</div>
+      <div class="norm-box">
+        <div class="norm-item">
+          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="#EBF5F5"/>
+            <path d="M12 24 C14 20 18 19 20 22 C22 19 26 20 28 24" stroke="#005A9C" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="14" cy="15" r="2" fill="#0F203C"/>
+            <circle cx="26" cy="15" r="2" fill="#0F203C"/>
+          </svg>
+          <div>
+            <div class="norm-text-it">È normale sentirsi tristi, in ansia o preoccupati.</div>
+            <div class="norm-text-en">It's normal to feel sad, anxious or worried sometimes.</div>
+          </div>
         </div>
-      </div>
 
-      <div class="norm-item">
-        <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
-          <circle cx="20" cy="20" r="18" fill="#F4E8C1"/>
-          <path d="M13 20 L18 25 L27 15" stroke="#D9A036" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <div>
-          <div class="norm-text-it">Chiedere aiuto è un tuo diritto della salute.</div>
-          <div class="norm-text-en">Asking for help is your right to healthcare.</div>
+        <div class="norm-item">
+          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="#EBF5F5"/>
+            <path d="M12 18 Q20 10 28 18" stroke="#00A896" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <path d="M14 26 C18 23 22 23 26 26" stroke="#0F203C" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="norm-text-it">Parlarne non è una debolezza, è il primo passo.</div>
+            <div class="norm-text-en">Talking about it is not weakness, it's the first step.</div>
+          </div>
+        </div>
+
+        <div class="norm-item">
+          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="#F9EECB"/>
+            <path d="M13 20 L18 25 L27 15" stroke="#D99B26" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="norm-text-it">Chiedere aiuto è un tuo diritto della salute.</div>
+            <div class="norm-text-en">Asking for help is your right to healthcare.</div>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- WARNING SIGNS -->
-    <div class="section-header gold">
-      <span>QUANDO CHIEDERE AIUTO</span>
-      <span class="sub-en">· WHEN TO SEEK HELP</span>
-    </div>
-
-    <div class="cards-grid">
-      <!-- Card 1 -->
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-          <rect x="10" y="45" width="60" height="20" rx="4" fill="#12284C"/>
-          <path d="M15 45 C15 30 25 25 40 25 C55 25 65 30 65 45" stroke="#005A9C" stroke-width="3" fill="#EAF4F4"/>
-          <path d="M50 15 L58 10 M55 22 L65 20 M58 27 L66 32" stroke="#D9A036" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="30" cy="35" r="4" fill="#D9A036"/>
-        </svg>
-        <div class="card-title-it">Non dormi bene da settimane</div>
-        <div class="card-title-en">You haven't slept well for weeks</div>
-        <div class="card-extra">
-          <span class="bn">কয়েক সপ্তাহ ধরে ঘুম হচ্ছে না</span>
-          <span class="ur">ہفتوں سے نیند ٹھیک نہیں آرہی</span>
-        </div>
+    <div class="section-block">
+      <div class="section-header gold">
+        <span>QUANDO CHIEDERE AIUTO</span>
+        <span class="sub-en">· WHEN TO SEEK HELP</span>
       </div>
 
-      <!-- Card 2 -->
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-          <circle cx="40" cy="40" r="28" fill="#EAF4F4" stroke="#12284C" stroke-width="3"/>
-          <path d="M28 35 Q40 28 52 35" stroke="#D9A036" stroke-width="3" stroke-linecap="round"/>
-          <path d="M30 52 Q40 44 50 52" stroke="#12284C" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <circle cx="28" cy="38" r="2.5" fill="#12284C"/>
-          <circle cx="52" cy="38" r="2.5" fill="#12284C"/>
-        </svg>
-        <div class="card-title-it">Perdi l'appetito o mangi troppo</div>
-        <div class="card-title-en">Loss of appetite or overeating</div>
-        <div class="card-extra">
-          <span class="bn">ক্ষুধামন্দা বা অতিরিক্ত খাওয়া</span>
-          <span class="ur">بھوک نہ لگنا یا بہت زیادہ کھانا</span>
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <rect x="10" y="45" width="60" height="20" rx="4" fill="#0F203C"/>
+            <path d="M15 45 C15 30 25 25 40 25 C55 25 65 30 65 45" stroke="#005A9C" stroke-width="3" fill="#EBF5F5"/>
+            <path d="M50 15 L58 10 M55 22 L65 20 M58 27 L66 32" stroke="#D99B26" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="30" cy="35" r="4" fill="#D99B26"/>
+          </svg>
+          <div class="card-title-it">Non dormi bene da settimane</div>
+          <div class="card-title-en">You haven't slept well for weeks</div>
+          <div class="card-extra">
+            <span class="bn">কয়েক সপ্তাহ ধরে ঘুম হচ্ছে না</span>
+            <span class="ur">ہفتوں سے نیند ٹھیک نہیں آرہی</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Card 3 -->
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-          <!-- Isolated person -->
-          <circle cx="30" cy="32" r="10" fill="#12284C"/>
-          <path d="M15 58 C15 46 22 44 30 44 C38 44 45 46 45 58" fill="#12284C"/>
-          <!-- Dotted line separator -->
-          <line x1="50" y1="20" x2="50" y2="60" stroke="#CBD5E0" stroke-width="2" stroke-dasharray="3 3"/>
-          <!-- Group far away -->
-          <circle cx="62" cy="35" r="6" fill="#D9A036"/>
-          <path d="M54 54 C54 46 58 45 62 45 C66 45 70 46 70 54" fill="#D9A036"/>
-        </svg>
-        <div class="card-title-it">Ti isoli da amici e famiglia</div>
-        <div class="card-title-en">Avoiding friends and family</div>
-        <div class="card-extra">
-          <span class="bn">পরিবার ও বন্ধু থেকে বিচ্ছিন্নতা</span>
-          <span class="ur">دوستوں اور خاندان سے دوری</span>
+        <!-- Card 2 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="28" fill="#EBF5F5" stroke="#0F203C" stroke-width="3"/>
+            <path d="M28 35 Q40 28 52 35" stroke="#D99B26" stroke-width="3" stroke-linecap="round"/>
+            <path d="M30 52 Q40 44 50 52" stroke="#0F203C" stroke-width="3" stroke-linecap="round" fill="none"/>
+            <circle cx="28" cy="38" r="2.5" fill="#0F203C"/>
+            <circle cx="52" cy="38" r="2.5" fill="#0F203C"/>
+          </svg>
+          <div class="card-title-it">Perdi l'appetito o mangi troppo</div>
+          <div class="card-title-en">Loss of appetite or overeating</div>
+          <div class="card-extra">
+            <span class="bn">ক্ষুধামন্দা বা অতিরিক্ত খাওয়া</span>
+            <span class="ur">بھوک نہ لگنا یا بہت زیادہ کھانا</span>
+          </div>
         </div>
-      </div>
 
-      <!-- Card 4 -->
-      <div class="card">
-        <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-          <circle cx="40" cy="40" r="26" fill="#EAF4F4" stroke="#12284C" stroke-width="3"/>
-          <path d="M28 42 C28 32 35 30 40 30 C45 30 52 32 52 42 C52 50 40 48 40 54" stroke="#D9A036" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-          <circle cx="40" cy="60" r="2.5" fill="#D9A036"/>
-        </svg>
-        <div class="card-title-it">Pensieri fissi e ansia continua</div>
-        <div class="card-title-en">Overwhelming thoughts & anxiety</div>
-        <div class="card-extra">
-          <span class="bn">অতিরিক্ত চিন্তা ও দুশ্চিন্তা</span>
-          <span class="ur">مسلسل سوچیں اور بے چینی</span>
+        <!-- Card 3 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <circle cx="30" cy="32" r="10" fill="#0F203C"/>
+            <path d="M15 58 C15 46 22 44 30 44 C38 44 45 46 45 58" fill="#0F203C"/>
+            <line x1="50" y1="20" x2="50" y2="60" stroke="#CBD5E0" stroke-width="2" stroke-dasharray="3 3"/>
+            <circle cx="62" cy="35" r="6" fill="#D99B26"/>
+            <path d="M54 54 C54 46 58 45 62 45 C66 45 70 46 70 54" fill="#D99B26"/>
+          </svg>
+          <div class="card-title-it">Ti isoli da amici e famiglia</div>
+          <div class="card-title-en">Avoiding friends and family</div>
+          <div class="card-extra">
+            <span class="bn">পরিবার ও বন্ধু থেকে বিচ্ছিন্নতা</span>
+            <span class="ur">دوستوں اور خاندان سے دوری</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="26" fill="#EBF5F5" stroke="#0F203C" stroke-width="3"/>
+            <path d="M28 42 C28 32 35 30 40 30 C45 30 52 32 52 42 C52 50 40 48 40 54" stroke="#D99B26" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+            <circle cx="40" cy="60" r="2.5" fill="#D99B26"/>
+          </svg>
+          <div class="card-title-it">Pensieri fissi e ansia continua</div>
+          <div class="card-title-en">Overwhelming thoughts & anxiety</div>
+          <div class="card-extra">
+            <span class="bn">অতিরিক্ত চিন্তা ও দুশ্চিন্তা</span>
+            <span class="ur">مسلسل سوچیں اور بے چینی</span>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- WHAT TO DO -->
-    <div class="section-header">
-      <span>COSA PUOI FARE IN ITALIA</span>
-      <span class="sub-en">· WHAT YOU CAN DO IN ITALY</span>
-    </div>
-
-    <div class="action-grid">
-      <!-- Action 1 -->
-      <div class="action-card">
-        <svg class="action-icon" viewBox="0 0 60 60" fill="none">
-          <circle cx="30" cy="20" r="10" fill="#F4E8C1"/>
-          <path d="M12 50 C12 36 20 34 30 34 C40 34 48 36 48 50" fill="#F4E8C1"/>
-          <path d="M22 34 L22 26 C22 22 25 22 30 22 C35 22 38 22 38 26 L38 34" stroke="#00A896" stroke-width="2.5" fill="none"/>
-          <circle cx="30" cy="28" r="2.5" fill="#00A896"/>
-        </svg>
-        <div class="action-it">Parla con il tuo Medico di Famiglia (MMG)</div>
-        <div class="action-en">Talk to your Family Doctor (GP)</div>
-        <div class="action-detail">
-          È <strong>gratuito</strong> e protetto dal segreto professionale. Può indirizzarti allo psicologo o al Centro di Salute Mentale (CSM).
-        </div>
+    <div class="section-block">
+      <div class="section-header">
+        <span>COSA PUOI FARE IN ITALIA</span>
+        <span class="sub-en">· WHAT YOU CAN DO IN ITALY</span>
       </div>
 
-      <!-- Action 2 -->
-      <div class="action-card">
-        <svg class="action-icon" viewBox="0 0 60 60" fill="none">
-          <path d="M20 15 C16 15 15 20 15 25 C15 38 22 45 35 45 C40 45 45 44 45 40 L45 35 C45 33 42 32 40 32 L34 33 C32 33 30 31 29 29 L28 23 C27 21 25 20 23 20 L20 15 Z" fill="#F4E8C1"/>
-          <path d="M36 15 L48 15 M42 9 L42 21" stroke="#D9A036" stroke-width="2.5" stroke-linecap="round"/>
-        </svg>
-        <div class="action-it">Chiama un servizio d'ascolto gratuito</div>
-        <div class="action-en">Call a free support helpline</div>
-        <div class="action-detail">
-          <strong>Telefono Amico:</strong> 02 2327 2327<br>
-          <strong>Continuità Assistenziale:</strong> 116 117
+      <div class="action-grid">
+        <!-- Action 1 -->
+        <div class="action-card">
+          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="20" r="10" fill="#F9EECB"/>
+            <path d="M12 50 C12 36 20 34 30 34 C40 34 48 36 48 50" fill="#F9EECB"/>
+            <path d="M22 34 L22 26 C22 22 25 22 30 22 C35 22 38 22 38 26 L38 34" stroke="#00A896" stroke-width="2.5" fill="none"/>
+            <circle cx="30" cy="28" r="2.5" fill="#00A896"/>
+          </svg>
+          <div class="action-it">Parla con il tuo Medico di Medicina Generale (MMG)</div>
+          <div class="action-en">Talk to your Family Doctor (GP)</div>
+          <div class="action-detail">
+            È <strong>gratuito</strong> e protetto dal segreto professionale. Può indirizzarti allo psicologo o al Centro di Salute Mentale (CSM).
+          </div>
         </div>
-      </div>
 
-      <!-- Action 3 -->
-      <div class="action-card">
-        <svg class="action-icon" viewBox="0 0 60 60" fill="none">
-          <circle cx="20" cy="22" r="8" fill="#F4E8C1"/>
-          <circle cx="40" cy="22" r="8" fill="#F4E8C1"/>
-          <path d="M8 48 C8 36 14 34 20 34 C24 34 27 35 29 38" fill="#F4E8C1"/>
-          <path d="M52 48 C52 36 46 34 40 34 C36 34 33 35 31 38" fill="#F4E8C1"/>
-          <!-- Center supportive figure -->
-          <circle cx="30" cy="30" r="7" fill="#D9A036"/>
-          <path d="M18 52 C18 42 24 40 30 40 C36 40 42 42 42 52" fill="#D9A036"/>
-        </svg>
-        <div class="action-it">Contatta le associazioni ed i mediatori locali</div>
-        <div class="action-en">Contact local community associations</div>
-        <div class="action-detail">
-          Supporto culturale, linguistico e orientamento ai servizi socio-sanitari del territorio.
+        <!-- Action 2 -->
+        <div class="action-card">
+          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
+            <path d="M20 15 C16 15 15 20 15 25 C15 38 22 45 35 45 C40 45 45 44 45 40 L45 35 C45 33 42 32 40 32 L34 33 C32 33 30 31 29 29 L28 23 C27 21 25 20 23 20 L20 15 Z" fill="#F9EECB"/>
+            <path d="M36 15 L48 15 M42 9 L42 21" stroke="#D99B26" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <div class="action-it">Chiama un servizio d'ascolto e supporto gratuito</div>
+          <div class="action-en">Call a free support helpline</div>
+          <div class="action-detail">
+            <strong>Telefono Amico Italia:</strong> 02 2327 2327<br>
+            <strong>Samaritans ONLUS:</strong> 06 77208977
+          </div>
+        </div>
+
+        <!-- Action 3 -->
+        <div class="action-card">
+          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
+            <circle cx="20" cy="22" r="8" fill="#F9EECB"/>
+            <circle cx="40" cy="22" r="8" fill="#F9EECB"/>
+            <path d="M8 48 C8 36 14 34 20 34 C24 34 27 35 29 38" fill="#F9EECB"/>
+            <path d="M52 48 C52 36 46 34 40 34 C36 34 33 35 31 38" fill="#F9EECB"/>
+            <circle cx="30" cy="30" r="7" fill="#D99B26"/>
+            <path d="M18 52 C18 42 24 40 30 40 C36 40 42 42 42 52" fill="#D99B26"/>
+          </svg>
+          <div class="action-it">Contatta le associazioni ed i mediatori locali</div>
+          <div class="action-en">Contact local community associations</div>
+          <div class="action-detail">
+            Supporto culturale, linguistico e orientamento ai servizi socio-sanitari del territorio.
+          </div>
         </div>
       </div>
     </div>
@@ -645,34 +700,34 @@
     </div>
 
     <div class="contact-row">
-      <!-- Contact 1 -->
+      <!-- Contact 1: Cure Primarie USL -->
       <div class="contact-card">
         <div class="contact-icon-box">
           <svg viewBox="0 0 24 24" fill="none" stroke="#005A9C" stroke-width="2"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/></svg>
         </div>
         <div class="contact-info">
-          <div class="contact-name">Studio Medico Ippocrate</div>
-          <div class="contact-sub">Piazza Saione 3, Arezzo</div>
-          <div class="contact-phone">Tel: 0575 910904</div>
+          <div class="contact-name">Servizi Territoriali & Consultori</div>
+          <div class="contact-sub">Azienda USL Toscana Sud Est (Arezzo)</div>
+          <div class="contact-phone">CUP / Info: 800 556060</div>
         </div>
       </div>
 
-      <!-- Contact 2 -->
+      <!-- Contact 2: CSM -->
       <div class="contact-card">
         <div class="contact-icon-box">
           <svg viewBox="0 0 24 24" fill="none" stroke="#00A896" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
         </div>
         <div class="contact-info">
           <div class="contact-name">CSM - USL Toscana Sud Est</div>
-          <div class="contact-sub">Centro Salute Mentale Arezzo</div>
-          <div class="contact-phone">Via Cittadini 33 · Tel: 0575 2551</div>
+          <div class="contact-sub">Centro Salute Mentale Arezzo (Via Cittadini 33)</div>
+          <div class="contact-phone">Tel: 0575 2551</div>
         </div>
       </div>
 
-      <!-- Contact 3 -->
+      <!-- Contact 3: Emergenze & Guardia Medica -->
       <div class="contact-card">
         <div class="contact-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D9A036" stroke-width="2"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D99B26" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </div>
         <div class="contact-info">
           <div class="contact-name">Emergenze & Guardia Medica</div>
