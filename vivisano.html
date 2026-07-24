@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informativa Stili di Vita Sani — USL Toscana Sud Est (Arezzo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy-dark: #0F203C;
+    --nhs-blue: #005A9C;
+    --teal-soft: #EBF5F5;
+    --green-soft: #F2F8EE;
+    --accent-teal: #00A896;
+    --accent-green: #2B7A0B;
+    --accent-gold: #D99B26;
+    --gold-light: #F9EECB;
+    --card-bg: #FFFFFF;
+    --text-dark: #1A202C;
+    --text-muted: #4A5568;
+    --border-color: #E2E8F0;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    background: #F0F4F8;
+    color: var(--text-dark);
+    line-height: 1.5;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  /* Contenitore ottimizzato per PC / Schermo */
+  .poster-container {
+    width: 100%;
+    max-width: 1200px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ============ HEADER ============ */
+  .header {
+    background: var(--navy-dark);
+    color: white;
+    padding: 2.5rem 3rem 2rem 3rem;
+    position: relative;
+    border-bottom: 5px solid var(--accent-gold);
+  }
+
+  .top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .main-title {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+  }
+
+  .main-title span {
+    color: var(--accent-gold);
+  }
+
+  .title-translations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-gold);
+  }
+
+  .lang-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lang-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .lang-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #EDF2F7;
+    line-height: 1.3;
+  }
+
+  .lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; }
+  .lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; }
+
+  /* ============ HERO BANNER ============ */
+  .hero-banner {
+    background: var(--green-soft);
+    padding: 1.8rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .hero-icon {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+
+  .hero-it {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--navy-dark);
+    line-height: 1.35;
+  }
+
+  .hero-en {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--nhs-blue);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .hero-multilang {
+    margin-top: 8px;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+
+  .hero-multilang .bn { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; color: #2D3748; }
+  .hero-multilang .ur { font-family: 'Noto Sans Arabic', sans-serif; font-weight: 600; color: #2D3748; direction: rtl; }
+
+  /* ============ BODY CONTENT ============ */
+  .content-body {
+    padding: 2.5rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+
+  .section-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--nhs-blue);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-header.green {
+    background: var(--accent-green);
+    color: white;
+  }
+
+  .section-header.gold {
+    background: var(--accent-gold);
+    color: var(--navy-dark);
+  }
+
+  .section-header .sub-en {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  /* NORMALIZATION STRIP */
+  .norm-box {
+    width: 100%;
+    background: #F8FAFC;
+    border: 1.5px solid #CBD5E0;
+    border-left: 5px solid var(--accent-green);
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .norm-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .norm-icon {
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+  }
+
+  .norm-text-it { font-size: 1rem; font-weight: 700; color: var(--navy-dark); line-height: 1.3; }
+  .norm-text-en { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); font-style: italic; margin-top: 2px; }
+
+  /* HABIT CARDS GRID */
+  .cards-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1.5px solid #E2E8F0;
+    border-top: 4px solid var(--accent-gold);
+    border-radius: 12px;
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-icon {
+    width: 64px;
+    height: 64px;
+    margin-bottom: 1rem;
+  }
+
+  .card-title-it {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy-dark);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .card-title-en {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .card-extra {
+    font-size: 0.82rem;
+    line-height: 1.3;
+    padding-top: 0.8rem;
+    border-top: 1px dashed #E2E8F0;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .card-extra .bn { font-family: 'Noto Sans Bengali', sans-serif; color: #4A5568; display: block; margin-bottom: 2px; }
+  .card-extra .ur { font-family: 'Noto Sans Arabic', sans-serif; color: #4A5568; display: block; direction: rtl; }
+
+  /* ACTION BOXES */
+  .action-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .action-card {
+    background: var(--navy-dark);
+    color: white;
+    border-radius: 12px;
+    padding: 1.8rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+  }
+
+  .action-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .action-icon {
+    width: 56px;
+    height: 56px;
+    margin-bottom: 1rem;
+  }
+
+  .action-it {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .action-en {
+    font-size: 0.88rem;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .action-detail {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  /* ============ FOOTER / CONTACTS ============ */
+  .footer {
+    background: var(--nhs-blue);
+    color: white;
+    padding: 2.2rem 3rem;
+  }
+
+  .footer-header {
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+
+  .contact-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    background: white;
+    color: var(--text-dark);
+    border-radius: 10px;
+    padding: 1.2rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact-icon-box {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .contact-icon-box svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--navy-dark);
+    line-height: 1.2;
+  }
+
+  .contact-sub {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .contact-phone {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--nhs-blue);
+    margin-top: 4px;
+  }
+
+  /* ============ RESPONSIVITÀ PER TABLET E SMARTPHONE ============ */
+  @media (max-width: 992px) {
+    .title-translations, .norm-box, .action-grid, .contact-row {
+      grid-template-columns: 1fr;
+    }
+    .cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .header, .hero-banner, .content-body, .footer {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-banner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .hero-multilang {
+      justify-content: center;
+    }
+  }
+
+  /* ============ STAMPA (FORMATO A3) ============ */
+  @media print {
+    @page { size: A3 portrait; margin: 0; }
+    body { background: transparent; padding: 0; }
+    .poster-container { width: 297mm; min-height: 420mm; border-radius: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="poster-container">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="top-badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+      Azienda USL Toscana Sud Est · Arezzo (SSN)
+    </div>
+    
+    <h1 class="main-title">Vivi sano,<br>vivi <span>meglio</span></h1>
+
+    <div class="title-translations">
+      <div class="lang-box">
+        <span class="lang-tag">English</span>
+        <span class="lang-text">Healthy living, better living</span>
+      </div>
+      <div class="lang-box">
+        <span class="lang-tag">বাংলা (Bengali)</span>
+        <span class="lang-text bn">সুস্থ জীবন, সুন্দর জীবন</span>
+      </div>
+      <div class="lang-box">
+        <span class="lang-tag">اردو (Urdu)</span>
+        <span class="lang-text ur">صحت مند زندگی، بہتر زندگی</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO BANNER ============ -->
+  <section class="hero-banner">
+    <svg class="hero-icon" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" fill="#2B7A0B" opacity="0.12"/>
+      <path d="M50 18 C72 18 82 32 82 50 C82 72 50 82 50 82 C50 82 18 72 18 50 C18 32 28 18 50 18 Z" fill="#2B7A0B"/>
+      <path d="M50 28 C64 28 72 38 72 50 C72 65 50 74 50 74 C50 74 28 65 28 50 C28 38 36 28 50 28 Z" fill="#388E3C"/>
+      <path d="M50 38 C45 32 35 32 35 42 C35 52 50 62 50 62 C50 62 65 52 65 42 C65 32 55 32 50 38 Z" fill="#D99B26"/>
+      <path d="M50 82 L50 90" stroke="#0F203C" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    
+    <div class="hero-content">
+      <div class="hero-it">Uno stile di vita sano mantiene il corpo forte e la mente in perfetto equilibrio.</div>
+      <div class="hero-en">A healthy lifestyle keeps your body strong and your mind in balance.</div>
+      <div class="hero-multilang">
+        <span class="bn">স্বাস্থ্যকর জীবনযাপন আপনার শরীরকে শক্তিশালী এবং মনকে সুস্থ রাখে।</span>
+        <span class="ur">صحت مند طرز زندگی آپ کے جسم کو مضبوط اور ذہن کو متوازن رکھتا ہے۔</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BODY CONTENT ============ -->
+  <main class="content-body">
+
+    <!-- PILLARS OF HEALTH -->
+    <div class="section-block">
+      <div class="section-header green">
+        <span>I PILASTRI DELLA SALUTE</span>
+        <span class="sub-en">· THE PILLARS OF HEALTH</span>
+      </div>
+
+      <div class="norm-box">
+        <div class="norm-item">
+          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="#F2F8EE"/>
+            <path d="M20 10 C25 10 29 14 29 19 C29 25 20 30 20 30 C20 30 11 25 11 19 C11 14 15 10 20 10 Z" fill="#2B7A0B"/>
+            <path d="M20 14 C17 14 15 16 15 19 C15 22 20 26 20 26 C20 26 25 22 25 19 C25 16 23 14 20 14 Z" fill="#F9EECB"/>
+          </svg>
+          <div>
+            <div class="norm-text-it">Un'alimentazione equilibrata dona energia e benessere ogni giorno.</div>
+            <div class="norm-text-en">A balanced diet gives you daily energy and vitality.</div>
+          </div>
+        </div>
+
+        <div class="norm-item">
+          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="#EBF5F5"/>
+            <path d="M20 10 C20 10 12 18 12 24 C12 28.4 15.6 32 20 32 C24.4 32 28 28.4 28 24 C28 18 20 10 20 10 Z" fill="#005A9C"/>
+            <path d="M17 22 C17 22 15 24 15 26" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div>
+            <div class="norm-text-it">Bere molta acqua è essenziale per la vitalità dell'organismo.</div>
+            <div class="norm-text-en">Drinking enough water is vital for your overall health.</div>
+          </div>
+        </div>
+
+        <div class="norm-item">
+          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="#F9EECB"/>
+            <circle cx="13" cy="25" r="4.5" stroke="#D99B26" stroke-width="2.5" fill="none"/>
+            <circle cx="27" cy="25" r="4.5" stroke="#D99B26" stroke-width="2.5" fill="none"/>
+            <path d="M17.5 25 L21 16 L25 16 M13 25 L19.5 18 L20 13" stroke="#D99B26" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div>
+            <div class="norm-text-it">L'attività fisica rafforza il cuore e riduce lo stress.</div>
+            <div class="norm-text-en">Regular movement strengthens the heart and reduces stress.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HABIT SIGNS -->
+    <div class="section-block">
+      <div class="section-header gold">
+        <span>LE BUONE ABITUDINI QUOTIDIANE</span>
+        <span class="sub-en">· DAILY HEALTHY HABITS</span>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Card 1 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <circle cx="40" cy="40" r="28" fill="#F2F8EE" stroke="#2B7A0B" stroke-width="3"/>
+            <path d="M22 42 C22 52 30 58 40 58 C50 58 58 52 58 42 Z" fill="#2B7A0B"/>
+            <path d="M28 26 C32 20 40 22 40 28 M40 28 C40 22 48 20 52 26" stroke="#D99B26" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="40" cy="38" r="3" fill="#D99B26"/>
+          </svg>
+          <div class="card-title-it">Alimentazione varia ed equilibrata</div>
+          <div class="card-title-en">Varied and balanced nutrition</div>
+          <div class="card-extra">
+            <span class="bn">বৈচিত্র্যময় ও সুষম খাদ্য</span>
+            <span class="ur">متوازن اور متنوع غذا</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <path d="M28 22 L28 58 C28 64 33 68 40 68 C47 68 52 64 52 58 L52 22 Z" stroke="#005A9C" stroke-width="3" fill="#EBF5F5"/>
+            <path d="M28 38 C34 35 46 41 52 38 L52 58 C52 64 47 68 40 68 C33 68 28 64 28 58 Z" fill="#005A9C" opacity="0.3"/>
+            <path d="M40 12 C40 12 34 18 34 22 C34 25.3 36.7 28 40 28 C43.3 28 46 25.3 46 22 C46 18 40 12 40 12 Z" fill="#005A9C"/>
+          </svg>
+          <div class="card-title-it">Idratazione costante durante il giorno</div>
+          <div class="card-title-en">Adequate daily hydration</div>
+          <div class="card-extra">
+            <span class="bn">পর্যাপ্ত জল পান করা</span>
+            <span class="ur">مناسب پانی کا استعمال</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <circle cx="46" cy="20" r="7" fill="#D99B26"/>
+            <path d="M44 28 L36 42 L24 42 M36 42 L42 62 M36 42 L48 56" stroke="#0F203C" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 32 L38 30 L52 22" stroke="#00A896" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 64 Q25 60 35 64 T55 64" stroke="#CBD5E0" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="card-title-it">Movimento e attività fisica regolare</div>
+          <div class="card-title-en">Regular physical movement</div>
+          <div class="card-extra">
+            <span class="bn">নিয়মিত শারীরিক পরিশ্রম</span>
+            <span class="ur">باقاعدگی سے جسمانی سرگرمی</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="card">
+          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
+            <path d="M40 15 L62 24 L62 45 C62 59 40 70 40 70 C40 70 18 59 18 45 L18 24 Z" fill="#EBF5F5" stroke="#2B7A0B" stroke-width="3"/>
+            <path d="M40 32 L40 52 M30 42 L50 42" stroke="#D99B26" stroke-width="4" stroke-linecap="round"/>
+            <circle cx="40" cy="42" r="14" stroke="#0F203C" stroke-width="2" stroke-dasharray="3 3" fill="none"/>
+          </svg>
+          <div class="card-title-it">Prevenzione e vaccinazioni</div>
+          <div class="card-title-en">Prevention and vaccinations</div>
+          <div class="card-extra">
+            <span class="bn">প্রতিরোধ ও টিকাদান</span>
+            <span class="ur">احتیاطی تدابیر اور ویکسینیشن</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHAT TO DO -->
+    <div class="section-block">
+      <div class="section-header">
+        <span>COSA PUOI FARE IN ITALIA</span>
+        <span class="sub-en">· WHAT YOU CAN DO IN ITALY</span>
+      </div>
+
+      <div class="action-grid">
+        <!-- Action 1 -->
+        <div class="action-card">
+          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="20" r="10" fill="#F9EECB"/>
+            <path d="M12 50 C12 36 20 34 30 34 C40 34 48 36 48 50" fill="#F9EECB"/>
+            <path d="M22 34 L22 26 C22 22 25 22 30 22 C35 22 38 22 38 26 L38 34" stroke="#2B7A0B" stroke-width="2.5" fill="none"/>
+            <circle cx="30" cy="28" r="2.5" fill="#2B7A0B"/>
+          </svg>
+          <div class="action-it">Consulta il tuo Medico di Medicina Generale (MMG)</div>
+          <div class="action-en">Talk to your Family Doctor (GP)</div>
+          <div class="action-detail">
+            Chiedi consigli su dieta e stile di vita e verifica la copertura delle <strong>vaccinazioni di prevenzione</strong> per te e la tua famiglia.
+          </div>
+        </div>
+
+        <!-- Action 2 -->
+        <div class="action-card">
+          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
+            <rect x="12" y="14" width="36" height="32" rx="4" fill="#F9EECB"/>
+            <path d="M20 24 L40 24 M20 32 L32 32" stroke="#005A9C" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="42" cy="40" r="9" fill="#2B7A0B"/>
+            <path d="M38 40 L41 43 L47 37" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <div class="action-it">Consulta le guide ufficiali per la salute</div>
+          <div class="action-en">Access official health & wellness resources</div>
+          <div class="action-detail">
+            Trova indicazioni verificate su nutrizione, prevenzione dei rischi e promozione dell'attività fisica attraverso i canali del Servizio Sanitario.
+          </div>
+        </div>
+
+        <!-- Action 3 -->
+        <div class="action-card">
+          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
+            <circle cx="20" cy="22" r="8" fill="#F9EECB"/>
+            <circle cx="40" cy="22" r="8" fill="#F9EECB"/>
+            <path d="M8 48 C8 36 14 34 20 34 C24 34 27 35 29 38" fill="#F9EECB"/>
+            <path d="M52 48 C52 36 46 34 40 34 C36 34 33 35 31 38" fill="#F9EECB"/>
+            <circle cx="30" cy="30" r="7" fill="#D99B26"/>
+            <path d="M18 52 C18 42 24 40 30 40 C36 40 42 42 42 52" fill="#D99B26"/>
+          </svg>
+          <div class="action-it">Partecipa alle iniziative della comunità</div>
+          <div class="action-en">Join local community initiatives</div>
+          <div class="action-detail">
+            Gruppi di cammino, associazioni locali e consultori territoriali ti aiutano a mantenere uno stile di vita attivo e integrato.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-header">
+      SERVIZI SANITARI E CONTATTI UTILI AD AREZZO · LOCAL HEALTH CONTACTS
+    </div>
+
+    <div class="contact-row">
+      <!-- Contact 1: Cure Primarie USL -->
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#005A9C" stroke-width="2"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/></svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Servizi Territoriali & Consultori</div>
+          <div class="contact-sub">Azienda USL Toscana Sud Est (Arezzo)</div>
+          <div class="contact-phone">CUP / Info: 800 556060</div>
+        </div>
+      </div>
+
+      <!-- Contact 2: Dipartimento Prevenzione -->
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#2B7A0B" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Dipartimento di Prevenzione</div>
+          <div class="contact-sub">Vaccinazioni e Igiene Pubblica (Arezzo)</div>
+          <div class="contact-phone">Tel: 0575 2551</div>
+        </div>
+      </div>
+
+      <!-- Contact 3: Emergenze & Guardia Medica -->
+      <div class="contact-card">
+        <div class="contact-icon-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#D99B26" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="contact-info">
+          <div class="contact-name">Emergenze & Guardia Medica</div>
+          <div class="contact-sub">Emergenza Sanitaria: <strong>112</strong></div>
+          <div class="contact-phone">Continuità Assistenziale: <strong>116 117</strong></div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
