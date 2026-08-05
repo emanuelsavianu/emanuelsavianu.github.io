@@ -332,9 +332,9 @@ const translations = {
         qa_doctolib_label: 'Apri Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'Dal 30 giugno 2026 non si accettano più prenotazioni via email o sito savianu.it. Utilizza <strong>Doctolib</strong> per prenotazioni e richieste.',
+        doctolib_banner_text: 'Studio chiuso dal 6 al 14 agosto 2026. Riprendo il 17 agosto. 🚨 Urgenze: Guardia Medica 116 117 — Emergenze: 112.',
         doctolib_modal_title: 'Avviso Importante',
-        doctolib_modal_text: 'Gentili assistiti, per motivi legati alla privacy e gestione dei dati sensibili dei pazienti dal 30 giugno 2026 non sarà più possibile utilizzare mail o prendere appuntamenti direttamente dal mio sito savianu.it.<br><br>Potete richiedere farmaci continuativi, inviare richieste o consigli medici o prenotare un appuntamento scaricando l\'applicazione gratuita Doctolib o direttamente dal sito Doctolib.it:<br><br><a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="display:block; background:var(--accent); color:#fff; text-align:center; padding:14px 20px; border-radius:8px; font-weight:700; font-size:1.2rem; text-decoration:none; margin:15px 0;">clicca qui</a>',
+        doctolib_modal_text: 'Gentili Pazienti, un caro saluto.<br><br>Vi informo sulle prossime variazioni dello studio:<br><br><strong>6 – 7 Agosto (prefestivo e festivo)</strong><br>Studio chiuso. Attiva la Guardia Medica 24h/24 al 116 117.<br><br><strong>10 – 14 Agosto</strong><br>Sarò in ferie. Vi assisteranno i colleghi di studio contattando la segreteria allo 0575 910904.<br><br><strong>Dal 17 Agosto</strong><br>Tornerò regolarmente in studio.<br><br>🚨 <strong>Urgenze, notte, weekend e festivi</strong><br>Nei fine settimana, nei festivi e nelle ore notturne i medici di medicina generale non sono in servizio. Per qualsiasi urgenza in questi giorni — o se la segreteria non risponde — è sempre attiva la Guardia Medica 24h/24 al 116 117. Per le emergenze, 112.<br><br>📌 <strong>Appuntamenti e richieste</strong><br>Prenotate o scrivetemi su Doctolib, oppure chiamate la segreteria al 0575 910904.<br><br>Buone e serene vacanze a tutti voi.<br><br>Dott. Emanuel Savianu<br><em>Medico di Medicina Generale</em>',
         doctolib_modal_btn: 'Ho letto',
 
         // CTA buttons
@@ -524,9 +524,9 @@ const translations = {
         qa_doctolib_label: 'Open Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'From 30 June 2026, bookings via email or the savianu.it website are no longer accepted. Use <strong>Doctolib</strong> for appointments and requests.',
+        doctolib_banner_text: 'The practice is closed from 6 to 14 August 2026. I will be back on 17 August. 🚨 Urgencies: On-Call Doctor (Guardia Medica) 116 117 — Emergencies: 112.',
         doctolib_modal_title: 'Important Notice',
-        doctolib_modal_text: 'Dear patients, for privacy reasons and the management of sensitive patient data, from 30 June 2026 it will no longer be possible to use Email or book appointments directly from my website savianu.it.<br><br>You can request repeat prescriptions, send medical inquiries, or book an appointment by downloading the free Doctolib app or directly from Doctolib.it:<br><br><a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;font-size:1.1rem;">click here → tinyurl.com/Savianu</a>',
+        doctolib_modal_text: 'Dear Patients, warm regards.<br><br>I would like to inform you about the upcoming changes to the practice:<br><br><strong>6 – 7 August (day before and public holiday)</strong><br>The practice is closed. The On-Call Doctor (Guardia Medica) is available 24/7 at 116 117.<br><br><strong>10 – 14 August</strong><br>I will be on holiday. My practice colleagues will assist you by contacting the secretariat at 0575 910904.<br><br><strong>From 17 August</strong><br>I will be back in the practice as usual.<br><br>🚨 <strong>Urgencies, night, weekends and public holidays</strong><br>On weekends, public holidays and at night, general practitioners are not on duty. For any urgency on these days — or if the secretariat does not answer — the On-Call Doctor (Guardia Medica) is always available 24/7 at 116 117. For emergencies, 112.<br><br>📌 <strong>Appointments and requests</strong><br>Book or write to me on Doctolib, or call the secretariat at 0575 910904.<br><br>Have a restful holiday, everyone.<br><br>Dr. Emanuel Savianu<br><em>General Practitioner</em>',
         doctolib_modal_btn: 'I understand',
 
         // CTA buttons
@@ -649,7 +649,7 @@ function trapFocus(modal) {
     if (!banner || !textEl) return;
     var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
     var t = translations[lang] || translations['it'];
-    textEl.innerHTML = t.doctolib_banner_text + ' <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="doctolib-banner-link">' + (lang === 'it' ? 'Clicca qui' : 'Click here') + ' →</a>';
+    textEl.innerHTML = t.doctolib_banner_text;
 })();
 
 // --- DOCTOLIB WELCOME MODAL ---
