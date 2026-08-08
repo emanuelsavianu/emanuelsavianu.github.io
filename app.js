@@ -212,6 +212,17 @@ const translations = {
         // Header
         header_subtitle: "Medico di Medicina Generale - Arezzo",
 
+        // Landing triage
+        landing_hero_title: "Benvenuti nello Studio Medico Ippocrate",
+        landing_hero_sub: "Scegli la tua area: ogni percorso ti porta direttamente a ciò che ti serve.",
+        triage_ssn_title: "Pazienti SSN",
+        triage_ssn_desc: "Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.",
+        triage_privati_title: "Pazienti Privati",
+        triage_privati_desc: "Consulenze private, certificati INPS, invalidità civile e Legge 104 — prenota su Google Calendar.",
+        triage_colleghi_title: "Colleghi",
+        triage_colleghi_desc: "Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.",
+        triage_cta: "Entra",
+
         // Alert box (index.html)
         alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Benvenuti</strong> nello Studio Medico Ippocrate — Dott. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
 
@@ -414,6 +425,17 @@ const translations = {
     en: {
         // Header
         header_subtitle: "General Practitioner - Arezzo",
+
+        // Landing triage
+        landing_hero_title: "Welcome to Studio Medico Ippocrate",
+        landing_hero_sub: "Choose your area: each path takes you straight to what you need.",
+        triage_ssn_title: "NHS Patients",
+        triage_ssn_desc: "Are you a patient of Dr. Savianu? Book visits on Doctolib, request prescriptions, read guides and exemptions.",
+        triage_privati_title: "Private Patients",
+        triage_privati_desc: "Private consultations, INPS certificates, civil disability and Law 104 — book on Google Calendar.",
+        triage_colleghi_title: "Colleagues",
+        triage_colleghi_desc: "Reserved area for professionals: tools, protocols, regulations and service applications.",
+        triage_cta: "Enter",
 
         // Alert box (index.html)
         alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Welcome</strong> to Studio Medico Ippocrate — Dr. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
