@@ -29,7 +29,7 @@
     <meta name="twitter:image" content="https://savianu.it/logo.png">
 
     <meta name="theme-color" content="#1a2f4c">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../manifest.json">
 
     <!-- New Brand Fonts: Montserrat & Playball -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
 
-    <link rel="stylesheet" href="styles.css?v=22">
+    <link rel="stylesheet" href="../styles.css?v=23">
 
     <style>
         /* FAQ-specific styles */
@@ -367,7 +367,7 @@
         </p>
     </div>
 
-    <a href="index.html" data-i18n="faq_back" class="back-link"><i class="fas fa-arrow-left"></i> Torna al sito principale</a>
+    <a href="../index.html" data-i18n="faq_back" class="back-link"><i class="fas fa-arrow-left"></i> Torna al sito principale</a>
 
     <nav class="faq-nav" aria-label="Navigazione FAQ">
         <a href="#prenotazioni" data-i18n="faq_nav_prenotazioni">Prenotazioni</a>
@@ -475,6 +475,46 @@
                 </div>
             </div>
         </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a12">
+                <span data-i18n="faq_q12">Come faccio a richiedere la ripetizione di una ricetta?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a12">
+                <div class="faq-answer-inner" data-i18n="faq_a12">
+                    Il metodo più veloce è tramite <strong>Doctolib</strong>: invia un messaggio al medico specificando il farmaco da ripetere, oppure chiama la segreteria allo <strong>0575 910 904</strong>. Le ricette dematerializzate (NRE) vengono di norma evase entro 2 giorni lavorativi.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a13">
+                <span data-i18n="faq_q13">Qual è la differenza tra ricetta rossa, bianca e dematerializzata?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a13">
+                <div class="faq-answer-inner" data-i18n="faq_a13">
+                    <ul>
+                        <li><strong>Ricetta rossa (SSN)</strong> — A carico del Servizio Sanitario, soggetta a ticket (salvo esenzioni).</li>
+                        <li><strong>Ricetta bianca</strong> — A carico del paziente (pagata al 100%).</li>
+                        <li><strong>Dematerializzata (NRE)</strong> — Formato digitale della ricetta rossa: basta comunicare il codice fiscale in farmacia.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a14">
+                <span data-i18n="faq_q14">Posso richiedere farmaci urgenti? Entro quanto arrivano?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a14">
+                <div class="faq-answer-inner" data-i18n="faq_a14">
+                    Per farmaci cronici abitualmente prescritti, segnala eventuali urgenze nel messaggio su <strong>Doctolib</strong> o alla segreteria. Pianifica le terapie croniche con almeno <strong>5-7 giorni di anticipo</strong>. Per una vera urgenza clinica fuori orario, contatta la Guardia Medica: <strong>116 117</strong>.
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="faq-section" id="certificati">
@@ -495,6 +535,30 @@
                 </div>
             </div>
         </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a15">
+                <span data-i18n="faq_q15">Posso chiedere il certificato di malattia per telefono o email?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a15">
+                <div class="faq-answer-inner" data-i18n="faq_a15">
+                    <strong>No.</strong> Il certificato INPS non può essere rilasciato senza visita medica (Circolare INPS n. 113/2013). Devi presentarti in studio il <strong>primo giorno di malattia</strong>.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a17">
+                <span data-i18n="faq_q17">Lavoro come libero professionista: ho bisogno del certificato INPS?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a17">
+                <div class="faq-answer-inner" data-i18n="faq_a17">
+                    Il certificato telematico INPS è obbligatorio <strong>solo per i lavoratori dipendenti</strong>. Se sei libero professionista, lavoratore autonomo o titolare di partita IVA, potresti comunque averne bisogno per il commercialista, una compagnia assicurativa o un committente: il medico può rilasciare una <strong>certificazione su carta intestata</strong>, che prevede comunque una visita.
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="faq-section" id="referti">
@@ -509,6 +573,18 @@
                 <div class="faq-answer-inner" data-i18n="faq_a7">
                     I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>
                     Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:700;">prenotate una visita su Doctolib →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a20">
+                <span data-i18n="faq_q20">Ho la relazione/referto dello specialista: devo tornare dal mio medico?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a20">
+                <div class="faq-answer-inner" data-i18n="faq_a20">
+                    Non sempre è necessaria una visita di restituzione formale, ma è fortemente <strong>consigliata</strong> se lo specialista ha modificato la terapia, raccomanda ulteriori accertamenti o hai dubbi. Puoi consegnare il referto anche alla segreteria: il medico lo valuta e ti contatta se necessario.
                 </div>
             </div>
         </div>
@@ -535,6 +611,18 @@
                 </div>
             </div>
         </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a23">
+                <span data-i18n="faq_q23">Posso cambiare medico di base? Come funziona?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a23">
+                <div class="faq-answer-inner" data-i18n="faq_a23">
+                    Il cambio del medico di medicina generale in Toscana è <strong>libero e gratuito</strong>, effettuabile una volta l'anno (salvo motivi eccezionali). Rivolgiti allo sportello dell'<strong>ASL Toscana Sud Est</strong> più vicino (o al portale online) con tessera sanitaria e documento: il cambio è effettivo dal giorno successivo alla richiesta.
+                </div>
+            </div>
+        </div>
     </section>
 
     <section class="faq-section" id="urgenze">
@@ -549,6 +637,47 @@
                 <div class="faq-answer-inner" data-i18n="faq_a10">
                     In caso di emergenza medica chiamare sempre il <strong>112</strong>.<br><br>
                     Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la <strong>Continuità Assistenziale</strong> (ex Guardia Medica) al numero <strong>116 117</strong>.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a16">
+                <span data-i18n="faq_q16">Mi sono ammalato nel weekend o in un giorno festivo: cosa faccio?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a16">
+                <div class="faq-answer-inner" data-i18n="faq_a16">
+                    Rivolgiti alla <strong>Continuità Assistenziale (Guardia Medica)</strong> al numero <strong>116 117</strong>: può visitarti e rilasciarti il certificato di malattia con decorrenza dal giorno della visita.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a24">
+                <span data-i18n="faq_q24">Quando devo chiamare il 112 e quando il 116 117?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a24">
+                <div class="faq-answer-inner" data-i18n="faq_a24">
+                    <ul>
+                        <li><strong>112 — Emergenza (Numero Unico)</strong>: pericolo di vita imminente.</li>
+                        <li><strong>116 117 — Guardia Medica</strong>: problemi urgenti ma non a rischio di vita, fuori dagli orari di ambulatorio.</li>
+                        <li><strong>Pronto Soccorso (PS)</strong>: in alternativa per urgenze che richiedono accertamenti.</li>
+                    </ul>
+                    In caso di dubbio, chiama il <strong>116 117</strong>: un operatore ti indirizza al servizio più appropriato.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a25">
+                <span data-i18n="faq_q25">Il medico è assente: cosa faccio se ho bisogno urgente?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a25">
+                <div class="faq-answer-inner" data-i18n="faq_a25">
+                    In caso di assenza viene attivato un <strong>medico sostituto</strong>: la segreteria comunica i riferimenti. Di notte, nei festivi e prefestivi: <strong>116 117</strong>. Per le emergenze: <strong>112</strong>. Le assenze programmate sono comunicate per tempo nell'avviso in cima alla homepage.
                 </div>
             </div>
         </div>
@@ -571,6 +700,72 @@
                 </div>
             </div>
         </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a18">
+                <span data-i18n="faq_q18">Per andare dallo specialista ho sempre bisogno dell'impegnativa del mio medico?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a18">
+                <div class="faq-answer-inner" data-i18n="faq_a18">
+                    <strong>Non sempre.</strong> La maggior parte delle specialistiche richiede l'impegnativa del medico di medicina generale, ma alcune sono prenotabili direttamente al CUP senza impegnativa. In caso di dubbio, chiedi prima alla segreteria o contatta il CUP Toscana.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a19">
+                <span data-i18n="faq_q19">Cosa significano le classi di priorità (U, B, D, P) sulla mia impegnativa?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a19">
+                <div class="faq-answer-inner" data-i18n="faq_a19">
+                    <ul>
+                        <li><strong>U — Urgente</strong>: entro <strong>72 ore</strong>.</li>
+                        <li><strong>B — Breve</strong>: entro <strong>10 giorni</strong>.</li>
+                        <li><strong>D — Differibile</strong>: entro <strong>30 giorni</strong> per visite, <strong>60</strong> per esami strumentali.</li>
+                        <li><strong>P — Programmabile</strong>: entro <strong>120 giorni</strong>.</li>
+                    </ul>
+                    Se al CUP non ci sono disponibilità nei tempi della tua classe, hai diritto a essere inserito in una struttura alternativa senza costi aggiuntivi.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a21">
+                <span data-i18n="faq_q21">Come faccio a sapere se ho diritto a un'esenzione dal ticket?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a21">
+                <div class="faq-answer-inner" data-i18n="faq_a21">
+                    Le esenzioni si dividono in <strong>per reddito</strong> (ISEE), <strong>per patologia cronica o rara</strong> e <strong>per invalidità</strong>. Il tuo medico di base può prescrivere l'esenzione per patologia cronica dopo la diagnosi; per quelle per reddito devi fare domanda all'ASL Toscana Sud Est.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a22">
+                <span data-i18n="faq_q22">Ho una malattia cronica: l'esenzione copre tutto o solo alcune prestazioni?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a22">
+                <div class="faq-answer-inner" data-i18n="faq_a22">
+                    L'esenzione per patologia cronica è <strong>selettiva</strong>: copre solo le prestazioni correlate alla patologia esente. Quando prenoti al CUP, specifica il <strong>codice esenzione</strong> (es. "013" per diabete) per non pagare il ticket sulle prestazioni coperte.
+                </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button type="button" class="faq-question" onclick="toggleFaq(this)" aria-expanded="false" aria-controls="faq-a26">
+                <span data-i18n="faq_q26">Posso richiedere una visita domiciliare?</span>
+                <i class="fas fa-chevron-down chevron"></i>
+            </button>
+            <div class="faq-answer" id="faq-a26">
+                <div class="faq-answer-inner" data-i18n="faq_a26">
+                    Sì, quando sei impossibilitato a raggiungere lo studio per motivi di salute. Chiama la segreteria la mattina presto (ideale 09:30-10:30). Per visite domiciliari urgenti in orario notturno o festivo: <strong>116 117</strong>.
+                </div>
+            </div>
+        </div>
     </section>
 
     <div class="faq-cta">
@@ -588,8 +783,8 @@
         <div class="footer-content">
             <p>© <span id="current-year">2026</span> Studio Medico Ippocrate - Dr. Savianu Emanuel</p>
             <nav style="margin-top:10px;">
-                <a href="index.html">Home</a> ·
-                <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
+                <a href="../index.html">Home</a> ·
+                <a href="../privacy.html" data-i18n="link_privacy">Privacy Policy</a>
             </nav>
         </div>
     </footer>
@@ -601,8 +796,8 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script src="config.js?v=1"></script>
-<script src="app.js?v=16"></script>
+<script src="../config.js?v=2"></script>
+<script src="../app.js?v=17"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
