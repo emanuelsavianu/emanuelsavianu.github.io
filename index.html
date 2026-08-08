@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
 
-    <title>Medico di Famiglia Arezzo | Dott. Emanuel Savianu</title>
-    <meta name="description" content="Studio Medico Ippocrate - Dott. Emanuel Savianu a Arezzo (Piazza Saione 3). Prenota visite su Doctolib, consulti privati.">
+    <title>Dott. Emanuel Savianu | Medico di Famiglia Arezzo — Visite Private e Certificati INPS</title>
+    <meta name="description" content="Dott. Emanuel Savianu, Medico di Medicina Generale ad Arezzo (Piazza Saione 3). Per pazienti SSN, visite private, certificati INPS e colleghi: prenotazioni, guide e contatti.">
     
     <meta name="geo.region" content="IT-AR" />
     <meta name="geo.placename" content="Arezzo" />
@@ -31,23 +31,23 @@
     <meta property="og:url" content="https://savianu.it/">
     <meta property="og:locale" content="it_IT">
     <meta property="og:site_name" content="Studio Medico Ippocrate">
-    <meta property="og:title" content="Medico di Famiglia Arezzo | Dott. Emanuel Savianu">
-    <meta property="og:description" content="Studio Medico Ippocrate ad Arezzo: prenotazioni tramite Doctolib, FAQ pazienti, ricette e contatti utili.">
-    <meta property="og:image" content="https://savianu.it/logo.png">
+    <meta property="og:title" content="Dott. Emanuel Savianu | Medico di Famiglia Arezzo">
+    <meta property="og:description" content="Studio Medico Ippocrate ad Arezzo: pazienti SSN, visite private, certificati INPS e area colleghi.">
+    <meta property="og:image" content="https://savianu.it/assets/bronzelogo.png">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://savianu.it/">
-    <meta name="twitter:title" content="Medico di Famiglia Arezzo | Dott. Emanuel Savianu">
-    <meta name="twitter:description" content="Studio Medico Ippocrate ad Arezzo: prenotazioni tramite Doctolib, FAQ pazienti, ricette e contatti utili.">
-    <meta name="twitter:image" content="https://savianu.it/logo.png">
+    <meta name="twitter:title" content="Dott. Emanuel Savianu | Medico di Famiglia Arezzo">
+    <meta name="twitter:description" content="Studio Medico Ippocrate ad Arezzo: pazienti SSN, visite private, certificati INPS e area colleghi.">
+    <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=22">
+    <link rel="stylesheet" href="styles.css?v=23">
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
@@ -59,8 +59,8 @@
       "url": "https://savianu.it/",
       "telephone": "+39 0575 910 904",
       "sameAs": ["https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu"],
-      "image": "https://savianu.it/logo.png",
-      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette.",
+      "image": "https://savianu.it/assets/bronzelogo.png",
+      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette, consulenze private e certificazioni INPS.",
       "medicalSpecialty": "GeneralPractice",
       "areaServed": {
         "@type": "City",
@@ -82,15 +82,15 @@
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
-          "opens": "16:00",
-          "closes": "19:00"
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:30",
+          "closes": "12:30"
         },
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Tuesday", "Thursday"],
-          "opens": "10:00",
-          "closes": "13:00"
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "16:00",
+          "closes": "19:00"
         }
       ],
       "priceRange": "\u20ac\u20ac",
@@ -103,13 +103,15 @@
 </head>
 <body>
 
-<div id="doctolib-modal" class="modal-overlay">
-    <div class="modal-content">
-        <h2 data-i18n="doctolib_modal_title">Avviso Importante</h2>
-        <p class="modal-subtitle">STUDIO MEDICO IPPOCRATE</p>
-        <div class="modal-text" data-i18n="doctolib_modal_text">Gentili Pazienti...</div>
-        <button class="btn-accept" onclick="closeDoctolibModal()" data-i18n="doctolib_modal_btn">Ho letto</button>
-    </div>
+<div id="ferie-banner" hidden>
+    <i class="fas fa-info-circle" aria-hidden="true"></i>
+    <span id="ferie-banner-text"></span>
+    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
+</div>
+
+<div id="large-text-banner">
+    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
+    <button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
 </div>
 
 <site-header>
@@ -137,76 +139,37 @@
 
     <main role="main" id="main-content">
 
-        <section class="card">
-            <div style="text-align: center;">
-                <a href="https://dottemanuelsavianu.it/visite-private.html" target="_blank" rel="noopener noreferrer" class="btn-main faq-banner-btn" style="background: var(--accent); color: var(--primary); border-color: var(--primary);">
-                    <i class="fas fa-file-medical"></i>
-                    <span data-i18n="cert_inps_btn">Sei qui per un certificato per l'INPS? Premi qui</span>
-                </a>
-                <div style="margin-top: 20px; text-align: left; padding: 0 10px;">
-                    <p style="font-size: 0.95rem; color: var(--text-medium); line-height: 1.7;" data-i18n="cert_inps_desc">
-                        <strong style="color: var(--primary);">Certificato Invalidità Civile, Accompagnamento e Legge 104 ad Arezzo</strong><br><br>
-                        Il Dott. Emanuel Savianu, Certificatore Telematico INPS autorizzato, fornisce il nuovo Certificato Medico Introduttivo necessario per la domanda di invalidità civile, Legge 104 e accompagnamento ad Arezzo e provincia (D.Lgs. 62/2024). Esperienza come medico di categoria ANMIC nelle commissioni Medico-Legali.
-                    </p>
-                </div>
+        <section class="card" aria-labelledby="landing-hero-title">
+            <div style="text-align: center; padding: 10px 0 0;">
+                <h2 id="landing-hero-title" style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;" data-i18n="landing_hero_title">Benvenuti nello Studio Medico Ippocrate</h2>
+                <p style="color: var(--text-medium); margin-bottom: 6px;" data-i18n="landing_hero_sub">Scegli la tua area: ogni percorso ti porta direttamente a ciò che ti serve.</p>
+                <p style="font-size: 0.9rem; color: var(--text-medium); margin-bottom: 0;">
+                    <i class="fas fa-clock" aria-hidden="true" style="color: var(--accent); margin-right: 6px;"></i>
+                    <span data-i18n="hours_title">Orari di Studio</span>:
+                    <span data-badge-anchor><strong>Lun - Ven 09:30 – 12:30 · 16:00 – 19:00</strong></span>
+                </p>
             </div>
         </section>
 
-        <section class="card">
-            <div style="margin-bottom: 25px;">
-                <a href="faq.html" class="btn-main faq-banner-btn">
-                    <i class="fas fa-question-circle"></i>
-                    <span data-i18n="btn_faq_main">Hai dubbi? Leggi prima le FAQ</span>
+        <section class="triage-section" aria-label="Scegli la tua area">
+            <div class="triage-grid">
+                <a class="triage-card" data-accent="ssn" href="ssn/index.html">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-user-injured"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_ssn_title">Pazienti SSN</span>
+                    <span class="triage-card-desc" data-i18n="triage_ssn_desc">Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </a>
-                <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;" data-i18n="service_banner_desc">
-                    Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).
-                </p>
-            </div>
-            <div style="padding-top: 15px; border-top: 1px dashed var(--border-color);">
-                <p style="font-size: 0.9rem; color: var(--text-medium); margin-bottom: 8px;">
-                    <i class="fas fa-prescription-bottle" aria-hidden="true" style="color: var(--accent); margin-right: 8px;"></i>
-                    <span>Per richiedere la ricetta per i farmaci assunti abitualmente o inviare un messaggio al medico, usa <strong>Doctolib</strong>:</span>
-                </p>
-                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 28px;">
-                    <i class="fas fa-envelope"></i>
-                    <span>Invia richiesta su Doctolib</span>
+                <a class="triage-card" data-accent="privati" href="privati/index.html">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-user-tie"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_privati_title">Pazienti Privati</span>
+                    <span class="triage-card-desc" data-i18n="triage_privati_desc">Consulenze private, certificati INPS, invalidità civile e Legge 104 — prenota su Google Calendar.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </a>
-            </div>
-        </section>
-
-        <section id="booking-section" class="card" aria-labelledby="booking-title">
-            <div class="card-header">
-                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                <h2 id="booking-title" data-i18n="booking_title">Prenotazione su Doctolib</h2>
-            </div>
-
-            <div class="doctolib-cta-grid">
-                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
-                    <i class="fas fa-calendar-check"></i>
-                    <span class="cta-title" data-i18n="cta_book_doctolib">Prenota appuntamento</span>
-                    <span class="cta-sub" data-i18n="cta_book_doctolib_sub">Scegli giorno e orario su Doctolib</span>
-                </a>
-                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
-                    <i class="fas fa-envelope"></i>
-                    <span class="cta-title" data-i18n="cta_message_doctolib">Invia messaggio / Richiedi ricetta</span>
-                    <span class="cta-sub" data-i18n="cta_message_doctolib_sub">Comunica col medico tramite Doctolib</span>
-                </a>
-            </div>
-
-            <div style="margin-top:30px;">
-                <a href="https://dottemanuelsavianu.it/visite-private.html" target="_blank" rel="noopener noreferrer" class="btn-cal-service privata">
-                    <div class="cal-icon-wrapper"><i class="fas fa-user-tie"></i></div>
-                    <div class="cal-text">
-                        <h3 data-i18n="cal_privata_title">Consulenze e visite private (non sono un assistito)</h3>
-                        <p data-i18n="cal_privata_desc">Consulti e certificati privati.</p>
-                    </div>
-                </a>
-            </div>
-
-            <div class="privacy-notice" style="margin-top: 30px;">
-                <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> <span data-i18n="privacy_notice_text">Leggi l'informativa privacy.</span></p>
-                <a href="privacy.html" target="_blank" rel="noopener noreferrer">
-                    <span data-i18n="privacy_notice_link">Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
+                <a class="triage-card" data-accent="colleghi" href="colleghi/index.html">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-handshake"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_colleghi_title">Colleghi</span>
+                    <span class="triage-card-desc" data-i18n="triage_colleghi_desc">Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
                 </a>
             </div>
         </section>
@@ -218,7 +181,7 @@
             </aside>
         </div>
 
-        <section class="card fade-in" aria-labelledby="title-116117">
+        <section class="card" aria-labelledby="title-116117">
             <div class="card-header">
                 <i class="fas fa-phone-volume" aria-hidden="true"></i>
                 <h2 id="title-116117" data-i18n="title_116117">116 117 — Assistenza Sanitaria Non Urgente</h2>
@@ -256,6 +219,21 @@
             </div>
         </section>
 
+        <section class="card" aria-labelledby="cert-inps-heading">
+            <div style="text-align: center;">
+                <a href="privati/index.html" class="btn-main faq-banner-btn" style="background: var(--accent); color: var(--primary); border-color: var(--primary);">
+                    <i class="fas fa-file-medical"></i>
+                    <span data-i18n="cert_inps_btn">Sei qui per un certificato per l'INPS? Premi qui</span>
+                </a>
+                <div style="margin-top: 20px; text-align: left; padding: 0 10px;">
+                    <p style="font-size: 0.95rem; color: var(--text-medium); line-height: 1.7;" data-i18n="cert_inps_desc">
+                        <strong style="color: var(--primary);">Certificato Invalidità Civile, Accompagnamento e Legge 104 ad Arezzo</strong><br><br>
+                        Il Dott. Emanuel Savianu, Certificatore Telematico INPS autorizzato, fornisce il nuovo Certificato Medico Introduttivo necessario per la domanda di invalidità civile, Legge 104 e accompagnamento ad Arezzo e provincia (D.Lgs. 62/2024). Esperienza come medico di categoria ANMIC nelle commissioni Medico-Legali.
+                    </p>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <aside role="complementary">
@@ -289,7 +267,7 @@
         <section class="card">
             <div class="card-header">
                 <i class="fas fa-headset" aria-hidden="true"></i>
-                <h2 data-i18n="secretary_hours_label">Orari Segreteria - 0575 910 904</h2>
+                <h2 data-badge-anchor data-i18n="secretary_hours_label">Orari Segreteria - 0575 910 904</h2>
             </div>
             <table class="hours-table">
                 <tbody>
@@ -319,16 +297,16 @@
         <div class="footer-content">
             <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
             <nav style="margin-top: 10px;">
-                <a href="faq.html">FAQ</a> ·
-                <a href="malattia.html" data-i18n="footer_malattia_link">Certificato di malattia: chi deve farlo?</a> ·
+                <a href="ssn/faq.html">FAQ</a> ·
+                <a href="ssn/malattia.html" data-i18n="footer_malattia_link">Certificato di malattia: chi deve farlo?</a> ·
                 <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
             </nav>
         </div>
     </footer>
 </site-footer>
 
-<script src="config.js?v=1"></script>
-<script src="app.js?v=16"></script>
+<script src="config.js?v=2"></script>
+<script src="app.js?v=17"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
