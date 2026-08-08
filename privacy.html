@@ -20,11 +20,11 @@
     <meta property="og:title" content="Privacy Policy | Dr. Emanuel Savianu">
     <meta property="og:description" content="Informativa privacy (GDPR) del sito savianu.it: dati trattati, finalita, servizi esterni e diritti dell'interessato.">
     <meta property="og:url" content="https://savianu.it/privacy.html">
-    <meta property="og:image" content="https://savianu.it/logo.png">
+    <meta property="og:image" content="https://savianu.it/assets/bronzelogo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Privacy Policy | Dr. Emanuel Savianu">
     <meta name="twitter:description" content="Informativa privacy (GDPR) del sito savianu.it: dati trattati, finalita, servizi esterni e diritti dell'interessato.">
-    <meta name="twitter:image" content="https://savianu.it/logo.png">
+    <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
 
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -37,7 +37,7 @@
         "@type": "Organization",
         "name": "Studio Medico Ippocrate - Dott. Emanuel Savianu",
         "url": "https://savianu.it/",
-        "logo": "https://savianu.it/logo.png",
+        "logo": "https://savianu.it/assets/bronzelogo.png",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Piazza Saione 3",
@@ -55,9 +55,9 @@
             --bg: #ffffff;
             --bg-alt: #f9f9f9;
             --text: #333333;
-            --heading1: #2c3e50;
-            --heading2: #2980b9;
-            --accent: #3498db;
+            --heading1: #1a2f4c;
+            --heading2: #285078;
+            --accent: #c29b57;
             --border: #3498db;
             --btn-bg: #1a2f4c;
             --btn-color: #c29b57;
@@ -88,6 +88,13 @@
     </style>
 </head>
 <body>
+
+    <site-nav data-section="static">
+        <div class="fallback-nav">
+            <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+            <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
+        </div>
+    </site-nav>
 
     <h1>Informativa sulla Privacy (GDPR)</h1>
     <p>Ai sensi del Regolamento UE 2016/679 (GDPR), questa pagina descrive come vengono trattati i dati personali degli utenti che consultano il sito web dello studio medico.</p>
@@ -144,6 +151,15 @@
 
     <br>
     <a href="index.html" class="btn-back">← Torna alla Home</a>
+
+    <site-footer data-section="static">
+        <footer role="contentinfo">
+            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+        </footer>
+    </site-footer>
+    <script src="config.js?v=2"></script>
+    <script src="app.js?v=17"></script>
+    <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
 </body>
 </html>
