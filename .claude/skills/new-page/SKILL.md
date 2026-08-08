@@ -1,14 +1,14 @@
 ---
 name: new-page
-description: Create a new HTML page for the savianu.it site using the standard template with correct head, fonts, styles, header, footer, and script links
+description: Create a new HTML page for the savianu.it site using the standard template with correct head, fonts, styles, site-nav/site-footer components, and module script tag
 disable-model-invocation: true
 ---
 
 Create a new HTML page in the project. The filename, section folder and purpose come from the arguments: {args}
 
-Determine the section: `ssn/` (Pazienti SSN), `privati/` (Pazienti Privati), `colleghi/` (Colleghi, Italian-only), or root. Use the relative prefix `../` for every link to root assets when the page lives in a section folder (`../styles.css`, `../app.js`, `../config.js`, `../privacy.html`, `../index.html`).
+Determine the section: `ssn/` (Pazienti SSN), `privati/` (Pazienti Privati), `colleghi/` (Colleghi, Italian-only), or root. Use the relative prefix `../` for every link to root assets when the page lives in a section folder (`../styles.css`, `../app.js`, `../privacy.html`, `../index.html`). Pages reference only `../styles.css` + `../app.js` — `config.js` is imported by `app.js` and is no longer a page tag.
 
-Use this exact template structure (replace PAGENAME, PAGE_TITLE, PAGE_DESCRIPTION, and PAGE_CONTENT as appropriate):
+Use this exact template structure (replace PAGENAME, PAGE_TITLE, PAGE_DESCRIPTION, SECTION, and PAGE_CONTENT as appropriate; PREFIX is `../` for section pages, empty for root):
 
 ```html
 <!DOCTYPE html>
@@ -35,7 +35,7 @@ Use this exact template structure (replace PAGENAME, PAGE_TITLE, PAGE_DESCRIPTIO
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
 
-    <link rel="stylesheet" href="PREFIX/styles.css?v=23">
+    <link rel="stylesheet" href="PREFIX/styles.css?v=24">
 
     <style>
         /* PAGE_TITLE-specific styles */
@@ -44,75 +44,51 @@ Use this exact template structure (replace PAGENAME, PAGE_TITLE, PAGE_DESCRIPTIO
 
 <body>
 
-<div id="ferie-banner" hidden>
-    <i class="fas fa-info-circle" aria-hidden="true"></i>
-    <span id="ferie-banner-text"></span>
-    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
-</div>
-
-<div id="large-text-banner">
-    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
-    <button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
-</div>
-
-<site-header>
-<header role="banner">
-    <nav class="lang-switch" aria-label="Language and controls">
-        <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
-        <span class="lang-separator">|</span>
-        <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
-        <span class="lang-separator">|</span>
-        <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
-        <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
-    </nav>
-    <div class="header-content">
-        <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
-        <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
-        <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
-        <a href="tel:+390575910904" class="btn-telefono-header">
-            <i class="fas fa-phone-alt"></i> Segreteria: 0575 910 904
-        </a>
+<site-nav data-section="SECTION">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
-</header>
-</site-header>
+</site-nav>
 
-<div class="container" id="main-content">
-<nav class="breadcrumb-bar" aria-label="Breadcrumb">
-    <a href="PREFIX/index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
-    <span aria-hidden="true">/</span>
-    <span>PAGE_TITLE</span>
-</nav>
+<div class="container">
 
-<main role="main">
-    PAGE_CONTENT
-</main>
-</div>
+    <main role="main" id="main-content">
 
-<site-footer>
-<footer role="contentinfo">
-    <div class="footer-content">
-        <p>© <span id="current-year">2026</span> Studio Medico Ippocrate - Dr. Savianu Emanuel</p>
-        <nav style="margin-top:10px;">
-            <a href="PREFIX/index.html">Home</a> ·
-            <a href="PREFIX/privacy.html">Privacy Policy</a>
+        <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+            <a href="PREFIX/index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
+            <span aria-hidden="true">/</span>
+            <span>PAGE_TITLE</span>
         </nav>
-    </div>
-</footer>
+
+        <h1>PAGE_TITLE</h1>
+
+        PAGE_CONTENT
+
+    </main>
+
+</div>
+
+<site-footer data-section="SECTION">
+    <footer role="contentinfo">
+        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+    </footer>
 </site-footer>
 
-<script src="PREFIX/config.js?v=2"></script>
-<script src="PREFIX/app.js?v=17"></script>
+<script type="module" src="PREFIX/app.js?v=18"></script>
 </body>
 </html>
 ```
 
 Rules:
+- The `<site-nav>`/`<site-footer>` fallback blocks render the full chrome via the web components in `app.js`; set `data-section` on both to `root`, `ssn`, `privati`, or `colleghi`. `ssn`/`privati` get the full patient chrome (skip link, banners, ITA/ENG toggle, Google Translate, nav, quick actions) — use `data-i18n` on every user-facing string; `colleghi` is Italian-only (dark-mode toggle only, no translate widget, no `data-i18n`)
 - The `<title>` must be descriptive and under 60 characters total
 - The `<meta name="description">` must be under 160 characters
-- Keep `lang="it"` on `<html>` always; the ITA/ENG toggle (native i18n) is for `ssn/` and `privati/` pages only — `colleghi/` pages use the header WITHOUT the lang-switch and Google Translate (Italian-only), keeping only the dark-mode toggle
+- Keep `lang="it"` on `<html>` always; the ITA/ENG toggle (native i18n) is for `ssn/` and `privati/` pages only — `colleghi/` pages are Italian-only, no Google Translate widget
 - Every user-facing string on patient/private pages must use `data-i18n` with BOTH `it` and `en` entries in the `translations` object in `app.js`
 - Do NOT change the fonts, the two-file Font Awesome CDN pattern, or the styles.css link
 - Do NOT add external JS libraries unless explicitly requested
+- Do NOT add a `config.js` tag on the page — `app.js` imports it; a single module tag `<script type="module" src="PREFIX/app.js?v=18"></script>` is all that's needed
 - Put `data-badge-anchor` on the hours heading if the page shows opening hours (badge is appended there by app.js)
 - Use `CONFIG.SCHEDULE` (Mon–Fri 09:30–12:30 + 16:00–19:00) for any hours content
 - After creating the file, also add it to `sw.js` in the `PRECACHE_URLS` array if it is a major page
