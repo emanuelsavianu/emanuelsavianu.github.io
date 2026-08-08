@@ -1659,6 +1659,8 @@ body.dark-mode .page-hero .hero-eyebrow { color: var(--color-accent); }
         linear-gradient(90deg, rgba(10, 22, 40, 0) 84%, rgba(10, 22, 40, 0.92) 100%),
         linear-gradient(180deg, rgba(10, 22, 40, 0.6) 0%, rgba(26, 47, 76, 0.4) 55%, rgba(26, 47, 76, 0.2) 100%);
     position: relative;
+    width: 100%;
+    max-width: 100%;
     aspect-ratio: 4 / 3;
     min-height: 260px;
     max-height: min(42vw, 620px);

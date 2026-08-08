@@ -31,3 +31,11 @@ Il nuovo hero con foto dello studio (commit `9fbaa25`) risultava tagliato/asimme
 - Apertura di `index.html` nel browser: hero simmetrico senza striscia rotta su desktop/tablet/mobile, light e dark mode; hairline oro sotto l'hero; respiro sopra le triage card.
 - `node tools/update-sw.mjs`, poi `node tools/check-links.mjs`, `node tools/check-i18n.mjs`, `node tools/check-sw.mjs`, `node --check app.js` / `config.js`.
 - Hard-refresh (Ctrl+F5) dopo il deploy per superare le cache.
+
+## Addendum — root cause definitivo (2026-08-08, seconda iterazione)
+
+L'utente segnalava ancora asimmetria dopo il primo fix. Riproduzione headless (Playwright/Chromium, sia sul sito live sia su file locale) ha misurato la sezione `.page-hero--media` a **1447px in un viewport da 1920px** (75%), con il fondo pagina crema visibile a destra; a 1440px era 1411px; a breakpoint tablet ~75% e mobile ~56%.
+
+**Causa:** per CSS Sizing Level 3, un box block con `aspect-ratio` + altezza definitiva (`max-height: min(42vw, 620px)`) + `width: auto` **deriva la larghezza dall'altezza** (620 × 21/9 = 1446.7px) invece di riempire il containing block. Il bug esisteva dal commit `9fbaa25` (introduzione dell'hero media) ed era indipendente dalle immagini.
+
+**Fix:** `width: 100%; max-width: 100%` su `.page-hero--media` (larghezza esplicita vince sulla derivazione dall'aspect-ratio; l'altezza resta governata da aspect-ratio + max-height). Verificato con riproduzione headless a 1920/1440/1024/800/600/390: `rightGap: 0` ovunque, hero edge-to-edge, vignette simmetriche, testo centrato.
