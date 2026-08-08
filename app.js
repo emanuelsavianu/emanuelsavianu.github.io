@@ -73,7 +73,7 @@ class SiteNav extends HTMLElement {
     this.innerHTML =
       '<nav class="lang-switch" aria-label="' + (isPatient ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
       '<header role="banner"><div class="header-content">' + brand + '</div></header>' +
-      navRow;
+      (section !== 'static' ? navRow : '');
 
     if (isPatient) {
       this.insertAdjacentHTML('afterend',
