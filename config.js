@@ -1,8 +1,9 @@
 // =================================================================
 // GLOBAL CONFIGURATION — edit these values to update all pages
+// (ES module — imported by app.js; no longer referenced in <script> tags)
 // =================================================================
 
-const CONFIG = {
+export const CONFIG = {
     // Vacation / closure / relocation banner config
     // 'from' and 'to' in YYYY-MM-DD format. Free-text note (Italian).
     ASSENZE: [
@@ -31,17 +32,17 @@ const CONFIG = {
 
     GOOGLE_CAL: {
         iframe: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3doNfY80zH2XLETLNnYnaqXyu6ImECj_O5_WciNc6aBVZKQbtGYBK57W1g84TT7bvrHMUFzOhn?gv=true'
-    }
-};
+    },
 
-CONFIG.getActiveAbsence = function() {
-    const now = new Date();
-    const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
-    return CONFIG.ASSENZE.find(function(a) {
-        const partsFrom = a.from.split('-').map(Number);
-        const partsTo = a.to.split('-').map(Number);
-        const fromUTC = Date.UTC(partsFrom[0], partsFrom[1] - 1, partsFrom[2]);
-        const toUTC = Date.UTC(partsTo[0], partsTo[1] - 1, partsTo[2], 23, 59, 59, 999);
-        return todayUTC >= fromUTC && todayUTC <= toUTC;
-    }) || null;
+    getActiveAbsence: function() {
+        const now = new Date();
+        const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+        return CONFIG.ASSENZE.find(function(a) {
+            const partsFrom = a.from.split('-').map(Number);
+            const partsTo = a.to.split('-').map(Number);
+            const fromUTC = Date.UTC(partsFrom[0], partsFrom[1] - 1, partsFrom[2]);
+            const toUTC = Date.UTC(partsTo[0], partsTo[1] - 1, partsTo[2], 23, 59, 59, 999);
+            return todayUTC >= fromUTC && todayUTC <= toUTC;
+        }) || null;
+    }
 };

@@ -1,3 +1,5 @@
+import { CONFIG } from './config.js';
+
 // =================================================================
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
 // =================================================================
@@ -169,7 +171,7 @@ const yearEl = document.getElementById('current-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // --- DARK MODE TOGGLE ---
-function toggleDarkMode() {
+export function toggleDarkMode() {
     const body = document.body;
     const isDark = body.classList.toggle('dark-mode');
     const darkBtn = document.getElementById('btn-dark');
@@ -262,7 +264,7 @@ function updateLargeTextBanner(isActive) {
     btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
 }
 
-function toggleLargeText() {
+export function toggleLargeText() {
     var isActive = document.body.classList.toggle('large-text');
     try { localStorage.setItem('largeText', isActive ? 'enabled' : 'disabled'); } catch(e) {}
     updateLargeTextBanner(isActive);
@@ -291,7 +293,7 @@ initLargeText();
 
 
 // --- LANGUAGE MANAGEMENT ---
-const translations = {
+export const translations = {
     it: {
         // Header
         header_subtitle: "Medico di Medicina Generale - Arezzo",
@@ -321,7 +323,6 @@ const translations = {
         booking_title: "Prenotazione su Doctolib",
         booking_guide_title: "Scegli cosa fare:",
         booking_guide_steps: "<li>Clicca il pulsante del tipo di visita qui sotto.</li><li>Scegli il giorno e l'orario disponibile sul calendario.</li><li>Inserisci Nome, Cognome e un indirizzo Email.</li><li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>",
-        booking_guide_steps: "",
         cal_prima_title: "Prima Visita (Nuovi Pazienti)",
         cal_prima_desc: "Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)",
         cal_ord_title: "Visita Ordinaria",
@@ -580,7 +581,6 @@ const translations = {
         booking_title: "Book on Doctolib",
         booking_guide_title: "Choose what to do:",
         booking_guide_steps: "<li>Click the button for the visit type below.</li><li>Choose the day and time available on the calendar.</li><li>Enter First Name, Last Name and an Email address.</li><li>Click <strong>Confirm</strong> (you will receive a summary email).</li>",
-        booking_guide_steps: "",
         cal_prima_title: "First Visit (New Patients)",
         cal_prima_desc: "For new patients only. Bring documents, tests, reports and exemptions. (30 min)",
         cal_ord_title: "Standard Visit",
@@ -812,7 +812,7 @@ const translations = {
     }
 };
 
-function setLanguage(lang) {
+export function setLanguage(lang) {
     const btnIt = document.getElementById('btn-it');
     const btnEn = document.getElementById('btn-en');
     if (btnIt) btnIt.classList.toggle('active', lang === 'it');
@@ -840,7 +840,7 @@ try {
 } catch (e) {}
 
 // --- SMOOTH SCROLL ---
-function showSection(sectionId) {
+export function showSection(sectionId) {
     const section = document.getElementById(sectionId + '-section');
     if(section) {
         section.classList.remove('hidden');
@@ -865,7 +865,7 @@ function initGuidaRapida() {
     } catch(e) {}
 }
 
-function dismissGuidaRapida() {
+export function dismissGuidaRapida() {
     var card = document.getElementById('guida-rapida');
     if (card) card.classList.add('hidden');
     try { localStorage.setItem('guidaRapidaSeen', '1'); } catch(e) {}
@@ -952,7 +952,7 @@ function trapFocus(modal) {
     banner.removeAttribute('hidden');
 })();
 
-function dismissFerieBanner() {
+export function dismissFerieBanner() {
     const banner = document.getElementById('ferie-banner');
     if (banner) banner.setAttribute('hidden', '');
     try {
@@ -962,7 +962,7 @@ function dismissFerieBanner() {
 }
 
 // --- DOCTOLIB WELCOME MODAL ---
-function closeDoctolibModal() {
+export function closeDoctolibModal() {
     const modal = document.getElementById('doctolib-modal');
     if (modal) modal.style.display = 'none';
     try {
@@ -979,7 +979,7 @@ function closeDoctolibModal() {
     modal.style.display = 'flex';
 })();
 
-function startBooking() {
+export function startBooking() {
     var el = document.getElementById('booking-section');
     if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -989,7 +989,7 @@ function getFlowLabel(lang, key) {
     return translations[lang]?.[key] || translations['it'][key] || '';
 }
 
-function renderFlowStep(stepKey) {
+export function renderFlowStep(stepKey) {
     const lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
     const container = document.getElementById('flow-step');
     if (!container) return;
@@ -1068,7 +1068,7 @@ function renderFlowStep(stepKey) {
 }
 
 // --- UNIFIED ACCORDION LOGIC ---
-function toggleAccordion(header) {
+export function toggleAccordion(header) {
     const content = header.nextElementSibling;
     const activeClass = 'active';
     const openClass = 'open';
@@ -1098,7 +1098,7 @@ function toggleAccordion(header) {
 }
 
 // Map toggleFaq to the same unified logic
-const toggleFaq = toggleAccordion;
+export const toggleFaq = toggleAccordion;
 
 // --- BACK TO TOP ---
 function initBackToTop() {
@@ -1170,7 +1170,7 @@ function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelect
 }
 
 // --- PRIVATE VISIT TYPE SELECTOR (Google Calendar) ---
-function selectVisitType(type, url) {
+export function selectVisitType(type, url) {
     // Highlight selected button
     document.querySelectorAll('.btn-cal-service').forEach(function(btn) {
         btn.classList.remove('selected');
@@ -1187,6 +1187,29 @@ window.addEventListener('load', function() {
     initBackToTop();
     initGlobalFilters();
 });
+
+
+// =================================================================
+// LEGACY GLOBAL EXPOSURE — inline onclick handlers & injected HTML
+// reference these globals; keep in sync with page templates.
+// =================================================================
+const GLOBAL_FUNCTIONS = {
+    setLanguage: setLanguage,
+    toggleDarkMode: toggleDarkMode,
+    toggleLargeText: toggleLargeText,
+    dismissFerieBanner: dismissFerieBanner,
+    closeDoctolibModal: closeDoctolibModal,
+    startBooking: startBooking,
+    renderFlowStep: renderFlowStep,
+    toggleAccordion: toggleAccordion,
+    toggleFaq: toggleFaq,
+    showSection: showSection,
+    dismissGuidaRapida: dismissGuidaRapida,
+    selectVisitType: selectVisitType
+};
+for (const name in GLOBAL_FUNCTIONS) {
+    window[name] = GLOBAL_FUNCTIONS[name];
+}
 
 
 
