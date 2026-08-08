@@ -6,55 +6,102 @@
 :root {
     color-scheme: light dark;
 
-    /* New Brand Identity Colors */
-    --primary: #1a2f4c;        /* Navy Blue */
-    --primary-dark: #0f1a2a;   /* Darker Navy */
-    --primary-light: #285078;  /* Lighter Blue */
-    --accent: #c29b57;         /* Elegant Gold */
-    --bg-gradient-1: #f3efe6;  /* Cream Background */
-    --bg-gradient-2: #e8e2d2;  /* Slightly darker cream */
-    --text-dark: #1a2f4c;      /* Navy text for high contrast */
-    --text-medium: #4a5568;
-    --white: #ffffff;
-    --border-color: #d1c7b3;   /* Cream border */
-    --shadow-md: 0 8px 24px rgba(26, 47, 76, 0.12);
-    --radius-lg: 12px;         /* Sharper borders for classic look */
-    --radius-md: 8px;
-    --danger: #dc2626;         /* Emergency Red */
-    --warning: #c29b57;        /* Gold */
+    /* ---- Semantic tokens ---- */
+    --color-bg: #f3efe6;
+    --color-bg-alt: #e8e2d2;
+    --color-surface: #ffffff;
+    --color-text: #1a2f4c;
+    --color-text-muted: #4a5568;
+    --color-border: #d1c7b3;
+    --color-brand: #1a2f4c;
+    --color-brand-dark: #0f1a2a;
+    --color-brand-light: #285078;
+    --color-accent: #c29b57;
+    --color-accent-strong: #7a5c2e;
+    --color-danger: #dc2626;
+    --color-success: #16a34a;
+    --color-focus: #7a5c2e;
+    --color-shadow: rgba(26, 47, 76, 0.12);
 
-    /* Section accents (landing triage cards) */
-    --ssn: #1a2f4c;            /* Navy — Pazienti SSN */
-    --privati: #c29b57;        /* Gold — Pazienti Privati */
-    --colleghi: #2e7d6b;       /* Teal — Colleghi */
-    --accent-text: #7a5c2e;    /* Dark gold — WCAG-safe small text on light bg (5.4:1) */
-    
-    /* New Brand Fonts */
+    /* ---- Legacy aliases (used by page inline styles) ---- */
+    --primary: var(--color-brand);
+    --primary-dark: var(--color-brand-dark);
+    --primary-light: var(--color-brand-light);
+    --accent: var(--color-accent);
+    --accent-text: var(--color-accent-strong);
+    --bg-gradient-1: var(--color-bg);
+    --bg-gradient-2: var(--color-bg-alt);
+    --text-dark: var(--color-text);
+    --text-medium: var(--color-text-muted);
+    --white: var(--color-surface);
+    --border-color: var(--color-border);
+    --danger: var(--color-danger);
+    --warning: var(--color-accent);
+
+    /* ---- Spacing scale ---- */
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px; --space-12: 48px;
+
+    /* ---- Typography scale ---- */
+    --text-xs: 0.75rem; --text-sm: 0.85rem; --text-base: 0.95rem;
+    --text-md: 1rem; --text-lg: 1.1rem; --text-xl: 1.25rem; --text-2xl: 1.5rem;
+
+    /* ---- Elevation / z-index ---- */
+    --shadow-md: 0 8px 24px var(--color-shadow);
+    --z-banner: 999; --z-nav: 1000; --z-modal: 2000; --z-toast: 99999;
+
+    --radius-lg: 12px;
+    --radius-md: 8px;
+
     --font-sans: 'Montserrat', sans-serif;
     --font-serif: 'Playball', cursive;
+    --focus-ring: 3px solid var(--color-focus);
+
+    /* Section accents (landing triage cards) */
+    --ssn: #1a2f4c;
+    --privati: #c29b57;
+    --colleghi: #2e7d6b;
 }
 
 /* Dark Mode Variables (Navy & Gold Theme) */
 body.dark-mode {
-    --primary: #1f3659;        /* Deep Navy for UI elements to maintain contrast */
-    --primary-dark: #e0b976;   /* Gold for headings */
-    --primary-light: #2a4a73;  /* Lighter blue for active states */
-    --accent: #e0b976;         /* Bright Gold */
-    --accent-text: #e0b976;    /* Gold on dark is WCAG-safe */
-    --bg-gradient-1: #0a1628;  /* Very Dark Navy */
-    --bg-gradient-2: #11223a;  /* Standard Navy */
-    --text-dark: #f3efe6;      /* Cream text */
-    --text-medium: #cbd5e1;
-    --white: #162438;          /* Card backgrounds */
-    --border-color: #285078;
-    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.6);
+    --color-brand: #1f3659;
+    --color-brand-dark: #e0b976;
+    --color-brand-light: #2a4a73;
+    --color-accent: #e0b976;
+    --color-accent-strong: #e0b976;
+    --color-bg: #0a1628;
+    --color-bg-alt: #11223a;
+    --color-text: #f3efe6;
+    --color-text-muted: #cbd5e1;
+    --color-surface: #162438;
+    --color-border: #285078;
+    --color-focus: #e0b976;
+    --color-shadow: rgba(0, 0, 0, 0.6);
+
+    --primary: var(--color-brand);
+    --primary-dark: var(--color-brand-dark);
+    --primary-light: var(--color-brand-light);
+    --accent: var(--color-accent);
+    --accent-text: var(--color-accent-strong);
+    --bg-gradient-1: var(--color-bg);
+    --bg-gradient-2: var(--color-bg-alt);
+    --text-dark: var(--color-text);
+    --text-medium: var(--color-text-muted);
+    --white: var(--color-surface);
+    --border-color: var(--color-border);
+    --danger: #ff6b6b;
+    --warning: var(--color-accent);
+    --shadow-md: 0 8px 24px var(--color-shadow);
+    --focus-ring: 3px solid var(--color-focus);
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
-:focus-visible {
-    outline: 3px solid var(--accent);
+:where(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+    outline: var(--focus-ring);
     outline-offset: 2px;
+    border-radius: 4px;
 }
 
 html {
@@ -1069,26 +1116,7 @@ body.dark-mode .btn-cal-service.selected { outline-color: var(--accent); }
     }
 }
 
-/* Keyboard-visible focus ring for all interactive elements */
-button:focus-visible,
-[role="button"]:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-.btn-prenota-large:focus-visible,
-/* .btn-millebook:focus-visible removed */
-.btn-accept:focus-visible,
-.btn-reps-close:focus-visible,
-.lang-btn:focus-visible,
-.flow-option-btn:focus-visible,
-.flow-action-btn:focus-visible,
-.flow-restart-btn:focus-visible,
-.floating-faq:focus-visible,
-.contact-row:focus-visible {
-    outline: 3px solid var(--accent);
-    outline-offset: 3px;
-    border-radius: 4px;
-}
+/* Keyboard-visible focus ring for all interactive elements (unified :where() rule in the token layer) */
 
 /* Dark mode: flow option buttons readable text */
 body.dark-mode .flow-option-btn { color: var(--text-dark); }
@@ -1639,3 +1667,30 @@ site-nav, site-footer { display: block; align-self: stretch; }
     .nav-menu a { display: block; padding: 14px 12px; font-size: 1rem; }
 }
 body.dark-mode .site-nav { background: var(--bg-gradient-2); }
+
+/* =================================================================
+   TASK — NATIVE HIGH CONTRAST & FORCED COLORS
+   ================================================================= */
+@media (prefers-contrast: more) {
+    :root, body.dark-mode {
+        --color-text-muted: #1f2937;
+        --color-accent-strong: #5f451f;
+        --border-color: #6b6254;
+    }
+    body.dark-mode {
+        --color-text-muted: #f1f5f9;
+        --color-accent-strong: #ffd700;
+    }
+}
+
+@media (forced-colors: active) {
+    .badge-open, .badge-closed, .alert-emergency, .box-info, .box-danger {
+        border: 2px solid CanvasText;
+    }
+    .badge-open, .badge-closed, .alert-emergency, .triage-card,
+    .btn-main, .doctolib-cta, .btn-cal-service, .flow-option-btn {
+        forced-color-adjust: none;
+        background: Canvas; color: CanvasText;
+    }
+    .skip-link:focus { outline: 3px solid Highlight; }
+}
