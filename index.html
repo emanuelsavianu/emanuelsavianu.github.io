@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=29">
+    <link rel="stylesheet" href="styles.css?v=31">
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
@@ -110,21 +110,36 @@
     </div>
 </site-nav>
 
+<section class="page-hero page-hero--media" aria-labelledby="hero-heading">
+    <picture>
+        <source type="image/avif" media="(min-width: 1024px)" srcset="assets/studio/studio-location-desktop.avif">
+        <source type="image/webp" media="(min-width: 1024px)" srcset="assets/studio/studio-location-desktop.webp">
+        <source type="image/avif" media="(min-width: 600px)" srcset="assets/studio/studio-location-tablet.avif">
+        <source type="image/webp" media="(min-width: 600px)" srcset="assets/studio/studio-location-tablet.webp">
+        <source type="image/avif" srcset="assets/studio/studio-location-mobile.avif">
+        <img src="assets/studio/studio-location-mobile.webp" alt="Studio Medico Ippocrate — Piazza Saione 3, Arezzo" width="2000" height="848" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">
+            <span data-i18n="landing_hero_eyebrow">Studio Medico Ippocrate</span>
+        </p>
+        <h1 class="hero-title" id="hero-heading" data-i18n="landing_hero_title">Dott. Emanuel Savianu</h1>
+    </div>
+</section>
+
+<div class="hero-info-bar">
+    <p class="hero-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span data-i18n="landing_hero_location">Piazza Saione 3, Arezzo</span></p>
+    <p class="hero-hours">
+        <i class="fas fa-clock" aria-hidden="true"></i>
+        <span data-i18n="hours_title">Orari di Studio</span>:
+        <span data-badge-anchor><strong><span data-i18n="hours_lun_ven">Lun - Ven</span> 09:30 – 12:30 · 16:00 – 19:00</strong></span>
+    </p>
+</div>
+
 <div class="container">
 
     <main role="main" id="main-content">
-
-        <section class="card" aria-labelledby="landing-hero-title">
-            <div style="text-align: center; padding: 10px 0 0;">
-                <h2 id="landing-hero-title" style="font-size: 1.5rem; font-weight: 800; color: var(--primary); margin-bottom: 8px;" data-i18n="landing_hero_title">Benvenuti nello Studio Medico Ippocrate</h2>
-                <p style="color: var(--text-medium); margin-bottom: 6px;" data-i18n="landing_hero_sub">Scegli la tua area: ogni percorso ti porta direttamente a ciò che ti serve.</p>
-                <p style="font-size: 0.9rem; color: var(--text-medium); margin-bottom: 0;">
-                    <i class="fas fa-clock" aria-hidden="true" style="color: var(--accent); margin-right: 6px;"></i>
-                    <span data-i18n="hours_title">Orari di Studio</span>:
-                    <span data-badge-anchor><strong><span data-i18n="hours_lun_ven">Lun - Ven</span> 09:30 – 12:30 · 16:00 – 19:00</strong></span>
-                </p>
-            </div>
-        </section>
 
         <section class="triage-section" aria-label="Scegli la tua area" data-i18n-aria-label="triage_section_label">
             <div class="triage-grid">
@@ -273,7 +288,7 @@
     </footer>
 </site-footer>
 
-<script type="module" src="app.js?v=23"></script>
+<script type="module" src="app.js?v=25"></script>
 
 <script>
   if ('serviceWorker' in navigator) {

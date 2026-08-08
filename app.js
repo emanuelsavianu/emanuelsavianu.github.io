@@ -62,7 +62,7 @@ class SiteNav extends HTMLElement {
 
     const brand =
       '<div class="brand-wrap">' +
-        '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" fetchpriority="high" decoding="async">' +
+        '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async">' +
         '<div class="brand-text">' +
           '<' + brandTag + ' class="brand-name">Dott. Savianu Emanuel</' + brandTag + '>' +
           '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
@@ -263,8 +263,9 @@ export const translations = {
         header_subtitle: "Medico di Medicina Generale - Arezzo",
 
         // Landing triage
-        landing_hero_title: "Benvenuti nello Studio Medico Ippocrate",
-        landing_hero_sub: "Scegli la tua area: ogni percorso ti porta direttamente a ciò che ti serve.",
+        landing_hero_eyebrow: "Studio Medico Ippocrate",
+        landing_hero_title: "Dott. Emanuel Savianu",
+        landing_hero_location: "Piazza Saione 3, Arezzo",
         triage_ssn_title: "Pazienti",
         triage_ssn_desc: "Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.",
         triage_privati_title: "Pazienti Privati",
@@ -525,8 +526,9 @@ export const translations = {
         header_subtitle: "General Practitioner - Arezzo",
 
         // Landing triage
-        landing_hero_title: "Welcome to Studio Medico Ippocrate",
-        landing_hero_sub: "Choose your area: each path takes you straight to what you need.",
+        landing_hero_eyebrow: "Studio Medico Ippocrate",
+        landing_hero_title: "Dr. Emanuel Savianu",
+        landing_hero_location: "Piazza Saione 3, Arezzo",
         triage_ssn_title: "Patients",
         triage_ssn_desc: "Are you a patient of Dr. Savianu? Book visits on Doctolib, request prescriptions, read guides and exemptions.",
         triage_privati_title: "Private Patients",

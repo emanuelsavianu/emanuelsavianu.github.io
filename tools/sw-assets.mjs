@@ -9,7 +9,7 @@ import { fileURLToPath } from 'url';
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const EXCLUDE_DIRS = new Set(['node_modules', 'cloudflare', '.claude', '.git', 'docs', 'email-templates', 'schema-templates', '.superpowers', 'RUAP', 'gestoreturni']);
 const EXCLUDE_FILES = new Set(['xsegretarie.html']);
-const STATIC_ASSETS = ['/styles.css', '/app.js', '/config.js', '/manifest.json', '/assets/bluelogo.png', '/assets/bronzelogo.png'];
+const STATIC_ASSETS = ['/styles.css', '/app.js', '/config.js', '/manifest.json', '/assets/bluelogo.png', '/assets/bronzelogo.png', '/assets/studio/studio-location-desktop.avif', '/assets/studio/studio-location-desktop.webp', '/assets/studio/studio-location-tablet.avif', '/assets/studio/studio-location-tablet.webp', '/assets/studio/studio-location-mobile.avif', '/assets/studio/studio-location-mobile.webp'];
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
