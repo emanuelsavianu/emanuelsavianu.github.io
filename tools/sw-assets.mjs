@@ -32,5 +32,5 @@ export function computePrecacheUrls() {
   }).flat();
 
   const unique = [...new Set(pages)];
-  return ['/offline.html', '/404.html', ...unique, ...STATIC_ASSETS];
+  return [...new Set(['/offline.html', '/404.html', ...unique, ...STATIC_ASSETS])];
 }
