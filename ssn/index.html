@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <title>Pazienti SSN | Dott. Emanuel Savianu — Medico di Famiglia Arezzo</title>
+    <meta name="description" content="Area Pazienti SSN del Dott. Emanuel Savianu ad Arezzo (Piazza Saione 3). Prenota su Doctolib, richiedi ricette, consulta FAQ, esenzioni e guide.">
+    
+    <meta name="geo.region" content="IT-AR" />
+    <meta name="geo.placename" content="Arezzo" />
+    <meta name="geo.position" content="43.4632;11.8796" />
+    <meta name="ICBM" content="43.4632, 11.8796" />
+
+    <meta name="author" content="Dott. Emanuel Savianu">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://savianu.it/ssn/">
+    <!-- Security: referrer policy and permissions (meta fallback; add HTTP headers via Cloudflare for full effect) -->
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
+
+    <meta name="theme-color" content="#1a2f4c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Dr. Savianu">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://savianu.it/ssn/">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:site_name" content="Studio Medico Ippocrate">
+    <meta property="og:title" content="Pazienti SSN | Dott. Emanuel Savianu">
+    <meta property="og:description" content="Area Pazienti SSN: prenotazioni Doctolib, ricette, FAQ, esenzioni e guide utili.">
+    <meta property="og:image" content="https://savianu.it/assets/bronzelogo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://savianu.it/ssn/">
+    <meta name="twitter:title" content="Pazienti SSN | Dott. Emanuel Savianu">
+    <meta name="twitter:description" content="Area Pazienti SSN: prenotazioni Doctolib, ricette, FAQ, esenzioni e guide utili.">
+    <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="../styles.css?v=23">
+
+    <!-- JSON-LD Physician -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Physician",
+      "name": "Dott. Emanuel Savianu",
+      "additionalName": "Studio Medico Ippocrate",
+      "url": "https://savianu.it/",
+      "telephone": "+39 0575 910 904",
+      "sameAs": ["https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu"],
+      "image": "https://savianu.it/assets/bronzelogo.png",
+      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette.",
+      "medicalSpecialty": "GeneralPractice",
+      "areaServed": {
+        "@type": "City",
+        "name": "Arezzo"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Piazza Saione 3",
+        "addressLocality": "Arezzo",
+        "addressRegion": "AR",
+        "postalCode": "52100",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.4632,
+        "longitude": 11.8796
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
+          "opens": "16:00",
+          "closes": "19:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Tuesday", "Thursday"],
+          "opens": "10:00",
+          "closes": "13:00"
+        }
+      ],
+      "priceRange": "\u20ac\u20ac",
+      "currenciesAccepted": "EUR",
+      "paymentAccepted": "Cash, Credit Card",
+      "availableLanguage": ["it", "en"]
+    }
+    </script>
+
+</head>
+<body>
+
+<div id="ferie-banner" hidden>
+    <i class="fas fa-info-circle" aria-hidden="true"></i>
+    <span id="ferie-banner-text"></span>
+    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
+</div>
+
+<div id="large-text-banner">
+    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
+    <button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
+</div>
+
+<div id="doctolib-modal" class="modal-overlay">
+    <div class="modal-content">
+        <h2 data-i18n="doctolib_modal_title">Avviso Importante</h2>
+        <p class="modal-subtitle">STUDIO MEDICO IPPOCRATE</p>
+        <div class="modal-text" data-i18n="doctolib_modal_text">Gentili Pazienti...</div>
+        <button class="btn-accept" onclick="closeDoctolibModal()" data-i18n="doctolib_modal_btn">Ho letto</button>
+    </div>
+</div>
+
+<site-header>
+    <header role="banner">
+        <nav class="lang-switch" aria-label="Language and controls">
+            <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
+            <span class="lang-separator">|</span>
+            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
+            <span class="lang-separator">|</span>
+            <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
+            <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
+        </nav>
+        <div class="header-content">
+            <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
+            <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
+            <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
+            <a href="tel:+390575910904" class="btn-telefono-header">
+                <i class="fas fa-phone-alt"></i> Segreteria: 0575 910 904
+            </a>
+        </div>
+    </header>
+</site-header>
+
+<div class="container">
+
+        <main role="main" id="main-content">
+
+        <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+            <a href="../index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
+            <span aria-hidden="true">/</span>
+            <span>Pazienti SSN</span>
+        </nav>
+
+        <h2 class="section-title">Pazienti SSN</h2>
+        <p style="color: var(--text-medium); margin-bottom: 4px;" data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
+
+        <section class="card" aria-label="Guide rapide">
+            <div class="card-header">
+                <i class="fas fa-book-open" aria-hidden="true"></i>
+                <h2 data-i18n="services_title">Servizi Online</h2>
+            </div>
+            <div class="guide-grid">
+                <a href="faq.html"><i class="fas fa-question-circle" aria-hidden="true"></i> FAQ</a>
+                <a href="esenzioni.html"><i class="fas fa-percent" aria-hidden="true"></i> Esenzioni Ticket</a>
+                <a href="impegnative.html"><i class="fas fa-file-prescription" aria-hidden="true"></i> Impegnative e CUP</a>
+                <a href="cert-malattia.html"><i class="fas fa-file-medical" aria-hidden="true"></i> Certificato Malattia</a>
+                <a href="malattia.html"><i class="fas fa-scale-balanced" aria-hidden="true"></i> Malattia: chi la certifica?</a>
+                <a href="bengalese.html"><i class="fas fa-language" aria-hidden="true"></i> Guida in bengalese</a>
+                <a href="urdu.html"><i class="fas fa-language" aria-hidden="true"></i> Guida in urdu</a>
+                <a href="salutementale.html"><i class="fas fa-brain" aria-hidden="true"></i> Salute mentale (poster)</a>
+                <a href="vivisano.html"><i class="fas fa-heart-pulse" aria-hidden="true"></i> Vivi sano (poster)</a>
+            </div>
+        </section>
+
+        <section class="card">
+            <div style="text-align: center;">
+                <a href="privati/index.html" target="_blank" rel="noopener noreferrer" class="btn-main faq-banner-btn" style="background: var(--accent); color: var(--primary); border-color: var(--primary);">
+                    <i class="fas fa-file-medical"></i>
+                    <span data-i18n="cert_inps_btn">Sei qui per un certificato per l'INPS? Premi qui</span>
+                </a>
+                <div style="margin-top: 20px; text-align: left; padding: 0 10px;">
+                    <p style="font-size: 0.95rem; color: var(--text-medium); line-height: 1.7;" data-i18n="cert_inps_desc">
+                        <strong style="color: var(--primary);">Certificato Invalidit├á Civile, Accompagnamento e Legge 104 ad Arezzo</strong><br><br>
+                        Il Dott. Emanuel Savianu, Certificatore Telematico INPS autorizzato, fornisce il nuovo Certificato Medico Introduttivo necessario per la domanda di invalidit├á civile, Legge 104 e accompagnamento ad Arezzo e provincia (D.Lgs. 62/2024). Esperienza come medico di categoria ANMIC nelle commissioni Medico-Legali.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div style="margin-bottom: 25px;">
+                <a href="faq.html" class="btn-main faq-banner-btn">
+                    <i class="fas fa-question-circle"></i>
+                    <span data-i18n="btn_faq_main">Hai dubbi? Leggi prima le FAQ</span>
+                </a>
+                <p style="text-align: center; font-size: 0.85rem; color: var(--text-medium); margin-top: 8px;" data-i18n="service_banner_desc">
+                    Trovi subito le risposte ai dubbi pi├╣ comuni (certificati, esenzioni, impegnative).
+                </p>
+            </div>
+            <div style="padding-top: 15px; border-top: 1px dashed var(--border-color);">
+                <p style="font-size: 0.9rem; color: var(--text-medium); margin-bottom: 8px;">
+                    <i class="fas fa-prescription-bottle" aria-hidden="true" style="color: var(--accent); margin-right: 8px;"></i>
+                    <span>Per richiedere la ricetta per i farmaci assunti abitualmente o inviare un messaggio al medico, usa <strong>Doctolib</strong>:</span>
+                </p>
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 8px; color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-left: 28px;">
+                    <i class="fas fa-envelope"></i>
+                    <span>Invia richiesta su Doctolib</span>
+                </a>
+            </div>
+        </section>
+
+        <section id="booking-section" class="card" aria-labelledby="booking-title">
+            <div class="card-header">
+                <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                <h2 id="booking-title" data-i18n="booking_title">Prenotazione su Doctolib</h2>
+            </div>
+
+            <div class="doctolib-cta-grid">
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
+                    <i class="fas fa-calendar-check"></i>
+                    <span class="cta-title" data-i18n="cta_book_doctolib">Prenota appuntamento</span>
+                    <span class="cta-sub" data-i18n="cta_book_doctolib_sub">Scegli giorno e orario su Doctolib</span>
+                </a>
+                <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" class="doctolib-cta">
+                    <i class="fas fa-envelope"></i>
+                    <span class="cta-title" data-i18n="cta_message_doctolib">Invia messaggio / Richiedi ricetta</span>
+                    <span class="cta-sub" data-i18n="cta_message_doctolib_sub">Comunica col medico tramite Doctolib</span>
+                </a>
+            </div>
+
+            <div style="margin-top:30px;">
+                <a href="privati/index.html" target="_blank" rel="noopener noreferrer" class="btn-cal-service privata">
+                    <div class="cal-icon-wrapper"><i class="fas fa-user-tie"></i></div>
+                    <div class="cal-text">
+                        <h3 data-i18n="cal_privata_title">Consulenze e visite private (non sono un assistito)</h3>
+                        <p data-i18n="cal_privata_desc">Consulti e certificati privati.</p>
+                    </div>
+                </a>
+            </div>
+
+            <div class="privacy-notice" style="margin-top: 30px;">
+                <p><i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent);"></i> <span data-i18n="privacy_notice_text">Leggi l'informativa privacy.</span></p>
+                <a href="../privacy.html" target="_blank" rel="noopener noreferrer">
+                    <span data-i18n="privacy_notice_link">Informativa Trattamento Dati</span> <i class="fas fa-external-link-alt" aria-hidden="true" style="font-size: 0.8rem;"></i>
+                </a>
+            </div>
+        </section>
+
+        <div class="urgency-wrapper">
+            <aside class="alert-emergency" role="alert">
+                <i class="fas fa-ambulance" aria-hidden="true"></i>
+                <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
+            </aside>
+        </div>
+
+        <section class="card fade-in" aria-labelledby="title-116117">
+            <div class="card-header">
+                <i class="fas fa-phone-volume" aria-hidden="true"></i>
+                <h2 id="title-116117" data-i18n="title_116117">116 117 ΓÇö Assistenza Sanitaria Non Urgente</h2>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <p style="font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 8px;">
+                    ≡ƒæë <span data-i18n="cta_116117_main">CHIAMA IL 116 117</span>
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 12px;" data-i18n="note_116117_free">
+                    (Numero gratuito, sempre attivo 24 ore su 24)
+                </p>
+                <p style="color: var(--text-medium); line-height: 1.7;" data-i18n="desc_116117_operator">
+                    Un medico o un operatore ti aiuter├á a capire cosa fare.
+                </p>
+            </div>
+
+            <div class="action-grid" style="gap: 20px; margin-bottom: 5px;">
+                <div class="box-info">
+                    <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: #16a34a;" data-i18n="when_call_116117">Γ£à QUANDO CHIAMARE IL 116 117:</p>
+                    <ul style="margin-left: 18px; color: var(--text-medium); line-height: 1.7; font-size: 0.95rem;">
+                        <li style="margin-bottom: 6px;" data-i18n="item_when_1">Per consigli medici quando il tuo dottore non c'├¿.</li>
+                        <li style="margin-bottom: 6px;" data-i18n="item_when_2">Per la Guardia Medica (di notte, nei weekend e festivi).</li>
+                        <li data-i18n="item_when_3">Per informazioni sui servizi sanitari della zona.</li>
+                    </ul>
+                </div>
+
+                <div class="box-danger">
+                    <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--danger);" data-i18n="when_not_call_116117">Γ¥î QUANDO NON CHIAMARE IL 116 117:</p>
+                    <ul style="margin-left: 18px; color: var(--text-medium); line-height: 1.7; font-size: 0.95rem;">
+                        <li style="margin-bottom: 6px;" data-i18n="item_not_emergency"><strong>Emergenze gravi:</strong> Chiama subito il <strong>112</strong>.</li>
+                        <li data-i18n="item_not_booking"><strong>Per prenotare esami o visite:</strong> Chiama il CUP (<strong>800 575 575</strong>) o vai in farmacia.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <aside role="complementary">
+
+        <section class="card">
+            <div class="card-header">
+                <i class="fas fa-address-book" aria-hidden="true"></i>
+                <h2 data-i18n="contacts_title">Contatti Studio</h2>
+            </div>
+            
+            <a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="contact-row" style="border:2px solid var(--accent); margin-bottom:0; border-radius:10px 10px 0 0;">
+                <div class="icon-circle" style="background:var(--accent); color:var(--primary);"><i class="fas fa-calendar-check"></i></div>
+                <div>
+                    <span data-i18n="label_doctolib_contacts" class="contact-label" style="font-size:1rem;">Appuntamenti, Messaggi, Rinnovi Farmaci</span>
+                    <span style="display:block; font-size:0.8rem; color:var(--accent); font-weight:600;">tramite Doctolib</span>
+                </div>
+                <i class="fas fa-chevron-right" style="margin-left:auto; color:var(--accent);"></i>
+            </a>
+            <a href="tel:0575910904" class="contact-row" style="margin-bottom:15px; border-radius:0 0 10px 10px;">
+                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                <div><span data-i18n="label_secretary_fallback" class="contact-label">Segreteria (solo se non puoi usare Doctolib)</span><span class="contact-value text-primary">0575 910 904</span></div>
+            </a>
+            <div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" class="contact-row" style="margin-bottom:0; border-radius:10px;">
+                    <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                    <div><span data-i18n="label_address" class="contact-label">Studio Medico Ippocrate</span><span style="display:block;">Piazza Saione 3, Arezzo</span></div>
+                </a>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="card-header">
+                <i class="fas fa-headset" aria-hidden="true"></i>
+                <h2 data-badge-anchor data-i18n="secretary_hours_label">Orari Segreteria - 0575 910 904</h2>
+            </div>
+            <table class="hours-table">
+                <tbody>
+                    <tr><td class="day" data-i18n="hours_lun_ven">Lun - Ven</td><td class="time">09:30 ΓÇô 12:30<br>16:00 ΓÇô 19:00</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card" style="text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 6px;" data-i18n="aside_116117_prompt">
+                <i class="fas fa-phone-volume" style="color: var(--accent);"></i>
+                Segreteria chiusa o non risponde? Non trovi il medico?
+            </p>
+            <a href="tel:116117" style="display: inline-block; font-size: 1.4rem; font-weight: 800; color: var(--accent);">
+                116 117
+            </a>
+            <p style="font-size: 0.75rem; color: var(--text-medium); margin-top: 4px;" data-i18n="aside_116117_sub">
+                Numero gratuito, sempre attivo 24 ore su 24
+            </p>
+        </section>
+    </aside>
+
+</div>
+
+<site-footer>
+    <footer role="contentinfo">
+        <div class="footer-content">
+            <p>┬⌐ <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+            <nav style="margin-top: 10px;">
+                <a href="faq.html">FAQ</a> ·
+                <a href="malattia.html" data-i18n="footer_malattia_link">Certificato di malattia: chi deve farlo?</a> ·
+                <a href="../privacy.html" data-i18n="link_privacy">Privacy Policy</a>
+            </nav>
+        </div>
+    </footer>
+</site-footer>
+
+<script src="../config.js?v=2"></script>
+<script src="../app.js?v=17"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+    });
+  }
+</script>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'it'
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>
