@@ -1531,3 +1531,46 @@ body.dark-mode .triage-card-cta { color: var(--accent); }
     .triage-grid { grid-template-columns: 1fr; gap: 16px; }
     .triage-card { min-height: 0; padding: 22px 20px; }
 }
+
+/* --- SECTION DASHBOARD (guide quick links) --- */
+.breadcrumb-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-medium);
+}
+.breadcrumb-bar a { color: var(--accent-text); text-decoration: none; }
+.breadcrumb-bar a:hover { text-decoration: underline; }
+.section-title {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+.guide-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+}
+.guide-grid a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    transition: border-color 0.15s, transform 0.15s;
+}
+.guide-grid a:hover { border-color: var(--accent); transform: translateY(-2px); }
+.guide-grid a i { color: var(--accent-text); font-size: 1.1rem; flex-shrink: 0; }
+body.dark-mode .guide-grid a i { color: var(--accent); }
