@@ -2,40 +2,120 @@
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
 // =================================================================
 
-// --- WEB COMPONENTS (Light DOM) ---
-// Header e footer condivisi tra index.html e faq.html.
-// Usano insertAdjacentHTML per iniettare elementi extra senza cancellare il
-// contenuto statico delle pagine (che preserva <h1> per SEO e crawler).
-// Il contenuto statico resta nel DOM — il componente lo arricchisce, non lo sostituisce.
-class SiteHeader extends HTMLElement {
+// =================================================================
+// WEB COMPONENTS — SiteNav & SiteFooter (light-DOM, SEO-safe)
+// The static content inside the tags is the no-JS/crawler fallback;
+// on upgrade the component replaces it with the full rendered chrome.
+// =================================================================
+
+function getPathPrefix() {
+  const depth = location.pathname.split('/').filter(Boolean).length;
+  return depth > 1 ? '../'.repeat(depth - 1) : '';
+}
+
+function applyI18n(lang) {
+  if (typeof setLanguage === 'function') setLanguage(lang);
+}
+
+class SiteNav extends HTMLElement {
   connectedCallback() {
     if (this.dataset.rendered === '1') return;
     this.dataset.rendered = '1';
+    const section = this.dataset.section || 'root'; // root|ssn|privati|colleghi|static
+    const prefix = getPathPrefix();
+    const isPatient = section !== 'colleghi' && section !== 'static';
+    const isRoot = section === 'root';
+    const brandTag = isRoot ? 'h1' : 'div';
 
-    // Relative prefix for pages served from section subfolders
-    const prefix = (function() {
-      const depth = location.pathname.split('/').filter(Boolean).length;
-      return depth > 1 ? '../'.repeat(depth - 1) : '';
-    })();
+    // Top banners + skip link (patient pages get the full set)
+    const skipLink =
+      '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>';
+    const banners = isPatient
+      ? '<div id="doctolib-banner"><i class="fas fa-info-circle" aria-hidden="true"></i><span id="doctolib-banner-text"></span></div>' +
+        '<div id="ferie-banner" hidden><i class="fas fa-info-circle" aria-hidden="true"></i><span id="ferie-banner-text"></span><button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">&times;</button></div>' +
+        '<div id="large-text-banner"><span id="large-text-banner-label">&#128276; Difficoltà a leggere?</span><button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()" aria-pressed="false">A+ Testo Grande</button></div>'
+      : '<div id="ferie-banner" hidden><i class="fas fa-info-circle" aria-hidden="true"></i><span id="ferie-banner-text"></span><button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">&times;</button></div>';
 
-    this.insertAdjacentHTML('beforebegin',
-      '<div id="doctolib-banner">' +
-        '<i class="fas fa-info-circle"></i>' +
-        '<span id="doctolib-banner-text"></span>' +
-      '</div>' +
-      '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>' +
-      '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
-        '<i class="fas fa-question-circle"></i>' +
-        '<span class="floating-faq-text">FAQ</span>' +
-      '</a>'
-    );
+    // Language/control switch
+    const controls = isPatient
+      ? '<button onclick="setLanguage(\'it\')" class="lang-btn active" id="btn-it">ITA</button>' +
+        '<span class="lang-separator" aria-hidden="true">|</span>' +
+        '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en">ENG</button>' +
+        '<span class="lang-separator" aria-hidden="true">|</span>' +
+        '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>' +
+        '<div id="google_translate_element"></div>'
+      : '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>';
 
-    // Aggiorna i18n sugli elementi appena iniettati dopo che il resto dello script è stato caricato
+    // Nav links row + mobile menu
+    const here = location.pathname.replace(/\/$/, '');
+    const navRow =
+      '<nav class="site-nav" aria-label="Navigazione principale">' +
+        '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
+        '<ul class="nav-menu" id="site-nav-menu">' +
+          '<li><a href="' + prefix + 'index.html"' + (isPatient ? ' data-i18n="nav_home"' : '') + (here.endsWith('/index.html') || here === '' ? ' aria-current="page"' : '') + '>Home</a></li>' +
+          '<li><a href="' + prefix + 'ssn/index.html"' + (isPatient ? ' data-i18n="nav_ssn"' : '') + (here.includes('/ssn') ? ' aria-current="page"' : '') + '>Pazienti SSN</a></li>' +
+          '<li><a href="' + prefix + 'privati/index.html"' + (isPatient ? ' data-i18n="nav_privati"' : '') + (here.includes('/privati') ? ' aria-current="page"' : '') + '>Pazienti Privati</a></li>' +
+          '<li><a href="' + prefix + 'colleghi/index.html"' + (isPatient ? ' data-i18n="nav_colleghi"' : '') + (here.includes('/colleghi') ? ' aria-current="page"' : '') + '>Colleghi</a></li>' +
+          '<li><a href="' + prefix + 'ssn/faq.html"' + (isPatient ? ' data-i18n="nav_faq"' : '') + '>FAQ</a></li>' +
+        '</ul>' +
+      '</nav>';
+
+    const phone =
+      '<a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> Segreteria: 0575 910 904</a>';
+
+    const brand =
+      '<' + brandTag + ' class="brand-name">Dott. Savianu Emanuel</' + brandTag + '>' +
+      '<p class="brand-sub">STUDIO MEDICO IPPOCRATE</p>' +
+      '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
+      phone;
+
+    this.insertAdjacentHTML('beforebegin', skipLink + banners);
+    this.innerHTML =
+      '<nav class="lang-switch" aria-label="' + (isPatient ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
+      '<header role="banner"><div class="header-content">' + brand + '</div></header>' +
+      navRow;
+
+    if (isPatient) {
+      this.insertAdjacentHTML('afterend',
+        '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
+          '<i class="fas fa-question-circle" aria-hidden="true"></i><span class="floating-faq-text">FAQ</span>' +
+        '</a>'
+      );
+    }
+
+    // Mobile menu toggle
+    const toggle = this.querySelector('#nav-toggle');
+    const menu = this.querySelector('#site-nav-menu');
+    if (toggle && menu) {
+      toggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const open = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+        menu.classList.toggle('open', !open);
+        toggle.setAttribute('aria-label', open ? 'Apri il menu di navigazione' : 'Chiudi il menu di navigazione');
+      });
+      document.addEventListener('click', function(e) {
+        if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== toggle) {
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && menu.classList.contains('open')) {
+          menu.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          toggle.focus();
+        }
+      });
+    }
+
     Promise.resolve().then(function() {
-      if (typeof setLanguage === 'function') {
-        var lang = 'it';
-        try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch(e) {}
-        setLanguage(lang);
+      var lang = 'it';
+      try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch (e) {}
+      applyI18n(lang);
+      // Re-attach Google Translate to the freshly injected div if the widget already loaded
+      if (isPatient && window.google && window.google.translate) {
+        try { window.googleTranslateElementInit(); } catch (e) {}
       }
     });
   }
@@ -45,40 +125,43 @@ class SiteFooter extends HTMLElement {
   connectedCallback() {
     if (this.dataset.rendered === '1') return;
     this.dataset.rendered = '1';
+    const section = this.dataset.section || 'root';
+    const prefix = getPathPrefix();
+    const isPatient = section !== 'colleghi' && section !== 'static';
 
-    const prefix = (function() {
-      const depth = location.pathname.split('/').filter(Boolean).length;
-      return depth > 1 ? '../'.repeat(depth - 1) : '';
-    })();
+    this.innerHTML =
+      '<footer role="contentinfo">' +
+        '<div class="footer-content">' +
+          '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - Dr. Savianu Emanuel</p>' +
+          '<nav class="footer-nav" aria-label="Footer">' +
+            '<a href="' + prefix + 'index.html"' + (isPatient ? ' data-i18n="footer_home"' : '') + '>Home</a>' +
+            ' <span aria-hidden="true">·</span> ' +
+            '<a href="' + prefix + 'ssn/faq.html"' + (isPatient ? ' data-i18n="footer_faq"' : '') + '>FAQ</a>' +
+            ' <span aria-hidden="true">·</span> ' +
+            '<a href="' + prefix + 'privacy.html"' + (isPatient ? ' data-i18n="link_privacy"' : '') + '>Privacy Policy</a>' +
+          '</nav>' +
+        '</div>' +
+      '</footer>';
 
-    this.insertAdjacentHTML('afterend',
-      '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
-        '<a href="tel:+390575910904" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria">' +
-          '<i class="fas fa-phone-alt" aria-hidden="true"></i>' +
-          '<span data-i18n="qa_call">Chiama</span>' +
-        '</a>' +
-        '<a href="' + prefix + 'ssn/faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti">' +
-          '<i class="fas fa-question-circle" aria-hidden="true"></i>' +
-          '<span>FAQ</span>' +
-        '</a>' +
-        '<a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib">' +
-          '<i class="fas fa-calendar-check" aria-hidden="true"></i>' +
-          '<span data-i18n="qa_doctolib">Doctolib</span>' +
-        '</a>' +
-      '</nav>'
-    );
+    if (isPatient) {
+      this.insertAdjacentHTML('afterend',
+        '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
+          '<a href="tel:+390575910904" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria"><i class="fas fa-phone-alt" aria-hidden="true"></i><span data-i18n="qa_call">Chiama</span></a>' +
+          '<a href="' + prefix + 'ssn/faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti"><i class="fas fa-question-circle" aria-hidden="true"></i><span>FAQ</span></a>' +
+          '<a href="https://tinyurl.com/Savianu" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib"><i class="fas fa-calendar-check" aria-hidden="true"></i><span data-i18n="qa_doctolib">Doctolib</span></a>' +
+        '</nav>'
+      );
+    }
 
     Promise.resolve().then(function() {
-      if (typeof setLanguage === 'function') {
-        var lang = 'it';
-        try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch(e) {}
-        setLanguage(lang);
-      }
+      var lang = 'it';
+      try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch (e) {}
+      applyI18n(lang);
     });
   }
 }
 
-customElements.define('site-header', SiteHeader);
+customElements.define('site-nav', SiteNav);
 customElements.define('site-footer', SiteFooter);
 
 // --- AUTOMATIC YEAR ---
@@ -176,6 +259,7 @@ function updateLargeTextBanner(isActive) {
         label.textContent = '🔤 Difficoltà a leggere?';
         btn.textContent   = 'A+ Testo Grande';
     }
+    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
 }
 
 function toggleLargeText() {
@@ -407,6 +491,7 @@ const translations = {
         qa_book: 'Prenota',
         qa_home: 'Home',
         qa_email: 'Doctolib',
+        qa_doctolib: 'Doctolib',
 
         // FAQ page extras
         faq_search_placeholder: 'Cerca nelle FAQ...',
@@ -448,6 +533,20 @@ const translations = {
         cta_book_doctolib_sub: 'Scegli giorno e orario su Doctolib',
         cta_message_doctolib: 'Invia messaggio / Richiedi ricetta',
         cta_message_doctolib_sub: 'Comunica col medico tramite Doctolib',
+
+        // Nav (site-nav component)
+        nav_home: 'Home',
+        nav_ssn: 'Pazienti SSN',
+        nav_privati: 'Pazienti Privati',
+        nav_colleghi: 'Colleghi',
+        nav_faq: 'FAQ',
+        nav_menu_open: 'Apri il menu di navigazione',
+        nav_menu_close: 'Chiudi il menu di navigazione',
+        nav_menu_label: 'Menu principale',
+
+        // Footer (site-footer component)
+        footer_home: 'Home',
+        footer_faq: 'Domande Frequenti',
 
         // Footer
         footer_malattia_link: 'Certificato di malattia: chi deve farlo?'
@@ -651,6 +750,7 @@ const translations = {
         qa_book: 'Book',
         qa_home: 'Home',
         qa_email: 'Doctolib',
+        qa_doctolib: 'Doctolib',
 
         // FAQ page extras
         faq_search_placeholder: 'Search the FAQ...',
@@ -692,6 +792,20 @@ const translations = {
         cta_book_doctolib_sub: 'Choose date and time on Doctolib',
         cta_message_doctolib: 'Send a message / Request prescription',
         cta_message_doctolib_sub: 'Contact the doctor via Doctolib',
+
+        // Nav (site-nav component)
+        nav_home: 'Home',
+        nav_ssn: 'NHS Patients',
+        nav_privati: 'Private Patients',
+        nav_colleghi: 'Colleagues',
+        nav_faq: 'FAQ',
+        nav_menu_open: 'Open navigation menu',
+        nav_menu_close: 'Close navigation menu',
+        nav_menu_label: 'Main menu',
+
+        // Footer (site-footer component)
+        footer_home: 'Home',
+        footer_faq: 'Frequently Asked Questions',
 
         // Footer
         footer_malattia_link: 'Sick leave certificate: who should issue it?'
