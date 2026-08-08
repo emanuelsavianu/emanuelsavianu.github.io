@@ -138,7 +138,7 @@ a:focus-visible {
 .skip-link:focus { top: 0; }
 
 /* Custom Elements: display block per evitare problematiche inline/block */
-site-header, site-footer { display: block; }
+site-footer { display: block; }
 
 /* --- HEADER / LANDING PAGE --- */
 header {
