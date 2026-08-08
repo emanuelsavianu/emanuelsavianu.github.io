@@ -5,15 +5,27 @@ const CACHE_NAME = 'savianu-v308';
 const PRECACHE_URLS = [
   '/',
   '/index.html',
-  '/faq.html',
+  '/ssn/',
+  '/ssn/index.html',
+  '/ssn/faq.html',
+  '/ssn/esenzioni.html',
+  '/ssn/impegnative.html',
+  '/ssn/cert-malattia.html',
+  '/ssn/malattia.html',
+  '/privati/',
+  '/privati/index.html',
+  '/privati/certificato-invalidita-civile.html',
+  '/privati/faq-riforma.html',
+  '/colleghi/',
+  '/colleghi/index.html',
   '/offline.html',
+  '/404.html',
   '/styles.css',
   '/app.js',
   '/config.js',
   '/manifest.json',
-  '/logo.png',
-  '/bluelogo.png',
-  '/bronzelogo.png'
+  '/assets/bluelogo.png',
+  '/assets/bronzelogo.png'
 ];
 
 function isSameOrigin(url) {
