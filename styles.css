@@ -148,7 +148,7 @@ site-footer { display: block; }
 header {
     background-color: var(--primary); 
     color: var(--white);
-    padding: 70px 20px 40px;
+    padding: 80px 20px 40px;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -174,13 +174,15 @@ body.dark-mode header::after { background: rgba(10, 22, 40, 0.9); }
 .header-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
 
 .header-info {
-    position: relative; z-index: 2;
-    display: flex; align-items: center; flex-wrap: wrap;
+    background: var(--primary-dark);
+    border-top: 2px solid var(--accent);
+    border-bottom: 2px solid var(--accent);
+    display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
     gap: 10px;
     font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.95);
     padding: 10px 20px;
-    border-bottom: 1px solid rgba(194, 155, 87, 0.25);
+    text-align: center;
 }
 .header-info i { color: var(--accent); flex-shrink: 0; font-size: 1rem; }
 .header-info-base { color: rgba(255, 255, 255, 0.95); }
@@ -201,9 +203,6 @@ body.dark-mode header::after { background: rgba(10, 22, 40, 0.9); }
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(194, 155, 87, 0.12);
-}
-@media (min-width: 600px) {
-    .header-info { padding-right: 260px; }
 }
 
 .brand-wrap {
