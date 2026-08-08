@@ -1773,3 +1773,16 @@ body.dark-mode .site-nav { background: var(--bg-gradient-2); }
 .page-hero .hero-desc { color: var(--color-text-muted); }
 .page-hero .hero-eyebrow { color: var(--color-accent-strong); }
 body.dark-mode .page-hero .hero-eyebrow { color: var(--color-accent); }
+
+/* --- CLS hardening --- */
+img { max-width: 100%; height: auto; }
+.topbar-logo, .sidebar-logo-img { width: auto; height: auto; }
+.triage-card { contain: layout paint; }
+iframe { max-width: 100%; }
+html { text-rendering: optimizeLegibility; }
+
+/* --- Large-text toggle focus ring (keyboard visibility) --- */
+#large-text-toggle-btn:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
