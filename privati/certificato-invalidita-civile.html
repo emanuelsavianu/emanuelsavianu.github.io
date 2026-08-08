@@ -162,15 +162,9 @@
             background: var(--white);
             position: relative;
             width: 100%;
-        }
-        .calendar-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-        }
-        @media (max-width: 600px) {
-            .calendar-frame { height: 750px; }
+            display: flex;
+            justify-content: center;
+            padding: 48px 24px;
         }
 
         /* ── Animations ── */
@@ -607,13 +601,24 @@
             <p style="text-align: center; color: var(--text-medium); font-size: 0.9rem; margin-bottom: 24px;">
                 Una consulenza preliminare chiarisce i tempi, i documenti necessari e il percorso personalizzato per il tuo caso.
             </p>
-            <div class="calendar-frame" style="width: 100%; height: 620px; min-height: 620px;">
-                <iframe
-                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ3doNfY80zH2XLETLNnYnaqXyu6ImECj_O5_WciNc6aBVZKQbtGYBK57W1g84TT7bvrHMUFzOhn?gv=true"
-                    frameborder="0"
-                    title="Calendario prenotazioni consulenze invalidità civile"
-                    style="width: 100%; height: 100%; border: none;">
-                </iframe>
+            <div class="calendar-frame" style="width: 100%;">
+                <!-- Google Calendar Appointment Scheduling begin -->
+                <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+                <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                <script>
+                (function() {
+                  var target = document.currentScript;
+                  window.addEventListener('load', function() {
+                    calendar.schedulingButton.load({
+                      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ3doNfY80zH2XLETLNnYnaqXyu6ImECj_O5_WciNc6aBVZKQbtGYBK57W1g84TT7bvrHMUFzOhn?gv=true',
+                      color: '#D50000',
+                      label: document.documentElement.lang === 'en' ? 'Book an appointment' : 'Fissa un appuntamento',
+                      target,
+                    });
+                  });
+                })();
+                </script>
+                <!-- end Google Calendar Appointment Scheduling -->
             </div>
         </section>
 
