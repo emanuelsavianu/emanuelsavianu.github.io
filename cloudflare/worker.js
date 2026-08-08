@@ -45,12 +45,12 @@ const SECURITY_HEADERS = {
   //    Once a build step is added, replace with nonces or hashes.
   //  • fonts.googleapis.com / gstatic: Google Fonts
   //  • cdnjs.cloudflare.com: Font Awesome CSS + font files
-  //  • calendar.google.com: private-practice booking iframe (frame-src)
+  //  • calendar.google.com: private-practice booking button (script/style-src)
   //  • translate.google.com: Google Translate widget (script-src)
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://translate.google.com https://ssl.google-analytics.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://translate.googleapis.com",
+    "script-src 'self' 'unsafe-inline' https://calendar.google.com https://translate.google.com https://ssl.google-analytics.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://translate.googleapis.com https://calendar.google.com",
     "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
     "img-src 'self' data: https://savianu.it https://www.google.com https://translate.google.com",
     "connect-src 'self' https://translate.googleapis.com",
