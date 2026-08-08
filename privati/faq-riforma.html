@@ -524,26 +524,14 @@
     </style>
 </head>
 <body>
-<a href="#faq-main" class="skip-link">Vai alle domande frequenti</a>
+<site-nav data-section="privati">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
+    </div>
+</site-nav>
 
-<div class="page-wrapper">
-
-    <!-- ── Top bar ────────────────────────────────────── -->
-    <header class="page-topbar">
-        <div class="topbar-brand">
-            <img src="../assets/bluelogo.png" alt="Studio Medico Ippocrate" width="32" height="32" class="topbar-logo">
-            <span>Studio Medico Ippocrate</span>
-        </div>
-        <div class="topbar-actions">
-            <a href="index.html" class="btn-back" aria-label="Torna a Visite Private">
-                <i class="fa-solid fa-arrow-left"></i>
-                <span>Visite Private</span>
-            </a>
-            <button id="btn-dark" class="btn-dark-toggle" onclick="toggleDarkMode()" aria-label="Attiva/Disattiva modalità scura">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </div>
-    </header>
+<div class="page-wrapper" id="main-content">
 
     <!-- ── Hero ──────────────────────────────────────── -->
     <section class="page-hero" aria-labelledby="faq-hero-heading">
@@ -1002,20 +990,25 @@
     </main>
 
     <!-- ── Footer ── -->
-    <footer class="page-footer">
-        <span>Studio Medico Ippocrate &mdash; Piazza Saione 3, Arezzo &mdash; Tel. <a href="tel:+3905751713428">0575 171 3428</a></span><br>
-        <span>&copy; <span id="current-year"></span> Dott. Emanuel Savianu &mdash; </span>
-        <a href="../privacy.html">Informativa Privacy</a>
-        <span> &mdash; </span>
-        <a href="index.html">Visite Private</a>
-        <span> &mdash; </span>
-        <a href="../index.html">Home</a>
-    </footer>
+    <site-footer data-section="privati">
+        <footer role="contentinfo">
+            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+        </footer>
+    </site-footer>
 
 </div>
 
 <script src="../config.js?v=2"></script>
 <script src="../app.js?v=17"></script>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'it'
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <script>
     // ── Accordion ──
     document.querySelectorAll('.faq-question').forEach(function(btn) {

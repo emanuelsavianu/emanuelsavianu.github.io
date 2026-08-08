@@ -772,36 +772,14 @@
     </style>
 </head>
 <body>
-<div id="ferie-banner" hidden>
-    <i class="fas fa-info-circle" aria-hidden="true"></i>
-    <span id="ferie-banner-text"></span>
-    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
-</div>
-<div id="large-text-banner">
-    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
-    <button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
-</div>
-<a href="#calendario" class="skip-link">Vai al calendario prenotazioni</a>
-<div class="page-wrapper">
-    <!-- ── Top bar ──────────────────────────────────────────────── -->
-    <div class="page-topbar">
-        <div class="topbar-brand">
-            <img src="../assets/bluelogo.png" alt="Studio Medico Ippocrate" width="32" height="32" class="topbar-logo">
-            <i class="fa-solid fa-stethoscope" style="font-size: 1.1rem; color: var(--accent);"></i>
-            <span>Certificati Medici INPS</span>
-        </div>
-        <div class="topbar-actions">
-            <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
-            <span class="lang-separator">|</span>
-            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
-            <span class="lang-separator">|</span>
-            <button onclick="toggleDarkMode()" class="btn-dark-toggle" id="btn-dark" title="Toggle Dark Mode" aria-label="Toggle dark mode">
-                <i class="fa-solid fa-moon" aria-hidden="true"></i>
-            </button>
-            <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
-        </div>
+<site-nav data-section="privati">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
+</site-nav>
 
+<div class="page-wrapper" id="main-content">
     <!-- ── Breadcrumb ─────────────────────────────────────────── -->
     <nav class="breadcrumb-bar" aria-label="Breadcrumb" style="max-width: 900px; margin: 18px auto 0; padding: 0 20px;">
         <a href="../index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
@@ -1273,15 +1251,11 @@
     </button>
 
     <!-- ── Footer ────────────────────────────────────────────── -->
-    <footer class="page-footer">
-        <span>Studio Medico Ippocrate &mdash; Piazza Saione 3, Arezzo &mdash; Tel. <a href="tel:+3905751713428">0575 171 3428</a></span><br>
-        <span>&copy; <span id="current-year"></span> Dott. Emanuel Savianu &mdash; </span>
-        <a href="../privacy.html">Informativa Privacy</a>
-        <span> &mdash; </span>
-        <a href="../ssn/index.html">Pazienti SSN</a>
-        <span> &mdash; </span>
-        <a href="../index.html">Home</a>
-    </footer>
+    <site-footer data-section="privati">
+        <footer role="contentinfo">
+            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+        </footer>
+    </site-footer>
 
 </div>
 
