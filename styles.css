@@ -1518,6 +1518,10 @@ body.large-text .qa-item i { font-size: 1.35rem; }
     transform: translateY(-4px);
     box-shadow: 0 14px 30px rgba(26, 47, 76, 0.18);
 }
+.triage-card:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 3px;
+}
 .triage-card[data-accent="ssn"] { border-top-color: var(--ssn); }
 .triage-card[data-accent="privati"] { border-top-color: var(--privati); }
 .triage-card[data-accent="colleghi"] { border-top-color: var(--colleghi); }

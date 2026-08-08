@@ -47,7 +47,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=24">
+    <link rel="stylesheet" href="styles.css?v=25">
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
@@ -121,12 +121,12 @@
                 <p style="font-size: 0.9rem; color: var(--text-medium); margin-bottom: 0;">
                     <i class="fas fa-clock" aria-hidden="true" style="color: var(--accent); margin-right: 6px;"></i>
                     <span data-i18n="hours_title">Orari di Studio</span>:
-                    <span data-badge-anchor><strong>Lun - Ven 09:30 – 12:30 · 16:00 – 19:00</strong></span>
+                    <span data-badge-anchor><strong><span data-i18n="hours_lun_ven">Lun - Ven</span> 09:30 – 12:30 · 16:00 – 19:00</strong></span>
                 </p>
             </div>
         </section>
 
-        <section class="triage-section" aria-label="Scegli la tua area">
+        <section class="triage-section" aria-label="Scegli la tua area" data-i18n-aria-label="triage_section_label">
             <div class="triage-grid">
                 <a class="triage-card" data-accent="ssn" href="ssn/index.html">
                     <span class="triage-icon" aria-hidden="true"><i class="fas fa-user-injured"></i></span>
@@ -223,7 +223,7 @@
                 <div class="icon-circle" style="background:var(--accent); color:var(--primary);"><i class="fas fa-calendar-check"></i></div>
                 <div>
                     <span data-i18n="label_doctolib_contacts" class="contact-label" style="font-size:1rem;">Appuntamenti, Messaggi, Rinnovi Farmaci</span>
-                    <span style="display:block; font-size:0.8rem; color:var(--accent-text); font-weight:600;">tramite Doctolib</span>
+                    <span data-i18n="label_via_doctolib" style="display:block; font-size:0.8rem; color:var(--accent-text); font-weight:600;">tramite Doctolib</span>
                 </div>
                 <i class="fas fa-chevron-right" style="margin-left:auto; color:var(--accent);"></i>
             </a>
@@ -234,7 +234,7 @@
             <div>
                 <a href="https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" class="contact-row" style="margin-bottom:0; border-radius:10px;">
                     <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
-                    <div><span data-i18n="label_address" class="contact-label">Studio Medico Ippocrate</span><span style="display:block;">Piazza Saione 3, Arezzo</span></div>
+                    <div><span data-i18n="label_address" class="contact-label">Studio Medico Ippocrate</span><span data-i18n="label_address_value" style="display:block;">Piazza Saione 3, Arezzo</span></div>
                 </a>
             </div>
         </section>
@@ -273,7 +273,7 @@
     </footer>
 </site-footer>
 
-<script type="module" src="app.js?v=18"></script>
+<script type="module" src="app.js?v=19"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
