@@ -44,12 +44,16 @@ const SECURITY_HEADERS = {
   //    inline <script> blocks and inline style attributes without a build step.
   //    Once a build step is added, replace with nonces or hashes.
   //  • fonts.googleapis.com / gstatic: Google Fonts
-  //  • cdnjs.cloudflare.com: Font Awesome CSS + font files
+  //  • cdnjs.cloudflare.com: Font Awesome CSS + font files + RUAP/gestoreturni JS (jsPDF, html2canvas, xlsx)
+  //  • cdn.tailwindcss.com: Tailwind CDN used by RUAP and other tool pages
+  //  • cdn.jsdelivr.net: chart.js on malattia/guida/scudo pages
+  //  • unpkg.com: react/react-dom/babel on calcolatore-ferie pages
+  //  • cdn.sheetjs.com: xlsx on calcolatore-ferie
   //  • calendar.google.com: private-practice booking button (script/style-src)
   //  • translate.google.com: Google Translate widget (script-src)
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://calendar.google.com https://translate.google.com https://ssl.google-analytics.com",
+    "script-src 'self' 'unsafe-inline' https://calendar.google.com https://translate.google.com https://ssl.google-analytics.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://translate.googleapis.com https://calendar.google.com",
     "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
     "img-src 'self' data: https://savianu.it https://www.google.com https://translate.google.com",
