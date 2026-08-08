@@ -103,37 +103,12 @@
 </head>
 <body>
 
-<div id="ferie-banner" hidden>
-    <i class="fas fa-info-circle" aria-hidden="true"></i>
-    <span id="ferie-banner-text"></span>
-    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
-</div>
-
-<div id="large-text-banner">
-    <span id="large-text-banner-label">🔤 Difficoltà a leggere?</span>
-    <button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()">A+ Testo Grande</button>
-</div>
-
-<site-header>
-    <header role="banner">
-        <nav class="lang-switch" aria-label="Language and controls">
-            <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
-            <span class="lang-separator">|</span>
-            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
-            <span class="lang-separator">|</span>
-            <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
-            <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
-        </nav>
-        <div class="header-content">
-            <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
-            <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
-            <p data-i18n="header_subtitle">Medico di Medicina Generale - Arezzo</p>
-            <a href="tel:+390575910904" class="btn-telefono-header">
-                <i class="fas fa-phone-alt"></i> Segreteria: 0575 910 904
-            </a>
-        </div>
-    </header>
-</site-header>
+<site-nav data-section="root">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p>Piazza Saione 3, Arezzo · <a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
+    </div>
+</site-nav>
 
 <div class="container">
 
@@ -292,16 +267,9 @@
 
 </div>
 
-<site-footer>
+<site-footer data-section="root">
     <footer role="contentinfo">
-        <div class="footer-content">
-            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
-            <nav style="margin-top: 10px;">
-                <a href="ssn/faq.html">FAQ</a> ·
-                <a href="ssn/malattia.html" data-i18n="footer_malattia_link">Certificato di malattia: chi deve farlo?</a> ·
-                <a href="privacy.html" data-i18n="link_privacy">Privacy Policy</a>
-            </nav>
-        </div>
+        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
     </footer>
 </site-footer>
 
