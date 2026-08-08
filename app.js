@@ -75,7 +75,7 @@ class SiteNav extends HTMLElement {
       '<header role="banner"><div class="header-content">' + brand + '</div></header>' +
       (section !== 'static' ? navRow : '');
 
-    if (isPatient) {
+    if (isPatient && this.dataset.noFloat !== '1') {
       this.insertAdjacentHTML('afterend',
         '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
           '<i class="fas fa-question-circle" aria-hidden="true"></i><span class="floating-faq-text">FAQ</span>' +
