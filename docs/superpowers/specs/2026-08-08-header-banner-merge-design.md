@@ -16,7 +16,7 @@ The two alert bars repeat the same urgenze line, and the pastel backgrounds clas
 
 1. **Remove `#large-text-banner` entirely** (markup `app.js:38`, CSS `styles.css:1360-1432` incl. `.large-text-btn`, `toggleLargeText()` `app.js:267`, any orphaned translation keys). The text-zoom accessibility control is removed site-wide per user request.
 
-2. **Merge `#doctolib-banner` + `#ferie-banner` into one info line folded into the top of the navy header** — rendered inside `header[role=banner]`, above `.header-content`, on every page via the shared `SiteNav` component. No bar above the header anymore.
+2. **Merge `#doctolib-banner` + `#ferie-banner` into one info line in a standalone bar above the navy header** — rendered before `<site-nav>` via `insertAdjacentHTML('beforebegin', skipLink + infoBar)` on every page. Revised after user review: the fold-in version (info inside `header[role=banner]`) felt cramped and cluttered next to the brand and ITA/ENG toggle, so the bar sits on its own above the header: `--primary-dark` background, gold top/bottom hairline borders, centered content.
 
 3. **Text merge, no duplication** — urgenze line appears exactly once:
    - base: "Prenotazioni e ricette tramite Doctolib." (patient pages only)
@@ -43,7 +43,8 @@ The two alert bars repeat the same urgenze line, and the pastel backgrounds clas
 - Desktop: info line must clear the absolutely-positioned `.lang-switch` (top-right); mobile (≤599px) the toggle strip flows above the header, the line wraps beneath it.
 - Reuse the existing ferie-dismissal sessionStorage key.
 - Remove/replace `dismissFerieBanner()` references with the new dismiss handler.
-- Version bumps: `styles.css?v=25`, `app.js?v=19` on ALL pages; then `node tools/update-sw.mjs`.
+- Version bumps: `styles.css?v=29`, `app.js?v=23` on ALL pages; then `node tools/update-sw.mjs`.
+- Cache-busting: `app.js` imports `./config.js?v=1` — config.js is cached independently of app.js (this caused a stale-urgenze-text bug in testing); bump `?v=` when editing `config.js`.
 
 ## Verification
 
