@@ -1369,7 +1369,7 @@ body.dark-mode .search-input {
 }
 
 /* --- TRIAGE SECTION (three-choice landing) --- */
-.triage-section { padding: 10px 0 30px; }
+.triage-section { padding: 24px 0 30px; }
 .triage-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -1653,7 +1653,11 @@ body.dark-mode .page-hero .hero-eyebrow { color: var(--color-accent); }
 
 /* --- Gateway hero with studio location photo (index.html) --- */
 .page-hero--media {
-    --hero-overlay: linear-gradient(180deg, rgba(10, 22, 40, 0.62), rgba(26, 47, 76, 0.42) 55%, rgba(26, 47, 76, 0.14));
+    --hero-overlay:
+        radial-gradient(ellipse 55% 60% at 50% 50%, rgba(10, 22, 40, 0.5) 0%, rgba(10, 22, 40, 0) 75%),
+        linear-gradient(90deg, rgba(10, 22, 40, 0.92) 0%, rgba(10, 22, 40, 0) 16%),
+        linear-gradient(90deg, rgba(10, 22, 40, 0) 84%, rgba(10, 22, 40, 0.92) 100%),
+        linear-gradient(180deg, rgba(10, 22, 40, 0.6) 0%, rgba(26, 47, 76, 0.4) 55%, rgba(26, 47, 76, 0.2) 100%);
     position: relative;
     aspect-ratio: 4 / 3;
     min-height: 260px;
@@ -1690,14 +1694,19 @@ body.dark-mode .page-hero .hero-eyebrow { color: var(--color-accent); }
 .page-hero--media .hero-eyebrow {
     color: var(--accent);
     margin-bottom: 12px;
-    font-size: 0.6rem;
+    font-size: 0.68rem;
+    text-shadow: 0 1px 6px rgba(10, 22, 40, 0.5);
 }
 .page-hero--media .hero-title {
     color: #ffffff;
     text-shadow: 0 2px 18px rgba(10, 22, 40, 0.45);
 }
 body.dark-mode .page-hero--media {
-    --hero-overlay: linear-gradient(180deg, rgba(6, 14, 26, 0.8), rgba(10, 22, 40, 0.58) 60%, rgba(10, 22, 40, 0.22));
+    --hero-overlay:
+        radial-gradient(ellipse 55% 60% at 50% 50%, rgba(6, 14, 26, 0.62) 0%, rgba(6, 14, 26, 0) 75%),
+        linear-gradient(90deg, rgba(6, 14, 26, 0.94) 0%, rgba(6, 14, 26, 0) 16%),
+        linear-gradient(90deg, rgba(6, 14, 26, 0) 84%, rgba(6, 14, 26, 0.94) 100%),
+        linear-gradient(180deg, rgba(6, 14, 26, 0.75) 0%, rgba(10, 22, 40, 0.55) 60%, rgba(10, 22, 40, 0.25) 100%);
 }
 body.dark-mode .page-hero--media .hero-title { color: #ffffff; }
 
@@ -1712,6 +1721,7 @@ body.dark-mode .page-hero--media .hero-title { color: #ffffff; }
     background: var(--primary);
     color: #f1ece2;
     text-align: center;
+    border-top: 2px solid rgba(194, 155, 87, 0.28);
 }
 .hero-info-bar p { margin: 0; }
 .hero-info-bar .hero-location {
