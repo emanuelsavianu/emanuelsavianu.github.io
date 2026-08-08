@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Gestore Turni Universale Configurabile — Dott. Emanuel Savianu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { 50:'#eff6ff', 100:'#dbeafe', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body.dark-mode { background: #0f172a !important; color: #e2e8f0; }
+    body.dark-mode .bg-white { background: #1e293b !important; }
+    body.dark-mode .bg-slate-50 { background: #1e293b !important; }
+    body.dark-mode .text-slate-800 { color: #e2e8f0 !important; }
+    body.dark-mode .border-slate-200 { border-color: #334155 !important; }
+    #assign-dropdown { z-index: 9999; }
+
+    /* Wizard overrides for elderly-friendly UI */
+    #onboarding-wizard {
+      background: linear-gradient(160deg, #f0f4ff 0%, #fdf8f0 100%);
+    }
+    #onboarding-wizard .wizard-card {
+      background: #fff;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 40px rgba(30, 58, 138, 0.10), 0 1.5px 6px rgba(30, 58, 138, 0.06);
+      max-width: 600px;
+      width: 100%;
+    }
+    #onboarding-wizard h1 {
+      font-size: 1.85rem;
+      line-height: 1.25;
+      color: #1e3a5f;
+      font-weight: 800;
+    }
+    #onboarding-wizard .wizard-body-text {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #5a6a7e;
+    }
+    #onboarding-wizard .wizard-big-btn {
+      display: block;
+      width: 100%;
+      padding: 1.25rem 1.5rem;
+      border-radius: 1rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.15s;
+      border: 3px solid transparent;
+      text-align: left;
+    }
+    #onboarding-wizard .wizard-big-btn:active {
+      transform: scale(0.98);
+    }
+    #onboarding-wizard .wizard-big-btn.primary {
+      background: #1d4ed8;
+      color: #fff;
+      border-color: #1d4ed8;
+    }
+    #onboarding-wizard .wizard-big-btn.primary:hover {
+      background: #1e40af;
+      box-shadow: 0 4px 20px rgba(29, 78, 216, 0.3);
+    }
+    #onboarding-wizard .wizard-big-btn.success {
+      background: #16a34a;
+      color: #fff;
+      border-color: #16a34a;
+    }
+    #onboarding-wizard .wizard-big-btn.success:hover {
+      background: #15803d;
+      box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3);
+    }
+    #onboarding-wizard .wizard-big-btn.outline {
+      background: #fff;
+      color: #475569;
+      border-color: #cbd5e1;
+    }
+    #onboarding-wizard .wizard-big-btn.outline:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+    #onboarding-wizard .wizard-big-btn .btn-icon {
+      font-size: 1.6rem;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+    #onboarding-wizard .wizard-big-btn .btn-sub {
+      display: block;
+      font-size: 1rem;
+      font-weight: 400;
+      margin-top: 0.25rem;
+      opacity: 0.85;
+    }
+    #onboarding-wizard .wizard-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 2rem;
+      font-size: 1.05rem;
+      font-weight: 600;
+    }
+    #onboarding-wizard .wizard-chip .chip-remove {
+      font-size: 1.3rem;
+      line-height: 1;
+      opacity: 0.7;
+      cursor: pointer;
+      padding: 0 0.15rem;
+    }
+    #onboarding-wizard .wizard-chip .chip-remove:hover {
+      opacity: 1;
+    }
+    #onboarding-wizard .wizard-selected-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background: #16a34a;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+    #onboarding-wizard input[type="text"] {
+      font-size: 1.15rem;
+      padding: 1rem 1.25rem;
+      border: 2.5px solid #cbd5e1;
+      border-radius: 1rem;
+      width: 100%;
+      transition: border-color 0.15s;
+    }
+    #onboarding-wizard input[type="text"]:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+    }
+    #onboarding-wizard .wizard-progress-dots {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+    #onboarding-wizard .wizard-progress-dots .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      transition: background 0.2s, transform 0.2s;
+    }
+    #onboarding-wizard .wizard-progress-dots .dot.active {
+      background: #1d4ed8;
+      transform: scale(1.25);
+    }
+    #onboarding-wizard .wizard-progress-dots .dot.done {
+      background: #16a34a;
+    }
+    @keyframes wizard-pop {
+      0% { transform: scale(0.9); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    #onboarding-wizard #wizard-step-content {
+      animation: wizard-pop 0.25s ease-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
+
+<header class="bg-brand-800 text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <i class="fa-solid fa-calendar-check text-blue-300 text-xl"></i>
+      <h1 class="font-bold text-lg">Gestore Turni Universale Configurabile</h1>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <button id="btn-auto-assign" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+        <i class="fa-solid fa-wand-magic-sparkles"></i> Assegna Automaticamente
+      </button>
+      <button id="btn-dark-mode" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-sm">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button id="btn-settings" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+        <i class="fa-solid fa-gear"></i> Impostazioni
+      </button>
+<button id="btn-export" class="bg-blue-500 hover:bg-blue-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+        <i class="fa-solid fa-file-export"></i> Export
+      </button>
+      <label class="bg-slate-500 hover:bg-slate-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium cursor-pointer">
+        <i class="fa-solid fa-file-import"></i> Import
+        <input type="file" id="import-file" accept=".json" class="hidden" />
+      </label>
+    </div>
+  </div>
+</header>
+
+<div class="max-w-screen-xl mx-auto px-4 py-6 grid grid-cols-4 gap-4">
+  <aside class="col-span-1 bg-white rounded-xl shadow p-4">
+    <h2 class="font-bold text-lg mb-4">Personale</h2>
+    <div id="sidebar-staff" class="space-y-2"></div>
+  </aside>
+  <main class="col-span-3">
+    <div id="cal-container" class="bg-white rounded-xl shadow p-4">
+      <div class="flex items-center justify-between mb-4">
+        <h2 id="cal-title" class="font-bold text-xl"></h2>
+        <div class="flex gap-2">
+          <button id="cal-prev" class="bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-lg text-sm"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="cal-today" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1 rounded-lg text-sm">Oggi</button>
+          <button id="cal-next" class="bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-lg text-sm"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+      </div>
+      <div id="cal-grid" class="space-y-4"></div>
+    </div>
+  </main>
+</div>
+
+<div id="settings-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-xl shadow-lg max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+    <div class="sticky top-0 bg-white border-b p-4 flex items-center justify-between">
+      <h2 class="font-bold text-xl">Impostazioni Struttura</h2>
+      <button id="settings-close" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+    </div>
+    <div id="settings-content" class="p-4">
+  <div class="flex gap-4 border-b mb-4">
+    <button class="settings-tab active px-4 py-2 border-b-2 border-brand-600 font-medium text-brand-600" data-tab="roles">
+      <i class="fa-solid fa-user-tie"></i> Ruoli
+    </button>
+    <button class="settings-tab px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700" data-tab="shifts">
+      <i class="fa-solid fa-clock"></i> Turni
+    </button>
+    <button class="settings-tab px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700" data-tab="activities">
+      <i class="fa-solid fa-building"></i> Attività
+    </button>
+    <button class="settings-tab px-4 py-2 border-b-2 border-transparent text-slate-500 hover:text-slate-700" data-tab="staff">
+      <i class="fa-solid fa-users"></i> Personale
+    </button>
+  </div>
+
+  <div id="tab-roles" class="settings-tab-content">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Ruoli Professionali</h3>
+      <button id="btn-add-role" class="bg-green-500 hover:bg-green-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Aggiungi Ruolo
+      </button>
+    </div>
+    <div id="roles-list" class="space-y-2"></div>
+  </div>
+
+  <div id="tab-shifts" class="settings-tab-content hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Turni (Fasce Orarie)</h3>
+      <button id="btn-add-shift" class="bg-green-500 hover:bg-green-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Aggiungi Turno
+      </button>
+    </div>
+    <div id="shifts-list" class="space-y-2"></div>
+  </div>
+
+  <div id="tab-activities" class="settings-tab-content hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Sedi / Attività</h3>
+      <button id="btn-add-activity" class="bg-green-500 hover:bg-green-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Aggiungi Sede
+      </button>
+    </div>
+    <div id="activities-list" class="space-y-2"></div>
+  </div>
+
+  <div id="tab-staff" class="settings-tab-content hidden">
+    <div class="flex items-center justify-between mb-4">
+      <h3 class="font-bold text-lg">Personale</h3>
+      <button id="btn-add-staff" class="bg-green-500 hover:bg-green-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+        <i class="fa-solid fa-plus"></i> Aggiungi Membro
+      </button>
+    </div>
+    <div id="staff-list" class="space-y-2"></div>
+  </div>
+
+  <!-- Zona pericolosa -->
+  <div class="mt-6 pt-4 border-t border-slate-200">
+    <p class="text-sm text-slate-500 mb-3"><i class="fa-solid fa-triangle-exclamation text-amber-500"></i> Questa operazione cancellerà tutti i dati configurati.</p>
+    <button id="btn-restart-wizard" class="w-full py-2.5 px-4 rounded-lg border-2 border-amber-400 text-amber-700 font-semibold text-sm hover:bg-amber-50 transition-colors">
+      <i class="fa-solid fa-rotate-left"></i> Ricomincia la Configurazione Guidata
+    </button>
+  </div>
+</div>
+  </div>
+</div>
+
+<!-- UNAVAILABILITY MODAL -->
+<div id="unavailability-modal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[70] p-4">
+  <div class="bg-white rounded-xl shadow-lg w-full max-w-lg flex flex-col max-h-[85vh]">
+    <div class="sticky top-0 bg-white border-b p-4 flex items-center justify-between">
+      <div>
+        <h2 class="font-bold text-xl" id="unavail-modal-title">Indisponibilità</h2>
+        <p class="text-sm text-slate-500" id="unavail-modal-subtitle"></p>
+      </div>
+      <button id="unavail-close" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+    </div>
+    <div class="flex-1 overflow-y-auto p-4">
+      <!-- Add form -->
+      <div class="bg-slate-50 rounded-lg p-4 mb-4 border border-slate-200">
+        <p class="font-semibold text-slate-700 mb-3">Aggiungi periodo</p>
+        <div class="flex gap-2 mb-3">
+          <div class="flex-1">
+            <label class="text-xs text-slate-500 font-medium">Dal</label>
+            <input id="unavail-from" type="date" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
+          </div>
+          <div class="flex-1">
+            <label class="text-xs text-slate-500 font-medium">Al</label>
+            <input id="unavail-to" type="date" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
+          </div>
+        </div>
+        <div class="flex gap-2 mb-3">
+          <div class="flex-1">
+            <label class="text-xs text-slate-500 font-medium">Tipo</label>
+            <select id="unavail-type" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
+              <option value="ferie">🏖️ Ferie</option>
+              <option value="malattia">🤒 Malattia</option>
+              <option value="indisponibile">🚫 Indisponibile</option>
+            </select>
+          </div>
+          <div class="flex-1">
+            <label class="text-xs text-slate-500 font-medium">Note (opzionale)</label>
+            <input id="unavail-note" type="text" placeholder="es. Congresso..." class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
+          </div>
+        </div>
+        <button id="unavail-add" class="w-full bg-brand-600 hover:bg-brand-500 text-white rounded-lg py-2 text-sm font-semibold transition-colors">
+          <i class="fa-solid fa-plus"></i> Aggiungi
+        </button>
+      </div>
+      <!-- List -->
+      <div id="unavail-list"></div>
+    </div>
+  </div>
+</div>
+
+<div id="assign-dropdown" class="hidden fixed bg-white rounded-lg shadow-lg border border-slate-200 z-50 min-w-64 max-h-96 overflow-y-auto">
+  <div class="sticky top-0 bg-slate-100 border-b p-3 font-bold text-sm text-slate-700">
+    <div id="assign-slot-label"></div>
+  </div>
+  <div id="assign-list" class="p-2"></div>
+  <div id="assign-remove-wrap" class="hidden border-t p-2">
+    <button id="assign-remove" class="w-full text-red-600 hover:bg-red-50 px-3 py-2 rounded text-sm text-left">
+      <i class="fa-solid fa-trash-can"></i> Rimuovi assegnazione
+    </button>
+  </div>
+</div>
+
+<div id="auto-assign-loading" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+  <div class="bg-white rounded-lg p-6 flex flex-col items-center gap-4">
+    <div class="animate-spin"><i class="fa-solid fa-spinner text-2xl text-brand-600"></i></div>
+    <p class="text-sm font-medium">Assegnazione in corso...</p>
+  </div>
+</div>
+
+<footer style="text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0;">
+  <p style="margin: 0;">© 2026 Dott. Emanuel Savianu — Gestore Turni Universale Configurabile</p>
+</footer>
+
+<!-- ONBOARDING WIZARD -->
+<div id="onboarding-wizard" class="hidden fixed inset-0 z-[60] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="wizard-step-label">
+  <div class="wizard-card flex flex-col max-h-[92vh]">
+    <!-- Header: progress dots -->
+    <div class="px-8 pt-6 pb-2">
+      <div id="wizard-progress-dots" class="wizard-progress-dots" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+        <!-- dots injected by JS -->
+      </div>
+      <p id="wizard-step-label" class="text-center text-sm text-slate-400 mt-2 font-medium sr-only">Passo 1 di 4</p>
+    </div>
+    <!-- Body: step content injected by JS -->
+    <div id="wizard-step-content" class="flex-1 overflow-y-auto px-8 py-5"></div>
+    <!-- Footer: navigation -->
+    <div class="px-8 pb-6 pt-3 flex items-center gap-3">
+      <button id="wizard-back" class="hidden py-3.5 px-7 rounded-xl text-slate-500 font-bold text-lg hover:bg-slate-100 transition-colors">
+        ← Indietro
+      </button>
+      <div class="flex-1"></div>
+      <button id="wizard-next" class="hidden py-3.5 px-10 rounded-xl bg-brand-600 text-white font-bold text-lg hover:bg-brand-700 transition-colors disabled:opacity-40 disabled:cursor-not-allowed shadow-md">
+        Avanti →
+      </button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
