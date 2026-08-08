@@ -65,7 +65,6 @@ class SiteNav extends HTMLElement {
         '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" fetchpriority="high" decoding="async">' +
         '<div class="brand-text">' +
           '<' + brandTag + ' class="brand-name">Dott. Savianu Emanuel</' + brandTag + '>' +
-          '<p class="brand-sub">STUDIO MEDICO IPPOCRATE</p>' +
           '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
           phone +
         '</div>' +
@@ -252,52 +251,6 @@ function initDarkMode() {
 }
 
 initDarkMode();
-
-
-// --- LARGE TEXT ACCESSIBILITY MODE ---
-function updateLargeTextBanner(isActive) {
-    var banner = document.getElementById('large-text-banner');
-    var label  = document.getElementById('large-text-banner-label');
-    var btn    = document.getElementById('large-text-toggle-btn');
-    if (!banner || !label || !btn) return;
-    if (isActive) {
-        banner.classList.add('active');
-        banner.classList.remove('hidden');
-        label.textContent = '✓ Testo grande attivo';
-        btn.textContent   = 'A− Normale';
-    } else {
-        banner.classList.remove('active');
-        label.textContent = '🔤 Difficoltà a leggere?';
-        btn.textContent   = 'A+ Testo Grande';
-    }
-    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-}
-
-export function toggleLargeText() {
-    var isActive = document.body.classList.toggle('large-text');
-    try { localStorage.setItem('largeText', isActive ? 'enabled' : 'disabled'); } catch(e) {}
-    updateLargeTextBanner(isActive);
-}
-
-function initLargeText() {
-    try {
-        if (localStorage.getItem('largeText') === 'enabled') {
-            document.body.classList.add('large-text');
-            updateLargeTextBanner(true);
-        }
-    } catch(e) {}
-    // Hide banner on first scroll only if large text is NOT active
-    window.addEventListener('scroll', function() {
-        if (!document.body.classList.contains('large-text')) {
-            var banner = document.getElementById('large-text-banner');
-            if (banner) banner.classList.add('hidden');
-        }
-    }, { once: true });
-}
-
-initLargeText();
-
-
 
 
 
@@ -536,7 +489,8 @@ export const translations = {
         qa_doctolib_label: 'Apri Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'Prenotazioni e ricette tramite Doctolib. Per urgenze: Guardia Medica 116 117 — Emergenze: 112.',
+        doctolib_banner_text: 'Prenotazioni e ricette tramite Doctolib.',
+        urgenze_line: 'Per urgenze: Guardia Medica 116 117 — Emergenze: 112.',
         doctolib_modal_title: 'Avviso Importante',
         doctolib_modal_text: 'Gentili Pazienti, un caro saluto.<br><br>Vi informo sulle prossime variazioni dello studio:<br><br><strong>6 – 7 Agosto (prefestivo e festivo)</strong><br>Studio chiuso. Attiva la Guardia Medica 24h/24 al 116 117.<br><br><strong>10 – 14 Agosto</strong><br>Sarò in ferie. Vi assisteranno i colleghi di studio contattando la segreteria allo 0575 910904.<br><br><strong>Dal 17 Agosto</strong><br>Tornerò regolarmente in studio.<br><br>🚨 <strong>Urgenze, notte, weekend e festivi</strong><br>Nei fine settimana, nei festivi e nelle ore notturne i medici di medicina generale non sono in servizio. Per qualsiasi urgenza in questi giorni — o se la segreteria non risponde — è sempre attiva la Guardia Medica 24h/24 al 116 117. Per le emergenze, 112.<br><br>📌 <strong>Appuntamenti e richieste</strong><br>Prenotate o scrivetemi su Doctolib, oppure chiamate la segreteria al 0575 910904.<br><br>Buone e serene vacanze a tutti voi.<br><br>Dott. Emanuel Savianu<br><em>Medico di Medicina Generale</em>',
         doctolib_modal_btn: 'Ho letto',
@@ -797,7 +751,8 @@ export const translations = {
         qa_doctolib_label: 'Open Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'Bookings and prescriptions via Doctolib. For urgent needs: Out-of-Hours Service 116 117 — Emergencies: 112.',
+        doctolib_banner_text: 'Appointments and prescriptions via Doctolib.',
+        urgenze_line: 'For urgent matters: Guardia Medica 116 117 — Emergencies: 112.',
         doctolib_modal_title: 'Important Notice',
         doctolib_modal_text: 'Dear Patients, warm regards.<br><br>I would like to inform you about the upcoming changes to the practice:<br><br><strong>6 – 7 August (day before and public holiday)</strong><br>The practice is closed. The On-Call Doctor (Guardia Medica) is available 24/7 at 116 117.<br><br><strong>10 – 14 August</strong><br>I will be on holiday. My practice colleagues will assist you by contacting the secretariat at 0575 910904.<br><br><strong>From 17 August</strong><br>I will be back in the practice as usual.<br><br>🚨 <strong>Urgencies, night, weekends and public holidays</strong><br>On weekends, public holidays and at night, general practitioners are not on duty. For any urgency on these days — or if the secretariat does not answer — the On-Call Doctor (Guardia Medica) is always available 24/7 at 116 117. For emergencies, 112.<br><br>📌 <strong>Appointments and requests</strong><br>Book or write to me on Doctolib, or call the secretariat at 0575 910904.<br><br>Have a restful holiday, everyone.<br><br>Dr. Emanuel Savianu<br><em>General Practitioner</em>',
         doctolib_modal_btn: 'I understand',
@@ -929,43 +884,65 @@ function trapFocus(modal) {
     anchor.parentNode.appendChild(badge);
 })();
 
-// --- DOCTOLIB BANNER LOGIC ---
-// NOTE: this banner always shows its own i18n text. The closure/absence
-// notice is rendered exclusively by #ferie-banner (CONFIG.ASSENZE) — showing
-// it in both banners caused duplicated notices on every patient page.
+// --- HEADER INFO LINE (merged doctolib + closure notice) ---
 (function() {
-    const banner = document.getElementById('doctolib-banner');
-    const textEl = document.getElementById('doctolib-banner-text');
-    if (!banner || !textEl) return;
+    const navEl = document.querySelector('site-nav');
+    const section = navEl ? navEl.dataset.section : 'root';
+    const isPatient = section !== 'colleghi' && section !== 'static';
+    const line = document.getElementById('header-info-line');
+    const base = document.getElementById('header-info-base');
+    const absence = document.getElementById('header-info-absence');
+    const urgenze = document.getElementById('header-info-urgenze');
+    const closeBtn = document.getElementById('header-info-close');
+    if (!line || !base || !absence || !urgenze || !closeBtn) return;
+
     var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
     var t = translations[lang] || translations['it'];
-    textEl.textContent = t.doctolib_banner_text;
+
+    var active = null;
+    var dismissed = false;
+    if (typeof CONFIG !== 'undefined') {
+        active = CONFIG.getActiveAbsence();
+        if (active) {
+            try { dismissed = sessionStorage.getItem('ferie-dismissed-' + active.from) === '1'; } catch(e) {}
+        }
+    }
+
+    if (isPatient) {
+        base.textContent = t.doctolib_banner_text;
+        urgenze.textContent = t.urgenze_line;
+    } else if (active && !dismissed) {
+        urgenze.textContent = t.urgenze_line;
+    } else {
+        line.setAttribute('hidden', '');
+        return;
+    }
+
+    if (active && !dismissed) {
+        absence.textContent = active.note;
+        absence.removeAttribute('hidden');
+        closeBtn.removeAttribute('hidden');
+    }
 })();
 
-// --- FERIE BANNER LOGIC ---
-(function() {
-    if (typeof CONFIG === 'undefined') return;
-    const banner = document.getElementById('ferie-banner');
-    const textEl = document.getElementById('ferie-banner-text');
-    if (!banner || !textEl) return;
+export function dismissHeaderInfo() {
+    const navEl = document.querySelector('site-nav');
+    const section = navEl ? navEl.dataset.section : 'root';
+    const isPatient = section !== 'colleghi' && section !== 'static';
+    const line = document.getElementById('header-info-line');
+    const absence = document.getElementById('header-info-absence');
+    const closeBtn = document.getElementById('header-info-close');
+    if (!line) return;
 
-    const active = CONFIG.getActiveAbsence();
-
-    if (!active) return;
+    if (isPatient) {
+        if (absence) absence.setAttribute('hidden', '');
+        if (closeBtn) closeBtn.setAttribute('hidden', '');
+    } else {
+        line.setAttribute('hidden', '');
+    }
 
     try {
-        if (sessionStorage.getItem('ferie-dismissed-' + active.from)) return;
-    } catch(e) {}
-
-    textEl.textContent = active.note;
-    banner.removeAttribute('hidden');
-})();
-
-export function dismissFerieBanner() {
-    const banner = document.getElementById('ferie-banner');
-    if (banner) banner.setAttribute('hidden', '');
-    try {
-        const active = CONFIG.getActiveAbsence();
+        const active = (typeof CONFIG !== 'undefined') ? CONFIG.getActiveAbsence() : null;
         if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
     } catch(e) {}
 }
@@ -1205,8 +1182,7 @@ window.addEventListener('load', function() {
 const GLOBAL_FUNCTIONS = {
     setLanguage: setLanguage,
     toggleDarkMode: toggleDarkMode,
-    toggleLargeText: toggleLargeText,
-    dismissFerieBanner: dismissFerieBanner,
+    dismissHeaderInfo: dismissHeaderInfo,
     closeDoctolibModal: closeDoctolibModal,
     startBooking: startBooking,
     renderFlowStep: renderFlowStep,

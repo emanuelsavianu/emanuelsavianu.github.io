@@ -148,7 +148,7 @@ site-footer { display: block; }
 header {
     background-color: var(--primary); 
     color: var(--white);
-    padding: 80px 20px 40px;
+    padding: 70px 20px 40px;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -172,6 +172,39 @@ header::after {
 body.dark-mode header::after { background: rgba(10, 22, 40, 0.9); }
 
 .header-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+
+.header-info {
+    position: relative; z-index: 2;
+    display: flex; align-items: center; flex-wrap: wrap;
+    gap: 10px;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.95);
+    padding: 10px 20px;
+    border-bottom: 1px solid rgba(194, 155, 87, 0.25);
+}
+.header-info i { color: var(--accent); flex-shrink: 0; font-size: 1rem; }
+.header-info-base { color: rgba(255, 255, 255, 0.95); }
+.header-info-absence { color: var(--accent); font-weight: 600; }
+.header-info-urgenze { color: rgba(255, 255, 255, 0.95); }
+.header-info-close {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    width: 22px; height: 22px;
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer; font-size: 1rem; line-height: 1;
+    flex-shrink: 0;
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+}
+.header-info-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(194, 155, 87, 0.12);
+}
+@media (min-width: 600px) {
+    .header-info { padding-right: 260px; }
+}
 
 .brand-wrap {
     display: flex; align-items: center; justify-content: center;
@@ -826,36 +859,6 @@ body.dark-mode .badge-open { background: #1a3a22; color: #7ecf8e; border-color: 
 body.dark-mode .badge-closed { background: #3a1a1e; color: #f08090; border-color: #5a2a30; }
 .badge-open i, .badge-closed i { font-size: 0.5rem; }
 
-/* --- DOCTOLIB BANNER --- */
-#doctolib-banner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #fff8e1;
-    color: #5d4037;
-    border-bottom: 2px solid #f9a825;
-    padding: 12px 20px;
-    font-weight: 600;
-    font-size: 0.88rem;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 999;
-    flex-wrap: wrap;
-    line-height: 1.5;
-}
-#doctolib-banner i { flex-shrink: 0; font-size: 1.1rem; color: #f9a825; }
-#doctolib-banner span { flex: 1; min-width: 0; }
-body.dark-mode #doctolib-banner { background: #2a1f0a; color: #ffd54f; border-bottom-color: #f9a825; }
-body.dark-mode #doctolib-banner i { color: #ffd54f; }
-
-#doctolib-banner .doctolib-banner-link {
-    color: var(--accent);
-    font-weight: 700;
-    text-decoration: underline;
-    white-space: nowrap;
-}
-body.dark-mode #doctolib-banner .doctolib-banner-link { color: #ffd54f; }
-
 /* --- DOCTOLIB CTA BUTTONS --- */
 .doctolib-cta-grid {
     display: grid;
@@ -1256,43 +1259,6 @@ body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
 
 
 
-/* --- FERIE BANNER (config-driven absence/closure) --- */
-#ferie-banner {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #dce8f5;
-    color: #0f1e2e;
-    border-bottom: 2px solid #285078;
-    padding: 10px 20px;
-    font-weight: 600;
-    font-size: 0.9rem;
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 999;
-    flex-wrap: wrap;
-}
-#ferie-banner i { flex-shrink: 0; font-size: 1.1rem; color: #285078; }
-#ferie-banner span { flex: 1; min-width: 0; }
-#ferie-banner-close {
-    background: none;
-    border: 1px solid #285078;
-    color: #285078;
-    border-radius: 50%;
-    width: 24px;
-    height: 24px;
-    cursor: pointer;
-    font-size: 1rem;
-    line-height: 1;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-body.dark-mode #ferie-banner { background: #0d1e30; color: #a8c8e8; border-bottom-color: #285078; }
-body.dark-mode #ferie-banner i { color: #a8c8e8; }
-body.dark-mode #ferie-banner-close { border-color: #a8c8e8; color: #a8c8e8; }
-
 /* --- BACK TO TOP BUTTON --- */
 .back-to-top {
     position: fixed;
@@ -1370,112 +1336,6 @@ body.dark-mode .search-input {
     color: var(--text-dark);
     border-color: var(--border-color);
 }
-
-/* --- LARGE TEXT ACCESSIBILITY MODE --- */
-#large-text-banner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 20px;
-    background: #f0f4f8;
-    border-bottom: 3px solid #d1d5db;
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    color: #555;
-    gap: 12px;
-    transition: background 0.3s, border-color 0.3s;
-    position: relative;
-    z-index: 10000;
-}
-#large-text-banner.hidden { display: none; }
-#large-text-banner.active {
-    background: #fffbea;
-    border-bottom-color: #c9a227;
-    color: #7a6000;
-    font-weight: 600;
-}
-.large-text-btn {
-    font-size: 0.85rem;
-    font-weight: 700;
-    padding: 8px 18px;
-    border-radius: 20px;
-    cursor: pointer;
-    white-space: nowrap;
-    transition: all 0.2s;
-    flex-shrink: 0;
-}
-#large-text-banner:not(.active) .large-text-btn {
-    background: var(--primary);
-    color: white;
-    border: 2px solid var(--primary);
-}
-#large-text-banner.active .large-text-btn {
-    background: white;
-    color: #7a6000;
-    border: 2px solid #c9a227;
-}
-body.dark-mode #large-text-banner {
-    background: #1a2f4c;
-    border-bottom-color: #285078;
-    color: var(--text-medium);
-}
-body.dark-mode #large-text-banner.active {
-    background: #2a2000;
-    border-bottom-color: var(--accent);
-    color: var(--accent);
-}
-body.dark-mode #large-text-banner:not(.active) .large-text-btn {
-    background: var(--accent);
-    color: var(--primary);
-    border-color: var(--accent);
-}
-body.dark-mode #large-text-banner.active .large-text-btn {
-    background: transparent;
-    color: var(--accent);
-    border-color: var(--accent);
-}
-@media (max-width: 480px) {
-    #large-text-banner {
-        flex-wrap: wrap;
-        gap: 8px;
-        padding: 10px 16px;
-    }
-    #large-text-banner-label {
-        flex: 1 1 100%;
-        text-align: center;
-    }
-    .large-text-btn {
-        width: 100%;
-        text-align: center;
-    }
-}
-html:has(body.large-text) { font-size: 22px; }
-body.large-text .flow-option-btn {
-    padding: 16px 20px;
-    min-height: 64px;
-    font-size: 1.1rem;
-    line-height: 1.4;
-}
-body.large-text .flow-action-btn {
-    font-size: 1.1rem;
-    padding: 18px 24px;
-}
-body.large-text .btn-cal-service {
-    padding: 20px;
-}
-body.large-text .cal-text h3 { font-size: 1.2rem; }
-body.large-text .cal-text p  { font-size: 0.95rem; line-height: 1.6; }
-body.large-text .contact-value { font-size: 1.2rem; }
-body.large-text .contact-label { font-size: 0.9rem; }
-body.large-text .hours-table td { font-size: 1.05rem; padding: 12px 0; }
-body.large-text .step-content h3 { font-size: 1.2rem; }
-body.large-text .step-content p  { font-size: 1rem; line-height: 1.7; }
-body.large-text .qa-item {
-    font-size: 0.72rem;
-    gap: 5px;
-    padding: 8px 10px;
-}
-body.large-text .qa-item i { font-size: 1.35rem; }
 
 /* --- CONTACTS + CALENDAR RESPONSIVE LAYOUT --- */
 .booking-contacts-wrapper {
@@ -1640,11 +1500,6 @@ site-nav, site-footer { display: block; align-self: stretch; }
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     line-height: 1.2; color: #ffffff;
 }
-.brand-sub {
-    font-family: 'Montserrat', sans-serif; font-weight: 700;
-    letter-spacing: 3px; text-transform: uppercase;
-    font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;
-}
 .brand-tagline { color: rgba(255,255,255,0.9); margin-bottom: 25px; }
 
 /* Fallback content shown when JS is disabled */
@@ -1804,16 +1659,10 @@ img { max-width: 100%; height: auto; }
 iframe { max-width: 100%; }
 html { text-rendering: optimizeLegibility; }
 
-/* --- Large-text toggle focus ring (keyboard visibility) --- */
-#large-text-toggle-btn:focus-visible {
-    outline: var(--focus-ring);
-    outline-offset: 2px;
-}
-
 /* --- PRINT: patient pages --- */
 @media print {
     .skip-link, .lang-switch, .site-nav, .nav-toggle, .floating-faq,
-    .quick-actions-bar, #ferie-banner, #large-text-banner, #doctolib-banner,
+    .quick-actions-bar, .header-info,
     .btn-telefono-header, .back-to-top { display: none !important; }
     header { padding: 20px; background: #fff; color: #000; }
     .brand-name { color: #1a2f4c; text-shadow: none; }
