@@ -1,0 +1,10 @@
+# Cloudflare Wrangler configuration — dottemanuelsavianu.it 301 redirect worker
+# Docs: https://developers.cloudflare.com/workers/wrangler/configuration/
+
+name        = "dottemanuelsavianu-redirect"
+main        = "redirect-worker.js"
+compatibility_date = "2024-01-01"
+
+[[routes]]
+pattern = "dottemanuelsavianu.it/*"
+zone_name = "dottemanuelsavianu.it"
