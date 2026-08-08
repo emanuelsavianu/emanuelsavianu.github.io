@@ -2,58 +2,77 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://savianu.it/</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/privati/</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/faq.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/privati/certificato-invalidita-civile.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/esenzioni.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/impegnative.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/cert-malattia.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/privati/faq-riforma.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/malattia.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://savianu.it/privati/</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://savianu.it/privati/certificato-invalidita-civile.html</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://savianu.it/privati/faq-riforma.html</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://savianu.it/colleghi/</loc>
+    <loc>https://savianu.it/ssn/bengalese.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://savianu.it/colleghi/rsa.html</loc>
+    <loc>https://savianu.it/ssn/urdu.html</loc>
+    <lastmod>2026-08-08</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/ssn/salutementale.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://savianu.it/colleghi/malattia.html</loc>
+    <loc>https://savianu.it/ssn/vivisano.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/privacy.html</loc>
+    <lastmod>2026-08-08</lastmod>
     <priority>0.5</priority>
   </url>
 </urlset>
