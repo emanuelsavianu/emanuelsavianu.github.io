@@ -76,10 +76,10 @@ class SiteNav extends HTMLElement {
       '<header role="banner">' +
         '<div class="header-info" id="header-info-line">' +
           '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
-          '<span class="header-info-base" id="header-info-base" data-i18n="doctolib_banner_text"></span>' +
+          '<span class="header-info-base" id="header-info-base"' + (isPatient ? ' data-i18n="doctolib_banner_text"' : '') + '></span>' +
           '<span class="header-info-absence" id="header-info-absence" hidden></span>' +
           '<span class="header-info-urgenze" id="header-info-urgenze" data-i18n="urgenze_line"></span>' +
-          '<button id="header-info-close" hidden onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
+          '<button id="header-info-close" class="header-info-close" hidden onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
         '</div>' +
         '<div class="header-content">' + brand + '</div>' +
       '</header>' +
