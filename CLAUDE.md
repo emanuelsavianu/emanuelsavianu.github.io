@@ -1,35 +1,54 @@
 # savianu.it — Studio Medico Dott. Emanuel Savianu
 
-Static HTML/CSS/JS medical practice website deployed at **savianu.it** via GitHub Pages + Cloudflare.
+Unified static HTML/CSS/JS medical practice website deployed at **savianu.it** via GitHub Pages + Cloudflare. Merged from the former patient portal (`emanuelsavianu.github.io`) and the professional portal (`dottemanuelsavianu.it`).
+
+## Site Structure
+
+The home page (`index.html`) is a three-choice gateway:
+
+1. **`ssn/`** — 🏥 Pazienti SSN (Doctolib booking, FAQ, esenzioni, impegnative, multilingual guides, posters) — IT/EN
+2. **`privati/`** — 💼 Pazienti Privati (visite private, certificati INPS, Legge 104, Google Calendar booking) — IT/EN
+3. **`colleghi/`** — 🤝 Colleghi (internal tools, protocolli, RUAP, Gestore Turni, calcolatori) — **Italian-only**, no ITA/ENG toggle, no Google Translate
 
 ## Key Files
 
 | File | Purpose |
 |------|---------|
-| `index.html` | Main page (FAQ banner, booking, contacts, hours) |
-| `app.js` | All JS: dark mode, i18n, booking with dynamic checklists, language switching |
-| `config.js` | **Edit here for operational changes**: clinic hours (`SCHEDULE`) and vacation/absence banners (`ASSENZE`) |
-| `styles.css` | All styles |
+| `index.html` | Three-choice landing (SSN / Privati / Colleghi) |
+| `app.js` | All JS: dark mode, i18n IT/EN, large-text mode, flowchart, accordion, filters, badges, ferie banner |
+| `config.js` | **Edit here for operational changes**: hours (`SCHEDULE`), vacation/absence banners (`ASSENZE`), Doctolib + Google Calendar URLs |
+| `styles.css` | Single shared design system (navy #1a2f4c / gold #c29b57) |
 | `sw.js` | Service worker — cache version auto-bumped by hook |
-| `faq.html` | FAQ page |
-| `offline.html` | Service worker offline fallback page |
-| `dottori.html` | "Area Colleghi" — private page for medical colleagues (not linked publicly) |
-| `cloudflare/worker.js` | Cloudflare Worker (rate limiting, security headers) |
+| `404.html` | Custom 404 page |
+| `assets/` | `bluelogo.png` (logo/icon), `bronzelogo.png` (OG image) |
+| `cloudflare/worker.js` | Cloudflare Worker (security headers, CSP with calendar.google.com frame-src) |
+| `ssn/index.html`, `privati/index.html`, `colleghi/index.html` | Section dashboards |
+| `colleghi/RUAP/`, `colleghi/gestoreturni/` | Independent sub-apps (as-is, do not refactor) |
+
+## Conventions
+
+- **Relative paths**: all internal links relative. From section folders use `../` prefix for root assets (`../styles.css`, `../app.js`, `../config.js`, `../index.html`, `../privacy.html`).
+- **Hours**: `CONFIG.SCHEDULE` = Mon–Fri 09:30–12:30 + 16:00–19:00 everywhere (badge + hours tables + JSON-LD). The open/closed badge appends to `[data-badge-anchor]`.
+- **Absence/closure banner**: edit `CONFIG.ASSENZE` in `config.js` (YYYY-MM-DD dates, free-text `note`). Also drives the injected `#doctolib-banner` text.
+- **i18n**: `translations` object in `app.js` with `it` + `en` blocks. Patient/private pages use `data-i18n` for ALL user-facing text; colleagues pages are Italian-only. Google Translate widget on landing + `ssn/*` + `privati/*` only.
+- **Booking**: SSN → Doctolib (`CONFIG.DOCTOLIB`); Privati → Google Calendar iframe (`CONFIG.GOOGLE_CAL.iframe`).
+- **Contacts**: Segreteria 0575 910 904 · Dottore (solo urgenze) 0575 171 3428 · segreteria@savianu.it · Piazza Saione 3, Arezzo · 112 emergenze · 116 117 guardia medica.
 
 ## Quick Start
 
-No build step required. Open `index.html` directly in a browser to test locally. All functionality works from the filesystem.
+No build step required. Open `index.html` directly in a browser to test locally.
 
 ## Testing
 
 - **Local testing**: Open `index.html` in a browser (Firefox, Chrome, Safari)
-- **Mobile testing**: Use Chrome DevTools device emulation or test on actual devices
-- **Dark mode**: Toggle via the theme button in the header
-- **Internationalization**: Switch languages via the ITA | ENG selector and verify `data-i18n` attributes render correctly
+- **Mobile testing**: Chrome DevTools device emulation
+- **Dark mode**: theme button in the header
+- **i18n**: ITA | ENG selector; verify `data-i18n` renders in both languages
+- **Link checks**: `node tools/check-links.mjs` (broken relative links scan)
 
 ## Deployment
 
-The site is deployed via **GitHub Pages** (automatic on push to `main`) and fronted by **Cloudflare** for caching, security headers, and rate limiting. No manual deployment steps needed — commits to `main` deploy instantly.
+GitHub Pages (automatic on push to `main`) + Cloudflare in front. Commits to `main` deploy instantly.
 
 ## Automation (Critical)
 
@@ -37,32 +56,31 @@ A **PostToolUse hook** runs `node .claude/scripts/bump-sw.js` after every Edit/W
 
 ## Asset Cache-Busting
 
-`styles.css` and `app.js` are linked with `?v=N`. **Manually increment this version in both HTML files** (`index.html`, `faq.html`) when changing those files. Keep both in sync on the same version number.
+`styles.css`, `app.js` and `config.js` are linked with `?v=N`. **Increment the version in every HTML file that loads them when changing those files** — keep one consistent version per file across all pages. Current: `styles.css?v=23`, `app.js?v=17`, `config.js?v=2`.
 
-## i18n
+## Old-Domain Redirects
 
-All user-facing text uses `data-i18n` attributes on HTML elements. Translations for both `it` and `en` live in the `translations` object at the top of `app.js`. When adding new visible text, add entries for **both languages**.
-
-**Critical:** When modifying visit descriptions in `visitMeta` (inside `selectVisitType()`), update both the Italian and English blocks—they're in separate locations (~line 682 and ~line 713). Use `grep -n "cal_privata"` to verify both exist.
+The former domains (`dottemanuelsavianu.it`, `emanuelsavianu.github.io`) redirect to savianu.it via Cloudflare. The full old→new URL map lives in `docs/superpowers/specs/2026-08-08-unified-savianu-site-design.md` (§10).
 
 ## New Pages
 
-Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct HTML template. After creating a new major page, add it to the `urlsToCache` array in `sw.js`.
+Use the `/new-page` skill (`.claude/skills/new-page/SKILL.md`) for the correct HTML template. After creating a new major page, add it to the `PRECACHE_URLS` array in `sw.js`.
 
 ## Operational Changes
 
-- **Vacation/absence/relocation banner**: edit `CONFIG.ASSENZE` in `config.js` (YYYY-MM-DD dates). The `note` field is free text — used for both holiday notices and address transfers. The `#ferie-banner` icon (`fa-umbrella-beach` for holidays, `fa-location-dot` for transfers) and color should match the message type.
-- **Clinic hours badge**: edit `CONFIG.SCHEDULE` in `config.js`
-- **Visit types & what to bring**: Modify the `visitMeta` object in `selectVisitType()` (app.js, ~line 682). The checklist is generated from the `checklist` array; the `note` field shows duration/details. **Keep descriptions in both `index.html` and `app.js` in sync.**
-- **Booking calendar URLs**: inside `selectVisitType()` calls in `index.html` (Google Calendar links)
-- **Address/contact changes**: update all of `index.html`, `faq.html`, `privacy.html`, `offline.html`, and `app.js` (both IT and ENG translation blocks). Include: meta description, JSON-LD, Google Maps links, and all address displays. Verify completion: `grep -r "old_address" .` returns no results.
+- **Vacation/absence/relocation banner**: edit `CONFIG.ASSENZE` in `config.js` (YYYY-MM-DD dates). The `note` field is free text.
+- **Opening hours**: edit `CONFIG.SCHEDULE` in `config.js` (days 1–5, decimal hours).
+- **Booking links**: `CONFIG.DOCTOLIB` (SSN) and `CONFIG.GOOGLE_CAL.iframe` (private) in `config.js`.
+- **Address/contact changes**: update all of `index.html`, `ssn/`, `privati/`, `privacy.html`, `offline.html`, `404.html`, and `app.js` (both IT and EN translation blocks). Include: meta description, JSON-LD, Google Maps links, and all address displays.
 
 ## Gotchas
 
-- The `#guida-rapida` card logic exists in `app.js` (~line 510) and `styles.css` but the HTML element is currently absent from the pages — don't add it without intentionally re-enabling the feature.
-- `xsegretarie.html` is a private staff page — not linked from the main site.
+- The `#guida-rapida` card logic exists in `app.js` and `styles.css` but the HTML element is currently absent — don't add it without intentionally re-enabling the feature.
+- `xsegretarie.html` is a private staff page — not linked from the main site; `colleghi/` is `noindex`.
 - The Cloudflare `node_modules/` folder is gitignored but large — don't accidentally re-add it.
 - Font Awesome: All pages load as two separate files (`fontawesome.min.css` + `solid.min.css`). Keep consistent across all HTML files.
-- **Google Translate widget**: Dropdown needs `z-index: 99999 !important` to float above `.container` (z-index: 10); on mobile with responsive controls, use `flex-wrap: wrap; justify-content: center` to allow wrapping, hide separators (they break visually across lines). Initialize script must load AFTER config.js/app.js to avoid blocking critical resources.
+- **Google Translate widget**: Dropdown needs `z-index: 99999 !important` to float above `.container` (z-index: 10); on mobile with responsive controls, use `flex-wrap: wrap; justify-content: center` to allow wrapping, hide separators. Initialize script must load AFTER config.js/app.js.
 - **Mobile header responsiveness**: When re-layouting header controls from absolute positioning to flex stacking, add `overflow: visible` to header so dropdowns/overlays can escape viewport bounds.
-- **Language Strategy**: ITA/ENG buttons are native site functionality (set user's language preference). Google Translate widget is *for additional languages beyond Italian and English* — ensure both stay visible on mobile (use `flex-wrap: wrap`) so patients can choose native mode or translate to other languages.
+- **Language Strategy**: ITA/ENG buttons are native site functionality (set user's language preference). Google Translate widget is *for additional languages beyond Italian and English* — ensure both stay visible on mobile (`flex-wrap: wrap`) so patients can choose native mode or translate to other languages.
+- **MilleBook is legacy** — the practice uses Doctolib for messages/prescriptions. Do not reintroduce Millebook CTAs or FAQ sections.
+- Standalone pages (Tailwind/Chart.js/React calculators, A3 posters, Bengali/Urdu guides) are self-contained by design — don't force the shared design system on them.
