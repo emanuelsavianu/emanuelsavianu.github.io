@@ -22,11 +22,11 @@
     <meta property="og:title" content="FAQ Pazienti | Dr. Savianu Emanuel">
     <meta property="og:description" content="FAQ pazienti dello Studio Medico Ippocrate ad Arezzo: prenotazioni, ricette, certificati, urgenze e contatti.">
     <meta property="og:url" content="https://savianu.it/faq.html">
-    <meta property="og:image" content="https://savianu.it/logo.png">
+    <meta property="og:image" content="https://savianu.it/assets/bronzelogo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="FAQ Pazienti | Dr. Savianu Emanuel">
     <meta name="twitter:description" content="FAQ pazienti dello Studio Medico Ippocrate ad Arezzo: prenotazioni, ricette, certificati, urgenze e contatti.">
-    <meta name="twitter:image" content="https://savianu.it/logo.png">
+    <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
 
     <meta name="theme-color" content="#1a2f4c">
     <link rel="manifest" href="../manifest.json">
@@ -282,7 +282,7 @@
         "@type": "Physician",
         "name": "Dott. Emanuel Savianu",
         "url": "https://savianu.it/",
-        "image": "https://savianu.it/logo.png",
+        "image": "https://savianu.it/assets/bronzelogo.png",
         "address": {
           "@type": "PostalAddress",
           "streetAddress": "Piazza Saione 3",
@@ -330,27 +330,17 @@
 
 </head>
 <body>
-<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
-<div id="ferie-banner" hidden><i class="fas fa-info-circle" aria-hidden="true"></i><span id="ferie-banner-text"></span><button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button></div>
-
-<site-header>
-    <header role="banner">
-        <nav class="lang-switch" aria-label="Language and controls">
-            <button onclick="setLanguage('it')" class="lang-btn active" id="btn-it">ITA</button>
-            <span class="lang-separator">|</span>
-            <button onclick="setLanguage('en')" class="lang-btn" id="btn-en">ENG</button>
-            <span class="lang-separator">|</span>
-            <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon"></i></button>
-            <div id="google_translate_element" style="display:inline-block; vertical-align:middle; margin-left:8px;"></div>
-        </nav>
-        <div class="header-content">
-            <h1 style="font-family: 'Playball', cursive; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 5px; line-height: 1.2; color: #ffffff;" data-i18n="faq_header_title">Domande Frequenti</h1>
-            <p style="font-family: 'Montserrat', sans-serif;" data-i18n="faq_header_desc">Risposte alle domande più comuni</p>
-        </div>
-    </header>
-</site-header>
+<site-nav data-section="ssn">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
+    </div>
+</site-nav>
 
 <div class="faq-container" id="main-content">
+
+    <h1 style="font-family: 'Playball', cursive; font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 5px; line-height: 1.2; color: var(--primary);" data-i18n="faq_header_title">Domande Frequenti</h1>
+    <p style="font-family: 'Montserrat', sans-serif;" data-i18n="faq_header_desc">Risposte alle domande più comuni</p>
 
     <div class="faq-search-wrapper">
         <label for="faq-search" class="sr-only" data-i18n="faq_search_label">Cerca nelle FAQ</label>
@@ -780,15 +770,9 @@
 
 </div>
 
-<site-footer>
+<site-footer data-section="ssn">
     <footer role="contentinfo">
-        <div class="footer-content">
-            <p>© <span id="current-year">2026</span> Studio Medico Ippocrate - Dr. Savianu Emanuel</p>
-            <nav style="margin-top:10px;">
-                <a href="../index.html">Home</a> ·
-                <a href="../privacy.html" data-i18n="link_privacy">Privacy Policy</a>
-            </nav>
-        </div>
+        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
     </footer>
 </site-footer>
 
@@ -800,6 +784,15 @@
 
 <script src="../config.js?v=2"></script>
 <script src="../app.js?v=17"></script>
+
+<script type="text/javascript">
+function googleTranslateElementInit() {
+  new google.translate.TranslateElement({
+    pageLanguage: 'it'
+  }, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script>
   if ('serviceWorker' in navigator) {
