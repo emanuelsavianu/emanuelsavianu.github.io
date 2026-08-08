@@ -114,6 +114,8 @@ function formatDateIT(str) {
 function countWorkingDays(startStr, endStr, excludeHolidays = true) {
     const start = parseDate(startStr);
     const end = parseDate(endStr);
+    // Se la data di fine precede quella di inizio, il periodo non è valido
+    if (start > end) return 0;
     let count = 0;
     const current = new Date(start);
     while (current <= end) {
@@ -209,12 +211,17 @@ function useLocalStorage(key, defaultValue) {
     const [value, setValue] = React.useState(() => {
         try {
             const saved = localStorage.getItem(key);
-            return saved ? JSON.parse(saved) : defaultValue;
-        } catch { return defaultValue; }
+            if (saved === null) return defaultValue;
+            return JSON.parse(saved);
+        } catch (e) {
+            // Dati corrotti: rimuovi la chiave e riparti dal default
+            localStorage.removeItem(key);
+            return defaultValue;
+        }
     });
 
     React.useEffect(() => {
-        try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
+        try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
     }, [key, value]);
 
     return [value, setValue];
@@ -272,10 +279,10 @@ function SetupPanel({ doctors, setDoctors, coverageLimit, setCoverageLimit, defa
                         <p className="text-sm text-brand-600 mb-3">Ogni nuovo medico aggiunto riceverà questo numero di giorni spettanti.</p>
                         <div className="flex items-center gap-3">
                             <input
-                                type="number" min="1" max="365"
+                                type="number" min="1" max="365" inputmode="numeric"
                                 value={defaultYearlyDays}
                                 onChange={e => {
-                                    const v = Math.max(1, Number(e.target.value) || 1);
+                                    const v = Math.max(1, Math.min(365, Number(e.target.value) || 1));
                                     setDefaultYearlyDays(v);
                                     setNewDays(v);
                                 }}
@@ -302,9 +309,12 @@ function SetupPanel({ doctors, setDoctors, coverageLimit, setCoverageLimit, defa
                                     Limite copertura: max medici in ferie contemporaneamente
                                 </label>
                                 <input
-                                    type="number" min="1" max="20"
+                                    type="number" min="1" max="31" inputmode="numeric"
                                     value={coverageLimit}
-                                    onChange={e => setCoverageLimit(Math.max(1, Number(e.target.value) || 1))}
+                                    onChange={e => {
+                                        const v = Math.max(1, Math.min(31, Number(e.target.value) || 1));
+                                        setCoverageLimit(v);
+                                    }}
                                     className="w-32 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-center font-medium"
                                 />
                                 <p className="text-xs text-slate-500 mt-1">Se il numero di medici assenti in un giorno supera questo limite, verrà segnalata una scopertura.</p>
@@ -362,7 +372,7 @@ function SetupPanel({ doctors, setDoctors, coverageLimit, setCoverageLimit, defa
                                 className="w-28 px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-none text-sm text-center"
                                 placeholder="Giorni"
                             />
-                            <button onClick={addDoctor} className="flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm">
+                            <button onClick={addDoctor} className="flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm min-h-[44px]">
                                 <Icons.Plus size={16} /> Aggiungi
                             </button>
                         </div>
@@ -381,12 +391,18 @@ function HolidayForm({ doctors, holidays, setHolidays }) {
     const [startDate, setStartDate] = React.useState('');
     const [endDate, setEndDate] = React.useState('');
     const [editId, setEditId] = React.useState(null);
+    const [error, setError] = React.useState('');
 
-    const resetForm = () => { setSelectedDoc(''); setStartDate(''); setEndDate(''); setEditId(null); };
+    const resetForm = () => { setSelectedDoc(''); setStartDate(''); setEndDate(''); setEditId(null); setError(''); };
 
     const addHoliday = () => {
         if (!selectedDoc || !startDate || !endDate) return;
-        if (startDate > endDate) return alert('La data di inizio deve essere precedente alla data di fine.');
+        // Valida il range: la data di fine non può precedere quella di inizio
+        if (parseDate(endDate) < parseDate(startDate)) {
+            setError('La data di fine deve essere successiva alla data di inizio.');
+            return;
+        }
+        setError('');
 
         const entry = { id: editId || uid(), doctorId: selectedDoc, start: startDate, end: endDate };
 
@@ -403,6 +419,7 @@ function HolidayForm({ doctors, holidays, setHolidays }) {
         setStartDate(h.start);
         setEndDate(h.end);
         setEditId(h.id);
+        setError('');
     };
 
     const deleteHoliday = (id) => {
@@ -440,7 +457,7 @@ function HolidayForm({ doctors, holidays, setHolidays }) {
                             <label className="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Medico</label>
                             <select
                                 value={selectedDoc}
-                                onChange={e => setSelectedDoc(e.target.value)}
+                                onChange={e => { setSelectedDoc(e.target.value); setError(''); }}
                                 className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm bg-white"
                             >
                                 <option value="">— Seleziona —</option>
@@ -449,17 +466,19 @@ function HolidayForm({ doctors, holidays, setHolidays }) {
                         </div>
                         <div>
                             <label className="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Data inizio</label>
-                            <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
-                                className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm" />
+                            <input type="date" value={startDate} onChange={e => { setStartDate(e.target.value); setError(''); }}
+                                className="w-full block px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
+                                style={{ minHeight: 44 }} />
                         </div>
                         <div>
                             <label className="block text-xs font-semibold text-slate-600 mb-1.5 uppercase tracking-wide">Data fine</label>
-                            <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}
-                                className="w-full px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm" />
+                            <input type="date" value={endDate} onChange={e => { setEndDate(e.target.value); setError(''); }}
+                                className="w-full block px-3 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none text-sm"
+                                style={{ minHeight: 44 }} />
                         </div>
                         <div className="flex items-end gap-2">
                             <button onClick={addHoliday}
-                                className={`flex-1 flex items-center justify-center gap-2 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm ${editId ? 'bg-amber-600 hover:bg-amber-700' : 'bg-blue-600 hover:bg-blue-700'}`}>
+                                className={`flex-1 flex items-center justify-center gap-2 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors shadow-sm min-h-[44px] ${editId ? 'bg-amber-600 hover:bg-amber-700' : 'bg-blue-600 hover:bg-blue-700'}`}>
                                 {editId ? <><Icons.Check size={16}/> Salva</> : <><Icons.Plus size={16}/> Aggiungi</>}
                             </button>
                             {editId && (
@@ -469,6 +488,11 @@ function HolidayForm({ doctors, holidays, setHolidays }) {
                             )}
                         </div>
                     </div>
+                    {error && (
+                        <p role="alert" className="mt-4 text-sm font-medium text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-3">
+                            {error}
+                        </p>
+                    )}
                 </div>
             </div>
 
@@ -634,7 +658,7 @@ function Dashboard({ doctors, holidays, coverageLimit }) {
                         </div>
                     </div>
                 </div>
-                <div className="overflow-x-auto">
+                <div className="overflow-x-auto" style={{ overflowX: 'auto' }}>
                     <table className="w-full text-left">
                         <thead>
                             <tr className="bg-slate-50 text-slate-500 text-xs uppercase tracking-wider">
@@ -896,11 +920,11 @@ function App() {
                         </p>
                         <div className="flex gap-3 justify-end">
                             <button onClick={() => setShowResetConfirm(false)}
-                                className="px-4 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 hover:bg-slate-50 transition-colors">
+                                className="px-4 py-2 border border-slate-300 rounded-lg text-sm text-slate-700 hover:bg-slate-50 transition-colors min-h-[44px]">
                                 Annulla
                             </button>
                             <button onClick={resetAll}
-                                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors">
+                                className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-medium transition-colors min-h-[44px]">
                                 Elimina tutto
                             </button>
                         </div>
