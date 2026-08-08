@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
 
-    <title>Portale Studio Medico Ippocrate | Dott. Emanuel Savianu — Arezzo</title>
-    <meta name="description" content="Portale dello Studio Medico Ippocrate — Dott. Emanuel Savianu, Medico di Medicina Generale ad Arezzo. Accesso pazienti e area riservata colleghi.">
+    <title>Area Colleghi | Dott. Emanuel Savianu — Arezzo</title>
+    <meta name="description" content="Area Colleghi dello Studio Medico Ippocrate — Dott. Emanuel Savianu, Medico di Medicina Generale ad Arezzo. Strumenti, protocolli e risorse per professionisti.">
 
     <meta name="geo.region" content="IT-AR" />
     <meta name="geo.placename" content="Arezzo" />
@@ -15,6 +15,7 @@
 
     <meta name="author" content="Dott. Emanuel Savianu">
     <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://savianu.it/colleghi/">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
 
@@ -22,7 +23,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Dr. Savianu">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="../manifest.json">
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +31,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="styles.css?v=12">
+    <link rel="stylesheet" href="../styles.css?v=23">
 
 
 <style>
@@ -412,6 +413,12 @@
 </head>
 <body>
 
+<div id="ferie-banner" hidden>
+    <i class="fas fa-info-circle" aria-hidden="true"></i>
+    <span id="ferie-banner-text"></span>
+    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
+</div>
+
 <a href="#main-content" class="skip-link">Vai al contenuto principale</a>
 
 <header role="banner">
@@ -431,6 +438,12 @@
 <div class="container" id="main-content">
     <main role="main" style="grid-column: 1 / -1;">
 
+        <nav class="breadcrumb-bar" aria-label="Breadcrumb">
+            <a href="../index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
+            <span aria-hidden="true">/</span>
+            <span>Colleghi</span>
+        </nav>
+
         <!-- ═══════════════════════════════════════════════
              HERO — The Split: Pazienti vs. Colleghi
              ═══════════════════════════════════════════════ -->
@@ -440,7 +453,7 @@
                 <h2>Benvenuto — Seleziona il portale</h2>
             </div>
             <div class="action-grid">
-                <a href="https://savianu.it"
+                <a href="../ssn/index.html"
                    target="_blank"
                    rel="noopener noreferrer"
                    class="btn-prenota-large"
@@ -919,7 +932,7 @@
                     Documenti informativi da esporre in sala d'attesa o consegnare ai pazienti.
                 </p>
                 <div class="action-grid tools-grid-auto">
-                    <a href="cert-malattia.html"
+                    <a href="../ssn/cert-malattia.html"
                        class="btn-main btn-prenota"
                        aria-label="Informativa Certificati di Malattia INPS">
                         <i class="fas fa-file-medical" aria-hidden="true"></i>
@@ -940,21 +953,21 @@
                         <span>Vademecum RSA</span>
                         <small>Continuità Assistenziale · Limiti</small>
                     </a>
-                    <a href="faq.html"
+                    <a href="../ssn/faq.html"
                        class="btn-main btn-prenota"
                        aria-label="FAQ Pazienti — Domande frequenti">
                         <i class="fas fa-question-circle" aria-hidden="true"></i>
                         <span>FAQ Pazienti</span>
                         <small>Ricette · Certificati · Specialisti</small>
                     </a>
-                    <a href="esenzioni.html"
+                    <a href="../ssn/esenzioni.html"
                        class="btn-main btn-prenota"
                        aria-label="Guida Esenzioni Ticket">
                         <i class="fas fa-tag" aria-hidden="true"></i>
                         <span>Esenzioni Ticket</span>
                         <small>Guida · Codici · Come richiederle</small>
                     </a>
-                    <a href="impegnative.html"
+                    <a href="../ssn/impegnative.html"
                        class="btn-main btn-prenota"
                        aria-label="Guida Impegnative e CUP">
                         <i class="fas fa-hospital-user" aria-hidden="true"></i>
@@ -1144,14 +1157,14 @@
     <div class="footer-content">
         <p>© <span id="current-year">2026</span> — Dr. Savianu Emanuel · Studio Medico Ippocrate, Arezzo</p>
         <nav style="margin-top: 10px;">
-            <a href="https://savianu.it" target="_blank" rel="noopener noreferrer">Sito Pazienti</a> ·
-            <a href="privacy.html">Privacy Policy</a>
+            <a href="../ssn/index.html" target="_blank" rel="noopener noreferrer">Sito Pazienti</a> ·
+            <a href="../privacy.html">Privacy Policy</a>
         </nav>
     </div>
 </footer>
 
-<script src="config.js"></script>
-<script src="app.js?v=10"></script>
+<script src="../config.js?v=2"></script>
+<script src="../app.js?v=17"></script>
 
 <script>
     if ('serviceWorker' in navigator) {
