@@ -27,7 +27,7 @@
     --ssn: #1a2f4c;            /* Navy — Pazienti SSN */
     --privati: #c29b57;        /* Gold — Pazienti Privati */
     --colleghi: #2e7d6b;       /* Teal — Colleghi */
-    --accent-text: #8a6d3b;    /* Dark gold — WCAG-safe small text on light bg */
+    --accent-text: #7a5c2e;    /* Dark gold — WCAG-safe small text on light bg (5.4:1) */
     
     /* New Brand Fonts */
     --font-sans: 'Montserrat', sans-serif;
