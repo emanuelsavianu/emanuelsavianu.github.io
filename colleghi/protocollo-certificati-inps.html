@@ -350,23 +350,14 @@
 </head>
 <body>
 
-<div class="page-wrapper">
+<site-nav data-section="colleghi">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
+    </div>
+</site-nav>
 
-    <header class="page-topbar">
-        <div class="topbar-brand">
-            <img src="../assets/bluelogo.png" alt="Studio Medico Ippocrate" width="32" height="32" class="topbar-logo">
-            <span>Studio Medico Ippocrate</span>
-        </div>
-        <div class="topbar-actions">
-            <a href="index.html" class="btn-back" aria-label="Torna all'area colleghi">
-                <i class="fa-solid fa-arrow-left"></i>
-                <span>Colleghi</span>
-            </a>
-            <button id="btn-dark" class="btn-dark-toggle" onclick="toggleDarkMode()" aria-label="Attiva/Disattiva modalità scura">
-                <i class="fa-solid fa-moon"></i>
-            </button>
-        </div>
-    </header>
+<div class="page-wrapper">
 
     <section class="page-hero" aria-labelledby="hero-heading">
         <h1 class="hero-title" id="hero-heading">Protocollo Operativo<br>Certificati INPS D.Lgs. 62/2024</h1>
@@ -376,7 +367,7 @@
         </p>
     </section>
 
-    <main class="content-wrapper">
+    <main class="content-wrapper" id="main-content">
 
         <!-- Sezione 1 -->
         <section class="protocol-section">
@@ -568,12 +559,11 @@
 
     </main>
 
-    <footer class="page-footer">
-        <span>&copy; <span id="current-year"></span> Dott. Emanuel Savianu &mdash; </span>
-        <a href="../privacy.html">Informativa Privacy</a>
-        <span> &mdash; </span>
-        <a href="index.html">Area Colleghi</a>
-    </footer>
+    <site-footer data-section="colleghi">
+        <footer role="contentinfo">
+            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+        </footer>
+    </site-footer>
 
 </div>
 
