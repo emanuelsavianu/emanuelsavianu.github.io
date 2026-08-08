@@ -68,6 +68,32 @@ function toDateKey(date) {
 
 function formatDateShort(date) { return date.toLocaleDateString('it-IT', { day: 'numeric', month: 'short' }); }
 
+// Minimal self-contained toast helper (auto-dismiss, click to close)
+function showToast(message, type = 'info') {
+  let container = document.getElementById('toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'toast-container';
+    container.style.cssText = 'position:fixed;bottom:1rem;right:1rem;z-index:99999;display:flex;flex-direction:column;gap:0.5rem;max-width:min(90vw,22rem);';
+    document.body.appendChild(container);
+  }
+  const colors = { success: '#16a34a', warning: '#d97706', error: '#dc2626', info: '#2563eb' };
+  const toast = document.createElement('div');
+  toast.textContent = message;
+  toast.style.cssText = `background:${colors[type] || colors.info};color:#fff;padding:0.75rem 1rem;border-radius:0.5rem;font-size:0.875rem;font-weight:500;box-shadow:0 4px 12px rgba(0,0,0,0.2);cursor:pointer;`;
+  toast.addEventListener('click', () => {
+    toast.style.opacity = '0';
+    setTimeout(() => toast.remove(), 300);
+  });
+  container.appendChild(toast);
+  setTimeout(() => {
+    if (toast.isConnected) {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }
+  }, 3000);
+}
+
 // ====================================================
 // PERSISTENCE & MIGRATION
 // ====================================================
@@ -133,16 +159,30 @@ function saveToStorage() {
 }
 
 function loadFromStorage() {
-  try {
-    const cfg = localStorage.getItem(STORAGE_CONFIG);
-    const stf = localStorage.getItem(STORAGE_STAFF);
-    const asgn = localStorage.getItem(STORAGE_ASSIGNMENTS);
+  const pairs = [
+    { key: STORAGE_CONFIG, target: 'config' },
+    { key: STORAGE_STAFF, target: 'staff' },
+    { key: STORAGE_ASSIGNMENTS, target: 'assignments' }
+  ];
+  let corrupt = false;
 
-    if (cfg) state.config = JSON.parse(cfg);
-    if (stf) state.staff = JSON.parse(stf);
-    if (asgn) state.assignments = JSON.parse(asgn);
-  } catch (e) {
-    console.error('Storage load error:', e);
+  pairs.forEach(({ key, target }) => {
+    const raw = localStorage.getItem(key);
+    if (!raw) return;
+    try {
+      const parsed = JSON.parse(raw);
+      if (parsed === null || typeof parsed !== 'object') throw new Error('valore non valido');
+      state[target] = parsed;
+    } catch (e) {
+      console.warn(`Storage load error for ${key}:`, e);
+      localStorage.removeItem(key);
+      corrupt = true;
+    }
+  });
+
+  if (corrupt) {
+    // Key(s) removed → that slice falls back to the default/empty state
+    showToast('Dati salvati non validi — ripristino dati dimostrativi', 'warning');
   }
 }
 
@@ -168,6 +208,12 @@ function importJSON(file) {
   reader.onload = (e) => {
     try {
       const data = JSON.parse(e.target.result);
+
+      // Validate required top-level keys before touching state (no partial render)
+      if (!data || typeof data !== 'object' || !data.config || !Array.isArray(data.staff) || !data.assignments) {
+        showToast('Errore importazione: il file non contiene le chiavi config, staff e assignments', 'error');
+        return;
+      }
 
       if (data.version === 1) {
         const migrated = migrateV1ToV2(data);
@@ -222,6 +268,8 @@ function isStaffAvailable(staffId, dateKey) {
 
 function getWeeklyAssignedHours(staffId, weekStart) {
   let hours = 0;
+  // Dangling staffId (staff no longer exists) → skip: 0 hours
+  if (!staffId || !getStaffById(staffId)) return hours;
   for (let i = 0; i < 7; i++) {
     const d = new Date(weekStart);
     d.setDate(d.getDate() + i);
@@ -243,6 +291,8 @@ function getWeeklyAssignedHours(staffId, weekStart) {
 
 function getMonthlyAssignedHours(staffId, year, month) {
   let hours = 0;
+  // Dangling staffId (staff no longer exists) → skip: 0 hours
+  if (!staffId || !getStaffById(staffId)) return hours;
   const lastDay = new Date(year, month + 1, 0).getDate();
   for (let day = 1; day <= lastDay; day++) {
     const d = new Date(year, month, day);
@@ -282,7 +332,7 @@ function validateActivityCoverage(dateKey, activityId, shiftId) {
 
 function canAssignStaff(staffId, dateKey, shiftId, activityId, slotIndex) {
   const staff = getStaffById(staffId);
-  if (!staff) return { canAssign: false, reason: 'Personale non trovato' };
+  if (!staffId || !staff) return { canAssign: false, reason: 'Personale non trovato' };
 
   if (!isStaffAvailable(staffId, dateKey)) {
     return { canAssign: false, reason: 'Personale non disponibile in questa data' };
@@ -565,52 +615,61 @@ function autoAssign() {
   const month = state.calMonth;
   const lastDay = new Date(year, month + 1, 0).getDate();
   let count = 0;
+  let progress = true;
 
-  for (let day = 1; day <= lastDay; day++) {
-    const cellDate = new Date(year, month, day);
-    const jsDay = cellDate.getDay();
-    if (jsDay === 0 || jsDay === 6) continue;
-    const dateKey = toDateKey(cellDate);
-    const weekStart = getWeekStart(cellDate);
+  // Progress guard: repeat full passes until a pass produces zero new assignments.
+  // Each slot is assigned at most once, so the loop always terminates — when no
+  // staff is available at all, the first pass assigns nothing and we stop.
+  while (progress) {
+    progress = false;
 
-    state.config.activities.forEach(activity => {
-      state.config.shifts.forEach(shift => {
-        const required = activity.requirements[0]?.count || 1;
-        const requiredRoleId = activity.requirements[0]?.roleId;
+    for (let day = 1; day <= lastDay; day++) {
+      const cellDate = new Date(year, month, day);
+      const jsDay = cellDate.getDay();
+      if (jsDay === 0 || jsDay === 6) continue;
+      const dateKey = toDateKey(cellDate);
+      const weekStart = getWeekStart(cellDate);
 
-        for (let slot = 0; slot < required; slot++) {
-          const slotKey = `${dateKey}_${shift.id}_${activity.id}_${slot}`;
-          if (state.assignments[slotKey]) continue;
+      state.config.activities.forEach(activity => {
+        state.config.shifts.forEach(shift => {
+          const required = activity.requirements[0]?.count || 1;
+          const requiredRoleId = activity.requirements[0]?.roleId;
 
-          const candidates = state.staff.filter(s => {
-            if (requiredRoleId && s.roleId !== requiredRoleId) return false;
-            if (!isStaffAvailable(s.id, dateKey)) return false;
-            // Non assegnare se già in turno in questo stesso shift (qualsiasi attività/slot)
-            const prefix = `${dateKey}_${shift.id}_`;
-            const alreadyBusy = Object.entries(state.assignments)
-              .some(([k, v]) => v === s.id && k.startsWith(prefix));
-            return !alreadyBusy;
-          });
+          for (let slot = 0; slot < required; slot++) {
+            const slotKey = `${dateKey}_${shift.id}_${activity.id}_${slot}`;
+            if (state.assignments[slotKey]) continue;
 
-          if (candidates.length === 0) continue;
+            const candidates = state.staff.filter(s => {
+              if (requiredRoleId && s.roleId !== requiredRoleId) return false;
+              if (!isStaffAvailable(s.id, dateKey)) return false;
+              // Non assegnare se già in turno in questo stesso shift (qualsiasi attività/slot)
+              const prefix = `${dateKey}_${shift.id}_`;
+              const alreadyBusy = Object.entries(state.assignments)
+                .some(([k, v]) => v === s.id && k.startsWith(prefix));
+              return !alreadyBusy;
+            });
 
-          // Filtra chi non supererebbe maxWeeklyHours
-          const canTake = candidates.filter(s => {
-            const assigned = getWeeklyAssignedHours(s.id, weekStart);
-            return assigned + shift.hours <= s.maxWeeklyHours;
-          });
-          const pool = canTake.length > 0 ? canTake : candidates;
+            if (candidates.length === 0) continue;
 
-          // Scegli chi ha meno ore settimanali assegnate
-          pool.sort((a, b) =>
-            getWeeklyAssignedHours(a.id, weekStart) - getWeeklyAssignedHours(b.id, weekStart)
-          );
+            // Filtra chi non supererebbe maxWeeklyHours
+            const canTake = candidates.filter(s => {
+              const assigned = getWeeklyAssignedHours(s.id, weekStart);
+              return assigned + shift.hours <= s.maxWeeklyHours;
+            });
+            const pool = canTake.length > 0 ? canTake : candidates;
 
-          state.assignments[slotKey] = pool[0].id;
-          count++;
-        }
+            // Scegli chi ha meno ore settimanali assegnate
+            pool.sort((a, b) =>
+              getWeeklyAssignedHours(a.id, weekStart) - getWeeklyAssignedHours(b.id, weekStart)
+            );
+
+            state.assignments[slotKey] = pool[0].id;
+            count++;
+            progress = true;
+          }
+        });
       });
-    });
+    }
   }
 
   if (count === 0) {
@@ -1440,3 +1499,22 @@ document.getElementById('btn-add-staff').addEventListener('click', () => {
   saveToStorage();
   renderStaffList();
 });
+
+// ====================================================
+// WINDOW EXPOSURE — inline `onclick` handlers generated in
+// innerHTML templates resolve against `window`, so the module
+// must expose exactly the functions the HTML/JS strings call.
+// ====================================================
+const GLOBAL_HANDLERS = {
+  deleteActivity,
+  deleteRole,
+  deleteShift,
+  deleteStaff,
+  deleteUnavailability,
+  editActivity,
+  editRole,
+  editShift,
+  editStaff,
+  openUnavailabilityModal,
+};
+for (const name in GLOBAL_HANDLERS) window[name] = GLOBAL_HANDLERS[name];
