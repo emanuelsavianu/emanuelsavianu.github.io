@@ -1694,3 +1694,82 @@ body.dark-mode .site-nav { background: var(--bg-gradient-2); }
     }
     .skip-link:focus { outline: 3px solid Highlight; }
 }
+
+/* --- SHARED: page hero (migrated from privati/colleghi pages) --- */
+.page-hero {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-bottom: 1px solid var(--border-color);
+    padding: 56px 28px 52px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+/* Subtle decorative circle behind hero */
+.page-hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(194, 155, 87, 0.08);
+    pointer-events: none;
+}
+.hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-accent-strong);
+    margin-bottom: 14px;
+}
+.hero-eyebrow i { font-size: 0.75rem; }
+.hero-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--color-text);
+    line-height: 1.2;
+    margin-bottom: 16px;
+}
+.hero-desc {
+    font-size: clamp(0.85rem, 2vw, 0.95rem);
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+    font-weight: 400;
+}
+/* CTA button */
+.btn-cta-hero {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #ffffff;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 14px 30px;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s;
+    box-shadow: 0 6px 20px rgba(194, 155, 87, 0.4);
+}
+.btn-cta-hero:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(194, 155, 87, 0.5);
+    background: #d4ac62;
+    opacity: 1;
+}
+.btn-cta-hero i { font-size: 0.85rem; }
+
+/* Restyle for unified chrome (cream hero under navy site-nav) */
+.page-hero .hero-title { color: var(--color-text); }
+.page-hero .hero-desc { color: var(--color-text-muted); }
+.page-hero .hero-eyebrow { color: var(--color-accent-strong); }
+body.dark-mode .page-hero .hero-eyebrow { color: var(--color-accent); }
