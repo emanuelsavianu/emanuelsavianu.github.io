@@ -142,14 +142,13 @@
 
 ```js
 CONFIG = {
-  SCHEDULE: { ... }            // CLINIC hours (badge): Mon/Wed/Fri 16–19, Tue/Thu 10–13 (from dott)
-  SECRETARY_HOURS: { ... }     // Lun–Ven 09:30–12:30 + 16:00–19:00 (from base repo) — hours table
+  SCHEDULE: { ... }            // Mon–Fri 09:30–12:30 + 16:00–19:00 EVERYWHERE (user decision 2026-08-08)
   ASSENZE: [ ... ]             // from dott (relocation banner) + future entries
   DOCTOLIB: { booking, patientRequest, profile }   // from base repo
   GOOGLE_CAL: { iframe, visit-type URLs }          // from dott visite-private (private booking); ferie.html's legacy SSN calendar links are retired with that page — SSN booking is Doctolib-only
 }
 ```
-**Note:** the two repos carried different schedules — base repo `SCHEDULE` is *secretary* hours (Mon–Fri 09:30–12:30 + 16:00–19:00), dott `SCHEDULE` is *clinic* hours (Mon/Wed/Fri 16–19, Tue/Thu 10–13). Both are kept as distinct keys and each renders in its own context: open/closed badge and hours tables use the **clinic** schedule; the secretary hours table on the SSN dashboard uses `SECRETARY_HOURS`. The badge label reads "Segreteria" only where secretary hours are shown — on the new unified pages the badge reflects clinic availability.
+**Note (user decision 2026-08-08):** the two repos carried different schedules (secretary Mon–Fri 09:30–12:30 + 16:00–19:00 vs clinic Mon/Wed/Fri 16–19, Tue/Thu 10–13). The unified site uses **09:30–12:30 + 16:00–19:00 everywhere** — single `SCHEDULE` key drives the open/closed badge, hours tables, and JSON-LD. No separate secretary key.
 
 Absence banner logic (`getActiveAbsence()`) merged; both repos' banner/modal implementations unified (dott's config-driven banner is the canonical one).
 
