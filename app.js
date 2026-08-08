@@ -55,7 +55,7 @@ class SiteNav extends HTMLElement {
         '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
         '<ul class="nav-menu" id="site-nav-menu">' +
           '<li><a href="' + prefix + 'index.html"' + (isPatient ? ' data-i18n="nav_home"' : '') + (here.endsWith('/index.html') || here === '' ? ' aria-current="page"' : '') + '>Home</a></li>' +
-          '<li><a href="' + prefix + 'ssn/index.html"' + (isPatient ? ' data-i18n="nav_ssn"' : '') + (here.includes('/ssn') ? ' aria-current="page"' : '') + '>Pazienti SSN</a></li>' +
+          '<li><a href="' + prefix + 'ssn/index.html"' + (isPatient ? ' data-i18n="nav_ssn"' : '') + (here.includes('/ssn') ? ' aria-current="page"' : '') + '>Pazienti</a></li>' +
           '<li><a href="' + prefix + 'privati/index.html"' + (isPatient ? ' data-i18n="nav_privati"' : '') + (here.includes('/privati') ? ' aria-current="page"' : '') + '>Pazienti Privati</a></li>' +
           '<li><a href="' + prefix + 'colleghi/index.html"' + (isPatient ? ' data-i18n="nav_colleghi"' : '') + (here.includes('/colleghi') ? ' aria-current="page"' : '') + '>Colleghi</a></li>' +
           '<li><a href="' + prefix + 'ssn/faq.html"' + (isPatient ? ' data-i18n="nav_faq"' : '') + '>FAQ</a></li>' +
@@ -301,7 +301,7 @@ export const translations = {
         // Landing triage
         landing_hero_title: "Benvenuti nello Studio Medico Ippocrate",
         landing_hero_sub: "Scegli la tua area: ogni percorso ti porta direttamente a ciò che ti serve.",
-        triage_ssn_title: "Pazienti SSN",
+        triage_ssn_title: "Pazienti",
         triage_ssn_desc: "Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.",
         triage_privati_title: "Pazienti Privati",
         triage_privati_desc: "Consulenze private, certificati INPS, invalidità civile e Legge 104 — prenota su Google Calendar.",
@@ -458,11 +458,11 @@ export const translations = {
         faq_q20: "Ho la relazione/referto dello specialista: devo tornare dal mio medico?",
         faq_a20: "Non sempre è necessaria una visita di restituzione formale, ma è fortemente <strong>consigliata</strong> se:<ul><li>Lo specialista ha modificato la terapia o avviato nuovi farmaci</li><li>Raccomanda ulteriori accertamenti o visite di controllo</li><li>Hai dubbi su quanto scritto o prescritto</li><li>La tua condizione è peggiorata</li></ul>Puoi consegnare il referto anche alla segreteria: il medico lo valuta e ti contatta se ritiene necessaria una visita.<div class='highlight-box'>Per nuove prescrizioni di farmaci cronici derivanti dalla visita specialistica, prenota una visita ordinaria affinché il medico possa inserirle correttamente nella cartella clinica.</div>",
         faq_q21: "Come faccio a sapere se ho diritto a un'esenzione dal ticket?",
-        faq_a21: "Le esenzioni ticket si dividono in tre grandi categorie:<ul><li><strong>Per reddito</strong> — Basate sul reddito familiare (ISEE): disoccupati, titolari di pensione minima/sociale, famiglie a basso reddito.</li><li><strong>Per patologia cronica o rara</strong> — Diabete, ipertensione grave, BPCO, ecc.: esenzione per le prestazioni correlate alla patologia.</li><li><strong>Per invalidità e disabilità</strong> — In base al grado di invalidità riconosciuta.</li></ul><div class='highlight-box'>Il tuo medico di base può prescrivere l'esenzione per patologia cronica dopo la diagnosi. Per le esenzioni per reddito devi fare domanda all'ASL Toscana Sud Est.</div>Per verificare le esenzioni attive sulla tua tessera sanitaria, accedi al <strong>Fascicolo Sanitario Elettronico</strong> della Regione Toscana.",
+        faq_a21: "Le esenzioni ticket si dividono in tre grandi categorie:<ul><li><strong>Per reddito</strong> — Basate sul reddito familiare (ISEE): disoccupati, titolari di pensione minima/sociale, famiglie a basso reddito.</li><li><strong>Per patologia cronica o rara</strong> — Diabete, ipertensione grave, BPCO, ecc.: esenzione per le prestazioni correlate alla patologia.</li><li><strong>Per invalidità e disabilità</strong> — In base al grado di invalidità riconosciuta.</li></ul><div class='highlight-box'>Il tuo medico di base può prescrivere l'esenzione per patologia cronica dopo la diagnosi. Per le esenzioni per reddito devi fare domanda allo sportello della tua ASL di riferimento.</div>Per verificare le esenzioni attive sulla tua tessera sanitaria, accedi al <strong>Fascicolo Sanitario Elettronico</strong> della Regione Toscana.",
         faq_q22: "Ho una malattia cronica: l'esenzione copre tutto o solo alcune prestazioni?",
         faq_a22: "L'esenzione per patologia cronica è <strong>selettiva</strong>: copre solo le prestazioni sanitarie <em>correlate</em> alla patologia esente, non tutte.<br><br>Esempio: se sei esente per diabete mellito (codice 013), sei esente per gli esami del sangue correlati (glicemia, HbA1c, profilo lipidico…) e per le visite diabetologiche, ma non per una visita ortopedica non correlata.<div class='highlight-box'>Quando prenoti una prestazione al CUP, specifica il <strong>codice esenzione</strong> (es. \"013\") per non pagare il ticket sulle prestazioni coperte.</div>I codici esenzione delle patologie croniche sono definiti dal DPCM 12/01/2017 (LEA) e sono uniformi su tutto il territorio nazionale.",
         faq_q23: "Posso cambiare medico di base? Come funziona?",
-        faq_a23: "Il cambio del medico di medicina generale in Toscana è <strong>libero e gratuito</strong>, effettuabile una volta l'anno (salvo motivi eccezionali).<ol><li>Rivolgiti allo sportello dell'<strong>ASL Toscana Sud Est</strong> più vicino (o accedi online al portale regionale) con tessera sanitaria e documento</li><li>Scegli il nuovo medico dall'elenco degli iscritti della tua zona</li><li>Il cambio è effettivo dal giorno successivo alla richiesta</li></ol>Non è necessario \"disdire\" col vecchio medico: il sistema aggiorna automaticamente la lista dei pazienti di entrambi i medici.",
+        faq_a23: "Il cambio del medico di medicina generale in Toscana è <strong>libero e gratuito</strong>, effettuabile una volta l'anno (salvo motivi eccezionali).<ol><li>Rivolgiti allo sportello della tua <strong>ASL</strong> più vicino (o accedi online al portale regionale) con tessera sanitaria e documento</li><li>Scegli il nuovo medico dall'elenco degli iscritti della tua zona</li><li>Il cambio è effettivo dal giorno successivo alla richiesta</li></ol>Non è necessario \"disdire\" col vecchio medico: il sistema aggiorna automaticamente la lista dei pazienti di entrambi i medici.",
         faq_q24: "Quando devo chiamare il 112 e quando il 116 117?",
         faq_a24: "<ul><li><strong>112 — Emergenza (Numero Unico)</strong>: pericolo di vita imminente. Dolore toracico, difficoltà respiratoria grave, perdita di coscienza, ictus, trauma grave, emorragia abbondante.</li><li><strong>116 117 — Guardia Medica (Continuità Assistenziale)</strong>: problemi urgenti ma non a rischio di vita, fuori dagli orari di ambulatorio. Febbre alta, dolori acuti, problemi che non possono attendere il giorno dopo.</li><li><strong>Pronto Soccorso (PS)</strong>: in alternativa per urgenze che richiedono accertamenti (radiografie, esami urgenti) ma non necessariamente un'ambulanza.</li></ul><div class='highlight-box'>In caso di dubbio, chiama il <strong>116 117</strong>: un operatore valuta telefonicamente e ti indirizza al servizio più appropriato.</div>",
         faq_q25: "Il medico è assente: cosa faccio se ho bisogno urgente?",
@@ -540,7 +540,7 @@ export const translations = {
 
         // Nav (site-nav component)
         nav_home: 'Home',
-        nav_ssn: 'Pazienti SSN',
+        nav_ssn: 'Pazienti',
         nav_privati: 'Pazienti Privati',
         nav_colleghi: 'Colleghi',
         nav_faq: 'FAQ',
@@ -562,7 +562,7 @@ export const translations = {
         // Landing triage
         landing_hero_title: "Welcome to Studio Medico Ippocrate",
         landing_hero_sub: "Choose your area: each path takes you straight to what you need.",
-        triage_ssn_title: "NHS Patients",
+        triage_ssn_title: "Patients",
         triage_ssn_desc: "Are you a patient of Dr. Savianu? Book visits on Doctolib, request prescriptions, read guides and exemptions.",
         triage_privati_title: "Private Patients",
         triage_privati_desc: "Private consultations, INPS certificates, civil disability and Law 104 — book on Google Calendar.",
@@ -721,11 +721,11 @@ export const translations = {
         faq_q20: "I have the specialist's report: do I need to go back to my GP?",
         faq_a20: "A formal follow-up visit is not always necessary, but it is strongly <strong>recommended</strong> if:<ul><li>The specialist changed your medication or started new drugs</li><li>Further tests or follow-up visits are recommended</li><li>You have doubts about what was written or prescribed</li><li>Your condition has worsened</li></ul>You can also leave the report with reception: the doctor will review it and contact you if a visit is needed.<div class='highlight-box'>For new chronic prescriptions resulting from a specialist visit, book a standard visit so the doctor can add them correctly to your medical record.</div>",
         faq_q21: "How do I know if I am entitled to a co-payment exemption?",
-        faq_a21: "Co-payment exemptions fall into three broad categories:<ul><li><strong>By income</strong> — Based on household income (ISEE): unemployed people, minimum/social pension holders, low-income families.</li><li><strong>By chronic or rare condition</strong> — Diabetes, severe hypertension, COPD, etc.: exemption for services related to the condition.</li><li><strong>By disability</strong> — Based on the recognised degree of disability.</li></ul><div class='highlight-box'>Your GP can prescribe a chronic-condition exemption after diagnosis. For income-based exemptions you must apply to ASL Toscana Sud Est.</div>To check the exemptions active on your health card, access the <strong>Electronic Health Record</strong> of the Tuscany Region.",
+        faq_a21: "Co-payment exemptions fall into three broad categories:<ul><li><strong>By income</strong> — Based on household income (ISEE): unemployed people, minimum/social pension holders, low-income families.</li><li><strong>By chronic or rare condition</strong> — Diabetes, severe hypertension, COPD, etc.: exemption for services related to the condition.</li><li><strong>By disability</strong> — Based on the recognised degree of disability.</li></ul><div class='highlight-box'>Your GP can prescribe a chronic-condition exemption after diagnosis. For income-based exemptions you must apply at your local health authority office.</div>To check the exemptions active on your health card, access the <strong>Electronic Health Record</strong> of the Tuscany Region.",
         faq_q22: "I have a chronic condition: does the exemption cover everything or only some services?",
         faq_a22: "The chronic-condition exemption is <strong>selective</strong>: it covers only health services <em>related</em> to the exempt condition, not everything.<br><br>Example: if you are exempt for diabetes (code 013), you are exempt for related blood tests (glucose, HbA1c, lipid profile…) and diabetes consultations, but not for an unrelated orthopaedic visit.<div class='highlight-box'>When booking a service with the CUP, state your <strong>exemption code</strong> (e.g. \"013\") to avoid paying the co-payment on covered services.</div>Exemption codes for chronic conditions are defined by DPCM 12/01/2017 (LEA) and are uniform nationwide.",
         faq_q23: "Can I change my GP? How does it work?",
-        faq_a23: "Changing your GP in Tuscany is <strong>free</strong> and can be done once a year (except for exceptional reasons).<ol><li>Go to the nearest <strong>ASL Toscana Sud Est</strong> office (or use the regional online portal) with your health card and ID</li><li>Choose the new doctor from the list of GPs in your area</li><li>The change takes effect from the day after your request</li></ol>You do not need to \"unsubscribe\" from your old doctor: the system automatically updates both doctors' patient lists.",
+        faq_a23: "Changing your GP in Tuscany is <strong>free</strong> and can be done once a year (except for exceptional reasons).<ol><li>Go to the nearest <strong>local health authority</strong> office (or use the regional online portal) with your health card and ID</li><li>Choose the new doctor from the list of GPs in your area</li><li>The change takes effect from the day after your request</li></ol>You do not need to \"unsubscribe\" from your old doctor: the system automatically updates both doctors' patient lists.",
         faq_q24: "When should I call 112 and when 116 117?",
         faq_a24: "<ul><li><strong>112 — Emergency (Single Number)</strong>: imminent life-threatening situations. Chest pain, severe breathing difficulty, loss of consciousness, stroke, severe trauma, heavy bleeding.</li><li><strong>116 117 — Out-of-Hours Service</strong>: urgent but not life-threatening problems outside clinic hours. High fever, acute pain, issues that cannot wait until the next day.</li><li><strong>Emergency Department (ER)</strong>: an alternative for urgencies requiring tests (X-rays, urgent lab work) but not necessarily an ambulance.</li></ul><div class='highlight-box'>If in doubt, call <strong>116 117</strong>: an operator will assess you over the phone and direct you to the most appropriate service.</div>",
         faq_q25: "The doctor is away: what do I do if I need urgent care?",
@@ -801,7 +801,7 @@ export const translations = {
 
         // Nav (site-nav component)
         nav_home: 'Home',
-        nav_ssn: 'NHS Patients',
+        nav_ssn: 'Patients',
         nav_privati: 'Private Patients',
         nav_colleghi: 'Colleagues',
         nav_faq: 'FAQ',
@@ -921,21 +921,15 @@ function trapFocus(modal) {
 })();
 
 // --- DOCTOLIB BANNER LOGIC ---
+// NOTE: this banner always shows its own i18n text. The closure/absence
+// notice is rendered exclusively by #ferie-banner (CONFIG.ASSENZE) — showing
+// it in both banners caused duplicated notices on every patient page.
 (function() {
     const banner = document.getElementById('doctolib-banner');
     const textEl = document.getElementById('doctolib-banner-text');
     if (!banner || !textEl) return;
     var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
     var t = translations[lang] || translations['it'];
-
-    // Config-driven absence note takes priority, translation is the fallback
-    if (typeof CONFIG !== 'undefined' && CONFIG.getActiveAbsence) {
-        const active = CONFIG.getActiveAbsence();
-        if (active) {
-            textEl.textContent = active.note;
-            return;
-        }
-    }
     textEl.textContent = t.doctolib_banner_text;
 })();
 

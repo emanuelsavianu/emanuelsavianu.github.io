@@ -137,14 +137,18 @@ a:focus-visible {
 }
 .skip-link:focus { top: 0; }
 
-/* Custom Elements: display block per evitare problematiche inline/block */
+/* Custom Elements: display block per evitare problematiche inline/block.
+   position: relative è REQUIRED: .lang-switch (absolute top/right) prende il
+   containing block dal più vicino antenato posizionato; senza, fluttua in cima
+   alla viewport sopra i banner. */
+site-nav { display: block; position: relative; }
 site-footer { display: block; }
 
 /* --- HEADER / LANDING PAGE --- */
 header {
     background-color: var(--primary); 
     color: var(--white);
-    padding: 80px 20px 120px;
+    padding: 80px 20px 40px;
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -292,7 +296,7 @@ iframe.goog-te-menu-frame {
 
 /* --- LAYOUT GRID --- */
 .container {
-    max-width: 1100px; margin: -60px auto 60px; padding: 0 20px;
+    max-width: 1100px; margin: 0 auto 60px; padding: 0 20px;
     display: grid; grid-template-columns: 1fr; gap: 25px; position: relative; z-index: 10;
 }
 .container > * { min-width: 0; }
