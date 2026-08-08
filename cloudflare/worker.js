@@ -45,17 +45,16 @@ const SECURITY_HEADERS = {
   //    Once a build step is added, replace with nonces or hashes.
   //  • fonts.googleapis.com / gstatic: Google Fonts
   //  • cdnjs.cloudflare.com: Font Awesome CSS + font files
-  //  • calendar.app.google: Google Calendar booking links open in new tab —
-  //    no frame-src required, but listed for future embed safety.
-  //  • millebook.it: external link only — no embed.
+  //  • calendar.google.com: private-practice booking iframe (frame-src)
+  //  • translate.google.com: Google Translate widget (script-src)
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-inline'",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+    "script-src 'self' 'unsafe-inline' https://translate.google.com https://ssl.google-analytics.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://translate.googleapis.com",
     "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
-    "img-src 'self' data: https://savianu.it",
-    "connect-src 'self'",
-    "frame-src 'none'",
+    "img-src 'self' data: https://savianu.it https://www.google.com https://translate.google.com",
+    "connect-src 'self' https://translate.googleapis.com",
+    "frame-src https://calendar.google.com",
     "object-src 'none'",
     "base-uri 'self'",
     "form-action 'self'",
