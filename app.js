@@ -71,10 +71,19 @@ class SiteNav extends HTMLElement {
         '</div>' +
       '</div>';
 
-    this.insertAdjacentHTML('beforebegin', skipLink + banners);
+    this.insertAdjacentHTML('beforebegin', skipLink);
     this.innerHTML =
       '<nav class="lang-switch" aria-label="' + (isPatient ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
-      '<header role="banner"><div class="header-content">' + brand + '</div></header>' +
+      '<header role="banner">' +
+        '<div class="header-info" id="header-info-line">' +
+          '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
+          '<span class="header-info-base" id="header-info-base" data-i18n="doctolib_banner_text"></span>' +
+          '<span class="header-info-absence" id="header-info-absence" hidden></span>' +
+          '<span class="header-info-urgenze" id="header-info-urgenze" data-i18n="urgenze_line"></span>' +
+          '<button id="header-info-close" hidden onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
+        '</div>' +
+        '<div class="header-content">' + brand + '</div>' +
+      '</header>' +
       (section !== 'static' ? navRow : '');
 
     if (isPatient && this.dataset.noFloat !== '1') {
