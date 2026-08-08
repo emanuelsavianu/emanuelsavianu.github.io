@@ -19,6 +19,7 @@ Thumbs.db
 /.superpowers
 .superpowers/brainstorm/2009-1774431641/.server-info
 *.md
+!docs/**/*.md
 /.claude
 .claude/settings.local.json
 CLAUDE.md
