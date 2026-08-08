@@ -1786,3 +1786,15 @@ html { text-rendering: optimizeLegibility; }
     outline: var(--focus-ring);
     outline-offset: 2px;
 }
+
+/* --- PRINT: patient pages --- */
+@media print {
+    .skip-link, .lang-switch, .site-nav, .nav-toggle, .floating-faq,
+    .quick-actions-bar, #ferie-banner, #large-text-banner, #doctolib-banner,
+    .btn-telefono-header, .back-to-top { display: none !important; }
+    header { padding: 20px; background: #fff; color: #000; }
+    .brand-name { color: #1a2f4c; text-shadow: none; }
+    .container { margin-top: 0; max-width: 100%; grid-template-columns: 1fr; }
+    a { color: #1a2f4c; }
+    body { background: #fff; }
+}
