@@ -12,13 +12,19 @@ class SiteHeader extends HTMLElement {
     if (this.dataset.rendered === '1') return;
     this.dataset.rendered = '1';
 
+    // Relative prefix for pages served from section subfolders
+    const prefix = (function() {
+      const depth = location.pathname.split('/').filter(Boolean).length;
+      return depth > 1 ? '../'.repeat(depth - 1) : '';
+    })();
+
     this.insertAdjacentHTML('beforebegin',
       '<div id="doctolib-banner">' +
         '<i class="fas fa-info-circle"></i>' +
         '<span id="doctolib-banner-text"></span>' +
       '</div>' +
       '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>' +
-      '<a href="faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
+      '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
         '<i class="fas fa-question-circle"></i>' +
         '<span class="floating-faq-text">FAQ</span>' +
       '</a>'
@@ -40,13 +46,18 @@ class SiteFooter extends HTMLElement {
     if (this.dataset.rendered === '1') return;
     this.dataset.rendered = '1';
 
+    const prefix = (function() {
+      const depth = location.pathname.split('/').filter(Boolean).length;
+      return depth > 1 ? '../'.repeat(depth - 1) : '';
+    })();
+
     this.insertAdjacentHTML('afterend',
       '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
         '<a href="tel:+390575910904" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria">' +
           '<i class="fas fa-phone-alt" aria-hidden="true"></i>' +
           '<span data-i18n="qa_call">Chiama</span>' +
         '</a>' +
-        '<a href="faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti">' +
+        '<a href="' + prefix + 'ssn/faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti">' +
           '<i class="fas fa-question-circle" aria-hidden="true"></i>' +
           '<span>FAQ</span>' +
         '</a>' +
@@ -149,6 +160,49 @@ function initDarkMode() {
 initDarkMode();
 
 
+// --- LARGE TEXT ACCESSIBILITY MODE ---
+function updateLargeTextBanner(isActive) {
+    var banner = document.getElementById('large-text-banner');
+    var label  = document.getElementById('large-text-banner-label');
+    var btn    = document.getElementById('large-text-toggle-btn');
+    if (!banner || !label || !btn) return;
+    if (isActive) {
+        banner.classList.add('active');
+        banner.classList.remove('hidden');
+        label.textContent = '✓ Testo grande attivo';
+        btn.textContent   = 'A− Normale';
+    } else {
+        banner.classList.remove('active');
+        label.textContent = '🔤 Difficoltà a leggere?';
+        btn.textContent   = 'A+ Testo Grande';
+    }
+}
+
+function toggleLargeText() {
+    var isActive = document.body.classList.toggle('large-text');
+    try { localStorage.setItem('largeText', isActive ? 'enabled' : 'disabled'); } catch(e) {}
+    updateLargeTextBanner(isActive);
+}
+
+function initLargeText() {
+    try {
+        if (localStorage.getItem('largeText') === 'enabled') {
+            document.body.classList.add('large-text');
+            updateLargeTextBanner(true);
+        }
+    } catch(e) {}
+    // Hide banner on first scroll only if large text is NOT active
+    window.addEventListener('scroll', function() {
+        if (!document.body.classList.contains('large-text')) {
+            var banner = document.getElementById('large-text-banner');
+            if (banner) banner.classList.add('hidden');
+        }
+    }, { once: true });
+}
+
+initLargeText();
+
+
 
 
 
@@ -159,7 +213,7 @@ const translations = {
         header_subtitle: "Medico di Medicina Generale - Arezzo",
 
         // Alert box (index.html)
-        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Trasferimento:</strong> Dal 27 Aprile 2026, il dottor Savianu visiterà in <strong>Piazza Saione 3</strong>.",
+        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Benvenuti</strong> nello Studio Medico Ippocrate — Dott. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
 
         // Services section
         services_title: "Servizi Online",
@@ -171,6 +225,7 @@ const translations = {
         // Booking section
         booking_title: "Prenotazione su Doctolib",
         booking_guide_title: "Scegli cosa fare:",
+        booking_guide_steps: "<li>Clicca il pulsante del tipo di visita qui sotto.</li><li>Scegli il giorno e l'orario disponibile sul calendario.</li><li>Inserisci Nome, Cognome e un indirizzo Email.</li><li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>",
         booking_guide_steps: "",
         cal_prima_title: "Prima Visita (Nuovi Pazienti)",
         cal_prima_desc: "Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)",
@@ -191,6 +246,8 @@ const translations = {
         // Emergency & out-of-hours
         emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
         title_116117: "116 117 — Assistenza Sanitaria Non Urgente",
+        guard_title: "Continuità Assistenziale (ex-Guardia Medica)",
+        guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
         cta_116117_main: "CHIAMA IL 116 117",
         note_116117_free: "(Numero gratuito, sempre attivo 24 ore su 24)",
         desc_116117_operator: "Un medico o un operatore ti aiuterà a capire cosa fare.",
@@ -215,6 +272,14 @@ const translations = {
 
         // Hours
         hours_lun_ven: "Lun - Ven",
+        hours_title: "Orari di Studio",
+        appt_only: "Solo su appuntamento",
+        hours_day1: "Lun - Ven",
+        hours_day2: "",
+        day_sat_sun: "Sab - Dom",
+        closed: "Chiuso",
+        hours_secretary_title: "Orari Segreteria",
+        hours_secretary_desc: "Per appuntamenti telefonici e info.",
 
         // Footer
         link_privacy: "Privacy Policy",
@@ -255,7 +320,7 @@ const translations = {
         faq_q2: "Posso venire senza appuntamento?",
         faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.",
         faq_q3: "Quali sono gli orari dell'ambulatorio?",
-        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì, Mercoledì, Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Martedì, Giovedì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
+        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Lunedì - Venerdì</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>09:30 - 12:30 · 16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Sabato - Domenica</td><td style='text-align:right; color: var(--danger);'>Chiuso</td></tr></table><div class='highlight-box'><strong>Indirizzo:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
         faq_q4: "Come annullo o sposto un appuntamento?",
         faq_a4: "Per modificare o cancellare un appuntamento, aprite la conferma nell'app Doctolib o accedete al vostro account su Doctolib.it.<br><br>In alternativa, chiamate la segreteria al <strong>0575 910 904</strong> con ragionevole anticipo.",
         faq_q5: "Come richiedo la ricetta per i farmaci che prendo regolarmente?",
@@ -332,7 +397,7 @@ const translations = {
         qa_doctolib_label: 'Apri Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'Studio chiuso dal 6 al 14 agosto 2026. Riprendo il 17 agosto. 🚨 Urgenze: Guardia Medica 116 117 — Emergenze: 112.',
+        doctolib_banner_text: 'Prenotazioni e ricette tramite Doctolib. Per urgenze: Guardia Medica 116 117 — Emergenze: 112.',
         doctolib_modal_title: 'Avviso Importante',
         doctolib_modal_text: 'Gentili Pazienti, un caro saluto.<br><br>Vi informo sulle prossime variazioni dello studio:<br><br><strong>6 – 7 Agosto (prefestivo e festivo)</strong><br>Studio chiuso. Attiva la Guardia Medica 24h/24 al 116 117.<br><br><strong>10 – 14 Agosto</strong><br>Sarò in ferie. Vi assisteranno i colleghi di studio contattando la segreteria allo 0575 910904.<br><br><strong>Dal 17 Agosto</strong><br>Tornerò regolarmente in studio.<br><br>🚨 <strong>Urgenze, notte, weekend e festivi</strong><br>Nei fine settimana, nei festivi e nelle ore notturne i medici di medicina generale non sono in servizio. Per qualsiasi urgenza in questi giorni — o se la segreteria non risponde — è sempre attiva la Guardia Medica 24h/24 al 116 117. Per le emergenze, 112.<br><br>📌 <strong>Appuntamenti e richieste</strong><br>Prenotate o scrivetemi su Doctolib, oppure chiamate la segreteria al 0575 910904.<br><br>Buone e serene vacanze a tutti voi.<br><br>Dott. Emanuel Savianu<br><em>Medico di Medicina Generale</em>',
         doctolib_modal_btn: 'Ho letto',
@@ -351,7 +416,7 @@ const translations = {
         header_subtitle: "General Practitioner - Arezzo",
 
         // Alert box (index.html)
-        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Relocation:</strong> From 27 April 2026, Dr. Savianu will be visiting at <strong>Piazza Saione 3</strong>.",
+        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Welcome</strong> to Studio Medico Ippocrate — Dr. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
 
         // Services section
         services_title: "Online Services",
@@ -363,6 +428,7 @@ const translations = {
         // Booking section
         booking_title: "Book on Doctolib",
         booking_guide_title: "Choose what to do:",
+        booking_guide_steps: "<li>Click the button for the visit type below.</li><li>Choose the day and time available on the calendar.</li><li>Enter First Name, Last Name and an Email address.</li><li>Click <strong>Confirm</strong> (you will receive a summary email).</li>",
         booking_guide_steps: "",
         cal_prima_title: "First Visit (New Patients)",
         cal_prima_desc: "For new patients only. Bring documents, tests, reports and exemptions. (30 min)",
@@ -385,6 +451,8 @@ const translations = {
         // Emergency & out-of-hours
         emergency_112: "For medical emergencies, always call the emergency number 112.",
         title_116117: "116 117 — Non-Urgent Health Care",
+        guard_title: "Out-of-Hours Service (Continuità Assistenziale)",
+        guard_desc: "For non-urgent medical care at night, on holidays and days before holidays.",
         cta_116117_main: "CALL 116 117",
         note_116117_free: "(Free, 24/7 service)",
         desc_116117_operator: "A doctor or operator will help you.",
@@ -409,6 +477,14 @@ const translations = {
 
         // Hours
         hours_lun_ven: "Mon - Fri",
+        hours_title: "Office Hours",
+        appt_only: "By appointment only",
+        hours_day1: "Mon - Fri",
+        hours_day2: "",
+        day_sat_sun: "Sat - Sun",
+        closed: "Closed",
+        hours_secretary_title: "Reception Hours",
+        hours_secretary_desc: "For phone appointments and information.",
 
         // Footer
         link_privacy: "Privacy Policy",
@@ -449,7 +525,7 @@ const translations = {
         faq_q2: "Can I come without an appointment?",
         faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book via Doctolib, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
         faq_q3: "What are the clinic opening hours?",
-        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday, Wednesday, Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600;'>Tuesday, Thursday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>10:00 - 13:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
+        faq_a3: "<table style='width:100%; border-collapse: collapse;'><tr><td style='padding: 6px 0; font-weight: 600;'>Monday - Friday</td><td style='text-align:right; color: var(--text-dark); font-weight: 700;'>09:30 - 12:30 · 16:00 - 19:00</td></tr><tr><td style='padding: 6px 0; font-weight: 600; color: var(--danger);'>Saturday - Sunday</td><td style='text-align:right; color: var(--danger);'>Closed</td></tr></table><div class='highlight-box'><strong>Address:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo</div>",
         faq_q4: "How do I cancel or reschedule an appointment?",
         faq_a4: "To <strong>modify or cancel</strong> an appointment, open your confirmation in the Doctolib app or log in to your account at Doctolib.it.<br><br>Alternatively, call reception on <strong>0575 910 904</strong> with reasonable notice.",
         faq_q5: "How do I request a prescription for my regular medications?",
@@ -524,7 +600,7 @@ const translations = {
         qa_doctolib_label: 'Open Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'The practice is closed from 6 to 14 August 2026. I will be back on 17 August. 🚨 Urgencies: On-Call Doctor (Guardia Medica) 116 117 — Emergencies: 112.',
+        doctolib_banner_text: 'Bookings and prescriptions via Doctolib. For urgent needs: Out-of-Hours Service 116 117 — Emergencies: 112.',
         doctolib_modal_title: 'Important Notice',
         doctolib_modal_text: 'Dear Patients, warm regards.<br><br>I would like to inform you about the upcoming changes to the practice:<br><br><strong>6 – 7 August (day before and public holiday)</strong><br>The practice is closed. The On-Call Doctor (Guardia Medica) is available 24/7 at 116 117.<br><br><strong>10 – 14 August</strong><br>I will be on holiday. My practice colleagues will assist you by contacting the secretariat at 0575 910904.<br><br><strong>From 17 August</strong><br>I will be back in the practice as usual.<br><br>🚨 <strong>Urgencies, night, weekends and public holidays</strong><br>On weekends, public holidays and at night, general practitioners are not on duty. For any urgency on these days — or if the secretariat does not answer — the On-Call Doctor (Guardia Medica) is always available 24/7 at 116 117. For emergencies, 112.<br><br>📌 <strong>Appointments and requests</strong><br>Book or write to me on Doctolib, or call the secretariat at 0575 910904.<br><br>Have a restful holiday, everyone.<br><br>Dr. Emanuel Savianu<br><em>General Practitioner</em>',
         doctolib_modal_btn: 'I understand',
@@ -629,7 +705,7 @@ function trapFocus(modal) {
     const slots = SCHEDULE[day] || [];
     const isOpen = slots.some(s => hour >= s.from && hour < s.to);
 
-    const anchor = document.querySelector('[data-i18n="secretary_hours_label"]');
+    const anchor = document.querySelector('[data-badge-anchor]');
     if (!anchor) return;
     const badge = document.createElement('span');
     badge.className = isOpen ? 'badge-open' : 'badge-closed';
@@ -649,8 +725,45 @@ function trapFocus(modal) {
     if (!banner || !textEl) return;
     var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
     var t = translations[lang] || translations['it'];
-    textEl.innerHTML = t.doctolib_banner_text;
+
+    // Config-driven absence note takes priority, translation is the fallback
+    if (typeof CONFIG !== 'undefined' && CONFIG.getActiveAbsence) {
+        const active = CONFIG.getActiveAbsence();
+        if (active) {
+            textEl.textContent = active.note;
+            return;
+        }
+    }
+    textEl.textContent = t.doctolib_banner_text;
 })();
+
+// --- FERIE BANNER LOGIC ---
+(function() {
+    if (typeof CONFIG === 'undefined') return;
+    const banner = document.getElementById('ferie-banner');
+    const textEl = document.getElementById('ferie-banner-text');
+    if (!banner || !textEl) return;
+
+    const active = CONFIG.getActiveAbsence();
+
+    if (!active) return;
+
+    try {
+        if (sessionStorage.getItem('ferie-dismissed-' + active.from)) return;
+    } catch(e) {}
+
+    textEl.textContent = active.note;
+    banner.removeAttribute('hidden');
+})();
+
+function dismissFerieBanner() {
+    const banner = document.getElementById('ferie-banner');
+    if (banner) banner.setAttribute('hidden', '');
+    try {
+        const active = CONFIG.getActiveAbsence();
+        if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
+    } catch(e) {}
+}
 
 // --- DOCTOLIB WELCOME MODAL ---
 function closeDoctolibModal() {
@@ -757,6 +870,127 @@ function renderFlowStep(stepKey) {
             </div>`;
     }
 }
+
+// --- UNIFIED ACCORDION LOGIC ---
+function toggleAccordion(header) {
+    const content = header.nextElementSibling;
+    const activeClass = 'active';
+    const openClass = 'open';
+
+    const isActive = header.classList.contains(activeClass) || header.classList.contains(openClass);
+
+    // Close all accordions on the page for exclusivity
+    document.querySelectorAll('.accordion-header').forEach(h => {
+        h.classList.remove(activeClass, openClass);
+        h.setAttribute('aria-expanded', 'false');
+        if (h.nextElementSibling) {
+            h.nextElementSibling.classList.remove(activeClass, openClass);
+            // Some old styles might use display: none/block
+            if (h.nextElementSibling.style.display === 'block') {
+                h.nextElementSibling.style.display = 'none';
+            }
+        }
+    });
+
+    if (!isActive) {
+        header.classList.add(activeClass, openClass);
+        header.setAttribute('aria-expanded', 'true');
+        if (content) {
+            content.classList.add(activeClass, openClass);
+        }
+    }
+}
+
+// Map toggleFaq to the same unified logic
+const toggleFaq = toggleAccordion;
+
+// --- BACK TO TOP ---
+function initBackToTop() {
+    // Avoid double injection
+    if (document.querySelector('.back-to-top')) return;
+
+    const btn = document.createElement('button');
+    btn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    btn.className = 'back-to-top';
+    btn.setAttribute('aria-label', 'Torna all\'inizio');
+    btn.setAttribute('title', 'Torna all\'inizio della pagina');
+    document.body.appendChild(btn);
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 400) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    });
+
+    btn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+}
+
+// --- LIVE FILTERS ---
+function initGlobalFilters() {
+    // 1. Filter for colleghi/index.html "Strumenti e Risorse"
+    initLiveFilter('search-tools', '.tools-grid-auto a', 'span');
+
+    // 2. Filter for ssn/faq.html
+    initLiveFilter('search-faq', '.accordion-item', '.accordion-header span', '.faq-category');
+
+    // 3. Filter for ssn/esenzioni.html
+    initLiveFilter('search-esenzioni', '.exemption-table tr:not(:first-child)', '', '.section-block');
+
+    // 4. Filter for ssn/impegnative.html
+    initLiveFilter('search-impegnative', '.branch-table tr:not(:first-child)', '', '.section-block');
+}
+
+function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelector) {
+    const input = document.getElementById(inputId);
+    if (!input) return;
+
+    input.addEventListener('input', function() {
+        const term = this.value.toLowerCase().trim();
+        const items = document.querySelectorAll(itemsSelector);
+
+        items.forEach(item => {
+            const textElement = textSelector ? item.querySelector(textSelector) : item;
+            const text = textElement ? textElement.textContent.toLowerCase() : '';
+
+            if (text.includes(term)) {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // Optional: show/hide sections/categories if all their items are hidden
+        if (parentToHideSelector) {
+            document.querySelectorAll(parentToHideSelector).forEach(parent => {
+                const hasVisible = Array.from(parent.querySelectorAll(itemsSelector)).some(i => i.style.display !== 'none');
+                parent.style.display = hasVisible ? '' : 'none';
+            });
+        }
+    });
+}
+
+// --- PRIVATE VISIT TYPE SELECTOR (Google Calendar) ---
+function selectVisitType(type, url) {
+    // Highlight selected button
+    document.querySelectorAll('.btn-cal-service').forEach(function(btn) {
+        btn.classList.remove('selected');
+    });
+    var activeBtn = document.querySelector('.btn-cal-service.' + type);
+    if (activeBtn) activeBtn.classList.add('selected');
+
+    // Open calendar directly
+    window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+// --- GLOBAL INIT ON LOAD ---
+window.addEventListener('load', function() {
+    initBackToTop();
+    initGlobalFilters();
+});
 
 
 
