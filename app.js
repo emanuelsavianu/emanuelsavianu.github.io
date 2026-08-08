@@ -308,6 +308,7 @@ export const translations = {
         triage_colleghi_title: "Colleghi",
         triage_colleghi_desc: "Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.",
         triage_cta: "Entra",
+        triage_section_label: "Scegli la tua area",
 
         // Alert box (index.html)
         alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Benvenuti</strong> nello Studio Medico Ippocrate — Dott. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
@@ -365,6 +366,8 @@ export const translations = {
         label_doctor: "Tel. Personale (Solo Urgenze)",
         label_address: "Studio Medico Ippocrate",
         label_email: "Email",
+        label_via_doctolib: "tramite Doctolib",
+        label_address_value: "Piazza Saione 3, Arezzo",
 
         // Hours
         hours_lun_ven: "Lun - Ven",
@@ -566,6 +569,7 @@ export const translations = {
         triage_colleghi_title: "Colleagues",
         triage_colleghi_desc: "Reserved area for professionals: tools, protocols, regulations and service applications.",
         triage_cta: "Enter",
+        triage_section_label: "Choose your area",
 
         // Alert box (index.html)
         alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Welcome</strong> to Studio Medico Ippocrate — Dr. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
@@ -625,6 +629,8 @@ export const translations = {
         label_doctor: "Personal Phone (Emergencies only)",
         label_address: "Studio Medico Ippocrate",
         label_email: "Email",
+        label_via_doctolib: "via Doctolib",
+        label_address_value: "Piazza Saione 3, Arezzo",
 
         // Hours
         hours_lun_ven: "Mon - Fri",
