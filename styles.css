@@ -1576,7 +1576,8 @@ body.dark-mode .triage-card-cta { color: var(--accent); }
 body.dark-mode .guide-grid a i { color: var(--accent); }
 
 /* --- SITE-NAV / SITE-FOOTER COMPONENTS --- */
-site-nav, site-footer { display: block; }
+/* align-self: stretch makes the custom elements span the full cross-axis width on pages whose body is a centered flex column; inert on normal block-body pages */
+site-nav, site-footer { display: block; align-self: stretch; }
 
 .brand-name {
     font-family: var(--font-serif);
