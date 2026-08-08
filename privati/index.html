@@ -210,7 +210,7 @@
             flex-shrink: 0;
         }
 
-        /* Calendar iframe wrapper */
+        /* Google Calendar booking button wrapper */
         .calendar-frame {
             border: 1px solid var(--border-color);
             border-radius: var(--radius-lg);
@@ -219,16 +219,9 @@
             background: var(--white);
             position: relative;
             width: 100%;
-            height: 900px;
-        }
-        .calendar-frame iframe {
-            width: 100%;
-            height: 100%;
-            border: 0;
-            display: block;
-        }
-        @media (max-width: 600px) {
-            .calendar-frame { height: 750px; }
+            display: flex;
+            justify-content: center;
+            padding: 48px 24px;
         }
 
         /* ── Entrance animations ── */
@@ -790,11 +783,23 @@
             <h2 class="booking-title">Scegli giorno e orario disponibile</h2>
 
             <div class="calendar-frame">
-                <iframe
-                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ1B_CFbVVkgJyLRQHZbycem1FEBy-DRubtJQrIvxm9DBt80Sm2jwvR6W2I73m1qEpjLLsstVXh5?gv=true"
-                    frameborder="0"
-                    title="Calendario prenotazioni visite private">
-                </iframe>
+                <!-- Google Calendar Appointment Scheduling begin -->
+                <link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+                <script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+                <script>
+                (function() {
+                  var target = document.currentScript;
+                  window.addEventListener('load', function() {
+                    calendar.schedulingButton.load({
+                      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1B_CFbVVkgJyLRQHZbycem1FEBy-DRubtJQrIvxm9DBt80Sm2jwvR6W2I73m1qEpjLLsstVXh5?gv=true',
+                      color: '#D50000',
+                      label: document.documentElement.lang === 'en' ? 'Book an appointment' : 'Fissa un appuntamento',
+                      target,
+                    });
+                  });
+                })();
+                </script>
+                <!-- end Google Calendar Appointment Scheduling -->
             </div>
 
         </section>
