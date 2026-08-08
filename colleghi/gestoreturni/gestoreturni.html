@@ -175,6 +175,17 @@
     #onboarding-wizard #wizard-step-content {
       animation: wizard-pop 0.25s ease-out;
     }
+
+    /* --- Mobile input polish (Task 3.2) --- */
+    #cal-container, #settings-content { overflow-x: auto; }
+    #cal-grid { touch-action: pan-x pan-y; }
+    #settings-modal button,
+    #unavailability-modal button,
+    #assign-dropdown button,
+    #cal-container button {
+      min-height: 44px;
+      min-width: 44px;
+    }
   </style>
 </head>
 <body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
@@ -316,11 +327,11 @@
         <div class="flex gap-2 mb-3">
           <div class="flex-1">
             <label class="text-xs text-slate-500 font-medium">Dal</label>
-            <input id="unavail-from" type="date" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
+            <input id="unavail-from" type="date" min="2020-01-01" max="2099-12-31" style="min-height:44px" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
           </div>
           <div class="flex-1">
             <label class="text-xs text-slate-500 font-medium">Al</label>
-            <input id="unavail-to" type="date" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
+            <input id="unavail-to" type="date" min="2020-01-01" max="2099-12-31" style="min-height:44px" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand-400 mt-1">
           </div>
         </div>
         <div class="flex gap-2 mb-3">
@@ -395,6 +406,6 @@
   </div>
 </div>
 
-<script src="app.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>
