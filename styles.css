@@ -173,6 +173,17 @@ body.dark-mode header::after { background: rgba(10, 22, 40, 0.9); }
 
 .header-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
 
+.brand-wrap {
+    display: flex; align-items: center; justify-content: center;
+    gap: 24px; max-width: 900px; margin: 0 auto;
+}
+.brand-logo {
+    width: 96px; height: 96px; border-radius: 14px;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+    flex-shrink: 0;
+}
+.brand-text { text-align: left; }
+
 header h1 { 
     font-family: var(--font-serif);
     font-size: clamp(2.5rem, 6vw, 4rem);
@@ -220,6 +231,10 @@ header p {
         overflow: visible; /* allow translate dropdown to escape if it opens upward */
     }
     body .header-content { order: 1; width: 100%; }
+
+    body .brand-wrap { flex-direction: column; gap: 16px; }
+    body .brand-logo { width: 70px; height: 70px; }
+    body .brand-text { text-align: center; }
 
     body .lang-switch {
         order: 2;

@@ -29,14 +29,9 @@ class SiteNav extends HTMLElement {
     const isRoot = section === 'root';
     const brandTag = isRoot ? 'h1' : 'div';
 
-    // Top banners + skip link (patient pages get the full set)
+    // Skip link
     const skipLink =
       '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>';
-    const banners = isPatient
-      ? '<div id="doctolib-banner"><i class="fas fa-info-circle" aria-hidden="true"></i><span id="doctolib-banner-text"></span></div>' +
-        '<div id="ferie-banner" hidden><i class="fas fa-info-circle" aria-hidden="true"></i><span id="ferie-banner-text"></span><button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">&times;</button></div>' +
-        '<div id="large-text-banner"><span id="large-text-banner-label">&#128276; Difficoltà a leggere?</span><button class="large-text-btn" id="large-text-toggle-btn" onclick="toggleLargeText()" aria-pressed="false">A+ Testo Grande</button></div>'
-      : '<div id="ferie-banner" hidden><i class="fas fa-info-circle" aria-hidden="true"></i><span id="ferie-banner-text"></span><button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">&times;</button></div>';
 
     // Language/control switch
     const controls = isPatient
@@ -66,10 +61,15 @@ class SiteNav extends HTMLElement {
       '<a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> Segreteria: 0575 910 904</a>';
 
     const brand =
-      '<' + brandTag + ' class="brand-name">Dott. Savianu Emanuel</' + brandTag + '>' +
-      '<p class="brand-sub">STUDIO MEDICO IPPOCRATE</p>' +
-      '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
-      phone;
+      '<div class="brand-wrap">' +
+        '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" fetchpriority="high" decoding="async">' +
+        '<div class="brand-text">' +
+          '<' + brandTag + ' class="brand-name">Dott. Savianu Emanuel</' + brandTag + '>' +
+          '<p class="brand-sub">STUDIO MEDICO IPPOCRATE</p>' +
+          '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
+          phone +
+        '</div>' +
+      '</div>';
 
     this.insertAdjacentHTML('beforebegin', skipLink + banners);
     this.innerHTML =
