@@ -413,27 +413,12 @@
 </head>
 <body>
 
-<div id="ferie-banner" hidden>
-    <i class="fas fa-info-circle" aria-hidden="true"></i>
-    <span id="ferie-banner-text"></span>
-    <button id="ferie-banner-close" onclick="dismissFerieBanner()" aria-label="Chiudi avviso">×</button>
-</div>
-
-<a href="#main-content" class="skip-link">Vai al contenuto principale</a>
-
-<header role="banner">
-    <nav class="lang-switch" aria-label="Language selector">
-        <button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
-    </nav>
-    <div class="header-content">
-        <h1 style="margin-bottom: 0;">Dott. Savianu Emanuel</h1>
-        <p style="font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; font-size: 1.1rem; color: var(--accent); margin-bottom: 5px;">STUDIO MEDICO IPPOCRATE</p>
-        <p data-i18n="header_subtitle">Medico di Medicina Generale — Arezzo</p>
-        <a href="tel:+390575910904" class="btn-telefono-header">
-            <i class="fas fa-phone-alt"></i> Segreteria: 0575 910 904
-        </a>
+<site-nav data-section="colleghi">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
-</header>
+</site-nav>
 
 <div class="container" id="main-content">
     <main role="main" style="grid-column: 1 / -1;">
@@ -450,7 +435,7 @@
         <section class="card split-hero" aria-label="Seleziona il portale">
             <div class="card-header">
                 <i class="fas fa-door-open" aria-hidden="true"></i>
-                <h2>Benvenuto — Seleziona il portale</h2>
+                <h1>Benvenuto — Seleziona il portale</h1>
             </div>
             <div class="action-grid">
                 <a href="../ssn/index.html"
@@ -1153,15 +1138,11 @@
     </main>
 </div>
 
-<footer role="contentinfo">
-    <div class="footer-content">
-        <p>© <span id="current-year">2026</span> — Dr. Savianu Emanuel · Studio Medico Ippocrate, Arezzo</p>
-        <nav style="margin-top: 10px;">
-            <a href="../ssn/index.html" target="_blank" rel="noopener noreferrer">Sito Pazienti</a> ·
-            <a href="../privacy.html">Privacy Policy</a>
-        </nav>
-    </div>
-</footer>
+<site-footer data-section="colleghi">
+    <footer role="contentinfo">
+        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+    </footer>
+</site-footer>
 
 <script src="../config.js?v=2"></script>
 <script src="../app.js?v=17"></script>
