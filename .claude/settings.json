@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "node .claude/scripts/bump-sw.js"
+            "command": "node .claude/scripts/bump-sw.mjs"
           }
         ]
       }
