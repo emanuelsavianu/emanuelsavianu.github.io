@@ -1112,14 +1112,10 @@ body.dark-mode .flow-warning { background: #3a2e00; color: #ffd060; border-color
 body.dark-mode #faq-search { background: var(--bg-gradient-2); color: var(--text-dark); }
 
 /* --- CHECKLIST --- */
-/* Reset <button> browser defaults without breaking existing .btn-cal-service layout */
-.btn-cal-service {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-family: var(--font-sans);
-    /* padding and width already set by the existing .btn-cal-service rule — do not override here */
-}
+/* NOTE: the former global .btn-cal-service reset (background:none; border:none) was
+   removed — it overrode the calendar-button styling in the cascade. Buttons using
+   this class keep the styled rule above; any future <button> checklist element must
+   use a distinct class. */
 .btn-cal-service.selected {
     outline: 3px solid var(--accent);
     border-radius: var(--radius-lg);
@@ -1568,6 +1564,7 @@ site-nav, site-footer { display: block; align-self: stretch; }
     min-width: 44px; min-height: 44px; font-size: 1.2rem; cursor: pointer;
 }
 @media (max-width: 900px) {
+    .site-nav { overflow: visible; } /* let the absolute nav-menu dropdown escape the flex row */
     .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
     .nav-menu {
         display: none; position: absolute; top: 100%; left: 0; right: 0;
