@@ -253,10 +253,14 @@ header p {
     padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     display: flex; gap: 10px; align-items: center;
 }
-/* Mobile: de-absolutify and show as a compact strip at the bottom of the header. */
+/* Mobile: de-absolutify the strip; it flows at the top of site-nav, above the header. */
 @media (max-width: 599px) {
+    /* Spacing that used to ride on the strip's (now reset) margin-top;
+       padding here prevents margin-collapse through site-nav. */
+    site-nav { padding-top: 18px; }
+
     body header {
-        padding: 20px 20px 80px;
+        padding: 20px 20px 28px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -264,15 +268,26 @@ header p {
     }
     body .header-content { order: 1; width: 100%; }
 
-    body .brand-wrap { flex-direction: column; gap: 16px; }
+    body .brand-wrap { flex-direction: column; gap: 10px; }
     body .brand-logo { width: 70px; height: 70px; }
     body .brand-text { text-align: center; }
 
+    body .brand-name {
+        font-size: clamp(1.6rem, 5vw, 2.2rem); /* single line at phone widths */
+        line-height: 1.15;
+    }
+    body .brand-tagline { font-size: 0.82rem; margin-bottom: 12px; }
+    body .btn-telefono-header {
+        font-size: 0.95rem;
+        padding: 11px 22px;
+        white-space: nowrap;
+    }
+
     body .lang-switch {
-        order: 2;
-        position: relative;       /* exits absolute flow, becomes a flex item */
+        top: auto; right: auto; left: auto; /* clear desktop absolute offsets */
+        margin-top: 0;
+        position: relative;       /* exits absolute flow, becomes a block-level strip */
         z-index: 3;               /* above header::after overlay (z-index:1) */
-        margin-top: 18px;
         padding: 8px 14px;
         border-radius: 30px;
         gap: 8px;
@@ -1659,7 +1674,9 @@ body.dark-mode .page-hero .hero-eyebrow { color: var(--color-accent); }
         linear-gradient(90deg, rgba(10, 22, 40, 0) 84%, rgba(10, 22, 40, 0.92) 100%),
         linear-gradient(180deg, rgba(10, 22, 40, 0.6) 0%, rgba(26, 47, 76, 0.4) 55%, rgba(26, 47, 76, 0.2) 100%);
     position: relative;
-    width: 100%;
+    width: 100%; /* keep the photo full-bleed: without this, min/max-height
+                    + aspect-ratio transfer the height back into width
+                    (hero rendered ~28px narrower than the viewport) */
     max-width: 100%;
     aspect-ratio: 4 / 3;
     min-height: 260px;
@@ -1740,6 +1757,9 @@ body.dark-mode .page-hero--media .hero-title { color: #ffffff; }
 body.dark-mode .hero-info-bar { background: #0e1a2e; }
 body.dark-mode .hero-info-bar .hero-hours { color: #dfe5ec; }
 
+@media (max-width: 1023px) {
+    .page-hero--media { max-height: none; }
+}
 @media (min-width: 600px) {
     .page-hero--media { aspect-ratio: 16 / 9; }
 }
