@@ -36,6 +36,7 @@
     gap:18px;
     margin-bottom:18px;
     align-items:flex-start;
+    min-width:0; /* allow shrinking below content min-width on small screens */
   }
   .step-num {
     width:36px; height:36px; flex-shrink:0;
@@ -45,7 +46,7 @@
     display:flex; align-items:center; justify-content:center;
     font-weight:900; font-size:1rem;
   }
-  .step-body { flex:1; padding-top:5px; }
+  .step-body { flex:1; min-width:0; padding-top:5px; }
   .step-body strong { display:block; font-size:1rem; color:#1c1917; margin-bottom:4px; }
   .step-body p { margin:0; font-size:.95rem; }
 
@@ -83,6 +84,7 @@
     gap:14px;
     align-items:flex-start;
   }
+  .box > div { min-width:0; } /* allow content to shrink; pre inside scrolls */
   .box.info    { background:#eff6ff; border-left:4px solid #3b82f6; }
   .box.warning { background:#fffbeb; border-left:4px solid #f59e0b; }
   .box.success { background:#f0fdf9; border-left:4px solid var(--accent); }
@@ -93,6 +95,7 @@
   .box strong  { color:#1c1917; }
 
   /* URL table */
+  .table-scroll { overflow-x:auto; }
   .url-table { width:100%; border-collapse:collapse; margin:16px 0; }
   .url-table th { background:var(--primary); color:white; padding:10px 14px; text-align:left; font-size:.85rem; text-transform:uppercase; letter-spacing:.5px; }
   .url-table td { padding:10px 14px; border-bottom:1px solid #e5e7eb; font-size:.95rem; }
@@ -126,6 +129,7 @@
     font-size:.82rem;
     margin:10px 0 16px;
     line-height:1.7;
+    overflow-x:auto; /* keep long ASCII tables inside the viewport */
   }
   .pm2-output .green  { color:#4ade80; }
   .pm2-output .yellow { color:#facc15; }
@@ -440,6 +444,7 @@ Scheda Ethernet Connessione alla rete locale (LAN):<br>
 &nbsp;&nbsp; Gateway predefinito . . . . . . . . . : 192.168.0.7
   </div>
 
+  <div class="table-scroll">
   <table class="url-table">
     <thead>
       <tr>
@@ -476,6 +481,7 @@ Scheda Ethernet Connessione alla rete locale (LAN):<br>
       </tr>
     </tbody>
   </table>
+  </div>
 
   <div class="box warning">
     <span class="box-icon">💡</span>

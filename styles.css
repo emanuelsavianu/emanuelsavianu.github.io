@@ -1287,7 +1287,7 @@ body.dark-mode .quick-actions-bar {
 }
 #sw-update-toast .sw-toast-btn:hover { opacity: 0.85; }
 body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
-@media (max-width: 768px) { #sw-update-toast { bottom: 84px; font-size: 0.8rem; } }
+@media (max-width: 768px) { #sw-update-toast { bottom: 84px; font-size: 0.8rem; white-space: normal; max-width: calc(100vw - 20px); text-align: center; } }
 @media (prefers-reduced-motion: reduce) { #sw-update-toast { transition: opacity 0.01ms; } }
 
 
