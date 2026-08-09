@@ -313,6 +313,26 @@ header p {
     #google_translate_element .goog-te-gadget-simple span { font-size: 0.9rem !important; }
 }
 
+/* Root page (index.html): the brand header is removed, so the photo hero is the
+   masthead. Float the lang/controls strip over the hero's top-right corner,
+   just below the nav row (site-nav's bottom edge). Inactive below 600px, where
+   the mobile strip rules above flow it as a normal block. */
+@media (min-width: 600px) {
+    site-nav[data-section="root"] .lang-switch {
+        position: absolute;
+        top: 100%;
+        right: 20px;
+        margin-top: 14px;
+        z-index: 60;
+        background: rgba(26, 47, 76, 0.55);
+        border-color: rgba(194, 155, 87, 0.5);
+    }
+}
+
+/* Root page: nav row sits directly under the header-info bar, whose gold
+   border-bottom would double up with the nav row's gold border-top. */
+site-nav[data-section="root"] .site-nav { border-top: none; }
+
 .lang-btn {
     background: none; border: none; color: rgba(255, 255, 255, 0.7);
     font-weight: 600; cursor: pointer; font-size: 0.9rem;

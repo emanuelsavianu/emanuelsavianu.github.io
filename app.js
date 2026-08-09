@@ -80,11 +80,13 @@ class SiteNav extends HTMLElement {
       '</div>';
 
     this.insertAdjacentHTML('beforebegin', skipLink + infoBar);
+    // Root page (index.html): no brand header — the photo hero is the masthead.
+    // All other sections keep the navy brand header with logo/name/phone.
     this.innerHTML =
       '<nav class="lang-switch" aria-label="' + (isPatient ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
-      '<header role="banner">' +
+      (isRoot ? '' : '<header role="banner">' +
         '<div class="header-content">' + brand + '</div>' +
-      '</header>' +
+      '</header>') +
       (section !== 'static' ? navRow : '');
 
     if (isPatient && this.dataset.noFloat !== '1') {
