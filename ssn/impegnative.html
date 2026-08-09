@@ -13,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="../styles.css?v=34">
+    <link rel="stylesheet" href="../styles.css?v=35">
 
     <style>
         :root {
@@ -174,6 +174,7 @@
         body.dark-mode .priority-card p { color: rgba(255,255,255,0.55); }
 
         /* Tabella branche */
+        .table-scroll { overflow-x: auto; }
         .branch-table {
             width: 100%;
             border-collapse: collapse;
@@ -369,6 +370,7 @@
             <div class="section-body">
                 <p>Non tutte le visite specialistiche richiedono l'impegnativa del medico di base. In Toscana alcune branche specialistiche hanno un canale di <strong>accesso diretto</strong>:</p>
 
+                <div class="table-scroll">
                 <table class="branch-table">
                     <thead>
                         <tr>
@@ -381,7 +383,7 @@
                         <tr>
                             <td><strong>Medicina Generale (MMG)</strong></td>
                             <td><span class="badge-direct">Accesso Diretto</span></td>
-                            <td>Sei già iscritto — prenota tramite MilleBook</td>
+                            <td>Sei già iscritto — prenota su Doctolib</td>
                         </tr>
                         <tr>
                             <td><strong>Cardiologia</strong></td>
@@ -455,6 +457,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <p style="font-size: 0.82rem; color: var(--text-medium); margin-top: 8px;">Le modalità di accesso diretto possono variare per singola ASL e si aggiornano periodicamente. Verifica sempre con il CUP prima di prenotare.</p>
             </div>
         </div>
