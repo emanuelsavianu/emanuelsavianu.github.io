@@ -28,27 +28,26 @@ export function getEasterMondayDate(year) {
   return new Date(easter.getFullYear(), easter.getMonth(), easter.getDate() + 1);
 }
 
+// Fixed-date holidays keyed by month index (0 = January)
+const FIXED_HOLIDAYS = {
+  0: [1, 6],        // Capodanno, Epifania
+  3: [25],          // Liberazione
+  4: [1],           // Festa del Lavoro
+  5: [2, 24],       // Festa della Repubblica, San Giovanni (Firenze patrono)
+  7: [15],          // Ferragosto
+  10: [1],          // Ognissanti
+  11: [8, 25, 26],  // Immacolata, Natale, Santo Stefano
+};
+
 /**
  * Check if a date is an official Italian public holiday.
  * @param {Date} date
  * @returns {boolean}
  */
 export function isItalianHoliday(date) {
-  const d = date.getDate(), m = date.getMonth(), y = date.getFullYear();
-  if (m === 0 && d === 1) return true;   // Capodanno
-  if (m === 0 && d === 6) return true;   // Epifania
-  if (m === 3 && d === 25) return true;  // Liberazione
-  if (m === 4 && d === 1) return true;   // Festa del Lavoro
-  if (m === 5 && d === 2) return true;   // Festa della Repubblica
-  if (m === 5 && d === 24) return true;  // San Giovanni (Firenze patrono)
-  if (m === 7 && d === 15) return true;  // Ferragosto
-  if (m === 10 && d === 1) return true;  // Ognissanti
-  if (m === 11 && d === 8) return true;  // Immacolata
-  if (m === 11 && d === 25) return true; // Natale
-  if (m === 11 && d === 26) return true; // Santo Stefano
-  const easter = getEasterDate(y);
-  const easterMon = getEasterMondayDate(y);
-  if (date.getTime() === easter.getTime()) return true;
-  if (date.getTime() === easterMon.getTime()) return true;
-  return false;
+  const fixed = FIXED_HOLIDAYS[date.getMonth()];
+  if (fixed && fixed.includes(date.getDate())) return true;
+  const easter = getEasterDate(date.getFullYear());
+  const easterMon = getEasterMondayDate(date.getFullYear());
+  return date.getTime() === easter.getTime() || date.getTime() === easterMon.getTime();
 }

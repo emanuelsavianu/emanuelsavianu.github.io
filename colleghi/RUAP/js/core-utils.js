@@ -135,15 +135,13 @@ export function isDoctorAvailableForSlot(doctor, dateKey, slotKey) {
   const d = new Date(dateKey + 'T00:00:00');
   if (d.getDay() === 0 || d.getDay() === 6) return false;
   if (isItalianHoliday(d)) return false;
-  const dayMap = { 1: 'lun', 2: 'mar', 3: 'mer', 4: 'gio', 5: 'ven' };
-  const dayKey = dayMap[d.getDay()];
-  if (!dayKey) return false;
+  const dayKey = DAY_KEYS[d.getDay() - 1];
   const avail = doctor.availability[dayKey];
   if (!avail) return false;
   return avail[slotKey] === true;
 }
 
-export function sumSlotHours(SLOTS, PLACES, assignments, predicate) {
+function sumSlotHours(SLOTS, PLACES, assignments, predicate) {
   let hours = 0;
   SLOTS.forEach(slot => {
     PLACES.forEach(place => {

@@ -45,14 +45,21 @@ import {
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
 // ====================================================
+
+function shiftMonth(delta) {
+  state.calMonth += delta;
+  if (state.calMonth < 0) { state.calMonth = 11; state.calYear--; }
+  else if (state.calMonth > 11) { state.calMonth = 0; state.calYear++; }
+}
+
 document.addEventListener('keydown', (e) => {
   const tag = e.target.tagName;
   if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target.isContentEditable) return;
   const mod = e.ctrlKey || e.metaKey;
   if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
   if (mod && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) { e.preventDefault(); redo(); }
-  if (e.key === 'ArrowLeft' && mod) { e.preventDefault(); state.calMonth--; if (state.calMonth < 0) { state.calMonth = 11; state.calYear--; } renderAll(); }
-  if (e.key === 'ArrowRight' && mod) { e.preventDefault(); state.calMonth++; if (state.calMonth > 11) { state.calMonth = 0; state.calYear++; } renderAll(); }
+  if (e.key === 'ArrowLeft' && mod) { e.preventDefault(); shiftMonth(-1); renderAll(); }
+  if (e.key === 'ArrowRight' && mod) { e.preventDefault(); shiftMonth(1); renderAll(); }
   if (e.key === 'Escape') { closeAssignDropdown(); closeDoctorModal(); closeConflictModal(); closeInstructions(); }
 });
 
@@ -171,7 +178,7 @@ el('btn-oggi')?.addEventListener('click', () => {
   toast('Tornato a oggi', 'info');
 });
 
-// --- Delegated click handler on cal-grid (fallback per slot-btn) ---
+// --- Delegated click handler on cal-grid (single wiring for slot buttons) ---
 el('cal-grid')?.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-slot-key]');
   if (!btn) return;
@@ -182,7 +189,8 @@ el('cal-grid')?.addEventListener('click', (e) => {
   if (!slotKey || !dateKey || !place || !slotType) return;
   const slot = SLOTS.find(s => s.key === slotType);
   if (!slot) return;
-  openAssignDropdown(e, slotKey, slot, dateKey, place, btn.getBoundingClientRect());
+  e.stopPropagation();
+  openAssignDropdown(slotKey, slot, dateKey, place, btn.getBoundingClientRect());
 });
 
 // --- Calendar navigation ---
@@ -191,8 +199,7 @@ el('cal-prev')?.addEventListener('click', () => {
     state.calendarWeekStart.setDate(state.calendarWeekStart.getDate() - 7);
     state.sidebarWeekStart = new Date(state.calendarWeekStart);
   } else {
-    state.calMonth--;
-    if (state.calMonth < 0) { state.calMonth = 11; state.calYear--; }
+    shiftMonth(-1);
   }
   renderAll();
 });
@@ -201,8 +208,7 @@ el('cal-next')?.addEventListener('click', () => {
     state.calendarWeekStart.setDate(state.calendarWeekStart.getDate() + 7);
     state.sidebarWeekStart = new Date(state.calendarWeekStart);
   } else {
-    state.calMonth++;
-    if (state.calMonth > 11) { state.calMonth = 0; state.calYear++; }
+    shiftMonth(1);
   }
   renderAll();
 });
@@ -246,7 +252,7 @@ window.toggleHideZeroDocs = toggleHideZeroDocs;
 // Update banner — shown when config.js data changes
 // ====================================================
 
-function acceptConfigUpdate(version) {
+function seedStateFromConfig() {
   state.doctors = getDefaultDoctors();
   if (typeof CONFIG !== 'undefined' && CONFIG.places) state.places = [...CONFIG.places];
   if (typeof CONFIG !== 'undefined' && CONFIG.slots) state.slots = CONFIG.slots.map(s => ({...s}));
@@ -256,6 +262,10 @@ function acceptConfigUpdate(version) {
       if (state.doctors.some(d => d.id === docId)) state.assignments[key] = docId;
     });
   }
+}
+
+function acceptConfigUpdate(version) {
+  seedStateFromConfig();
   saveToStorage();
   clearHistory();
   if (version) localStorage.setItem(CONFIG_DATA_KEY, version);
@@ -314,13 +324,7 @@ function init() {
     const now = new Date();
     state.calYear = now.getFullYear();
     state.calMonth = now.getMonth();
-    state.doctors = getDefaultDoctors();
-    if (typeof CONFIG !== 'undefined' && CONFIG.places) state.places = [...CONFIG.places];
-    if (typeof CONFIG !== 'undefined' && CONFIG.assignments) {
-      Object.entries(CONFIG.assignments).forEach(([key, docId]) => {
-        if (state.doctors.some(d => d.id === docId)) state.assignments[key] = docId;
-      });
-    }
+    seedStateFromConfig();
     saveToStorage();
     if (configDataVersion) localStorage.setItem(CONFIG_DATA_KEY, configDataVersion);
     el('demo-banner')?.classList.remove('hidden');
