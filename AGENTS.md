@@ -14,6 +14,7 @@ Static HTML/CSS/JS medical practice site (no build step) on GitHub Pages + Cloud
 
 ## Verification (run before claiming done)
 
+- `npm test` (alias `node tools/run-all-checks.mjs`) — runs ALL of the below in one shot: JS syntax, link integrity, i18n parity, SW precache sync. Exit code 0 = all pass.
 - `node tools/check-links.mjs` — broken relative links (after any move/rename/link edit)
 - `node tools/check-i18n.mjs` — IT/EN key parity + `data-i18n` coverage
 - `node --check app.js` / `node --check config.js` — JS syntax
@@ -24,7 +25,7 @@ Static HTML/CSS/JS medical practice site (no build step) on GitHub Pages + Cloud
 
 - **Relative paths everywhere**: from `ssn/`, `privati/`, `colleghi/` use `../` for root assets (`../styles.css`, `../app.js`, `../index.html`, `../privacy.html`). No root-absolute internal links. `config.js` has no page script tag — `app.js` imports it as an ES module.
 - **i18n**: every user-facing string on landing/`ssn/*`/`privati/*` uses `data-i18n` with BOTH `it` and `en` keys in `app.js`; keep the blocks' exact key indentation (8 spaces) — `tools/check-i18n.mjs` parses app.js textually. Colleghi pages: Italian-only, no ITA/ENG toggle, no Google Translate widget. Google Translate init script must load AFTER the `app.js` module tag.
-- **Cache-busting `?v=N`**: one consistent version per file across ALL pages. Current: `styles.css?v=36`, `app.js?v=26` (grep to confirm if the file looks stale). Bump when changing that file. Run `node tools/update-sw.mjs` after changing pages/assets (OpenCode: hooks do not run).
+- **Cache-busting `?v=N`**: one consistent version per file across ALL pages. Current: `styles.css?v=37`, `app.js?v=27` (grep to confirm if the file looks stale). Bump when changing that file. Run `node tools/update-sw.mjs` after changing pages/assets (OpenCode: hooks do not run).
 - **sw.js `savianu-vN`**: the `bump-sw.mjs` PostToolUse hook (`.claude/scripts/bump-sw.mjs`) is Claude-Code-only — **it does NOT run in OpenCode**. In OpenCode use `node tools/update-sw.mjs`, which regenerates the `PRECACHE_URLS` list AND bumps `savianu-vN` by +1.
 - **sitemap.xml / robots.txt are hand-maintained** (no tool): add new public pages to `sitemap.xml`; `colleghi/*` and `offline.html`/`404.html` are deliberately absent (noindex). robots.txt already disallows `colleghi/xsegretarie.html`, `colleghi/RUAP/`, `colleghi/gestoreturni/` — keep it that way.
 - **Font Awesome**: always load BOTH `fontawesome.min.css` + `solid.min.css` (6.4.0). Never `all.min.css`.
