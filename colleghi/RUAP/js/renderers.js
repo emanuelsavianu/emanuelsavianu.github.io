@@ -17,7 +17,10 @@ import {
 } from './core-utils.js';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
-  DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL
+  DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
+  STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
+  STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
+  DEFAULT_SLOTS
 } from './config.js';
 import { isItalianHoliday } from './holidays.js';
 
@@ -61,6 +64,19 @@ function getCoverageBadge(dateKey, place) {
   };
 }
 
+const DAY_SHORT = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
+
+function getMonthWorkdays(year, month) {
+  const lastDay = new Date(year, month + 1, 0).getDate();
+  const workdays = [];
+  for (let day = 1; day <= lastDay; day++) {
+    const d = new Date(year, month, day);
+    if (d.getDay() === 0 || d.getDay() === 6) continue;
+    workdays.push({ day, date: d, dateKey: toDateKey(d) });
+  }
+  return workdays;
+}
+
 function resolveShiftCell(id) {
   if (!id) return { display: '', bg: '', textColor: '' };
   if (typeof id === 'string' && id.startsWith(EXTERNAL_PREFIX)) {
@@ -76,16 +92,15 @@ function resolveShiftCell(id) {
 function createSlotButton(dateKey, place, slot, inMonth) {
   const slotKey = `${dateKey}_${slot.key}_${place}`;
   const assignedId = state.assignments[slotKey];
-  const isExt = assignedId && assignedId.startsWith(EXTERNAL_PREFIX);
-  const assignedDoc = !isExt && assignedId ? getDoctorById(state.doctors, assignedId) : null;
-  const extName = isExt ? assignedId.replace(EXTERNAL_PREFIX, '') : null;
-  const color = assignedDoc ? getDoctorColor(assignedDoc) : (extName ? { hex: '#d97706' } : null);
-  const displayName = assignedDoc ? cleanDoctorName(assignedDoc.name) : extName;
+  const { display: displayName, bg: colorHex } = resolveShiftCell(assignedId);
 
   const slotBtn = document.createElement('button');
-  slotBtn.className = 'slot-btn w-full text-left rounded-lg px-2 py-1.5 mb-1 text-xs font-medium border transition-all ' +
-    (displayName ? 'border-transparent text-white shadow-sm' : inMonth ? 'border-dashed border-slate-300 bg-slate-50 text-slate-400 hover:border-brand-400 hover:bg-blue-50 hover:text-brand-700' : 'border-transparent bg-transparent cursor-default');
-  if (color && displayName) slotBtn.style.backgroundColor = color.hex;
+  let variantClass;
+  if (displayName) variantClass = 'border-transparent text-white shadow-sm';
+  else if (inMonth) variantClass = 'border-dashed border-slate-300 bg-slate-50 text-slate-400 hover:border-brand-400 hover:bg-blue-50 hover:text-brand-700';
+  else variantClass = 'border-transparent bg-transparent cursor-default';
+  slotBtn.className = `slot-btn w-full text-left rounded-lg px-2 py-1.5 mb-1 text-xs font-medium border transition-all ${variantClass}`;
+  if (colorHex && displayName) slotBtn.style.backgroundColor = colorHex;
 
   slotBtn.innerHTML = displayName
     ? `<div class="truncate font-semibold text-xs">${escapeHtml(displayName)}</div><div class="text-[10px] opacity-80">${slot.icon} ${slot.label}</div>`
@@ -97,7 +112,6 @@ function createSlotButton(dateKey, place, slot, inMonth) {
     slotBtn.dataset.dateKey = dateKey;
     slotBtn.dataset.place = place;
     slotBtn.dataset.slotType = slot.key;
-    slotBtn.addEventListener('click', (e) => openAssignDropdown(e, slotKey, slot, dateKey, place, e.currentTarget.getBoundingClientRect()));
   }
   return slotBtn;
 }
@@ -108,6 +122,15 @@ export function renderCalendar() {
   } else {
     renderCalendarMonth();
   }
+}
+
+function holidayCellHTML(dayNum, dayName = '') {
+  const label = dayName ? `${dayName} ${dayNum}` : `${dayNum}`;
+  return `<div class="flex items-center justify-between mb-1">
+    <span class="text-xs font-bold text-slate-500">${label}</span>
+    <span class="text-[9px] font-bold text-red-600 bg-red-50 px-1 py-0.5 rounded uppercase">Festivo</span>
+  </div>
+  <div class="flex items-center justify-center py-3 text-[10px] font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
 }
 
 function renderCalendarWeek() {
@@ -132,11 +155,7 @@ function renderCalendarWeek() {
     const dayNum = d.getDate();
 
     if (isHoliday) {
-      cell.innerHTML = `<div class="flex items-center justify-between mb-1">
-        <span class="text-xs font-bold text-slate-500">${dayName} ${dayNum}</span>
-        <span class="text-[9px] font-bold text-red-600 bg-red-50 px-1 py-0.5 rounded uppercase">Festivo</span>
-      </div>
-      <div class="flex items-center justify-center py-3 text-[10px] font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
+      cell.innerHTML = holidayCellHTML(dayNum, dayName);
     } else {
       cell.innerHTML = `<div class="text-xs font-bold text-slate-500 mb-1 pb-1 border-b border-slate-100 flex items-center justify-between">
         <span>${dayName} ${dayNum}</span>
@@ -185,11 +204,7 @@ function renderCalendarMonth() {
       cell.className = `rounded-xl p-2 border ${isHoliday && inMonth ? 'holiday-cell border-slate-100' : inMonth ? 'bg-white shadow-sm border-slate-100' : 'bg-transparent border-transparent'} ${isToday && inMonth ? 'ring-2 ring-brand-400' : ''}`;
 
       if (isHoliday && inMonth) {
-        cell.innerHTML = `<div class="flex items-center justify-between mb-1">
-          <span class="text-xs font-bold text-slate-500">${cellDate.getDate()}</span>
-          <span class="text-[9px] font-bold text-red-600 bg-red-50 px-1 py-0.5 rounded uppercase">Festivo</span>
-        </div>
-        <div class="flex items-center justify-center py-3 text-[10px] font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
+        cell.innerHTML = holidayCellHTML(cellDate.getDate());
       } else if (inMonth) {
         cell.innerHTML = `<div class="flex items-center justify-between mb-1">
           <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-500'}">${cellDate.getDate()}</span>
@@ -284,7 +299,7 @@ function positionDropdown(rect) {
   if (spaceBelow >= DROPDOWN_HEIGHT || spaceBelow > spaceAbove) {
     top = Math.min(rect.bottom + 4, window.innerHeight - DROPDOWN_HEIGHT - 4);
   } else {
-    top = Math.max(4, rect.top - DROPDOWN_HEIGHT - 4);
+    top = rect.top - DROPDOWN_HEIGHT - 4;
   }
   top = Math.max(4, top);
   let left = Math.min(rect.left, window.innerWidth - DROPDOWN_WIDTH - 4);
@@ -293,16 +308,20 @@ function positionDropdown(rect) {
   dropdown.style.left = `${left}px`;
 }
 
-function renderAvailableList(slotKey, slot, dateKey) {
+function getSlotCandidates(dateKey, slotKey, place) {
+  const isAvailable = new Set();
+  const isBusy = new Set();
+  for (const doc of state.doctors) {
+    if (isDoctorAvailableForSlot(doc, dateKey, slotKey)) isAvailable.add(doc.id);
+    if (PLACES.some(p => p !== place && state.assignments[`${dateKey}_${slotKey}_${p}`] === doc.id)) isBusy.add(doc.id);
+  }
+  return { isAvailable, isBusy };
+}
+
+function renderAvailableList(slotKey, slot, dateKey, isAvailable, isBusy) {
   const list = el('assign-list');
   const place = slotKey.split('_').slice(2).join('_');
-  const availDocs = state.doctors.filter(doc => {
-    if (!isDoctorAvailableForSlot(doc, dateKey, slot.key)) return false;
-    const isBusyElsewhere = PLACES.some(p =>
-      p !== place && state.assignments[`${dateKey}_${slot.key}_${p}`] === doc.id
-    );
-    return !isBusyElsewhere;
-  });
+  const availDocs = state.doctors.filter(doc => isAvailable.has(doc.id) && !isBusy.has(doc.id));
   availDocs.sort((a, b) => {
     const aPref = a.preferredPlace === place ? 0 : 1;
     const bPref = b.preferredPlace === place ? 0 : 1;
@@ -313,7 +332,7 @@ function renderAvailableList(slotKey, slot, dateKey) {
   availDocs.forEach(doc => {
     const color = getDoctorColor(doc);
     const weeklyH = getWeeklyAssignedHours(doc.id, getWeekStart(new Date(dateKey + 'T00:00:00')), SLOTS, PLACES, state.assignments);
-    const pct = (doc.weeklyHours ?? 38) > 0 ? Math.round((weeklyH / (doc.weeklyHours ?? 38)) * 100) : 0;
+    const { pct, barColor } = getProgressBarData(weeklyH, doc.weeklyHours ?? 38);
     const btn = document.createElement('button');
     btn.className = 'w-full text-left rounded-lg px-3 py-2 hover:bg-slate-100 flex items-center gap-2 transition';
     btn.innerHTML = `
@@ -321,50 +340,44 @@ function renderAvailableList(slotKey, slot, dateKey) {
       <span class="flex-1 font-medium text-xs">${escapeHtml(doc.name)}</span>
       <div class="flex flex-col items-end gap-0.5">
         <span class="text-[10px] text-slate-400">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
-        <div class="w-12 h-1 bg-slate-100 rounded-full"><div style="width:${Math.min(100, pct)}%; background:${pct >= 90 ? '#ef4444' : pct >= 70 ? '#f59e0b' : '#22c55e'}" class="h-1 rounded-full"></div></div>
+        <div class="w-12 h-1 bg-slate-100 rounded-full"><div style="width:${pct}%; background:${barColor}" class="h-1 rounded-full"></div></div>
       </div>`;
     btn.addEventListener('click', () => assignDoctor(slotKey, doc.id));
     list.appendChild(btn);
   });
 }
 
-export function openAssignDropdown(e, slotKey, slot, dateKey, place, rect) {
+export function openAssignDropdown(slotKey, slot, dateKey, place, rect) {
   closeAssignDropdown();
-  e.stopPropagation();
   state.activeSlotKey = slotKey;
   const dropdown = el('assign-dropdown');
   const header = el('assign-slot-label');
   header.textContent = `${slot.icon} ${slot.label} · ${place} · ${dateKey}`;
   el('assign-remove-wrap').classList.toggle('hidden', !state.assignments[slotKey]);
-  renderAvailableList(slotKey, slot, dateKey);
+  const { isAvailable, isBusy } = getSlotCandidates(dateKey, slot.key, place);
+  renderAvailableList(slotKey, slot, dateKey, isAvailable, isBusy);
   const unavailSection = el('assign-unavail-section');
   const unavailList = el('assign-unavail-list');
   unavailSection.classList.add('hidden');
   el('assign-custom-section').classList.add('hidden');
-  const availIds = new Set(state.doctors.filter(doc =>
-    isDoctorAvailableForSlot(doc, dateKey, slot.key)
-  ).map(d => d.id));
-  const busyIds = new Set(state.doctors.filter(doc =>
-    PLACES.some(p => p !== place && state.assignments[`${dateKey}_${slot.key}_${p}`] === doc.id)
-  ).map(d => d.id));
-  const unavailDocs = state.doctors.filter(doc => !availIds.has(doc.id) || busyIds.has(doc.id));
+  const unavailDocs = state.doctors.filter(doc => !isAvailable.has(doc.id) || isBusy.has(doc.id));
   unavailList.innerHTML = '';
   unavailDocs.forEach(doc => {
     const color = getDoctorColor(doc);
     const btn = document.createElement('button');
     btn.className = 'w-full text-left rounded-lg px-3 py-2 hover:bg-slate-100 flex items-center gap-2 transition';
-    const isUnavailReason = !busyIds.has(doc.id);
+    const isUnavailReason = !isBusy.has(doc.id);
     btn.innerHTML = `
       <span class="w-3 h-3 rounded-full flex-shrink-0 mt-0.5" style="background:${color.hex}"></span>
       <span class="flex-1 font-medium text-xs">${escapeHtml(doc.name)}</span>
       ${isUnavailReason ? '<i class="fa-solid fa-ban text-red-400 text-xs" title="Non disponibile questo giorno"></i>' : ''}
-      <span class="text-[10px] text-slate-400 italic">${busyIds.has(doc.id) ? 'stessa fascia oraria' : 'eccezione'}</span>`;
+      <span class="text-[10px] text-slate-400 italic">${isBusy.has(doc.id) ? 'stessa fascia oraria' : 'eccezione'}</span>`;
     btn.addEventListener('click', () => assignDoctor(slotKey, doc.id));
     unavailList.appendChild(btn);
   });
   el('assign-exception-btn').classList.remove('hidden');
   el('assign-custom-input').value = '';
-  positionDropdown(rect || e.currentTarget.getBoundingClientRect());
+  positionDropdown(rect);
   dropdown.classList.remove('hidden');
 }
 
@@ -506,33 +519,31 @@ export function openDoctorModal(doctorId = null) {
   state.editingDoctorId = doctorId;
   el('doctor-modal').classList.remove('hidden');
   el('modal-doctor-id').value = doctorId || '';
-  el('modal-title').innerHTML = doctorId
-    ? '<i class="fa-solid fa-user-pen"></i> Modifica Medico'
-    : '<i class="fa-solid fa-user-doctor"></i> Aggiungi Medico';
   if (doctorId) {
-    const doc = getDoctorById(state.doctors, doctorId);
-    el('modal-name').value = doc.name;
-    el('modal-patients').value = doc.patients || '';
-    el('modal-hours').value = doc.weeklyHours ?? 38;
-    el('modal-is-pool').checked = doc.isPool || false;
-    el('modal-monthly-budget').value = doc.monthlyBudget ?? '';
-    el('modal-aft').value = doc.aft || '';
-    el('modal-seniority').value = doc.seniority || '';
-    renderAvailabilityTable(doc.availability);
-    renderColorPicker(doc.colorIndex || 0);
-    populatePlaceSelect(el('modal-preferred-place'), doc.preferredPlace);
+    el('modal-title').innerHTML = '<i class="fa-solid fa-user-pen"></i> Modifica Medico';
   } else {
-    el('modal-name').value = '';
-    el('modal-patients').value = '850';
-    el('modal-hours').value = '38';
-    el('modal-is-pool').checked = false;
-    el('modal-monthly-budget').value = '';
-    el('modal-aft').value = '';
-    el('modal-seniority').value = '';
-    renderAvailabilityTable(null);
-    renderColorPicker(0);
-    populatePlaceSelect(el('modal-preferred-place'), null);
+    el('modal-title').innerHTML = '<i class="fa-solid fa-user-doctor"></i> Aggiungi Medico';
   }
+  const doc = doctorId ? getDoctorById(state.doctors, doctorId) : null;
+  const values = doc ? {
+    name: doc.name,
+    patients: doc.patients || '',
+    hours: doc.weeklyHours ?? 38,
+    isPool: doc.isPool || false,
+    monthlyBudget: doc.monthlyBudget ?? '',
+    aft: doc.aft || '',
+    seniority: doc.seniority || '',
+  } : { name: '', patients: '850', hours: '38', isPool: false, monthlyBudget: '', aft: '', seniority: '' };
+  el('modal-name').value = values.name;
+  el('modal-patients').value = values.patients;
+  el('modal-hours').value = values.hours;
+  el('modal-is-pool').checked = values.isPool;
+  el('modal-monthly-budget').value = values.monthlyBudget;
+  el('modal-aft').value = values.aft;
+  el('modal-seniority').value = values.seniority;
+  renderAvailabilityTable(doc ? doc.availability : null);
+  renderColorPicker(doc ? doc.colorIndex || 0 : 0);
+  populatePlaceSelect(el('modal-preferred-place'), doc ? doc.preferredPlace : null);
   const periodsContainer = el('unavail-periods');
   periodsContainer.innerHTML = '';
   modalUnavail = doctorId
@@ -550,18 +561,25 @@ export function closeDoctorModal() {
   el('doctor-modal').classList.add('hidden');
 }
 
-export function deleteDoctor(id) {
-  const doc = getDoctorById(state.doctors, id);
-  if (!doc) return;
+function confirmToast(message, onConfirm) {
   const toastEl = document.createElement('div');
   toastEl.className = 'toast-item pointer-events-auto flex items-center gap-3 bg-white border border-slate-200 rounded-xl shadow-lg px-4 py-3 text-sm';
   toastEl.innerHTML = `
-    <span>Eliminare <strong>${cleanDoctorName(doc.name)}</strong>?</span>
+    <span>${message}</span>
     <button class="bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-red-600 confirm-yes">Sì</button>
     <button class="bg-slate-200 text-slate-700 px-3 py-1 rounded-lg text-xs font-bold hover:bg-slate-300 confirm-no">No</button>`;
   el('toast-container').appendChild(toastEl);
   toastEl.querySelector('.confirm-yes').addEventListener('click', () => {
     toastEl.remove();
+    onConfirm();
+  });
+  toastEl.querySelector('.confirm-no').addEventListener('click', () => toastEl.remove());
+}
+
+export function deleteDoctor(id) {
+  const doc = getDoctorById(state.doctors, id);
+  if (!doc) return;
+  confirmToast(`Eliminare <strong>${cleanDoctorName(doc.name)}</strong>?`, () => {
     pushHistory();
     state.doctors = state.doctors.filter(d => d.id !== id);
     Object.keys(state.assignments).forEach(k => { if (state.assignments[k] === id) delete state.assignments[k]; });
@@ -570,26 +588,16 @@ export function deleteDoctor(id) {
     renderAll();
     toast('Medico eliminato', 'success');
   });
-  toastEl.querySelector('.confirm-no').addEventListener('click', () => toastEl.remove());
 }
 
 export function resetAssignments() {
-  const toastEl = document.createElement('div');
-  toastEl.className = 'toast-item pointer-events-auto flex items-center gap-3 bg-white border border-slate-200 rounded-xl shadow-lg px-4 py-3 text-sm';
-  toastEl.innerHTML = `
-    <span>Eliminare <strong>tutte le assegnazioni</strong>?</span>
-    <button class="bg-red-500 text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-red-600 confirm-yes">Sì</button>
-    <button class="bg-slate-200 text-slate-700 px-3 py-1 rounded-lg text-xs font-bold hover:bg-slate-300 confirm-no">No</button>`;
-  el('toast-container').appendChild(toastEl);
-  toastEl.querySelector('.confirm-yes').addEventListener('click', () => {
-    toastEl.remove();
+  confirmToast('Eliminare <strong>tutte le assegnazioni</strong>?', () => {
     pushHistory();
     state.assignments = {};
     saveToStorage();
     renderAll();
     toast('Tutte le assegnazioni cancellate', 'success');
   });
-  toastEl.querySelector('.confirm-no').addEventListener('click', () => toastEl.remove());
 }
 
 export function addUnavailPeriodRow(from = '', to = '') {
@@ -666,22 +674,20 @@ export function saveDoctorFromModal() {
 // --- Conflicts ---
 
 function getConflicts() {
-  const conflictsMap = {};
+  const byDocSlot = {};
   for (const [key, docId] of Object.entries(state.assignments)) {
-    const parts = key.split('_');
-    const dateKey = parts[0];
-    const slotKey = parts[1];
+    const [dateKey, slotKey] = key.split('_');
+    const groupKey = `${docId}_${dateKey}_${slotKey}`;
+    const entry = byDocSlot[groupKey] || (byDocSlot[groupKey] = { docId, dateKey, slotKey, keys: [] });
+    entry.keys.push(key);
+  }
+  const conflicts = [];
+  for (const { docId, dateKey, slotKey, keys } of Object.values(byDocSlot)) {
     const doc = getDoctorById(state.doctors, docId);
     const isUnavailable = doc ? isDoctorUnavailable(doc, dateKey) : false;
-    const conflictKey = `${docId}_${dateKey}_${slotKey}`;
-    const matches = Object.entries(state.assignments).filter(([k, v]) => v === docId && k.startsWith(`${dateKey}_${slotKey}_`));
-    if (matches.length > 1 || isUnavailable) {
-      if (!conflictsMap[conflictKey]) {
-        conflictsMap[conflictKey] = { docId, dateKey, slotKey, keys: matches.map(m => m[0]), isUnavailable };
-      }
-    }
+    if (keys.length > 1 || isUnavailable) conflicts.push({ docId, dateKey, slotKey, keys, isUnavailable });
   }
-  return Object.values(conflictsMap);
+  return conflicts;
 }
 
 export function openConflictsModal() {
@@ -702,6 +708,7 @@ export function openConflictsModal() {
   } else {
     list.innerHTML = conflicts.map((c) => {
       const doc = getDoctorById(state.doctors, c.docId);
+      const displayName = doc ? doc.name : c.docId.startsWith(EXTERNAL_PREFIX) ? c.docId.replace(EXTERNAL_PREFIX, '') : 'Medico sconosciuto';
       const color = COLOR_PALETTE[doc?.colorIndex ?? 0] || COLOR_PALETTE[0];
       const slot = SLOTS.find(s => s.key === c.slotKey);
       const slotLabel = slot ? `${slot.icon} ${slot.label}` : c.slotKey;
@@ -724,7 +731,7 @@ export function openConflictsModal() {
         <div class="bg-slate-50 px-4 py-3 flex items-center gap-3 border-b border-slate-200">
           <div class="w-3 h-3 rounded-full ${color.bg} flex-shrink-0"></div>
           <div class="flex-1 min-w-0">
-            <p class="font-semibold text-slate-800 text-sm truncate">${escapeHtml(doc?.name || 'Medico sconosciuto')}</p>
+            <p class="font-semibold text-slate-800 text-sm truncate">${escapeHtml(displayName)}</p>
             <p class="text-xs text-slate-500">${dateFormatted} · ${slotLabel}</p>
           </div>
           <div class="flex items-center gap-1">
@@ -785,6 +792,10 @@ export function updateConflictsHeaderBadge() {
   }
 }
 
+function doctorsPoolLast() {
+  return [...state.doctors].sort((a, b) => (b.isPool ? 1 : 0) - (a.isPool ? 1 : 0));
+}
+
 // --- Instructions ---
 
 export function closeInstructions() {
@@ -814,7 +825,7 @@ export function importJSONFromFile(e) {
       if (!Array.isArray(data.doctors) || typeof data.assignments !== 'object' || data.assignments === null) throw new Error('Formato non valido');
       pushHistory();
       state.doctors = data.doctors; state.assignments = data.assignments;
-      saveToStorage(); renderAll(); renderMonthlyStats(); toast('Importazione completata!', 'success');
+      saveToStorage(); renderAll(); toast('Importazione completata!', 'success');
     } catch (err) { toast('Errore importazione: ' + err.message, 'error'); }
   };
   reader.readAsText(file); e.target.value = '';
@@ -844,12 +855,7 @@ export function importExcelFromFile(e) {
 
 function importFromRows(rows) {
   pushHistory();
-  const importMonth = detectMonthFromRows(rows);
-  const importYear = importMonth !== null ? rows.reduce((acc, r) => {
-    if (!r) return acc;
-    const d = excelDateToDate(r[1]);
-    return d ? d.getFullYear() : acc;
-  }, null) : null;
+  const { month: importMonth, year: importYear } = detectMonthYear(rows);
 
   const parsed = parseAssignmentSections(rows, importMonth, importYear);
 
@@ -888,13 +894,17 @@ function importFromRows(rows) {
   toast(`Importate ${assigned} assegnazioni, aggiornati ${debtCount} medici`, 'success');
 }
 
-function detectMonthFromRows(rows) {
+function detectMonthYear(rows) {
+  let month = null;
+  let year = null;
   for (const row of rows) {
     if (!row) continue;
     const parsedDate = excelDateToDate(row[1]);
-    if (parsedDate) return parsedDate.getMonth();
+    if (!parsedDate) continue;
+    if (month === null) month = parsedDate.getMonth();
+    year = parsedDate.getFullYear();
   }
-  return null;
+  return { month, year };
 }
 
 function parseAssignmentSections(rows, importMonth, importYear) {
@@ -963,8 +973,6 @@ export function exportExcel() {
   const year = state.calYear;
   const month = state.calMonth;
   const monthName = MONTHS_IT[month];
-  const lastDay = new Date(year, month + 1, 0).getDate();
-  const DAY_SHORT = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
   const rows = [];
 
   function getDocName(dateKey, slotKey, place) {
@@ -983,11 +991,8 @@ export function exportExcel() {
   });
   rows.push(headers);
 
-  for (let day = 1; day <= lastDay; day++) {
-    const d = new Date(year, month, day);
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
-    const dk = toDateKey(d);
-    const row = [`${day}/${month + 1}`, DAY_SHORT[d.getDay()]];
+  for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
+    const row = [`${day}/${month + 1}`, DAY_SHORT[date.getDay()]];
     PLACES.forEach(place => {
       SLOTS.forEach(slot => {
         row.push(getDocName(dk, slot.key, place));
@@ -1017,8 +1022,6 @@ export function buildPdfContent() {
   const year = state.calYear;
   const month = state.calMonth;
   const monthName = MONTHS_IT[month];
-  const lastDay = new Date(year, month + 1, 0).getDate();
-  const DAY_SHORT = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab'];
   let html = '';
 
   PLACES.forEach(place => {
@@ -1030,13 +1033,10 @@ export function buildPdfContent() {
     SLOTS.forEach(s => { html += `<th style="padding:4px 6px;border:1px solid #ccc;text-align:left">${s.label}</th>`; });
     html += `</tr></thead><tbody>`;
 
-    for (let day = 1; day <= lastDay; day++) {
-      const d = new Date(year, month, day);
-      if (d.getDay() === 0 || d.getDay() === 6) continue;
-      const dk = toDateKey(d);
+    for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
       html += `<tr>
         <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}</td>
-        <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[d.getDay()]}</td>`;
+        <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[date.getDay()]}</td>`;
       SLOTS.forEach(slot => {
         const id = state.assignments[`${dk}_${slot.key}_${place}`];
         const { display: name, bg: bgColor, textColor } = resolveShiftCell(id);
@@ -1093,8 +1093,6 @@ export function buildPngContent() {
   const year = state.calYear;
   const month = state.calMonth;
   const monthName = MONTHS_IT[month];
-  const lastDay = new Date(year, month + 1, 0).getDate();
-  const DAY_SHORT = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
 
   // --- Calendar section ---
   let calHtml = `
@@ -1118,15 +1116,12 @@ export function buildPngContent() {
     });
     calHtml += `</tr></thead><tbody>`;
 
-    for (let day = 1; day <= lastDay; day++) {
-      const d = new Date(year, month, day);
-      if (d.getDay() === 0 || d.getDay() === 6) continue;
-      const dk = toDateKey(d);
-      const isHoliday = isItalianHoliday(d);
+    for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
+      const isHoliday = isItalianHoliday(date);
       const rowBg = isHoliday ? 'background:#fef2f2;' : '';
       calHtml += `<tr style="${rowBg}">
         <td style="padding:6px 8px;border:1px solid #e2e8f0;font-weight:600;color:#334155;">${day}/${month + 1}</td>
-        <td style="padding:6px 8px;border:1px solid #e2e8f0;color:#475569;">${DAY_SHORT[d.getDay()]}</td>`;
+        <td style="padding:6px 8px;border:1px solid #e2e8f0;color:#475569;">${DAY_SHORT[date.getDay()]}</td>`;
       SLOTS.forEach(slot => {
         const id = state.assignments[`${dk}_${slot.key}_${place}`];
         const { display, bg, textColor } = resolveShiftCell(id);
@@ -1147,9 +1142,9 @@ export function buildPngContent() {
 
   // --- Budget section ---
   const stats = getMonthlyStats();
-  const ordered = [...state.doctors].sort((a, b) => (b.isPool ? 1 : 0) - (a.isPool ? 1 : 0));
+  const ordered = doctorsPoolLast();
 
-  const totalUsed = Object.values(stats.doctorHours).reduce((a, b) => a + b, 0);
+  const totalUsed = stats.totalHours;
 
   let budgetHtml = `
     <div style="margin-top:20px;padding-top:14px;border-top:2px solid #1e40af;">
@@ -1164,11 +1159,7 @@ export function buildPngContent() {
         </tr></thead><tbody>`;
 
   ordered.forEach(doc => {
-    const budget = getMonthlyBudget(doc);
-    const used = stats.doctorHours[doc.id] || 0;
-    const rem = Math.max(0, budget - used);
-    const pct = budget > 0 ? Math.round((used / budget) * 100) : 0;
-    const barColor = rem === 0 ? '#ef4444' : pct >= 80 ? '#f59e0b' : '#22c55e';
+    const { budget, used, pct, barColor } = getBudgetStats(doc, stats.doctorHours[doc.id] || 0);
     const colorHex = getDoctorColor(doc).hex;
     const label = doc.isPool ? ' (pool)' : '';
     budgetHtml += `<tr>
@@ -1262,7 +1253,21 @@ function getMonthlyStats() {
       });
     });
   }
-  return { totalSlots, filledSlots, emptySlots: totalSlots - filledSlots, coverage: totalSlots > 0 ? Math.round((filledSlots / totalSlots) * 100) : 0, doctorHours };
+  return {
+    totalSlots,
+    filledSlots,
+    emptySlots: totalSlots - filledSlots,
+    coverage: totalSlots > 0 ? Math.round((filledSlots / totalSlots) * 100) : 0,
+    doctorHours,
+    totalHours: Object.values(doctorHours).reduce((a, b) => a + b, 0),
+  };
+}
+
+function getBudgetStats(doc, used) {
+  const budget = getMonthlyBudget(doc);
+  const pct = budget > 0 ? Math.round((used / budget) * 100) : 0;
+  const barColor = used >= budget ? '#ef4444' : pct >= 80 ? '#f59e0b' : '#22c55e';
+  return { budget, used, pct, barColor };
 }
 
 export function renderMonthlyStats() {
@@ -1276,7 +1281,7 @@ export function renderMonthlyStats() {
   } else {
     totalEl.textContent = state.doctors.length;
   }
-  el('total-hours').textContent = Object.values(stats.doctorHours).reduce((a, b) => a + b, 0);
+  el('total-hours').textContent = stats.totalHours;
 
   const coverageEl = el('coverage-badge');
   if (coverageEl) {
@@ -1285,43 +1290,38 @@ export function renderMonthlyStats() {
   }
 
   if (!panel) return;
-  const ordered = [...state.doctors].sort((a, b) => (b.isPool ? 1 : 0) - (a.isPool ? 1 : 0));
+  const ordered = doctorsPoolLast();
   const visible = hideZeroDocs ? ordered.filter(d => (stats.doctorHours[d.id] || 0) > 0) : ordered;
+  const rows = visible.map(doc => ({
+    doc,
+    stats: getBudgetStats(doc, stats.doctorHours[doc.id] || 0),
+    color: getDoctorColor(doc),
+    label: doc.isPool ? ' (pool)' : '',
+  }));
 
-  panel.innerHTML = visible.map(doc => {
-    const budget = getMonthlyBudget(doc);
-    const used = stats.doctorHours[doc.id] || 0;
-    const rem = Math.max(0, budget - used);
-    const pct = budget > 0 ? Math.round((used / budget) * 100) : 0;
-    const color = getDoctorColor(doc);
-    const label = doc.isPool ? ' (pool)' : '';
-    const barColor = rem === 0 ? '#ef4444' : pct >= 80 ? '#f59e0b' : '#22c55e';
-    return `<div class="flex items-center gap-2 py-1 cursor-pointer hover:bg-slate-50 rounded px-1 -mx-1 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
+  panel.innerHTML = rows.map(({ doc, stats: { budget, used, pct, barColor }, color, label }) => `
+    <div class="flex items-center gap-2 py-1 cursor-pointer hover:bg-slate-50 rounded px-1 -mx-1 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
       <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
       <span class="flex-1 truncate text-slate-700">${escapeHtml(cleanDoctorName(doc.name))}${label}</span>
       <span class="text-slate-500 flex-shrink-0">${used}h/${budget}h</span>
       <div class="w-16 h-2.5 bg-slate-200 rounded-full flex-shrink-0">
         <div style="width:${Math.min(100, pct)}%; background:${barColor}" class="h-2.5 rounded-full"></div>
       </div>
-    </div>`;
-  }).join('');
+      </div>`
+  ).join('');
 
   const printGrid = el('print-bilancio-grid');
   if (printGrid) {
     const titleEl = el('print-bilancio-title');
     if (titleEl) titleEl.textContent = `${MONTHS_IT[state.calMonth]} ${state.calYear}`;
-    printGrid.innerHTML = visible.map(doc => {
-      const budget = getMonthlyBudget(doc);
-      const used = stats.doctorHours[doc.id] || 0;
-      const pct = budget > 0 ? Math.round((used / budget) * 100) : 0;
-      const barColor = (budget - used) <= 0 ? '#ef4444' : pct >= 80 ? '#f59e0b' : '#22c55e';
-      return `<div class="p-row cursor-pointer hover:bg-slate-50 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
-        <span class="p-dot" style="background:${getDoctorColor(doc).hex}"></span>
+    printGrid.innerHTML = rows.map(({ doc, stats: { budget, used, pct, barColor }, color }) => `
+      <div class="p-row cursor-pointer hover:bg-slate-50 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
+        <span class="p-dot" style="background:${color.hex}"></span>
         <span class="p-name">${escapeHtml(doc.name)}${doc.isPool ? ' (pool)' : ''}</span>
         <span class="p-hours">${used}h / ${budget}h</span>
         <div class="p-bar"><div class="p-fill" style="width:${Math.min(100, pct)}%;background:${barColor}"></div></div>
-      </div>`;
-    }).join('');
+      </div>`
+    ).join('');
   }
 }
 
@@ -1329,9 +1329,9 @@ export function toggleMonthlyStats() {
   const panel = el('monthly-stats-panel');
   const chevron = el('monthly-stats-chevron');
   if (!panel) return;
-  const open = panel.classList.toggle('hidden');
-  chevron.style.transform = open ? '' : 'rotate(180deg)';
-  if (!open) renderMonthlyStats();
+  const nowHidden = panel.classList.toggle('hidden');
+  chevron.style.transform = nowHidden ? '' : 'rotate(180deg)';
+  if (!nowHidden) renderMonthlyStats();
 }
 
 // ====================================================
@@ -1373,7 +1373,6 @@ function pasteWeek(weekStart) {
     return;
   }
   pushHistory();
-  const MS_PER_DAY = 86400 * 1000;
   const offset = Math.round((weekStart - copyWeekSource.weekStart) / (7 * MS_PER_DAY));
   let count = 0;
   for (const [key, docId] of Object.entries(copyWeekSource.assignments)) {
@@ -1401,7 +1400,7 @@ function pasteWeek(weekStart) {
 
 let wizardStep = 1;
 let wPlaces = [];
-let wSlots = [{ key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' }, { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' }];
+let wSlots = DEFAULT_SLOTS.map(s => ({ ...s }));
 let wDoctors = [];
 
 function renderWizardProgressDots() {
@@ -1431,11 +1430,16 @@ function renderWizardStep() {
   }
 }
 
+function wizardStepValid() {
+  if (wizardStep === 2) return wPlaces.length >= 1;
+  if (wizardStep === 3) return wSlots.length >= 1;
+  return true;
+}
+
 function updateWizardNextState() {
   const nextBtn = el('wizard-next');
   if (!nextBtn) return;
-  const valid = (wizardStep === 2 && wPlaces.length >= 1) || (wizardStep === 3 && wSlots.length >= 1);
-  nextBtn.disabled = !valid;
+  nextBtn.disabled = !wizardStepValid();
 }
 
 function finishWizard() {
@@ -1448,7 +1452,6 @@ function finishWizard() {
   saveToStorage();
   pushHistory();
   renderAll();
-  updateConflictsHeaderBadge();
   toast('Configurazione completata!', 'success');
 }
 
@@ -1637,7 +1640,7 @@ function renderWizardStep4() {
 export function startWizard() {
   wizardStep = 1;
   wPlaces = [];
-  wSlots = [{ key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' }, { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' }];
+  wSlots = DEFAULT_SLOTS.map(s => ({ ...s }));
   wDoctors = [];
   el('ruap-wizard').classList.remove('hidden');
   renderWizardStep();
@@ -1645,12 +1648,12 @@ export function startWizard() {
 
 export function restartWizard() {
   if (!confirm('Vuoi ricominciare la configurazione?\n\nTutti i dati verranno cancellati.')) return;
-  localStorage.removeItem('ruap-turni-medici');
-  localStorage.removeItem('ruap-turni-assegnazioni');
-  localStorage.removeItem('ruap-turni-history');
-  localStorage.removeItem('ruap-places');
-  localStorage.removeItem('ruap-slots');
-  localStorage.removeItem('ruap-storage-version');
+  localStorage.removeItem(STORAGE_DOCTORS);
+  localStorage.removeItem(STORAGE_ASSIGNMENTS);
+  localStorage.removeItem(STORAGE_HISTORY);
+  localStorage.removeItem(STORAGE_PLACES);
+  localStorage.removeItem(STORAGE_SLOTS);
+  localStorage.removeItem(STORAGE_VERSION_KEY);
   state.doctors = [];
   state.assignments = {};
   state.places = [];
@@ -1665,8 +1668,7 @@ export function wizardGoBack() {
 }
 
 export function wizardGoNext() {
-  if (wizardStep === 2 && wPlaces.length < 1) return;
-  if (wizardStep === 3 && wSlots.length < 1) return;
+  if (!wizardStepValid()) return;
   if (wizardStep < 4) { wizardStep++; renderWizardStep(); }
 }
 

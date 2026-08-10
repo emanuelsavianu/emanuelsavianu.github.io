@@ -5,16 +5,14 @@
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE,
-  STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX
+  STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
+  DEFAULT_PLACES, DEFAULT_SLOTS
 } from './config.js';
 import { el, toast, toDateKey, getWeekStart } from './core-utils.js';
 
 // --- Global mutable references (module-scoped) ---
-export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : ['M.S.Savino', 'Subbiano'];
-export let SLOTS = (typeof CONFIG !== 'undefined' && CONFIG.slots) ? CONFIG.slots : [
-  { key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' },
-  { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' },
-];
+export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;
+export let SLOTS = (typeof CONFIG !== 'undefined' && CONFIG.slots) ? CONFIG.slots : DEFAULT_SLOTS;
 
 // --- State object ---
 export let state = {
@@ -71,7 +69,7 @@ export function reloadPlaces() {
   } else if (typeof CONFIG !== 'undefined' && CONFIG.places) {
     PLACES = [...CONFIG.places];
   } else {
-    PLACES = ['M.S.Savino', 'Subbiano'];
+    PLACES = [...DEFAULT_PLACES];
   }
 }
 
@@ -81,10 +79,7 @@ export function reloadSlots() {
   } else if (typeof CONFIG !== 'undefined' && CONFIG.slots) {
     SLOTS = CONFIG.slots.map(s => ({ ...s }));
   } else {
-    SLOTS = [
-      { key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' },
-      { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' },
-    ];
+    SLOTS = DEFAULT_SLOTS.map(s => ({ ...s }));
   }
 }
 
