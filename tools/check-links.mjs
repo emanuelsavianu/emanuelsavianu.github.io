@@ -48,7 +48,7 @@ for (const file of files) {
     if (existsSync(resolved)) continue;
     // Directory index resolution: 'ssn/' or 'ssn' -> ssn/index.html
     const withIndex = join(resolved, 'index.html');
-    const withHtml = resolved.endsWith(sep) ? resolved + 'index.html' : resolved + '.html';
+    const withHtml = resolved.endsWith(sep) ? join(resolved, 'index.html') : resolved + '.html';
     if (existsSync(withIndex) || existsSync(withHtml)) continue;
     broken++;
     console.log(`BROKEN: ${file.replace(ROOT + sep, '')} -> ${target}`);
