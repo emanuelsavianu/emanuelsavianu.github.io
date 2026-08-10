@@ -34,7 +34,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="../styles.css?v=36">
+    <link rel="stylesheet" href="../styles.css?v=37">
 
     <script type="application/ld+json">
     [
@@ -309,6 +309,10 @@
             font-family: inherit;
             color: var(--text-dark);
             width: 100%;
+        }
+        .faq-inline-search input:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
         }
         .faq-inline-search input::placeholder { color: var(--text-medium); }
 
@@ -602,7 +606,7 @@
     </div>
 </site-nav>
 
-<div class="page-wrapper" id="main-content">
+<main role="main" class="page-wrapper" id="main-content">
     <!-- ── Breadcrumb ─────────────────────────────────────────── -->
     <nav class="breadcrumb-bar" aria-label="Breadcrumb" style="max-width: 900px; margin: 18px auto 0; padding: 0 20px;">
         <a href="../index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
@@ -1092,7 +1096,7 @@
         </footer>
     </site-footer>
 
-</div>
+</main>
 
 <script type="module" src="../app.js?v=27"></script>
 <script>
