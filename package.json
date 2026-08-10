@@ -1,5 +1,12 @@
 {
   "name": "savianu.it",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "scripts": {
+    "test": "node tools/run-all-checks.mjs",
+    "check:links": "node tools/check-links.mjs",
+    "check:i18n": "node tools/check-i18n.mjs",
+    "check:sw": "node tools/check-sw.mjs",
+    "update-sw": "node tools/update-sw.mjs"
+  }
 }

@@ -1356,7 +1356,12 @@ body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
     transition: all 0.2s ease;
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
 }
-.search-input:focus {
+.search-input:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-color: var(--accent);
+}
+.search-input:focus:not(:focus-visible) {
     outline: none;
     border-color: var(--accent);
     box-shadow: 0 0 0 4px rgba(194, 155, 87, 0.1);

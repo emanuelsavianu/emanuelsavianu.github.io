@@ -66,14 +66,51 @@ const SECURITY_HEADERS = {
   ].join('; '),
 };
 
+// ── Legacy path redirects (pre-merge URLs -> new structure) ─────────────────
+// Same map as cloudflare/redirect-worker.js (spec §10), except /malattia.html
+// which was the patient guide on this domain -> ssn/malattia.html.
+
+const LEGACY_REDIRECTS = {
+  '/faq.html': '/ssn/faq.html',
+  '/malattia.html': '/ssn/malattia.html',
+  '/esenzioni.html': '/ssn/esenzioni.html',
+  '/impegnative.html': '/ssn/impegnative.html',
+  '/cert-malattia.html': '/ssn/cert-malattia.html',
+  '/visite-private.html': '/privati/',
+  '/colleghi.html': '/colleghi/',
+  '/guida_interattiva_mmg.html': '/colleghi/guida-interattiva-mmg.html',
+  '/lo_scudo_del_medico.html': '/colleghi/lo-scudo-del-medico.html',
+  '/calcolatore-ferie.html': '/colleghi/calcolatore-ferie.html',
+  '/calcolatoreferiegemini.html': '/colleghi/calcolatore-ferie-gemini.html',
+  '/certificato-invalidita-civile.html': '/privati/certificato-invalidita-civile.html',
+  '/faq-riforma.html': '/privati/faq-riforma.html',
+  '/protocollo-certificati-inps.html': '/colleghi/protocollo-certificati-inps.html',
+  '/rsa.html': '/colleghi/rsa.html',
+  '/installazione.html': '/colleghi/installazione.html',
+  '/xsegretarie.html': '/colleghi/xsegretarie.html',
+  '/ferie.html': '/ssn/',
+  '/salutementale.html': '/ssn/salutementale.html',
+  '/vivisano.html': '/ssn/vivisano.html',
+  '/bengalese.html': '/ssn/bengalese.html',
+  '/urdu.html': '/ssn/urdu.html',
+};
+
 // ── Worker entry point ────────────────────────────────────────────────────────
 
 export default {
   async fetch(request, env) {
+    const url = new URL(request.url);
+
+    // Legacy URLs: 301 before hitting the origin (they would 404 on GitHub Pages)
+    const legacyTarget = LEGACY_REDIRECTS[url.pathname];
+    if (legacyTarget) {
+      url.pathname = legacyTarget;
+      return Response.redirect(url.toString(), 301);
+    }
+
     // Pass the request to the origin as-is
     const response = await fetch(request);
 
-    const url = new URL(request.url);
     const contentType = response.headers.get('Content-Type') || '';
 
     // Fix sitemap.xml MIME type (GitHub Pages may serve as plain text)
