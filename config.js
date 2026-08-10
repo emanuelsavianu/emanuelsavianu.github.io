@@ -10,7 +10,7 @@ export const CONFIG = {
         {
             from: "2026-08-06",
             to: "2026-08-14",
-            note: "Studio chiuso dal 6 al 14 agosto 2026. Riprendo il 17 agosto."
+            note: "Sarò sostituito dai colleghi dello studio questa settimana, per bisogni chiamare la segreteria. Riprendo il 17 agosto."
         }
     ],
 
