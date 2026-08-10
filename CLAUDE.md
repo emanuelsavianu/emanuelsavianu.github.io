@@ -56,7 +56,7 @@ A **PostToolUse hook** runs `node .claude/scripts/bump-sw.mjs` after every Edit/
 
 ## Asset Cache-Busting
 
-`styles.css` and `app.js` are linked with `?v=N`. **Increment the version in every HTML file that loads them when changing those files** — keep one consistent version per file across all pages. Current: `styles.css?v=24`, `app.js?v=18` (loaded as a module; `config.js` is imported by `app.js`, not linked by pages).
+`styles.css` and `app.js` are linked with `?v=N`. **Increment the version in every HTML file that loads them when changing those files** — keep one consistent version per file across all pages. Current: `styles.css?v=36`, `app.js?v=26` (loaded as a module; `config.js` is imported by `app.js`, not linked by pages).
 
 ## Old-Domain Redirects
 

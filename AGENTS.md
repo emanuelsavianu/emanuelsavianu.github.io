@@ -6,10 +6,11 @@ Static HTML/CSS/JS medical practice site (no build step) on GitHub Pages + Cloud
 
 ## Structure
 
-- `index.html` — three-choice landing → `ssn/` (Pazienti SSN, IT/EN), `privati/` (visite private/INPS, IT/EN), `colleghi/` (professionals, **Italian-only**). **index.html has NO brand header by design** (header merger 2026-08-09): the photo hero is the masthead and the ITA/ENG strip floats over its top-right corner at ≥600px — don't "restore" a header there.
+- `index.html` — three-choice landing → `ssn/` (Pazienti SSN, IT/EN), `privati/` (visite private/INPS, IT/EN), `colleghi/` (professionals, **Italian-only**). **index.html renders NO brand header by design** (header merger 2026-08-09): the `<site-nav data-section="root">` element IS present (with static fallback markup), but the component skips the `<header role="banner">` brand block on root (app.js:83-87) and renders only the nav + ITA/ENG strip, which floats over the hero's top-right corner at ≥600px — the photo hero is the masthead. Don't "restore" a header there.
 - `app.js` — all JS incl. the `translations` IT/EN object and the `<site-nav>`/`<site-footer>` web components (banners, nav, footer, quick actions); `config.js` — operational config imported by app.js (no page script tag); `styles.css` — single design system (navy #1a2f4c / gold #c29b57)
 - JS-injected chrome (don't search page HTML for it): `.back-to-top` (every page), `.floating-faq` (patient pages; suppressed by `data-no-float="1"` — `privati/index.html` uses its own `#floating-faq-btn` instead), `.quick-actions-bar` (after `<site-footer>` on patient pages).
 - `docs/superpowers/specs/2026-08-08-unified-savianu-site-design.md` — architecture + old-domain redirect map (§10)
+- Sub-apps: `colleghi/RUAP/` has its own `AGENTS.md` (read it before touching RUAP — module boot order, storage schema, export format). `colleghi/gestoreturni/` has none; both stay as-is, no shared chrome.
 
 ## Verification (run before claiming done)
 
@@ -24,7 +25,8 @@ Static HTML/CSS/JS medical practice site (no build step) on GitHub Pages + Cloud
 - **Relative paths everywhere**: from `ssn/`, `privati/`, `colleghi/` use `../` for root assets (`../styles.css`, `../app.js`, `../index.html`, `../privacy.html`). No root-absolute internal links. `config.js` has no page script tag — `app.js` imports it as an ES module.
 - **i18n**: every user-facing string on landing/`ssn/*`/`privati/*` uses `data-i18n` with BOTH `it` and `en` keys in `app.js`; keep the blocks' exact key indentation (8 spaces) — `tools/check-i18n.mjs` parses app.js textually. Colleghi pages: Italian-only, no ITA/ENG toggle, no Google Translate widget. Google Translate init script must load AFTER the `app.js` module tag.
 - **Cache-busting `?v=N`**: one consistent version per file across ALL pages. Current: `styles.css?v=36`, `app.js?v=26` (grep to confirm if the file looks stale). Bump when changing that file. Run `node tools/update-sw.mjs` after changing pages/assets (OpenCode: hooks do not run).
-- **sw.js `savianu-vN`**: the `bump-sw.js` PostToolUse hook is Claude-Code-only — **it does NOT run in OpenCode**. In OpenCode use `node tools/update-sw.mjs`, which regenerates the `PRECACHE_URLS` list AND bumps `savianu-vN` by +1.
+- **sw.js `savianu-vN`**: the `bump-sw.mjs` PostToolUse hook (`.claude/scripts/bump-sw.mjs`) is Claude-Code-only — **it does NOT run in OpenCode**. In OpenCode use `node tools/update-sw.mjs`, which regenerates the `PRECACHE_URLS` list AND bumps `savianu-vN` by +1.
+- **sitemap.xml / robots.txt are hand-maintained** (no tool): add new public pages to `sitemap.xml`; `colleghi/*` and `offline.html`/`404.html` are deliberately absent (noindex). robots.txt already disallows `colleghi/xsegretarie.html`, `colleghi/RUAP/`, `colleghi/gestoreturni/` — keep it that way.
 - **Font Awesome**: always load BOTH `fontawesome.min.css` + `solid.min.css` (6.4.0). Never `all.min.css`.
 - **Hours/closure banners**: edit `config.js`, not HTML — `CONFIG.SCHEDULE` (Mon–Fri 09:30–12:30 + 16:00–19:00; badge + hours tables + JSON-LD), `CONFIG.ASSENZE` (free-text `note`, drives `#ferie-banner`). Badge appends to the element with `data-badge-anchor`.
 - **Booking split**: SSN → Doctolib (`CONFIG.DOCTOLIB`); Privati → Google Calendar iframe (`CONFIG.GOOGLE_CAL.iframe`). Never swap them.
