@@ -43,3 +43,14 @@ Static HTML/CSS/JS medical practice site (no build step) on GitHub Pages + Cloud
 - PowerShell `>` / `Out-File` write UTF-16 or BOM-UTF8 — write files with the Write/Edit tools (UTF-8, no BOM) or `[System.IO.File]::WriteAllText(path, text, (New-Object System.Text.UTF8Encoding $false))`.
 - No playwright/puppeteer is installed — headless Chrome (see top caveat) is the only automated browser path.
 - Full detail in `CLAUDE.md` (gotchas: Google Translate z-index, mobile header overflow, `#guida-rapida` dormant feature).
+
+## Repository Map
+
+A full codemap is available at `codemap.md` in the project root (local-only — the `*.md` gitignore keeps it out of git; `.slim/codemap.json` holds change-detection state, also untracked).
+
+Before working on any task, read `codemap.md` to understand:
+- Project architecture and entry points
+- Directory responsibilities and design patterns
+- Data flow and integration points between modules
+
+For deep work on a specific folder, also read that folder's `codemap.md`.

@@ -19,13 +19,38 @@ function applyI18n(lang) {
   if (typeof setLanguage === 'function') setLanguage(lang);
 }
 
+function getPreferredLang() {
+  try {
+    return localStorage.getItem('preferredLanguage') || 'it';
+  } catch (e) {
+    return 'it';
+  }
+}
+
+function isPatientSection(section) {
+  return section !== 'colleghi' && section !== 'static';
+}
+
+function currentSection() {
+  const navEl = document.querySelector('site-nav');
+  return navEl ? navEl.dataset.section : 'root';
+}
+
+function navItem(href, i18nKey, isPatient, isCurrent, label) {
+  return `<li><a href="${href}"${isPatient ? ` data-i18n="${i18nKey}"` : ''}${isCurrent ? ' aria-current="page"' : ''}>${label}</a></li>`;
+}
+
+function footerLink(href, i18nKey, isPatient, label) {
+  return `<a href="${href}"${isPatient ? ` data-i18n="${i18nKey}"` : ''}>${label}</a>`;
+}
+
 class SiteNav extends HTMLElement {
   connectedCallback() {
     if (this.dataset.rendered === '1') return;
     this.dataset.rendered = '1';
     const section = this.dataset.section || 'root'; // root|ssn|privati|colleghi|static
     const prefix = getPathPrefix();
-    const isPatient = section !== 'colleghi' && section !== 'static';
+    const isPatient = isPatientSection(section);
     const isRoot = section === 'root';
     const brandTag = isRoot ? 'h1' : 'div';
 
@@ -34,14 +59,16 @@ class SiteNav extends HTMLElement {
       '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>';
 
     // Language/control switch
+    const darkBtn =
+      '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>';
     const controls = isPatient
       ? '<button onclick="setLanguage(\'it\')" class="lang-btn active" id="btn-it">ITA</button>' +
         '<span class="lang-separator" aria-hidden="true">|</span>' +
         '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en">ENG</button>' +
         '<span class="lang-separator" aria-hidden="true">|</span>' +
-        '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>' +
+        darkBtn +
         '<div id="google_translate_element"></div>'
-      : '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>';
+      : darkBtn;
 
     // Nav links row + mobile menu
     const here = location.pathname.replace(/\/$/, '');
@@ -49,11 +76,11 @@ class SiteNav extends HTMLElement {
       '<nav class="site-nav" aria-label="Navigazione principale">' +
         '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
         '<ul class="nav-menu" id="site-nav-menu">' +
-          '<li><a href="' + prefix + 'index.html"' + (isPatient ? ' data-i18n="nav_home"' : '') + (here.endsWith('/index.html') || here === '' ? ' aria-current="page"' : '') + '>Home</a></li>' +
-          '<li><a href="' + prefix + 'ssn/index.html"' + (isPatient ? ' data-i18n="nav_ssn"' : '') + (here.includes('/ssn') ? ' aria-current="page"' : '') + '>Pazienti</a></li>' +
-          '<li><a href="' + prefix + 'privati/index.html"' + (isPatient ? ' data-i18n="nav_privati"' : '') + (here.includes('/privati') ? ' aria-current="page"' : '') + '>Pazienti Privati</a></li>' +
-          '<li><a href="' + prefix + 'colleghi/index.html"' + (isPatient ? ' data-i18n="nav_colleghi"' : '') + (here.includes('/colleghi') ? ' aria-current="page"' : '') + '>Colleghi</a></li>' +
-          '<li><a href="' + prefix + 'ssn/faq.html"' + (isPatient ? ' data-i18n="nav_faq"' : '') + '>FAQ</a></li>' +
+          navItem(prefix + 'index.html', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
+          navItem(prefix + 'ssn/index.html', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
+          navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Pazienti Privati') +
+          navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
+          navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
         '</ul>' +
       '</nav>';
 
@@ -101,32 +128,30 @@ class SiteNav extends HTMLElement {
     const toggle = this.querySelector('#nav-toggle');
     const menu = this.querySelector('#site-nav-menu');
     if (toggle && menu) {
-      toggle.addEventListener('click', function(e) {
+      const closeMenu = () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      };
+      toggle.addEventListener('click', (e) => {
         e.stopPropagation();
         const open = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
         menu.classList.toggle('open', !open);
         toggle.setAttribute('aria-label', open ? 'Apri il menu di navigazione' : 'Chiudi il menu di navigazione');
       });
-      document.addEventListener('click', function(e) {
-        if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== toggle) {
-          menu.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-        }
+      document.addEventListener('click', (e) => {
+        if (menu.classList.contains('open') && !menu.contains(e.target) && e.target !== toggle) closeMenu();
       });
-      document.addEventListener('keydown', function(e) {
+      document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && menu.classList.contains('open')) {
-          menu.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
+          closeMenu();
           toggle.focus();
         }
       });
     }
 
-    Promise.resolve().then(function() {
-      var lang = 'it';
-      try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch (e) {}
-      applyI18n(lang);
+    Promise.resolve().then(() => {
+      applyI18n(getPreferredLang());
       // Re-attach Google Translate to the freshly injected div if the widget already loaded
       if (isPatient && window.google && window.google.translate) {
         try { window.googleTranslateElementInit(); } catch (e) {}
@@ -141,18 +166,18 @@ class SiteFooter extends HTMLElement {
     this.dataset.rendered = '1';
     const section = this.dataset.section || 'root';
     const prefix = getPathPrefix();
-    const isPatient = section !== 'colleghi' && section !== 'static';
+    const isPatient = isPatientSection(section);
 
     this.innerHTML =
       '<footer role="contentinfo">' +
         '<div class="footer-content">' +
           '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - Dr. Savianu Emanuel</p>' +
           '<nav class="footer-nav" aria-label="Footer">' +
-            '<a href="' + prefix + 'index.html"' + (isPatient ? ' data-i18n="footer_home"' : '') + '>Home</a>' +
+            footerLink(prefix + 'index.html', 'footer_home', isPatient, 'Home') +
             ' <span aria-hidden="true">·</span> ' +
-            '<a href="' + prefix + 'ssn/faq.html"' + (isPatient ? ' data-i18n="footer_faq"' : '') + '>FAQ</a>' +
+            footerLink(prefix + 'ssn/faq.html', 'footer_faq', isPatient, 'FAQ') +
             ' <span aria-hidden="true">·</span> ' +
-            '<a href="' + prefix + 'privacy.html"' + (isPatient ? ' data-i18n="link_privacy"' : '') + '>Privacy Policy</a>' +
+            footerLink(prefix + 'privacy.html', 'link_privacy', isPatient, 'Privacy Policy') +
           '</nav>' +
         '</div>' +
       '</footer>';
@@ -167,11 +192,7 @@ class SiteFooter extends HTMLElement {
       );
     }
 
-    Promise.resolve().then(function() {
-      var lang = 'it';
-      try { lang = localStorage.getItem('preferredLanguage') || 'it'; } catch (e) {}
-      applyI18n(lang);
-    });
+    Promise.resolve().then(() => applyI18n(getPreferredLang()));
   }
 }
 
@@ -183,29 +204,20 @@ const yearEl = document.getElementById('current-year');
 if (yearEl) yearEl.textContent = new Date().getFullYear();
 
 // --- DARK MODE TOGGLE ---
-export function toggleDarkMode() {
-    const body = document.body;
-    const isDark = body.classList.toggle('dark-mode');
-    const darkBtn = document.getElementById('btn-dark');
-    
-    if (darkBtn) {
-        const icon = darkBtn.querySelector('i');
-        if (icon) {
-            if (isDark) {
-                icon.classList.remove('fa-moon');
-                icon.classList.add('fa-sun');
-            } else {
-                icon.classList.remove('fa-sun');
-                icon.classList.add('fa-moon');
-            }
-        }
+function setDarkModeUI(isDark) {
+    document.body.classList.toggle('dark-mode', isDark);
+    const icon = document.querySelector('#btn-dark i');
+    if (icon) {
+        icon.classList.toggle('fa-sun', isDark);
+        icon.classList.toggle('fa-moon', !isDark);
     }
-    
     const themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeMeta) {
-        themeMeta.setAttribute('content', isDark ? '#0a1628' : '#1a2f4c');
-    }
-    
+    if (themeMeta) themeMeta.setAttribute('content', isDark ? '#0a1628' : '#1a2f4c');
+}
+
+export function toggleDarkMode() {
+    const isDark = !document.body.classList.contains('dark-mode');
+    setDarkModeUI(isDark);
     try {
         localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
     } catch (e) {
@@ -219,37 +231,11 @@ function initDarkMode() {
         const prefersD = window.matchMedia('(prefers-color-scheme: dark)').matches;
         const shouldBeDark = saved === 'enabled' || (saved === null && prefersD);
 
-        if (shouldBeDark) {
-            document.body.classList.add('dark-mode');
-            const darkBtn = document.getElementById('btn-dark');
-            if (darkBtn) {
-                const icon = darkBtn.querySelector('i');
-                if (icon) {
-                    icon.classList.remove('fa-moon');
-                    icon.classList.add('fa-sun');
-                }
-            }
-            const themeMeta = document.querySelector('meta[name="theme-color"]');
-            if (themeMeta) themeMeta.setAttribute('content', '#0a1628');
-        }
+        if (shouldBeDark) setDarkModeUI(true);
 
         // React to OS-level changes at runtime
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-            if (localStorage.getItem('darkMode') === null) {
-                if (e.matches) {
-                    document.body.classList.add('dark-mode');
-                    const icon = document.querySelector('#btn-dark i');
-                    if (icon) { icon.classList.remove('fa-moon'); icon.classList.add('fa-sun'); }
-                    const m = document.querySelector('meta[name="theme-color"]');
-                    if (m) m.setAttribute('content', '#0a1628');
-                } else {
-                    document.body.classList.remove('dark-mode');
-                    const icon = document.querySelector('#btn-dark i');
-                    if (icon) { icon.classList.remove('fa-sun'); icon.classList.add('fa-moon'); }
-                    const m = document.querySelector('meta[name="theme-color"]');
-                    if (m) m.setAttribute('content', '#1a2f4c');
-                }
-            }
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (localStorage.getItem('darkMode') === null) setDarkModeUI(e.matches);
         });
     } catch (e) {}
 }
@@ -881,7 +867,7 @@ function trapFocus(modal) {
     if (!anchor) return;
     const badge = document.createElement('span');
     badge.className = isOpen ? 'badge-open' : 'badge-closed';
-    const lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
+    const lang = getPreferredLang();
     const openLabel = lang === 'en' ? 'Open now' : 'Aperto ora';
     const closedLabel = lang === 'en' ? 'Closed' : 'Chiuso';
     badge.innerHTML = isOpen
@@ -892,9 +878,7 @@ function trapFocus(modal) {
 
 // --- HEADER INFO LINE (merged doctolib + closure notice) ---
 (function() {
-    const navEl = document.querySelector('site-nav');
-    const section = navEl ? navEl.dataset.section : 'root';
-    const isPatient = section !== 'colleghi' && section !== 'static';
+    const isPatient = isPatientSection(currentSection());
     const line = document.getElementById('header-info-line');
     const base = document.getElementById('header-info-base');
     const absence = document.getElementById('header-info-absence');
@@ -902,16 +886,13 @@ function trapFocus(modal) {
     const closeBtn = document.getElementById('header-info-close');
     if (!line || !base || !absence || !urgenze || !closeBtn) return;
 
-    var lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
-    var t = translations[lang] || translations['it'];
+    const lang = getPreferredLang();
+    const t = translations[lang] || translations['it'];
 
-    var active = null;
-    var dismissed = false;
-    if (typeof CONFIG !== 'undefined') {
-        active = CONFIG.getActiveAbsence();
-        if (active) {
-            try { dismissed = sessionStorage.getItem('ferie-dismissed-' + active.from) === '1'; } catch(e) {}
-        }
+    const active = CONFIG.getActiveAbsence();
+    let dismissed = false;
+    if (active) {
+        try { dismissed = sessionStorage.getItem('ferie-dismissed-' + active.from) === '1'; } catch(e) {}
     }
 
     if (isPatient) {
@@ -932,9 +913,7 @@ function trapFocus(modal) {
 })();
 
 export function dismissHeaderInfo() {
-    const navEl = document.querySelector('site-nav');
-    const section = navEl ? navEl.dataset.section : 'root';
-    const isPatient = section !== 'colleghi' && section !== 'static';
+    const isPatient = isPatientSection(currentSection());
     const line = document.getElementById('header-info-line');
     const absence = document.getElementById('header-info-absence');
     const closeBtn = document.getElementById('header-info-close');
@@ -948,7 +927,7 @@ export function dismissHeaderInfo() {
     }
 
     try {
-        const active = (typeof CONFIG !== 'undefined') ? CONFIG.getActiveAbsence() : null;
+        const active = CONFIG.getActiveAbsence();
         if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
     } catch(e) {}
 }
@@ -982,7 +961,7 @@ function getFlowLabel(lang, key) {
 }
 
 export function renderFlowStep(stepKey) {
-    const lang = (function() { try { return localStorage.getItem('preferredLanguage') || 'it'; } catch(e) { return 'it'; } })();
+    const lang = getPreferredLang();
     const container = document.getElementById('flow-step');
     if (!container) return;
 
@@ -1105,11 +1084,7 @@ function initBackToTop() {
     document.body.appendChild(btn);
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) {
-            btn.classList.add('visible');
-        } else {
-            btn.classList.remove('visible');
-        }
+        btn.classList.toggle('visible', window.scrollY > 400);
     });
 
     btn.addEventListener('click', () => {
@@ -1143,12 +1118,7 @@ function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelect
         items.forEach(item => {
             const textElement = textSelector ? item.querySelector(textSelector) : item;
             const text = textElement ? textElement.textContent.toLowerCase() : '';
-
-            if (text.includes(term)) {
-                item.style.display = '';
-            } else {
-                item.style.display = 'none';
-            }
+            item.style.display = text.includes(term) ? '' : 'none';
         });
 
         // Optional: show/hide sections/categories if all their items are hidden
