@@ -171,6 +171,11 @@ header::after {
 
 body.dark-mode header::after { background: rgba(10, 22, 40, 0.9); }
 
+/* Dark mode: --color-brand-dark becomes gold (an accent), so --primary-dark
+   must not be used as a background here — keep the info bar on the dark
+   surface like .site-nav, or the gold absence note vanishes into the bg. */
+body.dark-mode .header-info { background: var(--bg-gradient-2); }
+
 .header-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
 
 .header-info {
