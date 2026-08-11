@@ -27,7 +27,7 @@ import {
   openAssignDropdown, assignDoctor, removeAssignment,
   openConflictsModal, autoResolveAllConflicts,
   exportJSON, importJSONFromFile, importExcelFromFile,
-  exportExcel, exportPDF, exportPNG,
+  exportExcel, exportPDF, exportPNG, exportCalendarScreenshot,
   copyWeekFromCurrentView, pasteWeekToCurrentView,
   toggleMonthlyStats, toggleHideZeroDocs,
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
@@ -150,6 +150,7 @@ el('btn-auto-assign')?.addEventListener('click', autoAssign);
 el('btn-genera-mese')?.addEventListener('click', generateNextMonth);
 el('btn-pdf')?.addEventListener('click', exportPDF);
 el('btn-export-png')?.addEventListener('click', exportPNG);
+el('btn-export-screen')?.addEventListener('click', exportCalendarScreenshot);
 el('btn-darkmode')?.addEventListener('click', toggleDarkMode);
 el('btn-instructions')?.addEventListener('click', () => {
   el('instructions-modal')?.classList.remove('hidden');

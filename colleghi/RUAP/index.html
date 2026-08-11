@@ -6,6 +6,9 @@
   <meta name="robots" content="noindex, nofollow" />
   <title>RUAP Attività Diurne — Turni</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -15,7 +18,11 @@
       theme: {
         extend: {
           colors: {
-            brand: { 50:'#eff6ff', 100:'#dbeafe', 500:'#3b82f6', 600:'#2563eb', 700:'#1d4ed8', 800:'#1e40af', 900:'#1e3a8a' }
+            // Brand Studio Ippocrate: navy #1A2F4C, gold #C29B57, cream #F3EFE6.
+            // brand-400 = GOLD (accents/icons), brand-500 = NAVY (buttons),
+            // brand-100 = CREAM (light surfaces), brand-800/900 = navy deep (header/dark).
+            // Calendar-day backgrounds and doctor colors are NOT part of this scale.
+            brand: { 50:'#faf7f1', 100:'#f3efe6', 200:'#e9dfc9', 300:'#d8c69e', 400:'#c29b57', 500:'#1a2f4c', 600:'#132742', 700:'#1e3a5f', 800:'#16283f', 900:'#0e1c2e' }
           }
         }
       }
@@ -38,7 +45,7 @@
     .doctor-card:hover { transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(0,0,0,.1); }
     .toast-item { transition: all 0.3s ease; }
     /* Dark mode */
-    html.dark body { background: #0f172a !important; color: #e2e8f0; }
+    html.dark body { background: #0e1c2e !important; color: #e2e8f0; }
     html.dark .bg-white { background: #1e293b !important; }
     html.dark .bg-slate-50 { background: #1e293b !important; }
     html.dark .bg-slate-100 { background: #0f172a !important; }
@@ -53,6 +60,22 @@
     /* Festività */
     .holiday-cell { background: linear-gradient(135deg, #fef2f2, #fff) !important; }
     html.dark .holiday-cell { background: linear-gradient(135deg, #1c0a0a, #1e293b) !important; }
+    /* Brand identity — Studio Ippocrate (layout chrome only; doctor/calendar colors untouched) */
+    body { font-family: 'Montserrat', ui-sans-serif, system-ui, sans-serif; }
+    .font-display { font-family: 'Cormorant Garamond', Georgia, serif; }
+    h1, h2 { font-family: 'Cormorant Garamond', Georgia, serif; }
+    /* Dark-mode adjustments for the brand palette (keep doctor colors / day colors as-is) */
+    html.dark .bg-brand-50 { background: #16283f !important; }
+    html.dark .bg-brand-100 { background: #16283f !important; }
+    html.dark .bg-brand-200 { background: #1e3a5f !important; }
+    html.dark .bg-brand-500 { background: #24405f !important; }
+    html.dark .hover\:bg-brand-600:hover { background: #2d4d70 !important; }
+    html.dark .text-brand-300 { color: #c29b57 !important; }
+    html.dark .text-brand-400 { color: #c29b57 !important; }
+    html.dark .text-brand-700 { color: #d8c69e !important; }
+    html.dark .text-brand-800 { color: #f3efe6 !important; }
+    html.dark .border-brand-300 { border-color: #1e3a5f !important; }
+    html.dark .ring-brand-400 { --tw-ring-color: #c29b57 !important; }
     /* Rainbow animation for Konami code */
     @keyframes rainbow {
       0% { filter: hue-rotate(0deg); }
@@ -63,7 +86,7 @@
     }
     /* Wizard styles */
     #ruap-wizard {
-      background: linear-gradient(160deg, #eff6ff 0%, #fdf8f0 100%);
+      background: linear-gradient(160deg, #f3efe6 0%, #fdf8f0 100%);
     }
     #ruap-wizard .wizard-card {
       background: #fff;
@@ -96,8 +119,8 @@
       text-align: left;
     }
     #ruap-wizard .wizard-big-btn:active { transform: scale(0.98); }
-    #ruap-wizard .wizard-big-btn.primary { background: #1d4ed8; color: #fff; border-color: #1d4ed8; }
-    #ruap-wizard .wizard-big-btn.primary:hover { background: #1e40af; box-shadow: 0 4px 20px rgba(29, 78, 216, 0.3); }
+    #ruap-wizard .wizard-big-btn.primary { background: #1a2f4c; color: #fff; border-color: #1a2f4c; }
+    #ruap-wizard .wizard-big-btn.primary:hover { background: #132742; box-shadow: 0 4px 20px rgba(26, 47, 76, 0.35); }
     #ruap-wizard .wizard-big-btn.success { background: #16a34a; color: #fff; border-color: #16a34a; }
     #ruap-wizard .wizard-big-btn.success:hover { background: #15803d; box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3); }
     #ruap-wizard .wizard-big-btn.outline { background: #fff; color: #475569; border-color: #cbd5e1; }
@@ -135,7 +158,7 @@
       outline: none;
       transition: border-color 0.2s;
     }
-    #ruap-wizard input:focus { border-color: #3b82f6; }
+    #ruap-wizard input:focus { border-color: #c29b57; }
     #ruap-wizard .wizard-progress-dots {
       display: flex;
       justify-content: center;
@@ -149,7 +172,7 @@
       transition: all 0.3s;
     }
     #ruap-wizard .wizard-progress-dots .dot.active {
-      background: #1d4ed8;
+      background: #c29b57;
       transform: scale(1.25);
     }
     #ruap-wizard .wizard-progress-dots .dot.done {
@@ -183,7 +206,7 @@
     #print-bilancio .p-fill { height: 10px; border-radius: 5px; }
   </style>
 </head>
-<body class="bg-slate-100 text-slate-800 min-h-screen font-sans">
+<body class="bg-brand-50 text-slate-800 min-h-screen font-sans">
 
 <!-- Demo banner -->
 <div id="demo-banner" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-2 text-sm text-amber-800 flex items-center justify-between">
@@ -192,16 +215,16 @@
 </div>
 
 <!-- Update banner — appears when config.js data has changed -->
-<div id="update-banner" class="hidden bg-blue-50 border-b border-blue-200 px-4 py-3 text-sm text-blue-900">
+<div id="update-banner" class="hidden bg-brand-100 border-b border-brand-300 px-4 py-3 text-sm text-brand-800">
   <div class="max-w-screen-xl mx-auto flex items-center justify-between flex-wrap gap-2">
     <span>
-      <i class="fa-solid fa-rotate text-blue-500 mr-2"></i>
+      <i class="fa-solid fa-rotate text-brand-400 mr-2"></i>
       <strong>Nuovi dati disponibili</strong> — La configurazione dei turni è stata aggiornata.
     </span>
     <div class="flex items-center gap-2">
-      <button id="update-banner-accept" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition">Aggiorna</button>
-      <button id="update-banner-keep" class="bg-white hover:bg-slate-100 text-slate-700 px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-300 transition">Mantieni i miei dati</button>
-      <button id="update-banner-close" class="text-blue-400 hover:text-blue-600 font-bold text-lg leading-none ml-0.5 transition">&times;</button>
+      <button id="update-banner-accept" class="bg-brand-500 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition">Aggiorna</button>
+      <button id="update-banner-keep" class="bg-white hover:bg-brand-100 text-brand-700 px-3 py-1.5 rounded-lg text-xs font-medium border border-brand-300 transition">Mantieni i miei dati</button>
+      <button id="update-banner-close" class="text-brand-400 hover:text-brand-300 font-bold text-lg leading-none ml-0.5 transition">&times;</button>
     </div>
   </div>
 </div>
@@ -212,35 +235,36 @@
 <header class="bg-brand-800 text-white shadow-lg sticky top-0 z-50">
   <div class="max-w-screen-xl mx-auto px-4 py-3 flex items-center justify-between flex-wrap gap-2">
     <div class="flex items-center gap-3">
-      <i class="fa-solid fa-calendar-check text-blue-300 text-xl"></i>
+      <img src="../../assets/bronzelogo.png" alt="Studio Medico Ippocrate"
+        class="h-11 w-11 rounded-full object-cover ring-2 ring-brand-400/70 shadow-md" />
       <div>
-        <h1 class="font-bold text-lg leading-tight">Gestione Turni RUAP</h1>
-        <p id="header-subtitle" class="text-blue-200 text-xs">Attività Diurne</p>
+        <h1 class="font-display font-bold text-2xl leading-tight tracking-wide">Gestione Turni RUAP</h1>
+        <p id="header-subtitle" class="text-brand-300 text-[11px] tracking-widest uppercase">Attività Diurne · Studio Medico Ippocrate</p>
       </div>
     </div>
     <div class="flex gap-2 flex-wrap">
       <!-- Pulsante aggiunta medico -->
       <button id="btn-add-doctor"
-        class="bg-green-500 hover:bg-green-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+        class="bg-brand-400 hover:bg-brand-300 text-brand-900 px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1.5 shadow-sm transition-transform hover:scale-105">
         <i class="fa-solid fa-user-plus"></i> Aggiungi Medico
       </button>
       <!-- Auto-Assegna -->
       <button id="btn-auto-assign"
-        class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 shadow-sm transition-transform hover:scale-105">
+        class="bg-brand-500 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 shadow-sm transition-transform hover:scale-105">
         <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Assegna Mese
       </button>
       <!-- Genera mese successivo -->
       <button id="btn-genera-mese"
-        class="bg-violet-600 hover:bg-violet-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 shadow-sm transition-transform hover:scale-105">
+        class="bg-brand-400 hover:bg-brand-300 text-brand-900 px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1.5 shadow-sm transition-transform hover:scale-105">
         <i class="fa-solid fa-forward-fast"></i> <span id="btn-genera-label">Genera</span>
       </button>
       <!-- Oggi -->
-      <button id="btn-oggi" class="bg-brand-500 hover:bg-brand-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+      <button id="btn-oggi" class="bg-brand-500 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-calendar-day"></i> Oggi
       </button>
       <!-- Export JSON -->
       <button id="btn-export"
-        class="bg-blue-500 hover:bg-blue-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+        class="bg-brand-700 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-file-export"></i> Export JSON
       </button>
       <!-- Export Excel -->
@@ -250,16 +274,16 @@
       </button>
       <!-- Copia settimana -->
       <button id="btn-copy-week" onclick="copyWeekFromCurrentView()"
-        class="bg-cyan-500 hover:bg-cyan-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+        class="bg-brand-700 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-copy"></i> Copia Sett.
       </button>
       <!-- Incolla settimana -->
       <button id="btn-paste-week" onclick="pasteWeekToCurrentView()"
-        class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+        class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-paste"></i> Incolla Sett.
       </button>
       <!-- Import JSON -->
-      <label class="bg-slate-500 hover:bg-slate-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 cursor-pointer">
+      <label class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 cursor-pointer">
         <i class="fa-solid fa-file-import"></i> Import JSON
         <input type="file" id="import-file" accept=".json" class="hidden" />
       </label>
@@ -277,12 +301,19 @@
         class="bg-emerald-600 hover:bg-emerald-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-file-image"></i> PNG
       </button>
-      <!-- Dark mode -->
-      <button id="btn-darkmode" class="bg-slate-600 hover:bg-slate-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+      <!-- Salva Schermata (calendario come si vede, mese in vista) -->
+      <button id="btn-export-screen" title="Salva il calendario visibile come PNG (mese in vista)"
+        class="bg-brand-700 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+        <i class="fa-solid fa-camera"></i> Salva Schermata
+      </button>
+      <!-- Dark mode / light mode -->
+      <button id="btn-darkmode" title="Attiva/disattiva modalità scura"
+        class="bg-brand-400 hover:bg-brand-300 text-brand-900 px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1.5 shadow-sm transition-colors">
         <i class="fa-solid fa-moon" id="darkmode-icon"></i>
+        <span id="darkmode-label" class="hidden sm:inline">Scuro</span>
       </button>
       <!-- Istruzioni -->
-      <button id="btn-instructions" class="bg-cyan-600 hover:bg-cyan-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+      <button id="btn-instructions" class="bg-white hover:bg-brand-100 text-brand-800 border border-brand-300 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-circle-question"></i> Istruzioni
       </button>
       <!-- Resetta turni -->
@@ -295,7 +326,7 @@
         <span id="conflicts-header-badge" class="hidden bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full absolute -top-1 -right-1 leading-none">0</span>
       </button>
       <!-- Configurazione guidata -->
-      <button id="btn-restart-wizard" class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
+      <button id="btn-restart-wizard" class="bg-brand-200 hover:bg-brand-100 text-brand-900 border border-brand-300 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-wand-magic-sparkles"></i> Setup
       </button>
     </div>
@@ -459,7 +490,7 @@
           <label class="block text-sm font-semibold text-slate-700">
             Debito Orario Settimanale (ore) *
           </label>
-          <span id="debt-formula-badge" class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-md font-medium">
+          <span id="debt-formula-badge" class="text-xs bg-brand-100 text-brand-700 px-2 py-0.5 rounded-md font-medium">
             Auto-calcolato AIR Toscana 2026
           </span>
         </div>
@@ -561,16 +592,7 @@
         </select>
       </div>
 
-      <!-- Anzianità di Servizio -->
-      <div>
-        <label class="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-2">
-          <span>Anzianità di Servizio</span>
-          <span class="font-normal text-slate-400 text-xs">(Facoltativo)</span>
-        </label>
-        <input type="number" id="modal-seniority" placeholder="Es. 5" min="0" max="60"
-          class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-        <p class="text-xs text-slate-400 mt-1">Anni di servizio nel SSN</p>
-      </div>
+      <!-- (Anzianità di servizio rimossa: la priorità è data a chi ha meno pazienti, non all'anzianità) -->
     </div>
     <!-- Footer modale -->
     <div class="px-6 py-4 border-t border-slate-100 flex justify-end gap-3">
@@ -648,7 +670,7 @@
 <div id="instructions-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
   <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto dark-mode:bg-slate-800">
     <!-- Header -->
-    <div class="sticky top-0 bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4 flex justify-between items-center">
+    <div class="sticky top-0 bg-gradient-to-r from-brand-800 to-brand-900 px-6 py-4 flex justify-between items-center">
       <h2 class="text-2xl font-bold text-white">Istruzioni per l'uso</h2>
       <button id="close-instructions" class="text-white hover:text-gray-200 transition text-2xl leading-none">&times;</button>
     </div>
@@ -658,7 +680,7 @@
 
       <!-- Istruzione 1 -->
       <div class="flex gap-4 pb-4 border-b border-gray-200">
-        <div class="flex-shrink-0 text-blue-600 text-2xl w-8 h-8 flex items-center justify-center">
+        <div class="flex-shrink-0 text-brand-400 text-2xl w-8 h-8 flex items-center justify-center">
           <i class="fas fa-user-plus"></i>
         </div>
         <div>
@@ -704,7 +726,7 @@
 
     <!-- Footer -->
     <div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
-      <button id="close-instructions-bottom" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">
+      <button id="close-instructions-bottom" class="w-full bg-brand-500 hover:bg-brand-600 text-white font-semibold py-2 px-4 rounded-lg transition">
         Chiudi
       </button>
     </div>
@@ -719,8 +741,8 @@
 
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">
-  <div id="pdf-header" style="margin-bottom: 16px; border-bottom: 2px solid #1e40af; padding-bottom: 8px;">
-    <h1 style="font-size: 20px; font-weight: bold; color: #1e40af; margin: 0;">Turni RUAP Attività Diurne</h1>
+  <div id="pdf-header" style="margin-bottom: 16px; border-bottom: 2px solid #c29b57; padding-bottom: 8px;">
+    <h1 style="font-size: 20px; font-weight: bold; color: #1a2f4c; margin: 0;">Turni RUAP Attività Diurne</h1>
     <p id="pdf-subtitle" style="font-size: 13px; color: #64748b; margin: 4px 0 0;"></p>
   </div>
   <div id="pdf-table"></div>

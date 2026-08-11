@@ -86,12 +86,22 @@ export function reloadSlots() {
 export function initDarkMode() {
   const enabled = localStorage.getItem(STORAGE_DARK_MODE) === 'true';
   if (enabled) document.documentElement.classList.add('dark');
+  updateDarkModeButton();
+}
+
+function updateDarkModeButton() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const icon = document.getElementById('darkmode-icon');
+  const label = document.getElementById('darkmode-label');
+  if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+  if (label) label.textContent = isDark ? 'Chiaro' : 'Scuro';
 }
 
 export function toggleDarkMode() {
   const html = document.documentElement;
   html.classList.toggle('dark');
   localStorage.setItem(STORAGE_DARK_MODE, html.classList.contains('dark') ? 'true' : 'false');
+  updateDarkModeButton();
 }
 
 // --- History ---
