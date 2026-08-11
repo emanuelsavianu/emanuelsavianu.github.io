@@ -1227,27 +1227,56 @@ export async function exportPNG() {
 // renderizzata a schermo, per il mese attualmente in vista. Non tocca
 // gli export esistenti (PDF/PNG divisi per sede).
 export async function exportCalendarScreenshot() {
-  if (typeof html2canvas === 'undefined') {
-    toast('Libreria html2canvas non caricata — impossibile generare PNG', 'error');
-    return;
-  }
   const container = document.querySelector('main');
   if (!container) return;
   const bodyBg = getComputedStyle(document.body).backgroundColor;
   const backgroundColor = bodyBg && bodyBg !== 'rgba(0, 0, 0, 0)' ? bodyBg : '#faf7f1';
   try {
-    const canvas = await html2canvas(container, {
-      scale: 2,
-      useCORS: true,
-      backgroundColor,
-      logging: false,
-      width: container.scrollWidth,
-      height: container.scrollHeight,
-    });
+    let blob;
+    if (typeof domtoimage !== 'undefined') {
+      // dom-to-image-more: il browser disegna il DOM nativamente (SVG foreignObject)
+      // → testo e colori identici allo schermo, anche con Tailwind v3.
+      blob = await domtoimage.toBlob(container, {
+        width: container.scrollWidth,
+        height: container.scrollHeight,
+        pixelRatio: 2,
+        bgcolor: backgroundColor,
+      });
+    } else if (typeof html2canvas !== 'undefined') {
+      // Fallback: html2canvas non gestisce i colori moderni di Tailwind né
+      // overflow/nowrap → risolviamo tutto nel clone di cattura.
+      toast('Generazione con html2canvas (compatibilità)...', 'info', 1500);
+      const canvas = await html2canvas(container, {
+        scale: 2,
+        useCORS: true,
+        backgroundColor,
+        logging: false,
+        width: container.scrollWidth,
+        height: container.scrollHeight,
+        onclone: (doc) => {
+          doc.querySelectorAll('*').forEach((el) => {
+            const cs = doc.defaultView.getComputedStyle(el);
+            if (cs.color) el.style.color = cs.color;
+            const bg = cs.backgroundColor;
+            if (bg && bg !== 'rgba(0, 0, 0, 0)') el.style.backgroundColor = bg;
+            if (cs.overflow === 'hidden' || cs.overflowX === 'hidden' || cs.overflowY === 'hidden') {
+              el.style.overflow = 'visible';
+            }
+            if (cs.textOverflow === 'ellipsis') el.style.textOverflow = 'clip';
+            if (cs.whiteSpace === 'nowrap') el.style.whiteSpace = 'normal';
+          });
+        },
+      });
+      blob = await new Promise((res, rej) => canvas.toBlob(b => b ? res(b) : rej(new Error('toBlob fallito')), 'image/png'));
+    } else {
+      toast('Libreria di cattura non caricata', 'error');
+      return;
+    }
     const link = document.createElement('a');
     link.download = `calendario-${MONTHS_IT[state.calMonth].toLowerCase()}-${state.calYear}.png`;
-    link.href = canvas.toDataURL('image/png');
+    link.href = URL.createObjectURL(blob);
     link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 5000);
     toast('Schermata calendario scaricata', 'success');
   } catch (err) {
     toast('Errore salvataggio schermata: ' + err.message, 'error');
@@ -1708,7 +1737,7 @@ export function wizardGoNext() {
 // ====================================================
 export function updateHeaderSubtitle() {
   const elSubtitle = el('header-subtitle');
-  if (elSubtitle) elSubtitle.textContent = 'Attività Diurne — ' + PLACES.join(' · ');
+  if (elSubtitle) elSubtitle.textContent = 'Per suggerimenti scrivi a suggerimenti@savianu.it';
 }
 
 // ====================================================
