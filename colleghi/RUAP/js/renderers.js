@@ -103,7 +103,7 @@ function createSlotButton(dateKey, place, slot, inMonth) {
   if (colorHex && displayName) slotBtn.style.backgroundColor = colorHex;
 
   slotBtn.innerHTML = displayName
-    ? `<div class="truncate font-semibold text-xs">${escapeHtml(displayName)}</div><div class="text-[10px] opacity-80">${slot.icon} ${slot.label}</div>`
+    ? `<div class="truncate font-semibold text-xs">${escapeHtml(displayName)}</div><div class="text-[11px] opacity-80">${slot.icon} ${slot.label}</div>`
     : `<div class="text-slate-400 text-xs">${slot.icon} <span class="text-slate-400">Assegna</span></div>`;
   slotBtn.setAttribute('aria-label', displayName ? `${displayName} · ${place} · ${slot.label}` : `Assegna turno · ${place} · ${slot.label}`);
 
@@ -130,7 +130,7 @@ function holidayCellHTML(dayNum, dayName = '') {
     <span class="text-xs font-bold text-slate-500">${label}</span>
     <span class="text-[9px] font-bold text-red-600 bg-red-50 px-1 py-0.5 rounded uppercase">Festivo</span>
   </div>
-  <div class="flex items-center justify-center py-3 text-[10px] font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
+  <div class="flex items-center justify-center py-3 text-[11px] font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
 }
 
 function renderCalendarWeek() {
@@ -164,7 +164,7 @@ function renderCalendarWeek() {
         const { coverageClass, coverageIcon } = getCoverageBadge(dateKey, place);
         const placeDiv = document.createElement('div');
         placeDiv.className = 'mb-1';
-        placeDiv.innerHTML = `<div class="flex items-center gap-1 mb-0.5"><span class="text-[10px] font-semibold text-slate-500 flex-1 truncate">${escapeHtml(place)}</span><span class="text-[10px] font-bold px-1 rounded ${coverageClass}">${coverageIcon}</span></div>`;
+        placeDiv.innerHTML = `<div class="flex items-center gap-1 mb-0.5"><span class="text-[11px] font-semibold text-slate-500 flex-1 truncate">${escapeHtml(place)}</span><span class="text-[11px] font-bold px-1 rounded ${coverageClass}">${coverageIcon}</span></div>`;
         SLOTS.forEach(slot => {
           placeDiv.appendChild(createSlotButton(dateKey, place, slot, true));
         });
@@ -258,13 +258,13 @@ export function renderSidebar() {
         <div class="flex items-center gap-2 mb-1.5">
           <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
           <span class="font-semibold text-sm text-slate-800 truncate">${escapeHtml(cleanDoctorName(doc.name))}</span>
-          <span class="text-[10px] text-slate-400 ml-auto">${remH}h residue</span>
+          <span class="text-[11px] text-slate-500 ml-auto">${remH}h residue</span>
         </div>
         <div class="flex items-center gap-1">
           <div class="flex-1 h-1.5 bg-slate-100 rounded-full">
             <div style="width:${pct}%; background:${barColor}" class="h-1.5 rounded-full transition-all"></div>
           </div>
-          <span class="text-[10px] text-slate-400 flex-shrink-0">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
+          <span class="text-[11px] text-slate-500 flex-shrink-0">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
         </div>
       </div>`;
   }).join('');
@@ -339,7 +339,7 @@ function renderAvailableList(slotKey, slot, dateKey, isAvailable, isBusy) {
       <span class="w-3 h-3 rounded-full flex-shrink-0 mt-0.5" style="background:${color.hex}"></span>
       <span class="flex-1 font-medium text-xs">${escapeHtml(doc.name)}</span>
       <div class="flex flex-col items-end gap-0.5">
-        <span class="text-[10px] text-slate-400">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
+        <span class="text-[11px] text-slate-500">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
         <div class="w-12 h-1 bg-slate-100 rounded-full"><div style="width:${pct}%; background:${barColor}" class="h-1 rounded-full"></div></div>
       </div>`;
     btn.addEventListener('click', () => assignDoctor(slotKey, doc.id));
@@ -371,7 +371,7 @@ export function openAssignDropdown(slotKey, slot, dateKey, place, rect) {
       <span class="w-3 h-3 rounded-full flex-shrink-0 mt-0.5" style="background:${color.hex}"></span>
       <span class="flex-1 font-medium text-xs">${escapeHtml(doc.name)}</span>
       ${isUnavailReason ? '<i class="fa-solid fa-ban text-red-400 text-xs" title="Non disponibile questo giorno"></i>' : ''}
-      <span class="text-[10px] text-slate-400 italic">${isBusy.has(doc.id) ? 'stessa fascia oraria' : 'eccezione'}</span>`;
+      <span class="text-[11px] text-slate-500 italic">${isBusy.has(doc.id) ? 'stessa fascia oraria' : 'eccezione'}</span>`;
     btn.addEventListener('click', () => assignDoctor(slotKey, doc.id));
     unavailList.appendChild(btn);
   });
@@ -731,7 +731,7 @@ export function openConflictsModal() {
             <p class="text-xs text-slate-500">${dateFormatted} · ${slotLabel}</p>
           </div>
           <div class="flex items-center gap-1">
-            ${c.isUnavailable ? '<span class="bg-purple-100 text-purple-700 text-[10px] font-bold px-2 py-0.5 rounded-full flex-shrink-0">Assente / Ferie</span>' : ''}
+            ${c.isUnavailable ? '<span class="bg-purple-100 text-purple-700 text-[11px] font-bold px-2 py-0.5 rounded-full flex-shrink-0">Assente / Ferie</span>' : ''}
             <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full flex-shrink-0">${c.keys.length} sedi</span>
           </div>
         </div>
@@ -1747,10 +1747,10 @@ export function toggleHideZeroDocs() {
   hideZeroDocs = !hideZeroDocs;
   const icon = el('btn-hide-zero-docs');
   if (hideZeroDocs) {
-    icon.className = 'fa-solid fa-eye-slash text-brand-500 text-[10px] cursor-pointer hover:text-brand-600';
+    icon.className = 'fa-solid fa-eye-slash text-brand-500 text-[11px] cursor-pointer hover:text-brand-600';
     icon.title = 'Mostra tutti';
   } else {
-    icon.className = 'fa-regular fa-eye text-slate-400 text-[10px] cursor-pointer hover:text-brand-600';
+    icon.className = 'fa-regular fa-eye text-slate-400 text-[11px] cursor-pointer hover:text-brand-600';
     icon.title = 'Nascondi inattivi';
   }
   renderMonthlyStats();

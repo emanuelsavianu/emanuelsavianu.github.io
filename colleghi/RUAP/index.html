@@ -37,6 +37,10 @@
     /* Transizione slot calendario */
     .slot-btn { transition: all 0.15s ease; }
     .slot-btn:hover { transform: scale(1.02); }
+    /* Legibility: white text on the doctor-color chips needs a shadow to pass contrast on light hues */
+    .slot-btn.text-white { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45); }
+    /* Touch targets: header action buttons/labels get the recommended 44px min-height */
+    header button, header label { min-height: 44px; }
     /* Dropdown assegnazione */
     #assign-dropdown { z-index: 9999; }
     /* Animazioni */
