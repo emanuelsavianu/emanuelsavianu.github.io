@@ -97,7 +97,7 @@ function createSlotButton(dateKey, place, slot, inMonth) {
   const slotBtn = document.createElement('button');
   let variantClass;
   if (displayName) variantClass = 'border-transparent text-white shadow-sm';
-  else if (inMonth) variantClass = 'border-dashed border-slate-300 bg-slate-50 text-slate-400 hover:border-brand-400 hover:bg-blue-50 hover:text-brand-700';
+  else if (inMonth) variantClass = 'border-dashed border-slate-300 bg-slate-50 text-slate-400 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700';
   else variantClass = 'border-transparent bg-transparent cursor-default';
   slotBtn.className = `slot-btn w-full text-left rounded-lg px-2 py-1.5 mb-1 text-xs font-medium border transition-all ${variantClass}`;
   if (colorHex && displayName) slotBtn.style.backgroundColor = colorHex;
@@ -442,7 +442,7 @@ export function renderUnavailCalendar() {
         (isUnavail
           ? 'bg-red-500 text-white border-red-500'
           : inMonth
-            ? 'bg-slate-50 text-slate-700 border-slate-200 hover:border-brand-400 hover:bg-blue-50'
+            ? 'bg-slate-50 text-slate-700 border-slate-200 hover:border-brand-400 hover:bg-brand-50'
             : 'bg-transparent text-slate-300 border-transparent cursor-default');
       btn.textContent = cellDate.getDate();
       if (inMonth) {
@@ -532,15 +532,13 @@ export function openDoctorModal(doctorId = null) {
     isPool: doc.isPool || false,
     monthlyBudget: doc.monthlyBudget ?? '',
     aft: doc.aft || '',
-    seniority: doc.seniority || '',
-  } : { name: '', patients: '850', hours: '38', isPool: false, monthlyBudget: '', aft: '', seniority: '' };
+  } : { name: '', patients: '850', hours: '38', isPool: false, monthlyBudget: '', aft: '' };
   el('modal-name').value = values.name;
   el('modal-patients').value = values.patients;
   el('modal-hours').value = values.hours;
   el('modal-is-pool').checked = values.isPool;
   el('modal-monthly-budget').value = values.monthlyBudget;
   el('modal-aft').value = values.aft;
-  el('modal-seniority').value = values.seniority;
   renderAvailabilityTable(doc ? doc.availability : null);
   renderColorPicker(doc ? doc.colorIndex || 0 : 0);
   populatePlaceSelect(el('modal-preferred-place'), doc ? doc.preferredPlace : null);
@@ -625,7 +623,6 @@ export function saveDoctorFromModal() {
   const isPool = el('modal-is-pool').checked;
   const budget = el('modal-monthly-budget').value ? parseFloat(el('modal-monthly-budget').value) : undefined;
   const aft = el('modal-aft').value || '';
-  const seniority = parseInt(el('modal-seniority').value) || 0;
   const preferredPlace = el('modal-preferred-place').value || null;
   const selectedSwatch = document.querySelector('.color-swatch.border-slate-800');
   const colorIndex = selectedSwatch ? parseInt(selectedSwatch.dataset.index) : 0;
@@ -652,7 +649,6 @@ export function saveDoctorFromModal() {
       doc.isPool = isPool;
       if (budget !== undefined) doc.monthlyBudget = budget; else delete doc.monthlyBudget;
       doc.aft = aft;
-      doc.seniority = seniority;
       doc.preferredPlace = preferredPlace;
       doc.colorIndex = colorIndex;
       doc.availability = availability;
@@ -661,7 +657,7 @@ export function saveDoctorFromModal() {
   } else {
     state.doctors.push({
       id: generateId(), name, patients, weeklyHours, isPool, monthlyBudget: budget,
-      colorIndex, preferredPlace, availability, unavailPeriods, aft, seniority
+      colorIndex, preferredPlace, availability, unavailPeriods, aft
     });
   }
   saveToStorage();
@@ -1097,14 +1093,14 @@ export function buildPngContent() {
   // --- Calendar section ---
   let calHtml = `
     <div style="margin-bottom:20px;border-bottom:2px solid #1e3a5f;padding-bottom:10px;">
-      <h1 style="font-size:22px;font-weight:bold;color:#1e40af;margin:0 0 2px;">Turni RUAP Attività Diurne</h1>
+      <h1 style="font-size:22px;font-weight:bold;color:#1a2f4c;margin:0 0 2px;">Turni RUAP Attività Diurne</h1>
       <p style="font-size:14px;color:#64748b;margin:0;">${monthName} ${year}</p>
     </div>`;
 
   PLACES.forEach(place => {
     calHtml += `<div style="margin-bottom:18px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
-        <span style="background:#1e40af;color:white;font-size:10px;font-weight:bold;padding:2px 10px;border-radius:4px;letter-spacing:0.5px;">${escapeHtml(place)}</span>
+        <span style="background:#1a2f4c;color:white;font-size:10px;font-weight:bold;padding:2px 10px;border-radius:4px;letter-spacing:0.5px;">${escapeHtml(place)}</span>
         <span style="font-size:11px;color:#64748b;">Turni mensili</span>
       </div>
       <table style="width:100%;border-collapse:collapse;font-size:11px;">
@@ -1147,7 +1143,7 @@ export function buildPngContent() {
   const totalUsed = stats.totalHours;
 
   let budgetHtml = `
-    <div style="margin-top:20px;padding-top:14px;border-top:2px solid #1e40af;">
+    <div style="margin-top:20px;padding-top:14px;border-top:2px solid #c29b57;">
       <h2 style="font-size:17px;font-weight:bold;color:#1e3a5f;margin:0 0 10px;">📊 Bilancio Mensile</h2>
       <table style="width:100%;border-collapse:collapse;font-size:12px;">
         <thead><tr style="background:#1e3a5f;color:white;">
@@ -1221,6 +1217,41 @@ export async function exportPNG() {
     console.error(err);
   } finally {
     container.classList.add('hidden');
+  }
+}
+
+// ====================================================
+// 10b. SALVA SCHERMATA — PNG del calendario come si vede sul sito
+// ====================================================
+// Cattura l'area calendario (mese + griglia turni) esattamente come
+// renderizzata a schermo, per il mese attualmente in vista. Non tocca
+// gli export esistenti (PDF/PNG divisi per sede).
+export async function exportCalendarScreenshot() {
+  if (typeof html2canvas === 'undefined') {
+    toast('Libreria html2canvas non caricata — impossibile generare PNG', 'error');
+    return;
+  }
+  const container = document.querySelector('main');
+  if (!container) return;
+  const bodyBg = getComputedStyle(document.body).backgroundColor;
+  const backgroundColor = bodyBg && bodyBg !== 'rgba(0, 0, 0, 0)' ? bodyBg : '#faf7f1';
+  try {
+    const canvas = await html2canvas(container, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor,
+      logging: false,
+      width: container.scrollWidth,
+      height: container.scrollHeight,
+    });
+    const link = document.createElement('a');
+    link.download = `calendario-${MONTHS_IT[state.calMonth].toLowerCase()}-${state.calYear}.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    toast('Schermata calendario scaricata', 'success');
+  } catch (err) {
+    toast('Errore salvataggio schermata: ' + err.message, 'error');
+    console.error(err);
   }
 }
 
@@ -1475,7 +1506,7 @@ function renderWizardStep1() {
 
 function renderWizardStep2() {
   const chipsHtml = wPlaces.map(p => `
-    <span class="wizard-chip" style="background:#dbeafe; color:#1e40af">
+    <span class="wizard-chip" style="background:#f3efe6; color:#1a2f4c">
       ${escapeHtml(p)}
       <button class="chip-remove w-remove-place" data-place="${escapeHtml(p)}">×</button>
     </span>`).join('');

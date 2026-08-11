@@ -32,7 +32,7 @@ export function enumerateEmptySlots(year, month) {
   return slots;
 }
 
-function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, assignedInTarget, getEffectiveRemaining) {
+function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, assignedInTarget, getEffectiveRemaining, slotHours) {
   const notBusy = (doc) => {
     const prefix = `${dateKey}_${slotKeyOnly}_`;
     return !Object.entries(state.assignments).some(([k, v]) => v === doc.id && k.startsWith(prefix));
@@ -50,11 +50,12 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
     );
   };
 
+  // Budget must cover the WHOLE slot: no partial overshoot (e.g. 3h left cannot take a 6h shift)
   const filterAvailable = (docs) => docs.filter(doc =>
     isDoctorAvailableForSlot(doc, dateKey, slotKeyOnly)
     && notBusy(doc)
     && !hasConsecutiveShiftConflict(doc)
-    && getEffectiveRemaining(doc) > 0
+    && getEffectiveRemaining(doc) >= slotHours
   );
 
   const availablePrimary = filterAvailable(primaryDocs);
@@ -70,7 +71,15 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
 
   for (const group of priorityGroups) {
     if (group.length > 0) {
-      group.sort((a, b) => (assignedInTarget[a.id] || 0) - (assignedInTarget[b.id] || 0));
+      // Fairness first: the doctor with the FEWEST assigned hours this month wins.
+      // On a tie, priority goes to the doctor with the FEWER patients.
+      // (Do NOT fall back to the doctors array order — that was a hidden
+      // seniority bias that made the same doctors win every tie.)
+      group.sort((a, b) => {
+        const hoursDiff = (assignedInTarget[a.id] || 0) - (assignedInTarget[b.id] || 0);
+        if (hoursDiff !== 0) return hoursDiff;
+        return (a.patients ?? 0) - (b.patients ?? 0);
+      });
       return group[0];
     }
   }
@@ -125,7 +134,7 @@ export function runAutoAssignForMonth(year, month) {
       const slotHours = slotDef ? slotDef.hours : 6;
       const place = parts.slice(2).join('_');
 
-      const chosen = pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, assignedInTarget, getEffectiveRemaining);
+      const chosen = pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, assignedInTarget, getEffectiveRemaining, slotHours);
       if (!chosen) continue;
 
       state.assignments[slotKey] = chosen.id;
