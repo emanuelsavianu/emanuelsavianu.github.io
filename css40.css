@@ -19,7 +19,7 @@
     --color-accent: #c29b57;
     --color-accent-strong: #7a5c2e;
     --color-danger: #b91c1c;
-    --color-success: #166534;
+    --color-success: #15803d;
     --color-focus: #7a5c2e;
     --color-shadow: rgba(26, 47, 76, 0.12);
 
@@ -36,7 +36,6 @@
     --white: var(--color-surface);
     --border-color: var(--color-border);
     --danger: var(--color-danger);
-    --success: var(--color-success);
     --warning: var(--color-accent);
 
     /* ---- Spacing scale ---- */
@@ -92,7 +91,6 @@ body.dark-mode {
     --white: var(--color-surface);
     --border-color: var(--color-border);
     --danger: #ff6b6b;
-    --success: #4ade80;
     --warning: var(--color-accent);
     --shadow-md: 0 8px 24px var(--color-shadow);
     --focus-ring: 3px solid var(--color-focus);
