@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-08-11",
+  "configDataVersion": "2026-08-11T15:38:38Z",
   "places": [
     "M.S.Savino",
     "Subbiano"
@@ -725,7 +725,7 @@ const CONFIG = {
     "2026-09-11_mat_M.S.Savino": "mqgp5xpec24f6",
     "2026-09-11_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-09-11_pom_Subbiano": "mqgp5xpe79zho",
-    "2026-09-14_mat_M.S.Savino": "mqgp5xpeohiai",
+    "2026-09-14_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-09-14_mat_Subbiano": "mqgp5xpec24f6",
     "2026-09-14_pom_Subbiano": "mqgp5xpehbrke",
     "2026-09-15_mat_M.S.Savino": "mqgp5xpeohiai",
@@ -733,7 +733,7 @@ const CONFIG = {
     "2026-09-15_pom_M.S.Savino": "mqgp5xpe79zho",
     "2026-09-15_pom_Subbiano": "mqgp5xpe6gb6b",
     "2026-09-16_mat_M.S.Savino": "mqgp5xpe79zho",
-    "2026-09-16_pom_M.S.Savino": "mqgp5xpekiw12",
+    "2026-09-16_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-09-16_pom_Subbiano": "mrasudwdk87n",
     "2026-09-17_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-09-17_mat_Subbiano": "mqgp5xpe6gb6b",
@@ -764,14 +764,14 @@ const CONFIG = {
     "2026-09-25_pom_Subbiano": "mqgp5xpe6gb6b",
     "2026-09-28_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-09-28_mat_Subbiano": "mqgp5xpec24f6",
-    "2026-09-28_pom_M.S.Savino": "mqgp5xpe79zho",
+    "2026-09-28_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-09-28_pom_Subbiano": "mqgp5xpekiw12",
     "2026-09-29_mat_M.S.Savino": "mrasudwdk87n",
     "2026-09-29_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-09-29_pom_Subbiano": "mqgp5xpe6gb6b",
-    "2026-09-30_mat_M.S.Savino": "mqgp5xpe6gb6b",
-    "2026-09-30_mat_Subbiano": "mqgp5xpec24f6",
-    "2026-09-30_pom_M.S.Savino": "mqgp5xpemfnc0",
+    "2026-09-30_mat_M.S.Savino": "mqgp5xpec24f6",
+    "2026-09-30_mat_Subbiano": "mqgp5xpe6gb6b",
+    "2026-09-30_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-09-30_pom_Subbiano": "mrasudwdk87n",
     "2026-09-16_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-09-04_mat_Subbiano": "mqgp5xpec24f6",
