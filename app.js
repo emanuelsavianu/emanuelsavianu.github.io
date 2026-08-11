@@ -11,8 +11,13 @@ import { CONFIG } from './config.js?v=1';
 // =================================================================
 
 function getPathPrefix() {
-  const depth = location.pathname.split('/').filter(Boolean).length;
-  return depth > 1 ? '../'.repeat(depth - 1) : '';
+  const segments = location.pathname.split('/').filter(Boolean);
+  const last = segments[segments.length - 1] || '';
+  // L'ultimo segmento è un file se ha un'estensione (es. .html); altrimenti
+  // è una directory (URL tipo /colleghi/ o /colleghi senza slash).
+  const isFile = /\.\w+$/.test(last);
+  const dirs = Math.max(0, segments.length - (isFile ? 1 : 0));
+  return '../'.repeat(dirs);
 }
 
 function applyI18n(lang) {
