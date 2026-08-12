@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modalità di accesso e di uso - Studio Medico Ippocrate</title>
+    <link rel="canonical" href="https://savianu.it/ssn/poster_multilingue.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Noto+Nastaliq+Urdu:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+
+        :root {
+            --primary: #005f73;
+            --secondary: #0a9396;
+            --accent: #94d2bd;
+            --bg-color: #f8f9fa;
+            --text-color: #333;
+            --box-bg: #fff;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .poster-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 4px solid var(--primary);
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin: 0 0 10px 0;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header p {
+            margin: 5px 0;
+            font-size: 1.3em;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .header .website {
+            color: var(--secondary);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .col {
+            background: var(--box-bg);
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            border-top: 6px solid var(--secondary);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .col.urdu {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            direction: rtl;
+            font-size: 1.1em;
+            line-height: 2;
+        }
+
+        .col.bengali {
+            font-family: 'Noto Sans Bengali', sans-serif;
+        }
+
+        .lang-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .title {
+            color: var(--primary);
+            font-size: 1.5em;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .subtitle {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 1.05em;
+            line-height: 1.4;
+            padding-bottom: 15px;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .section-title {
+            color: var(--secondary);
+            font-size: 1.25em;
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .urdu .section-title {
+            flex-direction: row-reverse;
+        }
+
+        .point {
+            margin-bottom: 18px;
+            line-height: 1.5;
+            font-size: 0.95em;
+        }
+
+        .point strong {
+            display: block;
+            color: #222;
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+        
+        .urdu .point strong {
+            font-size: 1.1em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 2px solid #eee;
+            font-size: 1em;
+            color: #555;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .footer-logo {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.2em;
+        }
+
+        .icon {
+            font-size: 1.3em;
+            background: var(--bg-color);
+            padding: 8px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        /* Stili per la stampa (PDF / Carta) */
+        @media print {
+            @page {
+                size: A3 landscape;
+                margin: 15mm;
+            }
+            body {
+                background: white;
+                padding: 0;
+            }
+            .poster-container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+            .grid {
+                gap: 15px;
+            }
+            .col {
+                border: 1px solid #ddd;
+                border-top: 6px solid var(--secondary);
+                padding: 15px;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <div class="header">
+        <h1>Studio Medico Ippocrate</h1>
+        <p>Piazza Saione 3, Arezzo | Tel: 0575 910904</p>
+        <p class="website">savianu.it</p>
+    </div>
+
+    <div class="grid">
+        <!-- ITALIANO -->
+        <div class="col italian">
+            <div class="lang-badge">Italiano</div>
+            <div class="title">Guida pratica per la tua salute</div>
+            <div class="subtitle">Il Medico di Medicina Generale ti aiuta a curare le malattie e prevenire i problemi di salute.</div>
+            
+            <div class="section-title"><span class="icon">🏥</span> 1. Modalità di accesso</div>
+            <div class="point"><strong>Prenota un appuntamento:</strong> Vieni in ambulatorio per visite e ricette solo su appuntamento.</div>
+            <div class="point"><strong>No Pronto Soccorso per problemi lievi:</strong> Usa l'emergenza solo per casi gravi (es. pericolo di vita, forte dolore al petto, incidenti).</div>
+            <div class="point"><strong>Porta i tuoi farmaci:</strong> Ad ogni visita porta le scatole di tutti i farmaci che stai assumendo attualmente.</div>
+
+            <div class="section-title"><span class="icon">💊</span> 2. Uso sicuro dei farmaci</div>
+            <div class="point"><strong>Assumi i farmaci ogni giorno:</strong> Non interrompere le cure per pressione o diabete anche se ti senti meglio.</div>
+            <div class="point"><strong>Antibiotici:</strong> Usali solo su consiglio medico. Completa l'intero ciclo anche se il sintomo scompare.</div>
+            <div class="point"><strong>Informa il medico:</strong> Avvisa sempre se stai usando erbe, medicine tradizionali o integratori.</div>
+
+            <div class="section-title"><span class="icon">🥗</span> 3. Nutrizione e salute</div>
+            <div class="point"><strong>Evita zuccheri e dolci:</strong> Riduci bevande zuccherate, succhi, dolci e riso bianco.</div>
+            <div class="point"><strong>Riduci il sale:</strong> Usa spezie ed erbe naturali per insaporire i tuoi cibi.</div>
+            <div class="point"><strong>Più verdure e legumi:</strong> Verdure a foglia verde, lenticchie e ceci fanno bene a cuore e intestino.</div>
+            <div class="point"><strong>Bevi acqua:</strong> Almeno 1,5-2 litri al giorno. Evita le bevande gassate.</div>
+
+            <div class="section-title"><span class="icon">🚶</span> 4. Movimento quotidiano</div>
+            <div class="point">Cammina a passo svelto per almeno 30 minuti al giorno.</div>
+            <div class="point">L'attività fisica aiuta a controllare pressione, glicemia, peso e stress.</div>
+        </div>
+
+        <!-- ENGLISH -->
+        <div class="col english">
+            <div class="lang-badge">English</div>
+            <div class="title">Practical guide for your health</div>
+            <div class="subtitle">The General Practitioner helps you cure diseases and prevent health problems.</div>
+            
+            <div class="section-title"><span class="icon">🏥</span> 1. How the clinic works</div>
+            <div class="point"><strong>Book an appointment:</strong> Come to the clinic for check-ups and prescriptions only by appointment.</div>
+            <div class="point"><strong>Do not go to the ER for minor issues:</strong> Use the Emergency Room only for severe emergencies (e.g., life-threatening situations, severe chest pain).</div>
+            <div class="point"><strong>Bring your medicines:</strong> Bring the boxes of all the medicines you are currently taking to every visit.</div>
+
+            <div class="section-title"><span class="icon">💊</span> 2. Safe use of medicines</div>
+            <div class="point"><strong>Take medicine daily:</strong> Do not stop taking prescribed blood pressure or sugar medication even if you feel better.</div>
+            <div class="point"><strong>Antibiotics:</strong> Use only with the doctor's advice. Complete the full course.</div>
+            <div class="point"><strong>Inform the doctor:</strong> Be sure to tell the doctor if you are using herbs, traditional medicines, or supplements.</div>
+
+            <div class="section-title"><span class="icon">🥗</span> 3. Nutrition and health</div>
+            <div class="point"><strong>Avoid sugar and sweets:</strong> Reduce sweet drinks, fruit juices, sweets, and white rice.</div>
+            <div class="point"><strong>Reduce salt:</strong> Use spices and natural herbs to add flavor to your food.</div>
+            <div class="point"><strong>Eat vegetables & lentils:</strong> Green vegetables, lentils, and chickpeas are beneficial for the heart.</div>
+            <div class="point"><strong>Drink water:</strong> At least 1.5 to 2 liters daily. Avoid fizzy soft drinks.</div>
+
+            <div class="section-title"><span class="icon">🚶</span> 4. Daily exercise</div>
+            <div class="point">Walk at a brisk pace for at least 30 minutes every day.</div>
+            <div class="point">Physical activity helps control blood pressure, sugar, weight, and stress.</div>
+        </div>
+
+        <!-- URDU -->
+        <div class="col urdu">
+            <div class="lang-badge" style="direction: ltr;">اردو (Urdu)</div>
+            <div class="title">آپ کی صحت کے لیے عملی رہنمائی</div>
+            <div class="subtitle">عام معالج (جنرل پریکٹیشنر) بیماریاں دور کرنے اور صحت کے مسائل سے بچاؤ میں آپ کی مدد کرتا ہے۔</div>
+            
+            <div class="section-title"><span class="icon">🏥</span> 1۔ ڈاکٹر کا کلینک کیسے کام کرتا ہے؟</div>
+            <div class="point"><strong>اپائنٹمنٹ بک کریں:</strong> معائنے اور نسخے (پریکرپشن) کے لیے صرف اپائنٹمنٹ لے کر ہی کلینک آئیں۔</div>
+            <div class="point"><strong>معمولی مسائل کے لیے ایمرجنسی نہ جائیں:</strong> ایمرجنسی سروس صرف شدید ہنگامی حالات کے لیے استعمال کریں (مثلاً: جان کا خطرہ، سینے میں شدید درد)۔</div>
+            <div class="point"><strong>اپنی ادویات ساتھ لائیں:</strong> ہر وزٹ کے دوران ان تمام ادویات کے ڈبے ساتھ لائیں جو آپ اس وقت استعمال کر رہے ہیں۔</div>
+
+            <div class="section-title"><span class="icon">💊</span> 2۔ ادویات کا محفوظ استعمال</div>
+            <div class="point"><strong>روزانہ دوا لیں:</strong> اگر ڈاکٹر نے آپ کو بلڈ پریشر یا شوگر کی دوا دی ہے، تو بہتر محسوس کرنے پر بھی اسے بند نہ کریں۔</div>
+            <div class="point"><strong>اینٹی بائیوٹکس:</strong> صرف ڈاکٹر کے مشورے سے استعمال کریں۔ پورا کورس مکمل کریں۔</div>
+            <div class="point"><strong>ڈاکٹر کو آگاہ کریں:</strong> اگر آپ جڑی بوٹیوں، روایتی ادویات یا سپلیمنٹس کا استعمال کر رہے ہیں تو ڈاکٹر کو ضرور بتائیں۔</div>
+
+            <div class="section-title"><span class="icon">🥗</span> 3۔ غذائیت اور صحت</div>
+            <div class="point"><strong>چینی اور میٹھی اشیاء سے پرہیز:</strong> میٹھے مشروبات، پھلوں کے رس، مٹھائیوں اور سفید چاول کا استعمال کم کریں۔</div>
+            <div class="point"><strong>نمک کم کریں:</strong> کھانے میں ذائقہ لانے کے لیے مصالحے اور قدرتی جڑی بوٹیاں استعمال کریں۔</div>
+            <div class="point"><strong>سبزیاں اور دالیں زیادہ کھائیں:</strong> ہری سبزیاں، دالیں اور چنے دل کے لیے فائدہ مند ہیں۔</div>
+            <div class="point"><strong>پانی پیئیں:</strong> روزانہ 1.5 سے 2 لیٹر پانی پیئیں۔ گیس والے مشروبات سے پرہیز کریں۔</div>
+
+            <div class="section-title"><span class="icon">🚶</span> 4۔ روزانہ ورزش کریں</div>
+            <div class="point">روزانہ کم از کم 30 منٹ تیز رفتار سے پیدل چلیں۔</div>
+            <div class="point">جسمانی سرگرمی بلڈ پریشر، شوگر، وزن اور ذہنی تناؤ کو کنٹرول کرتی ہے۔</div>
+        </div>
+
+        <!-- BENGALI -->
+        <div class="col bengali">
+            <div class="lang-badge">বাংলা (Bengali)</div>
+            <div class="title">আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা</div>
+            <div class="subtitle">সাধারণ চিকিৎসক আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</div>
+            
+            <div class="section-title"><span class="icon">🏥</span> ১. ক্লিনিক কীভাবে কাজ করে?</div>
+            <div class="point"><strong>অ্যাপয়েন্টমেন্ট বুক করুন:</strong> চেক-আপ এবং প্রেসক্রিপশনের জন্য শুধুমাত্র অ্যাপয়েন্টমেন্ট নিয়ে ক্লিনিকে আসুন।</div>
+            <div class="point"><strong>সাধারণ সমস্যার জন্য ইমার্জেন্সিতে যাবেন না:</strong> শুধুমাত্র গুরুতর জরুরি পরিস্থিতিতে ইমার্জেন্সি পরিষেবা ব্যবহার করুন।</div>
+            <div class="point"><strong>আপনার ওষুধ সাথে আনুন:</strong> প্রতিবার ভিজিটের সময় বর্তমানে ব্যবহার করা সব ওষুধের বাক্স সাথে নিয়ে আসুন।</div>
+
+            <div class="section-title"><span class="icon">💊</span> ২. নিরাপদে ওষুধ ব্যবহার</div>
+            <div class="point"><strong>প্রতিদিন ওষুধ খান:</strong> ডাক্তার রক্তচাপ বা ডায়াবেটিসের ওষুধ দিলে, সুস্থ বোধ করলেও তা বন্ধ করবেন না।</div>
+            <div class="point"><strong>অ্যান্টিবায়োটিক:</strong> শুধুমাত্র ডাক্তারের পরামর্শে ব্যবহার করুন। সম্পূর্ণ কোর্স শেষ করুন।</div>
+            <div class="point"><strong>ডাক্তারকে জানান:</strong> ভেষজ, ঐতিহ্যবাহী ওষুধ বা সাপ্লিমেন্ট ব্যবহার করলে অবশ্যই ডাক্তারকে জানান।</div>
+
+            <div class="section-title"><span class="icon">🥗</span> ৩. পুষ্টি এবং স্বাস্থ্য</div>
+            <div class="point"><strong>চিনি ও মিষ্টি এড়িয়ে চলুন:</strong> মিষ্টি পানীয়, ফলের রস, মিষ্টি এবং সাদা চালের ব্যবহার কমান।</div>
+            <div class="point"><strong>লবণ কমান:</strong> খাবারে স্বাদ আনতে মশলা এবং প্রাকৃতিক ভেষজ ব্যবহার করুন।</div>
+            <div class="point"><strong>শাকসবজি ও ডাল খান:</strong> সবুজ শাকসবজি, ডাল এবং ছোলা হার্টের জন্য উপকারী।</div>
+            <div class="point"><strong>জল পান করুন:</strong> প্রতিদিন অন্তত ১.৫ থেকে ২ লিটার জল পান করুন। গ্যাসযুক্ত পানীয় এড়িয়ে চলুন।</div>
+
+            <div class="section-title"><span class="icon">🚶</span> ৪. প্রতিদিন ব্যায়াম করুন</div>
+            <div class="point">প্রতিদিন অন্তত ৩০ মিনিট দ্রুত গতিতে হাঁটুন।</div>
+            <div class="point">শারীরিক কার্যকলাপ রক্তচাপ, সুগার, ওজন এবং মানসিক চাপ নিয়ন্ত্রণে সাহায্য করে।</div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div>© Studio Medico Ippocrate · savianu.it</div>
+        <div class="footer-logo">STUDIO MEDICO IPPOCRATE</div>
+        <div>Guida Pratica - Multilingue (IT, EN, UR, BN)</div>
+    </div>
+</div>
+
+</body>
+</html>
