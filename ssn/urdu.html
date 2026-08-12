@@ -174,11 +174,47 @@
             color: #7f8c8d;
             background: #e9ecef;
         }
+        
+        .brand-bar {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+        
+        .brand-bar img {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+        }
+        
+        .brand-bar span {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #FFFFFF;
+            direction: ltr;
+        }
+        
+        @media print {
+            @page { size: A3 portrait; margin: 0; }
+            body { background: transparent; padding: 0; }
+            .container { max-width: 297mm; margin: 0 auto; padding: 0 15px; }
+            .brand-bar { display: inline-flex; }
+        }
     </style>
 </head>
 <body>
 
     <header>
+        <div class="brand-bar">
+            <img src="../assets/bronzelogo.png" alt="Studio Medico Ippocrate">
+            <span>savianu.it</span>
+        </div>
         <h1>اسٹوڈیو میڈیکو ایپوکراٹے</h1>
         <p>Studio Medico Ippocrate</p>
         <p>Piazza Saione 3 | Tel: <a href="tel:+390575910904">0575 910904</a></p>
@@ -228,21 +264,11 @@
         </div>
 
         <div class="contacts">
-            <h3>5۔ اہم نمبرز اور رابطے</h3>
+            <h3>5۔ رابطہ</h3>
             <div class="contact-grid">
                 <div class="contact-card">
-                    <span class="contact-title">ایمرجنسی / ایمبولینس</span>
-                    <span class="contact-desc">جان کا خطرہ (Pericolo di vita)</span>
-                    <span class="contact-number">112</span>
-                </div>
-                <div class="contact-card">
-                    <span class="contact-title">گارڈیا میڈیکا (ہنگامی ڈاکٹر)</span>
-                    <span class="contact-desc">24 گھنٹے (24 ore su 24)</span>
-                    <span class="contact-number">116 117</span>
-                </div>
-                <div class="contact-card">
-                    <span class="contact-title">ڈاکٹر کا کلینک</span>
-                    <span class="contact-desc">معائنہ، پرسکریپشن</span>
+                    <span class="contact-title">savianu.it</span>
+                    <span class="contact-desc">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
                     <span class="contact-number"><a href="tel:+390575910904">0575 910904</a></span>
                 </div>
             </div>
@@ -251,7 +277,7 @@
     </div>
 
     <div class="footer">
-        © Studio Medico Ippocrate - Guida Pratica (Versione Urdu)
+        © Studio Medico Ippocrate · savianu.it - Guida Pratica (Versione Urdu)
     </div>
 
 </body>

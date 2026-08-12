@@ -56,7 +56,7 @@
   .header {
     background: var(--navy-dark);
     color: white;
-    padding: 2.5rem 3rem 2rem 3rem;
+    padding: 1.8rem 3rem 1.6rem 3rem;
     position: relative;
     border-bottom: 5px solid var(--accent-gold);
   }
@@ -171,10 +171,10 @@
 
   /* ============ BODY CONTENT ============ */
   .content-body {
-    padding: 2.5rem 3rem;
+    padding: 2rem 3rem;
     display: flex;
     flex-direction: column;
-    gap: 2.2rem;
+    gap: 1.8rem;
   }
 
   .section-block {
@@ -353,85 +353,49 @@
     margin-top: auto;
   }
 
-  /* ============ FOOTER / CONTACTS ============ */
+  /* ============ FOOTER / BRAND ============ */
   .footer {
-    background: var(--nhs-blue);
+    background: var(--navy-dark);
     color: white;
-    padding: 2.2rem 3rem;
+    padding: 1.6rem 3rem;
+    border-top: 5px solid var(--accent-gold);
   }
 
-  .footer-header {
-    text-align: center;
-    font-size: 0.95rem;
-    font-weight: 700;
-    letter-spacing: 0.8px;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    color: var(--gold-light);
-  }
-
-  .contact-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .contact-card {
-    background: white;
-    color: var(--text-dark);
-    border-radius: 10px;
-    padding: 1.2rem 1.2rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .contact-icon-box {
-    width: 46px;
-    height: 46px;
-    border-radius: 50%;
-    background: var(--teal-soft);
+  .footer-brand {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-brand img {
     flex-shrink: 0;
   }
 
-  .contact-icon-box svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .contact-info {
+  .footer-brand-text {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
   }
 
-  .contact-name {
-    font-size: 0.95rem;
+  .footer-brand-text strong {
+    font-size: 1.4rem;
     font-weight: 800;
-    color: var(--navy-dark);
-    line-height: 1.2;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
   }
 
-  .contact-sub {
-    font-size: 0.82rem;
-    color: var(--text-muted);
+  .footer-brand-text span {
+    font-size: 0.85rem;
+    color: var(--gold-light);
     font-weight: 600;
-    margin-top: 2px;
-  }
-
-  .contact-phone {
-    font-size: 0.9rem;
-    font-weight: 800;
-    color: var(--nhs-blue);
-    margin-top: 4px;
   }
 
   /* ============ RESPONSIVITÀ PER TABLET E SMARTPHONE ============ */
   @media (max-width: 992px) {
-    .title-translations, .norm-box, .action-grid, .contact-row {
+    .title-translations, .norm-box, .action-grid {
       grid-template-columns: 1fr;
     }
     .cards-grid {
@@ -471,8 +435,8 @@
   <!-- ============ HEADER ============ -->
   <header class="header">
     <div class="top-badge">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-      Salute mentale · Toscana
+      <img src="../assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="22" height="22" style="border-radius:6px">
+      savianu.it
     </div>
     
     <h1 class="main-title">Anche la mente<br>si può <span>curare</span></h1>
@@ -696,45 +660,11 @@
 
   <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="footer-header">
-      SERVIZI SANITARI E CONTATTI UTILI AD AREZZO · LOCAL HEALTH CONTACTS
-    </div>
-
-    <div class="contact-row">
-      <!-- Contact 1: Cure Primarie USL -->
-      <div class="contact-card">
-        <div class="contact-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#005A9C" stroke-width="2"><path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0v-5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5m-4 0h4"/></svg>
-        </div>
-        <div class="contact-info">
-          <div class="contact-name">Servizi Territoriali & Consultori</div>
-          <div class="contact-sub">Servizi sanitari territoriali (Toscana)</div>
-          <div class="contact-phone">CUP / Info: 800 556060</div>
-        </div>
-      </div>
-
-      <!-- Contact 2: CSM -->
-      <div class="contact-card">
-        <div class="contact-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#00A896" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-        </div>
-        <div class="contact-info">
-          <div class="contact-name">CSM - Centro Salute Mentale</div>
-          <div class="contact-sub">Centro Salute Mentale Arezzo (Via Cittadini 33)</div>
-          <div class="contact-phone">Tel: 0575 2551</div>
-        </div>
-      </div>
-
-      <!-- Contact 3: Emergenze & Guardia Medica -->
-      <div class="contact-card">
-        <div class="contact-icon-box">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#D99B26" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div class="contact-info">
-          <div class="contact-name">Emergenze & Guardia Medica</div>
-          <div class="contact-sub">Emergenza Sanitaria: <strong>112</strong></div>
-          <div class="contact-phone">Continuità Assistenziale: <strong>116 117</strong></div>
-        </div>
+    <div class="footer-brand">
+      <img src="../assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="52" height="52" style="border-radius:10px">
+      <div class="footer-brand-text">
+        <strong>savianu.it</strong>
+        <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
       </div>
     </div>
   </footer>
