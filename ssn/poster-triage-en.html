@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Room or Family Doctor? — A3 Poster (English) | savianu.it</title>
+    <link rel="canonical" href="https://savianu.it/ssn/poster-triage-en.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --navy: #1A2F4C;
+            --gold: #C29B57;
+            --gold-soft: #F3EFE6;
+            --cream: #FDFBF7;
+            --text: #2c3e50;
+            --green-bg: #e8f5e9;
+            --green-border: #2e7d32;
+            --yellow-bg: #fff8e1;
+            --yellow-border: #b8860b;
+            --red-bg: #ffebee;
+            --red-border: #c0392b;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--gold-soft);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .poster-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
+            overflow: hidden;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: var(--navy);
+            color: white;
+            padding: 28px 34px 22px;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand-row img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+        }
+
+        .brand-row .site-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+            line-height: 1.05;
+        }
+
+        .studio-line {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .studio-line a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.9rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.08rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin: 0;
+            max-width: 46em;
+        }
+
+        /* ============ TIERS (SEMAFORO) ============ */
+        .content {
+            padding: 26px 34px 10px;
+        }
+
+        .tier {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 18px;
+            padding: 18px 20px;
+            border-radius: 12px;
+            border-left: 8px solid var(--tier-border);
+            background: var(--tier-bg);
+        }
+
+        .tier-icon {
+            font-size: 2.1rem;
+            line-height: 1.2;
+            flex-shrink: 0;
+        }
+
+        .tier-body { flex: 1; }
+
+        .tier-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .tier-title {
+            font-size: 1.22rem;
+            font-weight: 800;
+            color: var(--tier-border);
+            margin: 0;
+        }
+
+        .tier-cta {
+            font-size: 0.92rem;
+            font-weight: 700;
+            color: var(--navy);
+            background: #fff;
+            border: 2px solid var(--tier-border);
+            border-radius: 20px;
+            padding: 4px 14px;
+        }
+
+        .tier ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .tier li {
+            font-size: 1rem;
+            line-height: 1.45;
+            margin-bottom: 5px;
+        }
+
+        .tier-green   { --tier-border: var(--green-border); --tier-bg: var(--green-bg); }
+        .tier-yellow  { --tier-border: var(--yellow-border); --tier-bg: var(--yellow-bg); }
+        .tier-red     { --tier-border: var(--red-border); --tier-bg: var(--red-bg); }
+
+        .safety-note {
+            background: var(--navy);
+            color: #fff;
+            border-radius: 12px;
+            padding: 14px 20px;
+            font-size: 1rem;
+            margin-bottom: 18px;
+            border-left: 8px solid var(--gold);
+        }
+
+        .safety-note a {
+            color: var(--gold);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--navy);
+            color: white;
+            padding: 18px 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 5px solid var(--gold);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+        }
+
+        .footer-brand .site-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .footer .studio-line {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        .footer-right {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: right;
+        }
+
+        /* ============ PRINT A3 ============ */
+        @media print {
+            @page { size: A3 portrait; margin: 12mm; }
+            body { background: white; padding: 0; }
+            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <header class="header">
+        <div class="brand-row">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+        <h1>Emergency Room or Family Doctor?</h1>
+        <p class="subtitle">How to choose where to go when you don't feel well.</p>
+    </header>
+
+    <main class="content">
+
+        <section class="tier tier-green">
+            <div class="tier-icon" aria-hidden="true">🟢</div>
+            <div class="tier-body">
+                <div class="tier-head">
+                    <h2 class="tier-title">GREEN — The clinic, regular appointment</h2>
+                    <span class="tier-cta">Book an appointment</span>
+                </div>
+                <ul>
+                    <li>Cold, sore throat, mild fever for 1-2 days</li>
+                    <li>Routine check-ups, prescriptions, certificates</li>
+                    <li>Known health problems already under treatment</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="tier tier-yellow">
+            <div class="tier-icon" aria-hidden="true">🟡</div>
+            <div class="tier-body">
+                <div class="tier-head">
+                    <h2 class="tier-title">YELLOW — Same day, call the clinic</h2>
+                    <span class="tier-cta">Call the clinic today</span>
+                </div>
+                <ul>
+                    <li>High fever (above 39°) or lasting more than 3 days</li>
+                    <li>Strong or persistent headache</li>
+                    <li>Abdominal pain, vomiting or diarrhoea that won't stop</li>
+                    <li>Wounds or small burns</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="tier tier-red">
+            <div class="tier-icon" aria-hidden="true">🔴</div>
+            <div class="tier-body">
+                <div class="tier-head">
+                    <h2 class="tier-title">RED — Emergency, call 112 now</h2>
+                    <span class="tier-cta">112 — Don't wait</span>
+                </div>
+                <ul>
+                    <li>Difficulty breathing</li>
+                    <li>Sudden, strong chest or back pain</li>
+                    <li>Weakness or paralysis on one side of the body, difficulty speaking</li>
+                    <li>Loss of consciousness or fainting</li>
+                    <li>Heavy bleeding that won't stop</li>
+                    <li>Accident or serious injury</li>
+                </ul>
+            </div>
+        </section>
+
+        <p class="safety-note">💡 <strong>Not sure?</strong> Call the clinic: <a href="tel:+390575910904">0575 910 904</a> — we will help you decide what to do.</p>
+
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
+        <div class="footer-right">Emergency Room or Doctor? · English<br>savianu.it</div>
+    </footer>
+</div>
+
+</body>
+</html>
