@@ -1170,7 +1170,10 @@ const GLOBAL_FUNCTIONS = {
     startBooking: startBooking,
     renderFlowStep: renderFlowStep,
     toggleAccordion: toggleAccordion,
-    toggleFaq: toggleFaq,
+    // NOTE: toggleFaq intentionally NOT exposed. ssn/faq.html ships its own
+    // inline toggleFaq (max-height + .faq-item.open contract); exposing the
+    // unified toggleAccordion here SHADOWED it (module runs after parse) and
+    // broke the FAQ accordion (2026-08-13). Keep this list in sync.
     showSection: showSection,
     dismissGuidaRapida: dismissGuidaRapida,
     selectVisitType: selectVisitType
