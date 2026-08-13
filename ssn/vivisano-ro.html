@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trăiește sănătos, trăiește mai bine — Afiș (Română) | savianu.it</title>
+<link rel="canonical" href="https://savianu.it/ssn/vivisano-ro.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --navy-dark: #1A2F4C;
+    --nhs-blue: #1A2F4C;
+    --teal-soft: #F3EFE6;
+    --green-soft: #F3EFE6;
+    --accent-teal: #C29B57;
+    --accent-green: #C29B57;
+    --accent-gold: #C29B57;
+    --gold-light: #F3EFE6;
+    --card-bg: #FFFFFF;
+    --text-dark: #1A202C;
+    --text-muted: #4A5568;
+    --border-color: #E2E8F0;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+    background: #F0F4F8;
+    color: var(--text-dark);
+    line-height: 1.5;
+    padding: 30px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+  }
+
+  /* Contenitore principale */
+  .poster-container {
+    width: 100%;
+    max-width: 1200px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ============ HEADER ============ */
+  .header {
+    background: var(--navy-dark);
+    color: white;
+    padding: 1.8rem 3rem 1.6rem 3rem;
+    position: relative;
+    border-bottom: 5px solid var(--accent-gold);
+  }
+
+  .top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.5px;
+  }
+
+  .main-title {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 1.5rem;
+    color: #FFFFFF;
+  }
+
+  .main-title span {
+    color: var(--accent-gold);
+  }
+
+  .title-translations {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.2rem;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent-gold);
+  }
+
+  .lang-box {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lang-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+
+  .lang-text-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #EDF2F7;
+    line-height: 1.3;
+  }
+
+  .lang-text-title.bn { font-family: 'Noto Sans Bengali', sans-serif; }
+  .lang-text-title.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; }
+
+  /* ============ HERO BANNER ============ */
+  .hero-banner {
+    background: var(--green-soft);
+    padding: 1.8rem 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .hero-icon {
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0;
+  }
+
+  .hero-content {
+    flex: 1;
+  }
+
+  .hero-it {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--navy-dark);
+    line-height: 1.35;
+  }
+
+  .hero-en {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--nhs-blue);
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  .hero-multilang {
+    margin-top: 8px;
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+
+  .hero-multilang .bn { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; color: #2D3748; }
+  .hero-multilang .ur { font-family: 'Noto Sans Arabic', sans-serif; font-weight: 600; color: #2D3748; direction: rtl; }
+
+  /* ============ BODY CONTENT ============ */
+  .content-body {
+    padding: 2rem 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .section-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .section-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--nhs-blue);
+    color: white;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.2rem;
+  }
+
+  .section-header.gold {
+    background: var(--accent-gold);
+    color: var(--navy-dark);
+  }
+
+  .section-header .sub-en {
+    font-size: 0.85rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+
+  /* HABIT CARDS GRID (Unified and Redundancy-Free) */
+  .cards-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card {
+    background: var(--card-bg);
+    border: 1.5px solid #E2E8F0;
+    border-top: 4px solid var(--accent-gold);
+    border-radius: 12px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #F0F4F8;
+  }
+
+  .card-icon {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .card-title-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-title-it {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--navy-dark);
+    line-height: 1.2;
+  }
+
+  .card-title-en {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 4px;
+  }
+
+  .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .lang-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .lang-label {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 800;
+    background: var(--teal-soft);
+    color: var(--nhs-blue);
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .lang-text {
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    line-height: 1.45;
+    font-weight: 500;
+  }
+
+  .lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; font-size: 1.05rem; font-weight: 600; }
+  .lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; width: 100%; font-size: 1.05rem; font-weight: 600; }
+
+  /* ACTION BOXES */
+  .action-grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .action-card {
+    background: var(--navy-dark);
+    color: white;
+    border-radius: 12px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+  }
+
+  .action-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .action-header-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .action-icon {
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+  }
+
+  .action-title-group {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .action-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: white;
+  }
+
+  .action-title-en {
+    font-size: 0.88rem;
+    color: var(--gold-light);
+    font-style: italic;
+    margin-top: 2px;
+  }
+
+  .action-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1.2rem;
+    border-radius: 8px;
+    width: 100%;
+    margin-top: auto;
+  }
+
+  .action-lang-text {
+    font-size: 0.88rem;
+    line-height: 1.4;
+    color: #EDF2F7;
+    position: relative;
+    padding-left: 12px;
+    border-left: 2px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .action-lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; font-size: 0.95rem; }
+  .action-lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; padding-left: 0; padding-right: 12px; border-left: none; border-right: 2px solid rgba(255, 255, 255, 0.2); text-align: right; font-size: 0.95rem; }
+
+  /* ============ FOOTER / BRAND ============ */
+  .footer {
+    background: var(--navy-dark);
+    color: white;
+    padding: 1.6rem 3rem;
+    border-top: 5px solid var(--accent-gold);
+  }
+
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .footer-brand img {
+    flex-shrink: 0;
+  }
+
+  .footer-brand-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .footer-brand-text strong {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    line-height: 1.1;
+  }
+
+  .footer-brand-text span {
+    font-size: 0.85rem;
+    color: var(--gold-light);
+    font-weight: 600;
+  }
+
+  /* ============ RESPONSIVITÀ ============ */
+  @media (max-width: 992px) {
+    .title-translations, .action-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .header, .hero-banner, .content-body, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+  }
+
+  @media print {
+    @page { size: A3 portrait; margin: 0; }
+    body { background: transparent; padding: 0; }
+    .poster-container { width: 297mm; min-height: 420mm; border-radius: 0; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="poster-container">
+
+  <!-- ============ HEADER ============ -->
+  <header class="header">
+    <div class="top-badge">
+      <img src="../assets/bronzelogo.png" alt="savianu.it" width="22" height="22" style="border-radius:6px">
+      savianu.it
+    </div>
+    
+    <h1 class="main-title">Trăiește sănătos,<br>trăiește <span>mai bine</span></h1>
+
+    <div class="title-translations">
+      <div class="lang-box">
+        <span class="lang-tag">English</span>
+        <span class="lang-text-title">Healthy living, better living</span>
+      </div>
+      <div class="lang-box">
+        <span class="lang-tag">বাংলা (Bengali)</span>
+        <span class="lang-text-title bn">সুস্থ জীবন, সুন্দর জীবন</span>
+      </div>
+      <div class="lang-box">
+        <span class="lang-tag">اردو (Urdu)</span>
+        <span class="lang-text-title ur">صحت مند زندگی، بہتر زندگی</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO BANNER ============ -->
+  <section class="hero-banner">
+    <svg class="hero-icon" viewBox="0 0 100 100" fill="none">
+      <circle cx="50" cy="50" r="46" fill="#C29B57" opacity="0.12"/>
+      <path d="M50 18 C72 18 82 32 82 50 C82 72 50 82 50 82 C50 82 18 72 18 50 C18 32 28 18 50 18 Z" fill="#C29B57"/>
+      <path d="M50 28 C64 28 72 38 72 50 C72 65 50 74 50 74 C50 74 28 65 28 50 C28 38 36 28 50 28 Z" fill="#388E3C"/>
+      <path d="M50 38 C45 32 35 32 35 42 C35 52 50 62 50 62 C50 62 65 52 65 42 C65 32 55 32 50 38 Z" fill="#C29B57"/>
+      <path d="M50 82 L50 90" stroke="#1A2F4C" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+    
+    <div class="hero-content">
+      <div class="hero-it">Un stil de viață sănătos menține corpul puternic și mintea în echilibru.</div>
+      <div class="hero-en">A healthy lifestyle keeps your body strong and your mind in balance.</div>
+      <div class="hero-multilang">
+        <span class="bn">স্বাস্থ্যকর জীবনযাপন আপনার শরীরকে শক্তিশালী এবং মনকে সুস্থ রাখে।</span>
+        <span class="ur">صحت مند طرز زندگی آپ کے جسم کو مضبوط اور ذہن کو متوازن رکھتا ہے۔</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BODY CONTENT ============ -->
+  <main class="content-body">
+
+    <!-- GOLDEN RULES (Combined to remove redundancy and add new advice) -->
+    <div class="section-block">
+      <div class="section-header gold">
+        <span>REGULELE DE AUR PENTRU SĂNĂTATEA TA</span>
+        <span class="sub-en">· THE GOLDEN RULES FOR YOUR HEALTH</span>
+      </div>
+
+      <div class="cards-grid">
+        
+        <!-- Card 1: Nutrition -->
+        <div class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="#F3EFE6"/>
+              <path d="M14 34 C14 46 22 52 32 52 C42 52 50 46 50 34 Z" fill="#C29B57"/>
+              <path d="M12 34 L52 34" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
+              <path d="M32 32 C22 32 18 20 28 16 C36 12 32 32 32 32 Z" fill="#C29B57"/>
+              <path d="M32 32 C42 32 46 20 36 16 C28 12 32 32 32 32 Z" fill="#388E3C"/>
+              <path d="M32 34 L32 16" stroke="#F3EFE6" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="card-title-group">
+              <div class="card-title-it">Alimentație simplă și sănătoasă</div>
+              <div class="card-title-en">Simple and Healthy Diet</div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="lang-item">
+              <div class="lang-label">Română</div>
+              <div class="lang-text">Reduce zahărul, sarea, pastele și orezul alb. Mănâncă mai multe legume și leguminoase.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">English</div>
+              <div class="lang-text">Reduce sugar, salt, pasta, and white rice. Eat more vegetables and legumes.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">বাংলা</div>
+              <div class="lang-text bn">চিনি, লবণ, পাস্তা এবং সাদা ভাত খাওয়া কমান। বেশি করে শাকসবজি ও ডাল খান।</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F0F4F8; color:#4A5568;">اردو</div>
+              <div class="lang-text ur">چینی، نمک، پاستا اور سفید چاول کم کریں۔ سبزیاں اور دالیں زیادہ کھائیں۔</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Hydration -->
+        <div class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="#F3EFE6"/>
+              <path d="M22 16 L26 50 C26.5 53 29 54 32 54 C35 54 37.5 53 38 50 L42 16 Z" fill="#FFFFFF" stroke="#1A2F4C" stroke-width="3" stroke-linejoin="round"/>
+              <path d="M24 28 C28 30 36 26 40 28 L38.5 50 C38 52 36 52.5 32 52.5 C28 52.5 26 52 25.5 50 Z" fill="#C29B57" opacity="0.7"/>
+              <path d="M46 22 C46 22 42 28 42 30 C42 32 44 34 46 34 C48 34 50 32 50 30 C50 28 46 22 46 22 Z" fill="#1A2F4C"/>
+            </svg>
+            <div class="card-title-group">
+              <div class="card-title-it">Hidratare zilnică</div>
+              <div class="card-title-en">Daily Hydration</div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="lang-item">
+              <div class="lang-label">Română</div>
+              <div class="lang-text">Bea 1,5 - 2 litri de apă pe zi. Evită băuturile îndulcite sau carbogazoase.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">English</div>
+              <div class="lang-text">Drink 1.5 - 2 liters of water daily. Avoid sugary or carbonated drinks.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">বাংলা</div>
+              <div class="lang-text bn">প্রতিদিন ১.৫ থেকে ২ লিটার পানি পান করুন। মিষ্টি বা গ্যাসযুক্ত পানীয় এড়িয়ে চলুন।</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F0F4F8; color:#4A5568;">اردو</div>
+              <div class="lang-text ur">روزانہ 1.5 سے 2 لیٹر پانی پیئیں۔ میٹھے یا گیس والے مشروبات سے پرہیز کریں۔</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Movement -->
+        <div class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="#F3EFE6"/>
+              <path d="M44 20 C40 16 34 20 32 24 C30 20 24 16 20 20 C15 25 20 34 32 44 C44 34 49 25 44 20 Z" fill="#C29B57" opacity="0.3"/>
+              <circle cx="32" cy="20" r="5" fill="#1A2F4C"/>
+              <path d="M32 26 L32 38 M32 28 L24 34 M32 28 L40 24 M32 38 L24 50 M32 38 L38 48" stroke="#1A2F4C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 50 L48 50" stroke="#C29B57" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+            </svg>
+            <div class="card-title-group">
+              <div class="card-title-it">Mișcare regulată</div>
+              <div class="card-title-en">Regular Movement</div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="lang-item">
+              <div class="lang-label">Română</div>
+              <div class="lang-text">Mergi într-un ritm alert cel puțin 30 de minute pe zi, pentru inimă și minte.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">English</div>
+              <div class="lang-text">Walk briskly for at least 30 minutes every day for heart and mind health.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">বাংলা</div>
+              <div class="lang-text bn">হার্ট ও মনের সুস্থতার জন্য প্রতিদিন অন্তত ৩০ মিনিট দ্রুত হাঁটুন।</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F0F4F8; color:#4A5568;">اردو</div>
+              <div class="lang-text ur">دل اور دماغ کی صحت کے لیے روزانہ کم از کم 30 منٹ تیز پیدل چلیں۔</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Medication -->
+        <div class="card">
+          <div class="card-header">
+            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="32" cy="32" r="32" fill="#F0F4F8"/>
+              <path d="M32 12 L46 18 L46 32 C46 44 32 52 32 52 C32 52 18 44 18 32 L18 18 Z" fill="#1A2F4C" opacity="0.15"/>
+              <rect x="22" y="26" width="20" height="12" rx="6" fill="#1A2F4C" transform="rotate(-45 32 32)"/>
+              <rect x="22" y="26" width="10" height="12" rx="6" fill="#C29B57" transform="rotate(-45 32 32)"/>
+              <path d="M26 42 L34 34" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="44" cy="20" r="3" fill="#C29B57"/>
+              <circle cx="20" cy="44" r="2" fill="#C29B57"/>
+            </svg>
+            <div class="card-title-group">
+              <div class="card-title-it">Utilizarea corectă a medicamentelor</div>
+              <div class="card-title-en">Proper Use of Medicines</div>
+            </div>
+          </div>
+          <div class="card-content">
+            <div class="lang-item">
+              <div class="lang-label">Română</div>
+              <div class="lang-text">Nu întrerupe tratamentele cronice. Folosește antibioticele doar dacă ți le-a prescris medicul.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">English</div>
+              <div class="lang-text">Do not stop chronic treatments. Use antibiotics only when prescribed by a doctor.</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F3EFE6; color:#C29B57;">বাংলা</div>
+              <div class="lang-text bn">দীর্ঘস্থায়ী ওষুধ বন্ধ করবেন না। শুধুমাত্র ডাক্তারের পরামর্শে অ্যান্টিবায়োটিক ব্যবহার করুন।</div>
+            </div>
+            <div class="lang-item">
+              <div class="lang-label" style="background:#F0F4F8; color:#4A5568;">اردو</div>
+              <div class="lang-text ur">اپنی روزمرہ کی ادویات بند نہ کریں۔ اینٹی بائیوٹکس صرف ڈاکٹر کے مشورے سے استعمال کریں۔</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WHAT TO DO (Adapted to include Studio Medico Ippocrate advice) -->
+    <div class="section-block">
+      <div class="section-header">
+        <span>CE POȚI FACE ÎN ITALIA</span>
+        <span class="sub-en">· WHAT YOU CAN DO IN ITALY</span>
+      </div>
+
+      <div class="action-grid">
+        <!-- Action 1 -->
+        <div class="action-card">
+          <div class="action-header-bar">
+            <svg class="action-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="12" y="16" width="40" height="32" rx="4" fill="#F3EFE6"/>
+              <path d="M24 28 L40 28 M24 36 L32 36" stroke="#1A2F4C" stroke-width="3" stroke-linecap="round"/>
+              <circle cx="44" cy="42" r="10" fill="#C29B57"/>
+              <path d="M40 42 L43 45 L49 39" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="action-title-group">
+              <div class="action-title">Medicul de familie</div>
+              <div class="action-title-en">Family Doctor (GP)</div>
+            </div>
+          </div>
+          <div class="action-body">
+            <div class="action-lang-text">Programează vizitele la medic și adu mereu medicamentele tale.</div>
+            <div class="action-lang-text">Book appointments and always bring your current medicines.</div>
+            <div class="action-lang-text bn">জিপি অ্যাপয়েন্টমেন্ট বুক করুন এবং আপনার বর্তমান ওষুধ সাথে আনুন।</div>
+            <div class="action-lang-text ur">جی پی اپائنٹمنٹ بک کریں اور اپنی موجودہ ادویات ساتھ لائیں۔</div>
+          </div>
+        </div>
+
+        <!-- Action 2 -->
+        <div class="action-card">
+          <div class="action-header-bar">
+            <svg class="action-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M32 12 L54 50 H10 Z" fill="#F3EFE6"/>
+              <path d="M32 26 L32 38 M32 44 L32 46" stroke="#C29B57" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+            <div class="action-title-group">
+              <div class="action-title">Urgențe</div>
+              <div class="action-title-en">Emergencies</div>
+            </div>
+          </div>
+          <div class="action-body">
+            <div class="action-lang-text">Folosește Pronto Soccorso (112) doar pentru urgențe medicale grave.</div>
+            <div class="action-lang-text">Use the ER (112) only for severe medical emergencies.</div>
+            <div class="action-lang-text bn">শুধুমাত্র গুরুতর জরুরি অবস্থার জন্য ইমার্জেন্সি (১১২) ব্যবহার করুন।</div>
+            <div class="action-lang-text ur">ایمرجنسی (112) صرف شدید ہنگامی حالات کے لیے استعمال کریں۔</div>
+          </div>
+        </div>
+
+        <!-- Action 3 -->
+        <div class="action-card">
+          <div class="action-header-bar">
+            <svg class="action-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="8" fill="#F3EFE6"/>
+              <circle cx="40" cy="24" r="8" fill="#F3EFE6"/>
+              <path d="M12 48 C12 36 18 34 24 34 C28 34 31 35 33 38" fill="#F3EFE6"/>
+              <path d="M52 48 C52 36 46 34 40 34 C36 34 33 35 31 38" fill="#F3EFE6"/>
+              <circle cx="32" cy="32" r="7" fill="#C29B57"/>
+              <path d="M20 54 C20 44 26 42 32 42 C38 42 44 44 44 54" fill="#C29B57"/>
+            </svg>
+            <div class="action-title-group">
+              <div class="action-title">Prevenție</div>
+              <div class="action-title-en">Prevention</div>
+            </div>
+          </div>
+          <div class="action-body">
+            <div class="action-lang-text">Rămâi activ în comunitate și verifică-ți vaccinările.</div>
+            <div class="action-lang-text">Stay active locally and keep track of your vaccinations.</div>
+            <div class="action-lang-text bn">সুস্থ থাকতে সক্রিয় থাকুন এবং আপনার টিকাদান পরীক্ষা করুন।</div>
+            <div class="action-lang-text ur">صحت مند رہنے کے لیے متحرک رہیں اور اپنی ویکسینیشن چیک کریں۔</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <img src="../assets/bronzelogo.png" alt="savianu.it" width="52" height="52" style="border-radius:10px">
+      <div class="footer-brand-text">
+        <strong>savianu.it</strong>
+        <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
