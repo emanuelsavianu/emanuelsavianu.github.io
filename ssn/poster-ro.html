@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghid practic pentru sănătatea ta — Poster A3 (Română) | savianu.it</title>
+    <link rel="canonical" href="https://savianu.it/ssn/poster-ro.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --navy: #1A2F4C;
+            --gold: #C29B57;
+            --gold-soft: #F3EFE6;
+            --cream: #FDFBF7;
+            --text: #2c3e50;
+            --muted: #5a6b7d;
+            --border: #e3d9c8;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--gold-soft);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .poster-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
+            overflow: hidden;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: var(--navy);
+            color: white;
+            padding: 28px 34px 22px;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand-row img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+        }
+
+        .brand-row .site-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+            line-height: 1.05;
+        }
+
+        .studio-line {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .studio-line a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.9rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.08rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin: 0;
+            max-width: 46em;
+        }
+
+        /* ============ BODY ============ */
+        .content {
+            padding: 26px 34px 10px;
+        }
+
+        .section {
+            margin-bottom: 26px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.28rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .section-title .icon {
+            font-size: 1.35rem;
+        }
+
+        .point {
+            margin-bottom: 12px;
+            font-size: 1.02rem;
+            line-height: 1.5;
+        }
+
+        .point strong {
+            display: block;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--navy);
+            color: white;
+            padding: 18px 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 5px solid var(--gold);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+        }
+
+        .footer-brand .site-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .footer .studio-line {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        .footer-right {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: right;
+        }
+
+        /* ============ PRINT A3 ============ */
+        @media print {
+            @page { size: A3 portrait; margin: 12mm; }
+            body { background: white; padding: 0; }
+            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <header class="header">
+        <div class="brand-row">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+        <h1>Ghid practic pentru sănătatea ta</h1>
+        <p class="subtitle">Medicul de Medicină Generală te ajută să tratezi bolile și să previi problemele de sănătate.</p>
+    </header>
+
+    <main class="content">
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🏥</span> 1. Modalități de acces</h2>
+            <div class="point"><strong>Fă o programare:</strong> Vino la cabinet pentru vizite și rețete doar cu programare.</div>
+            <div class="point"><strong>Nu la Pronto Soccorso pentru probleme ușoare:</strong> Folosește urgența doar pentru cazuri grave (ex. pericol de viață, durere puternică în piept, accidente).</div>
+            <div class="point"><strong>Adu-ți medicamentele:</strong> La fiecare vizită adu cutiile cu toate medicamentele pe care le iei în prezent.</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">💊</span> 2. Folosirea sigură a medicamentelor</h2>
+            <div class="point"><strong>Ia medicamentele în fiecare zi:</strong> Nu întrerupe tratamentele pentru tensiune sau diabet, chiar dacă te simți mai bine.</div>
+            <div class="point"><strong>Antibioticele:</strong> Folosește-le doar la recomandarea medicului. Completează întregul tratament chiar dacă simptomul dispare.</div>
+            <div class="point"><strong>Informează medicul:</strong> Spune-i mereu dacă folosești plante medicinale, medicamente tradiționale sau suplimente.</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🥗</span> 3. Alimentație și sănătate</h2>
+            <div class="point"><strong>Evită zahărul și dulciurile:</strong> Reduce băuturile îndulcite, sucurile, dulciurile și orezul alb.</div>
+            <div class="point"><strong>Reduce sarea:</strong> Folosește condimente și ierburi naturale pentru a da gust mâncării.</div>
+            <div class="point"><strong>Mai multe legume și leguminoase:</strong> Legumele cu frunze verzi, lintea și năutul fac bine inimii și intestinului.</div>
+            <div class="point"><strong>Bea apă:</strong> Cel puțin 1,5-2 litri pe zi. Evită băuturile carbogazoase.</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🚶</span> 4. Mișcare zilnică</h2>
+            <div class="point">Mergi într-un ritm alert cel puțin 30 de minute pe zi.</div>
+            <div class="point">Activitatea fizică ajută la controlul tensiunii, glicemiei, greutății și stresului.</div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
+        <div class="footer-right">Ghid practic · Română<br>savianu.it</div>
+    </footer>
+</div>
+
+</body>
+</html>

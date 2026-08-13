@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practical guide for your health — A3 Poster (English) | savianu.it</title>
+    <link rel="canonical" href="https://savianu.it/ssn/poster-en.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --navy: #1A2F4C;
+            --gold: #C29B57;
+            --gold-soft: #F3EFE6;
+            --cream: #FDFBF7;
+            --text: #2c3e50;
+            --muted: #5a6b7d;
+            --border: #e3d9c8;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--gold-soft);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .poster-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
+            overflow: hidden;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: var(--navy);
+            color: white;
+            padding: 28px 34px 22px;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand-row img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+        }
+
+        .brand-row .site-name {
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+            line-height: 1.05;
+        }
+
+        .studio-line {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .studio-line a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.9rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.08rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin: 0;
+            max-width: 46em;
+        }
+
+        /* ============ BODY ============ */
+        .content {
+            padding: 26px 34px 10px;
+        }
+
+        .section {
+            margin-bottom: 26px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.28rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .section-title .icon {
+            font-size: 1.35rem;
+        }
+
+        .point {
+            margin-bottom: 12px;
+            font-size: 1.02rem;
+            line-height: 1.5;
+        }
+
+        .point strong {
+            display: block;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--navy);
+            color: white;
+            padding: 18px 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 5px solid var(--gold);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+        }
+
+        .footer-brand .site-name {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .footer .studio-line {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        .footer-right {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: right;
+        }
+
+        /* ============ PRINT A3 ============ */
+        @media print {
+            @page { size: A3 portrait; margin: 12mm; }
+            body { background: white; padding: 0; }
+            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <header class="header">
+        <div class="brand-row">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+        <h1>Practical guide for your health</h1>
+        <p class="subtitle">The General Practitioner helps you cure diseases and prevent health problems.</p>
+    </header>
+
+    <main class="content">
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🏥</span> 1. How the clinic works</h2>
+            <div class="point"><strong>Book an appointment:</strong> Come to the clinic for check-ups and prescriptions only by appointment.</div>
+            <div class="point"><strong>Do not go to the ER for minor issues:</strong> Use the Emergency Room only for severe emergencies (e.g., life-threatening situations, severe chest pain).</div>
+            <div class="point"><strong>Bring your medicines:</strong> Bring the boxes of all the medicines you are currently taking to every visit.</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">💊</span> 2. Safe use of medicines</h2>
+            <div class="point"><strong>Take medicine daily:</strong> Do not stop taking prescribed blood pressure or sugar medication even if you feel better.</div>
+            <div class="point"><strong>Antibiotics:</strong> Use only with the doctor's advice. Complete the full course.</div>
+            <div class="point"><strong>Inform the doctor:</strong> Be sure to tell the doctor if you are using herbs, traditional medicines, or supplements.</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🥗</span> 3. Nutrition and health</h2>
+            <div class="point"><strong>Avoid sugar and sweets:</strong> Reduce sweet drinks, fruit juices, sweets, and white rice.</div>
+            <div class="point"><strong>Reduce salt:</strong> Use spices and natural herbs to add flavor to your food.</div>
+            <div class="point"><strong>Eat vegetables &amp; lentils:</strong> Green vegetables, lentils, and chickpeas are beneficial for the heart.</div>
+            <div class="point"><strong>Drink water:</strong> At least 1.5 to 2 liters daily. Avoid fizzy soft drinks.</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🚶</span> 4. Daily exercise</h2>
+            <div class="point">Walk at a brisk pace for at least 30 minutes every day.</div>
+            <div class="point">Physical activity helps control blood pressure, sugar, weight, and stress.</div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
+        <div class="footer-right">Practical Guide · English<br>savianu.it</div>
+    </footer>
+</div>
+
+</body>
+</html>

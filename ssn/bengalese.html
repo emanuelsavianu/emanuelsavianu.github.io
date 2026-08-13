@@ -3,204 +3,238 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা - Studio Medico Ippocrate</title>
+    <title>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা — বাংলা | savianu.it</title>
     <link rel="canonical" href="https://savianu.it/ssn/bengalese.html">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;600;700&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --navy: #1A2F4C;
+            --gold: #C29B57;
+            --gold-soft: #F3EFE6;
+            --cream: #FDFBF7;
+            --text: #2c3e50;
+            --muted: #5a6b7d;
+            --border: #e3d9c8;
+        }
+
+        * { box-sizing: border-box; }
+
         body {
-            font-family: 'Noto Sans Bengali', Arial, sans-serif;
+            font-family: 'Noto Sans Bengali', 'Montserrat', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f8f9;
-            color: #2c3e50;
-            line-height: 1.6;
+            background-color: var(--gold-soft);
+            color: var(--text);
+            line-height: 1.7;
         }
-        
+
+        /* ============ HEADER ============ */
         header {
-            background-color: #006b77; /* Teal medical color */
+            background-color: var(--navy);
             color: white;
-            padding: 25px 20px;
+            padding: 26px 20px 20px;
             text-align: center;
-            border-bottom: 5px solid #004d56;
+            border-bottom: 5px solid var(--gold);
         }
-        
-        header h1 {
-            margin: 0;
-            font-size: 26px;
-            font-weight: 700;
-        }
-        
-        header p {
-            margin: 8px 0 0 0;
-            font-size: 16px;
-            opacity: 0.95;
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-        
-        .intro {
-            background-color: #e0f2f1;
-            color: #004d40;
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: center;
-            border-left: 5px solid #009688;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        
-        .intro h2 {
-            margin: 0 0 10px 0;
-            font-size: 22px;
-        }
-        
-        .intro p {
-            margin: 0;
-            font-size: 16px;
-        }
-        
-        .section {
-            background: white;
-            border-radius: 10px;
-            padding: 20px 25px;
-            margin-bottom: 25px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #006b77;
-        }
-        
-        .section h3 {
-            color: #006b77;
-            margin-top: 0;
-            font-size: 20px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-        
-        .section ul {
-            padding-left: 20px;
-            margin: 0;
-        }
-        
-        .section li {
-            margin-bottom: 15px;
-            font-size: 15.5px;
-        }
-        
-        .section li:last-child {
-            margin-bottom: 0;
-        }
-        
-        .section li strong {
-            color: #d35400; /* Contrast color for emphasis */
-            display: block;
-            margin-bottom: 3px;
-        }
-        
-        .contacts {
-            background-color: #fff3e0;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-top: 4px solid #e65100;
-        }
-        
-        .contacts h3 {
-            color: #e65100;
-            margin-top: 0;
-            text-align: center;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-        
-        .contact-card {
-            background: white;
-            padding: 15px;
-            border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            border-left: 4px solid #e65100;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            text-align: center;
-        }
-        
-        .contact-title {
-            font-weight: 700;
-            color: #e65100;
-            font-size: 17px;
-            margin-bottom: 5px;
-        }
-        
-        .contact-desc {
-            font-size: 14px;
-            color: #555;
-            margin-bottom: 10px;
-        }
-        
-        .contact-number {
-            font-size: 22px;
-            font-weight: 700;
-            color: #2c3e50;
-            background: #f8f9fa;
-            padding: 8px;
-            border-radius: 5px;
-        }
-        
-        @media (min-width: 768px) {
-            .contact-grid {
-                grid-template-columns: 1fr 1fr 1fr;
-            }
-        }
-        
-        .footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #7f8c8d;
-            background: #e9ecef;
-        }
-        
+
         .brand-bar {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            padding: 8px 22px;
             border-radius: 30px;
             margin-bottom: 14px;
         }
-        
+
         .brand-bar img {
             width: 28px;
             height: 28px;
             border-radius: 6px;
         }
-        
+
         .brand-bar span {
-            font-size: 20px;
-            font-weight: 700;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 800;
             letter-spacing: 0.5px;
             color: #FFFFFF;
         }
-        
+
+        .studio-line {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.85);
+            margin: 0 0 14px 0;
+        }
+
+        .studio-line a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        header p.sub {
+            margin: 8px 0 0 0;
+            font-size: 1.05rem;
+            opacity: 0.92;
+        }
+
+        /* ============ BODY ============ */
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        .intro {
+            background-color: #fff;
+            color: var(--navy);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            text-align: center;
+            border-left: 5px solid var(--gold);
+            box-shadow: 0 2px 5px rgba(26, 47, 76, 0.08);
+        }
+
+        .intro h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.4rem;
+        }
+
+        .intro p {
+            margin: 0;
+            font-size: 1.02rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 10px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 6px rgba(26, 47, 76, 0.06);
+            border-top: 4px solid var(--navy);
+        }
+
+        .section h3 {
+            color: var(--navy);
+            margin-top: 0;
+            font-size: 1.25rem;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .section ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        .section li {
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .section li:last-child {
+            margin-bottom: 0;
+        }
+
+        .section li strong {
+            color: var(--gold);
+            display: block;
+            margin-bottom: 3px;
+            font-weight: 700;
+        }
+
+        .contacts {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(26, 47, 76, 0.06);
+            border-top: 4px solid var(--gold);
+        }
+
+        .contacts h3 {
+            color: var(--navy);
+            margin-top: 0;
+            text-align: center;
+            font-size: 1.25rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .contact-card {
+            background: var(--gold-soft);
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            border-left: 4px solid var(--gold);
+            box-shadow: 0 2px 4px rgba(26, 47, 76, 0.06);
+            text-align: center;
+        }
+
+        .contact-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--navy);
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-desc {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin-bottom: 10px;
+        }
+
+        .contact-number {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--navy);
+            background: #fff;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.85);
+            background: var(--navy);
+            border-top: 4px solid var(--gold);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* ============ PRINT A3 ============ */
         @media print {
-            @page { size: A3 portrait; margin: 0; }
+            @page { size: A3 portrait; margin: 12mm; }
             body { background: transparent; padding: 0; }
-            .container { max-width: 297mm; margin: 0 auto; padding: 0 15px; }
-            .brand-bar { display: inline-flex; }
+            .container { max-width: 100%; margin: 0 auto; padding: 0; }
+            .intro, .section, .contacts { box-shadow: none; }
         }
     </style>
 </head>
@@ -208,16 +242,16 @@
 
     <header>
         <div class="brand-bar">
-            <img src="../assets/bronzelogo.png" alt="Studio Medico Ippocrate">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
             <span>savianu.it</span>
         </div>
-        <h1>স্টুডিও মেডিকো ইপ্পোক্রাতে</h1>
-        <p>Studio Medico Ippocrate</p>
-        <p>Piazza Saione 3 | Tel: <a href="tel:+390575910904">0575 910904</a></p>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+        <h1>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা</h1>
+        <p class="sub">সাধারণ চিকিৎসক (জেনারেল প্র্যাকটিশনার) আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</p>
     </header>
 
     <div class="container">
-        
+
         <div class="intro">
             <h2>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা</h2>
             <p>সাধারণ চিকিৎসক (জেনারেল প্র্যাকটিশনার) আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</p>
@@ -265,7 +299,7 @@
                 <div class="contact-card">
                     <span class="contact-title">savianu.it</span>
                     <span class="contact-desc">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
-                    <span class="contact-number"><a href="tel:+390575910904">0575 910904</a></span>
+                    <span class="contact-number"><a href="tel:+390575910904">0575 910 904</a></span>
                 </div>
             </div>
         </div>
@@ -273,7 +307,7 @@
     </div>
 
     <div class="footer">
-        © Studio Medico Ippocrate · savianu.it - Guida Pratica (Versione Bengalese)
+        © savianu.it — Studio Medico Ippocrate · Piazza Saione 3, Arezzo — ব্যবহারিক নির্দেশিকা (বাংলা সংস্করণ)
     </div>
 
 </body>

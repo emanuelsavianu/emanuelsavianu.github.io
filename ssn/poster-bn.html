@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা — পোস্টার A3 (বাংলা) | savianu.it</title>
+    <link rel="canonical" href="https://savianu.it/ssn/poster-bn.html">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+        :root {
+            --navy: #1A2F4C;
+            --gold: #C29B57;
+            --gold-soft: #F3EFE6;
+            --cream: #FDFBF7;
+            --text: #2c3e50;
+            --muted: #5a6b7d;
+            --border: #e3d9c8;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans Bengali', 'Montserrat', sans-serif;
+            background: var(--gold-soft);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .poster-container {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: var(--cream);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
+            overflow: hidden;
+        }
+
+        /* ============ HEADER ============ */
+        .header {
+            background: var(--navy);
+            color: white;
+            padding: 28px 34px 22px;
+            border-bottom: 5px solid var(--gold);
+        }
+
+        .brand-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 6px;
+        }
+
+        .brand-row img {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+        }
+
+        .brand-row .site-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            color: #fff;
+            line-height: 1.05;
+        }
+
+        .studio-line {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.82);
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        .studio-line a {
+            color: var(--gold);
+            text-decoration: none;
+        }
+
+        h1 {
+            font-family: 'Noto Sans Bengali', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin: 0 0 10px 0;
+            color: #fff;
+        }
+
+        .subtitle {
+            font-size: 1.08rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+            margin: 0;
+            max-width: 46em;
+        }
+
+        /* ============ BODY ============ */
+        .content {
+            padding: 26px 34px 10px;
+        }
+
+        .section {
+            margin-bottom: 26px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.28rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin: 0 0 12px 0;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--gold);
+        }
+
+        .section-title .icon {
+            font-size: 1.35rem;
+        }
+
+        .point {
+            margin-bottom: 12px;
+            font-size: 1.02rem;
+            line-height: 1.6;
+        }
+
+        .point strong {
+            display: block;
+            color: var(--navy);
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer {
+            background: var(--navy);
+            color: white;
+            padding: 18px 34px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            border-top: 5px solid var(--gold);
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand img {
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+        }
+
+        .footer-brand .site-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .footer .studio-line {
+            margin: 0;
+            font-size: 0.8rem;
+        }
+
+        .footer-right {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.85);
+            text-align: right;
+        }
+
+        /* ============ PRINT A3 ============ */
+        @media print {
+            @page { size: A3 portrait; margin: 12mm; }
+            body { background: white; padding: 0; }
+            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="poster-container">
+    <header class="header">
+        <div class="brand-row">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+        <h1>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা</h1>
+        <p class="subtitle">সাধারণ চিকিৎসক আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</p>
+    </header>
+
+    <main class="content">
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🏥</span> ১. ক্লিনিক কীভাবে কাজ করে?</h2>
+            <div class="point"><strong>অ্যাপয়েন্টমেন্ট বুক করুন:</strong> চেক-আপ এবং প্রেসক্রিপশনের জন্য শুধুমাত্র অ্যাপয়েন্টমেন্ট নিয়ে ক্লিনিকে আসুন।</div>
+            <div class="point"><strong>সাধারণ সমস্যার জন্য ইমার্জেন্সিতে যাবেন না:</strong> শুধুমাত্র গুরুতর জরুরি পরিস্থিতিতে ইমার্জেন্সি পরিষেবা ব্যবহার করুন।</div>
+            <div class="point"><strong>আপনার ওষুধ সাথে আনুন:</strong> প্রতিবার ভিজিটের সময় বর্তমানে ব্যবহার করা সব ওষুধের বাক্স সাথে নিয়ে আসুন।</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">💊</span> ২. নিরাপদে ওষুধ ব্যবহার</h2>
+            <div class="point"><strong>প্রতিদিন ওষুধ খান:</strong> ডাক্তার রক্তচাপ বা ডায়াবেটিসের ওষুধ দিলে, সুস্থ বোধ করলেও তা বন্ধ করবেন না।</div>
+            <div class="point"><strong>অ্যান্টিবায়োটিক:</strong> শুধুমাত্র ডাক্তারের পরামর্শে ব্যবহার করুন। সম্পূর্ণ কোর্স শেষ করুন।</div>
+            <div class="point"><strong>ডাক্তারকে জানান:</strong> ভেষজ, ঐতিহ্যবাহী ওষুধ বা সাপ্লিমেন্ট ব্যবহার করলে অবশ্যই ডাক্তারকে জানান।</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🥗</span> ৩. পুষ্টি এবং স্বাস্থ্য</h2>
+            <div class="point"><strong>চিনি ও মিষ্টি এড়িয়ে চলুন:</strong> মিষ্টি পানীয়, ফলের রস, মিষ্টি এবং সাদা চালের ব্যবহার কমান।</div>
+            <div class="point"><strong>লবণ কমান:</strong> খাবারে স্বাদ আনতে মশলা এবং প্রাকৃতিক ভেষজ ব্যবহার করুন।</div>
+            <div class="point"><strong>শাকসবজি ও ডাল খান:</strong> সবুজ শাকসবজি, ডাল এবং ছোলা হার্টের জন্য উপকারী।</div>
+            <div class="point"><strong>জল পান করুন:</strong> প্রতিদিন অন্তত ১.৫ থেকে ২ লিটার জল পান করুন। গ্যাসযুক্ত পানীয় এড়িয়ে চলুন।</div>
+        </section>
+
+        <section class="section">
+            <h2 class="section-title"><span class="icon">🚶</span> ৪. প্রতিদিন ব্যায়াম করুন</h2>
+            <div class="point">প্রতিদিন অন্তত ৩০ মিনিট দ্রুত গতিতে হাঁটুন।</div>
+            <div class="point">শারীরিক কার্যকলাপ রক্তচাপ, সুগার, ওজন এবং মানসিক চাপ নিয়ন্ত্রণে সাহায্য করে।</div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-brand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site-name">savianu.it</span>
+        </div>
+        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
+        <div class="footer-right">ব্যবহারিক নির্দেশিকা · বাংলা<br>savianu.it</div>
+    </footer>
+</div>
+
+</body>
+</html>
