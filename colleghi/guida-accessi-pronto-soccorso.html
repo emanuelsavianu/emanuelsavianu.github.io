@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <title>Guida Accessi — Pronto Soccorso Specialistici (San Donato) | Dott. Savianu</title>
+    <meta name="description" content="Orari e sedi dei Pronto Soccorso specialistici dell'Ospedale San Donato di Arezzo: Oculistico, Otorinolaringoiatrico, Ortopedico, Pediatrico, Ginecologico. Guida per colleghi.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://savianu.it/colleghi/guida-accessi-pronto-soccorso.html">
+
+    <meta name="theme-color" content="#1a2f4c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Playball&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="../styles.css?v=41">
+
+    <style>
+        .page-wrapper {
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-hero { padding: 40px 28px 32px; }
+        .page-hero::before { top: -60px; right: -60px; width: 280px; height: 280px; }
+        .hero-title {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
+        }
+        .hero-desc {
+            font-size: 0.85rem;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .content-wrapper {
+            flex: 1;
+            padding: 40px 28px;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .protocol-section {
+            margin-bottom: 32px;
+        }
+        .protocol-section h2 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        /* Scheda singolo Pronto Soccorso */
+        .ps-card {
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: var(--bg-gradient-1);
+            padding: 20px 22px;
+            margin: 14px 0;
+        }
+        .ps-card h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--accent-text);
+            margin-bottom: 10px;
+        }
+        .ps-card h3 i { margin-right: 10px; color: var(--accent); }
+
+        .ps-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        .ps-location i { color: var(--accent); }
+
+        .hours-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-label {
+            font-weight: 600;
+            color: var(--text-medium);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 0.78rem;
+        }
+        .hours-value {
+            font-weight: 700;
+            color: var(--primary);
+            text-align: right;
+        }
+        body.dark-mode .ps-card { background: var(--primary); }
+        body.dark-mode .hours-value { color: var(--accent); }
+
+        /* Nota prescrizione */
+        .note-box {
+            border-left: 4px solid var(--accent);
+            background: var(--bg-gradient-2);
+            padding: 16px 20px;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin: 20px 0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Fonte */
+        .source-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-text);
+            font-weight: 600;
+            text-decoration: none;
+            border-bottom: 1px dashed var(--accent);
+            padding-bottom: 2px;
+        }
+        .source-link:hover { color: var(--primary); }
+
+        @media (max-width: 600px) {
+            .content-wrapper { padding: 20px 16px; }
+            .page-hero { padding: 28px 16px 20px; }
+            .page-hero::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<site-nav data-section="colleghi">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><a href="tel:+390****0904">Segreteria 0575 910 904</a></p>
+    </div>
+</site-nav>
+
+<main role="main" class="page-wrapper" id="main-content">
+
+    <section class="page-hero" aria-labelledby="hero-heading">
+        <h1 class="hero-title" id="hero-heading">Guida Accessi<br>Pronto Soccorso Specialistici</h1>
+        <p class="hero-desc">
+            Orari e sedi dei Pronto Soccorso specialistici — Ospedale San Donato, Arezzo.
+        </p>
+    </section>
+
+    <div class="content-wrapper">
+
+        <!-- Pronto Soccorso Oculistico -->
+        <section class="protocol-section">
+            <h2><i class="fa-solid fa-eye" style="margin-right:10px;color:var(--accent)"></i>Pronto Soccorso Oculistico</h2>
+            <div class="ps-card">
+                <div class="hours-row">
+                    <span class="hours-label">Orario feriale</span>
+                    <span class="hours-value">9.00 – 12.00 · 15.00 – 18.00</span>
+                </div>
+                <div class="hours-row">
+                    <span class="hours-label">Orario festivo</span>
+                    <span class="hours-value">9.00 – 12.00 · 15.00 – 18.00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pronto Soccorso Otorinolaringoiatrico -->
+        <section class="protocol-section">
+            <h2><i class="fa-solid fa-ear-listen" style="margin-right:10px;color:var(--accent)"></i>Pronto Soccorso Otorinolaringoiatrico</h2>
+            <div class="ps-card">
+                <p class="ps-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Ospedale San Donato — Scala 1, Piano 2</p>
+                <div class="hours-row">
+                    <span class="hours-label">Orario feriale</span>
+                    <span class="hours-value">8.30 – 13.00 · 17.00 – 19.00</span>
+                </div>
+                <div class="hours-row">
+                    <span class="hours-label">Orario festivo e prefestivo</span>
+                    <span class="hours-value">9.00 – 13.00 · 17.00 – 19.00</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pronto Soccorso Ortopedico -->
+        <section class="protocol-section">
+            <h2><i class="fa-solid fa-bone" style="margin-right:10px;color:var(--accent)"></i>Pronto Soccorso Ortopedico</h2>
+            <div class="ps-card">
+                <div class="hours-row">
+                    <span class="hours-label">Dal lunedì al sabato</span>
+                    <span class="hours-value">10.30 – 14.00 · 16.00 – 19.30</span>
+                </div>
+            </div>
+            <div class="note-box">
+                <strong><i class="fa-solid fa-circle-exclamation" style="margin-right:6px;color:var(--accent)"></i>Domenica:</strong>
+                fast track non attivo.
+            </div>
+        </section>
+
+        <!-- Pronto Soccorso Pediatrico -->
+        <section class="protocol-section">
+            <h2><i class="fa-solid fa-baby" style="margin-right:10px;color:var(--accent)"></i>Pronto Soccorso Pediatrico</h2>
+            <div class="ps-card">
+                <p class="ps-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Ospedale San Donato — Scala 3, Piano 2</p>
+            </div>
+        </section>
+
+        <!-- Pronto Soccorso Ginecologico -->
+        <section class="protocol-section">
+            <h2><i class="fa-solid fa-venus" style="margin-right:10px;color:var(--accent)"></i>Pronto Soccorso Ginecologico</h2>
+            <div class="ps-card">
+                <p class="ps-location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>Ospedale San Donato — Scala 2, Piano 2</p>
+            </div>
+        </section>
+
+        <!-- Nota generale -->
+        <section class="protocol-section">
+            <div class="note-box">
+                <strong><i class="fa-solid fa-circle-info" style="margin-right:6px;color:var(--accent)"></i>Nota:</strong>
+                orari e sedi soggetti a variazioni da parte dell'Azienda USL Toscana Sud Est — prima dell'invio di un paziente verificare l'eventuale aggiornamento.
+            </div>
+        </section>
+
+    </div>
+
+    <site-footer data-section="colleghi">
+        <footer role="contentinfo">
+            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+        </footer>
+    </site-footer>
+
+</main>
+
+<script type="module" src="../app.js?v=29"></script>
+</body>
+</html>
