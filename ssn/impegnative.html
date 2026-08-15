@@ -312,6 +312,10 @@
             <p>Guida alle impegnative, alle classi di priorità e alla prenotazione delle visite specialistiche SSN</p>
         </div>
 
+        <p class="section-body">
+            L'impegnativa è la ricetta SSN che il medico di famiglia rilascia per visite specialistiche, esami diagnostici e di laboratorio a carico del Servizio Sanitario Nazionale. Con il numero NRE si prenota al CUP di Arezzo — telefono 800 001 100, online su prenotaonline.toscana.it con SPID, sportello in Via Curtatone 54 o farmacie FarmaCUP — e l'impegnativa ha validità 30 giorni dalla data di emissione: qui trovi la procedura completa e il significato delle classi di priorità.
+        </p>
+
         <!-- Filter -->
         <div class="search-container" style="max-width: 600px; margin: 0 auto 30px;">
             <div class="search-input-group">
@@ -344,31 +348,38 @@
             <div class="section-body">
                 <p>Il medico assegna una <strong>classe di priorità</strong> che indica il tempo massimo accettabile per ricevere la prestazione. Le strutture SSN sono tenute a rispettare questi tempi:</p>
 
-                <div class="priority-grid">
-                    <div class="priority-card urgent">
-                        <div class="priority-code">U</div>
-                        <h3>Urgente</h3>
-                        <div class="timing">Entro 72 ore (3 giorni)</div>
-                        <p>Situazione clinicamente urgente che non può attendere ma non richiede il Pronto Soccorso.</p>
-                    </div>
-                    <div class="priority-card short">
-                        <div class="priority-code">B</div>
-                        <h3>Breve</h3>
-                        <div class="timing">Entro 10 giorni</div>
-                        <p>Problemi che richiedono valutazione rapida per potenziale progressione o dubbio diagnostico.</p>
-                    </div>
-                    <div class="priority-card defer">
-                        <div class="priority-code">D</div>
-                        <h3>Differibile</h3>
-                        <div class="timing">Entro 30 gg (visite) / 60 gg (diagnostica)</div>
-                        <p>Situazioni clinicamente rilevanti ma non urgenti; la condizione è stabile.</p>
-                    </div>
-                    <div class="priority-card sched">
-                        <div class="priority-code">P</div>
-                        <h3>Programmabile</h3>
-                        <div class="timing">Entro 120 giorni</div>
-                        <p>Controlli programmati, follow-up, patologie croniche stabili in percorso noto.</p>
-                    </div>
+                <div class="table-scroll">
+                <table class="branch-table">
+                    <thead>
+                        <tr>
+                            <th>Classe</th>
+                            <th>Tempi</th>
+                            <th>Descrizione</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: var(--danger); margin-right: 6px;">U</span>Urgente</h3></td>
+                            <td>Entro 72 ore (3 giorni)</td>
+                            <td>Situazione clinicamente urgente che non può attendere ma non richiede il Pronto Soccorso.</td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: #d97706; margin-right: 6px;">B</span>Breve</h3></td>
+                            <td>Entro 10 giorni</td>
+                            <td>Problemi che richiedono valutazione rapida per potenziale progressione o dubbio diagnostico.</td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: #15803d; margin-right: 6px;">D</span>Differibile</h3></td>
+                            <td>Entro 30 gg (visite) / 60 gg (diagnostica)</td>
+                            <td>Situazioni clinicamente rilevanti ma non urgenti; la condizione è stabile.</td>
+                        </tr>
+                        <tr>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: #1d4ed8; margin-right: 6px;">P</span>Programmabile</h3></td>
+                            <td>Entro 120 giorni</td>
+                            <td>Controlli programmati, follow-up, patologie croniche stabili in percorso noto.</td>
+                        </tr>
+                    </tbody>
+                </table>
                 </div>
 
                 <div class="alert-box-inline">
