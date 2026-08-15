@@ -51,14 +51,16 @@
 
     <!-- JSON-LD Physician -->
     <script type="application/ld+json">
+    [
     {
       "@context": "https://schema.org",
       "@type": "Physician",
       "name": "Dott. Emanuel Savianu",
       "additionalName": "Studio Medico Ippocrate",
       "url": "https://savianu.it/",
-      "telephone": "+39 0575 910 904",
-      "sameAs": ["https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu"],
+      "telephone": "+390575910904",
+      "email": "segreteria@savianu.it",
+      "sameAs": ["https://tinyurl.com/Savianu"],
       "image": "https://savianu.it/assets/bronzelogo.png",
       "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette.",
       "medicalSpecialty": "GeneralPractice",
@@ -93,11 +95,52 @@
           "closes": "19:00"
         }
       ],
+      "location": {
+        "@id": "#clinic"
+      },
       "priceRange": "\u20ac\u20ac",
       "currenciesAccepted": "EUR",
       "paymentAccepted": "Cash, Credit Card",
       "availableLanguage": ["it", "en"]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalClinic",
+      "@id": "#clinic",
+      "name": "Studio Medico Ippocrate",
+      "url": "https://savianu.it/ssn/",
+      "telephone": "+390575910904",
+      "email": "segreteria@savianu.it",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Piazza Saione 3",
+        "addressLocality": "Arezzo",
+        "addressRegion": "AR",
+        "postalCode": "52100",
+        "addressCountry": "IT"
+      },
+      "medicalSpecialty": "GeneralPractice",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "09:30",
+          "closes": "12:30"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "16:00",
+          "closes": "19:00"
+        }
+      ],
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 43.4632,
+        "longitude": 11.8796
+      }
     }
+  ]
     </script>
 
 </head>
