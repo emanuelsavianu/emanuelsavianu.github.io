@@ -91,3 +91,6 @@ cloudflare/worker.js
 
 # Codemap change-detection state
 .slim/
+
+# Deepwork state (agent-local)
+.slim/deepwork/
