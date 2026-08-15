@@ -1,0 +1,85 @@
+# savianu.it
+
+> Sito ufficiale del Dott. Emanuel Savianu, Medico di Medicina Generale (SSN) ad Arezzo — Studio Medico Ippocrate, Piazza Saione 3.
+> Servizi per i pazienti SSN, visite private e certificati INPS, area dedicata ai colleghi MMG.
+
+## Orari e contatti
+
+- Orari ambulatorio: lunedì–venerdì 09:30–12:30 e 16:00–19:00; sabato e domenica chiuso.
+- Indirizzo: Studio Medico Ippocrate, Piazza Saione 3, 52100 Arezzo (AR), Italia.
+- Segreteria: 0575 910 904 (raggiungibile negli orari di ambulatorio) — email: segreteria@savianu.it.
+- Prenotazioni online su Doctolib: https://tinyurl.com/Savianu.
+- Emergenze (pericolo di vita): 112, Numero Unico di Emergenza.
+- Urgenze non emergenziali fuori dagli orari di ambulatorio: 116 117, Continuità Assistenziale (ex Guardia Medica).
+- Il Dottore riceve solo su appuntamento, per garantire tempi di attesa ragionevoli.
+
+## Prenotazioni e appuntamenti
+
+- Le prenotazioni avvengono tramite Doctolib: si sceglie il tipo di visita nell'app e si conferma l'appuntamento; in alternativa si chiama la segreteria allo 0575 910 904.
+- Per spostare o annullare un appuntamento: aprire la conferma nell'app Doctolib o accedere al proprio account su Doctolib.it, oppure chiamare la segreteria con ragionevole anticipo.
+- In caso di assenza del medico per ferie o malattia viene attivato un medico sostituto: la segreteria comunica i riferimenti del sostituto; di notte, nei festivi e prefestivi vale la Guardia Medica 116 117.
+
+## Ricette e farmaci
+
+- Le ricette per farmaci continuativi si richiedono inviando un messaggio al medico su Doctolib, chiamando la segreteria allo 0575 910 904 o durante una visita in studio; le richieste vengono di norma evase entro 2 giorni lavorativi.
+- Le ricette dematerializzate (NRE) vengono inviate direttamente al sistema: si ritirano in qualsiasi farmacia comunicando il codice fiscale, senza foglio fisico; sono valide su tutto il territorio nazionale.
+- Ricetta rossa (SSN): a carico del Servizio Sanitario, soggetta a ticket salvo esenzioni, copre i farmaci del Prontuario farmaceutico nazionale. Ricetta bianca: a carico del paziente.
+- Pianificare le terapie croniche con almeno 5–7 giorni di anticipo; eventuali urgenze vanno segnalate nel messaggio su Doctolib o alla segreteria.
+
+## Esenzioni ticket
+
+- Tre gruppi: per reddito (codici E01–E04), per invalidità e disabilità (048, 050, 051, 052, 053) e per patologia cronica o rara (codici 001, 006, 007, 010, 013, 021, 024, 027, 031, 035, 040, 044, 047…; malattie rare con codici RN).
+- Le esenzioni per reddito hanno validità annuale e vanno rinnovate ogni anno all'ASL; in Toscana la scadenza è di norma il 31 marzo.
+- Per le patologie croniche il medico di medicina generale certifica la diagnosi e attribuisce il codice di esenzione nella cartella clinica; il codice viene trasmesso telematicamente alla Regione Toscana e aggiornato sulla tessera sanitaria (può richiedere alcuni giorni lavorativi).
+- L'esenzione per patologia vale solo per le prestazioni correlate alla patologia; usare un codice per prestazioni non correlate è illecito.
+- Le esenzioni attive si possono verificare sul Fascicolo Sanitario Elettronico della Regione Toscana (fascicolosanitario.regione.toscana.it) con SPID o CIE.
+
+## Impegnative e CUP
+
+- L'impegnativa (ricetta SSN per prestazione specialistica) autorizza visite ed esami a carico del SSN; dal 2015 è dematerializzata e si riceve il numero NRE.
+- Le impegnative SSN hanno una validità di 30 giorni dalla data di emissione per effettuare la prenotazione; se scade, il medico deve riemetterla.
+- Classi di priorità: U urgente (entro 72 ore), B breve (entro 10 giorni), D differibile (entro 30 giorni per le visite, 60 per la diagnostica), P programmabile (entro 120 giorni).
+- Prenotazione al CUP di Arezzo: telefono 800 001 100 (numero verde gratuito, lun–ven 08:00–18:00, sab 08:00–13:00), online su prenotaonline.toscana.it con SPID o CNS (disponibile 24h), sportello in Via Curtatone 54, Arezzo (lun–ven 08:00–13:00), o presso le farmacie aderenti (FarmaCUP).
+- Per prenotare servono: tessera sanitaria (codice fiscale), numero NRE dell'impegnativa e codice esenzione ticket se dovuto. In caso di impossibilità, disdire entro 48 ore.
+- Garanzia dei tempi massimi di attesa: se il CUP non ha disponibilità nei tempi della classe di priorità, si ha diritto a essere inseriti in una struttura alternativa (pubblica o privata accreditata) senza costi aggiuntivi.
+
+## Certificati di malattia
+
+- Il certificato INPS richiede una visita medica: la trasmissione telematica deve avvenire "all'atto della visita" (Circolare INPS n. 113 del 25/07/2013). Non è possibile richiederlo per telefono, email o messaggistica.
+- Nessuna retrodatazione: l'INPS riconosce la prestazione solo dalla data di rilascio del certificato; il paziente deve presentarsi in studio (o richiedere visita domiciliare) il primo giorno di malattia.
+- Il certificato telematico è obbligatorio per i lavoratori dipendenti (pubblici e privati) e alcune categorie di parasubordinati; per i liberi professionisti può essere rilasciato un certificato bianco su carta intestata, comunque previa visita.
+- In caso di malattia insorta nei giorni festivi o prefestivi, il paziente deve rivolgersi alla Continuità Assistenziale (Guardia Medica, 116 117).
+
+## Invalidità civile INPS (riforma 2026)
+
+- Dal 1° marzo 2026 Arezzo entra nella sperimentazione della Riforma della Disabilità (D.Lgs. 62/2024): il nuovo Certificato Medico Introduttivo, inviato telematicamente all'INPS da un medico certificatore autorizzato (il Dott. Savianu è certificatore telematico INPS autorizzato ai sensi del D.Lgs. 62/2024), ha valore di domanda stessa: non serve più il passaggio al Patronato.
+- Tempi massimi di risposta INPS: 90 giorni dall'invio del certificato; 15 giorni per le patologie oncologiche (corsia preferenziale). La convocazione per la visita collegiale arriva per raccomandata.
+- Principio di "non regressione": chi ha già un verbale o riceve una prestazione non perde nulla e non viene richiamato a visita.
+- Il Dott. Savianu offre accompagnamento per invalidità civile, Legge 104 e indennità di accompagnamento.
+
+## Referti e Fascicolo Sanitario Elettronico
+
+- I referti degli esami sono disponibili sul Fascicolo Sanitario Elettronico regionale, accessibile su salute.toscana.it con SPID o CIE; il medico può visionarli e commentarli durante la visita.
+
+## Materiali multilingue
+
+- Poster guida alla salute (A3 gratuiti da stampare): italiano (/ssn/poster-it.html), inglese (/ssn/poster-en.html), romeno (/ssn/poster-ro.html), bengalese (/ssn/poster-bn.html), urdu (/ssn/poster-ur.html).
+- Salute mentale: italiano (/ssn/salutementale.html), romeno (/ssn/salutementale-ro.html).
+- Vivere sano: italiano (/ssn/vivisano.html), romeno (/ssn/vivisano-ro.html).
+- Foglio multilingue in italiano, inglese, urdu e bengali per colleghi e operatori sanitari (/ssn/poster_multilingue.html); guide pratiche in urdu (/ssn/urdu.html) e bengalese (/ssn/bengalese.html).
+- Tutti i materiali sono disponibili dal hub [Materiali informativi](/ssn/materiali.html).
+
+## Pagine principali del sito
+
+- [Area pazienti SSN](/ssn/): prenotazioni su Doctolib, ricette, certificati, FAQ, esenzioni e guide.
+- [FAQ pazienti](/ssn/faq.html): domande frequenti su prenotazioni, ricette, certificati, orari e contatti.
+- [Esenzione ticket](/ssn/esenzioni.html): guida a reddito, patologie croniche, invalidità, documenti e rinnovo.
+- [Impegnative e CUP](/ssn/impegnative.html): come richiedere le impegnative e prenotare visite ed esami.
+- [Certificato di malattia](/ssn/cert-malattia.html): quando serve, invio telematico all'INPS e regole del medico curante.
+- [Diritti del paziente — malattia](/ssn/malattia.html): chi deve rilasciare il certificato di malattia.
+- [Certificato di invalidità INPS](/privati/): procedura telematica dal 1° marzo 2026, accompagnamento e Legge 104.
+- [Certificato di invalidità civile](/privati/certificato-invalidita-civile.html): documenti e nuova procedura (D.Lgs. 62/2024).
+- [FAQ riforma invalidità 2026](/privati/faq-riforma.html): nuovo certificato telematico, domanda INPS, indennità e Legge 104.
+- [Area colleghi MMG](/colleghi/): strumenti, protocolli e guide professionali.
+
+Le informazioni su questo sito hanno scopo informativo e non sostituiscono il parere medico.
