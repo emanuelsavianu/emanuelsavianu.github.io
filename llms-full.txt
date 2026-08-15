@@ -36,7 +36,7 @@
 
 ## Impegnative e CUP
 
-- L'impegnativa (ricetta SSN per prestazione specialistica) autorizza visite ed esami a carico del SSN; dal 2015 è dematerializzata e si riceve il numero NRE.
+- L'impegnativa (ricetta SSN per prestazione specialistica) autorizza visite ed esami a carico del SSN; dal 2015 le ricette sono progressivamente digitali e si riceve il numero NRE.
 - Le impegnative SSN hanno una validità di 30 giorni dalla data di emissione per effettuare la prenotazione; se scade, il medico deve riemetterla.
 - Classi di priorità: U urgente (entro 72 ore), B breve (entro 10 giorni), D differibile (entro 30 giorni per le visite, 60 per la diagnostica), P programmabile (entro 120 giorni).
 - Prenotazione al CUP di Arezzo: telefono 800 001 100 (numero verde gratuito, lun–ven 08:00–18:00, sab 08:00–13:00), online su prenotaonline.toscana.it con SPID o CNS (disponibile 24h), sportello in Via Curtatone 54, Arezzo (lun–ven 08:00–13:00), o presso le farmacie aderenti (FarmaCUP).
@@ -63,11 +63,11 @@
 
 ## Materiali multilingue
 
-- Poster guida alla salute (A3 gratuiti da stampare): italiano (/ssn/poster-it.html), inglese (/ssn/poster-en.html), romeno (/ssn/poster-ro.html), bengalese (/ssn/poster-bn.html), urdu (/ssn/poster-ur.html).
-- Salute mentale: italiano (/ssn/salutementale.html), romeno (/ssn/salutementale-ro.html).
-- Vivere sano: italiano (/ssn/vivisano.html), romeno (/ssn/vivisano-ro.html).
-- Foglio multilingue in italiano, inglese, urdu e bengali per colleghi e operatori sanitari (/ssn/poster_multilingue.html); guide pratiche in urdu (/ssn/urdu.html) e bengalese (/ssn/bengalese.html).
-- Tutti i materiali sono disponibili dal hub [Materiali informativi](/ssn/materiali.html).
+- Poster guida alla salute (A3 gratuiti da stampare): [italiano](/ssn/poster-it.html), [inglese](/ssn/poster-en.html), [romeno](/ssn/poster-ro.html), [bengalese](/ssn/poster-bn.html), [urdu](/ssn/poster-ur.html).
+- Salute mentale: [italiano](/ssn/salutementale.html), [romeno](/ssn/salutementale-ro.html).
+- Vivere sano: [italiano](/ssn/vivisano.html), [romeno](/ssn/vivisano-ro.html).
+- [Foglio multilingue](/ssn/poster_multilingue.html) in italiano, inglese, urdu e bengali per colleghi e operatori sanitari; guide pratiche in [urdu](/ssn/urdu.html) e [bengalese](/ssn/bengalese.html).
+- Tutti i materiali sono disponibili dall'hub [Materiali informativi](/ssn/materiali.html).
 
 ## Pagine principali del sito
 
