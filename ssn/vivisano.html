@@ -1,653 +1,95 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Vivi Sano, Vivi Meglio — Informativa Stili di Vita</title>
-<link rel="canonical" href="https://savianu.it/ssn/vivisano.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --navy-dark: #1A2F4C;
-    --nhs-blue: #1A2F4C;
-    --teal-soft: #F3EFE6;
-    --green-soft: #F3EFE6;
-    --accent-teal: #C29B57;
-    --accent-green: #C29B57;
-    --accent-gold: #C29B57;
-    --gold-light: #F3EFE6;
-    --card-bg: #FFFFFF;
-    --text-dark: #1A202C;
-    --text-muted: #4A5568;
-    --border-color: #E2E8F0;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    background: #F0F4F8;
-    color: var(--text-dark);
-    line-height: 1.5;
-    padding: 30px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-  }
-
-  /* Contenitore principale */
-  .poster-container {
-    width: 100%;
-    max-width: 1200px;
-    background: #FFFFFF;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* ============ HEADER ============ */
-  .header {
-    background: var(--navy-dark);
-    color: white;
-    padding: 1.8rem 3rem 1.6rem 3rem;
-    position: relative;
-    border-bottom: 5px solid var(--accent-gold);
-  }
-
-  .top-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--gold-light);
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.5px;
-  }
-
-  .main-title {
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.5px;
-    margin-bottom: 1.5rem;
-    color: #FFFFFF;
-  }
-
-  .main-title span {
-    color: var(--accent-gold);
-  }
-
-  .title-translations {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 1.2rem 1.5rem;
-    border-radius: 12px;
-    border-left: 4px solid var(--accent-gold);
-  }
-
-  .lang-box {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .lang-tag {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent-gold);
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-
-  .lang-text-title {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #EDF2F7;
-    line-height: 1.3;
-  }
-
-  .lang-text-title.bn { font-family: 'Noto Sans Bengali', sans-serif; }
-  .lang-text-title.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; }
-
-  /* ============ HERO BANNER ============ */
-  .hero-banner {
-    background: var(--green-soft);
-    padding: 1.8rem 3rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .hero-icon {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-  }
-
-  .hero-content {
-    flex: 1;
-  }
-
-  .hero-it {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--navy-dark);
-    line-height: 1.35;
-  }
-
-  .hero-en {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--nhs-blue);
-    margin-top: 4px;
-    font-style: italic;
-  }
-
-  .hero-multilang {
-    margin-top: 8px;
-    display: flex;
-    gap: 1.5rem;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-  }
-
-  .hero-multilang .bn { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; color: #2D3748; }
-  .hero-multilang .ur { font-family: 'Noto Sans Arabic', sans-serif; font-weight: 600; color: #2D3748; direction: rtl; }
-
-  /* ============ BODY CONTENT ============ */
-  .content-body {
-    padding: 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-  }
-
-  .section-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .section-header {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--nhs-blue);
-    color: white;
-    padding: 8px 18px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    margin-bottom: 1.2rem;
-  }
-
-  .section-header.gold {
-    background: var(--accent-gold);
-    color: var(--navy-dark);
-  }
-
-  .section-header .sub-en {
-    font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.9;
-  }
-
-  /* HABIT CARDS GRID (Unified and Redundancy-Free) */
-  .cards-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border: 1.5px solid #E2E8F0;
-    border-top: 4px solid var(--accent-gold);
-    border-radius: 12px;
-    padding: 1.8rem;
-    display: flex;
-    flex-direction: column;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    margin-bottom: 1.2rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #F0F4F8;
-  }
-
-  .card-icon {
-    width: 64px;
-    height: 64px;
-    flex-shrink: 0;
-  }
-
-  .card-title-group {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-title-it {
-    font-size: 1.15rem;
-    font-weight: 800;
-    color: var(--navy-dark);
-    line-height: 1.2;
-  }
-
-  .card-title-en {
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--text-muted);
-    font-style: italic;
-    margin-top: 4px;
-  }
-
-  .card-content {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .lang-item {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .lang-label {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 800;
-    background: var(--teal-soft);
-    color: var(--nhs-blue);
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-bottom: 6px;
-    text-transform: uppercase;
-  }
-
-  .lang-text {
-    font-size: 0.95rem;
-    color: var(--text-dark);
-    line-height: 1.45;
-    font-weight: 500;
-  }
-
-  .lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; font-size: 1.05rem; font-weight: 600; }
-  .lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; width: 100%; font-size: 1.05rem; font-weight: 600; }
-
-  /* ACTION BOXES */
-  .action-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .action-card {
-    background: var(--navy-dark);
-    color: white;
-    border-radius: 12px;
-    padding: 1.8rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease;
-  }
-
-  .action-card:hover {
-    transform: translateY(-3px);
-  }
-
-  .action-header-bar {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .action-icon {
-    width: 50px;
-    height: 50px;
-    flex-shrink: 0;
-  }
-
-  .action-title-group {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .action-title {
-    font-size: 1.05rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: white;
-  }
-
-  .action-title-en {
-    font-size: 0.88rem;
-    color: var(--gold-light);
-    font-style: italic;
-    margin-top: 2px;
-  }
-
-  .action-body {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 1.2rem;
-    border-radius: 8px;
-    width: 100%;
-    margin-top: auto;
-  }
-
-  .action-lang-text {
-    font-size: 0.88rem;
-    line-height: 1.4;
-    color: #EDF2F7;
-    position: relative;
-    padding-left: 12px;
-    border-left: 2px solid rgba(255, 255, 255, 0.2);
-  }
-
-  .action-lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; font-size: 0.95rem; }
-  .action-lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; padding-left: 0; padding-right: 12px; border-left: none; border-right: 2px solid rgba(255, 255, 255, 0.2); text-align: right; font-size: 0.95rem; }
-
-  /* ============ FOOTER / BRAND ============ */
-  .footer {
-    background: var(--navy-dark);
-    color: white;
-    padding: 1.6rem 3rem;
-    border-top: 5px solid var(--accent-gold);
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .footer-brand img {
-    flex-shrink: 0;
-  }
-
-  .footer-brand-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .footer-brand-text strong {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #FFFFFF;
-    letter-spacing: 0.5px;
-    line-height: 1.1;
-  }
-
-  .footer-brand-text span {
-    font-size: 0.85rem;
-    color: var(--gold-light);
-    font-weight: 600;
-  }
-
-  /* ============ RESPONSIVITÀ ============ */
-  @media (max-width: 992px) {
-    .title-translations, .action-grid { grid-template-columns: 1fr; }
-    .cards-grid { grid-template-columns: 1fr; }
-    .header, .hero-banner, .content-body, .footer { padding-left: 1.5rem; padding-right: 1.5rem; }
-  }
-
-  @media print {
-    @page { size: A3 portrait; margin: 0; }
-    body { background: transparent; padding: 0; }
-    .poster-container { width: 297mm; min-height: 420mm; border-radius: 0; box-shadow: none; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vivi sano, vivi meglio — Poster A3 (Italiano) | savianu.it</title>
+    <link rel="canonical" href="https://savianu.it/ssn/vivisano.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="poster-styles.css">
+    <style>
+        :root { --accent: #4C8C6F; --accent-soft: #F2F8F4; }
+    </style>
 </head>
 <body>
 
-<div class="poster-container">
+<div class="poster">
 
-  <!-- ============ HEADER ============ -->
-  <header class="header">
-    <div class="top-badge">
-      <img src="../assets/bronzelogo.png" alt="savianu.it" width="22" height="22" style="border-radius:6px">
-      savianu.it
-    </div>
-    
-    <h1 class="main-title">Vivi sano,<br>vivi <span>meglio</span></h1>
-  </header>
-
-  <!-- ============ HERO BANNER ============ -->
-  <section class="hero-banner">
-    <svg class="hero-icon" viewBox="0 0 100 100" fill="none">
-      <circle cx="50" cy="50" r="46" fill="#C29B57" opacity="0.12"/>
-      <path d="M50 18 C72 18 82 32 82 50 C82 72 50 82 50 82 C50 82 18 72 18 50 C18 32 28 18 50 18 Z" fill="#C29B57"/>
-      <path d="M50 28 C64 28 72 38 72 50 C72 65 50 74 50 74 C50 74 28 65 28 50 C28 38 36 28 50 28 Z" fill="#388E3C"/>
-      <path d="M50 38 C45 32 35 32 35 42 C35 52 50 62 50 62 C50 62 65 52 65 42 C65 32 55 32 50 38 Z" fill="#C29B57"/>
-      <path d="M50 82 L50 90" stroke="#1A2F4C" stroke-width="4" stroke-linecap="round"/>
-    </svg>
-    
-    <div class="hero-content">
-      <div class="hero-it">Uno stile di vita sano mantiene il corpo forte e la mente in perfetto equilibrio.</div>
-    </div>
-  </section>
-
-  <!-- ============ BODY CONTENT ============ -->
-  <main class="content-body">
-
-    <!-- GOLDEN RULES (Combined to remove redundancy and add new advice) -->
-    <div class="section-block">
-      <div class="section-header gold">
-        <span>LE REGOLE D'ORO PER LA TUA SALUTE</span>
-      </div>
-
-      <div class="cards-grid">
-        
-        <!-- Card 1: Nutrition -->
-        <div class="card">
-          <div class="card-header">
-            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="#F3EFE6"/>
-              <path d="M14 34 C14 46 22 52 32 52 C42 52 50 46 50 34 Z" fill="#C29B57"/>
-              <path d="M12 34 L52 34" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>
-              <path d="M32 32 C22 32 18 20 28 16 C36 12 32 32 32 32 Z" fill="#C29B57"/>
-              <path d="M32 32 C42 32 46 20 36 16 C28 12 32 32 32 32 Z" fill="#388E3C"/>
-              <path d="M32 34 L32 16" stroke="#F3EFE6" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <div class="card-title-group">
-              <div class="card-title-it">Alimentazione Semplice e Sana</div>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="lang-item">
-              <div class="lang-label">Italiano</div>
-              <div class="lang-text">Riduci zuccheri, sale, pasta e riso bianco. Mangia più verdure e legumi.</div>
-            </div>
-          </div>
+    <header class="poster-header">
+        <div class="brand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site">savianu.it</span>
         </div>
+        <p class="studio">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+    </header>
 
-        <!-- Card 2: Hydration -->
-        <div class="card">
-          <div class="card-header">
-            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="#F3EFE6"/>
-              <path d="M22 16 L26 50 C26.5 53 29 54 32 54 C35 54 37.5 53 38 50 L42 16 Z" fill="#FFFFFF" stroke="#1A2F4C" stroke-width="3" stroke-linejoin="round"/>
-              <path d="M24 28 C28 30 36 26 40 28 L38.5 50 C38 52 36 52.5 32 52.5 C28 52.5 26 52 25.5 50 Z" fill="#C29B57" opacity="0.7"/>
-              <path d="M46 22 C46 22 42 28 42 30 C42 32 44 34 46 34 C48 34 50 32 50 30 C50 28 46 22 46 22 Z" fill="#1A2F4C"/>
-            </svg>
-            <div class="card-title-group">
-              <div class="card-title-it">Idratazione Quotidiana</div>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="lang-item">
-              <div class="lang-label">Italiano</div>
-              <div class="lang-text">Bevi 1.5 - 2 litri d'acqua al giorno. Evita le bevande zuccherate o gassate.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Movement -->
-        <div class="card">
-          <div class="card-header">
-            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="#F3EFE6"/>
-              <path d="M44 20 C40 16 34 20 32 24 C30 20 24 16 20 20 C15 25 20 34 32 44 C44 34 49 25 44 20 Z" fill="#C29B57" opacity="0.3"/>
-              <circle cx="32" cy="20" r="5" fill="#1A2F4C"/>
-              <path d="M32 26 L32 38 M32 28 L24 34 M32 28 L40 24 M32 38 L24 50 M32 38 L38 48" stroke="#1A2F4C" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M16 50 L48 50" stroke="#C29B57" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            </svg>
-            <div class="card-title-group">
-              <div class="card-title-it">Movimento Regolare</div>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="lang-item">
-              <div class="lang-label">Italiano</div>
-              <div class="lang-text">Cammina a passo svelto per almeno 30 minuti al giorno per cuore e mente.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 4: Medication -->
-        <div class="card">
-          <div class="card-header">
-            <svg class="card-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="32" cy="32" r="32" fill="#F0F4F8"/>
-              <path d="M32 12 L46 18 L46 32 C46 44 32 52 32 52 C32 52 18 44 18 32 L18 18 Z" fill="#1A2F4C" opacity="0.15"/>
-              <rect x="22" y="26" width="20" height="12" rx="6" fill="#1A2F4C" transform="rotate(-45 32 32)"/>
-              <rect x="22" y="26" width="10" height="12" rx="6" fill="#C29B57" transform="rotate(-45 32 32)"/>
-              <path d="M26 42 L34 34" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
-              <circle cx="44" cy="20" r="3" fill="#C29B57"/>
-              <circle cx="20" cy="44" r="2" fill="#C29B57"/>
-            </svg>
-            <div class="card-title-group">
-              <div class="card-title-it">Uso Corretto dei Farmaci</div>
-            </div>
-          </div>
-          <div class="card-content">
-            <div class="lang-item">
-              <div class="lang-label">Italiano</div>
-              <div class="lang-text">Non sospendere le terapie croniche. Usa gli antibiotici solo se prescritti dal medico.</div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+    <div class="poster-title">
+        <h1>Vivi sano, vivi meglio</h1>
+        <p class="sub">Uno stile di vita sano mantiene il corpo forte e la mente in equilibrio.</p>
     </div>
 
-    <!-- WHAT TO DO (Adapted to include Studio Medico Ippocrate advice) -->
-    <div class="section-block">
-      <div class="section-header">
-        <span>COSA PUOI FARE IN ITALIA</span>
-      </div>
+    <!-- IMMAGINE 1/5 — sostituisci il <figure> con <img class="img-real" alt="Mattinata sana ad Arezzo"> · path: ../assets/img/poster/hero-vivisano.png -->
+    <figure class="img-ph hero" data-ph="hero-vivisano">
+        <span class="ph-ico">🖼️</span>
+        <figcaption><span class="code">hero-vivisano</span> · healthy morning in Arezzo: people walking on a hill with a medieval fortress in the background, market stalls with fruit and vegetables in a medieval square with loggia, jogger on old city walls, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones and ages, simple clothing in navy, gold, teal and white, flat vector illustration, friendly cartoon style, bold simple shapes, clean outlines, limited flat palette (navy #1A2F4C, gold #C29B57, teal #3E8E7E), plain white background, no gradients, no shadows, no text, no letters, no watermark, 2D, minimal</figcaption>
+    </figure>
 
-      <div class="action-grid">
-        <!-- Action 1 -->
-        <div class="action-card">
-          <div class="action-header-bar">
-            <svg class="action-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="12" y="16" width="40" height="32" rx="4" fill="#F3EFE6"/>
-              <path d="M24 28 L40 28 M24 36 L32 36" stroke="#1A2F4C" stroke-width="3" stroke-linecap="round"/>
-              <circle cx="44" cy="42" r="10" fill="#C29B57"/>
-              <path d="M40 42 L43 45 L49 39" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <div class="action-title-group">
-              <div class="action-title">Medico di Base</div>
-            </div>
-          </div>
-          <div class="action-body">
-            <div class="action-lang-text">Prenota le visite dal medico e porta sempre le tue medicine.</div>
-            
-          </div>
+    <main class="cards">
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Piatto sano"> · path: ../assets/img/poster/card-piatto.png -->
+            <figure class="img-ph" data-ph="card-piatto">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-piatto</span> · healthy plate with vegetables, legumes and grains, water jug beside it, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Piatto sano</h3>
+            <p>Verdure, legumi e cereali ogni giorno. Poco sale e zucchero.</p>
+        </section>
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Bevi acqua"> · path: ../assets/img/poster/card-acqua.png -->
+            <figure class="img-ph" data-ph="card-acqua">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-acqua</span> · pitcher pouring water into a glass, stylized drops, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Bevi acqua</h3>
+            <p>1,5–2 litri al giorno. No alle bevande zuccherate.</p>
+        </section>
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Muoviti ogni giorno"> · path: ../assets/img/poster/card-movimento.png -->
+            <figure class="img-ph" data-ph="card-movimento">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-movimento</span> · people moving: walking, jogging, cycling along old city walls of an Italian hill town, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Muoviti</h3>
+            <p>30 minuti di cammino al giorno: bene per cuore e mente.</p>
+        </section>
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Vaccinazioni"> · path: ../assets/img/poster/card-vaccini.png -->
+            <figure class="img-ph" data-ph="card-vaccini">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-vaccini</span> · friendly doctor with a gentle syringe, smiling person with relaxed arm, stylized shield symbolizing protection, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Vaccinazioni</h3>
+            <p>Chiedi al tuo medico quali vaccini ti servono.</p>
+        </section>
+
+    </main>
+
+    <p class="strip">In caso di emergenza: chiama il 112</p>
+
+    <footer class="poster-footer">
+        <div class="fbrand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span>savianu.it</span>
         </div>
-
-        <!-- Action 2 -->
-        <div class="action-card">
-          <div class="action-header-bar">
-            <svg class="action-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M32 12 L54 50 H10 Z" fill="#F3EFE6"/>
-              <path d="M32 26 L32 38 M32 44 L32 46" stroke="#C29B57" stroke-width="4" stroke-linecap="round"/>
-            </svg>
-            <div class="action-title-group">
-              <div class="action-title">Emergenze</div>
-            </div>
-          </div>
-          <div class="action-body">
-            <div class="action-lang-text">Usa il Pronto Soccorso (112) solo per gravi urgenze mediche.</div>
-            
-          </div>
-        </div>
-
-        <!-- Action 3 -->
-        <div class="action-card">
-          <div class="action-header-bar">
-            <svg class="action-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="24" cy="24" r="8" fill="#F3EFE6"/>
-              <circle cx="40" cy="24" r="8" fill="#F3EFE6"/>
-              <path d="M12 48 C12 36 18 34 24 34 C28 34 31 35 33 38" fill="#F3EFE6"/>
-              <path d="M52 48 C52 36 46 34 40 34 C36 34 33 35 31 38" fill="#F3EFE6"/>
-              <circle cx="32" cy="32" r="7" fill="#C29B57"/>
-              <path d="M20 54 C20 44 26 42 32 42 C38 42 44 44 44 54" fill="#C29B57"/>
-            </svg>
-            <div class="action-title-group">
-              <div class="action-title">Prevenzione</div>
-            </div>
-          </div>
-          <div class="action-body">
-            <div class="action-lang-text">Mantieniti attivo nella comunità e controlla le tue vaccinazioni.</div>
-            
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="footer-brand">
-      <img src="../assets/bronzelogo.png" alt="savianu.it" width="52" height="52" style="border-radius:10px">
-      <div class="footer-brand-text">
-        <strong>savianu.it</strong>
-        <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
-      </div>
-    </div>
-  </footer>
+        <p>Studio Medico Ippocrate · Piazza Saione 3, Arezzo · 0575 910 904</p>
+        <p class="fright">Vivi sano · Italiano<br>savianu.it</p>
+    </footer>
 
 </div>
 

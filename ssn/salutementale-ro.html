@@ -1,624 +1,95 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sănătatea mintală se poate vindeca — Afiș (Română) | savianu.it</title>
-<link rel="canonical" href="https://savianu.it/ssn/salutementale-ro.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Noto+Sans+Arabic:wght@400;600;700&family=Noto+Sans+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
-
-<style>
-  :root {
-    --navy-dark: #1A2F4C;
-    --nhs-blue: #1A2F4C;
-    --teal-soft: #F3EFE6;
-    --accent-teal: #C29B57;
-    --accent-gold: #C29B57;
-    --gold-light: #F3EFE6;
-    --card-bg: #FFFFFF;
-    --text-dark: #1A202C;
-    --text-muted: #4A5568;
-    --border-color: #E2E8F0;
-    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 6px 16px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.12);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
-    background: #F0F4F8;
-    color: var(--text-dark);
-    line-height: 1.5;
-    padding: 30px 15px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 100vh;
-  }
-
-  /* Contenitore ottimizzato per PC / Schermo */
-  .poster-container {
-    width: 100%;
-    max-width: 1200px;
-    background: #FFFFFF;
-    border-radius: 16px;
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* ============ HEADER ============ */
-  .header {
-    background: var(--navy-dark);
-    color: white;
-    padding: 1.8rem 3rem 1.6rem 3rem;
-    position: relative;
-    border-bottom: 5px solid var(--accent-gold);
-  }
-
-  .top-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255, 255, 255, 0.12);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 6px 16px;
-    border-radius: 30px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--gold-light);
-    margin-bottom: 1.2rem;
-    letter-spacing: 0.5px;
-  }
-
-  .main-title {
-    font-size: clamp(2.2rem, 4vw, 3.2rem);
-    font-weight: 800;
-    line-height: 1.15;
-    letter-spacing: -0.5px;
-    margin-bottom: 1.5rem;
-    color: #FFFFFF;
-  }
-
-  .main-title span {
-    color: var(--accent-gold);
-  }
-
-  .title-translations {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.2rem;
-    background: rgba(0, 0, 0, 0.25);
-    padding: 1.2rem 1.5rem;
-    border-radius: 12px;
-    border-left: 4px solid var(--accent-gold);
-  }
-
-  .lang-box {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .lang-tag {
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    color: var(--accent-gold);
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-
-  .lang-text {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: #EDF2F7;
-    line-height: 1.3;
-  }
-
-  .lang-text.bn { font-family: 'Noto Sans Bengali', sans-serif; }
-  .lang-text.ur { font-family: 'Noto Sans Arabic', sans-serif; direction: rtl; text-align: right; }
-
-  /* ============ HERO BANNER ============ */
-  .hero-banner {
-    background: var(--teal-soft);
-    padding: 1.8rem 3rem;
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-    border-bottom: 1px solid var(--border-color);
-  }
-
-  .hero-icon {
-    width: 80px;
-    height: 80px;
-    flex-shrink: 0;
-  }
-
-  .hero-content {
-    flex: 1;
-  }
-
-  .hero-it {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: var(--navy-dark);
-    line-height: 1.35;
-  }
-
-  .hero-en {
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--nhs-blue);
-    margin-top: 4px;
-    font-style: italic;
-  }
-
-  .hero-multilang {
-    margin-top: 8px;
-    display: flex;
-    gap: 1.5rem;
-    font-size: 0.95rem;
-    color: var(--text-muted);
-  }
-
-  .hero-multilang .bn { font-family: 'Noto Sans Bengali', sans-serif; font-weight: 600; color: #2D3748; }
-  .hero-multilang .ur { font-family: 'Noto Sans Arabic', sans-serif; font-weight: 600; color: #2D3748; direction: rtl; }
-
-  /* ============ BODY CONTENT ============ */
-  .content-body {
-    padding: 2rem 3rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-  }
-
-  .section-block {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .section-header {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: var(--nhs-blue);
-    color: white;
-    padding: 8px 18px;
-    border-radius: 30px;
-    font-size: 0.95rem;
-    font-weight: 800;
-    letter-spacing: 0.5px;
-    margin-bottom: 1.2rem;
-  }
-
-  .section-header.gold {
-    background: var(--accent-gold);
-    color: var(--navy-dark);
-  }
-
-  .section-header .sub-en {
-    font-size: 0.85rem;
-    font-weight: 500;
-    opacity: 0.9;
-  }
-
-  /* NORMALIZATION STRIP */
-  .norm-box {
-    width: 100%;
-    background: #F8FAFC;
-    border: 1.5px solid #CBD5E0;
-    border-left: 5px solid var(--nhs-blue);
-    border-radius: 12px;
-    padding: 1.5rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .norm-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  .norm-icon {
-    width: 36px;
-    height: 36px;
-    flex-shrink: 0;
-  }
-
-  .norm-text-it { font-size: 1rem; font-weight: 700; color: var(--navy-dark); line-height: 1.3; }
-  .norm-text-en { font-size: 0.88rem; font-weight: 500; color: var(--text-muted); font-style: italic; margin-top: 2px; }
-
-  /* WARNING CARDS GRID */
-  .cards-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.2rem;
-  }
-
-  .card {
-    background: var(--card-bg);
-    border: 1.5px solid #E2E8F0;
-    border-top: 4px solid var(--accent-gold);
-    border-radius: 12px;
-    padding: 1.5rem 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-  }
-
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .card-icon {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 1rem;
-  }
-
-  .card-title-it {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--navy-dark);
-    line-height: 1.3;
-    margin-bottom: 4px;
-  }
-
-  .card-title-en {
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    font-style: italic;
-    line-height: 1.2;
-    margin-bottom: 1rem;
-  }
-
-  .card-extra {
-    font-size: 0.82rem;
-    line-height: 1.3;
-    padding-top: 0.8rem;
-    border-top: 1px dashed #E2E8F0;
-    width: 100%;
-    margin-top: auto;
-  }
-
-  .card-extra .bn { font-family: 'Noto Sans Bengali', sans-serif; color: #4A5568; display: block; margin-bottom: 2px; }
-  .card-extra .ur { font-family: 'Noto Sans Arabic', sans-serif; color: #4A5568; display: block; direction: rtl; }
-
-  /* ACTION BOXES */
-  .action-grid {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
-  .action-card {
-    background: var(--navy-dark);
-    color: white;
-    border-radius: 12px;
-    padding: 1.8rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.2s ease;
-  }
-
-  .action-card:hover {
-    transform: translateY(-3px);
-  }
-
-  .action-icon {
-    width: 56px;
-    height: 56px;
-    margin-bottom: 1rem;
-  }
-
-  .action-it {
-    font-size: 1.05rem;
-    font-weight: 700;
-    line-height: 1.3;
-    margin-bottom: 4px;
-  }
-
-  .action-en {
-    font-size: 0.88rem;
-    color: var(--gold-light);
-    font-style: italic;
-    margin-bottom: 1rem;
-  }
-
-  .action-detail {
-    font-size: 0.88rem;
-    line-height: 1.45;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 0.8rem 1rem;
-    border-radius: 8px;
-    width: 100%;
-    margin-top: auto;
-  }
-
-  /* ============ FOOTER / BRAND ============ */
-  .footer {
-    background: var(--navy-dark);
-    color: white;
-    padding: 1.6rem 3rem;
-    border-top: 5px solid var(--accent-gold);
-  }
-
-  .footer-brand {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-
-  .footer-brand img {
-    flex-shrink: 0;
-  }
-
-  .footer-brand-text {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .footer-brand-text strong {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: #FFFFFF;
-    letter-spacing: 0.5px;
-    line-height: 1.1;
-  }
-
-  .footer-brand-text span {
-    font-size: 0.85rem;
-    color: var(--gold-light);
-    font-weight: 600;
-  }
-
-  /* ============ RESPONSIVITÀ PER TABLET E SMARTPHONE ============ */
-  @media (max-width: 992px) {
-    .title-translations, .norm-box, .action-grid {
-      grid-template-columns: 1fr;
-    }
-    .cards-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .header, .hero-banner, .content-body, .footer {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .cards-grid {
-      grid-template-columns: 1fr;
-    }
-    .hero-banner {
-      flex-direction: column;
-      text-align: center;
-    }
-    .hero-multilang {
-      justify-content: center;
-    }
-  }
-
-  /* ============ STAMPA (FORMATO A3) ============ */
-  @media print {
-    @page { size: A3 portrait; margin: 0; }
-    body { background: transparent; padding: 0; }
-    .poster-container { width: 297mm; min-height: 420mm; border-radius: 0; box-shadow: none; }
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sănătatea mintală se poate vindeca — Afiș A3 (Română) | savianu.it</title>
+    <link rel="canonical" href="https://savianu.it/ssn/salutementale-ro.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="poster-styles.css">
+    <style>
+        :root { --accent: #3E8E7E; --accent-soft: #F0F7F5; }
+    </style>
 </head>
 <body>
 
-<div class="poster-container">
+<div class="poster">
 
-  <!-- ============ HEADER ============ -->
-  <header class="header">
-    <div class="top-badge">
-      <img src="../assets/bronzelogo.png" alt="savianu.it" width="22" height="22" style="border-radius:6px">
-      savianu.it
-    </div>
-    
-    <h1 class="main-title">Și mintea<br>se poate <span>vindeca</span></h1>
-  </header>
-
-  <!-- ============ HERO BANNER ============ -->
-  <section class="hero-banner">
-    <svg class="hero-icon" viewBox="0 0 100 100" fill="none">
-      <circle cx="50" cy="50" r="46" fill="#1A2F4C" opacity="0.1"/>
-      <path d="M50 20 C32 20 24 32 24 46 C24 60 35 68 40 72 L40 84 L60 84 L60 72 C65 68 76 60 76 46 C76 32 68 20 50 20 Z" stroke="#1A2F4C" stroke-width="3.5" fill="#FFFFFF" stroke-linejoin="round"/>
-      <path d="M50 35 C45 30 36 32 36 40 C36 48 50 58 50 58 C50 58 64 48 64 40 C64 32 55 30 50 35 Z" fill="#C29B57"/>
-      <path d="M40 90 L60 90" stroke="#1A2F4C" stroke-width="3.5" stroke-linecap="round"/>
-    </svg>
-    
-    <div class="hero-content">
-      <div class="hero-it">Îngrijirea minții este la fel de importantă ca îngrijirea corpului.</div>
-    </div>
-  </section>
-
-  <!-- ============ BODY CONTENT ============ -->
-  <main class="content-body">
-
-    <!-- NORMALIZATION -->
-    <div class="section-block">
-      <div class="section-header">
-        <span>E NORMAL SĂ TE SIMȚI AȘA</span>
-      </div>
-
-      <div class="norm-box">
-        <div class="norm-item">
-          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" fill="#F3EFE6"/>
-            <path d="M12 24 C14 20 18 19 20 22 C22 19 26 20 28 24" stroke="#1A2F4C" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="14" cy="15" r="2" fill="#1A2F4C"/>
-            <circle cx="26" cy="15" r="2" fill="#1A2F4C"/>
-          </svg>
-          <div>
-            <div class="norm-text-it">Este normal să te simți trist, anxios sau îngrijorat.</div>
-          </div>
+    <header class="poster-header">
+        <div class="brand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span class="site">savianu.it</span>
         </div>
+        <p class="studio">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
+    </header>
 
-        <div class="norm-item">
-          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" fill="#F3EFE6"/>
-            <path d="M12 18 Q20 10 28 18" stroke="#C29B57" stroke-width="2.5" fill="none" stroke-linecap="round"/>
-            <path d="M14 26 C18 23 22 23 26 26" stroke="#1A2F4C" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-          <div>
-            <div class="norm-text-it">A vorbi despre asta nu este o slăbiciune, este primul pas.</div>
-          </div>
-        </div>
-
-        <div class="norm-item">
-          <svg class="norm-icon" viewBox="0 0 40 40" fill="none">
-            <circle cx="20" cy="20" r="18" fill="#F3EFE6"/>
-            <path d="M13 20 L18 25 L27 15" stroke="#C29B57" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <div>
-            <div class="norm-text-it">A cere ajutor este un drept al tău în domeniul sănătății.</div>
-          </div>
-        </div>
-      </div>
+    <div class="poster-title">
+        <h1>Și mintea se poate vindeca</h1>
+        <p class="sub">Îngrijirea minții este la fel de importantă ca îngrijirea corpului.</p>
     </div>
 
-    <!-- WARNING SIGNS -->
-    <div class="section-block">
-      <div class="section-header gold">
-        <span>CÂND SĂ CERI AJUTOR</span>
-      </div>
+    <!-- IMAGINEA 1/5 — înlocuiește <figure> cu <img class="img-real" alt="Norul se risipește, răsare soarele"> · path: ../assets/img/poster/hero-mente.png -->
+    <figure class="img-ph hero" data-ph="hero-mente">
+        <span class="ph-ico">🖼️</span>
+        <figcaption><span class="code">hero-mente</span> · person sitting under a heavy cloud that is clearing, sun rising over the profile of a Tuscan cathedral dome, calm hopeful mood, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, friendly cartoon style, bold simple shapes, clean outlines, limited flat palette (navy #1A2F4C, gold #C29B57, teal #3E8E7E), plain white background, no gradients, no shadows, no text, no letters, no watermark, 2D, minimal</figcaption>
+    </figure>
 
-      <div class="cards-grid">
-        <!-- Card 1 -->
-        <div class="card">
-          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-            <rect x="10" y="45" width="60" height="20" rx="4" fill="#1A2F4C"/>
-            <path d="M15 45 C15 30 25 25 40 25 C55 25 65 30 65 45" stroke="#1A2F4C" stroke-width="3" fill="#F3EFE6"/>
-            <path d="M50 15 L58 10 M55 22 L65 20 M58 27 L66 32" stroke="#C29B57" stroke-width="2.5" stroke-linecap="round"/>
-            <circle cx="30" cy="35" r="4" fill="#C29B57"/>
-          </svg>
-          <div class="card-title-it">Nu dormi bine de săptămâni</div>
+    <main class="cards">
+
+        <section class="card">
+            <!-- <img class="img-real" alt="E normal să te simți așa"> · path: ../assets/img/poster/card-normale.png -->
+            <figure class="img-ph" data-ph="card-normale">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-normale</span> · person smiling with shoulders raised in a relaxed way, feeling okay, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>E normal</h3>
+            <p>Tristețea, anxietatea și îngrijorările li se întâmplă tuturor.</p>
+        </section>
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Vorbitul ajută"> · path: ../assets/img/poster/card-mente-parla.png -->
+            <figure class="img-ph" data-ph="card-mente-parla">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-mente-parla</span> · person talking with a trusted friend, two cups of tea, warm supportive mood, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Vorbește</h3>
+            <p>Cu cineva în care ai încredere sau cu medicul. Nu e o slăbiciune.</p>
+        </section>
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Dormi bine"> · path: ../assets/img/poster/card-sonno.png -->
+            <figure class="img-ph" data-ph="card-sonno">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-sonno</span> · person sleeping peacefully in bed, moon and stars, cozy bedroom, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Dormi bine</h3>
+            <p>7–8 ore pe noapte: somnul repară mintea și corpul.</p>
+        </section>
+
+        <section class="card">
+            <!-- <img class="img-real" alt="O rutină de seară"> · path: ../assets/img/poster/card-ritmo.png -->
+            <figure class="img-ph" data-ph="card-ritmo">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-ritmo</span> · healthy evening routine: alarm clock, walking shoes, phone resting on a book, open book, calm bedroom, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>O rutină</h3>
+            <p>Program regulat, mai puțin ecran seara, o plimbare.</p>
+        </section>
+
+    </main>
+
+    <p class="strip">Dacă nu mai reușești să faci lucrurile de obicei: vorbește cu cineva în care ai încredere sau cu medicul.</p>
+
+    <footer class="poster-footer">
+        <div class="fbrand">
+            <img src="../assets/bronzelogo.png" alt="savianu.it">
+            <span>savianu.it</span>
         </div>
-
-        <!-- Card 2 -->
-        <div class="card">
-          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-            <circle cx="40" cy="40" r="28" fill="#F3EFE6" stroke="#1A2F4C" stroke-width="3"/>
-            <path d="M28 35 Q40 28 52 35" stroke="#C29B57" stroke-width="3" stroke-linecap="round"/>
-            <path d="M30 52 Q40 44 50 52" stroke="#1A2F4C" stroke-width="3" stroke-linecap="round" fill="none"/>
-            <circle cx="28" cy="38" r="2.5" fill="#1A2F4C"/>
-            <circle cx="52" cy="38" r="2.5" fill="#1A2F4C"/>
-          </svg>
-          <div class="card-title-it">Îți pierzi pofta de mâncare sau mănânci prea mult</div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="card">
-          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-            <circle cx="30" cy="32" r="10" fill="#1A2F4C"/>
-            <path d="M15 58 C15 46 22 44 30 44 C38 44 45 46 45 58" fill="#1A2F4C"/>
-            <line x1="50" y1="20" x2="50" y2="60" stroke="#CBD5E0" stroke-width="2" stroke-dasharray="3 3"/>
-            <circle cx="62" cy="35" r="6" fill="#C29B57"/>
-            <path d="M54 54 C54 46 58 45 62 45 C66 45 70 46 70 54" fill="#C29B57"/>
-          </svg>
-          <div class="card-title-it">Te izolezi de prieteni și familie</div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="card">
-          <svg class="card-icon" viewBox="0 0 80 80" fill="none">
-            <circle cx="40" cy="40" r="26" fill="#F3EFE6" stroke="#1A2F4C" stroke-width="3"/>
-            <path d="M28 42 C28 32 35 30 40 30 C45 30 52 32 52 42 C52 50 40 48 40 54" stroke="#C29B57" stroke-width="3.5" stroke-linecap="round" fill="none"/>
-            <circle cx="40" cy="60" r="2.5" fill="#C29B57"/>
-          </svg>
-          <div class="card-title-it">Gânduri obsesive și anxietate continuă</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- WHAT TO DO -->
-    <div class="section-block">
-      <div class="section-header">
-        <span>CE POȚI FACE ÎN ITALIA</span>
-      </div>
-
-      <div class="action-grid">
-        <!-- Action 1 -->
-        <div class="action-card">
-          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
-            <circle cx="30" cy="20" r="10" fill="#F3EFE6"/>
-            <path d="M12 50 C12 36 20 34 30 34 C40 34 48 36 48 50" fill="#F3EFE6"/>
-            <path d="M22 34 L22 26 C22 22 25 22 30 22 C35 22 38 22 38 26 L38 34" stroke="#C29B57" stroke-width="2.5" fill="none"/>
-            <circle cx="30" cy="28" r="2.5" fill="#C29B57"/>
-          </svg>
-          <div class="action-it">Vorbește cu medicul tău de familie (MMG)</div>
-          <div class="action-detail">
-            Este <strong>gratuit</strong> și protejat de secretul profesional. Te poate îndruma către psiholog sau către Centrul de Sănătate Mintală (CSM).
-          </div>
-        </div>
-
-        <!-- Action 2 -->
-        <div class="action-card">
-          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
-            <path d="M20 15 C16 15 15 20 15 25 C15 38 22 45 35 45 C40 45 45 44 45 40 L45 35 C45 33 42 32 40 32 L34 33 C32 33 30 31 29 29 L28 23 C27 21 25 20 23 20 L20 15 Z" fill="#F3EFE6"/>
-            <path d="M36 15 L48 15 M42 9 L42 21" stroke="#C29B57" stroke-width="2.5" stroke-linecap="round"/>
-          </svg>
-          <div class="action-it">Sună la un serviciu gratuit de ascultare și sprijin</div>
-          <div class="action-detail">
-            <strong>Telefono Amico Italia:</strong> 02 2327 2327<br>
-            <strong>Samaritans ONLUS:</strong> 06 77208977
-          </div>
-        </div>
-
-        <!-- Action 3 -->
-        <div class="action-card">
-          <svg class="action-icon" viewBox="0 0 60 60" fill="none">
-            <circle cx="20" cy="22" r="8" fill="#F3EFE6"/>
-            <circle cx="40" cy="22" r="8" fill="#F3EFE6"/>
-            <path d="M8 48 C8 36 14 34 20 34 C24 34 27 35 29 38" fill="#F3EFE6"/>
-            <path d="M52 48 C52 36 46 34 40 34 C36 34 33 35 31 38" fill="#F3EFE6"/>
-            <circle cx="30" cy="30" r="7" fill="#C29B57"/>
-            <path d="M18 52 C18 42 24 40 30 40 C36 40 42 42 42 52" fill="#C29B57"/>
-          </svg>
-          <div class="action-it">Contactează asociațiile și mediatorii locali</div>
-          <div class="action-detail">
-            Sprijin cultural, lingvistic și orientare către serviciile socio-sanitare din teritoriu.
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </main>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="footer">
-    <div class="footer-brand">
-      <img src="../assets/bronzelogo.png" alt="savianu.it" width="52" height="52" style="border-radius:10px">
-      <div class="footer-brand-text">
-        <strong>savianu.it</strong>
-        <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
-      </div>
-    </div>
-  </footer>
+        <p>Medicul tău de familie: gratuit și protejat de secretul profesional · Telefono Amico 02 2327 2327 · Samaritans 06 77208977</p>
+        <p class="fright">Sănătate mintală · Română<br>savianu.it</p>
+    </footer>
 
 </div>
 

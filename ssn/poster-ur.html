@@ -5,245 +5,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>آپ کی صحت کے لیے عملی رہنمائی — پوسٹر A3 (اردو) | savianu.it</title>
     <link rel="canonical" href="https://savianu.it/ssn/poster-ur.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700;800&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="poster-styles.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
-
-        :root {
-            --navy: #1A2F4C;
-            --gold: #C29B57;
-            --gold-soft: #F3EFE6;
-            --cream: #FDFBF7;
-            --text: #2c3e50;
-            --muted: #5a6b7d;
-            --border: #e3d9c8;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Noto Nastaliq Urdu', 'Montserrat', sans-serif;
-            background: var(--gold-soft);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            line-height: 2;
-        }
-
-        .poster-container {
-            max-width: 210mm;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
-            overflow: hidden;
-        }
-
-        /* ============ HEADER ============ */
-        .header {
-            background: var(--navy);
-            color: white;
-            padding: 28px 34px 22px;
-            border-bottom: 5px solid var(--gold);
-        }
-
-        .brand-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
-
-        .brand-row img {
-            width: 44px;
-            height: 44px;
-            border-radius: 8px;
-        }
-
-        .brand-row .site-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.7rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: #fff;
-            line-height: 1.05;
-            direction: ltr;
-        }
-
-        .studio-line {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.82);
-            font-weight: 500;
-            margin-bottom: 18px;
-            direction: ltr;
-            text-align: left;
-        }
-
-        .studio-line a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-
-        h1 {
-            font-family: 'Noto Nastaliq Urdu', serif;
-            font-size: 2.3rem;
-            font-weight: 600;
-            line-height: 1.4;
-            margin: 0 0 10px 0;
-            color: #fff;
-        }
-
-        .subtitle {
-            font-size: 1.08rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin: 0;
-            max-width: 46em;
-        }
-
-        /* ============ BODY ============ */
-        .content {
-            padding: 26px 34px 10px;
-        }
-
-        .section {
-            margin-bottom: 26px;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.28rem;
-            font-weight: 700;
-            color: var(--navy);
-            margin: 0 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .section-title .icon {
-            font-size: 1.35rem;
-        }
-
-        .point {
-            margin-bottom: 12px;
-            font-size: 1.02rem;
-            line-height: 2;
-        }
-
-        .point strong {
-            display: block;
-            color: var(--navy);
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        /* ============ FOOTER ============ */
-        .footer {
-            background: var(--navy);
-            color: white;
-            padding: 18px 34px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            border-top: 5px solid var(--gold);
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-brand img {
-            width: 34px;
-            height: 34px;
-            border-radius: 6px;
-        }
-
-        .footer-brand .site-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
-            direction: ltr;
-        }
-
-        .footer .studio-line {
-            margin: 0;
-            font-size: 0.8rem;
-        }
-
-        .footer-right {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.85);
-            text-align: left;
-            direction: ltr;
-        }
-
-        /* ============ PRINT A3 ============ */
-        @media print {
-            @page { size: A3 portrait; margin: 12mm; }
-            body { background: white; padding: 0; }
-            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
-        }
+        :root { --accent: #C29B57; --accent-soft: #FBF6EC; }
+        body, .poster-title h1, .card h3, .card p, .strip, .infobar, .studio, .poster-footer { font-family: 'Noto Sans Arabic', 'Montserrat', sans-serif; }
+        .poster-title h1 { font-size: 36pt; }
     </style>
 </head>
 <body>
 
-<div class="poster-container">
-    <header class="header">
-        <div class="brand-row">
+<div class="poster">
+
+    <header class="poster-header">
+        <div class="brand">
             <img src="../assets/bronzelogo.png" alt="savianu.it">
-            <span class="site-name">savianu.it</span>
+            <span class="site">savianu.it</span>
         </div>
-        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
-        <h1>آپ کی صحت کے لیے عملی رہنمائی</h1>
-        <p class="subtitle">عام معالج (جنرل پریکٹیشنر) بیماریاں دور کرنے اور صحت کے مسائل سے بچاؤ میں آپ کی مدد کرتا ہے۔</p>
+        <p class="studio">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
     </header>
 
-    <main class="content">
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🏥</span> 1۔ ڈاکٹر کا کلینک کیسے کام کرتا ہے؟</h2>
-            <div class="point"><strong>اپائنٹمنٹ بک کریں:</strong> معائنے اور نسخے (پریکرپشن) کے لیے صرف اپائنٹمنٹ لے کر ہی کلینک آئیں۔</div>
-            <div class="point"><strong>معمولی مسائل کے لیے ایمرجنسی نہ جائیں:</strong> ایمرجنسی سروس صرف شدید ہنگامی حالات کے لیے استعمال کریں (مثلاً: جان کا خطرہ، سینے میں شدید درد)۔</div>
-            <div class="point"><strong>اپنی ادویات ساتھ لائیں:</strong> ہر وزٹ کے دوران ان تمام ادویات کے ڈبے ساتھ لائیں جو آپ اس وقت استعمال کر رہے ہیں۔</div>
+    <div class="poster-title">
+        <h1>آپ کی صحت کے لیے عملی رہنمائی</h1>
+        <p class="sub">عام معالج بیماریاں دور کرنے اور صحت کے مسائل سے بچاؤ میں آپ کی مدد کرتا ہے۔</p>
+    </div>
+
+    <!-- تصویر ۱/۵ — <figure> کو تبدیل کریں: <img class="img-real" alt="ڈاکٹر ایک خاندان کا خیرمقدم کر رہے ہیں"> · path: ../assets/img/poster/hero-guida.png -->
+    <figure class="img-ph hero" data-ph="hero-guida">
+        <span class="ph-ico">🖼️</span>
+        <figcaption><span class="code">hero-guida</span> · friendly doctor in white coat welcoming a diverse family at the door of a small clinic, Tuscan square with stone loggia in background, warm welcoming atmosphere, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones and ages, simple clothing in navy, gold, teal and white, flat vector illustration, friendly cartoon style, bold simple shapes, clean outlines, limited flat palette (navy #1A2F4C, gold #C29B57, teal #3E8E7E), plain white background, no gradients, no shadows, no text, no letters, no watermark, 2D, minimal</figcaption>
+    </figure>
+
+    <main class="cards">
+
+        <section class="card">
+            <!-- <img class="img-real" alt="فون پر اپائنٹمنٹ"> · path: ../assets/img/poster/card-prenota.png -->
+            <figure class="img-ph" data-ph="card-prenota">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-prenota</span> · person booking an appointment on a smartphone, stylized calendar and telephone receiver floating nearby, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>اپائنٹمنٹ بک کریں</h3>
+            <p>معائنے اور نسخے کے لیے صرف اپائنٹمنٹ لے کر آئیں۔</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">💊</span> 2۔ ادویات کا محفوظ استعمال</h2>
-            <div class="point"><strong>روزانہ دوا لیں:</strong> اگر ڈاکٹر نے آپ کو بلڈ پریشر یا شوگر کی دوا دی ہے، تو بہتر محسوس کرنے پر بھی اسے بند نہ کریں۔</div>
-            <div class="point"><strong>اینٹی بائیوٹکس:</strong> صرف ڈاکٹر کے مشورے سے استعمال کریں۔ پورا کورس مکمل کریں۔</div>
-            <div class="point"><strong>ڈاکٹر کو آگاہ کریں:</strong> اگر آپ جڑی بوٹیوں، روایتی ادویات یا سپلیمنٹس کا استعمال کر رہے ہیں تو ڈاکٹر کو ضرور بتائیں۔</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="ادویات کا بیگ"> · path: ../assets/img/poster/card-farmaci.png -->
+            <figure class="img-ph" data-ph="card-farmaci">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-farmaci</span> · open bag with colorful medicine boxes and a stylized pill, no writing on the boxes, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>اپنی ادویات ساتھ لائیں</h3>
+            <p>ہر وزٹ پر ان تمام ادویات کے ڈبے ساتھ لائیں جو آپ استعمال کر رہے ہیں۔</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🥗</span> 3۔ غذائیت اور صحت</h2>
-            <div class="point"><strong>چینی اور میٹھی اشیاء سے پرہیز:</strong> میٹھے مشروبات، پھلوں کے رس، مٹھائیوں اور سفید چاول کا استعمال کم کریں۔</div>
-            <div class="point"><strong>نمک کم کریں:</strong> کھانے میں ذائقہ لانے کے لیے مصالحے اور قدرتی جڑی بوٹیاں استعمال کریں۔</div>
-            <div class="point"><strong>سبزیاں اور دالیں زیادہ کھائیں:</strong> ہری سبزیاں، دالیں اور چنے دل کے لیے فائدہ مند ہیں۔</div>
-            <div class="point"><strong>پانی پیئیں:</strong> روزانہ 1.5 سے 2 لیٹر پانی پیئیں۔ گیس والے مشروبات سے پرہیز کریں۔</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="ڈاکٹر نسخہ دے رہے ہیں"> · path: ../assets/img/poster/card-antibiotici.png -->
+            <figure class="img-ph" data-ph="card-antibiotici">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-antibiotici</span> · doctor handing a prescription to a smiling person who nods, stethoscope around neck, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>اینٹی بائیوٹکس</h3>
+            <p>صرف ڈاکٹر کے مشورے سے۔ پورا کورس مکمل کریں۔</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🚶</span> 4۔ روزانہ ورزش کریں</h2>
-            <div class="point">روزانہ کم از کم 30 منٹ تیز رفتار سے پیدل چلیں۔</div>
-            <div class="point">جسمانی سرگرمی بلڈ پریشر، شوگر، وزن اور ذہنی تناؤ کو کنٹرول کرتی ہے۔</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="ڈاکٹر سے گفتگو"> · path: ../assets/img/poster/card-parla.png -->
+            <figure class="img-ph" data-ph="card-parla">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-parla</span> · person talking with the doctor in a cozy office, two cups of tea on the table, trusting atmosphere, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>ڈاکٹر کو آگاہ کریں</h3>
+            <p>جڑی بوٹیاں، روایتی ادویات یا سپلیمنٹس استعمال کرنے پر بتائیں۔</p>
         </section>
+
     </main>
 
-    <footer class="footer">
-        <div class="footer-brand">
+    <p class="infobar">بلڈ پریشر یا شوگر کی دوا دی ہے تو بہتر محسوس کرنے پر بھی اسے بند نہ کریں۔</p>
+
+    <p class="strip">ہنگامی صورت میں: 112 پر کال کریں</p>
+
+    <footer class="poster-footer">
+        <div class="fbrand">
             <img src="../assets/bronzelogo.png" alt="savianu.it">
-            <span class="site-name">savianu.it</span>
+            <span>savianu.it</span>
         </div>
-        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
-        <div class="footer-right">عملی رہنمائی · اردو<br>savianu.it</div>
+        <p>Studio Medico Ippocrate · Piazza Saione 3, Arezzo · 0575 910 904</p>
+        <p class="fright">عملی رہنمائی · اردو<br>savianu.it</p>
     </footer>
+
 </div>
 
 </body>
