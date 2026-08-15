@@ -5,236 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Practical guide for your health — A3 Poster (English) | savianu.it</title>
     <link rel="canonical" href="https://savianu.it/ssn/poster-en.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="poster-styles.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
-
-        :root {
-            --navy: #1A2F4C;
-            --gold: #C29B57;
-            --gold-soft: #F3EFE6;
-            --cream: #FDFBF7;
-            --text: #2c3e50;
-            --muted: #5a6b7d;
-            --border: #e3d9c8;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--gold-soft);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.5;
-        }
-
-        .poster-container {
-            max-width: 210mm;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
-            overflow: hidden;
-        }
-
-        /* ============ HEADER ============ */
-        .header {
-            background: var(--navy);
-            color: white;
-            padding: 28px 34px 22px;
-            border-bottom: 5px solid var(--gold);
-        }
-
-        .brand-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
-
-        .brand-row img {
-            width: 44px;
-            height: 44px;
-            border-radius: 8px;
-        }
-
-        .brand-row .site-name {
-            font-size: 1.7rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: #fff;
-            line-height: 1.05;
-        }
-
-        .studio-line {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.82);
-            font-weight: 500;
-            margin-bottom: 18px;
-        }
-
-        .studio-line a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.9rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin: 0 0 8px 0;
-            color: #fff;
-        }
-
-        .subtitle {
-            font-size: 1.08rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin: 0;
-            max-width: 46em;
-        }
-
-        /* ============ BODY ============ */
-        .content {
-            padding: 26px 34px 10px;
-        }
-
-        .section {
-            margin-bottom: 26px;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.28rem;
-            font-weight: 800;
-            color: var(--navy);
-            margin: 0 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .section-title .icon {
-            font-size: 1.35rem;
-        }
-
-        .point {
-            margin-bottom: 12px;
-            font-size: 1.02rem;
-            line-height: 1.5;
-        }
-
-        .point strong {
-            display: block;
-            color: var(--navy);
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        /* ============ FOOTER ============ */
-        .footer {
-            background: var(--navy);
-            color: white;
-            padding: 18px 34px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            border-top: 5px solid var(--gold);
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-brand img {
-            width: 34px;
-            height: 34px;
-            border-radius: 6px;
-        }
-
-        .footer-brand .site-name {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .footer .studio-line {
-            margin: 0;
-            font-size: 0.8rem;
-        }
-
-        .footer-right {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.85);
-            text-align: right;
-        }
-
-        /* ============ PRINT A3 ============ */
-        @media print {
-            @page { size: A3 portrait; margin: 12mm; }
-            body { background: white; padding: 0; }
-            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
-        }
+        :root { --accent: #C29B57; --accent-soft: #FBF6EC; }
     </style>
 </head>
 <body>
 
-<div class="poster-container">
-    <header class="header">
-        <div class="brand-row">
+<div class="poster">
+
+    <header class="poster-header">
+        <div class="brand">
             <img src="../assets/bronzelogo.png" alt="savianu.it">
-            <span class="site-name">savianu.it</span>
+            <span class="site">savianu.it</span>
         </div>
-        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
-        <h1>Practical guide for your health</h1>
-        <p class="subtitle">The General Practitioner helps you cure diseases and prevent health problems.</p>
+        <p class="studio">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
     </header>
 
-    <main class="content">
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🏥</span> 1. How the clinic works</h2>
-            <div class="point"><strong>Book an appointment:</strong> Come to the clinic for check-ups and prescriptions only by appointment.</div>
-            <div class="point"><strong>Do not go to the ER for minor issues:</strong> Use the Emergency Room only for severe emergencies (e.g., life-threatening situations, severe chest pain).</div>
-            <div class="point"><strong>Bring your medicines:</strong> Bring the boxes of all the medicines you are currently taking to every visit.</div>
+    <div class="poster-title">
+        <h1>Practical guide for your health</h1>
+        <p class="sub">The General Practitioner helps you cure diseases and prevent health problems.</p>
+    </div>
+
+    <!-- IMMAGINE 1/5 — sostituisci il <figure> con <img class="img-real" alt="The doctor welcomes a family at the clinic"> · path: ../assets/img/poster/hero-guida.png -->
+    <figure class="img-ph hero" data-ph="hero-guida">
+        <span class="ph-ico">🖼️</span>
+        <figcaption><span class="code">hero-guida</span> · friendly doctor in white coat welcoming a diverse family at the door of a small clinic, Tuscan square with stone loggia in background, warm welcoming atmosphere, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones and ages, simple clothing in navy, gold, teal and white, flat vector illustration, friendly cartoon style, bold simple shapes, clean outlines, limited flat palette (navy #1A2F4C, gold #C29B57, teal #3E8E7E), plain white background, no gradients, no shadows, no text, no letters, no watermark, 2D, minimal</figcaption>
+    </figure>
+
+    <main class="cards">
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Booking on a smartphone"> · path: ../assets/img/poster/card-prenota.png -->
+            <figure class="img-ph" data-ph="card-prenota">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-prenota</span> · person booking an appointment on a smartphone, stylized calendar and telephone receiver floating nearby, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Book an appointment</h3>
+            <p>Check-ups and prescriptions by appointment only.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">💊</span> 2. Safe use of medicines</h2>
-            <div class="point"><strong>Take medicine daily:</strong> Do not stop taking prescribed blood pressure or sugar medication even if you feel better.</div>
-            <div class="point"><strong>Antibiotics:</strong> Use only with the doctor's advice. Complete the full course.</div>
-            <div class="point"><strong>Inform the doctor:</strong> Be sure to tell the doctor if you are using herbs, traditional medicines, or supplements.</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="Bag with medicines"> · path: ../assets/img/poster/card-farmaci.png -->
+            <figure class="img-ph" data-ph="card-farmaci">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-farmaci</span> · open bag with colorful medicine boxes and a stylized pill, no writing on the boxes, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Bring your medicines</h3>
+            <p>The boxes of everything you take, at every visit.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🥗</span> 3. Nutrition and health</h2>
-            <div class="point"><strong>Avoid sugar and sweets:</strong> Reduce sweet drinks, fruit juices, sweets, and white rice.</div>
-            <div class="point"><strong>Reduce salt:</strong> Use spices and natural herbs to add flavor to your food.</div>
-            <div class="point"><strong>Eat vegetables &amp; lentils:</strong> Green vegetables, lentils, and chickpeas are beneficial for the heart.</div>
-            <div class="point"><strong>Drink water:</strong> At least 1.5 to 2 liters daily. Avoid fizzy soft drinks.</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="Doctor gives a prescription"> · path: ../assets/img/poster/card-antibiotici.png -->
+            <figure class="img-ph" data-ph="card-antibiotici">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-antibiotici</span> · doctor handing a prescription to a smiling person who nods, stethoscope around neck, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Antibiotics</h3>
+            <p>Only if prescribed. Always finish the course.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🚶</span> 4. Daily exercise</h2>
-            <div class="point">Walk at a brisk pace for at least 30 minutes every day.</div>
-            <div class="point">Physical activity helps control blood pressure, sugar, weight, and stress.</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="Talking with the doctor"> · path: ../assets/img/poster/card-parla.png -->
+            <figure class="img-ph" data-ph="card-parla">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-parla</span> · person talking with the doctor in a cozy office, two cups of tea on the table, trusting atmosphere, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Tell your doctor</h3>
+            <p>Everything: herbs, traditional medicines, supplements.</p>
         </section>
+
     </main>
 
-    <footer class="footer">
-        <div class="footer-brand">
+    <p class="infobar">Blood pressure or diabetes: take your medicine every day, even if you feel well.</p>
+
+    <p class="strip">In an emergency: call 112</p>
+
+    <footer class="poster-footer">
+        <div class="fbrand">
             <img src="../assets/bronzelogo.png" alt="savianu.it">
-            <span class="site-name">savianu.it</span>
+            <span>savianu.it</span>
         </div>
-        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
-        <div class="footer-right">Practical Guide · English<br>savianu.it</div>
+        <p>Studio Medico Ippocrate · Piazza Saione 3, Arezzo · 0575 910 904</p>
+        <p class="fright">Practical guide · English<br>savianu.it</p>
     </footer>
+
 </div>
 
 </body>

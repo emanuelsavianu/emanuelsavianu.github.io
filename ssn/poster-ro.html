@@ -5,236 +5,94 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghid practic pentru sănătatea ta — Poster A3 (Română) | savianu.it</title>
     <link rel="canonical" href="https://savianu.it/ssn/poster-ro.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="poster-styles.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Montserrat:wght@400;500;600;700;800&display=swap');
-
-        :root {
-            --navy: #1A2F4C;
-            --gold: #C29B57;
-            --gold-soft: #F3EFE6;
-            --cream: #FDFBF7;
-            --text: #2c3e50;
-            --muted: #5a6b7d;
-            --border: #e3d9c8;
-        }
-
-        * { box-sizing: border-box; }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: var(--gold-soft);
-            color: var(--text);
-            margin: 0;
-            padding: 20px;
-            line-height: 1.5;
-        }
-
-        .poster-container {
-            max-width: 210mm;
-            margin: 0 auto;
-            background: var(--cream);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(26, 47, 76, 0.12);
-            overflow: hidden;
-        }
-
-        /* ============ HEADER ============ */
-        .header {
-            background: var(--navy);
-            color: white;
-            padding: 28px 34px 22px;
-            border-bottom: 5px solid var(--gold);
-        }
-
-        .brand-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
-
-        .brand-row img {
-            width: 44px;
-            height: 44px;
-            border-radius: 8px;
-        }
-
-        .brand-row .site-name {
-            font-size: 1.7rem;
-            font-weight: 800;
-            letter-spacing: 0.5px;
-            color: #fff;
-            line-height: 1.05;
-        }
-
-        .studio-line {
-            font-size: 0.85rem;
-            color: rgba(255, 255, 255, 0.82);
-            font-weight: 500;
-            margin-bottom: 18px;
-        }
-
-        .studio-line a {
-            color: var(--gold);
-            text-decoration: none;
-        }
-
-        h1 {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.9rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin: 0 0 8px 0;
-            color: #fff;
-        }
-
-        .subtitle {
-            font-size: 1.08rem;
-            color: rgba(255, 255, 255, 0.9);
-            font-weight: 500;
-            margin: 0;
-            max-width: 46em;
-        }
-
-        /* ============ BODY ============ */
-        .content {
-            padding: 26px 34px 10px;
-        }
-
-        .section {
-            margin-bottom: 26px;
-        }
-
-        .section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.28rem;
-            font-weight: 800;
-            color: var(--navy);
-            margin: 0 0 12px 0;
-            padding-bottom: 8px;
-            border-bottom: 2px solid var(--gold);
-        }
-
-        .section-title .icon {
-            font-size: 1.35rem;
-        }
-
-        .point {
-            margin-bottom: 12px;
-            font-size: 1.02rem;
-            line-height: 1.5;
-        }
-
-        .point strong {
-            display: block;
-            color: var(--navy);
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        /* ============ FOOTER ============ */
-        .footer {
-            background: var(--navy);
-            color: white;
-            padding: 18px 34px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
-            border-top: 5px solid var(--gold);
-        }
-
-        .footer-brand {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .footer-brand img {
-            width: 34px;
-            height: 34px;
-            border-radius: 6px;
-        }
-
-        .footer-brand .site-name {
-            font-size: 1.25rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
-        .footer .studio-line {
-            margin: 0;
-            font-size: 0.8rem;
-        }
-
-        .footer-right {
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.85);
-            text-align: right;
-        }
-
-        /* ============ PRINT A3 ============ */
-        @media print {
-            @page { size: A3 portrait; margin: 12mm; }
-            body { background: white; padding: 0; }
-            .poster-container { max-width: 100%; border-radius: 0; box-shadow: none; }
-        }
+        :root { --accent: #C29B57; --accent-soft: #FBF6EC; }
     </style>
 </head>
 <body>
 
-<div class="poster-container">
-    <header class="header">
-        <div class="brand-row">
+<div class="poster">
+
+    <header class="poster-header">
+        <div class="brand">
             <img src="../assets/bronzelogo.png" alt="savianu.it">
-            <span class="site-name">savianu.it</span>
+            <span class="site">savianu.it</span>
         </div>
-        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
-        <h1>Ghid practic pentru sănătatea ta</h1>
-        <p class="subtitle">Medicul de Medicină Generală te ajută să tratezi bolile și să previi problemele de sănătate.</p>
+        <p class="studio">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
     </header>
 
-    <main class="content">
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🏥</span> 1. Modalități de acces</h2>
-            <div class="point"><strong>Fă o programare:</strong> Vino la cabinet pentru vizite și rețete doar cu programare.</div>
-            <div class="point"><strong>Nu la Pronto Soccorso pentru probleme ușoare:</strong> Folosește urgența doar pentru cazuri grave (ex. pericol de viață, durere puternică în piept, accidente).</div>
-            <div class="point"><strong>Adu-ți medicamentele:</strong> La fiecare vizită adu cutiile cu toate medicamentele pe care le iei în prezent.</div>
+    <div class="poster-title">
+        <h1>Ghid practic pentru sănătatea ta</h1>
+        <p class="sub">Medicul de Medicină Generală te ajută să tratezi bolile și să previi problemele de sănătate.</p>
+    </div>
+
+    <!-- IMMAGINE 1/5 — înlocuiește <figure> cu <img class="img-real" alt="Medicul întâmpină o familie la cabinet"> · path: ../assets/img/poster/hero-guida.png -->
+    <figure class="img-ph hero" data-ph="hero-guida">
+        <span class="ph-ico">🖼️</span>
+        <figcaption><span class="code">hero-guida</span> · friendly doctor in white coat welcoming a diverse family at the door of a small clinic, Tuscan square with stone loggia in background, warm welcoming atmosphere, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones and ages, simple clothing in navy, gold, teal and white, flat vector illustration, friendly cartoon style, bold simple shapes, clean outlines, limited flat palette (navy #1A2F4C, gold #C29B57, teal #3E8E7E), plain white background, no gradients, no shadows, no text, no letters, no watermark, 2D, minimal</figcaption>
+    </figure>
+
+    <main class="cards">
+
+        <section class="card">
+            <!-- <img class="img-real" alt="Programare pe telefon"> · path: ../assets/img/poster/card-prenota.png -->
+            <figure class="img-ph" data-ph="card-prenota">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-prenota</span> · person booking an appointment on a smartphone, stylized calendar and telephone receiver floating nearby, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Fă o programare</h3>
+            <p>Vizitele și rețetele se fac doar cu programare.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">💊</span> 2. Folosirea sigură a medicamentelor</h2>
-            <div class="point"><strong>Ia medicamentele în fiecare zi:</strong> Nu întrerupe tratamentele pentru tensiune sau diabet, chiar dacă te simți mai bine.</div>
-            <div class="point"><strong>Antibioticele:</strong> Folosește-le doar la recomandarea medicului. Completează întregul tratament chiar dacă simptomul dispare.</div>
-            <div class="point"><strong>Informează medicul:</strong> Spune-i mereu dacă folosești plante medicinale, medicamente tradiționale sau suplimente.</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="Geantă cu medicamente"> · path: ../assets/img/poster/card-farmaci.png -->
+            <figure class="img-ph" data-ph="card-farmaci">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-farmaci</span> · open bag with colorful medicine boxes and a stylized pill, no writing on the boxes, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Adu-ți medicamentele</h3>
+            <p>Cutiile cu tot ce iei, la fiecare vizită.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🥗</span> 3. Alimentație și sănătate</h2>
-            <div class="point"><strong>Evită zahărul și dulciurile:</strong> Reduce băuturile îndulcite, sucurile, dulciurile și orezul alb.</div>
-            <div class="point"><strong>Reduce sarea:</strong> Folosește condimente și ierburi naturale pentru a da gust mâncării.</div>
-            <div class="point"><strong>Mai multe legume și leguminoase:</strong> Legumele cu frunze verzi, lintea și năutul fac bine inimii și intestinului.</div>
-            <div class="point"><strong>Bea apă:</strong> Cel puțin 1,5-2 litri pe zi. Evită băuturile carbogazoase.</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="Medicul dă rețeta"> · path: ../assets/img/poster/card-antibiotici.png -->
+            <figure class="img-ph" data-ph="card-antibiotici">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-antibiotici</span> · doctor handing a prescription to a smiling person who nods, stethoscope around neck, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Antibioticele</h3>
+            <p>Doar la prescripția medicului. Completează mereu tratamentul.</p>
         </section>
 
-        <section class="section">
-            <h2 class="section-title"><span class="icon">🚶</span> 4. Mișcare zilnică</h2>
-            <div class="point">Mergi într-un ritm alert cel puțin 30 de minute pe zi.</div>
-            <div class="point">Activitatea fizică ajută la controlul tensiunii, glicemiei, greutății și stresului.</div>
+        <section class="card">
+            <!-- <img class="img-real" alt="Discuție cu medicul"> · path: ../assets/img/poster/card-parla.png -->
+            <figure class="img-ph" data-ph="card-parla">
+                <span class="ph-ico">🖼️</span>
+                <figcaption><span class="code">card-parla</span> · person talking with the doctor in a cozy office, two cups of tea on the table, trusting atmosphere, friendly round-faced characters with small dot eyes and simple smiles, diverse skin tones, simple clothing in navy, gold, teal and white, flat vector illustration, bold simple shapes, clean outlines, plain white background, no gradients, no shadows, no text, no letters, 2D, minimal</figcaption>
+            </figure>
+            <h3>Informează medicul</h3>
+            <p>Despre orice: plante, medicamente tradiționale, suplimente.</p>
         </section>
+
     </main>
 
-    <footer class="footer">
-        <div class="footer-brand">
+    <p class="infobar">Tensiune sau diabet: ia medicamentele în fiecare zi, chiar dacă te simți bine.</p>
+
+    <p class="strip">În caz de urgență: sunați la 112</p>
+
+    <footer class="poster-footer">
+        <div class="fbrand">
             <img src="../assets/bronzelogo.png" alt="savianu.it">
-            <span class="site-name">savianu.it</span>
+            <span>savianu.it</span>
         </div>
-        <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
-        <div class="footer-right">Ghid practic · Română<br>savianu.it</div>
+        <p>Studio Medico Ippocrate · Piazza Saione 3, Arezzo · 0575 910 904</p>
+        <p class="fright">Ghid practic · Română<br>savianu.it</p>
     </footer>
+
 </div>
 
 </body>
