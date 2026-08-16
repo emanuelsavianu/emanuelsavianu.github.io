@@ -193,6 +193,13 @@ body.dark-mode .header-info { background: var(--bg-gradient-2); }
 }
 .header-info i { color: var(--accent); flex-shrink: 0; font-size: 1rem; }
 .header-info-base { color: rgba(255, 255, 255, 0.95); }
+.header-info-link {
+    color: var(--accent);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+.header-info-link:hover { color: #ffffff; }
 .header-info-absence { color: var(--accent); font-weight: 600; }
 .header-info-urgenze { color: rgba(255, 255, 255, 0.95); }
 .header-info-close {
