@@ -1002,7 +1002,7 @@ body.dark-mode .doctolib-cta:hover { color: var(--text-dark); }
     margin-bottom: 15px;
 }
 .modal-content .modal-link {
-    color: var(--accent);
+    color: var(--accent-text);
     font-weight: 700;
     text-decoration: underline;
 }
