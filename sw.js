@@ -1,6 +1,6 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Stale-While-Revalidate per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v342';
+const CACHE_NAME = 'savianu-v343';
 
 const PRECACHE_URLS = [
   '/offline.html',
@@ -16,7 +16,6 @@ const PRECACHE_URLS = [
   '/colleghi/lo-scudo-del-medico.html',
   '/colleghi/malattia.html',
   '/colleghi/protocollo-certificati-inps.html',
-  '/colleghi/rsa.html',
   '/',
   '/privacy.html',
   '/privati/certificato-invalidita-civile.html',
