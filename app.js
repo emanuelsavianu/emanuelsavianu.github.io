@@ -1,4 +1,4 @@
-import { CONFIG } from './config.js?v=1';
+import { CONFIG } from './config.js?v=2';
 
 // =================================================================
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
@@ -106,6 +106,7 @@ class SiteNav extends HTMLElement {
       '<div class="header-info" id="header-info-line">' +
         '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
         '<span class="header-info-base" id="header-info-base"' + (isPatient ? ' data-i18n="doctolib_banner_text"' : '') + '></span>' +
+        '<a class="header-info-link" id="header-info-doctolib" href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" data-i18n="doctolib_banner_link">Prenota su Doctolib</a>' +
         '<span class="header-info-absence" id="header-info-absence" hidden></span>' +
         '<span class="header-info-urgenze" id="header-info-urgenze" data-i18n="urgenze_line"></span>' +
         '<button id="header-info-close" class="header-info-close" hidden onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
@@ -486,10 +487,11 @@ export const translations = {
         qa_doctolib_label: 'Apri Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'Prenotazioni e ricette tramite Doctolib.',
+        doctolib_banner_text: 'Il dott. Savianu visita solo su appuntamento. Si prega di prenotare tramite Doctolib.',
+        doctolib_banner_link: 'Prenota su Doctolib',
         urgenze_line: 'Per urgenze: Guardia Medica 116 117 — Emergenze: 112.',
         doctolib_modal_title: 'Avviso Importante',
-        doctolib_modal_text: 'Gentili Pazienti, un caro saluto.<br><br>Vi informo sulle prossime variazioni dello studio:<br><br><strong>6 – 7 Agosto (prefestivo e festivo)</strong><br>Studio chiuso. Attiva la Guardia Medica 24h/24 al 116 117.<br><br><strong>10 – 14 Agosto</strong><br>Sarò in ferie. Vi assisteranno i colleghi di studio contattando la segreteria allo 0575 910904.<br><br><strong>Dal 17 Agosto</strong><br>Tornerò regolarmente in studio.<br><br>🚨 <strong>Urgenze, notte, weekend e festivi</strong><br>Nei fine settimana, nei festivi e nelle ore notturne i medici di medicina generale non sono in servizio. Per qualsiasi urgenza in questi giorni — o se la segreteria non risponde — è sempre attiva la Guardia Medica 24h/24 al 116 117. Per le emergenze, 112.<br><br>📌 <strong>Appuntamenti e richieste</strong><br>Prenotate o scrivetemi su Doctolib, oppure chiamate la segreteria al 0575 910904.<br><br>Buone e serene vacanze a tutti voi.<br><br>Dott. Emanuel Savianu<br><em>Medico di Medicina Generale</em>',
+        doctolib_modal_text: 'Gentili Pazienti, un caro saluto.<br><br>Il <strong>Dott. Savianu visita solo su appuntamento</strong>. Si prega di prenotare tramite <a href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" class="modal-link">Doctolib</a>.<br><br>🚨 <strong>Urgenze, notte, weekend e festivi</strong><br>Nei fine settimana, nei festivi e nelle ore notturne i medici di medicina generale non sono in servizio. Per qualsiasi urgenza in questi giorni — o se la segreteria non risponde — è sempre attiva la Guardia Medica 24h/24 al 116 117. Per le emergenze, 112.<br><br>📌 <strong>Appuntamenti e richieste</strong><br>Prenotate o scrivetemi su Doctolib, oppure chiamate la segreteria al 0575 910904.<br><br>Dott. Emanuel Savianu<br><em>Medico di Medicina Generale</em>',
         doctolib_modal_btn: 'Ho letto',
 
         // CTA buttons
@@ -750,10 +752,11 @@ export const translations = {
         qa_doctolib_label: 'Open Doctolib',
 
         // Doctolib announcement
-        doctolib_banner_text: 'Appointments and prescriptions via Doctolib.',
+        doctolib_banner_text: 'Dr. Savianu sees patients by appointment only. Please book via Doctolib.',
+        doctolib_banner_link: 'Book on Doctolib',
         urgenze_line: 'For urgent matters: Guardia Medica 116 117 — Emergencies: 112.',
         doctolib_modal_title: 'Important Notice',
-        doctolib_modal_text: 'Dear Patients, warm regards.<br><br>I would like to inform you about the upcoming changes to the practice:<br><br><strong>6 – 7 August (day before and public holiday)</strong><br>The practice is closed. The On-Call Doctor (Guardia Medica) is available 24/7 at 116 117.<br><br><strong>10 – 14 August</strong><br>I will be on holiday. My practice colleagues will assist you by contacting the secretariat at 0575 910904.<br><br><strong>From 17 August</strong><br>I will be back in the practice as usual.<br><br>🚨 <strong>Urgencies, night, weekends and public holidays</strong><br>On weekends, public holidays and at night, general practitioners are not on duty. For any urgency on these days — or if the secretariat does not answer — the On-Call Doctor (Guardia Medica) is always available 24/7 at 116 117. For emergencies, 112.<br><br>📌 <strong>Appointments and requests</strong><br>Book or write to me on Doctolib, or call the secretariat at 0575 910904.<br><br>Have a restful holiday, everyone.<br><br>Dr. Emanuel Savianu<br><em>General Practitioner</em>',
+        doctolib_modal_text: 'Dear Patients, warm regards.<br><br><strong>Dr. Savianu sees patients by appointment only</strong>. Please book via <a href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" class="modal-link">Doctolib</a>.<br><br>🚨 <strong>Urgencies, night, weekends and public holidays</strong><br>On weekends, public holidays and at night, general practitioners are not on duty. For any urgency on these days — or if the secretariat does not answer — the On-Call Doctor (Guardia Medica) is always available 24/7 at 116 117. For emergencies, 112.<br><br>📌 <strong>Appointments and requests</strong><br>Book or write to me on Doctolib, or call the secretariat at 0575 910904.<br><br>Dr. Emanuel Savianu<br><em>General Practitioner</em>',
         doctolib_modal_btn: 'I understand',
 
         // CTA buttons

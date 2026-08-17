@@ -7,11 +7,6 @@ export const CONFIG = {
     // Vacation / closure / relocation banner config
     // 'from' and 'to' in YYYY-MM-DD format. Free-text note (Italian).
     ASSENZE: [
-        {
-            from: "2026-08-06",
-            to: "2026-08-14",
-            note: "Sarò sostituito dai colleghi dello studio questa settimana, per bisogni chiamare la segreteria. Riprendo il 17 agosto."
-        }
     ],
 
     // Opening hours (used for badge and hours tables) — Mon–Fri
