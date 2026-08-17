@@ -85,7 +85,6 @@ const LEGACY_REDIRECTS = {
   '/certificato-invalidita-civile.html': '/privati/certificato-invalidita-civile.html',
   '/faq-riforma.html': '/privati/faq-riforma.html',
   '/protocollo-certificati-inps.html': '/colleghi/protocollo-certificati-inps.html',
-  '/rsa.html': '/colleghi/rsa.html',
   '/installazione.html': '/colleghi/installazione.html',
   '/xsegretarie.html': '/colleghi/xsegretarie.html',
   '/ferie.html': '/ssn/',
