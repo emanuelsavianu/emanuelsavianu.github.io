@@ -95,3 +95,6 @@ cloudflare/worker.js
 
 # Deepwork state (agent-local)
 .slim/deepwork/
+.opencode/.gitignore.oh-my-opencode-slim-legacy
+.opencode/package-lock.json
+.opencode/package.json
