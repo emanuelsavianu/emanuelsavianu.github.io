@@ -2700,3 +2700,8 @@ html { text-rendering: optimizeLegibility; }
         .pir-section-title:first-of-type {
             margin-top: 0;
         }
+
+/* --- P2: FAB UNIFICATION — quick-actions-bar owns FAQ on mobile; hide floating-faq there --- */
+@media (max-width: 768px) {
+    .floating-faq { display: none; }
+}
