@@ -19,6 +19,7 @@ Thumbs.db
 /.superpowers
 .superpowers/brainstorm/2009-1774431641/.server-info
 *.md
+!DESIGN.md
 !docs/**/*.md
 /.claude
 .claude/settings.local.json
@@ -105,3 +106,6 @@ ssn/images/card-farmaci.svg
 ssn/images/card-prenota.svg
 ssn/images/hero-guida.svg
 ssn/poster-styles.css
+.opencode/.gitignore.oh-my-opencode-slim-legacy
+.opencode/package-lock.json
+.opencode/package.json
