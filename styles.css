@@ -1496,6 +1496,40 @@ body.dark-mode .triage-card-cta { color: var(--accent); }
     .triage-card { min-height: 0; padding: 22px 20px; }
 }
 
+
+/* --- P1: TRIAGE WEIGHTING — Pazienti primary, others ghost --- */
+.triage-card--primary {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-color: var(--primary-dark);
+    border-top-color: var(--accent);
+}
+.triage-card--primary .triage-icon {
+    background: rgba(255, 255, 255, 0.14);
+    color: var(--accent);
+}
+.triage-card--primary .triage-card-title { color: #ffffff; }
+.triage-card--primary .triage-card-desc { color: rgba(255, 255, 255, 0.85); }
+.triage-card--primary .triage-card-cta { color: var(--accent); }
+.triage-card--primary:hover {
+    box-shadow: 0 16px 34px rgba(15, 26, 42, 0.35);
+}
+body.dark-mode .triage-card--primary {
+    background: linear-gradient(135deg, var(--primary) 0%, #0d1e33 100%);
+    border-color: var(--accent);
+}
+.triage-card--ghost {
+    background: transparent;
+    border-top-width: 3px;
+    box-shadow: none;
+}
+.triage-card--ghost:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    background: var(--white);
+}
+body.dark-mode .triage-card--ghost { background: transparent; }
+body.dark-mode .triage-card--ghost:hover { background: var(--white); }
+
 /* --- SECTION DASHBOARD (guide quick links) --- */
 .breadcrumb-bar {
     display: flex;
