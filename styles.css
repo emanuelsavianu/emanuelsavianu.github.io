@@ -322,10 +322,6 @@ header p {
         min-height: 36px;
         min-width: 36px;
     }
-
-    #google_translate_element .goog-te-gadget-simple { font-size: 0.9rem !important; }
-    #google_translate_element .goog-te-gadget-simple a,
-    #google_translate_element .goog-te-gadget-simple span { font-size: 0.9rem !important; }
 }
 
 /* Root page (index.html): the brand header is removed, so the photo hero is the
@@ -357,39 +353,6 @@ site-nav[data-section="root"] .site-nav { border-top: none; }
 .lang-btn:hover { color: var(--accent); }
 .lang-btn.active { color: var(--accent); }
 .lang-separator { color: rgba(255,255,255,0.3); }
-
-/* --- GOOGLE TRANSLATE WIDGET --- */
-#google_translate_element .goog-te-gadget-simple {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    font-size: 0.9rem !important;
-    font-family: inherit !important;
-}
-#google_translate_element .goog-te-gadget-simple a,
-#google_translate_element .goog-te-gadget-simple span {
-    color: rgba(255,255,255,0.7) !important;
-    font-weight: 600 !important;
-    text-decoration: none !important;
-    font-size: 0.9rem !important;
-    font-family: inherit !important;
-}
-#google_translate_element .goog-te-gadget-simple a:hover span {
-    color: var(--accent) !important;
-}
-/* hide the Google logo inside the widget */
-#google_translate_element .goog-te-gadget-simple img { display: none !important; }
-/* Dropdown iframe — float above everything, and pin to right edge of viewport
-   so the multi-column language list never overflows off-screen to the right. */
-.goog-te-menu-frame,
-iframe.goog-te-menu-frame {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
-    border-radius: 8px !important;
-    z-index: 99999 !important;
-    right: 0 !important;   /* override Google's inline left:Xpx that pushes it off-screen */
-    left: auto !important;
-}
-.goog-te-menu-value { white-space: nowrap; }
 
 /* --- LAYOUT GRID --- */
 .container {

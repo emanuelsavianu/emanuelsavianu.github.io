@@ -55,6 +55,9 @@ const PRECACHE_URLS = [
   '/assets/studio/studio-location-tablet.webp',
   '/assets/studio/studio-location-mobile.avif',
   '/assets/studio/studio-location-mobile.webp',
+  '/assets/fontawesome/css/fontawesome.min.css',
+  '/assets/fontawesome/css/solid.min.css',
+  '/assets/fontawesome/webfonts/fa-solid-900.woff2',
 ];
 
 function isSameOrigin(url) {

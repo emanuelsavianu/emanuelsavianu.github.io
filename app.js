@@ -71,8 +71,7 @@ class SiteNav extends HTMLElement {
         '<span class="lang-separator" aria-hidden="true">|</span>' +
         '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en">ENG</button>' +
         '<span class="lang-separator" aria-hidden="true">|</span>' +
-        darkBtn +
-        '<div id="google_translate_element"></div>'
+        darkBtn
       : darkBtn;
 
     // Nav links row + mobile menu
@@ -81,7 +80,7 @@ class SiteNav extends HTMLElement {
       '<nav class="site-nav" aria-label="Navigazione principale">' +
         '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
         '<ul class="nav-menu" id="site-nav-menu">' +
-          navItem(prefix + 'index.html', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
+          navItem(prefix || './', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
           navItem(prefix + 'ssn/index.html', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
           navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Pazienti Privati') +
           navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
@@ -156,13 +155,7 @@ class SiteNav extends HTMLElement {
       });
     }
 
-    Promise.resolve().then(() => {
-      applyI18n(getPreferredLang());
-      // Re-attach Google Translate to the freshly injected div if the widget already loaded
-      if (isPatient && window.google && window.google.translate) {
-        try { window.googleTranslateElementInit(); } catch (e) {}
-      }
-    });
+    Promise.resolve().then(() => applyI18n(getPreferredLang()));
   }
 }
 
@@ -179,7 +172,7 @@ class SiteFooter extends HTMLElement {
         '<div class="footer-content">' +
           '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - Dr. Savianu Emanuel</p>' +
           '<nav class="footer-nav" aria-label="Footer">' +
-            footerLink(prefix + 'index.html', 'footer_home', isPatient, 'Home') +
+            footerLink(prefix || './', 'footer_home', isPatient, 'Home') +
             ' <span aria-hidden="true">·</span> ' +
             footerLink(prefix + 'ssn/faq.html', 'footer_faq', isPatient, 'FAQ') +
             ' <span aria-hidden="true">·</span> ' +
@@ -271,41 +264,21 @@ export const translations = {
         triage_cta: "Entra",
         triage_section_label: "Scegli la tua area",
 
-        // Alert box (index.html)
-        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Benvenuti</strong> nello Studio Medico Ippocrate — Dott. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
 
         // Services section
         services_title: "Servizi Online",
         btn_faq_main: "Hai dubbi? Leggi prima le FAQ",
-        btn_book: "Prenota una visita",
-        btn_book_sub: "Scegli giorno e orario",
 
 
         // Booking section
         booking_title: "Prenotazione su Doctolib",
-        booking_guide_title: "Scegli cosa fare:",
-        booking_guide_steps: "<li>Clicca il pulsante del tipo di visita qui sotto.</li><li>Scegli il giorno e l'orario disponibile sul calendario.</li><li>Inserisci Nome, Cognome e un indirizzo Email.</li><li>Clicca <strong>Conferma</strong> (riceverai un'email di riepilogo).</li>",
-        cal_prima_title: "Prima Visita (Nuovi Pazienti)",
-        cal_prima_desc: "Solo per la prima visita. Portare documentazione, esami, referti ed esenzioni. (30 min)",
-        cal_ord_title: "Visita Ordinaria",
-        cal_ord_desc: "Controlli e problemi non urgenti. (20 min)",
-        cal_breve_title: "Sintomi Recenti",
-        cal_breve_desc: "Visite non rimandabili, malattie acute, certificati INPS malattia. (10 min)",
         privacy_notice_text: "Leggi l'informativa privacy.",
         privacy_notice_link: "Informativa Trattamento Dati",
 
-        // Visit info section
-        visit_info_title: "Cosa portare alla visita &amp; Link Utili",
-        visit_info_desc: "Per la visita in ambulatorio, ricordarsi di portare:",
-        visit_info_items: "<li>Lista aggiornata e dettagliata dei farmaci assunti regolarmente</li><li>Eventuali esami, referti specialistici o lettere di dimissioni precedenti</li>",
-        btn_cup: "Accedi al CUP Toscana",
-        btn_fse: "Fascicolo Sanitario",
 
         // Emergency & out-of-hours
         emergency_112: "Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.",
         title_116117: "116 117 — Assistenza Sanitaria Non Urgente",
-        guard_title: "Continuità Assistenziale (ex-Guardia Medica)",
-        guard_desc: "Per assistenza medica non urgente durante la notte, i festivi e prefestivi.",
         cta_116117_main: "CHIAMA IL 116 117",
         note_116117_free: "(Numero gratuito, sempre attivo 24 ore su 24)",
         desc_116117_operator: "Un medico o un operatore ti aiuterà a capire cosa fare.",
@@ -323,48 +296,19 @@ export const translations = {
         contacts_title: "Contatti Studio",
         label_doctolib_contacts: "Appuntamenti, Messaggi, Rinnovi Farmaci",
         label_secretary_fallback: "Segreteria (solo se non puoi usare Doctolib)",
-        label_secretary: "Segreteria e Appuntamenti",
-        label_doctor: "Tel. Personale (Solo Urgenze)",
         label_address: "Studio Medico Ippocrate",
-        label_email: "Email",
         label_via_doctolib: "tramite Doctolib",
         label_address_value: "Piazza Saione 3, Arezzo",
 
         // Hours
         hours_lun_ven: "Lun - Ven",
         hours_title: "Orari di Studio",
-        appt_only: "Solo su appuntamento",
-        hours_day1: "Lun - Ven",
-        hours_day2: "",
-        day_sat_sun: "Sab - Dom",
         closed: "Chiuso",
-        hours_secretary_title: "Orari Segreteria",
-        hours_secretary_desc: "Per appuntamenti telefonici e info.",
 
         // Footer
         link_privacy: "Privacy Policy",
 
-        // Welcome modal
-        welcome_transfer_title: "Nuova Sede Studio",
-        welcome_transfer_desc: "Dal 27 Aprile 2026, il Dott. Savianu si è trasferito in <strong>Piazza Saione 3</strong>.",
-        welcome_intro: "Benvenuti. Ho organizzato questo sito per semplificare la vostra vita. Utilizzando gli strumenti digitali, mi permettete di dedicare la massima attenzione alle visite mediche vere e proprie.",
-        welcome_step0_title: "0. Prima di tutto: Leggi le FAQ",
-        welcome_step0_desc: "La maggior parte delle risposte a dubbi su certificati, ricette ed esenzioni si trova nelle <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Domande Frequenti</a></strong>. Consultale prima di chiamare!",
-        welcome_step1_title: "1. Prenotazione Appuntamenti",
-        welcome_step1_desc: "L'agenda online vi permette di prenotare la visita senza attese al telefono.",
-        welcome_step2_title: "2. Urgenze e Contatto Diretto",
-        welcome_step2_p1: "Segreteria: <strong>0575 910 904</strong>",
-        welcome_step2_p2: "<strong>Urgenze vere: chiamare 112 / 116 117.</strong>",
-        welcome_step2_p3: "",
-        welcome_step3_title: "",
-        welcome_step3_p1: "",
-        welcome_step3_p2: "",
-        welcome_step3_p3: "",
-        welcome_btn: "<span>Ho letto e accetto</span><i class='fas fa-arrow-right'></i>",
 
-        // FAQ page
-        faq_hero_title: "<i class='fas fa-question-circle' style='margin-right: 10px;'></i>FAQ per i Pazienti",
-        faq_hero_desc: "Risposte alle domande più comuni sullo studio medico",
         faq_back: "<i class='fas fa-arrow-left'></i> Torna al sito principale",
         faq_nav_prenotazioni: "Prenotazioni",
         faq_nav_ricette: "Ricette",
@@ -433,8 +377,6 @@ export const translations = {
         faq_cta_title: "Non hai trovato la risposta?",
         faq_cta_desc: "Contatta la segreteria al 0575 910 904 per comunicare con il medico.",
 
-        // Flowchart
-        flowchart_title: "Di cosa hai bisogno?",
         flowchart_opt_book: '<i class="fas fa-calendar-check"></i> Voglio prenotare una visita',
         flowchart_opt_night: '<i class="fas fa-moon"></i> È sera, notte o weekend',
         flowchart_opt_faq: '<i class="fas fa-question-circle"></i> Ho un\'altra domanda',
@@ -453,9 +395,6 @@ export const translations = {
 
         // Quick actions bar
         qa_call: 'Chiama',
-        qa_book: 'Prenota',
-        qa_home: 'Home',
-        qa_email: 'Doctolib',
         qa_doctolib: 'Doctolib',
 
         // FAQ page extras
@@ -475,16 +414,13 @@ export const translations = {
 
         // Misc hardcoded
         service_banner_desc: 'Trovi subito le risposte ai dubbi più comuni (certificati, esenzioni, impegnative).',
-        email_privacy_notice: 'Per comunicazioni mediche usa Doctolib o la visita in studio.',
         secretary_hours_label: 'Orari Segreteria - 0575 910 904',
-        prescription_request_header: 'Per richiedere la ricetta per i farmaci assunti abitualmente:',
 
         // Accessibility — aria-label i18n
         skip_link: 'Vai al contenuto principale',
         floating_faq_label: 'Domande Frequenti',
         qa_call_label: 'Chiama la segreteria',
         qa_faq_label: 'Domande frequenti',
-        qa_email_label: 'Apri Doctolib',
         qa_doctolib_label: 'Apri Doctolib',
 
         // Doctolib announcement
@@ -507,9 +443,6 @@ export const translations = {
         nav_privati: 'Pazienti Privati',
         nav_colleghi: 'Colleghi',
         nav_faq: 'FAQ',
-        nav_menu_open: 'Apri il menu di navigazione',
-        nav_menu_close: 'Chiudi il menu di navigazione',
-        nav_menu_label: 'Menu principale',
 
         // Footer (site-footer component)
         footer_home: 'Home',
@@ -594,43 +527,23 @@ export const translations = {
         triage_cta: "Enter",
         triage_section_label: "Choose your area",
 
-        // Alert box (index.html)
-        alert_notice: "<i class='fas fa-info-circle' aria-hidden='true' style='margin-right: 8px;'></i><strong>Welcome</strong> to Studio Medico Ippocrate — Dr. Emanuel Savianu, <strong>Piazza Saione 3, Arezzo</strong>.",
 
         // Services section
         services_title: "Online Services",
         btn_faq_main: "Have questions? Read the FAQ first",
-        btn_book: "Book a visit",
-        btn_book_sub: "Choose date and time",
 
 
         // Booking section
         booking_title: "Book on Doctolib",
-        booking_guide_title: "Choose what to do:",
-        booking_guide_steps: "<li>Click the button for the visit type below.</li><li>Choose the day and time available on the calendar.</li><li>Enter First Name, Last Name and an Email address.</li><li>Click <strong>Confirm</strong> (you will receive a summary email).</li>",
-        cal_prima_title: "First Visit (New Patients)",
-        cal_prima_desc: "For new patients only. Bring documents, tests, reports and exemptions. (30 min)",
-        cal_ord_title: "Standard Visit",
-        cal_ord_desc: "Check-ups and non-urgent issues. (20 min)",
-        cal_breve_title: "Recent Symptoms",
-        cal_breve_desc: "Urgent but non-emergency visits, acute illness, INPS sick leave certificates. (10 min)",
         cal_privata_title: "Private Consultations and Visits (I am not an existing patient)",
         cal_privata_desc: "Private consultations and certificates.",
         privacy_notice_text: "Please read the privacy policy.",
         privacy_notice_link: "Data Processing Policy",
 
-        // Visit info section
-        visit_info_title: "What to Bring &amp; Useful Links",
-        visit_info_desc: "For your in-office visit, please remember to bring:",
-        visit_info_items: "<li>An up-to-date list of all medications you take regularly</li><li>Any previous tests, specialist reports, or hospital discharge letters</li>",
-        btn_cup: "Book via CUP Toscana",
-        btn_fse: "Health Record (FSE)",
 
         // Emergency & out-of-hours
         emergency_112: "For medical emergencies, always call the emergency number 112.",
         title_116117: "116 117 — Non-Urgent Health Care",
-        guard_title: "Out-of-Hours Service (Continuità Assistenziale)",
-        guard_desc: "For non-urgent medical care at night, on holidays and days before holidays.",
         cta_116117_main: "CALL 116 117",
         note_116117_free: "(Free, 24/7 service)",
         desc_116117_operator: "A doctor or operator will help you.",
@@ -648,48 +561,19 @@ export const translations = {
         contacts_title: "Office Contacts",
         label_doctolib_contacts: "Appointments, Messages, Prescription Renewals",
         label_secretary_fallback: "Reception (only if you cannot use Doctolib)",
-        label_secretary: "Reception &amp; Appointments",
-        label_doctor: "Personal Phone (Emergencies only)",
         label_address: "Studio Medico Ippocrate",
-        label_email: "Email",
         label_via_doctolib: "via Doctolib",
         label_address_value: "Piazza Saione 3, Arezzo",
 
         // Hours
         hours_lun_ven: "Mon - Fri",
         hours_title: "Office Hours",
-        appt_only: "By appointment only",
-        hours_day1: "Mon - Fri",
-        hours_day2: "",
-        day_sat_sun: "Sat - Sun",
         closed: "Closed",
-        hours_secretary_title: "Reception Hours",
-        hours_secretary_desc: "For phone appointments and information.",
 
         // Footer
         link_privacy: "Privacy Policy",
 
-        // Welcome modal
-        welcome_transfer_title: "New Office Location",
-        welcome_transfer_desc: "From 27 April 2026, Dr. Savianu has moved to <strong>Piazza Saione 3</strong>.",
-        welcome_intro: "Welcome. This website is designed to make your life easier. By using the digital tools available, you allow me to focus my full attention on in-person medical consultations.",
-        welcome_step0_title: "0. First of all: Read the FAQ",
-        welcome_step0_desc: "Most answers about certificates, prescriptions and exemptions can be found in the <strong><a href='faq.html' style='text-decoration:underline; font-weight:bold;'>Frequently Asked Questions</a></strong>. Check there before calling!",
-        welcome_step1_title: "1. Appointment Booking",
-        welcome_step1_desc: "The online calendar lets you book a visit without waiting on the phone.",
-        welcome_step2_title: "2. Urgent Matters &amp; Direct Contact",
-        welcome_step2_p1: "Reception: <strong>0575 910 904</strong>",
-        welcome_step2_p2: "<strong>True emergencies: call 112 / 116 117.</strong>",
-        welcome_step2_p3: "",
-        welcome_step3_title: "",
-        welcome_step3_p1: "",
-        welcome_step3_p2: "",
-        welcome_step3_p3: "",
-        welcome_btn: "<span>I have read and accept</span><i class='fas fa-arrow-right'></i>",
 
-        // FAQ page
-        faq_hero_title: "<i class='fas fa-question-circle' style='margin-right: 10px;'></i>FAQ for Patients",
-        faq_hero_desc: "Answers to the most common questions about the practice",
         faq_back: "<i class='fas fa-arrow-left'></i> Back to main site",
         faq_nav_prenotazioni: "Appointments",
         faq_nav_ricette: "Prescriptions",
@@ -758,8 +642,6 @@ export const translations = {
         faq_cta_title: "Didn't find the answer?",
         faq_cta_desc: "Contact reception on 0575 910 904 to send a message to the doctor.",
 
-        // Flowchart
-        flowchart_title: "What do you need?",
         flowchart_opt_book: '<i class="fas fa-calendar-check"></i> I want to book a visit',
         flowchart_opt_night: '<i class="fas fa-moon"></i> It\'s evening, night or weekend',
         flowchart_opt_faq: '<i class="fas fa-question-circle"></i> I have another question',
@@ -776,9 +658,6 @@ export const translations = {
 
         // Quick actions bar
         qa_call: 'Call',
-        qa_book: 'Book',
-        qa_home: 'Home',
-        qa_email: 'Doctolib',
         qa_doctolib: 'Doctolib',
 
         // FAQ page extras
@@ -798,16 +677,13 @@ export const translations = {
 
         // Misc hardcoded
         service_banner_desc: 'Find immediate answers to common questions (certificates, exemptions, referrals).',
-        email_privacy_notice: 'For medical communications use Doctolib or an in-office visit.',
         secretary_hours_label: 'Reception Hours - 0575 910 904',
-        prescription_request_header: 'To request a prescription for your regular medications:',
 
         // Accessibility — aria-label i18n
         skip_link: 'Skip to main content',
         floating_faq_label: 'Frequently Asked Questions',
         qa_call_label: 'Call reception',
         qa_faq_label: 'Frequently Asked Questions',
-        qa_email_label: 'Open Doctolib',
         qa_doctolib_label: 'Open Doctolib',
 
         // Doctolib announcement
@@ -830,9 +706,6 @@ export const translations = {
         nav_privati: 'Private Patients',
         nav_colleghi: 'Colleagues',
         nav_faq: 'FAQ',
-        nav_menu_open: 'Open navigation menu',
-        nav_menu_close: 'Close navigation menu',
-        nav_menu_label: 'Main menu',
 
         // Footer (site-footer component)
         footer_home: 'Home',
@@ -879,7 +752,7 @@ export const translations = {
         intl_f_lang: 'Preferred language *',
         intl_f_lang_en: 'English',
         intl_f_lang_it: 'Italiano',
-        intl_f_lang_ro: 'Română',
+        intl_f_lang_ro: 'România',
         intl_f_status: 'You are a…',
         intl_f_status_resident: 'Resident',
         intl_f_status_secondhome: 'Second-home owner',
