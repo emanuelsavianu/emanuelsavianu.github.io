@@ -456,7 +456,7 @@ export const translations = {
         triage_intl_title: 'Pazienti Internazionali',
         triage_intl_desc: 'Consulenze di famiglia e medicina generale in inglese, italiano e romeno — per residenti internazionali e visitatori della Provincia di Arezzo.',
         intl_hero_title: 'Il suo medico di famiglia in inglese ad Arezzo',
-        intl_hero_sub: 'Consulenze di medicina generale privata in lingua inglese, per residenti e visitatori della Provincia di Arezzo — sempre con lo stesso medico.',
+        intl_hero_sub: 'Consulenze di medicina generale privata in lingua inglese, per residenti e visitatori della Provincia di Arezzo — Cortona, Castiglion Fiorentino, la Val di Chiana e oltre — sempre con lo stesso medico.',
         intl_intro_heading: 'Informazioni sulle consulenze',
         intl_intro_1: "Muoversi tra sistemi sanitari diversi può disorientare, soprattutto quando la lingua aggiunge un ulteriore livello di mediazione a ogni conversazione medica. Le consulenze si svolgono direttamente in inglese — senza interprete, senza perdita di sfumature — per residenti internazionali, proprietari di seconde case e visitatori dell'area aretina.",
         intl_intro_2: 'Il Dott. Emanuel Savianu è un medico di medicina generale con studio ad Arezzo, in Toscana: offre consulenze private di medicina generale in lingua inglese rivolte a residenti internazionali e visitatori. Le consulenze sono disponibili anche in italiano e in romeno.',
@@ -507,7 +507,21 @@ export const translations = {
         intl_f_submit: 'Richiedi informazioni sulla visita privata',
         intl_f_alt: 'Per informazioni su costi e disponibilità scriva a <span class="js-email"></span>.',
         intl_f_done: 'Grazie — il suo programma di posta dovrebbe aprirsi con la richiesta precompilata. Se non succede, ci scriva direttamente.',
-        intl_emergency: 'Per le emergenze mediche chiami sempre il 112. Fuori orario, per cure non urgenti, chiami il 116 117.'
+        intl_emergency: 'Per le emergenze mediche chiami sempre il 112. Fuori orario, per cure non urgenti, chiami il 116 117.',
+        // International FAQ (/international/)
+        intl_faq_title: 'Domande frequenti',
+        intl_faq1_q: 'Devo essere iscritto al Servizio Sanitario Nazionale (SSN) per prenotare una consulenza privata?',
+        intl_faq1_a: 'No. Le consulenze private sono aperte a tutti, compresi i visitatori e i residenti non iscritti al Servizio Sanitario Nazionale (SSN). Se sta valutando l’iscrizione, durante la visita le spieghiamo cosa comporta.',
+        intl_faq2_q: 'Posso ottenere una ricetta o un certificato medico in inglese?',
+        intl_faq2_a: 'Sì. Dove appropriato, i certificati e le lettere di presentazione possono essere corredati di documentazione in inglese, oltre alla versione ufficiale in italiano. Le ricette elettroniche seguono il formato nazionale e si ritirano in qualsiasi farmacia italiana con il codice fiscale.',
+        intl_faq3_q: 'Quanto costa una consulenza privata?',
+        intl_faq3_a: 'L’onorario dipende dal tipo e dalla durata della consulenza. Scriva per ricevere un’indicazione chiara prima di prenotare: nessun obbligo.',
+        intl_faq4_q: 'È possibile il coordinamento con il medico nel paese d’origine?',
+        intl_faq4_a: 'Sì. Con il suo consenso, referti e documentazione possono essere condivisi con il suo medico o specialista nel paese d’origine, e le cure possono essere coordinate mentre si trova in Italia.',
+        intl_faq5_q: 'Sono disponibili visite a domicilio fuori Arezzo, ad esempio a Cortona o in Val di Chiana?',
+        intl_faq5_a: 'Le visite domiciliari sono disponibili in tutta la Provincia di Arezzo — tra cui Cortona, Castiglion Fiorentino e la Val di Chiana — dove clinicamente indicate. La disponibilità viene confermata insieme all’appuntamento.',
+        intl_faq6_q: 'Cosa succede in caso di emergenza medica?',
+        intl_faq6_a: 'In caso di emergenza medica chiami sempre il 112. Lo studio offre cure programmate non urgenti; fuori orario, l’assistenza non urgente è disponibile tramite il 116 117.',
     },
     en: {
         // Header
@@ -719,7 +733,7 @@ export const translations = {
         triage_intl_title: 'International Patients',
         triage_intl_desc: 'Family doctor & GP consultations in English, Italian and Romanian — for international residents and visitors across the Province of Arezzo.',
         intl_hero_title: 'Your English-Speaking Family Doctor in Arezzo',
-        intl_hero_sub: 'Private primary care consultations in English, for residents and visitors across the Province of Arezzo — with the same physician, visit after visit.',
+        intl_hero_sub: 'Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.',
         intl_intro_heading: 'About these consultations',
         intl_intro_1: 'Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.',
         intl_intro_2: 'Dr. Emanuel Savianu is a family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian and Romanian.',
@@ -770,7 +784,21 @@ export const translations = {
         intl_f_submit: 'Inquire About Primary Care',
         intl_f_alt: 'For information about fees and availability, please write to <span class="js-email"></span>.',
         intl_f_done: 'Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.',
-        intl_emergency: 'For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.'
+        intl_emergency: 'For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.',
+        // International FAQ (/international/)
+        intl_faq_title: 'Common questions',
+        intl_faq1_q: 'Do I need to be registered with the Italian national health service (SSN) to book a private consultation?',
+        intl_faq1_a: 'No. Private consultations are open to everyone, including visitors and residents who are not registered with the Italian national health service (SSN). If you are thinking about registering, we can explain what it involves during your visit.',
+        intl_faq2_q: 'Can I get a prescription or medical certificate written in English?',
+        intl_faq2_a: 'Yes. Where appropriate, certificates and referral letters can be accompanied by documentation in English, alongside the official Italian version. Electronic prescriptions follow the national format and are collected at any Italian pharmacy using your tax code.',
+        intl_faq3_q: 'How much does a private consultation cost?',
+        intl_faq3_a: 'Fees depend on the type and length of the consultation. Write to us for a clear indication before booking — there is no obligation.',
+        intl_faq4_q: 'Can you coordinate with my doctor back home?',
+        intl_faq4_a: 'Yes. With your consent, reports and documentation can be shared with your doctor or specialist in your home country, and ongoing care can be coordinated while you are in Italy.',
+        intl_faq5_q: 'Do you offer home visits outside Arezzo — e.g. Cortona or the Val di Chiana?',
+        intl_faq5_a: 'Home visits are available across the Province of Arezzo — including Cortona, Castiglion Fiorentino and the Val di Chiana — where clinically appropriate. Availability is confirmed together with the appointment.',
+        intl_faq6_q: 'What happens in a medical emergency?',
+        intl_faq6_a: 'For medical emergencies, always call 112. This practice provides scheduled, non-emergency care; outside opening hours, non-urgent assistance is available through 116 117.',
     }
 };
 
@@ -793,12 +821,15 @@ export function setLanguage(lang) {
         const key = el.getAttribute('data-i18n-aria-label');
         if (translations[lang]?.[key]) el.setAttribute('aria-label', translations[lang][key]);
     });
-    // Tier-2 international card: visible only for English-language sessions
+    // Tier-2 international card: crawlable default (visible); hidden for non-EN sessions
     document.querySelectorAll('.triage-card--international').forEach(el => {
-        el.classList.toggle('is-visible', lang === 'en');
+        el.classList.toggle('is-hidden', lang !== 'en');
     });
     const triageGrid = document.querySelector('.triage-grid');
-    if (triageGrid) triageGrid.classList.toggle('has-international', lang === 'en');
+    if (triageGrid) {
+        triageGrid.classList.toggle('intl-hidden', lang !== 'en');
+        triageGrid.classList.toggle('has-international', lang === 'en');
+    }
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
     document.dispatchEvent(new CustomEvent('site:i18n', { detail: { lang: lang } }));
 }

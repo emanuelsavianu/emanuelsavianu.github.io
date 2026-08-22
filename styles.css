@@ -1458,9 +1458,11 @@ body.dark-mode .search-input {
 body.dark-mode .triage-card { background: var(--white); }
 body.dark-mode .triage-card-cta { color: var(--accent); }
 
-/* --- Tier-2 international card (EN-language visitors only, JS-toggled) --- */
-.triage-card--international { display: none; }
-.triage-card--international.is-visible { display: flex; }
+/* --- Tier-2 international card ---
+   Visible BY DEFAULT (crawlable without JS); JS hides it for non-EN sessions. */
+.triage-card--international { display: flex; }
+.triage-card--international.is-hidden { display: none; }
+.triage-grid.intl-hidden { grid-template-columns: repeat(3, 1fr); }
 /* 4th visible card: 2x2 grid on desktop (keeps Pazienti primary path prominent) */
 .triage-grid.has-international {
     grid-template-columns: repeat(2, 1fr);

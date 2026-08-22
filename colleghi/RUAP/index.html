@@ -9,7 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="../../assets/fontawesome/css/fontawesome.min.css" />
+  <link rel="stylesheet" href="../../assets/fontawesome/css/solid.min.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.10.2/dist/dom-to-image-more.min.js"></script>
@@ -355,7 +356,7 @@
     <!-- Bilancio Mensile collassabile -->
     <button id="btn-toggle-monthly-stats" class="w-full text-left text-xs font-semibold text-brand-700 hover:text-brand-500 my-1.5 flex items-center gap-1.5 px-1" onclick="toggleMonthlyStats()">
       <i class="fa-solid fa-chart-simple text-brand-400"></i> Bilancio Mensile
-      <i class="fa-regular fa-eye ml-auto text-slate-400 text-[10px] cursor-pointer hover:text-brand-600" id="btn-hide-zero-docs" title="Nascondi inattivi" onclick="event.stopPropagation(); toggleHideZeroDocs()"></i>
+      <i class="fa-solid fa-eye ml-auto text-slate-400 text-[10px] cursor-pointer hover:text-brand-600" id="btn-hide-zero-docs" title="Nascondi inattivi" onclick="event.stopPropagation(); toggleHideZeroDocs()"></i>
       <i class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform ml-1" id="monthly-stats-chevron" style="transform: rotate(180deg)"></i>
     </button>
     <div id="monthly-stats-panel" class="text-sm space-y-1.5 mb-3 px-1"></div>
