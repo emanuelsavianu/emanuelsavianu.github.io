@@ -44,9 +44,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
-    <link rel="stylesheet" href="../styles.css?v=44">
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../assets/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="../assets/fontawesome/css/solid.min.css">
+    <link rel="stylesheet" href="../styles.css?v=45">
 
     <!-- JSON-LD: Physician (entity clarity for AI retrieval / Knowledge Graph) + BreadcrumbList -->
     <script type="application/ld+json">
@@ -115,7 +116,61 @@
           {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://savianu.it/"},
           {"@type": "ListItem", "position": 2, "name": "International Patients", "item": "https://savianu.it/international/"}
         ]
-      }
+      },
+{
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+        {
+            "@type": "Question",
+            "name": "Do I need to be registered with the Italian national health service (SSN) to book a private consultation?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Private consultations are open to everyone, including visitors and residents who are not registered with the Italian national health service (SSN). If you are thinking about registering, we can explain what it involves during your visit."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can I get a prescription or medical certificate written in English?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Where appropriate, certificates and referral letters can be accompanied by documentation in English, alongside the official Italian version. Electronic prescriptions follow the national format and are collected at any Italian pharmacy using your tax code."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "How much does a private consultation cost?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fees depend on the type and length of the consultation. Write to us for a clear indication before booking — there is no obligation."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Can you coordinate with my doctor back home?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. With your consent, reports and documentation can be shared with your doctor or specialist in your home country, and ongoing care can be coordinated while you are in Italy."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "Do you offer home visits outside Arezzo — e.g. Cortona or the Val di Chiana?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Home visits are available across the Province of Arezzo — including Cortona, Castiglion Fiorentino and the Val di Chiana — where clinically appropriate. Availability is confirmed together with the appointment."
+            }
+        },
+        {
+            "@type": "Question",
+            "name": "What happens in a medical emergency?",
+            "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For medical emergencies, always call 112. This practice provides scheduled, non-emergency care; outside opening hours, non-urgent assistance is available through 116 117."
+            }
+        }
+    ]
+}
     ]
     </script>
 
@@ -178,6 +233,19 @@
         @media (max-width: 640px) {
             .intl-grid { grid-template-columns: 1fr; }
         }
+        /* FAQ - native details/summary, no JS dependency */
+        .intl-faq { border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; }
+        .intl-faq details + details { border-top: 1px solid var(--border-color); }
+        .intl-faq summary {
+            cursor: pointer; padding: 14px 18px;
+            font-weight: 700; font-size: 0.95rem; color: var(--color-text);
+            list-style: none; display: flex; justify-content: space-between;
+            gap: 12px; align-items: baseline;
+        }
+        .intl-faq summary::-webkit-details-marker { display: none; }
+        .intl-faq summary::after { content: '+'; color: var(--accent-text); font-weight: 700; flex-shrink: 0; }
+        .intl-faq details[open] summary::after { content: '\2013'; }
+        .intl-faq .intl-faq-a { padding: 0 18px 16px; font-size: 0.93rem; color: var(--text-medium); line-height: 1.65; margin: 0; }
         /* This page has no <aside>: keep the container single-column and centered
            (overrides styles.css @media min-900 2fr/1fr — same specificity, later in cascade) */
         @media (min-width: 900px) { .container { grid-template-columns: 1fr; max-width: 900px; } }
@@ -201,7 +269,7 @@
                 <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
             </p>
             <h1 class="hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">Your English-Speaking Family Doctor in Arezzo</h1>
-            <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — with the same physician, visit after visit.</p>
+            <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.</p>
         </section>
 
         <!-- Intro -->
@@ -289,6 +357,40 @@
             </div>
         </section>
 
+
+        <!-- Common questions -->
+        <section class="card" aria-labelledby="intl-faq-heading">
+            <div class="card-header">
+                <i class="fas fa-question" aria-hidden="true"></i>
+                <h2 id="intl-faq-heading" data-i18n="intl_faq_title">Common questions</h2>
+            </div>
+            <div class="intl-faq">
+                <details>
+                    <summary><span data-i18n="intl_faq1_q">Do I need to be registered with the Italian national health service (SSN) to book a private consultation?</span></summary>
+                    <p class="intl-faq-a" data-i18n="intl_faq1_a">No. Private consultations are open to everyone, including visitors and residents who are not registered with the Italian national health service (SSN). If you are thinking about registering, we can explain what it involves during your visit.</p>
+                </details>
+                <details>
+                    <summary><span data-i18n="intl_faq2_q">Can I get a prescription or medical certificate written in English?</span></summary>
+                    <p class="intl-faq-a" data-i18n="intl_faq2_a">Yes. Where appropriate, certificates and referral letters can be accompanied by documentation in English, alongside the official Italian version. Electronic prescriptions follow the national format and are collected at any Italian pharmacy using your tax code.</p>
+                </details>
+                <details>
+                    <summary><span data-i18n="intl_faq3_q">How much does a private consultation cost?</span></summary>
+                    <p class="intl-faq-a" data-i18n="intl_faq3_a">Fees depend on the type and length of the consultation. Write to us for a clear indication before booking — there is no obligation.</p>
+                </details>
+                <details>
+                    <summary><span data-i18n="intl_faq4_q">Can you coordinate with my doctor back home?</span></summary>
+                    <p class="intl-faq-a" data-i18n="intl_faq4_a">Yes. With your consent, reports and documentation can be shared with your doctor or specialist in your home country, and ongoing care can be coordinated while you are in Italy.</p>
+                </details>
+                <details>
+                    <summary><span data-i18n="intl_faq5_q">Do you offer home visits outside Arezzo — e.g. Cortona or the Val di Chiana?</span></summary>
+                    <p class="intl-faq-a" data-i18n="intl_faq5_a">Home visits are available across the Province of Arezzo — including Cortona, Castiglion Fiorentino and the Val di Chiana — where clinically appropriate. Availability is confirmed together with the appointment.</p>
+                </details>
+                <details>
+                    <summary><span data-i18n="intl_faq6_q">What happens in a medical emergency?</span></summary>
+                    <p class="intl-faq-a" data-i18n="intl_faq6_a">For medical emergencies, always call 112. This practice provides scheduled, non-emergency care; outside opening hours, non-urgent assistance is available through 116 117.</p>
+                </details>
+            </div>
+        </section>
         <!-- Inquiry form -->
         <section class="card" aria-labelledby="intl-form-heading">
             <div class="card-header">
@@ -381,7 +483,7 @@
 })();
 </script>
 
-<script type="module" src="../app.js?v=33"></script>
+<script type="module" src="../app.js?v=34"></script>
 
 <script>
 (function () {
