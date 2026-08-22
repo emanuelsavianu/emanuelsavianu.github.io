@@ -68,6 +68,13 @@
 - Vivere sano: [italiano](/ssn/vivisano.html), [romeno](/ssn/vivisano-ro.html).
 - [Foglio multilingue](/ssn/poster_multilingue.html) in italiano, inglese, urdu e bengali per colleghi e operatori sanitari; guide pratiche in [urdu](/ssn/urdu.html) e [bengalese](/ssn/bengalese.html).
 
+## Pazienti internazionali — International patients
+
+- Il Dott. Emanuel Savianu offre consulenze private di medicina generale in lingua inglese (disponibili anche in italiano e romeno) per la comunità internazionale della Provincia di Arezzo: Dr. Emanuel Savianu offers private primary care consultations in English for international residents and visitors across the Province of Arezzo. Consultations are also available in Italian and Romanian.
+- Destinatari / Who it is for: residenti internazionali non (ancora) iscritti al SSN; proprietari di seconde case (Cortona, Castiglion Fiorentino, Sansepolcro, Val di Chiana); lavoratori da remoto e digital nomad; visitatori che necessitano di una consultazione non urgente.
+- La visita privata comprende: continuità con lo stesso medico e la stessa documentazione clinica, orientamento nel sistema sanitario italiano (SSN, impegnative, accesso agli specialisti), telemedicina per controlli successivi e visite domiciliari dove clinicamente indicate. / One physician and one clinical record across visits; guidance through the Italian system (SSN, referrals, specialist access); telemedicine follow-ups; home visits where clinically indicated.
+- Le consulenze si svolgono negli orari di ambulatorio (lunedì–venerdì 09:30–12:30 e 16:00–19:00), su appuntamento. Richieste tramite il [modulo di contatto](/international/#intl-form-heading) (solo dati amministrativi — nessuna informazione clinica tramite il modulo), email o telefono.
+
 ## Pagine principali del sito
 
 - [Area pazienti SSN](/ssn/): prenotazioni su Doctolib, ricette, certificati, FAQ, esenzioni e guide.
@@ -79,6 +86,7 @@
 - [Certificato di invalidità INPS](/privati/): procedura telematica dal 1° marzo 2026, accompagnamento e Legge 104.
 - [Certificato di invalidità civile](/privati/certificato-invalidita-civile.html): documenti e nuova procedura (D.Lgs. 62/2024).
 - [FAQ riforma invalidità 2026](/privati/faq-riforma.html): nuovo certificato telematico, domanda INPS, indennità e Legge 104.
+- [Pazienti internazionali](/international/): visite private di medicina generale in inglese per residenti e visitatori della Provincia di Arezzo.
 - [Area colleghi MMG](/colleghi/): strumenti, protocolli e guide professionali.
 
 Le informazioni su questo sito hanno scopo informativo e non sostituiscono il parere medico.
