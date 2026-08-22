@@ -95,6 +95,17 @@ cloudflare/worker.js
 
 # Deepwork state (agent-local)
 .slim/deepwork/
+ssn/claude/poster-styles.css
+ssn/doctorsoftheworld/Bengali-Healthy-Living.pdf
+ssn/doctorsoftheworld/Bengali-Love-Sex-and-You.pdf
+ssn/doctorsoftheworld/Bengali-The-NHS.pdf
+ssn/doctorsoftheworld/Italian-wellbeing-guidance-for-migrants.pdf
+ssn/doctorsoftheworld/mental-health-and-sleep.pdf
+ssn/images/card-antibiotici.svg
+ssn/images/card-farmaci.svg
+ssn/images/card-prenota.svg
+ssn/images/hero-guida.svg
+ssn/poster-styles.css
 .opencode/.gitignore.oh-my-opencode-slim-legacy
 .opencode/package-lock.json
 .opencode/package.json

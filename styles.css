@@ -62,6 +62,7 @@
     --ssn: #1a2f4c;
     --privati: #c29b57;
     --colleghi: #2e7d6b;
+    --international: #285078;
 }
 
 /* Dark Mode Variables (Navy & Gold Theme) */
@@ -1417,6 +1418,7 @@ body.dark-mode .search-input {
 .triage-card[data-accent="ssn"] { border-top-color: var(--ssn); }
 .triage-card[data-accent="privati"] { border-top-color: var(--privati); }
 .triage-card[data-accent="colleghi"] { border-top-color: var(--colleghi); }
+.triage-card[data-accent="international"] { border-top-color: var(--international); }
 .triage-icon {
     font-size: 2rem;
     width: 60px;
@@ -1431,6 +1433,7 @@ body.dark-mode .search-input {
 .triage-card[data-accent="ssn"] .triage-icon { color: var(--ssn); }
 .triage-card[data-accent="privati"] .triage-icon { color: var(--privati); }
 .triage-card[data-accent="colleghi"] .triage-icon { color: var(--colleghi); }
+.triage-card[data-accent="international"] .triage-icon { color: var(--international); }
 .triage-card-title {
     font-size: 1.25rem;
     font-weight: 800;
@@ -1454,6 +1457,17 @@ body.dark-mode .search-input {
 .triage-card:hover .triage-card-cta { text-decoration: underline; }
 body.dark-mode .triage-card { background: var(--white); }
 body.dark-mode .triage-card-cta { color: var(--accent); }
+
+/* --- Tier-2 international card (EN-language visitors only, JS-toggled) --- */
+.triage-card--international { display: none; }
+.triage-card--international.is-visible { display: flex; }
+/* 4th visible card: 2x2 grid on desktop (keeps Pazienti primary path prominent) */
+.triage-grid.has-international {
+    grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 900px) {
+    .triage-grid.has-international { grid-template-columns: 1fr; }
+}
 @media (max-width: 900px) {
     .triage-grid { grid-template-columns: 1fr; gap: 16px; }
     .triage-card { min-height: 0; padding: 22px 20px; }

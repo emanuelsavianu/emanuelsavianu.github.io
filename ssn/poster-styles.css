@@ -1,200 +1,248 @@
 /* ============================================================
-   poster-styles.css — Sistema layout poster A3 landscape (ssn/)
-   Design: print-first, risparmio inchiostro (Canon PIXMA iX6850)
-   Fondo pagina SEMPRE bianco; colore solo in blocchi piccoli.
-   Placeholder immagini: figure.img-ph → sostituire con img.img-real
+   poster-styles.css — Print-first, ultra-low ink (Canon PIXMA iX6850)
+   Design: white-on-white, black text, minimal color accents.
    ============================================================ */
 
 :root {
-    --navy: #1A2F4C;
-    --gold: #C29B57;
-    --cream: #F3EFE6;
-    --ink: #000000;
-    --muted: #5a6b7d;
-    --accent: #C29B57;        /* override per poster (gold/verde/teal) */
-    --accent-soft: #FBF6EC;   /* tinta chiarissima, piccole aree */
-    --border: #e3d9c8;
+  --ink: #000000;           /* Pure black for text */
+  --border: #e3d9c8;        /* Very light gray border */
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 html, body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    font-family: 'Montserrat', system-ui, sans-serif;
-    background: #eef0f2;            /* solo schermo: la stampa è bianca */
-    color: var(--ink);
-    line-height: 1.45;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  background: #ffffff;      /* Pure white – zero ink */
+  color: var(--ink);
+  line-height: 1.45;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
 }
 
 .poster {
-    width: 420mm;
-    max-width: 100%;
-    margin: 16px auto;
-    background: #ffffff;           /* SEMPRE bianco */
-    padding: 0;
-    box-shadow: 0 6px 24px rgba(0,0,0,.15);
+  width: 420mm;
+  max-width: 100%;
+  margin: 16px auto;
+  background: #ffffff;
+  padding: 0;
+  box-shadow: none;         /* No shadow – saves ink */
 }
 
-/* ---------- Header (striscia sottile, bianca) ---------- */
+/* Header */
 .poster-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8mm;
-    padding: 4mm 10mm 3mm;
-    border-bottom: 1.2mm solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4mm 10mm 3mm;
+  border-bottom: 1.2mm solid var(--border);
 }
 
-.brand { display: flex; align-items: center; gap: 4mm; }
-.brand img { width: 11mm; height: 11mm; border-radius: 2mm; }
-.brand .site { font-size: 13pt; font-weight: 800; color: var(--navy); letter-spacing: .5px; }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 4mm;
+}
+.brand img {
+  width: 11mm;
+  height: 11mm;
+  border-radius: 2mm;
+}
+.studio {
+  font-size: 9.5pt;
+  color: var(--muted);
+  font-weight: 500;
+  text-align: end;
+}
+.studio a {
+  color: var(--border);
+}
 
-.studio { font-size: 9.5pt; color: var(--muted); font-weight: 500; text-align: end; }
-.studio a { color: var(--gold); text-decoration: none; }
-
-/* ---------- Titolo ---------- */
+/* Title */
 .poster-title {
-    padding: 5mm 10mm 3mm;
+  padding: 5mm 10mm 3mm;
 }
 
 .poster-title h1 {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 38pt;
-    font-weight: 700;
-    line-height: 1.05;
-    color: var(--navy);
-    margin-bottom: 2mm;
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 38pt;
+  font-weight: 700;
+  line-height: 1.05;
+  color: var(--ink);
+  margin-bottom: 2mm;
 }
 
 .poster-title .sub {
-    font-size: 13pt;
-    font-weight: 500;
-    color: var(--muted);
-    max-width: 90%;
+  font-size: 13pt;
+  font-weight: 500;
+  color: var(--muted);
+  max-width: 90%;
 }
 
-/* ---------- Placeholder immagine (da sostituire) ---------- */
+/* Image container */
 .img-ph {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3mm;
-    border: 1mm dashed var(--gold);
-    border-radius: 4mm;
-    background: #fffdf8;
-    padding: 5mm 8mm;
-    text-align: center;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3mm;
+  border: 1mm dashed var(--border);
+  border-radius: 4mm;
+  background: #ffffff;
+  padding: 5mm 8mm;
+  text-align: center;
+  width: 100%;
 }
-.img-ph .ph-ico { font-size: 26pt; opacity: .55; line-height: 1; }
-.img-ph figcaption { font-size: 8pt; color: var(--muted); max-width: 92%; font-style: normal; }
-.img-ph figcaption .code { font-weight: 700; color: var(--navy); font-style: normal; }
 
-/* Immagine reale (dopo la generazione) */
+.img-ph .ph-ico {
+  font-size: 26pt;
+  opacity: 0.55;
+  line-height: 1;
+}
+
+.img-ph figcaption {
+  font-size: 8pt;
+  color: var(--muted);
+  max-width: 92%;
+  font-style: normal;
+}
+
+.img-ph figcaption .code {
+  font-weight: 700;
+  color: var(--ink);
+  font-style: normal;
+}
+
+/* Real image replacement */
 .img-real {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 4mm;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* ---------- Hero ---------- */
-.hero { padding: 1mm 10mm 3mm; }
-.hero .img-ph, .hero .img-real { height: 88mm; }
-
-/* ---------- Cards ---------- */
+/* Cards grid */
 .cards {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 6mm;
-    padding: 1mm 10mm 3mm;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6mm;
+  padding: 1mm 10mm 3mm;
 }
 
 .card {
-    border: 1mm solid var(--accent);
-    border-radius: 4mm;
-    padding: 3mm;
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    gap: 2mm;
+  border: 1mm solid var(--border);
+  border-radius: 4mm;
+  padding: 3mm;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  gap: 2mm;
 }
 
-.card .img-ph, .card .img-real { height: 36mm; }
-.card .img-ph { border-width: .8mm; padding: 3mm; }
-.card .img-ph .ph-ico { font-size: 16pt; }
-.card .img-ph figcaption { font-size: 6.8pt; }
+.card .img-ph, .card .img-real {
+  height: 36mm;
+}
+
+.card .img-ph {
+  border-width: .8mm;
+  padding: 3mm;
+}
+
+.card .img-ph .ph-ico {
+  font-size: 16pt;
+}
+
+.card .img-ph figcaption {
+  font-size: 6.8pt;
+}
 
 .card h3 {
-    font-size: 12pt;
-    font-weight: 800;
-    color: var(--navy);
-    line-height: 1.15;
+  font-size: 12pt;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.15;
 }
 
 .card p {
-    font-size: 9.5pt;
-    font-weight: 500;
-    line-height: 1.35;
+  font-size: 9.5pt;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
-/* ---------- Striscia chiave ---------- */
+/* Key strip */
 .strip {
-    background: var(--accent);
-    color: #ffffff;
-    border-radius: 4mm;
-    padding: 2.5mm 8mm;
-    text-align: center;
-    font-size: 13pt;
-    font-weight: 800;
-    margin: 2mm 10mm 3mm;
+  background: var(--border);
+  color: #ffffff;
+  border-radius: 4mm;
+  padding: 2.5mm 8mm;
+  text-align: center;
+  font-size: 13pt;
+  font-weight: 800;
+  margin: 2mm 10mm 3mm;
 }
 
-/* ---------- Barra info ---------- */
+/* Info bar */
 .infobar {
-    border-left: 2.5mm solid var(--gold);
-    background: var(--accent-soft);
-    padding: 2.5mm 6mm;
-    font-size: 9.5pt;
-    font-weight: 600;
-    color: #333;
-    margin: 2mm 10mm 4mm;
+  border-left: 2.5mm solid var(--border);
+  background: var(--border);
+  padding: 2.5mm 6mm;
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #333333;
+  margin: 2mm 10mm 4mm;
 }
 
-/* ---------- Footer ---------- */
 .poster-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6mm;
-    flex-wrap: wrap;
-    padding: 3.5mm 10mm;
-    border-top: 1.2mm solid var(--gold);
-    font-size: 8.5pt;
-    color: var(--muted);
-    margin-top: 2mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6mm;
+  flex-wrap: wrap;
+  padding: 3.5mm 10mm;
+  border-top: 1.2mm solid var(--border);
+  font-size: 8.5pt;
+  color: var(--muted);
+  margin-top: 2mm;
 }
-.poster-footer .fbrand { display: flex; align-items: center; gap: 3mm; font-weight: 700; color: var(--navy); }
-.poster-footer .fbrand img { width: 8mm; height: 8mm; border-radius: 1.5mm; }
-.poster-footer .fright { text-align: end; font-weight: 600; color: var(--navy); }
 
-/* ---------- RTL (urdu) ---------- */
+.poster-footer .fbrand {
+  display: flex;
+  align-items: center;
+  gap: 3mm;
+  font-weight: 700;
+  color: var(--ink);
+}
+.poster-footer .fbrand img {
+  width: 8mm;
+  height: 8mm;
+  border-radius: 1.5mm;
+}
+.poster-footer .fright {
+  text-align: end;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* RTL support */
 [dir="rtl"] .studio { text-align: start; }
 [dir="rtl"] .poster-footer .fright { text-align: start; }
 [dir="rtl"] .poster-title .sub { text-align: start; }
 
-/* ---------- Stampa A3 ---------- */
+/* A3 print page */
 @media print {
-    @page { size: A3 landscape; margin: 12mm; }
-    body { background: #ffffff; }
-    .poster { margin: 0; width: 100%; box-shadow: none; }
-    .img-ph { break-inside: avoid; }
+  @page {
+    size: A3 landscape;
+    margin: 12mm;
+  }
+  body { background: #ffffff; }
+  .poster { margin: 0; width: 100%; box-shadow: none; }
+  .img-ph { break-inside: avoid; }
 }

@@ -17,6 +17,8 @@ const PRECACHE_URLS = [
   '/colleghi/malattia.html',
   '/colleghi/protocollo-certificati-inps.html',
   '/',
+  '/international/index.html',
+  '/international/',
   '/privacy.html',
   '/privati/certificato-invalidita-civile.html',
   '/privati/faq-riforma.html',
