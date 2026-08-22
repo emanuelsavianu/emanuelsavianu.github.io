@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+
+    <title>English-Speaking GP in Arezzo | Dr. Emanuel Savianu</title>
+    <meta name="description" content="Private primary care in English for international residents and visitors in the Province of Arezzo. Continuity of care with the same physician.">
+    <meta name="author" content="Dott. Emanuel Savianu">
+
+    <meta name="geo.region" content="IT-AR" />
+    <meta name="geo.placename" content="Arezzo" />
+    <meta name="geo.position" content="43.4632;11.8796" />
+    <meta name="ICBM" content="43.4632, 11.8796" />
+
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://savianu.it/international/">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()">
+
+    <meta name="theme-color" content="#1a2f4c">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="../manifest.json">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://savianu.it/international/">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:site_name" content="Studio Medico Ippocrate">
+    <meta property="og:title" content="English-Speaking GP in Arezzo | Dr. Emanuel Savianu">
+    <meta property="og:description" content="Private primary care in English for international residents and visitors in the Province of Arezzo. Continuity of care with the same physician.">
+    <meta property="og:image" content="https://savianu.it/assets/bronzelogo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="English-Speaking GP in Arezzo | Dr. Emanuel Savianu">
+    <meta name="twitter:description" content="Private primary care in English for international residents and visitors in the Province of Arezzo. Continuity of care with the same physician.">
+    <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/solid.min.css">
+    <link rel="stylesheet" href="../styles.css?v=43">
+
+    <!-- JSON-LD: Physician (entity clarity for AI retrieval / Knowledge Graph) + BreadcrumbList -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "Physician",
+        "name": "Dott. Emanuel Savianu",
+        "image": "https://savianu.it/assets/bronzelogo.png",
+        "url": "https://savianu.it/international/",
+        "telephone": "+390575910904",
+        "email": "private@savianu.it",
+        "sameAs": ["https://tinyurl.com/Savianu"],
+        "description": "General practitioner (Medico di Medicina Generale) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents and visitors. Consultations are also available in Italian and Romanian.",
+        "medicalSpecialty": "GeneralPractice",
+        "knowsLanguage": ["en", "it", "ro"],
+        "availableService": {
+          "@type": "MedicalProcedure",
+          "name": "Private primary care consultation"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Piazza Saione 3",
+          "addressLocality": "Arezzo",
+          "addressRegion": "AR",
+          "postalCode": "52100",
+          "addressCountry": "IT"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.4632,
+          "longitude": 11.8796
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:30",
+            "closes": "12:30"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "16:00",
+            "closes": "19:00"
+          }
+        ],
+        "availableLanguage": [
+          { "@type": "Language", "name": "English" },
+          { "@type": "Language", "name": "Italian" },
+          { "@type": "Language", "name": "Romanian" }
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Arezzo" },
+          { "@type": "City", "name": "Cortona" },
+          { "@type": "City", "name": "Castiglion Fiorentino" },
+          { "@type": "City", "name": "Sansepolcro" },
+          { "@type": "City", "name": "Bibbiena" },
+          { "@type": "AdministrativeArea", "name": "Provincia di Arezzo" }
+        ]
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://savianu.it/"},
+          {"@type": "ListItem", "position": 2, "name": "International Patients", "item": "https://savianu.it/international/"}
+        ]
+      }
+    ]
+    </script>
+
+    <!-- Page-local styles (design tokens only — see DESIGN.md; no new global CSS) -->
+    <style>
+        .intl-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+        .intl-card {
+            background: var(--color-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+        .intl-card .triage-icon { font-size: 1.5rem; color: var(--accent); display: block; margin-bottom: 12px; }
+        .intl-card h3 { font-family: var(--font-serif); font-size: 1.25rem; color: var(--color-text); margin-bottom: 8px; }
+        .intl-card p { font-size: 0.95rem; color: var(--text-medium); line-height: 1.65; margin: 0; }
+        .intl-steps { margin: 0; padding-left: 22px; color: var(--text-medium); line-height: 1.8; }
+        .intl-steps li { margin-bottom: 10px; }
+        .intl-steps strong { color: var(--color-text); }
+        .intl-info-list { list-style: none; margin: 0; padding: 0; }
+        .intl-info-list li {
+            display: flex; gap: 12px; align-items: flex-start;
+            padding: 12px 0; border-bottom: 1px solid var(--border-color);
+            font-size: 0.95rem; color: var(--text-medium); line-height: 1.6;
+        }
+        .intl-info-list li:last-child { border-bottom: none; }
+        .intl-info-list i { color: var(--accent); margin-top: 3px; width: 18px; text-align: center; flex-shrink: 0; }
+        .intl-info-list strong { color: var(--color-text); font-weight: 700; }
+        .intl-btn {
+            display: inline-block; padding: 12px 24px;
+            background: transparent; color: var(--accent-text);
+            border: 1px solid var(--accent); border-radius: 8px;
+            font-family: var(--font-sans); font-weight: 600; font-size: 0.95rem;
+            cursor: pointer; text-decoration: none;
+            transition: background 200ms ease, color 200ms ease;
+        }
+        .intl-btn:hover { background: rgba(194, 155, 87, 0.08); text-decoration: none; }
+        .intl-field { margin-bottom: 18px; }
+        .intl-field label { display: block; font-weight: 600; font-size: 0.9rem; color: var(--color-text); margin-bottom: 6px; }
+        .intl-field input, .intl-field select, .intl-field textarea {
+            width: 100%; padding: 10px 12px;
+            background: var(--color-surface); color: var(--color-text);
+            border: 1px solid var(--border-color); border-radius: 8px;
+            font-family: var(--font-sans); font-size: 0.95rem;
+        }
+        .intl-field textarea { min-height: 96px; resize: vertical; }
+        .intl-field input:focus, .intl-field select:focus, .intl-field textarea:focus {
+            outline: 2px solid var(--accent); outline-offset: 1px;
+        }
+        .intl-hint { font-size: 0.8rem; color: var(--text-medium); margin-top: 4px; }
+        .intl-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; color: var(--text-medium); line-height: 1.55; margin: 18px 0; }
+        .intl-consent input { margin-top: 3px; flex-shrink: 0; }
+        .intl-consent a { color: var(--accent-text); font-weight: 600; }
+        .intl-divider { border-top: 1px solid var(--border-color); margin: 28px 0; }
+        .intl-note {
+            background: var(--neutral-bg-alt, var(--color-bg-alt));
+            border-left: 4px solid var(--accent);
+            border-radius: 8px; padding: 16px 20px;
+            font-size: 0.92rem; color: var(--text-medium); line-height: 1.65;
+        }
+        @media (max-width: 640px) {
+            .intl-grid { grid-template-columns: 1fr; }
+        }
+        /* This page has no <aside>: keep the container single-column and centered
+           (overrides styles.css @media min-900 2fr/1fr — same specificity, later in cascade) */
+        @media (min-width: 900px) { .container { grid-template-columns: 1fr; max-width: 900px; } }
+    </style>
+</head>
+<body>
+
+<site-nav data-section="privati">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p>Piazza Saione 3, Arezzo · <a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
+    </div>
+</site-nav>
+
+<div class="container">
+    <main role="main" id="main-content">
+
+        <!-- Hero -->
+        <section class="page-hero" aria-labelledby="intl-hero-heading">
+            <p class="hero-eyebrow">
+                <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
+            </p>
+            <h1 class="hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">Continuity of Care for the International Community in Arezzo</h1>
+            <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — with the same physician, visit after visit.</p>
+        </section>
+
+        <!-- Intro -->
+        <section class="card" aria-labelledby="intl-intro-heading">
+            <h2 id="intl-intro-heading" class="sr-only" data-i18n="intl_intro_heading">About these consultations</h2>
+            <p style="line-height: 1.75; color: var(--text-medium);" data-i18n="intl_intro_1">
+                Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.
+            </p>
+            <div class="intl-divider"></div>
+            <p style="line-height: 1.75; color: var(--text-medium); margin: 0;" data-i18n="intl_intro_2">
+                Dr. Emanuel Savianu is a general practitioner (Medico di Medicina Generale) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents and visitors. Consultations are also available in Italian and Romanian.
+            </p>
+        </section>
+
+        <!-- Pillars -->
+        <section class="card" aria-labelledby="intl-pillars-heading">
+            <div class="card-header">
+                <i class="fas fa-circle-info" aria-hidden="true"></i>
+                <h2 id="intl-pillars-heading" data-i18n="intl_pillars_title">How the practice works for international patients</h2>
+            </div>
+            <div class="intl-grid">
+                <div class="intl-card">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-user-doctor"></i></span>
+                    <h3 data-i18n="intl_pillar1_t">Medical continuity</h3>
+                    <p data-i18n="intl_pillar1_d">One physician, one clinical record, across every visit — including coordination with specialists and, where relevant, with your doctor at home.</p>
+                </div>
+                <div class="intl-card">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-comments"></i></span>
+                    <h3 data-i18n="intl_pillar2_t">English-language consultations</h3>
+                    <p data-i18n="intl_pillar2_d">Direct clinical conversation in English. Italian and Romanian are equally available.</p>
+                </div>
+                <div class="intl-card">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-compass"></i></span>
+                    <h3 data-i18n="intl_pillar3_t">Navigating Italian healthcare</h3>
+                    <p data-i18n="intl_pillar3_d">Clear guidance on how the SSN works, referrals (impegnative), specialist access, and when a private consultation makes sense.</p>
+                </div>
+                <div class="intl-card">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-house-medical"></i></span>
+                    <h3 data-i18n="intl_pillar4_t">Flexible access</h3>
+                    <p data-i18n="intl_pillar4_d">Telemedicine follow-ups when appropriate, and home visits across the Province where clinically indicated.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How it works -->
+        <section class="card" aria-labelledby="intl-steps-heading">
+            <div class="card-header">
+                <i class="fas fa-list-ol" aria-hidden="true"></i>
+                <h2 id="intl-steps-heading" data-i18n="intl_steps_title">What to expect</h2>
+            </div>
+            <ol class="intl-steps">
+                <li data-i18n="intl_step1"><strong>Inquiry.</strong> Send the form below, an email, or a phone message. You will receive a personal reply with availability, fee information, and next steps.</li>
+                <li data-i18n="intl_step2"><strong>Appointment.</strong> We confirm the date and format together — in your preferred language — and arrange anything needed to prepare.</li>
+                <li data-i18n="intl_step3"><strong>Consultation.</strong> At the studio (Piazza Saione 3, Arezzo), by telemedicine, or at home where clinically indicated. Follow-up and documentation are handled directly with you.</li>
+            </ol>
+        </section>
+
+        <!-- Practical information -->
+        <section class="card" aria-labelledby="intl-info-heading">
+            <div class="card-header">
+                <i class="fas fa-circle-question" aria-hidden="true"></i>
+                <h2 id="intl-info-heading" data-i18n="intl_info_title">Practical information</h2>
+            </div>
+            <ul class="intl-info-list">
+                <li>
+                    <i class="fas fa-location-dot" aria-hidden="true"></i>
+                    <span><strong data-i18n="intl_info_address_l">Studio</strong><br>Studio Medico Ippocrate · Piazza Saione 3, 52100 Arezzo (IT)</span>
+                </li>
+                <li>
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span><strong data-i18n="intl_info_hours_l">Opening hours</strong><br><span data-i18n="intl_info_hours_v">Monday to Friday, 09:30–12:30 and 16:00–19:00. Closed Saturday and Sunday. Visits by appointment.</span></span>
+                </li>
+                <li>
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <span><strong data-i18n="intl_info_phone_l">Phone</strong><br><a href="tel:+390575910904" style="color: inherit;">Segreteria: 0575 910 904</a></span>
+                </li>
+                <li>
+                    <i class="fas fa-language" aria-hidden="true"></i>
+                    <span><strong data-i18n="intl_info_langs_l">Languages</strong><br><span data-i18n="intl_info_langs_v">English · Italiano · Română</span></span>
+                </li>
+            </ul>
+            <div class="intl-divider"></div>
+            <div class="intl-note" data-i18n="intl_ssn_note">
+                International residents in Italy are not automatically enrolled in the national health service (SSN). A private consultation is one option for care while residency, SSN registration, or a short-term stay is being sorted out — and the practice can explain what SSN registration would involve.
+            </div>
+        </section>
+
+        <!-- Inquiry form -->
+        <section class="card" aria-labelledby="intl-form-heading">
+            <div class="card-header">
+                <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
+                <h2 id="intl-form-heading" data-i18n="intl_form_title">Request a consultation</h2>
+            </div>
+            <p style="font-size: 0.92rem; color: var(--text-medium); line-height: 1.65;" data-i18n="intl_form_intro">
+                This form collects administrative details only — please do not include medical information here. After we reply, we will arrange a secure way to collect your history. Fields marked * are required.
+            </p>
+            <form id="intl-inquiry-form" aria-label="International patient inquiry" novalidate>
+                <div class="intl-field">
+                    <label for="intl-name" data-i18n="intl_f_name">Full name *</label>
+                    <input type="text" id="intl-name" name="name" autocomplete="name" required>
+                </div>
+                <div class="intl-field">
+                    <label for="intl-email" data-i18n="intl_f_email">Email *</label>
+                    <input type="email" id="intl-email" name="email" autocomplete="email" required>
+                </div>
+                <div class="intl-field">
+                    <label for="intl-phone" data-i18n="intl_f_phone">Phone (optional)</label>
+                    <input type="tel" id="intl-phone" name="phone" autocomplete="tel">
+                </div>
+                <div class="intl-field">
+                    <label for="intl-lang" data-i18n="intl_f_lang">Preferred language *</label>
+                    <select id="intl-lang" name="lang" required>
+                        <option value="en" data-i18n="intl_f_lang_en">English</option>
+                        <option value="it" data-i18n="intl_f_lang_it">Italiano</option>
+                        <option value="ro" data-i18n="intl_f_lang_ro">Română</option>
+                    </select>
+                </div>
+                <div class="intl-field">
+                    <label for="intl-status" data-i18n="intl_f_status">You are a…</label>
+                    <select id="intl-status" name="status">
+                        <option value="resident" data-i18n="intl_f_status_resident">Resident</option>
+                        <option value="second-home" data-i18n="intl_f_status_secondhome">Second-home owner</option>
+                        <option value="visitor" data-i18n="intl_f_status_visitor">Visitor</option>
+                        <option value="nomad" data-i18n="intl_f_status_nomad">Remote worker / digital nomad</option>
+                    </select>
+                </div>
+                <div class="intl-field">
+                    <label for="intl-reason" data-i18n="intl_f_reason">Reason for inquiry *</label>
+                    <select id="intl-reason" name="reason" required>
+                        <option value="new-patient" data-i18n="intl_f_reason_new">New patient consultation</option>
+                        <option value="documentation" data-i18n="intl_f_reason_doc">Medical documentation or certificate</option>
+                        <option value="coordination" data-i18n="intl_f_reason_coord">Care coordination</option>
+                        <option value="home-visit" data-i18n="intl_f_reason_home">Home visit request</option>
+                        <option value="other" data-i18n="intl_f_reason_other">Other</option>
+                    </select>
+                </div>
+                <div class="intl-field">
+                    <label for="intl-note" data-i18n="intl_f_note">Optional note</label>
+                    <textarea id="intl-note" name="note" data-i18n-placeholder="intl_f_note_ph" placeholder="Optional — please don't include medical details here; we'll collect your history securely after we're in touch."></textarea>
+                </div>
+                <label class="intl-consent">
+                    <input type="checkbox" required>
+                    <span data-i18n="intl_f_consent">I have read and accept the <a href="../privacy.html">privacy policy</a>.</span>
+                </label>
+                <button type="submit" class="intl-btn" data-i18n="intl_f_submit">Inquire About Private Primary Care</button>
+                <p class="intl-hint" style="margin-top: 14px;" data-i18n="intl_f_alt">For information about fees and availability, please write to <span class="js-email"></span>.</p>
+                <p class="intl-hint" id="intl-form-done" hidden data-i18n="intl_f_done">Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.</p>
+            </form>
+        </section>
+
+        <!-- Emergency notice (calm, factual — mirrors site-wide pattern) -->
+        <div class="urgency-wrapper">
+            <aside class="alert-emergency" role="note">
+                <i class="fas fa-ambulance" aria-hidden="true"></i>
+                <span data-i18n="intl_emergency">For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.</span>
+            </aside>
+        </div>
+
+    </main>
+</div>
+
+<site-footer data-section="privati">
+    <footer role="contentinfo">
+        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+    </footer>
+</site-footer>
+
+<script>
+// EN-default for this page: fresh visitors (no saved language choice) get the
+// English base document; an explicit prior choice on any page stays respected.
+(function () {
+    try {
+        if (!localStorage.getItem('preferredLanguage')) {
+            localStorage.setItem('preferredLanguage', 'en');
+        }
+    } catch (e) {}
+})();
+</script>
+
+<script type="module" src="../app.js?v=32"></script>
+
+<script>
+(function () {
+    // Email injected via JS: Cloudflare Email Obfuscation rewrites plaintext
+    // addresses in served HTML — JS-set textContent is never rewritten.
+    var ADDR = 'private' + '@' + 'savianu.it';
+    document.querySelectorAll('.js-email').forEach(function (el) { el.textContent = ADDR; });
+
+    var form = document.getElementById('intl-inquiry-form');
+    if (!form) return;
+
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!form.reportValidity()) return;
+
+        var f = new FormData(form);
+        var reasonSel = document.getElementById('intl-reason');
+        var statusSel = document.getElementById('intl-status');
+        var langSel = document.getElementById('intl-lang');
+
+        var subject = '[International inquiry] ' + (reasonSel.options[reasonSel.selectedIndex] || {}).text || 'Inquiry';
+        var lines = [
+            'International patient inquiry — savianu.it/international/',
+            '',
+            'Name: ' + (f.get('name') || ''),
+            'Email: ' + (f.get('email') || ''),
+            'Phone: ' + (f.get('phone') || '(not provided)'),
+            'Preferred language: ' + (langSel.options[langSel.selectedIndex] || {}).text,
+            'Status: ' + ((statusSel.options[statusSel.selectedIndex] || {}).text || '(not specified)'),
+            'Reason: ' + (reasonSel.options[reasonSel.selectedIndex] || {}).text,
+            'Note: ' + (f.get('note') || '(none)'),
+            '',
+            'Privacy policy accepted: yes',
+            '(Administrative details only — medical history to be collected through a secure channel.)'
+        ];
+
+        var url = 'mailto:' + ADDR +
+            '?subject=' + encodeURIComponent(subject) +
+            '&body=' + encodeURIComponent(lines.join('\n'));
+        window.location.href = url;
+
+        var done = document.getElementById('intl-form-done');
+        if (done) done.hidden = false;
+    });
+})();
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

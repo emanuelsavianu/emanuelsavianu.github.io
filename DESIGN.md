@@ -77,6 +77,7 @@ section_accents:
   ssn:      "#1A2F4C"
   privati:  "#C29B57"
   colleghi: "#2E7D6B"
+  international: "#285078"   # primary-light — reuses existing token, no new hex
 ```
 
 ## Component rules
