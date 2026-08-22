@@ -520,6 +520,8 @@ export const translations = {
 
         // International patients (/international/)
         footer_international: 'Pazienti Internazionali',
+        triage_intl_title: 'Pazienti Internazionali',
+        triage_intl_desc: 'Consulenze di famiglia e medicina generale in inglese, italiano e romeno — per residenti internazionali e visitatori della Provincia di Arezzo.',
         intl_hero_title: 'Continuità di cura per la comunità internazionale ad Arezzo',
         intl_hero_sub: 'Consulenze di medicina generale privata in lingua inglese, per residenti e visitatori della Provincia di Arezzo — sempre con lo stesso medico.',
         intl_intro_heading: 'Informazioni sulle consulenze',
@@ -841,16 +843,18 @@ export const translations = {
 
         // International patients (/international/)
         footer_international: 'International Patients',
+        triage_intl_title: 'International Patients',
+        triage_intl_desc: 'Family doctor & GP consultations in English, Italian and Romanian — for international residents and visitors across the Province of Arezzo.',
         intl_hero_title: 'Continuity of Care for the International Community in Arezzo',
         intl_hero_sub: 'Private primary care consultations in English, for residents and visitors across the Province of Arezzo — with the same physician, visit after visit.',
         intl_intro_heading: 'About these consultations',
         intl_intro_1: 'Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.',
-        intl_intro_2: 'Dr. Emanuel Savianu is a general practitioner (Medico di Medicina Generale) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents and visitors. Consultations are also available in Italian and Romanian.',
+        intl_intro_2: 'Dr. Emanuel Savianu is a family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian and Romanian.',
         intl_pillars_title: 'How the practice works for international patients',
         intl_pillar1_t: 'Medical continuity',
         intl_pillar1_d: 'One physician, one clinical record, across every visit — including coordination with specialists and, where relevant, with your doctor at home.',
         intl_pillar2_t: 'English-language consultations',
-        intl_pillar2_d: 'Direct clinical conversation in English. Italian and Romanian are equally available.',
+        intl_pillar2_d: 'Direct clinical conversation in English — whether you need a family doctor, a GP, or ongoing primary care. Italian and Romanian are equally available.',
         intl_pillar3_t: 'Navigating Italian healthcare',
         intl_pillar3_d: 'Clear guidance on how the SSN works, referrals (impegnative), specialist access, and when a private consultation makes sense.',
         intl_pillar4_t: 'Flexible access',
@@ -916,6 +920,12 @@ export function setLanguage(lang) {
         const key = el.getAttribute('data-i18n-aria-label');
         if (translations[lang]?.[key]) el.setAttribute('aria-label', translations[lang][key]);
     });
+    // Tier-2 international card: visible only for English-language sessions
+    document.querySelectorAll('.triage-card--international').forEach(el => {
+        el.classList.toggle('is-visible', lang === 'en');
+    });
+    const triageGrid = document.querySelector('.triage-grid');
+    if (triageGrid) triageGrid.classList.toggle('has-international', lang === 'en');
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
     document.dispatchEvent(new CustomEvent('site:i18n', { detail: { lang: lang } }));
 }
