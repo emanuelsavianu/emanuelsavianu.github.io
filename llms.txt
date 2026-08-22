@@ -27,6 +27,11 @@
 - [Certificato di invalidità civile](/privati/certificato-invalidita-civile.html): Documenti, nuova procedura telematica (D.Lgs. 62/2024) e prenotazione visita.
 - [FAQ riforma invalidità 2026](/privati/faq-riforma.html): Guida alla riforma dell'invalidità civile: nuovo certificato medico telematico, domanda INPS, indennità e Legge 104.
 
+## Pazienti internazionali — International patients
+
+- [Visite private per pazienti internazionali](/international/): Consulenze private di medicina generale in inglese (anche italiano e romeno) per residenti, proprietari di seconde case e visitatori della Provincia di Arezzo. Continuità assistenziale, telemedicina, visite domiciliari dove indicato. / Private primary care consultations in English (family doctor / GP services) for residents, second-home owners, and visitors across the Province of Arezzo. Continuity of care, telemedicine follow-ups, home visits where appropriate.
+- [Richiedi una consulenza](/international/#intl-form-heading): modulo di contatto amministrativo per pazienti internazionali (nessuna informazione clinica tramite il modulo). / Administrative inquiry form for international patients (no medical details via the form).
+
 ## Per i colleghi MMG
 
 - [Area colleghi](/colleghi/): Strumenti, protocolli e guide professionali per Medici di Medicina Generale.

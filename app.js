@@ -176,6 +176,7 @@ class SiteFooter extends HTMLElement {
             ' <span aria-hidden="true">·</span> ' +
             footerLink(prefix + 'ssn/faq.html', 'footer_faq', isPatient, 'FAQ') +
             ' <span aria-hidden="true">·</span> ' +
+            (isPatient ? footerLink(prefix + 'international/index.html', 'footer_international', isPatient, 'International Patients') + ' <span aria-hidden="true">·</span> ' : '') +
             footerLink(prefix + 'privacy.html', 'link_privacy', isPatient, 'Privacy Policy') +
           '</nav>' +
         '</div>' +
@@ -447,6 +448,66 @@ export const translations = {
         footer_home: 'Home',
         footer_faq: 'Domande Frequenti',
 
+        // Footer
+        footer_malattia_link: 'Certificato di malattia: chi deve farlo?',
+
+        // International patients (/international/)
+        footer_international: 'Pazienti Internazionali',
+        triage_intl_title: 'Pazienti Internazionali',
+        triage_intl_desc: 'Consulenze di famiglia e medicina generale in inglese, italiano e romeno — per residenti internazionali e visitatori della Provincia di Arezzo.',
+        intl_hero_title: 'Continuità di cura per la comunità internazionale ad Arezzo',
+        intl_hero_sub: 'Consulenze di medicina generale privata in lingua inglese, per residenti e visitatori della Provincia di Arezzo — sempre con lo stesso medico.',
+        intl_intro_heading: 'Informazioni sulle consulenze',
+        intl_intro_1: "Muoversi tra sistemi sanitari diversi può disorientare, soprattutto quando la lingua aggiunge un ulteriore livello di mediazione a ogni conversazione medica. Le consulenze si svolgono direttamente in inglese — senza interprete, senza perdita di sfumature — per residenti internazionali, proprietari di seconde case e visitatori dell'area aretina.",
+        intl_intro_2: 'Il Dott. Emanuel Savianu è un medico di medicina generale con studio ad Arezzo, in Toscana: offre consulenze private di medicina generale in lingua inglese rivolte a residenti internazionali e visitatori. Le consulenze sono disponibili anche in italiano e in romeno.',
+        intl_pillars_title: 'Come funziona lo studio per i pazienti internazionali',
+        intl_pillar1_t: 'Continuità medica',
+        intl_pillar1_d: "Un solo medico, un solo fascicolo clinico, ad ogni visita — incluso il coordinamento con gli specialisti e, dove rilevante, con il medico del paese d'origine.",
+        intl_pillar2_t: 'Consulenze in lingua inglese',
+        intl_pillar2_d: 'Colloquio clinico diretto in inglese. Italiano e romeno sono ugualmente disponibili.',
+        intl_pillar3_t: 'Orientamento nel sistema sanitario italiano',
+        intl_pillar3_d: "Indicazioni chiare su come funziona il SSN, le impegnative, l'accesso agli specialisti e quando è utile una visita privata.",
+        intl_pillar4_t: 'Accesso flessibile',
+        intl_pillar4_d: 'Controlli in telemedicina quando appropriato e visite domiciliari nella Provincia dove clinicamente indicate.',
+        intl_steps_title: 'Che cosa aspettarsi',
+        intl_step1: "<strong>Richiesta.</strong> Compili il modulo qui sotto, scriva un'email o lasci un messaggio telefonico: riceverà una risposta personale con disponibilità, informazioni sui costi e prossimi passi.",
+        intl_step2: '<strong>Appuntamento.</strong> Concordiamo insieme data e modalità — nella lingua che preferisce — e organizziamo tutto ciò che serve per prepararsi.',
+        intl_step3: '<strong>Visita.</strong> In studio (Piazza Saione 3, Arezzo), in telemedicina o a domicilio dove clinicamente indicato. Follow-up e documentazione sono gestiti direttamente con lei.',
+        intl_info_title: 'Informazioni pratiche',
+        intl_info_address_l: 'Studio',
+        intl_info_hours_l: 'Orari',
+        intl_info_hours_v: 'Lunedì–venerdì, 09:30–12:30 e 16:00–19:00. Sabato e domenica chiuso. Visite solo su appuntamento.',
+        intl_info_phone_l: 'Telefono',
+        intl_info_langs_l: 'Lingue',
+        intl_info_langs_v: 'English · Italiano · Română',
+        intl_ssn_note: "I residenti internazionali in Italia non sono automaticamente iscritti al Servizio Sanitario Nazionale (SSN). La visita privata è una delle opzioni di cura mentre si definiscono residenza, iscrizione al SSN o un soggiorno di breve durata — lo studio può inoltre spiegare cosa comporta l'iscrizione al SSN.",
+        intl_form_title: 'Richiedi una consulenza',
+        intl_form_intro: 'Questo modulo raccoglie soltanto dati amministrativi: non inserisca informazioni mediche. Dopo la nostra risposta organizzeremo un canale sicuro per raccogliere la sua storia clinica. I campi contrassegnati con * sono obbligatori.',
+        intl_f_name: 'Nome completo *',
+        intl_f_email: 'Email *',
+        intl_f_phone: 'Telefono (facoltativo)',
+        intl_f_lang: 'Lingua preferita *',
+        intl_f_lang_en: 'English',
+        intl_f_lang_it: 'Italiano',
+        intl_f_lang_ro: 'Română',
+        intl_f_status: 'Lei è…',
+        intl_f_status_resident: 'Residente',
+        intl_f_status_secondhome: 'Proprietario/a di seconda casa',
+        intl_f_status_visitor: 'Visitatore/trice',
+        intl_f_status_nomad: 'Lavoratore/trice da remoto / digital nomad',
+        intl_f_reason: 'Motivo della richiesta *',
+        intl_f_reason_new: 'Prima consulenza da nuovo paziente',
+        intl_f_reason_doc: 'Documentazione o certificato medico',
+        intl_f_reason_coord: 'Coordinamento delle cure',
+        intl_f_reason_home: 'Richiesta di visita domiciliare',
+        intl_f_reason_other: 'Altro',
+        intl_f_note: 'Nota (facoltativa)',
+        intl_f_note_ph: 'Facoltativa — non inserisca dettagli medici qui; raccoglieremo la sua storia clinica in modo sicuro dopo il primo contatto.',
+        intl_f_consent: 'Ho letto e accetto l\u2019<a href="../privacy.html">informativa privacy</a>.',
+        intl_f_submit: 'Richiedi informazioni sulla visita privata',
+        intl_f_alt: 'Per informazioni su costi e disponibilità scriva a <span class="js-email"></span>.',
+        intl_f_done: 'Grazie — il suo programma di posta dovrebbe aprirsi con la richiesta precompilata. Se non succede, ci scriva direttamente.',
+        intl_emergency: 'Per le emergenze mediche chiami sempre il 112. Fuori orario, per cure non urgenti, chiami il 116 117.'
     },
     en: {
         // Header
@@ -650,6 +711,66 @@ export const translations = {
         footer_home: 'Home',
         footer_faq: 'Frequently Asked Questions',
 
+        // Footer
+        footer_malattia_link: 'Sick leave certificate: who should issue it?',
+
+        // International patients (/international/)
+        footer_international: 'International Patients',
+        triage_intl_title: 'International Patients',
+        triage_intl_desc: 'Family doctor & GP consultations in English, Italian and Romanian — for international residents and visitors across the Province of Arezzo.',
+        intl_hero_title: 'Continuity of Care for the International Community in Arezzo',
+        intl_hero_sub: 'Private primary care consultations in English, for residents and visitors across the Province of Arezzo — with the same physician, visit after visit.',
+        intl_intro_heading: 'About these consultations',
+        intl_intro_1: 'Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.',
+        intl_intro_2: 'Dr. Emanuel Savianu is a family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian and Romanian.',
+        intl_pillars_title: 'How the practice works for international patients',
+        intl_pillar1_t: 'Medical continuity',
+        intl_pillar1_d: 'One physician, one clinical record, across every visit — including coordination with specialists and, where relevant, with your doctor at home.',
+        intl_pillar2_t: 'English-language consultations',
+        intl_pillar2_d: 'Direct clinical conversation in English — whether you need a family doctor, a GP, or ongoing primary care. Italian and Romanian are equally available.',
+        intl_pillar3_t: 'Navigating Italian healthcare',
+        intl_pillar3_d: 'Clear guidance on how the SSN works, referrals (impegnative), specialist access, and when a private consultation makes sense.',
+        intl_pillar4_t: 'Flexible access',
+        intl_pillar4_d: 'Telemedicine follow-ups when appropriate, and home visits across the Province where clinically indicated.',
+        intl_steps_title: 'What to expect',
+        intl_step1: '<strong>Inquiry.</strong> Send the form below, an email, or a phone message. You will receive a personal reply with availability, fee information, and next steps.',
+        intl_step2: '<strong>Appointment.</strong> We confirm the date and format together — in your preferred language — and arrange anything needed to prepare.',
+        intl_step3: '<strong>Consultation.</strong> At the studio (Piazza Saione 3, Arezzo), by telemedicine, or at home where clinically indicated. Follow-up and documentation are handled directly with you.',
+        intl_info_title: 'Practical information',
+        intl_info_address_l: 'Studio',
+        intl_info_hours_l: 'Opening hours',
+        intl_info_hours_v: 'Monday to Friday, 09:30–12:30 and 16:00–19:00. Closed Saturday and Sunday. Visits by appointment.',
+        intl_info_phone_l: 'Phone',
+        intl_info_langs_l: 'Languages',
+        intl_info_langs_v: 'English · Italiano · Română',
+        intl_ssn_note: 'International residents in Italy are not automatically enrolled in the national health service (SSN). A private consultation is one option for care while residency, SSN registration, or a short-term stay is being sorted out — and the practice can explain what SSN registration would involve.',
+        intl_form_title: 'Request a consultation',
+        intl_form_intro: 'This form collects administrative details only — please do not include medical information here. After we reply, we will arrange a secure way to collect your history. Fields marked * are required.',
+        intl_f_name: 'Full name *',
+        intl_f_email: 'Email *',
+        intl_f_phone: 'Phone (optional)',
+        intl_f_lang: 'Preferred language *',
+        intl_f_lang_en: 'English',
+        intl_f_lang_it: 'Italiano',
+        intl_f_lang_ro: 'România',
+        intl_f_status: 'You are a…',
+        intl_f_status_resident: 'Resident',
+        intl_f_status_secondhome: 'Second-home owner',
+        intl_f_status_visitor: 'Visitor',
+        intl_f_status_nomad: 'Remote worker / digital nomad',
+        intl_f_reason: 'Reason for inquiry *',
+        intl_f_reason_new: 'New patient consultation',
+        intl_f_reason_doc: 'Medical documentation or certificate',
+        intl_f_reason_coord: 'Care coordination',
+        intl_f_reason_home: 'Home visit request',
+        intl_f_reason_other: 'Other',
+        intl_f_note: 'Optional note',
+        intl_f_note_ph: "Optional — please don't include medical details here; we'll collect your history securely after we're in touch.",
+        intl_f_consent: 'I have read and accept the <a href="../privacy.html">privacy policy</a>.',
+        intl_f_submit: 'Inquire About Primary Care',
+        intl_f_alt: 'For information about fees and availability, please write to <span class="js-email"></span>.',
+        intl_f_done: 'Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.',
+        intl_emergency: 'For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.'
     }
 };
 
@@ -672,7 +793,14 @@ export function setLanguage(lang) {
         const key = el.getAttribute('data-i18n-aria-label');
         if (translations[lang]?.[key]) el.setAttribute('aria-label', translations[lang][key]);
     });
+    // Tier-2 international card: visible only for English-language sessions
+    document.querySelectorAll('.triage-card--international').forEach(el => {
+        el.classList.toggle('is-visible', lang === 'en');
+    });
+    const triageGrid = document.querySelector('.triage-grid');
+    if (triageGrid) triageGrid.classList.toggle('has-international', lang === 'en');
     try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('site:i18n', { detail: { lang: lang } }));
 }
 
 try {
