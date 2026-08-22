@@ -29,7 +29,7 @@
 
 ## Pazienti internazionali — International patients
 
-- [Visite private per pazienti internazionali](/international/): Consulenze private di medicina generale in inglese (anche italiano e romeno) per residenti, proprietari di seconde case e visitatori della Provincia di Arezzo. Continuità assistenziale, telemedicina, visite domiciliari dove indicato. / Private primary care consultations in English (family doctor / GP services) for residents, second-home owners, and visitors across the Province of Arezzo. Continuity of care, telemedicine follow-ups, home visits where appropriate.
+- [Visite private per pazienti internazionali](/international/): Consulenze private di medicina generale in inglese (anche italiano) per residenti, proprietari di seconde case e visitatori della Provincia di Arezzo. Continuità assistenziale, telemedicina, visite domiciliari dove indicato. / Private primary care consultations in English (family doctor / GP services) for residents, second-home owners, and visitors across the Province of Arezzo. Continuity of care, telemedicine follow-ups, home visits where appropriate.
 - [Richiedi una consulenza](/international/#intl-form-heading): modulo di contatto amministrativo per pazienti internazionali (nessuna informazione clinica tramite il modulo). / Administrative inquiry form for international patients (no medical details via the form).
 
 ## Per i colleghi MMG

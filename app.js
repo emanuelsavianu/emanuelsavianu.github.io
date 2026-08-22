@@ -82,7 +82,7 @@ class SiteNav extends HTMLElement {
         '<ul class="nav-menu" id="site-nav-menu">' +
           navItem(prefix || './', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
           navItem(prefix + 'ssn/index.html', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
-          navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Pazienti Privati') +
+          navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
           navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
           navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
         '</ul>' +
@@ -257,7 +257,7 @@ export const translations = {
         landing_hero_phone: "Segreteria: 0575 910 904",
         triage_ssn_title: "Pazienti",
         triage_ssn_desc: "Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.",
-        triage_privati_title: "Pazienti Privati",
+        triage_privati_title: "Consulti e certificati INPS",
         triage_privati_desc: "Consulenze private, certificati INPS, invalidità civile e Legge 104 — prenota su Google Calendar.",
         triage_colleghi_title: "Colleghi",
         triage_colleghi_desc: "Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.",
@@ -440,7 +440,7 @@ export const translations = {
         // Nav (site-nav component)
         nav_home: 'Home',
         nav_ssn: 'Pazienti',
-        nav_privati: 'Pazienti Privati',
+        nav_privati: 'Consulti e certificati INPS',
         nav_colleghi: 'Colleghi',
         nav_faq: 'FAQ',
 
@@ -454,17 +454,17 @@ export const translations = {
         // International patients (/international/)
         footer_international: 'Pazienti Internazionali',
         triage_intl_title: 'Pazienti Internazionali',
-        triage_intl_desc: 'Consulenze di famiglia e medicina generale in inglese, italiano e romeno — per residenti internazionali e visitatori della Provincia di Arezzo.',
+        triage_intl_desc: 'Consulenze di famiglia e medicina generale in inglese e italiano — per residenti internazionali e visitatori della Provincia di Arezzo.',
         intl_hero_title: 'Il suo medico di famiglia in inglese ad Arezzo',
         intl_hero_sub: 'Consulenze di medicina generale privata in lingua inglese, per residenti e visitatori della Provincia di Arezzo — Cortona, Castiglion Fiorentino, la Val di Chiana e oltre — sempre con lo stesso medico.',
         intl_intro_heading: 'Informazioni sulle consulenze',
         intl_intro_1: "Muoversi tra sistemi sanitari diversi può disorientare, soprattutto quando la lingua aggiunge un ulteriore livello di mediazione a ogni conversazione medica. Le consulenze si svolgono direttamente in inglese — senza interprete, senza perdita di sfumature — per residenti internazionali, proprietari di seconde case e visitatori dell'area aretina.",
-        intl_intro_2: 'Il Dott. Emanuel Savianu è un medico di medicina generale con studio ad Arezzo, in Toscana: offre consulenze private di medicina generale in lingua inglese rivolte a residenti internazionali e visitatori. Le consulenze sono disponibili anche in italiano e in romeno.',
+        intl_intro_2: 'Il Dott. Emanuel Savianu è un medico di medicina generale con studio ad Arezzo, in Toscana: offre consulenze private di medicina generale in lingua inglese rivolte a residenti internazionali e visitatori. Le consulenze sono disponibili anche in italiano.',
         intl_pillars_title: 'Come funziona lo studio per i pazienti internazionali',
         intl_pillar1_t: 'Continuità medica',
         intl_pillar1_d: "Un solo medico, un solo fascicolo clinico, ad ogni visita — incluso il coordinamento con gli specialisti e, dove rilevante, con il medico del paese d'origine.",
         intl_pillar2_t: 'Consulenze in lingua inglese',
-        intl_pillar2_d: 'Colloquio clinico diretto in inglese. Italiano e romeno sono ugualmente disponibili.',
+        intl_pillar2_d: 'Colloquio clinico diretto in inglese. L’italiano è ugualmente disponibile.',
         intl_pillar3_t: 'Orientamento nel sistema sanitario italiano',
         intl_pillar3_d: "Indicazioni chiare su come funziona il SSN, le impegnative, l'accesso agli specialisti e quando è utile una visita privata.",
         intl_pillar4_t: 'Accesso flessibile',
@@ -479,7 +479,7 @@ export const translations = {
         intl_info_hours_v: 'Lunedì–venerdì, 09:30–12:30 e 16:00–19:00. Sabato e domenica chiuso. Visite solo su appuntamento.',
         intl_info_phone_l: 'Telefono',
         intl_info_langs_l: 'Lingue',
-        intl_info_langs_v: 'English · Italiano · Română',
+        intl_info_langs_v: 'English · Italiano',
         intl_ssn_note: "I residenti internazionali in Italia non sono automaticamente iscritti al Servizio Sanitario Nazionale (SSN). La visita privata è una delle opzioni di cura mentre si definiscono residenza, iscrizione al SSN o un soggiorno di breve durata — lo studio può inoltre spiegare cosa comporta l'iscrizione al SSN.",
         intl_form_title: 'Richiedi una consulenza',
         intl_form_intro: 'Questo modulo raccoglie soltanto dati amministrativi: non inserisca informazioni mediche. Dopo la nostra risposta organizzeremo un canale sicuro per raccogliere la sua storia clinica. I campi contrassegnati con * sono obbligatori.',
@@ -489,7 +489,6 @@ export const translations = {
         intl_f_lang: 'Lingua preferita *',
         intl_f_lang_en: 'English',
         intl_f_lang_it: 'Italiano',
-        intl_f_lang_ro: 'Română',
         intl_f_status: 'Lei è…',
         intl_f_status_resident: 'Residente',
         intl_f_status_secondhome: 'Proprietario/a di seconda casa',
@@ -534,7 +533,7 @@ export const translations = {
         landing_hero_phone: "Reception: 0575 910 904",
         triage_ssn_title: "Patients",
         triage_ssn_desc: "Are you a patient of Dr. Savianu? Book visits on Doctolib, request prescriptions, read guides and exemptions.",
-        triage_privati_title: "Private Patients",
+        triage_privati_title: "INPS Consultations & Certificates",
         triage_privati_desc: "Private consultations, INPS certificates, civil disability and Law 104 — book on Google Calendar.",
         triage_colleghi_title: "Colleagues",
         triage_colleghi_desc: "Reserved area for professionals: tools, protocols, regulations and service applications.",
@@ -717,7 +716,7 @@ export const translations = {
         // Nav (site-nav component)
         nav_home: 'Home',
         nav_ssn: 'Patients',
-        nav_privati: 'Private Patients',
+        nav_privati: 'INPS Consultations & Certificates',
         nav_colleghi: 'Colleagues',
         nav_faq: 'FAQ',
 
@@ -731,17 +730,17 @@ export const translations = {
         // International patients (/international/)
         footer_international: 'International Patients',
         triage_intl_title: 'International Patients',
-        triage_intl_desc: 'Family doctor & GP consultations in English, Italian and Romanian — for international residents and visitors across the Province of Arezzo.',
+        triage_intl_desc: 'Family doctor & GP consultations in English and Italian — for international residents and visitors across the Province of Arezzo.',
         intl_hero_title: 'Your English-Speaking Family Doctor in Arezzo',
         intl_hero_sub: 'Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.',
         intl_intro_heading: 'About these consultations',
         intl_intro_1: 'Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.',
-        intl_intro_2: 'Dr. Emanuel Savianu is a family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian and Romanian.',
+        intl_intro_2: 'Dr. Emanuel Savianu is a family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian.',
         intl_pillars_title: 'How the practice works for international patients',
         intl_pillar1_t: 'Medical continuity',
         intl_pillar1_d: 'One physician, one clinical record, across every visit — including coordination with specialists and, where relevant, with your doctor at home.',
         intl_pillar2_t: 'English-language consultations',
-        intl_pillar2_d: 'Direct clinical conversation in English — whether you need a family doctor, a GP, or ongoing primary care. Italian and Romanian are equally available.',
+        intl_pillar2_d: 'Direct clinical conversation in English — whether you need a family doctor, a GP, or ongoing primary care. Italian is equally available.',
         intl_pillar3_t: 'Navigating Italian healthcare',
         intl_pillar3_d: 'Clear guidance on how the SSN works, referrals (impegnative), specialist access, and when a private consultation makes sense.',
         intl_pillar4_t: 'Flexible access',
@@ -756,7 +755,7 @@ export const translations = {
         intl_info_hours_v: 'Monday to Friday, 09:30–12:30 and 16:00–19:00. Closed Saturday and Sunday. Visits by appointment.',
         intl_info_phone_l: 'Phone',
         intl_info_langs_l: 'Languages',
-        intl_info_langs_v: 'English · Italiano · Română',
+        intl_info_langs_v: 'English · Italiano',
         intl_ssn_note: 'International residents in Italy are not automatically enrolled in the national health service (SSN). A private consultation is one option for care while residency, SSN registration, or a short-term stay is being sorted out — and the practice can explain what SSN registration would involve.',
         intl_form_title: 'Request a consultation',
         intl_form_intro: 'This form collects administrative details only — please do not include medical information here. After we reply, we will arrange a secure way to collect your history. Fields marked * are required.',
@@ -766,7 +765,6 @@ export const translations = {
         intl_f_lang: 'Preferred language *',
         intl_f_lang_en: 'English',
         intl_f_lang_it: 'Italiano',
-        intl_f_lang_ro: 'România',
         intl_f_status: 'You are a…',
         intl_f_status_resident: 'Resident',
         intl_f_status_secondhome: 'Second-home owner',
