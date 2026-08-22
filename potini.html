@@ -8,15 +8,15 @@
     <style>
         body { font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; max-width: 800px; margin: 40px auto; padding: 20px; background-color: #f4f7f6; color: #333; }
         .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h1 { color: #2c3e50; margin-top: 0; }
+        h1 { color: #2c3e50; margin-top: 0; text-align: center; }
         .upload-area { border: 2px dashed #3498db; padding: 40px; text-align: center; border-radius: 8px; cursor: pointer; transition: 0.3s; margin: 20px 0; }
         .upload-area:hover { background-color: #ebf5fb; }
-        button { background: #27ae60; color: white; border: none; padding: 12px 24px; border-radius: 6px; font-size: 16px; cursor: pointer; width: 100%; transition: 0.3s; }
+        button { background: #27ae60; color: white; border: none; padding: 15px 24px; border-radius: 6px; font-size: 16px; cursor: pointer; width: 100%; transition: 0.3s; font-weight: bold; }
         button:disabled { background: #bdc3c7; cursor: not-allowed; }
         button:hover:not(:disabled) { background: #2ecc71; }
-        #status { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; }
-        .success { background: #d4edda; color: #155724; display: block !important; }
-        .error { background: #f8d7da; color: #721c24; display: block !important; }
+        #status { margin-top: 20px; padding: 15px; border-radius: 6px; display: none; white-space: pre-line; }
+        .success { background: #d4edda; color: #155724; display: block !important; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; display: block !important; border: 1px solid #f5c6cb; }
         pre { background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 6px; overflow-x: auto; font-size: 12px; max-height: 300px; }
     </style>
 </head>
@@ -24,10 +24,10 @@
 
 <div class="card">
     <h1>📅 Estrattore Turni Potini</h1>
-    <p>Carica i file CSV del turnario per generare il file <code>.ics</code> da importare in Google Calendar.</p>
+    <p style="text-align: center;">Carica i file CSV per generare il file <code>.ics</code> per Google Calendar.</p>
     
     <div class="upload-area" id="drop-zone">
-        <p>Trascina qui i file CSV o clicca per selezionarli</p>
+        <p id="file-label">Trascina qui i file CSV o clicca per selezionarli</p>
         <input type="file" id="file-input" multiple accept=".csv" style="display: none;">
     </div>
 
@@ -36,7 +36,7 @@
     <div id="status"></div>
     
     <div id="output-area" style="display:none; margin-top: 20px;">
-        <h3>Anteprima Codice ICS:</h3>
+        <h3>Anteprima ICS:</h3>
         <pre id="ics-preview"></pre>
     </div>
 </div>
@@ -48,52 +48,66 @@
     const status = document.getElementById('status');
     const preview = document.getElementById('ics-preview');
     const outputArea = document.getElementById('output-area');
+    const fileLabel = document.getElementById('file-label');
 
     let allShifts = [];
 
-    // Gestione Drag & Drop
     dropZone.onclick = () => fileInput.click();
-    fileInput.onchange = () => { if(fileInput.files.length > 0) processBtn.disabled = false; };
+    fileInput.onchange = () => { 
+        if(fileInput.files.length > 0) {
+            processBtn.disabled = false;
+            fileLabel.textContent = `${fileInput.files.length} file selezionati`;
+        }
+    };
 
     processBtn.onclick = async () => {
         allShifts = [];
         const files = Array.from(fileInput.files);
         
-        for (const file of files) {
-            await parseFile(file);
-        }
+        try {
+            for (const file of files) {
+                await parseFile(file);
+            }
 
-        if (allShifts.length > 0) {
-            generateICS();
-        } else {
-            showStatus("Nessun turno trovato per 'POTINI'. Verifica il formato del file.", "error");
+            if (allShifts.length > 0) {
+                generateICS();
+            } else {
+                showStatus("Nessun turno trovato per 'POTINI'.\nAssicurati che il nome sia scritto correttamente nel CSV.", "error");
+            }
+        } catch (err) {
+            console.error(err);
+            showStatus("Errore durante l'elaborazione: " + err.message, "error");
         }
     };
 
     function parseFile(file) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             Papa.parse(file, {
                 header: false,
+                skipEmptyLines: true,
                 complete: function(results) {
                     const data = results.data;
-                    if (data.length < 2) return resolve();
+                    if (data.length < 1) return resolve();
 
-                    const dates = data[0]; // La riga 0 contiene le date
+                    // La riga 0 contiene le date (es: 01/10/2023, 02/10/2023...)
+                    const datesRow = data[0]; 
 
-                    // Cicliamo le righe saltando le intestazioni
                     for (let r = 1; r < data.length; r++) {
                         const row = data[r];
-                        const fascia = (row[0] || "Generico").trim();
+                        if (!row[0]) continue; 
+
+                        const fascia = row[0].trim();
                         const reparto = (row[1] || "Reparto").trim();
 
-                        // Cicliamo le colonne dalla 2 in poi (dove ci sono i nomi)
                         for (let c = 2; c < row.length; c++) {
                             const cellVal = String(row[c] || "").toUpperCase();
+                            
                             if (cellVal.includes("POTINI")) {
-                                let dateRaw = dates[c] ? dates[c].split(' ')[0] : null;
-                                if (dateRaw) {
+                                let rawDateStr = datesRow[c] ? datesRow[c].trim().split(' ')[0] : null;
+                                
+                                if (rawDateStr) {
                                     allShifts.push({
-                                        date: dateRaw,
+                                        dateStr: rawDateStr, // Manteniamo la stringa originale
                                         fascia: fascia,
                                         reparto: reparto,
                                         isExtra: cellVal.includes("*")
@@ -103,9 +117,31 @@
                         }
                     }
                     resolve();
-                }
+                },
+                error: reject
             });
         });
+    }
+
+    // Helper per convertire vari formati data in un oggetto Date di JS
+    function parseDateString(str) {
+        // Gestisce DD/MM/YYYY o YYYY-MM-DD
+        const parts = str.split(/[-/]/);
+        if (parts.length !== 3) return null;
+        
+        if (parts[0].length === 4) { // YYYY-MM-DD
+            return new Date(parts[0], parts[1] - 1, parts[2]);
+        } else { // DD/MM/YYYY
+            return new Date(parts[2], parts[1] - 1, parts[0]);
+        }
+    }
+
+    // Formatta data per ICS (YYYYMMDD)
+    function formatToICSDate(dateObj) {
+        const y = dateObj.getFullYear();
+        const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+        const d = String(dateObj.getDate()).padStart(2, '0');
+        return `${y}${m}${d}`;
     }
 
     function generateICS() {
@@ -113,49 +149,66 @@
             "BEGIN:VCALENDAR",
             "VERSION:2.0",
             "PRODID:-//Turni Medico//IT",
-            "CALSCALE:GREGORIAN"
+            "CALSCALE:GREGORIAN",
+            "METHOD:PUBLISH"
         ];
 
         allShifts.forEach(shift => {
-            const dateStr = shift.date.replace(/-/g, "");
+            const dateObj = parseDateString(shift.dateStr);
+            if (!dateObj || isNaN(dateObj)) return;
+
+            const dateICS = formatToICSDate(dateObj);
             let startTime = "080000";
             let endTime = "140000";
             let isAllDay = false;
+            let isNight = false;
 
             const f = shift.fascia.toLowerCase();
+            
             if (f.includes("pomeriggio") || f.includes("pom")) {
                 startTime = "140000";
                 endTime = "200000";
             } else if (f.includes("notte")) {
+                isNight = true;
                 startTime = "200000";
-                // La notte finisce il giorno dopo
-                const nextDay = new Date(shift.date);
-                nextDay.setDate(nextDay.getDate() + 1);
-                const nextDayStr = nextDay.toISOString().split('T')[0].replace(/-/g, "");
+                // Fine alle 08:00 del giorno dopo
+                const nextDay = new Date(dateObj);
+                nextDay.setDate(dateObj.getDate() + 1);
+                const nextDayICS = formatToICSDate(nextDay);
                 
-                // Costruzione evento notte speciale
                 icsContent.push("BEGIN:VEVENT");
-                icsContent.push(`DTSTART:${dateStr}T200000`);
-                icsContent.push(`DTEND:${nextDayStr}T080000`);
-                writeCommonEventParts(icsContent, shift);
-                icsContent.push("END:VEVENT");
-                return; // Salta il push standard sotto
-            } else if (!f.includes("mattina")) {
+                icsContent.push(`DTSTART:${dateICS}T200000`);
+                icsContent.push(`DTEND:${nextDayICS}T080000`);
+            } else if (f.includes("mattina") || f.includes("matt")) {
+                startTime = "080000";
+                endTime = "140000";
+            } else {
                 isAllDay = true;
             }
 
-            icsContent.push("BEGIN:VEVENT");
-            if (isAllDay) {
-                const nextDay = new Date(shift.date);
-                nextDay.setDate(nextDay.getDate() + 1);
-                const nextDayStr = nextDay.toISOString().split('T')[0].replace(/-/g, "");
-                icsContent.push(`DTSTART;VALUE=DATE:${dateStr}`);
-                icsContent.push(`DTEND;VALUE=DATE:${nextDayStr}`);
-            } else {
-                icsContent.push(`DTSTART:${dateStr}T${startTime}`);
-                icsContent.push(`DTEND:${dateStr}T${endTime}`);
+            if (!isNight) {
+                icsContent.push("BEGIN:VEVENT");
+                if (isAllDay) {
+                    const nextDay = new Date(dateObj);
+                    nextDay.setDate(dateObj.getDate() + 1);
+                    icsContent.push(`DTSTART;VALUE=DATE:${dateICS}`);
+                    icsContent.push(`DTEND;VALUE=DATE:${formatToICSDate(nextDay)}`);
+                } else {
+                    icsContent.push(`DTSTART:${dateICS}T${startTime}`);
+                    icsContent.push(`DTEND:${dateICS}T${endTime}`);
+                }
             }
-            writeCommonEventParts(icsContent, shift);
+
+            // Metadati comuni
+            const uid = Math.random().toString(36).substring(2) + Date.now();
+            const stamp = new Date().toISOString().replace(/[-:]/g, "").split('.')[0] + "Z";
+            let title = `${shift.fascia} - ${shift.reparto}`;
+            if (shift.isExtra) title = "⭐ [EXTRA] " + title;
+
+            icsContent.push(`UID:${uid}@potini.app`);
+            icsContent.push(`DTSTAMP:${stamp}`);
+            icsContent.push(`SUMMARY:${title}`);
+            icsContent.push(`DESCRIPTION:Turno: ${shift.fascia}\\nReparto: ${shift.reparto}`);
             icsContent.push("END:VEVENT");
         });
 
@@ -165,19 +218,7 @@
         preview.textContent = finalIcs;
         outputArea.style.display = "block";
         downloadFile(finalIcs);
-        showStatus(`Successo! Estratti ${allShifts.length} turni. Il download è partito.`, "success");
-    }
-
-    function writeCommonEventParts(ics, shift) {
-        const uid = Math.random().toString(36).substring(2);
-        const stamp = new Date().toISOString().replace(/[-:]/g, "").split('.')[0] + "Z";
-        let title = `${shift.fascia} - ${shift.reparto}`;
-        if (shift.isExtra) title = "⭐ [AGGIUNTIVO] " + title;
-
-        ics.push(`UID:${uid}@potini.app`);
-        ics.push(`DTSTAMP:${stamp}`);
-        ics.push(`SUMMARY:${title}`);
-        ics.push(`DESCRIPTION:Turno estratto automaticamente\\nReparto: ${shift.reparto}\\nFascia: ${shift.fascia}\\nAggiuntivo: ${shift.isExtra ? 'Sì' : 'No'}`);
+        showStatus(`Successo! Estratti ${allShifts.length} turni.\nIl file 'turni_potini.ics' è stato scaricato.`, "success");
     }
 
     function downloadFile(content) {
@@ -196,4 +237,3 @@
 
 </body>
 </html>
-
