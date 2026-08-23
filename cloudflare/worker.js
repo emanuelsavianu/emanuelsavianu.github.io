@@ -50,14 +50,13 @@ const SECURITY_HEADERS = {
   //    so these origins could be dropped only when every remaining GF page is
   //    also self-hosted.
   //  • cdnjs.cloudflare.com: RUAP/gestoreturni CSS (all.min.css) + font files + JS (jsPDF, html2canvas, xlsx)
-  //  • cdn.tailwindcss.com: Tailwind CDN used by RUAP and other tool pages
   //  • cdn.jsdelivr.net: chart.js on malattia/guida/scudo pages
   //  • unpkg.com: react/react-dom/babel on calcolatore-ferie pages
   //  • cdn.sheetjs.com: xlsx on calcolatore-ferie
   //  • calendar.google.com: private-practice booking button (script/style-src)
   'Content-Security-Policy': [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://calendar.google.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com",
+      "script-src 'self' 'unsafe-inline' https://calendar.google.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com",
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://calendar.google.com",
       "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
       "img-src 'self' data: https://savianu.it https://www.gstatic.com",
