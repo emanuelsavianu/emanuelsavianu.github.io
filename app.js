@@ -506,6 +506,12 @@ export const translations = {
         intl_f_submit: 'Richiedi informazioni sulla visita privata',
         intl_f_alt: 'Per informazioni su costi e disponibilità scriva a <span class="js-email"></span>.',
         intl_f_done: 'Grazie — il suo programma di posta dovrebbe aprirsi con la richiesta precompilata. Se non succede, ci scriva direttamente.',
+        intl_hero_cta: 'Richiedi informazioni sulla visita privata',
+        intl_f_error: 'Invio non riuscito. Riprovi o scriva direttamente a <span class="js-email"></span>.',
+        intl_f_success: 'Grazie — la sua richiesta è stata inviata. Le risponderemo entro pochi giorni lavorativi.',
+        intl_f_sending: 'Invio in corso…',
+        intl_f_invalid: 'Completare i campi obbligatori indicati.',
+        intl_info_map_aria: 'Apri Studio Medico Ippocrate, Piazza Saione 3, Arezzo in Google Maps',
         intl_emergency: 'Per le emergenze mediche chiami sempre il 112. Fuori orario, per cure non urgenti, chiami il 116 117.',
         // International FAQ (/international/)
         intl_faq_title: 'Domande frequenti',
@@ -782,6 +788,12 @@ export const translations = {
         intl_f_submit: 'Inquire About Primary Care',
         intl_f_alt: 'For information about fees and availability, please write to <span class="js-email"></span>.',
         intl_f_done: 'Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.',
+        intl_hero_cta: 'Inquire About Private Primary Care',
+        intl_f_error: 'Submission failed. Please try again, or write to us directly at <span class="js-email"></span>.',
+        intl_f_success: 'Thank you — your inquiry has been sent. We will reply within a few business days.',
+        intl_f_sending: 'Sending…',
+        intl_f_invalid: 'Please complete the highlighted required fields.',
+        intl_info_map_aria: 'Open Studio Medico Ippocrate, Piazza Saione 3, Arezzo in Google Maps',
         intl_emergency: 'For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.',
         // International FAQ (/international/)
         intl_faq_title: 'Common questions',
@@ -1191,6 +1203,23 @@ window.addEventListener('load', function() {
 // LEGACY GLOBAL EXPOSURE — inline onclick handlers & injected HTML
 // reference these globals; keep in sync with page templates.
 // =================================================================
+// Bridge for /international/ inline form script (feedback strings follow the
+// language toggle without coupling app.js internals).
+window.__INTL_I18N__ = {
+    it: {
+        intl_f_invalid: translations.it.intl_f_invalid,
+        intl_f_sending: translations.it.intl_f_sending,
+        intl_f_success: translations.it.intl_f_success,
+        intl_f_done: translations.it.intl_f_done,
+    },
+    en: {
+        intl_f_invalid: translations.en.intl_f_invalid,
+        intl_f_sending: translations.en.intl_f_sending,
+        intl_f_success: translations.en.intl_f_success,
+        intl_f_done: translations.en.intl_f_done,
+    },
+};
+
 const GLOBAL_FUNCTIONS = {
     setLanguage: setLanguage,
     toggleDarkMode: toggleDarkMode,

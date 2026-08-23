@@ -43,7 +43,12 @@ const SECURITY_HEADERS = {
   //  • 'unsafe-inline' for scripts/styles is required because the site uses
   //    inline <script> blocks and inline style attributes without a build step.
   //    Once a build step is added, replace with nonces or hashes.
-  //  • fonts.googleapis.com / gstatic: Google Fonts
+  //  • fonts.googleapis.com / gstatic: Google Fonts — STILL REQUIRED by the
+  //    self-contained pages (ssn/poster-*, bengalese/urdu, salutementale/vivisano,
+  //    colleghi/malattia+installazione, RUAP). Main-site pages now self-host
+  //    Montserrat/Cormorant Garamond via /assets/fonts/fonts.css (2026-08-22),
+  //    so these origins could be dropped only when every remaining GF page is
+  //    also self-hosted.
   //  • cdnjs.cloudflare.com: RUAP/gestoreturni CSS (all.min.css) + font files + JS (jsPDF, html2canvas, xlsx)
   //  • cdn.tailwindcss.com: Tailwind CDN used by RUAP and other tool pages
   //  • cdn.jsdelivr.net: chart.js on malattia/guida/scudo pages
@@ -92,6 +97,117 @@ const LEGACY_REDIRECTS = {
   '/bengalese.html': '/ssn/bengalese.html',
   '/urdu.html': '/ssn/urdu.html',
 };
+
+// ── Inquiry form endpoint (/api/intl-inquiry) ────────────────────────────────
+// Receives the /international/ inquiry form and forwards it via Email Routing
+// (SEND_EMAIL binding). No storage, no auto-reply to the patient. Setup:
+// Setup: docs/cloudflare-email-worker-setup.md
+
+const INQUIRY_TO = 'private@savianu.it';
+const RATE_LIMIT_HOURS = 5;          // max emails per hour per IP
+
+const rate = new Map();              // ip -> [timestamps] (per-isolate; best-effort)
+
+function jsonResp(obj, status = 200) {
+  return new Response(JSON.stringify(obj), {
+    status,
+    headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' },
+  });
+}
+
+async function handleInquiry(request, env, ctx) {
+  let data;
+  try {
+    data = await request.json();
+  } catch {
+    return jsonResp({ ok: false, error: 'invalid_body' }, 400);
+  }
+
+  // Honeypot + time-trap: silently accept and drop obvious bots.
+  if (data.website || !data.ts || Date.now() - Number(data.ts) < 3000 ||
+      Date.now() - Number(data.ts) > 86400000) {
+    return jsonResp({ ok: true });
+  }
+
+  const name = String(data.name || '').trim();
+  const email = String(data.email || '').trim();
+  const consent = data.consent === true;
+  if (!name || name.length > 200 || consent !== true) {
+    return jsonResp({ ok: false, error: 'invalid_fields' }, 400);
+  }
+  // Deliberately permissive email shape check — real validation is the MX round-trip.
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return jsonResp({ ok: false, error: 'invalid_email' }, 400);
+  }
+
+  const pick = (v, allowed) => (allowed.includes(v) ? v : '');
+  const lang = pick(data.lang, ['en', 'it']);
+  const status = pick(data.status, ['resident', 'second-home', 'visitor', 'nomad']);
+  const reason = pick(data.reason, ['new-patient', 'documentation', 'coordination', 'home-visit', 'other']);
+  if (!lang || !reason) {
+    return jsonResp({ ok: false, error: 'invalid_fields' }, 400);
+  }
+  const note = String(data.note || '').trim().slice(0, 2000);
+  const phone = String(data.phone || '').trim().slice(0, 40);
+
+  // Best-effort rate limit (per isolate — resets on deploy; acceptable here)
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const now = Date.now();
+  const hits = (rate.get(ip) || []).filter(t => now - t < 3600000);
+  if (hits.length >= RATE_LIMIT_HOURS || (hits.length && now - hits[hits.length - 1] < 600000)) {
+    return jsonResp({ ok: false, error: 'rate_limited' }, 429);
+  }
+
+  const label = {
+    en: 'English', it: 'Italiano',
+  };
+  const reasonLabel = {
+    'new-patient': 'New patient consultation',
+    documentation: 'Medical documentation or certificate',
+    coordination: 'Care coordination',
+    'home-visit': 'Home visit request',
+    other: 'Other',
+  };
+  const statusLabel = {
+    resident: 'Resident',
+    'second-home': 'Second-home owner',
+    visitor: 'Visitor',
+    nomad: 'Remote worker / digital nomad',
+  };
+
+  const lines = [
+    'International patient inquiry — savianu.it/international/',
+    '',
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Phone: ${phone || '(not provided)'}`,
+    `Preferred language: ${label[lang]}`,
+    `Status: ${statusLabel[status] || '(not specified)'}`,
+    `Reason: ${reasonLabel[reason]}`,
+    `Note: ${note || '(none)'}`,
+    '',
+    'Privacy policy accepted: yes',
+    '(Administrative details only - medical history to be collected through a secure channel.)',
+  ].join('\n');
+
+  const message = {
+    from: 'savianu.it inquiries <noreply@savianu.it>',
+    to: INQUIRY_TO,
+    reply_to: email,                       // reply goes straight to the patient
+    subject: `[International inquiry] ${reasonLabel[reason]} - ${name}`,
+    text: lines,
+  };
+
+  try {
+    hits.push(now);
+    rate.set(ip, hits);
+    await env.SEND_EMAIL.send(message);   // requires Email Routing active (see setup doc)
+  } catch {
+    return jsonResp({ ok: false, error: 'send_failed' }, 502);
+  }
+
+  return jsonResp({ ok: true });
+}
 
 // ── Worker entry point ────────────────────────────────────────────────────────
 

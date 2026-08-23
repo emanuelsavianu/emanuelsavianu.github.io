@@ -16,4 +16,10 @@ pattern = "savianu.it/*"
 zone_name = "savianu.it"
 # zone_id = "YOUR_ZONE_ID"   # alternative to zone_name
 
-# ── No KV, Durable Objects, or bindings needed ────────────────────────────────
+# ── Bindings ──────────────────────────────────────────────────────────────────
+# send_email: requires Cloudflare Email Routing enabled on savianu.it with the
+# destination address verified. Used by the /api/intl-inquiry form endpoint.
+# See docs/cloudflare-email-worker-setup.md before deploying.
+[[send_email]]
+name = "SEND_EMAIL"
+

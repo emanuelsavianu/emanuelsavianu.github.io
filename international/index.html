@@ -41,9 +41,7 @@
     <meta name="twitter:description" content="Private family doctor and GP services in English in Arezzo, Tuscany. Primary care for international residents, second-home owners and visitors.">
     <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
     <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="../assets/fontawesome/css/solid.min.css">
@@ -60,7 +58,10 @@
         "url": "https://savianu.it/international/",
         "telephone": "+390575910904",
         "email": "private@savianu.it",
-        "sameAs": ["https://tinyurl.com/Savianu"],
+        "sameAs": ["https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu"],
+        "priceRange": "€€",
+        "isAcceptingNewPatients": true,
+        "hasMap": "https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo",
         "description": "Family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian.",
         "medicalSpecialty": "GeneralPractice",
         "knowsLanguage": ["en", "it"],
@@ -229,6 +230,16 @@
             border-radius: 8px; padding: 16px 20px;
             font-size: 0.92rem; color: var(--text-medium); line-height: 1.65;
         }
+        .intl-feedback { min-height: 1.2em; margin-top: 14px; font-size: 0.92rem; line-height: 1.6; }
+        .intl-feedback[data-state="success"] { color: var(--color-success, #2e7d6b); }
+        .intl-feedback[data-state="error"] { color: var(--danger); }
+        .intl-feedback a { color: inherit; font-weight: 600; }
+        .intl-field input.intl-invalid,
+        .intl-field select.intl-invalid,
+        .intl-field textarea.intl-invalid { border-color: var(--danger); }
+        .intl-field .intl-err { display: none; font-size: 0.8rem; color: var(--danger); margin-top: 4px; }
+        .intl-field .intl-err.is-on { display: block; }
+        .intl-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
         @media (max-width: 640px) {
             .intl-grid { grid-template-columns: 1fr; }
         }
@@ -269,6 +280,9 @@
             </p>
             <h1 class="hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">Your English-Speaking Family Doctor in Arezzo</h1>
             <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.</p>
+            <p style="margin-top:22px;">
+                <a class="intl-btn" href="#intl-form-heading" data-i18n="intl_hero_cta">Inquire About Private Primary Care</a>
+            </p>
         </section>
 
         <!-- Intro -->
@@ -335,7 +349,7 @@
             <ul class="intl-info-list">
                 <li>
                     <i class="fas fa-location-dot" aria-hidden="true"></i>
-                    <span><strong data-i18n="intl_info_address_l">Studio</strong><br>Studio Medico Ippocrate · Piazza Saione 3, 52100 Arezzo (IT)</span>
+                    <span><strong data-i18n="intl_info_address_l">Studio</strong><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Piazza+Saione+3+52100+Arezzo" target="_blank" rel="noopener noreferrer" data-i18n-aria-label="intl_info_map_aria" aria-label="Open Studio Medico Ippocrate, Piazza Saione 3, Arezzo in Google Maps" style="color: inherit;">Studio Medico Ippocrate · Piazza Saione 3, 52100 Arezzo (IT)</a></span>
                 </li>
                 <li>
                     <i class="fas fa-clock" aria-hidden="true"></i>
@@ -442,11 +456,17 @@
                     <label for="intl-note" data-i18n="intl_f_note">Optional note</label>
                     <textarea id="intl-note" name="note" data-i18n-placeholder="intl_f_note_ph" placeholder="Optional — please don't include medical details here; we'll collect your history securely after we're in touch."></textarea>
                 </div>
-                <label class="intl-consent">
-                    <input type="checkbox" required>
+                <label class="intl-consent" for="intl-consent">
+                    <input type="checkbox" id="intl-consent" name="consent" required>
                     <span data-i18n="intl_f_consent">I have read and accept the <a href="../privacy.html">privacy policy</a>.</span>
                 </label>
+                <div class="intl-hp" aria-hidden="true">
+                    <label for="intl-website">Website</label>
+                    <input type="text" id="intl-website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+                <input type="hidden" name="ts" id="intl-ts" value="">
                 <button type="submit" class="intl-btn" data-i18n="intl_f_submit">Inquire About Private Primary Care</button>
+                <p class="intl-feedback" id="intl-feedback" role="status" aria-live="polite"></p>
                 <p class="intl-hint" style="margin-top: 14px;" data-i18n="intl_f_alt">For information about fees and availability, please write to <span class="js-email"></span>.</p>
                 <p class="intl-hint" id="intl-form-done" hidden data-i18n="intl_f_done">Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.</p>
             </form>
@@ -481,7 +501,7 @@
 })();
 </script>
 
-<script type="module" src="../app.js?v=35"></script>
+<script type="module" src="../app.js?v=36"></script>
 
 <script>
 (function () {
@@ -490,12 +510,54 @@
     var ADDR = 'private' + '@' + 'savianu.it';
     document.querySelectorAll('.js-email').forEach(function (el) { el.textContent = ADDR; });
 
+    // Feedback strings are resolved at submit time from the app.js i18n bridge,
+    // so they always follow the active language (the module loads after this
+    // script; resolving at boot would freeze them to the EN base copy).
+    function intlStrings() {
+        var lang = document.documentElement.getAttribute('lang') === 'it' ? 'it' : 'en';
+        var tbl = (window.__INTL_I18N__ && window.__INTL_I18N__[lang]) || {};
+        return {
+            invalid: tbl.intl_f_invalid || 'Please complete the highlighted required fields.',
+            sending: tbl.intl_f_sending || 'Sending…',
+            success: tbl.intl_f_success || 'Thank you — your inquiry has been sent. We will reply within a few business days.',
+            fallback: ((tbl.intl_f_done || 'Your email program should now open with your inquiry pre-filled. If it does not, please write to us directly at ') + ' ').replace('  ', ' ')
+        };
+    }
+
     var form = document.getElementById('intl-inquiry-form');
     if (!form) return;
 
+    var ENDPOINT = '/api/intl-inquiry';
+    var tsField = document.getElementById('intl-ts');
+    if (tsField) tsField.value = String(Date.now());
+
+    var feedback = document.getElementById('intl-feedback');
+    function setFeedback(html, state) {
+        if (!feedback) return;
+        feedback.innerHTML = html;      // strings come from our own i18n table, not user input
+        feedback.dataset.state = state || '';
+    }
+    function markInvalid() {
+        var firstBad = null;
+        form.querySelectorAll('input[required], select[required], textarea[required]').forEach(function (el) {
+            var bad = !el.checkValidity();
+            el.classList.toggle('intl-invalid', bad);
+            var err = el.closest('.intl-field');
+            err = err ? err.querySelector('.intl-err') : null;
+            if (err) err.classList.toggle('is-on', bad);
+            if (bad && !firstBad) firstBad = el;
+        });
+        if (firstBad) firstBad.focus();
+    }
+
     form.addEventListener('submit', function (e) {
         e.preventDefault();
-        if (!form.reportValidity()) return;
+        setFeedback('', '');
+        if (!form.reportValidity()) {
+            markInvalid();
+            setFeedback(intlStrings().invalid, 'error');
+            return;
+        }
 
         var f = new FormData(form);
         var reasonSel = document.getElementById('intl-reason');
@@ -518,13 +580,42 @@
             '(Administrative details only — medical history to be collected through a secure channel.)'
         ];
 
-        var url = 'mailto:' + ADDR +
-            '?subject=' + encodeURIComponent(subject) +
-            '&body=' + encodeURIComponent(lines.join('\n'));
-        window.location.href = url;
+        var payload = {
+            name: f.get('name'), email: f.get('email'), phone: f.get('phone'),
+            lang: f.get('lang'), status: f.get('status'), reason: f.get('reason'),
+            note: f.get('note'), consent: true, ts: f.get('ts'), website: f.get('website') || ''
+        };
 
-        var done = document.getElementById('intl-form-done');
-        if (done) done.hidden = false;
+        var btn = form.querySelector('button[type="submit"]');
+        if (btn) { btn.disabled = true; btn.textContent = intlStrings().sending; }
+        var usedFallback = false;
+
+        fetch(ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(function (r) {
+            if (!r.ok) throw new Error('http_' + r.status);
+            return r.json();
+        }).then(function (out) {
+            if (!out || out.ok !== true) throw new Error('endpoint');
+            setFeedback(intlStrings().success, 'success');
+            form.reset();
+            if (tsField) tsField.value = String(Date.now());
+        }).catch(function () {
+            // mailto fallback: the pre-endpoint behaviour, kept as a safety net
+            usedFallback = true;
+            var url = 'mailto:' + ADDR +
+                '?subject=' + encodeURIComponent(subject) +
+                '&body=' + encodeURIComponent(lines.join('\n'));
+            window.location.href = url;
+            setFeedback(intlStrings().fallback + ADDR + '.', '');
+        }).finally(function () {
+            if (btn && !usedFallback) { btn.disabled = false; btn.textContent = I18N_SUBMIT; }
+            if (btn) btn.dataset.i18nDone = '1';
+            var done = document.getElementById('intl-form-done');
+            if (done && usedFallback) done.hidden = false;
+        });
     });
 })();
 </script>

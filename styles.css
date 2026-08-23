@@ -108,8 +108,7 @@ body.dark-mode {
 }
 
 html {
-    scroll-behavior: smooth; 
-    font-size: 18px; 
+    font-size: 18px;
 }
 
 body {
@@ -1932,14 +1931,98 @@ html { text-rendering: optimizeLegibility; }
         }
 
         /* ── Entrance animations ── */
-        @keyframes fadeSlideUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .hero-eyebrow { animation: fadeSlideUp 0.5s ease 0.05s both; }
-        .hero-title   { animation: fadeSlideUp 0.5s ease 0.12s both; }
-        .hero-desc    { animation: fadeSlideUp 0.5s ease 0.20s both; }
-        .btn-cta-hero { animation: fadeSlideUp 0.5s ease 0.28s both; }
+                @keyframes fadeSlideUp {
+                    from { opacity: 0; transform: translateY(18px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+                .hero-eyebrow { animation: fadeSlideUp 0.5s ease 0.05s both; }
+                .hero-title   { animation: fadeSlideUp 0.5s ease 0.12s both; }
+                .hero-desc    { animation: fadeSlideUp 0.5s ease 0.20s both; }
+                .btn-cta-hero { animation: fadeSlideUp 0.5s ease 0.28s both; }
+
+                /* ── Scroll Reveal Utility (silk-design timing: 0.6s easeOut, -20% margin) ── */
+                @keyframes revealUp {
+                    from { opacity: 0; transform: translateY(24px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+                .reveal {
+                    opacity: 0;
+                }
+                @media (prefers-reduced-motion: no-preference) {
+                    .revealed {
+                        animation: revealUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                    }
+                }
+                @media (prefers-reduced-motion: reduce) {
+                    .reveal { opacity: 1; transform: none; }
+                }
+
+                /* ── Fluid typography extensions (layer onto DESIGN.md scale) ── */
+                /* Hero h1: clamp(2.5rem, 6vw, 4rem) already exists */
+                /* Section h2 fluid scale */
+                .section-title-fluid {
+                    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+                    line-height: 1.2;
+                }
+                @media (max-width: 768px) {
+                    .section-title-fluid { font-size: clamp(1.3rem, 6vw, 1.8rem); }
+                }
+
+                /* ── Refined hover states for clinical trust context ── */
+                /* Triage cards: gentle lift + shadow */
+                @media (prefers-reduced-motion: no-preference) {
+                    .triage-card {
+                        transition: transform 0.3s ease-out, box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+                    }
+                    .triage-card:hover {
+                        transform: translateY(-4px);
+                        box-shadow: 0 16px 40px rgba(26, 47, 76, 0.18);
+                    }
+                    .triage-card--primary:hover {
+                        border-color: var(--accent);
+                    }
+                    .triage-card--ghost:hover {
+                        border-color: var(--accent);
+                        background: rgba(194, 155, 87, 0.06);
+                    }
+
+                    /* Primary buttons: inset highlight + color-matched glow (silk primary-glow adapted) */
+                    .btn-telefono-header,
+                    .btn-main.faq-banner-btn,
+                    .btn-prenota-large {
+                        transition: transform 0.2s ease-out, background-color 0.2s ease-out, color 0.2s ease-out, box-shadow 0.3s ease-out;
+                    }
+                    .btn-telefono-header:hover,
+                    .btn-main.faq-banner-btn:hover,
+                    .btn-prenota-large:hover {
+                        box-shadow:
+                            /* inset top highlight */
+                            inset 0 2px 4px -1px color-mix(in srgb, var(--color-surface) 30%, transparent),
+                            /* color-matched glow ramp */
+                            0 4px 12px -2px color-mix(in srgb, var(--accent) 25%, transparent),
+                            0 8px 24px -4px color-mix(in srgb, var(--accent) 20%, transparent),
+                            0 16px 32px -8px color-mix(in srgb, var(--accent) 15%, transparent);
+                    }
+                    .btn-telefono-header:active,
+                    .btn-main.faq-banner-btn:active,
+                    .btn-prenota-large:active {
+                        transform: scale(0.97);
+                        box-shadow:
+                            inset 0 2px 4px -1px color-mix(in srgb, var(--color-surface) 30%, transparent),
+                            0 2px 8px -2px color-mix(in srgb, var(--accent) 25%, transparent);
+                    }
+                }
+
+                /* Card hover refinement (generic .card) */
+                @media (prefers-reduced-motion: no-preference) {
+                    .card {
+                        transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+                    }
+                    .card:hover {
+                        transform: translateY(-2px);
+                        box-shadow: 0 12px 32px rgba(26, 47, 76, 0.15);
+                    }
+                }
 
         /* ── FAQ Section (inline) ── */
         .faq-inline-section {
