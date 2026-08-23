@@ -211,8 +211,13 @@ async function handleInquiry(request, env, ctx) {
 // ── Worker entry point ────────────────────────────────────────────────────────
 
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     const url = new URL(request.url);
+
+    // Inquiry form endpoint: handled entirely at the edge
+    if (request.method === 'POST' && url.pathname === '/api/intl-inquiry') {
+      return handleInquiry(request, env, ctx);
+    }
 
     // Legacy URLs: 301 before hitting the origin (they would 404 on GitHub Pages)
     const legacyTarget = LEGACY_REDIRECTS[url.pathname];
