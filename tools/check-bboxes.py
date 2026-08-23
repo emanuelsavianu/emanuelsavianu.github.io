@@ -1,34 +1,50 @@
 #!/usr/bin/env python
-"""Compare stored vs recomputed bbox per glyph (strict, integer-aware)."""
+"""
+Diagnostic: count glyphs whose stored bbox differs from BoundsPen-computed bounds.
+
+NOTE: This is a DIAGNOSTIC only. Do not use it to rewrite bboxes - see the
+caveat in docs/font-subset-notes.md: fontTools' own save path recomputes
+bounds differently from BoundsPen, so a 'fix' based on this script does not
+converge (run twice, it 'corrects' different counts each time).
+
+Usage:
+    python tools/check-bboxes.py <font-file>
+"""
 import sys
 from pathlib import Path
+
 from fontTools.ttLib import TTFont
+from fontTools.pens.boundsPen import BoundsPen
 
 path = Path(sys.argv[1])
 font = TTFont(str(path))
-glyf = font['glyf']
-names = glyf.keys()
-bad = []
-for name in names:
-    g = glyf[name]
-    if g.numberOfContours != 0:
-        stored = (g.xMin, g.yMin, g.xMax, g.yMax)
-    else:
-        stored = (getattr(g, 'xMin', None), getattr(g, 'yMin', None),
-                  getattr(g, 'xMax', None), getattr(g, 'yMax', None))
-        if None in stored:
-            continue
-    try:
-        computed = g.calcBounds(glyf)
-    except Exception as e:
-        print(f"  calcBounds failed for {name}: {e}")
-        continue
-    if computed is None:
-        continue
-    cs = tuple(int(round(v)) for v in computed)
-    if tuple(stored) != cs:
-        bad.append((name, tuple(stored), cs))
+glyf = font["glyf"]
+gs = font.getGlyphSet()
+order = font.getGlyphOrder()
 
-print(f"{path.name}: {len(bad)} strict bbox mismatches / {len(list(glyf.keys()))} glyphs")
-for name, s, c in bad[:15]:
-    print(f"  {name}: stored={s} computed={c}")
+mismatch = 0
+for name in order:
+    g = glyf[name]
+    ncontours = getattr(g, "numberOfContours", None)
+    if ncontours is None:
+        continue
+    stored = (
+        getattr(g, "xMin", None),
+        getattr(g, "yMin", None),
+        getattr(g, "xMax", None),
+        getattr(g, "yMax", None),
+    )
+    if None in stored:
+        continue
+    pen = BoundsPen(gs)
+    try:
+        gs[name].draw(pen)
+    except Exception:
+        continue
+    if pen.bounds is None:
+        continue
+    vals = tuple(int(round(v)) for v in pen.bounds)
+    if tuple(stored) != vals:
+        mismatch += 1
+
+print(f"{path.name}: {mismatch} bbox mismatch(es) / {len(order)} glyphs")

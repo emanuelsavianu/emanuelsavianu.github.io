@@ -5,6 +5,8 @@ name        = "prenota-booking-redirect"
 main        = "booking-worker.mjs"
 compatibility_date = "2024-01-01"
 
+# Custom Domain: Cloudflare auto-creates/manages the DNS record for
+# prenota.savianu.it during deploy (no manual CNAME needed).
 [[routes]]
 pattern = "prenota.savianu.it"
-zone_name = "savianu.it"
+custom_domain = true
