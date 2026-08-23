@@ -47,6 +47,45 @@
     <link rel="stylesheet" href="../assets/fontawesome/css/solid.min.css">
     <link rel="stylesheet" href="../styles.css?v=45">
 
+    <!-- Lenis smooth scroll (self-hosted, offline-first) -->
+    <script type="module">
+      import Lenis from '/assets/lenis/lenis.mjs';
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced) {
+        const lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          wheelMultiplier: 1,
+          touchMultiplier: 2
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        window.lenis = lenis;
+      }
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a[href^="#"]');
+        if (anchor) {
+          const href = anchor.getAttribute('href');
+          if (href.length > 1) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              if (window.lenis) {
+                window.lenis.scrollTo(target, { offset: 0 });
+              } else {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+              target.focus({ preventScroll: true });
+            }
+          }
+        }
+      });
+    </script>
+
+    <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
+    <script type="module" src="/assets/scroll-reveal.js"></script>
+
     <!-- JSON-LD: Physician (entity clarity for AI retrieval / Knowledge Graph) + BreadcrumbList -->
     <script type="application/ld+json">
     [
@@ -274,7 +313,7 @@
     <main role="main" id="main-content">
 
         <!-- Hero -->
-        <section class="page-hero" aria-labelledby="intl-hero-heading">
+        <section class="page-hero reveal" aria-labelledby="intl-hero-heading">
             <p class="hero-eyebrow">
                 <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
             </p>
@@ -286,7 +325,7 @@
         </section>
 
         <!-- Intro -->
-        <section class="card" aria-labelledby="intl-intro-heading">
+        <section class="card reveal" aria-labelledby="intl-intro-heading">
             <h2 id="intl-intro-heading" class="sr-only" data-i18n="intl_intro_heading">About these consultations</h2>
             <p style="line-height: 1.75; color: var(--text-medium);" data-i18n="intl_intro_1">
                 Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.
@@ -298,7 +337,7 @@
         </section>
 
         <!-- Pillars -->
-        <section class="card" aria-labelledby="intl-pillars-heading">
+        <section class="card reveal" aria-labelledby="intl-pillars-heading">
             <div class="card-header">
                 <i class="fas fa-circle-info" aria-hidden="true"></i>
                 <h2 id="intl-pillars-heading" data-i18n="intl_pillars_title">How the practice works for international patients</h2>
@@ -328,7 +367,7 @@
         </section>
 
         <!-- How it works -->
-        <section class="card" aria-labelledby="intl-steps-heading">
+        <section class="card reveal" aria-labelledby="intl-steps-heading">
             <div class="card-header">
                 <i class="fas fa-list-ol" aria-hidden="true"></i>
                 <h2 id="intl-steps-heading" data-i18n="intl_steps_title">What to expect</h2>
@@ -341,7 +380,7 @@
         </section>
 
         <!-- Practical information -->
-        <section class="card" aria-labelledby="intl-info-heading">
+        <section class="card reveal" aria-labelledby="intl-info-heading">
             <div class="card-header">
                 <i class="fas fa-circle-question" aria-hidden="true"></i>
                 <h2 id="intl-info-heading" data-i18n="intl_info_title">Practical information</h2>
@@ -372,7 +411,7 @@
 
 
         <!-- Common questions -->
-        <section class="card" aria-labelledby="intl-faq-heading">
+        <section class="card reveal" aria-labelledby="intl-faq-heading">
             <div class="card-header">
                 <i class="fas fa-question" aria-hidden="true"></i>
                 <h2 id="intl-faq-heading" data-i18n="intl_faq_title">Common questions</h2>
@@ -405,7 +444,7 @@
             </div>
         </section>
         <!-- Inquiry form -->
-        <section class="card" aria-labelledby="intl-form-heading">
+        <section class="card reveal" aria-labelledby="intl-form-heading">
             <div class="card-header">
                 <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
                 <h2 id="intl-form-heading" data-i18n="intl_form_title">Request a consultation</h2>
@@ -474,7 +513,7 @@
 
         <!-- Emergency notice (calm, factual — mirrors site-wide pattern) -->
         <div class="urgency-wrapper">
-            <aside class="alert-emergency" role="note">
+            <aside class="alert-emergency reveal" role="note">
                 <i class="fas fa-ambulance" aria-hidden="true"></i>
                 <span data-i18n="intl_emergency">For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.</span>
             </aside>
