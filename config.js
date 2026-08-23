@@ -22,7 +22,7 @@ export const CONFIG = {
     DOCTOLIB: {
         booking: 'https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile',
         patientRequest: 'https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message',
-        profile: 'https://tinyurl.com/Savianu'
+        profile: 'https://prenota.savianu.it'
     },
 
     GOOGLE_CAL: {

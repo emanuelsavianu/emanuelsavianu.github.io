@@ -16,10 +16,10 @@ pattern = "savianu.it/*"
 zone_name = "savianu.it"
 # zone_id = "YOUR_ZONE_ID"   # alternative to zone_name
 
-# Branded booking redirect route
-[[routes]]
-pattern = "prenota.savianu.it"
-zone_name = "savianu.it"
+# NOTE: prenota.savianu.it is NOT routed here. It belongs to the separate
+# booking worker (prenota-booking-redirect, see wrangler-booking.toml).
+# Including it here makes every deploy fail with
+# "Can't deploy routes that are assigned to another worker."
 
 # ── Bindings ──────────────────────────────────────────────────────────────────
 # send_email: requires Cloudflare Email Routing enabled on savianu.it with the
