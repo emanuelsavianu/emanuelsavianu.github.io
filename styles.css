@@ -156,8 +156,8 @@ a:focus-visible {
    position: relative è REQUIRED: .lang-switch (absolute top/right) prende il
    containing block dal più vicino antenato posizionato; senza, fluttua in cima
    alla viewport sopra i banner. */
-site-nav { display: block; position: relative; }
-site-footer { display: block; }
+site-nav { display: block; position: relative; content-visibility: auto; contain-intrinsic-size: auto 72px; }
+site-footer { display: block; content-visibility: auto; contain-intrinsic-size: auto 240px; }
 
 /* --- HEADER / LANDING PAGE --- */
 header {
@@ -456,7 +456,7 @@ body.dark-mode h2 { color: var(--accent); }
     align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0;
 }
 .btn-cal-service.prima .cal-icon-wrapper { background: var(--bg-gradient-1); color: var(--primary); }
-.btn-cal-service.ordinaria .cal-icon-wrapper { background: #fdfaf4; color: var(--accent); }
+.btn-cal-service.ordinaria .cal-icon-wrapper { background: #fdfaf4; color: var(--accent-text); }
 .btn-cal-service.breve .cal-icon-wrapper { background: #fff0f0; color: var(--danger); }
 
 body.dark-mode .btn-cal-service { background: var(--bg-gradient-2); color: var(--text-dark); }
@@ -470,7 +470,7 @@ body.dark-mode .btn-cal-service.breve .cal-icon-wrapper { background: #2d1a1a; c
 
 /* --- NOTICES & HIGHLIGHTS --- */
 .notice-transfer { background: #fffbeb; border-left: 4px solid var(--accent); padding: 15px; border-radius: 8px; }
-.notice-transfer .step-icon { background: #fdfaf4; color: var(--accent); }
+.notice-transfer .step-icon { background: #fdfaf4; color: var(--accent-text); }
 .notice-transfer h3 { color: var(--primary); }
 .notice-transfer p { color: var(--primary-dark); font-weight: bold; font-size: 1.05rem; }
 
@@ -589,7 +589,7 @@ body.dark-mode .triage-option h3 { color: var(--accent); }
 }
 .guida-row-icon.red { background: #fff0f0; color: var(--danger); }
 .guida-row-icon.blue { background: var(--bg-gradient-1); color: var(--primary); }
-.guida-row-icon.gold { background: #fdfaf4; color: var(--accent); }
+.guida-row-icon.gold { background: #fdfaf4; color: var(--accent-text); }
 .guida-row-text h4 { font-size: 0.95rem; font-weight: 700; color: var(--text-dark); margin: 0 0 3px; }
 .guida-row-text p { font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.4; }
 .guida-row-text a { color: var(--danger); font-weight: 700; }
