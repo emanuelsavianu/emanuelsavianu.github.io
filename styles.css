@@ -307,8 +307,8 @@ header p {
         gap: 8px;
         flex-wrap: wrap;          /* wrap to second line if too wide for small screens */
         justify-content: center;
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(194, 155, 87, 0.4);
+        background: var(--color-surface);
+        border-color: var(--border-color);
     }
 
     /* Hide separators — they look broken when items wrap */
@@ -1386,9 +1386,28 @@ body.dark-mode .search-input {
 .triage-section { padding: 24px 0 30px; }
 .triage-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: 1fr;
+    gap: 16px;
     margin: 20px 0 10px;
+}
+@media (min-width: 600px) {
+    .triage-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+@media (min-width: 901px) {
+    .triage-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+    .triage-grid.intl-hidden { grid-template-columns: repeat(3, 1fr); }
+}
+.triage-grid.has-international {
+    grid-template-columns: repeat(2, 1fr);
+}
+@media (max-width: 900px) {
+    .triage-grid.has-international { grid-template-columns: 1fr; }
 }
 .triage-card {
     display: flex;
