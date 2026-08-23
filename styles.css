@@ -99,6 +99,19 @@ body.dark-mode {
     --focus-ring: 3px solid var(--color-focus);
 }
 
+/* Dark mode lang-btn: inactive = muted gold, active = bright gold */
+body.dark-mode .lang-btn {
+    color: var(--color-text-muted); /* muted gold for inactive */
+    font-weight: 400; font-style: italic;
+}
+body.dark-mode .lang-btn:hover {
+    color: var(--accent); font-weight: 600; font-style: normal;
+}
+body.dark-mode .lang-btn.active {
+    color: var(--accent); font-weight: 700; font-style: normal;
+}
+body.dark-mode .lang-separator { color: var(--color-text-muted); opacity: 0.5; }
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 :where(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
@@ -344,14 +357,15 @@ header p {
 site-nav[data-section="root"] .site-nav { border-top: none; }
 
 .lang-btn {
-    background: none; border: none; color: rgba(255, 255, 255, 0.7);
-    font-weight: 600; cursor: pointer; font-size: 0.9rem;
-    transition: color 0.3s; padding: 5px 8px;
+    background: none; border: none; 
+    color: var(--color-brand); /* navy for inactive */
+    font-weight: 400; font-style: italic; cursor: pointer; font-size: 0.9rem;
+    transition: color 0.3s, font-weight 0.3s, font-style 0.3s; padding: 5px 8px;
 }
 
-.lang-btn:hover { color: var(--accent); }
-.lang-btn.active { color: var(--accent); }
-.lang-separator { color: rgba(255,255,255,0.3); }
+.lang-btn:hover { color: var(--accent); font-weight: 600; font-style: normal; }
+.lang-btn.active { color: var(--accent); font-weight: 700; font-style: normal; }
+.lang-separator { color: var(--color-brand); opacity: 0.4; }
 
 /* --- LAYOUT GRID --- */
 .container {
