@@ -1935,28 +1935,28 @@ html { text-rendering: optimizeLegibility; }
         }
 
         /* ── Entrance animations ── */
-                @keyframes fadeSlideUp {
-                    from { opacity: 0; transform: translateY(18px); }
-                    to   { opacity: 1; transform: translateY(0); }
-                }
-                .hero-eyebrow { animation: fadeSlideUp 0.5s ease 0.05s both; }
-                .hero-title   { animation: fadeSlideUp 0.5s ease 0.12s both; }
-                .hero-desc    { animation: fadeSlideUp 0.5s ease 0.20s both; }
-                .btn-cta-hero { animation: fadeSlideUp 0.5s ease 0.28s both; }
+                        @keyframes fadeSlideUp {
+                            from { opacity: 0; transform: translateY(18px); }
+                            to   { opacity: 1; transform: translateY(0); }
+                        }
+                        .hero-eyebrow { animation: fadeSlideUp 0.7s ease 0.08s both; }
+                        .hero-title   { animation: fadeSlideUp 0.7s ease 0.18s both; }
+                        .hero-desc    { animation: fadeSlideUp 0.7s ease 0.30s both; }
+                        .btn-cta-hero { animation: fadeSlideUp 0.7s ease 0.42s both; }
 
-                /* ── Scroll Reveal Utility (silk-design timing: 0.6s easeOut, -20% margin) ── */
-                @keyframes revealUp {
-                    from { opacity: 0; transform: translateY(24px); }
-                    to   { opacity: 1; transform: translateY(0); }
-                }
-                .reveal {
-                    opacity: 0;
-                }
-                @media (prefers-reduced-motion: no-preference) {
-                    .revealed {
-                        animation: revealUp 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-                    }
-                }
+                        /* ── Scroll Reveal Utility (silk-design timing: 0.9s easeOut, -20% margin) ── */
+                        @keyframes revealUp {
+                            from { opacity: 0; transform: translateY(24px); }
+                            to   { opacity: 1; transform: translateY(0); }
+                        }
+                        .reveal {
+                            opacity: 0;
+                        }
+                        @media (prefers-reduced-motion: no-preference) {
+                            .revealed {
+                                animation: revealUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                            }
+                        }
                 @media (prefers-reduced-motion: reduce) {
                     .reveal { opacity: 1; transform: none; }
                 }
