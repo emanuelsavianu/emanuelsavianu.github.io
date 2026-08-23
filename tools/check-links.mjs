@@ -31,7 +31,9 @@ function hrefTargets(content) {
     if (/^(https?:|tel:|mailto:|#|javascript:|data:|blob:|about:)/.test(v)) continue;
     if (v.startsWith('//')) continue; // protocol-relative
     if (v.includes('://')) continue;
-    out.push(v.split('#')[0].split('?')[0]);
+    // Normalize leading slash to be relative to site root
+    const normalized = v.startsWith('/') ? v.slice(1) : v;
+    out.push(normalized.split('#')[0].split('?')[0]);
   }
   return out;
 }
