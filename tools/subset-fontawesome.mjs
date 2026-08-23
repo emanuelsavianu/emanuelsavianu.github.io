@@ -171,6 +171,7 @@ try {
     ` --glyph-names --symbol-cmap --legacy-cmap` +
     ` --notdef-glyph --notdef-outline --recommended-glyphs` +
     ` --name-IDs='*' --name-legacy --name-languages='*'` +
+    ` --recalc-bounds` +
     ` --drop-tables='DSIG'`,
     { stdio: 'inherit' }
   );
