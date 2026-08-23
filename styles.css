@@ -221,6 +221,7 @@ body.dark-mode .header-info { background: var(--bg-gradient-2); }
     color: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     width: 22px; height: 22px;
+    position: relative;
     display: inline-flex; align-items: center; justify-content: center;
     cursor: pointer; font-size: 1rem; line-height: 1;
     flex-shrink: 0;
@@ -230,6 +231,13 @@ body.dark-mode .header-info { background: var(--bg-gradient-2); }
     border-color: var(--accent);
     color: var(--accent);
     background: rgba(194, 155, 87, 0.12);
+}
+/* Invisible 44px hit-area expansion around the 22px visual close button */
+.header-info-close::before {
+    content: "";
+    position: absolute;
+    inset: -11px;
+    border-radius: 50%;
 }
 
 .brand-wrap {
@@ -331,8 +339,8 @@ header p {
     #btn-dark {
         font-size: 1.1rem;
         padding: 6px 10px;
-        min-height: 36px;
-        min-width: 36px;
+        min-height: 44px;
+        min-width: 44px;
     }
 }
 
@@ -725,7 +733,12 @@ body.dark-mode .step-content h3 { color: var(--accent); }
     background-color: var(--accent); color: var(--primary); opacity: 1;
 }
 @media (max-width: 768px) {
-    .floating-faq { bottom: 20px; right: 20px; padding: 12px 18px; border-width: 2px;}
+    .floating-faq {
+        bottom: calc(20px + env(safe-area-inset-bottom));
+        right: calc(20px + env(safe-area-inset-right));
+        padding: 14px 18px; border-width: 2px;
+        min-width: 48px; min-height: 44px; justify-content: center;
+    }
     .floating-faq-text { display: none; }
     .floating-faq i { font-size: 1.5rem; margin: 0; }
 }
@@ -2350,7 +2363,7 @@ html { text-rendering: optimizeLegibility; }
             font-size: 1.4rem;
             margin-bottom: 16px;
         }
-        .patient-portal-cta h4 {
+        .patient-portal-cta h3 {
             font-size: 1.05rem;
             color: var(--primary);
             font-weight: 700;
@@ -2387,7 +2400,7 @@ html { text-rendering: optimizeLegibility; }
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
             border-color: var(--accent);
         }
-        body.dark-mode .patient-portal-cta h4 { color: var(--accent); }
+        body.dark-mode .patient-portal-cta h3 { color: var(--accent); }
         body.dark-mode .patient-portal-cta p { color: #f3efe6; }
         body.dark-mode .patient-portal-cta-icon {
             background: linear-gradient(135deg, var(--accent), #d4a574);
