@@ -1234,8 +1234,7 @@ const GLOBAL_FUNCTIONS = {
     // broke the FAQ accordion (2026-08-13). Keep this list in sync.
     showSection: showSection,
     dismissGuidaRapida: dismissGuidaRapida,
-    selectVisitType: selectVisitType,
-    initServiceWorker: initServiceWorker
+    selectVisitType: selectVisitType
 };
 for (const name in GLOBAL_FUNCTIONS) {
     window[name] = GLOBAL_FUNCTIONS[name];
@@ -1251,9 +1250,10 @@ export function initServiceWorker() {
   let pendingWorker = null;
 
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(registration => {
-        if (registration.waiting) showUpdateToast(registration.waiting);
+      navigator.serviceWorker.register('/sw.js')
+        .then(registration => {
+          registration.update(); // force check for new sw.js
+          if (registration.waiting) showUpdateToast(registration.waiting);
 
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
@@ -1285,11 +1285,14 @@ export function initServiceWorker() {
     });
   }
 
-  let refreshing = false;
-  navigator.serviceWorker.addEventListener('controllerchange', () => {
-    if (!refreshing) { refreshing = true; window.location.reload(); }
-  });
-}
+    let refreshing = false;
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      if (!refreshing) { refreshing = true; window.location.reload(); }
+    });
+  }
+
+  // Auto-initialize on module load — no inline script tag needed on pages
+  initServiceWorker();
 
 
 
