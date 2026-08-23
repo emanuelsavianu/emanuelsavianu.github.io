@@ -1939,12 +1939,12 @@ html { text-rendering: optimizeLegibility; }
                             from { opacity: 0; transform: translateY(18px); }
                             to   { opacity: 1; transform: translateY(0); }
                         }
-                        .hero-eyebrow { animation: fadeSlideUp 0.7s ease 0.08s both; }
-                        .hero-title   { animation: fadeSlideUp 0.7s ease 0.18s both; }
-                        .hero-desc    { animation: fadeSlideUp 0.7s ease 0.30s both; }
-                        .btn-cta-hero { animation: fadeSlideUp 0.7s ease 0.42s both; }
+                        .hero-eyebrow { animation: fadeSlideUp 1.0s ease 0.12s both; }
+                        .hero-title   { animation: fadeSlideUp 1.0s ease 0.25s both; }
+                        .hero-desc    { animation: fadeSlideUp 1.0s ease 0.40s both; }
+                        .btn-cta-hero { animation: fadeSlideUp 1.0s ease 0.55s both; }
 
-                        /* ── Scroll Reveal Utility (silk-design timing: 0.9s easeOut, -20% margin) ── */
+                        /* ── Scroll Reveal Utility (silk-design timing: 1.2s easeOut, -20% margin) ── */
                         @keyframes revealUp {
                             from { opacity: 0; transform: translateY(24px); }
                             to   { opacity: 1; transform: translateY(0); }
@@ -1954,7 +1954,7 @@ html { text-rendering: optimizeLegibility; }
                         }
                         @media (prefers-reduced-motion: no-preference) {
                             .revealed {
-                                animation: revealUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+                                animation: revealUp 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
                             }
                         }
                 @media (prefers-reduced-motion: reduce) {
