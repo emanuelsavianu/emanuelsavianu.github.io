@@ -38,23 +38,46 @@ function findHtmlFiles(dir, out = []) {
     if (entry.isDirectory()) {
       if (entry.name === 'node_modules' || entry.name.startsWith('.')) continue;
       findHtmlFiles(full, out);
-    } else if (/\.html$/i.test(entry.name)) {
+    } else if (/\.html$/i.test(entry.name) || /\.js$/i.test(entry.name)) {
       out.push(full);
     }
   }
   return out;
 }
 
+// JS that emits FA classes via template literals/innerHTML. app.js builds the
+// <site-nav>/<site-footer> chrome (theme toggle moon<->sun swap, quick-action
+// bar); missing these glyphs renders controls as blank/inactive.
+const JS_SOURCES = ['app.js'];
+
 function scanIconsUsed(rootDir) {
   const icons = new Set();
   const files = findHtmlFiles(rootDir);
   for (const file of files) {
+    // Only hand-written site JS carries icon classes; skip generated/vendor bundles
+    if (/\.js$/i.test(file)) {
+      const rel = file.slice(rootDir.length + 1).replace(/\\/g, '/');
+      const isSiteJs = JS_SOURCES.some(s => rel === s || rel.endsWith('/' + s));
+      const isToolJs = rel.includes('colleghi/gestoreturni/') || rel.includes('colleghi/RUAP/');
+      if (!isSiteJs && !isToolJs) continue;
+    }
     const content = readFileSync(file, 'utf8');
-    // Only match fa-* inside class attributes (icon usage), not URLs/filenames
-    // (fa-solid-900.woff2 in href/src would otherwise be picked up).
-    for (const attr of content.matchAll(/class\s*=\s*"([^"]*)"/g)) {
+    // Match fa-* inside class attributes AND JS template-literal class strings
+    // (single/double quotes or backticks), still excluding URLs/filenames.
+    for (const attr of content.matchAll(/class\s*=\s*["'`]([^"'`]*)["'`]/g)) {
       for (const m of attr[1].matchAll(/\b(?:fas|fa-solid|far|fa-regular|fab|fa-brands|fal|fa-light)?\s*fa-([a-z0-9][a-z0-9-]*)\b/g)) {
         if (!NON_ICON_WORDS.has(m[1])) icons.add(m[1]);
+      }
+    }
+    // JS-only: bare 'fa-name' / "fa-name" literals (classList.toggle/replace
+    // targets like icon.classList.toggle('fa-sun', isDark) never appear inside
+    // a class="..." attribute and would be missed by attribute-only scanning).
+    if (/\.js$/i.test(file)) {
+      for (const m of content.matchAll(/\bfa-([a-z0-9][a-z0-9-]{1,})\b/g)) {
+        const n = m[1];
+        if (NON_ICON_WORDS.has(n)) continue;
+        if (/\d/.test(n)) continue; // fa-solid-900 / weight-suffixed font filenames
+        icons.add(n);
       }
     }
   }
