@@ -24,9 +24,41 @@ Open `index.html` in a browser (no server needed).
 node tools/check-links.mjs
 ```
 
+## Full test suite
+
+```
+npm test          # JS syntax + link integrity + i18n parity + SW precache sync
+```
+
+## Minification (optional, one-off)
+
+`styles.css` and `app.js` are the editable sources. To generate minified copies:
+
+```
+node tools/minify.mjs        # requires: npx esbuild (devDependency)
+```
+
+This writes `styles.min.css` / `app.min.js`. If you switch HTML to reference the minified
+files, remember to re-run this script after every edit to either source file, and bump the
+`?v=NN` query strings in HTML. The unminified files remain the canonical edited versions.
+
+## Font Awesome subset (optional, one-off)
+
+The full `fa-solid-900.woff2` (~150 KB) ships every icon; only a fixed subset is used.
+
+```
+node tools/subset-fontawesome.mjs   # requires: pip install fonttools (pyftsubset)
+```
+
+Writes `assets/fontawesome/webfonts/fa-solid-900.subset.woff2`. To add a new icon:
+add its class to any HTML file, re-run the script, and bump the font version in HTML.
+Keep the full font in the repo as the regeneration source.
+
 ## Deployment
 
 Push to `main` — GitHub Pages deploys automatically; Cloudflare sits in front (worker: `cloudflare/worker.js`).
+Dashboard-only actions (DNS records, Zero Trust Access policies) are documented in
+`docs/manual-steps-cloudflare.md`.
 
 ## Old domains
 

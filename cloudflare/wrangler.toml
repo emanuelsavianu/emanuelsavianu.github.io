@@ -16,6 +16,11 @@ pattern = "savianu.it/*"
 zone_name = "savianu.it"
 # zone_id = "YOUR_ZONE_ID"   # alternative to zone_name
 
+# Branded booking redirect route
+[[routes]]
+pattern = "prenota.savianu.it"
+zone_name = "savianu.it"
+
 # ── Bindings ──────────────────────────────────────────────────────────────────
 # send_email: requires Cloudflare Email Routing enabled on savianu.it with the
 # destination address verified. Used by the /api/intl-inquiry form endpoint.

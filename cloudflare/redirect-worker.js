@@ -34,6 +34,9 @@ const REDIRECTS = {
   '/vivisano.html': '/ssn/vivisano.html',
   '/bengalese.html': '/ssn/bengalese.html',
   '/urdu.html': '/ssn/urdu.html',
+  // Branded booking redirect - will 302 to real Doctolib profile URL
+  // Update this URL when Doctolib profile URL changes
+  '/prenota': 'https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile',
 };
 
 export default {

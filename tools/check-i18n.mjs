@@ -42,7 +42,8 @@ function extractLangBlock(lang) {
     }
   }
   const block = appJs.slice(open + 1, end);
-  const keys = [...block.matchAll(/^\s{8}(\w+):/gm)].map(m => m[1]);
+  // Match keys with flexible indentation (8+ spaces)
+  const keys = [...block.matchAll(/^\s{8,}(\w+):/gm)].map(m => m[1]);
   return new Set(keys);
 }
 

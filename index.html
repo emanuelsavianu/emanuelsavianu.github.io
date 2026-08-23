@@ -27,6 +27,7 @@
     <meta name="apple-mobile-web-app-title" content="Dr. Savianu">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="/assets/pwa-icon-192.png">
+    <link rel="alternate" hreflang="en" href="https://savianu.it/international/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -92,98 +93,113 @@
     <script type="module" src="/assets/scroll-reveal.js"></script>
 
     <!-- JSON-LD Physician -->
-    <script type="application/ld+json">
-    [
-    {
-      "@context": "https://schema.org",
-      "@type": "Physician",
-      "name": "Dott. Emanuel Savianu",
-      "additionalName": "Studio Medico Ippocrate",
-      "url": "https://savianu.it/",
-      "telephone": "+390575910904",
-      "email": "segreteria@savianu.it",
-      "sameAs": ["https://tinyurl.com/Savianu"],
-      "image": "https://savianu.it/assets/bronzelogo.png",
-      "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette, consulenze private e certificazioni INPS.",
-      "medicalSpecialty": "GeneralPractice",
-      "areaServed": {
-        "@type": "City",
-        "name": "Arezzo"
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Piazza Saione 3",
-        "addressLocality": "Arezzo",
-        "addressRegion": "AR",
-        "postalCode": "52100",
-        "addressCountry": "IT"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 43.4632,
-        "longitude": 11.8796
-      },
-      "openingHoursSpecification": [
+        <script type="application/ld+json">
+        [
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:30",
-          "closes": "12:30"
+          "@context": "https://schema.org",
+          "@type": "Physician",
+          "name": "Dott. Emanuel Savianu",
+          "additionalName": "Studio Medico Ippocrate",
+          "url": "https://savianu.it/",
+          "telephone": "+390****0904",
+          "email": "segreteria@savianu.it",
+          "sameAs": ["https://tinyurl.com/Savianu"],
+          "image": "https://savianu.it/assets/bronzelogo.png",
+          "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette, consulenze private e certificazioni INPS.",
+          "medicalSpecialty": "GeneralPractice",
+          "areaServed": {
+            "@type": "City",
+            "name": "Arezzo"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Piazza Saione 3",
+            "addressLocality": "Arezzo",
+            "addressRegion": "AR",
+            "postalCode": "52100",
+            "addressCountry": "IT"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 43.4632,
+            "longitude": 11.8796
+          },
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "09:30",
+              "closes": "12:30"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "16:00",
+              "closes": "19:00"
+            }
+          ],
+          "location": {
+            "@id": "#clinic"
+          },
+          "priceRange": "\u20ac\u20ac",
+          "currenciesAccepted": "EUR",
+          "paymentAccepted": "Cash, Credit Card",
+          "availableLanguage": ["it", "en"]
         },
         {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "16:00",
-          "closes": "19:00"
+          "@context": "https://schema.org",
+          "@type": "MedicalClinic",
+          "@id": "#clinic",
+          "name": "Studio Medico Ippocrate",
+          "url": "https://savianu.it/",
+          "telephone": "+390****0904",
+          "email": "segreteria@savianu.it",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Piazza Saione 3",
+            "addressLocality": "Arezzo",
+            "addressRegion": "AR",
+            "postalCode": "52100",
+            "addressCountry": "IT"
+          },
+          "medicalSpecialty": "GeneralPractice",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "09:30",
+              "closes": "12:30"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              "opens": "16:00",
+              "closes": "19:00"
+            }
+          ],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 43.4632,
+            "longitude": 11.8796
+          }
         }
-      ],
-      "location": {
-        "@id": "#clinic"
-      },
-      "priceRange": "\u20ac\u20ac",
-      "currenciesAccepted": "EUR",
-      "paymentAccepted": "Cash, Credit Card",
-      "availableLanguage": ["it", "en"]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "MedicalClinic",
-      "@id": "#clinic",
-      "name": "Studio Medico Ippocrate",
-      "url": "https://savianu.it/",
-      "telephone": "+390575910904",
-      "email": "segreteria@savianu.it",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Piazza Saione 3",
-        "addressLocality": "Arezzo",
-        "addressRegion": "AR",
-        "postalCode": "52100",
-        "addressCountry": "IT"
-      },
-      "medicalSpecialty": "GeneralPractice",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "09:30",
-          "closes": "12:30"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-          "opens": "16:00",
-          "closes": "19:00"
-        }
-      ],
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 43.4632,
-        "longitude": 11.8796
-      }
-    }
-  ]
+      ]
     </script>
+    <!--
+      TODO (B3): When real Google review data is available, add an aggregateRating
+      object to the Physician object above. Template:
+      schema-templates/aggregateRating-template.json
+      Example shape:
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "127",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
+      Do NOT insert placeholder/estimated numbers — fabricated ratings violate
+      schema.org / Google policy.
+    -->
 
 </head>
 <body>

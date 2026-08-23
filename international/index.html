@@ -22,9 +22,10 @@
     <meta name="theme-color" content="#1a2f4c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <link rel="manifest" href="../manifest.json">
-    <link rel="icon" href="../assets/pwa-icon-192.png">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        <link rel="manifest" href="../manifest.json">
+        <link rel="icon" href="../assets/pwa-icon-192.png">
+        <link rel="alternate" hreflang="it" href="https://savianu.it/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -214,6 +215,21 @@
 }
     ]
     </script>
+    <!--
+      TODO (B3): When real Google review data is available, add an aggregateRating
+      object to the Physician object above. Template:
+      schema-templates/aggregateRating-template.json
+      Example shape:
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "127",
+          "bestRating": "5",
+          "worstRating": "1"
+        }
+      Do NOT insert placeholder/estimated numbers — fabricated ratings violate
+      schema.org / Google policy.
+    -->
 
     <!-- Page-local styles (design tokens only — see DESIGN.md; no new global CSS) -->
     <style>
@@ -315,18 +331,27 @@
     <main role="main" id="main-content">
 
         <!-- Hero -->
-        <section class="page-hero reveal" aria-labelledby="intl-hero-heading">
-            <p class="hero-eyebrow">
-                <span>Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
-            </p>
-            <h1 class="hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">English-Speaking Family Doctor in Arezzo</h1>
-            <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.</p>
-            <p style="margin-top:22px;">
-                <a class="intl-btn" href="#intl-form-heading" data-i18n="intl_hero_cta">Inquire About Private Primary Care</a>
-            </p>
-        </section>
-
-        <!-- Intro -->
+                <section class="page-hero reveal" aria-labelledby="intl-hero-heading">
+                    <picture>
+                        <source type="image/avif" media="(min-width: 1024px)" srcset="../assets/studio/studio-location-desktop.avif?v=2">
+                        <source type="image/webp" media="(min-width: 1024px)" srcset="../assets/studio/studio-location-desktop.webp?v=2">
+                        <source type="image/avif" media="(min-width: 600px)" srcset="../assets/studio/studio-location-tablet.avif?v=2">
+                        <source type="image/webp" media="(min-width: 600px)" srcset="../assets/studio/studio-location-tablet.webp?v=2">
+                        <source type="image/avif" srcset="../assets/studio/studio-location-mobile.avif?v=2">
+                        <img src="../assets/studio/studio-location-mobile.webp?v=2" alt="Studio Medico Ippocrate — Piazza Saione 3, Arezzo" width="2000" height="848" fetchpriority="high" decoding="async">
+                    </picture>
+                    <div class="hero-overlay" aria-hidden="true"></div>
+                    <div class="hero-content">
+                                    <p class="hero-eyebrow">
+                                        <span data-i18n="intl_hero_eyebrow">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
+                                    </p>
+                                    <h1 class="hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">English-Speaking Family Doctor in Arezzo</h1>
+                                    <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.</p>
+                                    <p style="margin-top:22px;">
+                                        <a class="intl-btn" href="#intl-form-heading" data-i18n="intl_hero_cta">Inquire About Private Primary Care</a>
+                                    </p>
+                                </div>
+                            </section>
         <section class="card reveal" aria-labelledby="intl-intro-heading">
             <h2 id="intl-intro-heading" class="sr-only" data-i18n="intl_intro_heading">About these consultations</h2>
             <p style="line-height: 1.75; color: var(--text-medium);" data-i18n="intl_intro_1">
@@ -541,8 +566,6 @@
     } catch (e) {}
 })();
 </script>
-
-<script type="module" src="../app.js?v=36"></script>
 
 <script>
 (function () {
