@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex, nofollow" />
   <title>RUAP Attività Diurne — Turni</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS (static build) -->
+  <link rel="stylesheet" href="/assets/css/tools.tw.navy.min.css?v=1">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -15,21 +16,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.10.2/dist/dom-to-image-more.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            // Brand Studio Ippocrate: navy #1A2F4C, gold #C29B57, cream #F3EFE6.
-            // brand-400 = GOLD (accents/icons), brand-500 = NAVY (buttons),
-            // brand-100 = CREAM (light surfaces), brand-800/900 = navy deep (header/dark).
-            // Calendar-day backgrounds and doctor colors are NOT part of this scale.
-            brand: { 50:'#faf7f1', 100:'#f3efe6', 200:'#e9dfc9', 300:'#d8c69e', 400:'#c29b57', 500:'#1a2f4c', 600:'#132742', 700:'#1e3a5f', 800:'#16283f', 900:'#0e1c2e' }
-          }
-        }
-      }
-    }
-  </script>
   <style>
     /* Scrollbar sottile per sidebar */
     .thin-scroll::-webkit-scrollbar { width: 4px; }

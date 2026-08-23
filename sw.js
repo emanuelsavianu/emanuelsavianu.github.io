@@ -1,6 +1,6 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Stale-While-Revalidate per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v363';
+const CACHE_NAME = 'savianu-v364';
 
 const PRECACHE_URLS = [
   '/offline.html',
@@ -64,6 +64,10 @@ const PRECACHE_URLS = [
   '/assets/fonts/montserrat-var-latin-ext.woff2',
   '/assets/fonts/cormorant-garamond-var-latin.woff2',
   '/assets/fonts/cormorant-garamond-var-latin-ext.woff2',
+  '/assets/css/tools.default.min.css',
+  '/assets/css/tools.tw.blue.min.css',
+  '/assets/css/tools.tw.navy.min.css',
+  '/assets/css/tools.tw.teal.min.css',
 ];
 
 function isSameOrigin(url) {
