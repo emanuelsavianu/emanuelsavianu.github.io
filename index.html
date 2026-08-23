@@ -378,16 +378,16 @@
     </footer>
 </site-footer>
 
+<!-- SW Update Toast (shared across all pages) -->
+<div id="sw-update-toast" role="status" aria-live="polite" aria-atomic="true">
+    <span data-i18n="sw_update_available">Aggiornamento disponibile</span>
+    <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
+</div>
+
 <script type="module" src="app.js?v=36"></script>
 
 <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js').catch(error => {
-        console.log('ServiceWorker registration failed:', error);
-      });
-    });
-  }
+  initServiceWorker();
 </script>
 
 </body>
