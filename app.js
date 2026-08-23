@@ -1234,7 +1234,8 @@ const GLOBAL_FUNCTIONS = {
     // broke the FAQ accordion (2026-08-13). Keep this list in sync.
     showSection: showSection,
     dismissGuidaRapida: dismissGuidaRapida,
-    selectVisitType: selectVisitType
+    selectVisitType: selectVisitType,
+    initServiceWorker: initServiceWorker
 };
 for (const name in GLOBAL_FUNCTIONS) {
     window[name] = GLOBAL_FUNCTIONS[name];
