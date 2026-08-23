@@ -56,18 +56,18 @@ const SECURITY_HEADERS = {
   //  • cdn.sheetjs.com: xlsx on calcolatore-ferie
   //  • calendar.google.com: private-practice booking button (script/style-src)
   'Content-Security-Policy': [
-    "default-src 'self'",
-    "script-src 'self' 'unsafe-inline' https://calendar.google.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://calendar.google.com",
-    "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
-    "img-src 'self' data: https://savianu.it",
-    "connect-src 'self'",
-    "frame-src https://calendar.google.com",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "upgrade-insecure-requests",
-  ].join('; '),
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://calendar.google.com https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com",
+      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://calendar.google.com",
+      "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+      "img-src 'self' data: https://savianu.it https://www.gstatic.com",
+      "connect-src 'self'",
+      "frame-src https://calendar.google.com",
+      "object-src 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+      "upgrade-insecure-requests",
+    ].join('; '),
 };
 
 // ── Legacy path redirects (pre-merge URLs -> new structure) ─────────────────
