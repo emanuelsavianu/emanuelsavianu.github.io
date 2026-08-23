@@ -31,9 +31,9 @@ function hrefTargets(content) {
     if (/^(https?:|tel:|mailto:|#|javascript:|data:|blob:|about:)/.test(v)) continue;
     if (v.startsWith('//')) continue; // protocol-relative
     if (v.includes('://')) continue;
-    // Normalize leading slash to be relative to site root
-    const normalized = v.startsWith('/') ? v.slice(1) : v;
-    out.push(normalized.split('#')[0].split('?')[0]);
+    // Normalize: root-relative paths (starting with /) are resolved from site root
+    // Other relative paths are resolved from file's directory
+    out.push({ path: v, isRootRelative: v.startsWith('/') });
   }
   return out;
 }
@@ -46,14 +46,24 @@ for (const file of files) {
   const content = readFileSync(file, 'utf8');
   for (const target of hrefTargets(content)) {
     if (!target) continue;
-    let resolved = normalize(resolve(dir, target));
+    const { path: targetPath, isRootRelative } = target;
+    const normalized = targetPath.split('#')[0].split('?')[0];
+    if (!normalized) continue;
+    let resolved;
+    if (isRootRelative) {
+      // Root-relative: resolve from site root
+      resolved = normalize(join(ROOT, normalized.slice(1)));
+    } else {
+      // Relative: resolve from file's directory
+      resolved = normalize(resolve(dir, normalized));
+    }
     if (existsSync(resolved)) continue;
     // Directory index resolution: 'ssn/' or 'ssn' -> ssn/index.html
     const withIndex = join(resolved, 'index.html');
     const withHtml = resolved.endsWith(sep) ? join(resolved, 'index.html') : resolved + '.html';
     if (existsSync(withIndex) || existsSync(withHtml)) continue;
     broken++;
-    console.log(`BROKEN: ${file.replace(ROOT + sep, '')} -> ${target}`);
+    console.log(`BROKEN: ${file.replace(ROOT + sep, '')} -> ${targetPath}`);
   }
 }
 
