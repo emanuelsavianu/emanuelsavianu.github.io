@@ -944,7 +944,7 @@
     </footer>
 </site-footer>
 
-<!-- SW Update Toast -->
+<!-- SW Update Toast (shared across all pages) -->
 <div id="sw-update-toast" role="status" aria-live="polite" aria-atomic="true">
     <span data-i18n="sw_update_available">Aggiornamento disponibile</span>
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
@@ -952,48 +952,8 @@
 
 <script type="module" src="../app.js?v=36"></script>
 
-
 <script>
-  if ('serviceWorker' in navigator) {
-    let pendingWorker = null;
-
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          if (registration.waiting) showUpdateToast(registration.waiting);
-
-          registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (!newWorker) return;
-            newWorker.addEventListener('statechange', () => {
-              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                showUpdateToast(newWorker);
-              }
-            });
-          });
-        })
-        .catch(error => {
-          console.log('ServiceWorker registration failed:', error);
-        });
-    });
-
-    function showUpdateToast(worker) {
-      pendingWorker = worker;
-      const toast = document.getElementById('sw-update-toast');
-      if (toast) toast.classList.add('visible');
-    }
-
-    document.getElementById('sw-update-btn')?.addEventListener('click', () => {
-      if (pendingWorker) {
-        pendingWorker.postMessage({ type: 'SKIP_WAITING' });
-      }
-    });
-
-    let refreshing = false;
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing) { refreshing = true; window.location.reload(); }
-    });
-  }
+  initServiceWorker();
 </script>
 
 <script>

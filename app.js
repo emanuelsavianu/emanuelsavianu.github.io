@@ -1240,5 +1240,55 @@ for (const name in GLOBAL_FUNCTIONS) {
     window[name] = GLOBAL_FUNCTIONS[name];
 }
 
+/**
+ * Shared Service Worker registration with update toast flow.
+ * Call once on page load from any page.
+ */
+export function initServiceWorker() {
+  if (!('serviceWorker' in navigator)) return;
+
+  let pendingWorker = null;
+
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => {
+        if (registration.waiting) showUpdateToast(registration.waiting);
+
+        registration.addEventListener('updatefound', () => {
+          const newWorker = registration.installing;
+          if (!newWorker) return;
+          newWorker.addEventListener('statechange', () => {
+            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+              showUpdateToast(newWorker);
+            }
+          });
+        });
+      })
+      .catch(error => {
+        console.log('ServiceWorker registration failed:', error);
+      });
+  });
+
+  function showUpdateToast(worker) {
+    pendingWorker = worker;
+    const toast = document.getElementById('sw-update-toast');
+    if (toast) toast.classList.add('visible');
+  }
+
+  const updateBtn = document.getElementById('sw-update-btn');
+  if (updateBtn) {
+    updateBtn.addEventListener('click', () => {
+      if (pendingWorker) {
+        pendingWorker.postMessage({ type: 'SKIP_WAITING' });
+      }
+    });
+  }
+
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) { refreshing = true; window.location.reload(); }
+  });
+}
+
 
 
