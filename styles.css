@@ -109,9 +109,9 @@ body.dark-mode {
     --focus-ring: 3px solid var(--color-focus);
 }
 
-/* Dark mode lang-btn: inactive = muted gold, active = bright gold */
+/* Dark mode lang-btn: inactive = cream (on solid navy pill), active = bright gold */
 body.dark-mode .lang-btn {
-    color: var(--color-text-muted); /* muted gold for inactive */
+    color: var(--color-text); /* cream text on the same solid navy pill */
     font-weight: 400; font-style: italic;
 }
 body.dark-mode .lang-btn:hover {
@@ -120,7 +120,7 @@ body.dark-mode .lang-btn:hover {
 body.dark-mode .lang-btn.active {
     color: var(--accent); font-weight: 700; font-style: normal;
 }
-body.dark-mode .lang-separator { color: var(--color-text-muted); opacity: 0.5; }
+body.dark-mode .lang-separator { color: var(--color-text); opacity: 0.5; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -294,7 +294,7 @@ header p {
 /* --- LANGUAGE SWITCHER --- */
 .lang-switch {
     position: absolute; top: 20px; right: 20px; z-index: 20;
-    background: rgba(26, 47, 76, 0.5); backdrop-filter: blur(5px);
+    background: var(--color-brand); /* SOLID navy pill: readable over any page backdrop */
     padding: 5px 15px; border-radius: 20px; border: 1px solid var(--accent);
     display: flex; gap: 10px; align-items: center;
 }
@@ -338,8 +338,8 @@ header p {
         gap: 8px;
         flex-wrap: wrap;          /* wrap to second line if too wide for small screens */
         justify-content: center;
-        background: var(--color-surface);
-        border-color: var(--border-color);
+        background: var(--color-brand); /* same solid navy pill as desktop */
+        border-color: var(--accent);
     }
 
     /* Hide separators — they look broken when items wrap */
@@ -365,7 +365,7 @@ header p {
         right: 20px;
         margin-top: 14px;
         z-index: 60;
-        background: rgba(26, 47, 76, 0.55);
+        background: var(--color-brand); /* solid navy, matches the unified pill */
         border-color: rgba(194, 155, 87, 0.5);
     }
 }
@@ -376,14 +376,14 @@ site-nav[data-section="root"] .site-nav { border-top: none; }
 
 .lang-btn {
     background: none; border: none; 
-    color: var(--color-brand); /* navy for inactive */
+    color: var(--color-bg); /* cream/off-white: readable on the navy pill */
     font-weight: 400; font-style: italic; cursor: pointer; font-size: 0.9rem;
     transition: color 0.3s, font-weight 0.3s, font-style 0.3s; padding: 5px 8px;
 }
 
 .lang-btn:hover { color: var(--accent); font-weight: 600; font-style: normal; }
 .lang-btn.active { color: var(--accent); font-weight: 700; font-style: normal; }
-.lang-separator { color: var(--color-brand); opacity: 0.4; }
+.lang-separator { color: var(--color-bg); opacity: 0.4; }
 
 /* --- LAYOUT GRID --- */
 .container {
