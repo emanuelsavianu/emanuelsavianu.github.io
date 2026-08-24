@@ -5,6 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nessuna connessione | Dr. Savianu</title>
     <meta name="robots" content="noindex">
+<script>
+(function(){try{
+  var s=localStorage.getItem('savianu-theme');
+  if(s==null&&localStorage.getItem('darkMode')==='enabled')s='dark';
+  if(s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches))
+    document.documentElement.classList.add('dark-mode');
+}catch(e){}})();
+</script>
 <link rel="stylesheet" href="assets/fonts/fonts.css">
     <style>
         :root { --primary: #1a2f4c; --accent: #c29b57; --bg: #f3efe6; }
@@ -49,6 +57,7 @@
     </style>
 </head>
 <body>
+<script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
     <div class="card">
         <div class="icon">📡</div>
         <h1>Nessuna connessione</h1>

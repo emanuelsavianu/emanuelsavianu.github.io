@@ -50,7 +50,15 @@
     }
     </script>
 
-    <link rel="stylesheet" href="styles.css?v=46">
+    <script>
+(function(){try{
+  var s=localStorage.getItem('savianu-theme');
+  if(s==null&&localStorage.getItem('darkMode')==='enabled')s='dark';
+  if(s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches))
+    document.documentElement.classList.add('dark-mode');
+}catch(e){}})();
+</script>
+    <link rel="stylesheet" href="styles.css?v=20260824a">
 
     <style>
         :root {
@@ -90,6 +98,7 @@
     </style>
 </head>
 <body>
+<script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 
     <site-nav data-section="static">
         <div class="fallback-nav">
@@ -169,7 +178,7 @@
             <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
         </footer>
     </site-footer>
-<script type="module" src="app.js?v=37"></script>
+<script type="module" src="app.js?v=20260824a"></script>
     <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
 </body>
