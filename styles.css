@@ -1,3 +1,8 @@
+/* @guard:accent-on-light — SAVIANU.IT COLOR CONTRACT
+   Gold (--accent #c29b57): decoration, icons, borders, active states ONLY.
+   Text on light backgrounds: ALWAYS --accent-text (#7a5c2e). Bare gold on
+   light bg fails WCAG AA (2.3:1 on #f3efe6). See audit F001. */
+
 /* =================================================================
    STUDIO MEDICO IPPOCRATE - BRANDED STYLESHEET
    ================================================================= */
@@ -64,6 +69,11 @@
     --colleghi: #2e7d6b;
     --international: #285078;
 }
+
+/* Defensive: forces WCAG-compliant text color on light containers.
+   .dark-mode ancestor selector intentionally matches EITHER html or body. */
+.accent-on-light { color: var(--accent-text) !important; }
+.dark-mode .accent-on-light      { color: var(--accent) !important; }
 
 /* Dark Mode Variables (Navy & Gold Theme) */
 body.dark-mode {
