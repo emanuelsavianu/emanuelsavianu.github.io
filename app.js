@@ -207,6 +207,7 @@ if (yearEl) yearEl.textContent = new Date().getFullYear();
 // --- DARK MODE TOGGLE ---
 function setDarkModeUI(isDark) {
     document.body.classList.toggle('dark-mode', isDark);
+    document.documentElement.classList.toggle('dark-mode', isDark);
     const icon = document.querySelector('#btn-dark i');
     if (icon) {
         icon.classList.toggle('fa-sun', isDark);
@@ -220,23 +221,25 @@ export function toggleDarkMode() {
     const isDark = !document.body.classList.contains('dark-mode');
     setDarkModeUI(isDark);
     try {
-        localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+        localStorage.setItem('savianu-theme', isDark ? 'dark' : 'light');
+        localStorage.removeItem('darkMode');
     } catch (e) {
-        console.log('LocalStorage not available');
+        console.warn('Theme persistence unavailable', e);
     }
 }
 
 function initDarkMode() {
     try {
-        const saved = localStorage.getItem('darkMode');
+        let saved = localStorage.getItem('savianu-theme');
+        if (saved === null && localStorage.getItem('darkMode') === 'enabled') saved = 'dark';
         const prefersD = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const shouldBeDark = saved === 'enabled' || (saved === null && prefersD);
+        const shouldBeDark = saved === 'dark' || (saved === null && prefersD);
 
         if (shouldBeDark) setDarkModeUI(true);
 
         // React to OS-level changes at runtime
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (localStorage.getItem('darkMode') === null) setDarkModeUI(e.matches);
+            if (localStorage.getItem('savianu-theme') === null) setDarkModeUI(e.matches);
         });
     } catch (e) {}
 }

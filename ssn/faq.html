@@ -38,7 +38,15 @@
     <link rel="stylesheet" href="../assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="../assets/fontawesome/css/solid.subset.css">
 
-    <link rel="stylesheet" href="../styles.css?v=46">
+    <script>
+(function(){try{
+  var s=localStorage.getItem('savianu-theme');
+  if(s==null&&localStorage.getItem('darkMode')==='enabled')s='dark';
+  if(s==='dark'||(!s&&matchMedia('(prefers-color-scheme: dark)').matches))
+    document.documentElement.classList.add('dark-mode');
+}catch(e){}})();
+</script>
+    <link rel="stylesheet" href="../styles.css?v=20260824a">
 
     <style>
         /* FAQ-specific styles */
@@ -498,6 +506,7 @@
 
 </head>
 <body>
+<script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 <site-nav data-section="ssn">
     <div class="fallback-nav">
         <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
@@ -950,7 +959,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=37"></script>
+<script type="module" src="../app.js?v=20260824a"></script>
 
 <script>
     // FAQ accordion
