@@ -6,12 +6,21 @@ batch call, so new/updated pages get crawled immediately instead of waiting
 for the Bingbot crawl queue.
 
 Usage:
+    # Key from a gitignored local file (preferred — keeps secret out of shell/git):
+    python tools/bing_submit.py
+    python tools/bing_submit.py https://savianu.it/ https://savianu.it/ssn/
+
+    # Or pass the key explicitly (still supported):
     python tools/bing_submit.py YOUR_BING_API_KEY
     python tools/bing_submit.py YOUR_BING_API_KEY https://savianu.it/ https://savianu.it/ssn/
 
 Bing Webmaster API key: Bing Webmaster Tools → Settings → API Access.
+Store it in a gitignored local file at `tools/.bing_key` (one line, no newline),
+or export it as the `BING_API_KEY` environment variable. Command-line arg still
+works for one-off use.
 """
 import json
+import os
 import sys
 import urllib.request
 import urllib.error
@@ -20,6 +29,7 @@ import xml.etree.ElementTree as ET
 DOMAIN = "https://savianu.it"
 SITEMAP = "https://savianu.it/sitemap.xml"
 ENDPOINT = "https://ssl.bing.com/webmaster/api.svc/json/SubmitUrlbatch?apikey={key}"
+KEY_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".bing_key")
 
 
 def urls_from_sitemap():
@@ -35,14 +45,31 @@ def urls_from_sitemap():
         return None
 
 
+def resolve_key():
+    # Priority: explicit arg (if it looks like a key) > local gitignored file > env
+    if len(sys.argv) >= 2 and not sys.argv[1].startswith("http"):
+        return sys.argv[1], sys.argv[2:]
+    try:
+        with open(KEY_FILE, "r", encoding="utf-8") as fh:
+            return fh.read().strip(), sys.argv[1:]
+    except FileNotFoundError:
+        pass
+    env_key = os.environ.get("BING_API_KEY")
+    if env_key:
+        return env_key.strip(), sys.argv[1:]
+    return None, sys.argv[1:]
+
+
 def main():
-    if len(sys.argv) < 2:
+    api_key, url_args = resolve_key()
+    if not api_key:
         print(__doc__)
+        print("\nERROR: no Bing API key found. Put it in tools/.bing_key "
+              "(gitignored) or export BING_API_KEY, or pass it as the first arg.")
         sys.exit(2)
 
-    api_key = sys.argv[1]
-    if len(sys.argv) > 2:
-        urls = sys.argv[2:]
+    if url_args:
+        urls = url_args
     else:
         urls = urls_from_sitemap() or [
             "https://savianu.it/",

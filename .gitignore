@@ -10,6 +10,7 @@ cloudflare/node_modules/.cache/
 .env
 .env.local
 .env.*.local
+tools/.bing_key
 
 # OS
 .DS_Store
