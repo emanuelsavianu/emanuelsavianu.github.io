@@ -1,0 +1,31 @@
+{
+  "$schema": "Manifest of Markdown-for-Agents routes. Add an entry here to publish a new page's .md and self-register it for Accept: text/markdown negotiation.",
+  "site": "https://savianu.it",
+  "routes": [
+    {
+      "route": "/",
+      "md": "home.md",
+      "html": "index.html",
+      "titleOverride": "Medico di Famiglia Arezzo | Dott. Savianu",
+      "stub": "markdown/home.md"
+    },
+    {
+      "route": "/ssn/",
+      "md": "ssn/index.md",
+      "html": "ssn/index.html",
+      "stub": "markdown/ssn.md"
+    },
+    {
+      "route": "/privati/",
+      "md": "privati/index.md",
+      "html": "privati/index.html",
+      "stub": "markdown/privati.md"
+    },
+    {
+      "route": "/colleghi/",
+      "md": "colleghi/index.md",
+      "html": "colleghi/index.html",
+      "stub": "markdown/colleghi.md"
+    }
+  ]
+}

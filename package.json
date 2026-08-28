@@ -3,10 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node tools/run-all-checks.mjs",
+    "test": "node tools/run-all-checks.mjs && node tools/gen-markdown.mjs --check",
     "check:links": "node tools/check-links.mjs",
     "check:i18n": "node tools/check-i18n.mjs",
     "check:sw": "node tools/check-sw.mjs",
+    "gen:markdown": "node tools/gen-markdown.mjs",
     "update-sw": "node tools/update-sw.mjs"
   }
 }
