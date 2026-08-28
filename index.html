@@ -59,7 +59,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="styles.css?v=20260824b">
+    <link rel="stylesheet" href="styles.css?v=20260824d">
 
     <!-- Lenis smooth scroll (self-hosted, offline-first) -->
     <script type="module">
@@ -102,114 +102,78 @@
     <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
     <script type="module" src="/assets/scroll-reveal.js"></script>
 
-    <!-- JSON-LD Physician -->
-        <script type="application/ld+json">
-        [
-        {
-          "@context": "https://schema.org",
-          "@type": "Physician",
-          "name": "Dott. Emanuel Savianu",
-          "additionalName": "Studio Medico Ippocrate",
-          "url": "https://savianu.it/",
-          "telephone": "+390575910904",
-          "email": "segreteria@savianu.it",
-          "sameAs": ["https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu", "https://www.omceoar.it/"],
-          "image": "https://savianu.it/assets/bronzelogo.png",
-          "description": "Medico di Medicina Generale ad Arezzo. Visite ambulatoriali su appuntamento tramite Doctolib, certificati, ricette, consulenze private e certificazioni INPS.",
-          "medicalSpecialty": "GeneralPractice",
-          "areaServed": {
-            "@type": "City",
-            "name": "Arezzo"
-          },
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Piazza Saione 3",
-            "addressLocality": "Arezzo",
-            "addressRegion": "AR",
-            "postalCode": "52100",
-            "addressCountry": "IT"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 43.4632,
-            "longitude": 11.8796
-          },
-          "openingHoursSpecification": [
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "09:30",
-              "closes": "12:30"
-            },
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "16:00",
-              "closes": "19:00"
-            }
-          ],
-          "location": {
-            "@id": "#clinic"
-          },
-          "priceRange": "\u20ac\u20ac",
-          "currenciesAccepted": "EUR",
-          "paymentAccepted": "Cash, Credit Card",
-          "availableLanguage": ["it", "en"]
+    <!-- JSON-LD: MedicalBusiness (clinic umbrella) with Physician as founder -->
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "MedicalBusiness",
+        "@id": "https://savianu.it/#clinic",
+        "name": "Studio Medico Ippocrate",
+        "url": "https://savianu.it/",
+        "telephone": "+390****0904",
+        "email": "segreteria@savianu.it",
+        "image": "https://savianu.it/assets/bronzelogo.png",
+        "logo": "https://savianu.it/assets/bronzelogo.png",
+        "medicalSpecialty": "GeneralPractice",
+        "description": "Studio di Medicina Generale (MMG) e consulenze medico-legali (CTP) ad Arezzo. Visite SSN e private, certificati e certificazioni INPS.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Piazza Saione 3",
+          "addressLocality": "Arezzo",
+          "addressRegion": "AR",
+          "postalCode": "52100",
+          "addressCountry": "IT"
         },
-        {
-          "@context": "https://schema.org",
-          "@type": "MedicalClinic",
-          "@id": "#clinic",
-          "name": "Studio Medico Ippocrate",
-          "url": "https://savianu.it/",
-          "telephone": "+390575910904",
-          "email": "segreteria@savianu.it",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "Piazza Saione 3",
-            "addressLocality": "Arezzo",
-            "addressRegion": "AR",
-            "postalCode": "52100",
-            "addressCountry": "IT"
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 43.4632,
+          "longitude": 11.8796
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "09:30",
+            "closes": "12:30"
           },
-          "medicalSpecialty": "GeneralPractice",
-          "openingHoursSpecification": [
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "09:30",
-              "closes": "12:30"
-            },
-            {
-              "@type": "OpeningHoursSpecification",
-              "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-              "opens": "16:00",
-              "closes": "19:00"
-            }
-          ],
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 43.4632,
-            "longitude": 11.8796
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "16:00",
+            "closes": "19:00"
           }
+        ],
+        "areaServed": { "@type": "City", "name": "Arezzo" },
+        "priceRange": "SSN / Privato",
+        "currenciesAccepted": "EUR",
+        "sameAs": [
+          "https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu",
+          "https://www.omceoar.it/",
+          "https://www.linkedin.com/in/emanuelsavianu"
+        ],
+        "founder": {
+          "@type": "Physician",
+          "@id": "https://savianu.it/#physician",
+          "name": "Dott. Emanuel Savianu",
+          "jobTitle": "Medico di Medicina Generale (MMG) e Consulente Tecnico di Parte (CTP)",
+          "url": "https://savianu.it/",
+          "image": "https://savianu.it/assets/bronzelogo.png",
+          "sameAs": [
+            "https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu",
+            "https://www.omceoar.it/",
+            "https://www.linkedin.com/in/emanuelsavianu"
+          ],
+          "medicalSpecialty": "GeneralPractice",
+          "hasCredential": {
+            "@type": "EducationalOccupationalCredential",
+            "name": "Iscrizione all'Albo dei Medici Chirurghi e Odontoiatri di Arezzo (OMCeO AR)"
+          },
+          "availableLanguage": ["it", "en"]
         }
-      ]
+      }
+    ]
     </script>
-    <!--
-      TODO (B3): When real Google review data is available, add an aggregateRating
-      object to the Physician object above. Template:
-      schema-templates/aggregateRating-template.json
-      Example shape:
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "127",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
-      Do NOT insert placeholder/estimated numbers — fabricated ratings violate
-      schema.org / Google policy.
-    -->
 
 </head>
 <body>
@@ -413,7 +377,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="app.js?v=20260824a"></script>
+<script type="module" src="app.js?v=20260824c"></script>
 
 </body>
 </html>

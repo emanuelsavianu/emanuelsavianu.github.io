@@ -57,7 +57,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20260824b">
+    <link rel="stylesheet" href="../styles.css?v=20260824d">
 
     <!-- Lenis smooth scroll (self-hosted, offline-first) -->
     <script type="module">
@@ -222,25 +222,10 @@
         }
     ]
 }
-    ]
-    </script>
-    <!--
-      TODO (B3): When real Google review data is available, add an aggregateRating
-      object to the Physician object above. Template:
-      schema-templates/aggregateRating-template.json
-      Example shape:
-        "aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "127",
-          "bestRating": "5",
-          "worstRating": "1"
-        }
-      Do NOT insert placeholder/estimated numbers — fabricated ratings violate
-      schema.org / Google policy.
-    -->
+]
+</script>
 
-    <!-- Page-local styles (design tokens only — see DESIGN.md; no new global CSS) -->
+<!-- Page-local styles (design tokens only — see DESIGN.md; no new global CSS) -->
     <style>
         .intl-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
         .intl-card {
@@ -701,7 +686,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20260824a"></script>
+<script type="module" src="../app.js?v=20260824c"></script>
 
 </body>
 </html>
