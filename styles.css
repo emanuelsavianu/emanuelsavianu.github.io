@@ -778,6 +778,12 @@ footer a { color: var(--accent); font-weight: bold; }
     text-align: center;
 }
 
+.footer-legal-note {
+    margin: 6px 0 0; padding: 0 8px;
+    font-size: 0.70rem; line-height: 1.4; color: var(--text-muted);
+    text-align: center;
+}
+
 /* --- WELCOME MODAL: EMERGENCY STEP DARK MODE FIX --- */
 .welcome-step-emergency {
     background-color: #fff0f0;
