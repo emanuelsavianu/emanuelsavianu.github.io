@@ -6,7 +6,6 @@ Disallow: /cloudflare/
 Disallow: /.superpowers/
 Disallow: /.claude/
 Disallow: /email-templates/
-Disallow: /schema-templates/
 Disallow: /docs/
 Disallow: /tools/
 Disallow: /colleghi/xsegretarie.html
