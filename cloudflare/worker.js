@@ -226,6 +226,50 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
+    // ── Accept: text/markdown content negotiation (Markdown for Agents) ──────
+    // Serve pre-rendered Markdown equivalents of key HTML pages so agents and
+    // AI systems get clean, formatting-stripped text instead of scraping dense
+    // JS-assembled HTML. Plan-independent (works on Cloudflare Free; no
+    // Pro/Business "Markdown for Agents" zone setting required).
+    const MARKDOWN_MAP = {
+      '/':                  '/home.md',
+      '/index.html':        '/home.md',
+      '/ssn/':             '/ssn/index.md',
+      '/ssn/index.html':    '/ssn/index.md',
+      '/privati/':         '/privati/index.md',
+      '/privati/index.html': '/privati/index.md',
+      '/colleghi/':        '/colleghi/index.md',
+      '/colleghi/index.html': '/colleghi/index.md',
+    };
+    const acceptHeader = request.headers.get('Accept') || '';
+    if (acceptHeader.includes('text/markdown')) {
+      const mdPath = MARKDOWN_MAP[url.pathname];
+      if (mdPath) {
+        try {
+          const mdUrl = url.origin + mdPath;
+          const mdResp = await fetch(mdUrl, { redirect: 'follow' });
+          if (mdResp.ok) {
+            const mdText = await mdResp.text();
+            const mdHeaders = new Headers();
+            mdHeaders.set('Content-Type', 'text/markdown; charset=utf-8');
+            mdHeaders.set('Vary', 'Accept');
+            mdHeaders.set('Cache-Control', 'public, max-age=3600');
+            mdHeaders.set('x-markdown-tokens', String(Math.ceil(mdText.length / 4)));
+            // Preserve security-relevant headers on the markdown variant too
+            for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
+              if (['X-Content-Type-Options', 'Strict-Transport-Security',
+                   'Referrer-Policy', 'Permissions-Policy'].includes(name)) {
+                mdHeaders.set(name, value);
+              }
+            }
+            return new Response(mdText, { status: 200, statusText: 'OK', headers: mdHeaders });
+          }
+        } catch {
+          // Markdown fetch failed — fall through to the normal HTML response
+        }
+      }
+    }
+
     // Pass the request to the origin as-is
     const response = await fetch(request);
 

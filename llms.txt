@@ -1,47 +1,27 @@
-# savianu.it
+# Studio Medico Ippocrate — Dott. Emanuel Savianu (savianu.it)
 
-> Sito ufficiale del Dott. Emanuel Savianu, Medico di Medicina Generale (SSN) ad Arezzo — Studio Medico Ippocrate, Piazza Saione 3.
-> Servizi per i pazienti SSN, visite private e certificati INPS, area dedicata ai colleghi MMG.
+> Sito ufficiale del Dott. Emanuel Savianu, Medico di Medicina Generale (SSN) ad Arezzo. Contenuti per pazienti del SSN, consulti e certificati INPS in libera professione, e area riservata ai colleghi medici.
 
-## Pazienti SSN
+## Sezioni principali
 
-- [Area pazienti](/ssn/): Prenota su Doctolib, richiedi ricette e certificati, consulta FAQ, esenzioni e guide.
-- [FAQ pazienti](/ssn/faq.html): Risposte alle domande frequenti dei pazienti: prenotazioni, ricette, certificati, orari e contatti.
-- [Esenzione ticket](/ssn/esenzioni.html): Come richiederla: guida a reddito, patologie croniche, invalidità, documenti e rinnovo.
-- [Impegnative e CUP](/ssn/impegnative.html): Come richiedere le impegnative e prenotare visite ed esami al CUP.
-- [Certificato di malattia](/ssn/cert-malattia.html): Quando serve il certificato, invio telematico all'INPS e regole del medico curante.
-- [Diritti del paziente — malattia](/ssn/malattia.html): Chi deve rilasciare il certificato di malattia (medico, Pronto Soccorso, dentisti) e invio telematico INPS.
-- [Poster — italiano](/ssn/poster-it.html): Poster A3 gratuito da stampare: guida pratica alla salute con consigli su prenotazioni, farmaci e visite.
-- [Poster — English](/ssn/poster-en.html): Free A3 poster to print: practical health guide with advice on appointments, medicines and check-ups.
-- [Poster — română](/ssn/poster-ro.html): Afiș A3 gratuit de imprimat: ghid practic de sănătate despre programări, medicamente și controale.
-- [Poster — বাংলা](/ssn/poster-bn.html): Poster A3 gratuito in bengalese con consigli su appuntamenti, farmaci e controlli.
-- [Poster — اردو](/ssn/poster-ur.html): Poster A3 gratuito in urdu con consigli su appuntamenti, farmaci e controlli.
-- [Salute mentale](/ssn/salutementale.html): Poster A3 gratuito: la salute mentale si può curare — segnali da non trascurare, consigli pratici e aiuto.
-- [Sănătate mentală — română](/ssn/salutementale-ro.html): Afiș A3 gratuit: sănătatea mintală se poate vindeca.
-- [Vivi sano](/ssn/vivisano.html): Poster A3 gratuito: consigli semplici per vivere sano — alimentazione, movimento, acqua e vaccinazioni.
-- [Viață sănătoasă — română](/ssn/vivisano-ro.html): Afiș A3 gratuit: sfaturi pentru o viață sănătoasă — alimentație, mișcare, apă și vaccinări.
+- [Home](https://savianu.it/) — presentazione dello studio, orari, contatti e smistamento verso le aree.
+- [Pazienti / SSN](https://savianu.it/ssn/) — prenotazioni Doctolib, ricette, FAQ, esenzioni ticket, impegnative CUP, certificato di malattia.
+- [Consulti e certificati INPS](https://savianu.it/privati/) — invalidità civile, Legge 104, indennità di accompagnamento, riforma disabilità D.Lgs. 62/2024, procedura telematica Arezzo.
+- [Area Colleghi](https://savianu.it/colleghi/) — strumenti, protocolli, normative, RUAP/PIR, guide Millewin per Medici di Medicina Generale.
 
-## Visite private e certificati
+## Markdown per agenti
 
-- [Certificato di invalidità INPS](/privati/): Come richiederlo ad Arezzo: dal 1° marzo 2026 la procedura è telematica. Accompagnamento, Legge 104 e prenotazioni.
-- [Certificato di invalidità civile](/privati/certificato-invalidita-civile.html): Documenti, nuova procedura telematica (D.Lgs. 62/2024) e prenotazione visita.
-- [FAQ riforma invalidità 2026](/privati/faq-riforma.html): Guida alla riforma dell'invalidità civile: nuovo certificato medico telematico, domanda INPS, indennità e Legge 104.
+Ogni sezione è disponibile in formato Markdown tramite content negotiation:
+invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure apri direttamente i file:
 
-## Pazienti internazionali — International patients
+- [home.md](https://savianu.it/home.md)
+- [ssn/index.md](https://savianu.it/ssn/index.md)
+- [privati/index.md](https://savianu.it/privati/index.md)
+- [colleghi/index.md](https://savianu.it/colleghi/index.md)
 
-- [Visite private per pazienti internazionali](/international/): Consulenze private di medicina generale in inglese (anche italiano) per residenti, proprietari di seconde case e visitatori della Provincia di Arezzo. Continuità assistenziale, telemedicina, visite domiciliari dove indicato. / Private primary care consultations in English (family doctor / GP services) for residents, second-home owners, and visitors across the Province of Arezzo. Continuity of care, telemedicine follow-ups, home visits where appropriate.
-- [Richiedi una consulenza](/international/#intl-form-heading): modulo di contatto amministrativo per pazienti internazionali (nessuna informazione clinica tramite il modulo). / Administrative inquiry form for international patients (no medical details via the form).
+## Contatti generali
 
-## Per i colleghi MMG
-
-- [Area colleghi](/colleghi/): Strumenti, protocolli e guide professionali per Medici di Medicina Generale.
-- [Protocollo certificati INPS](/colleghi/protocollo-certificati-inps.html): Protocollo operativo standard per l'allegazione documentale nel certificato medico introduttivo INPS.
-- [Guida interattiva MMG](/colleghi/guida-interattiva-mmg.html): Guida interattiva sullo status giuridico del MMG: libero professionista o pubblico dipendente.
-
-## Fatti chiave
-
-- Orari ambulatorio: lunedì–venerdì 09:30–12:30 e 16:00–19:00; chiuso sabato e domenica.
-- Indirizzo: Studio Medico Ippocrate, Piazza Saione 3, 52100 Arezzo (AR), Italia.
-- Segreteria: 0575 910 904 — email: segreteria@savianu.it.
-- Prenotazioni online su Doctolib (riceve solo su appuntamento): https://tinyurl.com/Savianu.
-- Emergenze: 112 (Numero Unico). Urgenze non emergenziali fuori orario: Continuità Assistenziale (Guardia Medica) 116 117.
+- **Studio Medico Ippocrate** — Piazza Saione 3, Arezzo
+- **Segreteria:** 0575 910 904 — Lun–Ven 09:30–12:30 · 16:00–19:00
+- **Prenotazioni / ricette / messaggi:** Doctolib
+- **Urgenze:** 112 (Numero Unico) · 116 117 (Guardia Medica non urgente, 24h)
