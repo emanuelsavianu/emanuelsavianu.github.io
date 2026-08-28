@@ -27,6 +27,10 @@ Thumbs.db
 !ssn/index.md
 !privati/index.md
 !colleghi/index.md
+!markdown/home.md
+!markdown/ssn.md
+!markdown/privati.md
+!markdown/colleghi.md
 /.claude
 .claude/settings.local.json
 CLAUDE.md
