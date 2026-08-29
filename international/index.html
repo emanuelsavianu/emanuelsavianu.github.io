@@ -25,6 +25,7 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
         <link rel="manifest" href="../manifest.json">
         <link rel="icon" href="../assets/pwa-icon-192.png">
+        <link rel="alternate" hreflang="en" href="https://savianu.it/international/">
         <link rel="alternate" hreflang="it" href="https://savianu.it/">
         <link rel="alternate" hreflang="x-default" href="https://savianu.it/">
 
@@ -284,7 +285,8 @@
         .intl-feedback { min-height: 1.2em; margin-top: 14px; font-size: 0.92rem; line-height: 1.6; }
         .intl-feedback[data-state="success"] { color: var(--color-success, #2e7d6b); }
         .intl-feedback[data-state="error"] { color: var(--danger); }
-        .intl-feedback a { color: inherit; font-weight: 600; }
+        .intl-feedback a { color: var(--accent-text); font-weight: 600; text-decoration: underline; }
+        .intl-feedback .intl-btn { display: inline-block; margin-top: 10px; }
         .intl-field input.intl-invalid,
         .intl-field select.intl-invalid,
         .intl-field textarea.intl-invalid { border-color: var(--danger); }
@@ -529,7 +531,6 @@
                 <button type="submit" class="intl-btn" data-i18n="intl_f_submit">Inquire About Private Primary Care</button>
                 <p class="intl-feedback" id="intl-feedback" role="status" aria-live="polite"></p>
                 <p class="intl-hint" style="margin-top: 14px;" data-i18n="intl_f_alt">For information about fees and availability, please write to <span class="js-email"></span>.</p>
-                <p class="intl-hint" id="intl-form-done" hidden data-i18n="intl_f_done">Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.</p>
             </form>
         </section>
 
@@ -579,8 +580,33 @@
             invalid: tbl.intl_f_invalid || 'Please complete the highlighted required fields.',
             sending: tbl.intl_f_sending || 'Sending…',
             success: tbl.intl_f_success || 'Thank you — your inquiry has been sent. We will reply within a few business days.',
-            fallback: ((tbl.intl_f_done || 'Your email program should now open with your inquiry pre-filled. If it does not, please write to us directly at ') + ' ').replace('  ', ' ')
+            fallback: ((tbl.intl_f_done || 'Your email program should now open with your inquiry pre-filled. If it does not, please write to us directly at ') + ' ').replace('  ', ' '),
+            fallbackMsg: tbl.intl_f_fallback || 'If your email app did not open, send your inquiry to',
+            copy: tbl.intl_f_copy || 'Copy inquiry to clipboard',
+            copied: tbl.intl_f_copied || 'Copied — paste into your email'
         };
+    }
+
+    function copyTextToClipboard(text, btn, doneLabel) {
+        function legacy() {
+            var ta = document.createElement('textarea');
+            ta.value = text;
+            ta.setAttribute('readonly', '');
+            ta.style.position = 'absolute';
+            ta.style.left = '-9999px';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); if (btn) btn.textContent = doneLabel; }
+            catch (e) { /* clipboard unavailable — user can still use the mailto link */ }
+            document.body.removeChild(ta);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function () {
+                if (btn) btn.textContent = doneLabel;
+            }).catch(legacy);
+        } else {
+            legacy();
+        }
     }
 
     var form = document.getElementById('intl-inquiry-form');
@@ -663,18 +689,45 @@
                 form.reset();
                 if (tsField) tsField.value = String(Date.now());
             }).catch(function () {
-                // mailto fallback: the pre-endpoint behaviour, kept as a safety net
+                // Endpoint unreachable (offline / worker error): expose every
+                // manual path so the inquiry is never lost — open the mail client,
+                // click the direct mailto link, or copy the pre-filled text.
                 usedFallback = true;
-                var url = 'mailto:' + ADDR +
+                var mailBody = lines.join('\n');
+                var mailtoUrl = 'mailto:' + ADDR +
                     '?subject=' + encodeURIComponent(subject) +
-                    '&body=' + encodeURIComponent(lines.join('\n'));
-                window.location.href = url;
-                setFeedback(intlStrings().fallback + ADDR + '.', '');
+                    '&body=' + encodeURIComponent(mailBody);
+                // Best-effort: open the user's mail client.
+                window.location.href = mailtoUrl;
+
+                // Resilient fallback UI inside the polite live region.
+                feedback.innerHTML = '';
+                feedback.dataset.state = '';
+                var lead = document.createElement('span');
+                lead.textContent = intlStrings().fallbackMsg + ' ';
+                feedback.appendChild(lead);
+
+                var mailLink = document.createElement('a');
+                mailLink.href = mailtoUrl;
+                mailLink.textContent = ADDR;
+                mailLink.className = 'intl-feedback-link';
+                feedback.appendChild(mailLink);
+                feedback.appendChild(document.createTextNode('. '));
+
+                var copyBtn = document.createElement('button');
+                copyBtn.type = 'button';
+                copyBtn.className = 'intl-btn';
+                copyBtn.style.marginTop = '10px';
+                copyBtn.textContent = intlStrings().copy;
+                copyBtn.addEventListener('click', function () {
+                    var full = 'To: ' + ADDR + '\nSubject: ' + subject + '\n\n' + mailBody;
+                    copyTextToClipboard(full, copyBtn, intlStrings().copied);
+                });
+                feedback.appendChild(document.createElement('br'));
+                feedback.appendChild(copyBtn);
             }).finally(function () {
                 if (btn && !usedFallback) { btn.disabled = false; btn.textContent = originalLabel; }
                 if (btn) btn.dataset.i18nDone = '1';
-                var done = document.getElementById('intl-form-done');
-                if (done && usedFallback) done.hidden = false;
             });
         });
 })();
@@ -686,7 +739,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20260824c"></script>
+<script type="module" src="../app.js?v=20260829a"></script>
 
 </body>
 </html>
