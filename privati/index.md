@@ -1,6 +1,6 @@
 ---
 title: Certificati INPS e Invalidità ad Arezzo | Dott. Savianu
-description: Come richiedere il certificato di invalidità INPS ad Arezzo — dal 1° marzo 2026 la procedura è telematica (D.Lgs. 62/2024). Accompagnamento, Legge 104 e prenotazioni.
+description: Come richiedere il certificato di invalidità INPS ad Arezzo: dal 1° marzo 2026 la procedura è telematica. Accompagnamento, Legge 104 e prenotazioni.
 ---
 
 # Consulti e certificati INPS — Studio Medico Ippocrate (Arezzo)
