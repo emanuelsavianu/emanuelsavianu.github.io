@@ -1,28 +1,23 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Network-First per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v372';
+const CACHE_NAME = 'savianu-v373';
 
 const PRECACHE_URLS = [
   '/offline.html',
   '/404.html',
   '/colleghi/ausili-assistenziali.html',
-  '/colleghi/calcolatore-ferie-gemini.html',
-  '/colleghi/calcolatore-ferie.html',
   '/colleghi/guida-accessi-malattie-infettive.html',
   '/colleghi/guida-accessi-pronto-soccorso.html',
   '/colleghi/guida-accessi-vascolari.html',
   '/colleghi/guida-interattiva-mmg.html',
   '/colleghi/index.html',
   '/colleghi/',
-  '/colleghi/installazione.html',
-  '/colleghi/lo-scudo-del-medico.html',
   '/colleghi/malattia.html',
   '/colleghi/medicina-fisica-codici-LR.html',
   '/colleghi/protocollo-certificati-inps.html',
   '/',
   '/international/index.html',
   '/international/',
-  '/potini.html',
   '/privacy.html',
   '/privati/certificato-invalidita-civile.html',
   '/privati/faq-riforma.html',

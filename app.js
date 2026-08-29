@@ -180,7 +180,7 @@ class SiteFooter extends HTMLElement {
             footerLink(prefix + 'privacy.html', 'link_privacy', isPatient, 'Privacy Policy') +
           '</nav>' +
           '<p class="footer-privacy-note">Questo sito non usa cookie di profilazione né strumenti di tracciamento invasivi. Le statistiche sono aggregate e anonime nel rispetto del GDPR.</p>' +
-          '<p class="footer-legal-note">Sito di informazione sanitaria ai sensi della Legge 145/2018 (pubblicità informativa con finalità educative). Il contenuto non sostituisce il parere del medico; in caso di urgenza chiama il 112. Iscrizione all\'Albo dei Medici Chirurghi e Odontoiatri di Arezzo (OMCeO AR).</p>' +
+          '<p class="footer-legal-note">Sito di informazione sanitaria ai sensi della Legge 145/2018 (pubblicità informativa con finalità educative). Il contenuto non sostituisce il parere del medico; in caso di urgenza chiama il 112. Iscrizione all\'Albo dei Medici Chirurghi e Odontoiatri di Arezzo (OMCeO AR) n. [NUMERO_ISCRIZIONE]. P.IVA / C.F. [P_IVA_CF].</p>' +
         '</div>' +
       '</footer>';
 
