@@ -4,20 +4,20 @@
 
 ## Sezioni principali
 
-- [Home](https://savianu.it/) — presentazione dello studio, orari, contatti e smistamento verso le aree.
-- [Pazienti / SSN](https://savianu.it/ssn/) — prenotazioni Doctolib, ricette, FAQ, esenzioni ticket, impegnative CUP, certificato di malattia.
-- [Consulti e certificati INPS](https://savianu.it/privati/) — invalidità civile, Legge 104, indennità di accompagnamento, riforma disabilità D.Lgs. 62/2024, procedura telematica Arezzo.
-- [Area Colleghi](https://savianu.it/colleghi/) — strumenti, protocolli, normative, RUAP/PIR, guide Millewin per Medici di Medicina Generale.
+- [Medico di Famiglia Arezzo | Dott. Savianu](https://savianu.it/)
+- [Pazienti | Dott. Emanuel Savianu — Medico di Famiglia Arezzo](https://savianu.it/ssn/)
+- [Certificati INPS e Invalidità ad Arezzo | Dott. Savianu](https://savianu.it/privati/)
+- [Area Colleghi | Dott. Emanuel Savianu — Arezzo](https://savianu.it/colleghi/)
 
 ## Markdown per agenti
 
 Ogni sezione è disponibile in formato Markdown tramite content negotiation:
 invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure apri direttamente i file:
 
-- [home.md](https://savianu.it/home.md)
-- [ssn/index.md](https://savianu.it/ssn/index.md)
-- [privati/index.md](https://savianu.it/privati/index.md)
-- [colleghi/index.md](https://savianu.it/colleghi/index.md)
+- [/home.md](https://savianu.it/home.md)
+- [/ssn/index.md](https://savianu.it/ssn/index.md)
+- [/privati/index.md](https://savianu.it/privati/index.md)
+- [/colleghi/index.md](https://savianu.it/colleghi/index.md)
 
 ## Contatti generali
 
