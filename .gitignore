@@ -17,8 +17,6 @@ tools/.bing_key
 Thumbs.db
 .superpowers/brainstorm/2009-1774431641/.server-info
 /.superpowers
-/.superpowers
-.superpowers/brainstorm/2009-1774431641/.server-info
 *.md
 !DESIGN.md
 !docs/**/*.md
@@ -34,13 +32,7 @@ Thumbs.db
 /.claude
 .claude/settings.local.json
 CLAUDE.md
-.claude/settings.local.json
-CLAUDE.md
 sw.js
-.claude/settings.local.json
-.claude/settings.local.json
-CLAUDE.md
-CLAUDE.md
 .bkit/snapshots/snapshot-2026-04-04T11-20-16-789Z.json
 .bkit/state/memory.json
 .bkit/state/pdca-status.json
@@ -61,8 +53,6 @@ CLAUDE.md
 .bkit/snapshots/snapshot-2026-04-04T11-25-00-021Z.json
 .bkit/snapshots/snapshot-2026-04-04T11-25-11-853Z.json
 .bkit/snapshots/snapshot-2026-04-04T11-25-27-425Z.json
-.claude/settings.local.json
-.claude/settings.local.json
 cloudflare/worker.js
 .bkit/snapshots/snapshot-2026-04-04T13-02-53-461Z.json
 .bkit/snapshots/snapshot-2026-04-04T13-03-03-748Z.json
@@ -119,3 +109,7 @@ ssn/poster-styles.css
 .opencode/.gitignore.oh-my-opencode-slim-legacy
 .opencode/package-lock.json
 .opencode/package.json
+
+# Internal agent workspaces & private docs (untracked 2026-08-29)
+/docs/
+/email-templates/
