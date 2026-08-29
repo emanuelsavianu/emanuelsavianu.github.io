@@ -1,6 +1,6 @@
 ---
 title: Area Colleghi | Dott. Emanuel Savianu — Arezzo
-description: Area Colleghi dello Studio Medico Ippocrate — Dott. Emanuel Savianu — strumenti, protocolli e guide professionali per Medici di Medicina Generale.
+description: Area Colleghi dello Studio Medico Ippocrate — Dott. Emanuel Savianu: strumenti, protocolli e guide professionali per Medici di Medicina Generale.
 ---
 
 # Area Colleghi — Studio Medico Ippocrate
