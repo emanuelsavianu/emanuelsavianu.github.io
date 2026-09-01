@@ -16,7 +16,7 @@ export const HISTORY_MAX = 50;
 export const DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì'];
 export const DAY_KEYS  = ['lun', 'mar', 'mer', 'gio', 'ven'];
 
-export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano'];
+export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'Baldaccio', 'Guadagnoli'];
 export const DEFAULT_SLOTS = [
   { key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' },
   { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' },
