@@ -97,6 +97,14 @@ const LEGACY_REDIRECTS = {
   '/urdu.html': '/ssn/urdu.html',
 };
 
+// Cross-origin redirects (subdomain/external targets) — handled separately
+// because url.pathname cannot hold an absolute URL.
+// /prenota: short booking link. After the dottemanuelsavianu.it -> savianu.it
+// zone-level merge, dottemanuelsavianu.it/prenota 301s here (path preserved).
+const EXTERNAL_REDIRECTS = {
+  '/prenota': 'https://prenota.savianu.it/',
+};
+
 // ── Inquiry form endpoint (/api/intl-inquiry) ────────────────────────────────
 // Receives the /international/ inquiry form and forwards it via Email Routing
 // (SEND_EMAIL binding). No storage, no auto-reply to the patient. Setup:
@@ -224,6 +232,14 @@ export default {
     if (legacyTarget) {
       url.pathname = legacyTarget;
       return Response.redirect(url.toString(), 301);
+    }
+
+    // Cross-origin redirects (absolute targets — see EXTERNAL_REDIRECTS)
+    const externalTarget = EXTERNAL_REDIRECTS[url.pathname];
+    if (externalTarget) {
+      const target = new URL(externalTarget);
+      target.search = url.search;   // preserve query string
+      return Response.redirect(target.toString(), 302);
     }
 
     // ── Accept: text/markdown content negotiation (Markdown for Agents) ──────
