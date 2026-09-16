@@ -42,8 +42,16 @@ const REDIRECTS = {
 export default {
   async fetch(request) {
     const url = new URL(request.url);
+    const target = REDIRECTS[url.pathname];
 
-    url.pathname = REDIRECTS[url.pathname] || url.pathname;
+    // Absolute-URL redirects (external services, e.g. Doctolib): must go
+    // straight to Response.redirect — assigning an absolute URL to
+    // url.pathname encodes the slashes and mangles the URL.
+    if (target && target.startsWith('http')) {
+      return Response.redirect(target, 302);
+    }
+
+    url.pathname = target || url.pathname;
     url.hostname = 'savianu.it';
     url.protocol = 'https:';
     url.port = '';
