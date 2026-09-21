@@ -28,6 +28,7 @@ Dolore toracico, dispnea acuta, cefalea intensa e inusuale, deficit neurologici 
 - **Gestore Turni Universale (RUAP)** — pianificazione turni, ruoli, sedi, personale, export/import, dark mode.
 - **Calcolatore Ferie e Coperture** — ferie gruppo medico, coperture giornaliere, export Excel (dati locali nel browser).
 - **Protocolli e Normative** — Protocollo INPS (D.Lgs. 62/2024, allegazioni, WHODAS), Medicina Fisica (codici LR01–LR21 nuovo Catalogo), Ausili Assistenziali (Elenco 2B, DPCM 12/01/2017), Guida Accessi, Pronto Soccorso (San Donato), MST, Accessi Vascolari (PICC/Port).
+- **Nota operativa 2026 — codici prescrittivi (nutrizione):** per le richieste di primo accesso a valutazione nutrizionale va inserito il codice **2229 (Visita Dietetica)** e non il codice 1070; se dalla visita emerge la necessità di coinvolgere il nutrizionista, è lo specialista stesso ad attivarsi per la prescrizione. Fonte: indicazione della Direzione della Nutrizione Clinica — sede operativa di Arezzo (Azienda USL Toscana Sud Est), 2026.
 - **Modulistica** — PAI (Piano Assistenziale Integrato: ADI/ADP/ADR/cure intermedie), facsimili e certificati.
 
 ## Guide Millewin (scorciatoie)
