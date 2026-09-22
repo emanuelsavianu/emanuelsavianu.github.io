@@ -784,6 +784,16 @@ footer a { color: var(--accent); font-weight: bold; }
     text-align: center;
 }
 
+/* Dati identificativi dello studio (albo, codice regionale, P.IVA, SDI).
+   Colori espliciti: --text-muted non è definita e ricadrebbe sul bianco
+   ereditato, annullando la gerarchia etichetta/valore. */
+.footer-ident {
+    margin: 8px 0 0; padding: 0 8px;
+    font-size: 0.70rem; line-height: 1.6; color: #C9D6E4;
+    text-align: center;
+}
+.footer-ident strong { color: #fff; font-weight: 700; letter-spacing: 0.01em; }
+
 /* --- WELCOME MODAL: EMERGENCY STEP DARK MODE FIX --- */
 .welcome-step-emergency {
     background-color: #fff0f0;
