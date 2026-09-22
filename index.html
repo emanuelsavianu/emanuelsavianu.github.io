@@ -48,7 +48,7 @@
     <meta name="twitter:description" content="Dott. Emanuel Savianu, medico di medicina generale ad Arezzo: visite private, certificati INPS e contatti.">
     <meta name="twitter:image" content="https://savianu.it/assets/bronzelogo.png">
 
-    <link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
     <link rel="preload" href="assets/fontawesome/webfonts/fa-solid-900.subset.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="assets/fontawesome/css/solid.subset.css">
@@ -60,372 +60,48 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <!-- Marks JS availability for the index accordion: without it every panel
-         stays open and the labels are plain headings. -->
-    <script>document.documentElement.classList.add('lp-js');</script>
-    <link rel="stylesheet" href="styles.css?v=20260922a">
+    <link rel="stylesheet" href="styles.css?v=20260824d">
 
-    <!-- =========================================================
-         LANDING PAGE — "Lo sportello" (design/COMMIT-SHEET.md)
-         Tokens are namespaced --lp-* so nothing here leaks into the
-         20+ other pages, which keep styles.css untouched.
-         ========================================================= -->
-    <style>
-/* ── TOKENS ─────────────────────────────────────────────────── */
-:root {
-    --lp-navy:        #1A2F4C;
-    --lp-navy-deep:   #12243C;
-    --lp-paper:       #F6F7F8;
-    --lp-paper-edge:  #E7E9EB;
-    --lp-cream:       #F3EFE6;   /* brand stamp — rationed, never the ground */
-    --lp-brass:       #C29B57;   /* live state + one action per row */
-    --lp-brass-ink:   #7A5C2E;   /* brass as text on paper: 5.8:1 */
-    --lp-ink:         #14202E;
-    --lp-muted:       #55606E;
-    --lp-on-navy:        rgba(255, 255, 255, 0.92);
-    --lp-on-navy-muted:  rgba(255, 255, 255, 0.68);
-    --lp-rule-navy:      rgba(255, 255, 255, 0.17);
-    --lp-rule-paper:     rgba(20, 32, 46, 0.14);
-    --lp-ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
-    --lp-pad:         clamp(1.15rem, 4vw, 3.25rem);
-    --lp-measure:     1080px;
-    --lp-font-display: 'Cormorant Garamond', Georgia, serif;
-    --lp-font-text:    'Montserrat', system-ui, sans-serif;
-}
-.dark-mode {
-    --lp-paper:      #0B1524;
-    --lp-paper-edge: #1B2B42;
-    --lp-cream:      #16233A;
-    --lp-ink:        #EDF0F4;
-    --lp-muted:      #A9B4C2;
-    --lp-brass-ink:  #E0B976;
-    --lp-rule-paper: rgba(255, 255, 255, 0.16);
-}
+    <!-- Lenis smooth scroll (self-hosted, offline-first) -->
+    <script type="module">
+      import Lenis from '/assets/lenis/lenis.mjs';
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!prefersReduced) {
+        const lenis = new Lenis({
+          duration: 2.0,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          wheelMultiplier: 1.5,
+          touchMultiplier: 2.5
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        // Expose for anchor links
+        window.lenis = lenis;
+      }
+      // Smooth anchor scroll via Lenis (or fallback)
+      document.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a[href^="#"]');
+        if (anchor) {
+          const href = anchor.getAttribute('href');
+          if (href.length > 1) {
+            const target = document.querySelector(href);
+            if (target) {
+              e.preventDefault();
+              if (window.lenis) {
+                window.lenis.scrollTo(target, { offset: 0 });
+              } else {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+              target.focus({ preventScroll: true });
+            }
+          }
+        }
+      });
+    </script>
 
-html { scroll-behavior: smooth; }
-body {
-    background: var(--lp-paper);
-    color: var(--lp-ink);
-    font-family: var(--lp-font-text);
-    line-height: 1.55;
-    font-synthesis-weight: none;
-}
-@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-.lp-wrap {
-    padding-inline: max(var(--lp-pad), calc((100vw - var(--lp-measure)) / 2));
-}
-.lp-sr {
-    position: absolute; width: 1px; height: 1px; overflow: hidden;
-    clip-path: inset(50%); white-space: nowrap;
-}
-.lp-skip {
-    position: absolute; left: -9999px; top: 0; z-index: 5;
-    background: var(--lp-brass); color: #17202E; padding: 0.7rem 1.1rem;
-    font-weight: 600; font-size: 0.9rem;
-}
-.lp-skip:focus { left: 0.5rem; top: 0.5rem; }
-
-/* ── THE DECISION BAND ──────────────────────────────────────── */
-.lp-sportello {
-    position: relative;
-    background: var(--lp-navy);
-    color: var(--lp-on-navy);
-    display: flex;
-    flex-direction: column;
-    isolation: isolate;
-}
-/* static 3% grain: kills the flat vector emptiness. Never animated. */
-.lp-sportello::after {
-    content: "";
-    position: absolute; inset: 0; z-index: 1; pointer-events: none;
-    opacity: 0.035;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-.lp-sportello > * { position: relative; z-index: 2; }
-
-/* header: identity · controls. No status chrome, no live dot. */
-.lp-top {
-    display: flex; align-items: flex-start; justify-content: space-between;
-    gap: 1.5rem;
-    padding-block: clamp(0.85rem, 1.9vw, 1.45rem) 0.85rem;
-    border-bottom: 1px solid var(--lp-rule-navy);
-}
-.lp-identity { display: flex; align-items: center; gap: 0.9rem; min-width: 0; }
-.lp-mark { width: 44px; height: 44px; flex: none; }
-.lp-identity-txt { min-width: 0; }
-.lp-identity-name {
-    font-family: var(--lp-font-display);
-    font-size: clamp(1.4rem, 2.2vw, 2.35rem);
-    font-weight: 600; line-height: 1; letter-spacing: -0.01em;
-    margin: 0; color: #fff;
-}
-.lp-identity-role {
-    margin: 0.3rem 0 0; font-size: 0.78rem; line-height: 1.45;
-    color: var(--lp-on-navy-muted); max-width: 64ch;
-}
-.lp-controls { display: flex; align-items: center; gap: 0.5rem; flex: none; }
-.lp-lang { display: flex; gap: 0.1rem; }
-.lp-lang button {
-    font: 600 0.78rem/1 var(--lp-font-text); letter-spacing: 0.02em;
-    background: none; border: 0; cursor: pointer;
-    padding: 0.5rem; color: var(--lp-on-navy-muted);
-}
-.lp-lang button:hover { color: #fff; }
-.lp-lang button.active {
-    color: var(--lp-brass);
-    text-decoration: underline; text-underline-offset: 5px;
-}
-.lp-icon-btn {
-    width: 40px; height: 40px; display: grid; place-items: center;
-    background: none; border: 1px solid var(--lp-rule-navy); border-radius: 2px;
-    color: var(--lp-on-navy); cursor: pointer; font-size: 0.95rem; line-height: 1;
-    transition: border-color 140ms var(--lp-ease), color 140ms var(--lp-ease);
-}
-.lp-icon-btn:hover { border-color: var(--lp-brass); color: var(--lp-brass); }
-
-/* the counter: one live sentence + today's strip */
-.lp-counter {
-    padding-block: clamp(1rem, 2.2vw, 1.7rem) clamp(0.9rem, 2vw, 1.45rem);
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 0.9rem clamp(1.25rem, 3vw, 3rem);
-    align-items: start;
-    border-bottom: 1px solid var(--lp-rule-navy);
-}
-.lp-counter-state { display: grid; gap: 0.6rem; align-content: start; }
-.lp-state {
-    margin: 0;
-    font-size: clamp(1rem, 1.3vw, 1.18rem);
-    color: #fff;
-    display: flex; align-items: baseline; gap: 0.55rem; flex-wrap: wrap;
-}
-.lp-state-word { color: var(--lp-brass); font-weight: 600; }
-.lp-state-eta { color: var(--lp-on-navy-muted); font-variant-numeric: tabular-nums; }
-.lp-strip { display: grid; gap: 0.45rem; }
-.lp-strip-caption { margin: 0; font-size: 0.82rem; color: var(--lp-on-navy-muted); }
-.lp-strip-track {
-    position: relative; height: 22px;
-    border-bottom: 1px solid var(--lp-rule-navy);
-}
-.lp-strip-open {
-    position: absolute; bottom: 0; height: 6px;
-    background: var(--lp-brass); opacity: 0.6;
-}
-.lp-strip-now {
-    position: absolute; bottom: -4px; width: 1px; height: 16px;
-    background: #fff; transform: translateX(-0.5px);
-}
-.lp-strip-now::after {
-    content: ""; position: absolute; top: -3px; left: -2px;
-    width: 5px; height: 5px; background: #fff; border-radius: 50%;
-}
-.lp-strip-scale {
-    display: flex; justify-content: space-between;
-    font-size: 0.68rem; color: var(--lp-on-navy-muted);
-    font-variant-numeric: tabular-nums;
-}
-
-/* ── THE INDEX — ledger lines on a continuous counter rule ──── */
-.lp-path {
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 0 clamp(1.25rem, 3vw, 3rem);
-    border-top: 1px solid var(--lp-rule-navy);
-}
-.lp-path:first-of-type { border-top: 0; }
-.lp-path-row {
-    grid-column: 1; grid-row: 1;
-    padding-block: 0.38rem;
-}
-.lp-path-title {
-    display: block; margin: 0;
-    font-family: var(--lp-font-display);
-    font-weight: 500; line-height: 0.95; letter-spacing: -0.02em;
-    color: var(--lp-on-navy);
-    font-size: clamp(1.5rem, 2.8vw, 2.35rem);
-    transition: color 140ms var(--lp-ease);
-}
-/* the disclosure button is created by JS. Without JS the label is a plain
-   heading and every panel stays open — no dead control, nothing unreachable. */
-.lp-path-toggle {
-    display: block; width: 100%;
-    font: inherit; color: inherit; letter-spacing: inherit;
-    line-height: inherit; text-align: left;
-    background: none; border: 0; padding: 0; cursor: pointer;
-}
-.lp-path-toggle:hover { color: #fff; }
-.lp-path-toggle:focus-visible { outline: 2px solid var(--lp-brass); outline-offset: 6px; border-radius: 2px; }
-.lp-path-who {
-    display: block; margin-top: 0.25rem;
-    font-size: 0.82rem; color: var(--lp-on-navy-muted);
-    max-width: 46ch;
-}
-.lp-path-actions {
-    grid-column: 2; grid-row: 1;
-    border-left: 1px solid var(--lp-rule-navy);
-    padding-left: clamp(1rem, 2.4vw, 2.25rem);
-    padding-block: 0.6rem;
-    display: flex; flex-direction: column; justify-content: center;
-    gap: 0.5rem;
-    align-self: stretch;
-}
-/* one open at a time — only when JS is available to reopen them */
-.lp-js .lp-path:not(.is-open) .lp-path-actions,
-.lp-js .lp-path:not(.is-open) .lp-path-panel { display: none; }
-.lp-path.is-open .lp-path-row { background: var(--lp-navy-deep); }
-.lp-path.is-open .lp-path-actions { background: var(--lp-navy-deep); }
-.lp-path.is-open .lp-path-title { font-size: clamp(2.6rem, 6.6vw, 5.75rem); }
-.lp-path-panel {
-    grid-column: 1 / -1; grid-row: 2;
-    background: var(--lp-navy-deep);
-    border-top: 1px solid var(--lp-rule-navy);
-}
-.lp-panel-inner {
-    padding-block: 1rem 1.5rem;
-    display: grid;
-    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 0.9rem clamp(1.25rem, 3vw, 3rem);
-    animation: lp-panel-in 260ms var(--lp-ease) both;
-}
-@keyframes lp-panel-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
-.lp-panel-note { margin: 0; max-width: 62ch; font-size: 0.92rem; color: var(--lp-on-navy); }
-.lp-panel-note strong { color: #fff; }
-.lp-panel-links {
-    margin: 0; padding: 0; list-style: none;
-    border-left: 1px solid var(--lp-rule-navy);
-    padding-left: clamp(1rem, 2.4vw, 2.25rem);
-}
-.lp-panel-links li + li { margin-top: 0.4rem; }
-.lp-panel-links a {
-    font-size: 0.88rem; color: var(--lp-brass);
-    border-bottom: 1px solid transparent; opacity: 1;
-    transition: border-color 140ms var(--lp-ease);
-}
-.lp-panel-links a:hover { border-bottom-color: var(--lp-brass); opacity: 1; }
-
-/* buttons: one brass action per row, the rest are ghosts */
-.lp-btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    min-height: 44px; padding: 0.6rem 1.1rem;
-    font: 600 0.9rem/1 var(--lp-font-text); text-align: center;
-    border: 1px solid transparent; border-radius: 2px; opacity: 1;
-    transition: background-color 140ms var(--lp-ease), border-color 140ms var(--lp-ease), color 140ms var(--lp-ease);
-}
-.lp-btn:hover { opacity: 1; }
-.lp-btn--brass { background: var(--lp-brass); color: #17202E; }
-.lp-btn--brass:hover { background: #D2AC6B; }
-.lp-btn--ghost { border-color: var(--lp-rule-navy); color: var(--lp-on-navy); }
-.lp-btn--ghost:hover { border-color: var(--lp-brass); color: var(--lp-brass); }
-
-/* emergency: static facts, next to the live state — never a decision tree */
-.lp-emergency {
-    margin: 0;
-    padding-top: 0.6rem;
-    border-top: 1px solid var(--lp-rule-navy);
-    display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.3rem 1.3rem;
-    font-size: 0.82rem;
-}
-.lp-emergency .num { font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; }
-.lp-emergency .lbl { color: var(--lp-on-navy-muted); }
-.lp-emergency .urgent .num { color: #F4A2A2; }
-
-/* ── THE RECORD — paper layer ───────────────────────────────── */
-.lp-record { padding-block: clamp(2rem, 5vw, 3.75rem); }
-.lp-record-head {
-    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 1.1rem clamp(1.25rem, 3vw, 3rem);
-    border-bottom: 1px solid var(--lp-rule-paper);
-    padding-bottom: 1.25rem;
-}
-.lp-record-title {
-    margin: 0; font-family: var(--lp-font-display); font-weight: 600;
-    font-size: clamp(1.9rem, 3.3vw, 2.9rem); line-height: 1; letter-spacing: -0.02em;
-}
-.lp-record-note { margin: 0.55rem 0 0; color: var(--lp-muted); font-size: 0.88rem; max-width: 46ch; }
-.lp-hours { border-collapse: collapse; width: 100%; }
-.lp-hours th, .lp-hours td {
-    text-align: left; font-weight: 400; font-size: 0.9rem;
-    padding: 0.55rem 0; border-bottom: 1px solid var(--lp-rule-paper);
-    vertical-align: baseline;
-}
-.lp-hours th { color: var(--lp-ink); padding-right: 1rem; }
-.lp-hours td { color: var(--lp-muted); font-variant-numeric: tabular-nums; text-align: right; }
-.lp-stamp {
-    background: var(--lp-cream); border: 1px solid var(--lp-paper-edge);
-    padding: 1.15rem 1.3rem; margin-top: 1.9rem; max-width: 68ch;
-}
-.lp-stamp h3 {
-    margin: 0 0 0.45rem; font-family: var(--lp-font-display);
-    font-size: 1.4rem; font-weight: 600; color: var(--lp-ink);
-}
-.lp-stamp p { margin: 0 0 0.5rem; font-size: 0.88rem; color: var(--lp-muted); }
-.lp-stamp strong { color: var(--lp-ink); }
-.lp-stamp a { color: var(--lp-brass-ink); border-bottom: 1px solid currentColor; opacity: 1; }
-.lp-stamp a:hover { opacity: 1; }
-.lp-locator { margin-top: 1.9rem; display: grid; gap: 0.8rem; }
-.lp-locator img {
-    display: block; width: 100%; max-width: 620px; height: auto;
-    border: 1px solid var(--lp-paper-edge);
-}
-.lp-locator p { margin: 0; font-size: 0.84rem; color: var(--lp-muted); max-width: 62ch; }
-.lp-locator a { color: var(--lp-brass-ink); border-bottom: 1px solid currentColor; opacity: 1; }
-.lp-locator a:hover { opacity: 1; }
-
-/* 116 117 — factual, two columns under hairlines. No green/red decision boxes. */
-.lp-facts { padding-block: clamp(1.75rem, 4vw, 3rem); border-top: 1px solid var(--lp-rule-paper); }
-.lp-facts-head {
-    display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
-    gap: 0.9rem clamp(1.25rem, 3vw, 3rem);
-}
-.lp-facts h2 {
-    margin: 0; font-family: var(--lp-font-display); font-weight: 600;
-    font-size: clamp(1.5rem, 2.6vw, 2.2rem); line-height: 1.05; letter-spacing: -0.01em;
-}
-.lp-facts-lead { margin: 0; font-size: 0.9rem; color: var(--lp-muted); max-width: 46ch; }
-.lp-facts-cols {
-    margin-top: 1.5rem;
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-    gap: 1.5rem clamp(1.25rem, 3vw, 3rem);
-}
-.lp-facts-col { border-top: 1px solid var(--lp-rule-paper); padding-top: 0.9rem; }
-.lp-facts-col h3 {
-    margin: 0 0 0.6rem; font: 600 0.82rem/1.4 var(--lp-font-text);
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--lp-brass-ink);
-}
-.lp-facts-col ul { margin: 0; padding-left: 1.1rem; }
-.lp-facts-col li { font-size: 0.9rem; color: var(--lp-muted); margin-bottom: 0.45rem; }
-.lp-facts-col li strong { color: var(--lp-ink); }
-
-/* ── RESPONSIVE ─────────────────────────────────────────────── */
-@media (max-width: 860px) {
-    .lp-counter, .lp-record-head, .lp-facts-head, .lp-panel-inner, .lp-facts-cols {
-        grid-template-columns: minmax(0, 1fr);
-    }
-    .lp-path { grid-template-columns: minmax(0, 1fr); }
-    .lp-path-row { grid-column: 1; grid-row: 1; }
-    .lp-path-actions {
-        grid-column: 1; grid-row: 2;
-        border-left: 0; padding-left: 0;
-        border-top: 1px solid var(--lp-rule-navy);
-        padding-top: 0.85rem;
-        flex-direction: row; flex-wrap: wrap;
-    }
-    .lp-path-panel { grid-row: 3; }
-    .lp-panel-links { border-left: 0; padding-left: 0; border-top: 1px solid var(--lp-rule-navy); padding-top: 0.85rem; }
-    .lp-path.is-open .lp-path-title { font-size: clamp(2.3rem, 12vw, 3.6rem); }
-    .lp-top { flex-direction: column; align-items: stretch; gap: 0.9rem; }
-    .lp-controls { justify-content: flex-end; }
-    .lp-mark { width: 36px; height: 36px; }
-    .lp-hours td { text-align: left; }
-}
-
-/* reduced motion: an alternative direction, not an off switch */
-@media (prefers-reduced-motion: reduce) {
-    .lp-panel-inner { animation: none; }
-    .lp-btn, .lp-panel-links a, .lp-path-title, .lp-icon-btn { transition: none; }
-}
-    </style>
+    <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
+    <script type="module" src="/assets/scroll-reveal.js"></script>
 
     <!-- JSON-LD: MedicalBusiness (clinic umbrella) with Physician as founder -->
     <script type="application/ld+json">
@@ -472,7 +148,6 @@ body {
         "areaServed": { "@type": "City", "name": "Arezzo" },
         "priceRange": "SSN / Privato",
         "currenciesAccepted": "EUR",
-        "vatID": "IT02348320512",
         "sameAs": [
           "https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu",
           "https://www.omceoar.it/",
@@ -493,8 +168,7 @@ body {
           "medicalSpecialty": "GeneralPractice",
           "hasCredential": {
             "@type": "EducationalOccupationalCredential",
-            "name": "Iscrizione all'Albo dei Medici Chirurghi e Odontoiatri di Arezzo (OMCeO AR)",
-            "identifier": "Ord. Medici AR n. 3499"
+            "name": "Iscrizione all'Albo dei Medici Chirurghi e Odontoiatri di Arezzo (OMCeO AR)"
           },
           "availableLanguage": ["it", "en"]
         }
@@ -506,224 +180,195 @@ body {
 <body>
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 
-<div class="lp-sportello">
-
-    <a class="lp-skip" href="#main-content" data-i18n="skip_link">Vai al contenuto principale</a>
-
-    <!-- not a <header> element on purpose: styles.css paints an overlay on
-         header::after that would swallow clicks on these controls -->
-    <div class="lp-top lp-wrap" role="banner">
-        <div class="lp-identity">
-            <img class="lp-mark" src="assets/bronzelogo.png" alt="" width="44" height="44">
-            <div class="lp-identity-txt">
-                <h1 class="lp-identity-name" data-i18n="landing_hero_title">Dott. Emanuel Savianu</h1>
-                <p class="lp-identity-role" data-i18n="lp_identity_role">Medico di Medicina Generale (SSN) · Studio Medico Ippocrate, Piazza Saione 3, Arezzo</p>
-            </div>
-        </div>
-        <div class="lp-controls">
-            <div class="lp-lang" role="group" aria-label="Lingua" data-i18n-aria-label="lp_lang_label">
-                <button type="button" id="btn-it" class="active" onclick="setLanguage('it')">ITA</button>
-                <button type="button" id="btn-en" onclick="setLanguage('en')">ENG</button>
-            </div>
-            <button type="button" class="lp-icon-btn" id="btn-dark" onclick="toggleDarkMode()" aria-label="Attiva/Disattiva tema scuro" data-i18n-aria-label="lp_theme_toggle"><i class="fas fa-moon" aria-hidden="true"></i></button>
-        </div>
+<site-nav data-section="root">
+    <div class="fallback-nav">
+        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p>Piazza Saione 3, Arezzo · <a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
+</site-nav>
 
-    <!-- the counter: one live sentence + today's strip, and the emergency facts
-         next to it — both are facts about *now*, and safety numbers are never
-         the last thing on the page -->
-    <div class="lp-counter lp-wrap">
-        <div class="lp-counter-state">
-            <p class="lp-state">
-                <span class="lp-state-word" id="lp-state-word">Orari</span>
-                <span id="lp-state-text">Lun – Ven · 09:30 – 12:30 · 16:00 – 19:00</span>
-            </p>
-            <p class="lp-emergency">
-                <span class="urgent"><span class="lbl" data-i18n="lp_em_emergenza">Emergenza</span> <span class="num">112</span></span>
-                <span><span class="lbl" data-i18n="lp_em_guardia">Guardia medica e consigli non urgenti</span> <span class="num">116 117</span></span>
-                <span class="lbl" data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
-            </p>
-        </div>
-        <div class="lp-strip">
-            <p class="lp-strip-caption" id="lp-strip-caption">Oggi</p>
-            <div class="lp-strip-track" id="lp-strip-track" role="img" aria-label="Fasce di apertura di oggi: 09:30 – 12:30 e 16:00 – 19:00">
-                <span class="lp-strip-open" data-from="9.5" data-to="12.5"></span>
-                <span class="lp-strip-open" data-from="16" data-to="19"></span>
-                <span class="lp-strip-now" id="lp-strip-now" hidden></span>
-            </div>
-            <div class="lp-strip-scale" aria-hidden="true"><span>08</span><span>11</span><span>14</span><span>17</span><span>20</span></div>
-        </div>
+<section class="page-hero page-hero--media" aria-labelledby="hero-heading">
+    <picture>
+        <source type="image/avif" media="(min-width: 1024px)" srcset="assets/studio/studio-location-desktop.avif?v=2">
+        <source type="image/webp" media="(min-width: 1024px)" srcset="assets/studio/studio-location-desktop.webp?v=2">
+        <source type="image/avif" media="(min-width: 600px)" srcset="assets/studio/studio-location-tablet.avif?v=2">
+        <source type="image/webp" media="(min-width: 600px)" srcset="assets/studio/studio-location-tablet.webp?v=2">
+        <source type="image/avif" srcset="assets/studio/studio-location-mobile.avif?v=2">
+        <img src="assets/studio/studio-location-mobile.webp?v=2" alt="Studio Medico Ippocrate — Piazza Saione 3, Arezzo" width="2000" height="848" fetchpriority="high" decoding="async">
+    </picture>
+    <div class="hero-overlay" aria-hidden="true"></div>
+    <div class="hero-content">
+        <p class="hero-eyebrow">
+            <span data-i18n="landing_hero_eyebrow">Studio Medico Ippocrate</span>
+        </p>
+        <h1 class="hero-title" id="hero-heading" data-i18n="landing_hero_title">Dott. Emanuel Savianu</h1>
     </div>
+</section>
 
-    <main id="main-content">
-
-        <!-- the index: four paths, one open in place.
-             Plain sections on purpose: without JS every panel stays open, with JS
-             the labels are upgraded to disclosure buttons (aria-expanded/controls). -->
-        <nav class="lp-index" aria-label="Scegli la tua area" data-i18n-aria-label="lp_index_label">
-
-            <section class="lp-path is-open">
-                <div class="lp-path-row lp-wrap">
-                    <h2 class="lp-path-title"><span class="lp-path-label" data-i18n="triage_ssn_title">Pazienti</span></h2>
-                    <p class="lp-path-who" data-i18n="lp_who_pazienti">Sono assistito dal Dott. Savianu.</p>
-                </div>
-                <div class="lp-path-actions lp-wrap">
-                    <a class="lp-btn lp-btn--brass" id="lp-cta-doctolib" href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/booking?source=profile" target="_blank" rel="noopener noreferrer" data-i18n="lp_cta_book">Prenota su Doctolib</a>
-                    <a class="lp-btn lp-btn--ghost" id="lp-cta-renew" href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu/patient-request?category=message" target="_blank" rel="noopener noreferrer" data-i18n="lp_cta_renew">Rinnovo ricette</a>
-                </div>
-                <div class="lp-path-panel" id="lp-panel-pazienti">
-                    <div class="lp-panel-inner lp-wrap">
-                        <p class="lp-panel-note" data-i18n="lp_note_pazienti">Appuntamenti, messaggi e rinnovi passano da <strong>Doctolib</strong>: è il canale che la segreteria controlla per primo. Se non riesci a usarlo, chiama la segreteria <strong>0575 910 904</strong> negli orari di apertura.</p>
-                        <ul class="lp-panel-links">
-                            <li><a href="ssn/" data-i18n="lp_link_ssn">Assistito SSN: esenzioni, impegnative, scelte e revoche</a></li>
-                            <li><a href="ssn/cert-malattia.html" data-i18n="lp_link_malattia">Certificato di malattia</a></li>
-                            <li><a href="ssn/faq.html" data-i18n="lp_link_faq">Domande frequenti</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="lp-path">
-                <div class="lp-path-row lp-wrap">
-                    <h2 class="lp-path-title"><span class="lp-path-label" data-i18n="triage_privati_title">Consulti e certificati INPS</span></h2>
-                    <p class="lp-path-who" data-i18n="lp_who_inps">Mi serve un certificato, una visita privata o una consulenza medico-legale.</p>
-                </div>
-                <div class="lp-path-actions lp-wrap">
-                    <a class="lp-btn lp-btn--brass" href="privati/" data-i18n="lp_cta_consult">Prenota una consulenza</a>
-                    <a class="lp-btn lp-btn--ghost" href="privati/" data-i18n="lp_cta_bring">Cosa portare</a>
-                </div>
-                <div class="lp-path-panel" id="lp-panel-inps">
-                    <div class="lp-panel-inner lp-wrap">
-                        <p class="lp-panel-note" data-i18n="lp_note_inps">Certificatore Telematico INPS: rilascia il <strong>Certificato Medico Introduttivo</strong> per invalidità civile, Legge 104 e indennità di accompagnamento (D.Lgs. 62/2024). Redige inoltre <strong>consulenze tecniche di parte (CTP)</strong> a sostegno dei ricorsi contro i verbali INPS.</p>
-                        <ul class="lp-panel-links">
-                            <li><a href="privati/" data-i18n="lp_link_invalidita">Invalidità civile, Legge 104, indennità di accompagnamento</a></li>
-                            <li><a href="privati/certificato-invalidita-civile.html" data-i18n="lp_link_cert_intro">Certificato medico introduttivo</a></li>
-                            <li><a href="privati/faq-riforma.html" data-i18n="lp_link_riforma">Domande sulla riforma</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="lp-path">
-                <div class="lp-path-row lp-wrap">
-                    <h2 class="lp-path-title"><span class="lp-path-label" data-i18n="triage_colleghi_title">Colleghi</span></h2>
-                    <p class="lp-path-who" data-i18n="lp_who_colleghi">Sono un medico, un infermiere o un operatore sanitario.</p>
-                </div>
-                <div class="lp-path-actions lp-wrap">
-                    <a class="lp-btn lp-btn--brass" href="colleghi/" data-i18n="lp_cta_tools">Strumenti e protocolli</a>
-                    <a class="lp-btn lp-btn--ghost" href="colleghi/modulistica/" data-i18n="lp_cta_forms">Modulistica</a>
-                </div>
-                <div class="lp-path-panel" id="lp-panel-colleghi">
-                    <div class="lp-panel-inner lp-wrap">
-                        <p class="lp-panel-note" data-i18n="lp_note_colleghi">Protocolli operativi e guide agli accessi (malattie infettive, pronto soccorso, vascolari), modulistica scaricabile, codici di medicina fisica e il <strong>gestore turni RUAP</strong>.</p>
-                        <ul class="lp-panel-links">
-                            <li><a href="colleghi/guida-interattiva-mmg.html" data-i18n="lp_link_guida">Guida interattiva MMG</a></li>
-                            <li><a href="colleghi/protocollo-certificati-inps.html" data-i18n="lp_link_protocollo">Protocollo certificati INPS</a></li>
-                            <li><a href="colleghi/adi-adp-pai.html" data-i18n="lp_link_adi">Assistenza domiciliare ADI/ADP/PAI</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="lp-path">
-                <div class="lp-path-row lp-wrap">
-                    <h2 class="lp-path-title"><span class="lp-path-label" data-i18n="triage_intl_title">International Patients</span></h2>
-                    <p class="lp-path-who" data-i18n="lp_who_intl">I need a family doctor in the Province of Arezzo.</p>
-                </div>
-                <div class="lp-path-actions lp-wrap">
-                    <a class="lp-btn lp-btn--brass" href="international/index.html" data-i18n="lp_cta_intl_book">Book a consultation</a>
-                    <a class="lp-btn lp-btn--ghost" href="international/index.html" data-i18n="lp_cta_intl_bring">What to bring</a>
-                </div>
-                <div class="lp-path-panel" id="lp-panel-intl">
-                    <div class="lp-panel-inner lp-wrap">
-                        <p class="lp-panel-note" data-i18n="lp_note_intl">Consultations, prescriptions and certificates in <strong>English and Italian</strong>, for international residents and visitors across the Province of Arezzo. For an emergency anywhere in Italy, call <strong>112</strong>.</p>
-                        <ul class="lp-panel-links">
-                            <li><a href="international/index.html" data-i18n="lp_link_intl">Consultations, documents and fees</a></li>
-                            <li><a href="ssn/faq.html" data-i18n="lp_link_faq2">Domande frequenti (FAQ in italiano)</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-        </nav>
-
-    </main>
+<div class="hero-info-bar">
+    <p class="hero-location"><i class="fas fa-map-marker-alt" aria-hidden="true"></i><span data-i18n="landing_hero_location">Piazza Saione 3, Arezzo</span></p>
+    <p class="hero-phone"><i class="fas fa-phone-alt" aria-hidden="true"></i><a href="tel:+390575910904" style="color: inherit; text-decoration: none;" data-i18n="landing_hero_phone">Segreteria: 0575 910 904</a></p>
+    <p class="hero-hours">
+        <i class="fas fa-clock" aria-hidden="true"></i>
+        <span data-i18n="hours_title">Orari di Studio</span>:
+        <span data-badge-anchor><strong><span data-i18n="hours_lun_ven">Lun - Ven</span> 09:30 – 12:30 · 16:00 – 19:00</strong></span>
+    </p>
 </div>
 
-<!-- ══════════ THE RECORD — where and when ══════════ -->
-<section class="lp-record lp-wrap" aria-labelledby="lp-record-title">
-    <div class="lp-record-head">
-        <div>
-            <h2 class="lp-record-title" id="lp-record-title" data-i18n="lp_record_title">Dove e quando</h2>
-            <p class="lp-record-note" data-i18n="lp_record_note">Studio Medico Ippocrate, Piazza Saione 3 — Arezzo. Visite su appuntamento.</p>
-        </div>
-        <table class="lp-hours">
-            <caption class="lp-sr" data-i18n="lp_hours_caption">Orari di apertura dello studio</caption>
-            <tbody>
-                <tr>
-                    <th scope="row" data-i18n="hours_lun_ven">Lun - Ven</th>
-                    <td>09:30 – 12:30 · 16:00 – 19:00</td>
-                </tr>
-                <tr>
-                    <th scope="row" data-i18n="lp_hours_weekend">Sabato e domenica</th>
-                    <td data-i18n="lp_state_closed">Chiuso</td>
-                </tr>
-                <tr>
-                    <th scope="row" data-i18n="lp_hours_secretary">Segreteria</th>
-                    <td><a href="tel:+390****0904" style="color:inherit;">0575 910 904</a></td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container">
 
-    <div class="lp-stamp">
-        <h3 data-i18n="lp_stamp_title">Sei qui per un certificato INPS?</h3>
-        <p data-i18n="cert_inps_desc"><strong>Certificato Invalidità Civile, Accompagnamento e Legge 104 ad Arezzo</strong><br><br>Il Dott. Emanuel Savianu, Certificatore Telematico INPS autorizzato, fornisce il nuovo Certificato Medico Introduttivo necessario per la domanda di invalidità civile, Legge 104 e accompagnamento ad Arezzo e provincia (D.Lgs. 62/2024). Esperienza come medico di categoria ANMIC nelle commissioni Medico-Legali.</p>
-        <p><a href="privati/" data-i18n="lp_stamp_link">Cosa portare e come prenotare</a></p>
-    </div>
+    <main role="main" id="main-content">
 
-    <div class="lp-locator">
-        <picture>
-            <source type="image/avif" media="(min-width: 1024px)" srcset="assets/studio/studio-location-desktop.avif?v=2">
-            <source type="image/webp" media="(min-width: 1024px)" srcset="assets/studio/studio-location-desktop.webp?v=2">
-            <source type="image/avif" media="(min-width: 600px)" srcset="assets/studio/studio-location-tablet.avif?v=2">
-            <source type="image/webp" media="(min-width: 600px)" srcset="assets/studio/studio-location-tablet.webp?v=2">
-            <source type="image/avif" srcset="assets/studio/studio-location-mobile.avif?v=2">
-            <img src="assets/studio/studio-location-mobile.webp?v=2" alt="Studio Medico Ippocrate — Piazza Saione 3, Arezzo" width="2000" height="848" loading="lazy" decoding="async">
-        </picture>
-        <p><span data-i18n="lp_locator_note">Piazza Saione è nel centro storico, a pochi minuti a piedi da Piazza Grande.</span> <a href="https://www.google.com/maps/search/?api=1&amp;query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" rel="noopener noreferrer" data-i18n="lp_maps_link">Indicazioni su Google Maps</a>.</p>
-    </div>
-</section>
+        <section class="triage-section reveal" aria-label="Scegli la tua area" data-i18n-aria-label="triage_section_label">
+            <div class="triage-grid">
+                <a class="triage-card triage-card--primary" data-accent="ssn" href="ssn/">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-user-injured"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_ssn_title">Pazienti</span>
+                    <span class="triage-card-desc" data-i18n="triage_ssn_desc">Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a class="triage-card triage-card--ghost" data-accent="privati" href="privati/">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-user-tie"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_privati_title">Consulti e certificati INPS</span>
+                    <span class="triage-card-desc" data-i18n="triage_privati_desc">Consulenze private, certificati INPS, invalidità civile e Legge 104 — prenota su Google Calendar.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                <a class="triage-card triage-card--ghost" data-accent="colleghi" href="colleghi/">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-handshake"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_colleghi_title">Colleghi</span>
+                    <span class="triage-card-desc" data-i18n="triage_colleghi_desc">Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+                 <a class="triage-card triage-card--ghost triage-card--international" data-accent="international" href="international/index.html">
+                    <span class="triage-icon" aria-hidden="true"><i class="fas fa-globe"></i></span>
+                    <span class="triage-card-title" data-i18n="triage_intl_title">International Patients</span>
+                    <span class="triage-card-desc" data-i18n="triage_intl_desc">Family doctor &amp; GP consultations in English and Italian — for international residents and visitors across the Province of Arezzo.</span>
+                    <span class="triage-card-cta" data-i18n="triage_cta">Entra <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+                </a>
+           </div>
+        </section>
 
-<!-- ══════════ 116 117 — factual lists, not a decision tree ══════════ -->
-<section class="lp-facts lp-wrap" aria-labelledby="lp-facts-title">
-    <div class="lp-facts-head">
-        <h2 id="lp-facts-title" data-i18n="title_116117">116 117 — Assistenza Sanitaria Non Urgente</h2>
-        <p class="lp-facts-lead" data-i18n="lp_facts_lead">Numero gratuito, attivo 24 ore su 24. Un medico o un operatore ti aiuterà a capire cosa fare quando il tuo medico non c'è.</p>
-    </div>
-    <div class="lp-facts-cols">
-        <div class="lp-facts-col">
-            <h3 data-i18n="lp_116117_when">Quando chiamare il 116 117</h3>
-            <ul>
-                <li data-i18n="item_when_1">Per consigli medici quando il tuo dottore non c'è.</li>
-                <li data-i18n="item_when_2">Per la Guardia Medica (di notte, nei weekend e festivi).</li>
-                <li data-i18n="item_when_3">Per informazioni sui servizi sanitari della zona.</li>
-            </ul>
+        <div class="urgency-wrapper">
+            <aside class="alert-emergency" role="alert">
+                <i class="fas fa-ambulance" aria-hidden="true"></i>
+                <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
+            </aside>
         </div>
-        <div class="lp-facts-col">
-            <h3 data-i18n="lp_116117_when_not">Quando non chiamare il 116 117</h3>
-            <ul>
-                <li data-i18n="item_not_emergency"><strong>Emergenze gravi:</strong> chiama subito il <strong>112</strong>.</li>
-                <li data-i18n="item_not_booking"><strong>Per prenotare esami o visite:</strong> chiama il CUP (<strong>800 575 575</strong>) o vai in farmacia.</li>
-            </ul>
-        </div>
-    </div>
-</section>
+
+        <section class="card reveal" aria-labelledby="title-116117">
+            <div class="card-header">
+                <i class="fas fa-phone-volume" aria-hidden="true"></i>
+                <h2 id="title-116117" data-i18n="title_116117">116 117 — Assistenza Sanitaria Non Urgente</h2>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <p style="font-size: 1.1rem; font-weight: 800; color: var(--accent-text); margin-bottom: 8px;">
+                    👉 <span data-i18n="cta_116117_main">CHIAMA IL 116 117</span>
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 12px;" data-i18n="note_116117_free">
+                    (Numero gratuito, sempre attivo 24 ore su 24)
+                </p>
+                <p style="color: var(--text-medium); line-height: 1.7;" data-i18n="desc_116117_operator">
+                    Un medico o un operatore ti aiuterà a capire cosa fare.
+                </p>
+            </div>
+
+            <div class="action-grid" style="gap: 20px; margin-bottom: 5px;">
+                <div class="box-info">
+                    <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--success);" data-i18n="when_call_116117">✅ QUANDO CHIAMARE IL 116 117:</p>
+                    <ul style="margin-left: 18px; color: var(--text-medium); line-height: 1.7; font-size: 0.95rem;">
+                        <li style="margin-bottom: 6px;" data-i18n="item_when_1">Per consigli medici quando il tuo dottore non c'è.</li>
+                        <li style="margin-bottom: 6px;" data-i18n="item_when_2">Per la Guardia Medica (di notte, nei weekend e festivi).</li>
+                        <li data-i18n="item_when_3">Per informazioni sui servizi sanitari della zona.</li>
+                    </ul>
+                </div>
+
+                <div class="box-danger">
+                    <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--danger);" data-i18n="when_not_call_116117">❌ QUANDO NON CHIAMARE IL 116 117:</p>
+                    <ul style="margin-left: 18px; color: var(--text-medium); line-height: 1.7; font-size: 0.95rem;">
+                        <li style="margin-bottom: 6px;" data-i18n="item_not_emergency"><strong>Emergenze gravi:</strong> Chiama subito il <strong>112</strong>.</li>
+                        <li data-i18n="item_not_booking"><strong>Per prenotare esami o visite:</strong> Chiama il CUP (<strong>800 575 575</strong>) o vai in farmacia.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="card reveal" aria-labelledby="cert-inps-heading">
+            <div style="text-align: center;">
+                <a href="privati/" class="btn-main faq-banner-btn" style="background: var(--accent); color: var(--primary); border-color: var(--primary);">
+                    <i class="fas fa-file-medical"></i>
+                    <span data-i18n="cert_inps_btn">Sei qui per un certificato per l'INPS? Premi qui</span>
+                </a>
+                <div style="margin-top: 20px; text-align: left; padding: 0 10px;">
+                    <p style="font-size: 0.95rem; color: var(--text-medium); line-height: 1.7;" data-i18n="cert_inps_desc">
+                        <strong style="color: var(--primary);">Certificato Invalidità Civile, Accompagnamento e Legge 104 ad Arezzo</strong><br><br>
+                        Il Dott. Emanuel Savianu, Certificatore Telematico INPS autorizzato, fornisce il nuovo Certificato Medico Introduttivo necessario per la domanda di invalidità civile, Legge 104 e accompagnamento ad Arezzo e provincia (D.Lgs. 62/2024). Esperienza come medico di categoria ANMIC nelle commissioni Medico-Legali.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <aside role="complementary">
+
+        <section class="card reveal">
+            <div class="card-header">
+                <i class="fas fa-address-book" aria-hidden="true"></i>
+                <h2 data-i18n="contacts_title">Contatti Studio</h2>
+            </div>
+            
+            <a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu" target="_blank" rel="noopener noreferrer" class="contact-row" style="border:2px solid var(--accent); margin-bottom:0; border-radius:10px 10px 0 0;">
+                <div class="icon-circle" style="background:var(--accent); color:var(--primary);"><i class="fas fa-calendar-check"></i></div>
+                <div>
+                    <span data-i18n="label_doctolib_contacts" class="contact-label" style="font-size:1rem;">Appuntamenti, Messaggi, Rinnovi Farmaci</span>
+                    <span data-i18n="label_via_doctolib" style="display:block; font-size:0.8rem; color:var(--accent-text); font-weight:600;">tramite Doctolib</span>
+                </div>
+                <i class="fas fa-chevron-right" style="margin-left:auto; color:var(--accent);"></i>
+            </a>
+            <a href="tel:+390575910904" class="contact-row" style="margin-bottom:15px; border-radius:0 0 10px 10px;">
+                <div class="icon-circle"><i class="fas fa-phone-alt"></i></div>
+                <div><span data-i18n="label_secretary_fallback" class="contact-label">Segreteria (solo se non puoi usare Doctolib)</span><span class="contact-value text-primary">0575 910 904</span></div>
+            </a>
+            <div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Studio+Medico+Ippocrate+Piazza+Saione+3+Arezzo" target="_blank" class="contact-row" style="margin-bottom:0; border-radius:10px;">
+                    <div class="icon-circle"><i class="fas fa-map-marker-alt"></i></div>
+                    <div><span data-i18n="label_address" class="contact-label">Studio Medico Ippocrate</span><span data-i18n="label_address_value" style="display:block;">Piazza Saione 3, Arezzo</span></div>
+                </a>
+            </div>
+        </section>
+
+        <section class="card reveal">
+            <div class="card-header">
+                <i class="fas fa-headset" aria-hidden="true"></i>
+                <h2 data-badge-anchor data-i18n="secretary_hours_label">Orari Segreteria - 0575 910 904</h2>
+            </div>
+            <table class="hours-table">
+                <tbody>
+                    <tr><td class="day" data-i18n="hours_lun_ven">Lun - Ven</td><td class="time">09:30 – 12:30<br>16:00 – 19:00</td></tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="card reveal" style="text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--text-medium); margin-bottom: 6px;" data-i18n="aside_116117_prompt">
+                <i class="fas fa-phone-volume" style="color: var(--accent);"></i>
+                Segreteria chiusa o non risponde? Non trovi il medico?
+            </p>
+            <a href="tel:116117" style="display: inline-block; font-size: 1.4rem; font-weight: 800; color: var(--accent-text);">
+                116 117
+            </a>
+            <p style="font-size: 0.75rem; color: var(--text-medium); margin-top: 4px;" data-i18n="aside_116117_sub">
+                Numero gratuito, sempre attivo 24 ore su 24
+            </p>
+        </section>
+    </aside>
+
+</div>
 
 <site-footer data-section="root">
     <footer role="contentinfo">
         <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
-        <p class="footer-ident">Iscrizione all'Albo dei Medici Chirurghi e Odontoiatri di Arezzo (OMCeO AR), Ord. Medici AR n. <strong>3499</strong> · Codice regionale <strong>011189</strong> · P.IVA <strong>02348320512</strong> · Codice destinatario fatture elettroniche <strong>JKKZDGR</strong></p>
     </footer>
 </site-footer>
 
@@ -733,166 +378,7 @@ body {
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="app.js?v=20260922a"></script>
-
-<!-- ── The live counter: reads CONFIG.SCHEDULE, writes one sentence. ── -->
-<script type="module">
-import { CONFIG } from './config.js?v=2';
-
-(function () {
-    const SCHEDULE = CONFIG.SCHEDULE || {};
-    const STRIP_FROM = 8;
-    const STRIP_TO = 20;
-    const DAY_KEYS = ['lp_day_0', 'lp_day_1', 'lp_day_2', 'lp_day_3', 'lp_day_4', 'lp_day_5', 'lp_day_6'];
-    const DAY_IT = ['domenica', 'lunedì', 'martedì', 'mercoledì', 'giovedì', 'venerdì', 'sabato'];
-
-    const wordEl = document.getElementById('lp-state-word');
-    const textEl = document.getElementById('lp-state-text');
-    const captionEl = document.getElementById('lp-strip-caption');
-    const trackEl = document.getElementById('lp-strip-track');
-    const nowEl = document.getElementById('lp-strip-now');
-    if (!wordEl || !textEl || !trackEl) return;
-
-    function T(key, fallback) {
-        const value = (typeof window.t === 'function') ? window.t(key) : null;
-        return (value && value !== key) ? value : fallback;
-    }
-    function hhmm(h) {
-        const H = Math.floor(h);
-        const M = Math.round((h - H) * 60);
-        return H + (M ? ':' + (M < 10 ? '0' + M : M) : ':00');
-    }
-    function dur(mins) {
-        const h = Math.floor(mins / 60);
-        const m = Math.round(mins % 60);
-        if (!h) return m + ' min';
-        if (!m) return h + ' h';
-        return h + ' h ' + m + ' min';
-    }
-    function dayName(i) { return T(DAY_KEYS[i], DAY_IT[i]); }
-
-    function drawStrip(slots) {
-        trackEl.querySelectorAll('.lp-strip-open').forEach(node => node.remove());
-        slots.forEach(function (slot) {
-            const seg = document.createElement('span');
-            seg.className = 'lp-strip-open';
-            seg.style.left = ((slot.from - STRIP_FROM) / (STRIP_TO - STRIP_FROM) * 100) + '%';
-            seg.style.width = ((slot.to - slot.from) / (STRIP_TO - STRIP_FROM) * 100) + '%';
-            trackEl.insertBefore(seg, nowEl);
-        });
-        const label = slots.length
-            ? slots.map(s => hhmm(s.from) + ' – ' + hhmm(s.to)).join(' · ')
-            : T('lp_state_closed', 'Chiuso');
-        trackEl.setAttribute('aria-label', T('lp_strip_label', 'Fasce di apertura di oggi') + ': ' + label);
-    }
-
-    function render() {
-        const now = new Date();
-        const mins = now.getHours() * 60 + now.getMinutes();
-        const day = now.getDay();
-        const slots = SCHEDULE[day] || [];
-
-        drawStrip(slots);
-        captionEl.textContent = T('lp_strip_today', 'Oggi') + ' · ' + dayName(day);
-
-        const pct = (mins / 60 - STRIP_FROM) / (STRIP_TO - STRIP_FROM);
-        if (pct >= 0 && pct <= 1) {
-            nowEl.hidden = false;
-            nowEl.style.left = (pct * 100) + '%';
-        } else {
-            nowEl.hidden = true;
-        }
-
-        // An active absence overrides the timetable: state what is true now.
-        if (typeof CONFIG.getActiveAbsence === 'function') {
-            const absence = CONFIG.getActiveAbsence();
-            if (absence) {
-                wordEl.textContent = T('lp_state_closed', 'Chiuso');
-                textEl.textContent = absence.note || '';
-                return;
-            }
-        }
-
-        for (let i = 0; i < slots.length; i++) {
-            const opens = slots[i].from * 60;
-            const closes = slots[i].to * 60;
-            if (mins >= opens && mins < closes) {
-                wordEl.textContent = T('lp_state_open', 'Aperto ora');
-                textEl.innerHTML = T('lp_state_closes_at', 'chiude alle') + ' ' + hhmm(slots[i].to) +
-                    ' <span class="lp-state-eta">(' + T('lp_state_in', 'tra') + ' ' + dur(closes - mins) + ')</span>';
-                return;
-            }
-            if (mins < opens) {
-                wordEl.textContent = T('lp_state_closed', 'Chiuso');
-                textEl.innerHTML = T('lp_state_opens_at', 'apre') + ' ' + T('lp_state_today', 'oggi') + ' ' +
-                    T('lp_state_at', 'alle') + ' ' + hhmm(slots[i].from) +
-                    ' <span class="lp-state-eta">(' + T('lp_state_in', 'tra') + ' ' + dur(opens - mins) + ')</span>';
-                return;
-            }
-        }
-
-        for (let d = 1; d <= 7; d++) {
-            const nextDay = (day + d) % 7;
-            const next = SCHEDULE[nextDay];
-            if (next && next.length) {
-                const when = d === 1 ? T('lp_state_tomorrow', 'domani') : dayName(nextDay);
-                wordEl.textContent = T('lp_state_closed', 'Chiuso');
-                textEl.textContent = T('lp_state_opens_at', 'apre') + ' ' + when + ' ' +
-                    T('lp_state_at', 'alle') + ' ' + hhmm(next[0].from);
-                return;
-            }
-        }
-    }
-
-    render();
-    setInterval(render, 60000);
-    document.addEventListener('site:i18n', render);
-
-    // booking links come from config.js, never hardcoded twice
-    const book = document.getElementById('lp-cta-doctolib');
-    const renew = document.getElementById('lp-cta-renew');
-    if (book && renew && CONFIG.DOCTOLIB) {
-        book.href = CONFIG.DOCTOLIB.booking;
-        renew.href = CONFIG.DOCTOLIB.patientRequest;
-    }
-})();
-
-/* ── The index: upgrade each label into a disclosure button.
-      Progressive enhancement — the markup ships four open sections, so with JS
-      disabled the whole index is readable; with JS it becomes an accordion. ── */
-(function () {
-    const paths = Array.prototype.slice.call(document.querySelectorAll('.lp-index .lp-path'));
-
-    paths.forEach(function (path, index) {
-        const label = path.querySelector('.lp-path-label');
-        const title = path.querySelector('.lp-path-title');
-        const panel = path.querySelector('.lp-path-panel');
-        if (!label || !title || !panel) return;
-
-        if (!panel.id) panel.id = 'lp-panel-' + (index + 1);
-
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'lp-path-toggle';
-        button.setAttribute('aria-controls', panel.id);
-        button.setAttribute('aria-expanded', path.classList.contains('is-open') ? 'true' : 'false');
-
-        title.insertBefore(button, label);
-        button.appendChild(label);
-
-        button.addEventListener('click', function () {
-            const willOpen = !path.classList.contains('is-open');
-            paths.forEach(function (other) {
-                other.classList.remove('is-open');
-                const otherButton = other.querySelector('.lp-path-toggle');
-                if (otherButton) otherButton.setAttribute('aria-expanded', 'false');
-            });
-            path.classList.toggle('is-open', willOpen);
-            button.setAttribute('aria-expanded', String(willOpen));
-        });
-    });
-})();
-</script>
+<script type="module" src="app.js?v=20260824c"></script>
 
 </body>
 </html>
