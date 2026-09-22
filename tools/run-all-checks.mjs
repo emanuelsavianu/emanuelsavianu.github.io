@@ -18,6 +18,7 @@ const steps = [
   { name: 'Link integrity',          cmd: NODE, args: [join('tools', 'check-links.mjs')] },
   { name: 'i18n parity + coverage',  cmd: NODE, args: [join('tools', 'check-i18n.mjs')] },
   { name: 'SW precache sync',        cmd: NODE, args: [join('tools', 'check-sw.mjs')] },
+  { name: 'PDF senza dati compilati', cmd: NODE, args: [join('tools', 'check-pdf-pii.mjs')] },
 ];
 
 let failed = 0;
