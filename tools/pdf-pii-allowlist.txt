@@ -1,0 +1,17 @@
+# Allowlist per tools/check-pdf-pii.mjs
+#
+# Ogni riga è una regex JS: un valore trovato in un PDF che matcha una di queste
+# regex NON viene segnalato. Serve per i contenuti legittimi che assomigliano a
+# dati compilati (recapiti di ufficio, partita IVA dell'azienda, date di
+# revisione dei moduli, ecc.).
+#
+# NON aggiungere qui nomi di pazienti o dati clinici: un modulo compilato va
+# sostituito con il facsimile in bianco, non autorizzato.
+#
+# 02/08/2023 = data di revisione presente nell'intestazione del modulo PAISCI 011
+# (accessi vascolari) — non è un dato di paziente.
+^02/08/2023$
+
+# Esempi (attivali solo se servono):
+# ^0575[\s.]?\d{6}$            recapiti della Zona Distretto / azienda
+# ^02236310518$                P.IVA e C.F. Azienda USL Toscana Sud Est

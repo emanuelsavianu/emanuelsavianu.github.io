@@ -1,0 +1,10 @@
+#!/bin/sh
+# Pre-commit hook (savianu.it)
+# Blocca il commit se un PDF tracciato sembra un MODULO COMPILATO
+# (dati di paziente): vedi tools/check-pdf-pii.mjs.
+#
+# Attivazione (una volta per clone):
+#   git config core.hooksPath .githooks
+#
+# Per scansionare anche tutta la storia: node tools/check-pdf-pii.mjs --all
+exec node tools/check-pdf-pii.mjs
