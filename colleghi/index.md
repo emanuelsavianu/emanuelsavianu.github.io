@@ -34,7 +34,20 @@ Dolore toracico, dispnea acuta, cefalea intensa e inusuale, deficit neurologici 
 - **Calcolatore Ferie e Coperture** — ferie gruppo medico, coperture giornaliere, export Excel (dati locali nel browser).
 - **Protocolli e Normative** — Protocollo INPS (D.Lgs. 62/2024, allegazioni, WHODAS), Medicina Fisica (codici LR01–LR21 nuovo Catalogo), Ausili Assistenziali (Elenco 2B, DPCM 12/01/2017), Guida Accessi, Pronto Soccorso (San Donato), MST, Accessi Vascolari (PICC/Port).
 - **Nota operativa 2026 — codici prescrittivi (nutrizione):** per le richieste di primo accesso a valutazione nutrizionale va inserito il codice **2229 (Visita Dietetica)** e non il codice 1070; se dalla visita emerge la necessità di coinvolgere il nutrizionista, è lo specialista stesso ad attivarsi per la prescrizione. Fonte: indicazione della Direzione della Nutrizione Clinica — sede operativa di Arezzo (Azienda USL Toscana Sud Est), 2026.
-- **Modulistica** — PAI (Piano Assistenziale Integrato: ADI/ADP/ADR/cure intermedie), facsimili e certificati.
+- **Modulistica** — PAI (Piano Assistenziale Integrato: ADI/ADP/ADR/cure intermedie), STU (Scheda Terapeutica Unica), valutazione iniziale del MMG, facsimili e certificati. PDF scaricabili in `colleghi/modulistica/`.
+- **Assistenza Domiciliare ADI/ADP/PAI** — pagina [Assistenza Domiciliare ADI/ADP/PAI](https://savianu.it/colleghi/adi-adp-pai.html): nuova procedura operativa USL Toscana Sud Est (Zona Distretto Aretina, U.F. Cure Primarie) in vigore dal 1° Ottobre 2026, testo integrale della comunicazione del 21/09/2026 e facsimili dei moduli.
+
+## Assistenza Domiciliare — ADI/ADP/PAI (dal 1° Ottobre 2026)
+
+Disposizioni operative dell'Azienda USL Toscana Sud Est — Zona Distretto Aretina, U.F. Cure Primarie (Resp. Dr. Tommaso Condello), comunicazione del 21/09/2026.
+
+- **PAI obbligatorio:** per ogni assistito per cui si richiede la presa in carico domiciliare il MMG compila il PAI cartaceo, che resta nella cartella clinica domiciliare presso l'abitazione dell'assistito per tutto il periodo definito nel PAI.
+- **Il PAI sostituisce** le richieste di prestazioni infermieristiche finora fatte con richiesta bianca o ricettario regionale (medicazioni, catetere vescicale, accessi vascolari, ecc.).
+- **STU obbligatoria** per le terapie parenterali (infusionale, intramuscolare, sottocutanea, intradermica): principio attivo/farmaco, posologia, via di somministrazione, diluente, velocità/tempo, durata del ciclo (data inizio e fine), firma e timbro del medico prescrivente. Non più accolte richieste generiche («si richiede ciclo di flebo»).
+- **Trasmissione:** PAI e STU (ove prevista) alle Cure Primarie della Zona Distretto, che verificano conformità formale e congruità e inoltrano al Servizio Infermieristico entro 24 ore dalla ricezione (primo giorno lavorativo utile nei fine settimana e nei festivi/prefestivi). Richieste incomplete: restituite al medico mittente.
+- **Invariato:** i prelievi domiciliari restano indirizzati agli Infermieri di Famiglia e Comunità.
+- **Moduli scaricabili:** PAI iniziale (`colleghi/modulistica/PAI.pdf`), STU (`colleghi/modulistica/STU-scheda-terapeutica-unica.pdf`, Mod. 031-std domiciliare), valutazione iniziale del MMG (`colleghi/modulistica/valutazione-iniziale-inquadramento-clinico.pdf`, Mod. 010 rev. 1 — anamnesi ed esame obiettivo).
+- **Riferimenti:** U.F. Cure Primarie — Via Curtatone 54, 52100 Arezzo · tel. 0575 255802 · tommaso1.condello@uslsudest.toscana.it
 
 ## Guide Millewin (scorciatoie)
 - **Ctrl+Z** agenda · **Ctrl+F3** rubrica · **Alt+F** familiari · **Alt+Q** Patient Summary · **Alt+H** pianificazione/scadenze · **Ctrl+R** cronologia visite · **F2** monitoraggio · **Ctrl+O** origine spesa · **Ctrl+G** impegnativa dematerializzata.
