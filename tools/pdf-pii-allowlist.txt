@@ -8,9 +8,10 @@
 # NON aggiungere qui nomi di pazienti o dati clinici: un modulo compilato va
 # sostituito con il facsimile in bianco, non autorizzato.
 #
-# 02/08/2023 = data di revisione presente nell'intestazione del modulo PAISCI 011
-# (accessi vascolari) — non è un dato di paziente.
-^02/08/2023$
+# 12/08/2023 (a volte letto 02/08/2023 dall'OCR) = data di revisione presente
+# nell'intestazione del modulo PAISCI 011 (accessi vascolari) — non è un dato
+# di paziente. Pattern tollerante alla varianza OCR del giorno.
+^[01][0-9]/08/2023$
 
 # Esempi (attivali solo se servono):
 # ^0575[\s.]?\d{6}$            recapiti della Zona Distretto / azienda
