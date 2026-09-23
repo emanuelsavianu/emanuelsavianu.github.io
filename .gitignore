@@ -6,6 +6,10 @@ cloudflare/node_modules/
 cloudflare/.wrangler/
 cloudflare/node_modules/.cache/
 
+# Design working artifacts (auteur proposals: commit-sheets, mockups, recon, shots).
+# Working material only — never published by GitHub Pages, never shipped.
+design/
+
 # Environment files (never commit secrets)
 .env
 .env.local
