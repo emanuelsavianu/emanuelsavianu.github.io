@@ -26,6 +26,12 @@
       "md": "colleghi/index.md",
       "html": "colleghi/index.html",
       "stub": "markdown/colleghi.md"
+    },
+    {
+      "route": "/colleghi/comunicazioni-2026.html",
+      "md": "colleghi/comunicazioni-2026.md",
+      "html": "colleghi/comunicazioni-2026.html",
+      "stub": "markdown/colleghi-comunicazioni-2026.md"
     }
   ]
 }

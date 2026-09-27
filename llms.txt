@@ -8,6 +8,7 @@
 - [Pazienti | Dott. Emanuel Savianu — Medico di Famiglia Arezzo](https://savianu.it/ssn/)
 - [Certificati INPS e Invalidità ad Arezzo | Dott. Savianu](https://savianu.it/privati/)
 - [Area Colleghi | Dott. Emanuel Savianu — Arezzo](https://savianu.it/colleghi/)
+- [Comunicazioni 2026 Medicina Generale | Dott. Savianu](https://savianu.it/colleghi/comunicazioni-2026.md)
 
 ## Markdown per agenti
 
@@ -18,6 +19,7 @@ invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure
 - [/ssn/index.md](https://savianu.it/ssn/index.md)
 - [/privati/index.md](https://savianu.it/privati/index.md)
 - [/colleghi/index.md](https://savianu.it/colleghi/index.md)
+- [/colleghi/comunicazioni-2026.md](https://savianu.it/colleghi/comunicazioni-2026.md)
 
 ## Contatti generali
 

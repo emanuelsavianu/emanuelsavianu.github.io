@@ -31,6 +31,7 @@ Dolore toracico, dispnea acuta, cefalea intensa e inusuale, deficit neurologici 
 - **Nota operativa 2026 — codici prescrittivi (nutrizione):** per le richieste di primo accesso a valutazione nutrizionale va inserito il codice **2229 (Visita Dietetica)** e non il codice 1070; se dalla visita emerge la necessità di coinvolgere il nutrizionista, è lo specialista stesso ad attivarsi per la prescrizione. Fonte: indicazione della Direzione della Nutrizione Clinica — sede operativa di Arezzo (Azienda USL Toscana Sud Est), 2026.
 - **Modulistica** — PAI (Piano Assistenziale Integrato: ADI/ADP/ADR/cure intermedie), STU (Scheda Terapeutica Unica), valutazione iniziale del MMG, facsimili e certificati. PDF scaricabili in `colleghi/modulistica/`.
 - **Assistenza Domiciliare ADI/ADP/PAI** — pagina [Assistenza Domiciliare ADI/ADP/PAI](https://savianu.it/colleghi/adi-adp-pai.html): nuova procedura operativa USL Toscana Sud Est (Zona Distretto Aretina, U.F. Cure Primarie) in vigore dal 1° Ottobre 2026, testo integrale della comunicazione del 21/09/2026 e facsimili dei moduli.
+- **Comunicazioni ufficiali 2026** — pagina [Comunicazioni ufficiali 2026 per la Medicina Generale](https://savianu.it/colleghi/comunicazioni-2026.html): raccolta verificata delle comunicazioni 2026 per i MMG da FNOMCeO, Ministero della Salute, AIFA e INPS, con sintesi e link alle fonti primarie (INPS e disabilità, farmaci, vaccinazioni, FSE 2.0, ECM, contratto e liste d'attesa, adempimenti dello studio).
 
 ## Assistenza Domiciliare — ADI/ADP/PAI (dal 1° Ottobre 2026)
 
