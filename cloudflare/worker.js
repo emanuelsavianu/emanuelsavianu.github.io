@@ -259,6 +259,7 @@ export default {
       '/privati/index.html': '/privati/index.md',
       '/colleghi/':        '/colleghi/index.md',
       '/colleghi/index.html': '/colleghi/index.md',
+      '/colleghi/comunicazioni-2026.html': '/colleghi/comunicazioni-2026.md',
     };
     const acceptHeader = request.headers.get('Accept') || '';
     if (acceptHeader.includes('text/markdown')) {
