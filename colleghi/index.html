@@ -96,6 +96,11 @@
 
     <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
     <script type="module" src="/assets/scroll-reveal.js"></script>
+
+    <style>
+        /* Banner "Comunicazioni" a tutta larghezza in testa alla sezione */
+        .split-hero .action-grid > .btn-hero-span { grid-column: 1 / -1; }
+    </style>
 </head>
 <body>
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
@@ -125,6 +130,14 @@
                 <h1>Benvenuto — Seleziona il portale</h1>
             </div>
             <div class="action-grid">
+                <a href="comunicazioni-2026.html"
+                   class="btn-prenota-large btn-hero-span"
+                   aria-label="Comunicazioni ufficiali 2026 per la Medicina Generale">
+                    <i class="fas fa-book-open" aria-hidden="true"></i>
+                    <span>Comunicazioni</span>
+                    <small>Ufficiali 2026 · INPS · AIFA · Ministero · Ordini</small>
+                </a>
+
                 <a href="../ssn/"
                    target="_blank"
                    rel="noopener noreferrer"
@@ -592,13 +605,6 @@
                     Linee guida tecniche e normative per certificatori. Standard operativi, requisiti documentali e procedure INPS.
                 </p>
                 <div class="action-grid tools-grid-auto">
-                    <a href="comunicazioni-2026.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Comunicazioni ufficiali 2026 per la Medicina Generale — INPS, AIFA, Ministero della Salute, Ordini">
-                        <i class="fas fa-book-open" aria-hidden="true"></i>
-                        <span>Comunicazioni ufficiali 2026</span>
-                        <small>INPS · AIFA · Ministero · Ordini</small>
-                    </a>
                     <a href="protocollo-certificati-inps.html"
                        class="btn-main btn-prenota"
                        aria-label="Protocollo Operativo Certificati INPS D.Lgs. 62/2024">
