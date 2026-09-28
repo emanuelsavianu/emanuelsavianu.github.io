@@ -5,7 +5,7 @@ description: Le comunicazioni ufficiali 2026 per i Medici di Medicina Generale, 
 
 # Comunicazioni ufficiali 2026 per la Medicina Generale
 
-> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 27 settembre 2026.
+> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 28 settembre 2026.
 
 Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina aggiornata automaticamente ogni settimana.
 
@@ -53,6 +53,8 @@ Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina
 
 - **Hantavirus tipo Andes — focolaio MV Hondius** — Circolari 3482-11/05/2026 e 3680-15/05/2026 (com. FNOMCeO nn. 55 e 63). Definizioni di caso e contatto, misure raccomandate, testing e segnalazione. [PDF n. 55](https://portale.fnomceo.it/wp-content/uploads/2026/05/COM-N-55.pdf) · [PDF n. 63](https://portale.fnomceo.it/wp-content/uploads/2026/05/COM-N-63.pdf)
 
+- **Riforma della disabilità: materiale didattico per i medici certificatori** — FNOMCeO, 15/5/2026 (segnalato dall'OMCeO Firenze). Materiali dei corsi di formazione con il Ministero per le Disabilità per la compilazione del nuovo certificato medico introduttivo (D.Lgs. 62/2024). [fnomceo.it](https://portale.fnomceo.it/riforma-della-disabilita-disponibili-i-materiali-operativi-sulla-compilazione-del-nuovo-certificato/)
+
 - **FadInMed operativa dal 15/5/2026** — (com. FNOMCeO n. 57, 14/5/2026). Corsi disponibili: PAD 2026 (10,4 crediti), Choosing Wisely Italy 2026 (10), Radioprotezione del paziente (7). [PDF](https://portale.fnomceo.it/wp-content/uploads/2026/05/COM-N-57.pdf)
 
 - **Tabelle stupefacenti: aggiornamenti 2026** — Comunicazioni FNOMCeO nn. 08, 09, 10, 18, 30, 34, 39, 46, 47, 56; da ultimo il decreto 28/4/2026 (GU n. 106 del 9/5/2026): Tabella I con N-propil efenidina, ADMB-FUBBIOCA, Δ9-THCP-metilcarbonato, 2-formil-Δ9-THCP, α-PiHPP; Tabella IV con avizafone. [PDF](https://portale.fnomceo.it/wp-content/uploads/2026/05/COM-N-56.pdf)
@@ -87,4 +89,4 @@ Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina
 
 - **RENTRI: esonero per studi medici** — L. 199/2025 (com. FNOMCeO n. 1, 8/1/2026). Esonero dall'iscrizione al Registro elettronico per gli studi medici non in forma d'impresa; resta l'obbligo del formulario per 3 anni. [PDF](https://portale.fnomceo.it/wp-content/uploads/2026/01/COM-N-01.pdf)
 
-Fonti ufficiali monitorate: FNOMCeO ([archivio comunicati](https://portale.fnomceo.it/archivio-comunicati-ordini/)), Ministero della Salute, AIFA, ISS, OMCeO Arezzo, SIMG.
+Fonti ufficiali monitorate: FNOMCeO ([archivio comunicati](https://portale.fnomceo.it/archivio-comunicati-ordini/)), Ministero della Salute, AIFA, ISS, OMCeO Arezzo, OMCeO Firenze, SIMG.

@@ -804,9 +804,27 @@ body.dark-mode .welcome-step-emergency p b { color: #ff6b6b; }
 .text-primary { 
     color: var(--primary); 
 }
-body.dark-mode .text-primary { 
-    color: var(--accent) !important; 
+body.dark-mode .text-primary {
+    color: var(--accent) !important;
 }
+
+/* Dark mode: testo navy inline (style="color: var(--primary)") senza proprio sfondo → accent.
+   Esclude gli elementi con background inline (es. bottoni bianchi/dorati che restano chiari). */
+body.dark-mode h1[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode h2[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode h3[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode h4[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode p[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode strong[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode li[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode span[style*="color: var(--primary)"]:not([style*="background"]),
+body.dark-mode div[style*="color: var(--primary)"]:not([style*="background"]) {
+    color: var(--accent) !important;
+}
+body.dark-mode .privacy-notice a { color: var(--accent); }
+body.dark-mode .privacy-notice a:hover { color: var(--text-dark); }
+/* CTA hero (pagine privati/ssn): bianco su oro scende a ~1.9:1 in dark → navy */
+body.dark-mode .btn-cta-hero { color: var(--primary); }
 
 /* 116117 info boxes */
 .box-info {
@@ -879,6 +897,14 @@ body.dark-mode .sidebar-logo-img {
 .btn-prenota-large i { font-size: 2.5rem; margin-bottom: 10px; color: var(--accent); transition: color 0.2s; }
 .btn-prenota-large span { font-size: clamp(1.1rem, 3vw, 1.4rem); font-weight: 700; letter-spacing: 0.5px; }
 .btn-prenota-large small { font-size: 1rem; opacity: 0.9; margin-top: 5px; font-weight: 500; }
+
+/* --- FEEDBACK CARD (landing colleghi) --- */
+.feedback-card { background: linear-gradient(135deg, var(--accent) 0%, rgba(194, 155, 87, 0.1) 100%); border: 2px solid var(--accent); }
+.feedback-card .card-header { border-bottom: 2px solid var(--accent); }
+.feedback-card .card-header h2 { color: var(--primary); }
+body.dark-mode .feedback-card { background: var(--bg-gradient-2); }
+body.dark-mode .feedback-card .card-header h2 { color: var(--accent); }
+body.dark-mode .feedback-card p { color: var(--text-medium); }
 
 /* --- NOTICE: READ FAQ (welcome modal) --- */
 .notice-readfaq {
@@ -2703,7 +2729,7 @@ html { text-rendering: optimizeLegibility; }
             color: var(--text-dark);
         }
         body.dark-mode .expandable-card-header-content h3 {
-            color: var(--white);
+            color: var(--text-dark);
         }
         .expandable-card-header-content p {
             margin: 4px 0 0;

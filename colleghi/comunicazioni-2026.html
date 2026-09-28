@@ -263,9 +263,13 @@
         .doc-badge.cat { background: transparent; color: var(--accent-text); border: 1px dashed var(--accent); }
 
         body.dark-mode .doc-card { background: var(--primary); }
-        body.dark-mode .doc-chip { background: var(--primary); }
+        body.dark-mode .doc-chip { background: var(--primary); color: var(--text-dark); }
         body.dark-mode .doc-badge.ente { background: var(--accent); color: var(--primary); }
         body.dark-mode .doc-chip.active { background: var(--accent); border-color: var(--accent); color: var(--primary); }
+        /* Dark mode: contrasto dei testi su superfici --primary (chiaro su scuro) */
+        body.dark-mode .doc-summary strong { color: var(--text-dark); }
+        body.dark-mode .source-link:hover,
+        body.dark-mode .fonti-grid a:hover { color: var(--text-dark); }
 
         @media (max-width: 600px) {
             .content-wrapper { padding: 20px 16px; }
@@ -290,7 +294,7 @@
     <section class="page-hero" aria-labelledby="hero-heading">
         <h1 class="hero-title" id="hero-heading">Comunicazioni ufficiali 2026<br>per la Medicina Generale</h1>
         <p class="hero-desc">
-            Raccolta curata e verificata delle comunicazioni, circolari e norme del 2026 rilevanti per i medici di famiglia — in ordine cronologico, dalla più recente alla più vecchia, con sintesi e link diretti alle fonti ufficiali. Aggiornata al 27 settembre 2026.
+            Raccolta curata e verificata delle comunicazioni, circolari e norme del 2026 rilevanti per i medici di famiglia — in ordine cronologico, dalla più recente alla più vecchia, con sintesi e link diretti alle fonti ufficiali. Aggiornata al 28 settembre 2026.
         </p>
     </section>
 
@@ -550,6 +554,19 @@
                 <a class="source-link" href="https://portale.fnomceo.it/wp-content/uploads/2026/05/COM-N-63.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Comunicazione n. 63 (PDF)</a>
             </article>
 
+            <article class="doc-card" data-cat="risorse">
+                <div class="doc-meta">
+                    <span class="doc-badge ente">FNOMCeO · OMCeO Firenze</span>
+                    <span class="doc-badge date">15 maggio 2026</span>
+                    <span class="doc-badge cat">Risorse</span>
+                </div>
+                <h3>Riforma della disabilità: materiale didattico per i medici certificatori</h3>
+                <p class="doc-summary">
+                    La FNOMCeO ha reso accessibili i <strong>materiali dei corsi di formazione</strong> tenuti con il Ministero per le Disabilità e dedicati ai medici certificatori coinvolti nella sperimentazione della riforma (D.Lgs. 62/2024). Le slide degli esperti ministeriali offrono supporto operativo per la <strong>compilazione del nuovo certificato medico introduttivo</strong>.
+                </p>
+                <a class="source-link" href="https://portale.fnomceo.it/riforma-della-disabilita-disponibili-i-materiali-operativi-sulla-compilazione-del-nuovo-certificato/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Materiali operativi su fnomceo.it</a>
+            </article>
+
             <article class="doc-card" data-cat="ecm">
                 <div class="doc-meta">
                     <span class="doc-badge ente">FNOMCeO</span>
@@ -753,16 +770,17 @@
                     <a href="https://www.aifa.gov.it/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>AIFA — Agenzia Italiana del Farmaco</a>
                     <a href="https://www.iss.it/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Istituto Superiore di Sanità</a>
                     <a href="https://www.omceoar.it/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Ordine dei Medici di Arezzo (OMCeO AR)</a>
+                    <a href="https://www.ordine-medici-firenze.it/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Ordine dei Medici di Firenze (OMCeO FI)</a>
                     <a href="https://www.simg.it/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>SIMG — Medicina Generale</a>
                 </div>
                 <p class="source-note">
-                    Pagina aggiornata automaticamente ogni settimana (controllo delle fonti ufficiali). Sono privilegiate le comunicazioni con ricaduta pratica sulla medicina generale; non tutte le comunicazioni del 2026 sono incluse. Fanno sempre fede i testi ufficiali linkati. Ultima verifica: 27 settembre 2026.
+                    Pagina aggiornata automaticamente ogni settimana (controllo delle fonti ufficiali). Sono privilegiate le comunicazioni con ricaduta pratica sulla medicina generale; non tutte le comunicazioni del 2026 sono incluse. Fanno sempre fede i testi ufficiali linkati. Ultima verifica: 28 settembre 2026.
                 </p>
             </div>
         </section>
 
         <div class="note-box">
-            <strong>Disclaimer:</strong> contenuti a scopo informativo per personale sanitario; non sostituiscono i documenti ufficiali né il giudizio clinico. Sintesi redatte e verificate sul testo originale dei documenti citati (ultima verifica: 27 settembre 2026).
+            <strong>Disclaimer:</strong> contenuti a scopo informativo per personale sanitario; non sostituiscono i documenti ufficiali né il giudizio clinico. Sintesi redatte e verificate sul testo originale dei documenti citati (ultima verifica: 28 settembre 2026).
         </div>
 
     </div>
