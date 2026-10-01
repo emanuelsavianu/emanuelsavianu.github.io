@@ -16,3 +16,23 @@
 # Esempi (attivali solo se servono):
 # ^0575[\s.]?\d{6}$            recapiti della Zona Distretto / azienda
 # ^02236310518$                P.IVA e C.F. Azienda USL Toscana Sud Est
+
+# 01/10/2026 — bundle "Facsimile certificati" + "Modulistica varia" pubblicato in
+# colleghi/modulistica/. Tutti i riscontri sono recapiti di struttura (Zone Distretto
+# USL Toscana Sud Est, palestre/associazioni AFA, uffici) o riferimenti normativi e
+# date di revisione stampati nel modulo: nessun dato di paziente (verificato a video
+# pagina per pagina e con OCR su 22 moduli).
+^0564[\s.\-]?(?:485111|485506|485508|914607|869407)$
+^0575[\s.\-]?(?:255874|568734|837093|757733|911141|370147|302036|380564|302766|295475|254156|99410)$
+^0577[\s.\-]?(?:536983|782318|994813|535111)$
+^0566[\s.\-]?59509$
+^0578[\s.\-]?713012$
+^055[\s.\-]?9106354$
+^327[\s.\-]?5318998$
+^368[\s.\-]?3039225$
+^334[\s.\-]?6639621$
+^14/08/2014$
+^06/08/2014$
+^28/12/2000$
+^1/10/2019$
+^08/07/2024$
