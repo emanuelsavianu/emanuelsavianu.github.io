@@ -1,6 +1,6 @@
 ---
-title: Area Colleghi | Dott. Emanuel Savianu — Arezzo
-description: Area Colleghi dello Studio Medico Ippocrate — Dott. Emanuel Savianu: strumenti, protocolli e guide professionali per Medici di Medicina Generale.
+title: Area Colleghi: modulistica e facsimili MMG | Savianu
+description: Facsimili dei certificati e modulistica per MMG e PLS: PAI, STU, ADI/ADP, accessi vascolari, esenzioni, ausili. Moduli originali ASL Toscana Sud Est.
 ---
 
 # Area Colleghi — Studio Medico Ippocrate
