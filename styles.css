@@ -124,6 +124,14 @@ body.dark-mode .lang-separator { color: var(--color-text); opacity: 0.5; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* L'attributo `hidden` deve SEMPRE vincere sui `display:` delle classi.
+   Senza questa regola `.header-info { display:flex }` e
+   `.header-info-close { display:inline-flex }` annullavano `hidden` (specificità
+   di classe > attributo): la barra informativa e la sua X restavano visibili
+   anche quando il JS le considerava chiuse → X visibile ma inerte
+   (segnalato dall'utente 2026-10-01). */
+[hidden] { display: none !important; }
+
 :where(a, button, input, select, textarea, [role="button"], [tabindex]):focus-visible {
     outline: var(--focus-ring);
     outline-offset: 2px;
@@ -165,8 +173,15 @@ a:focus-visible {
 /* Custom Elements: display block per evitare problematiche inline/block.
    position: relative è REQUIRED: .lang-switch (absolute top/right) prende il
    containing block dal più vicino antenato posizionato; senza, fluttua in cima
-   alla viewport sopra i banner. */
-site-nav { display: block; position: relative; content-visibility: auto; contain-intrinsic-size: auto 72px; }
+   alla viewport sopra i banner.
+
+   NIENTE content-visibility/contain su site-nav (bug 2026-10-01): implicano
+   `contain: paint`, che ritaglia i discendenti al box dell'elemento. Sulla
+   landing il selettore lingua/tema è posizionato FUORI da quel box
+   (site-nav[data-section="root"] .lang-switch { top: 100% }), quindi veniva
+   ritagliato: ITA/ENG/tema invisibili e non cliccabili, con l'hero-overlay
+   sopra (verificato: elementFromPoint restituiva .hero-overlay). */
+site-nav { display: block; position: relative; }
 site-footer { display: block; content-visibility: auto; contain-intrinsic-size: auto 240px; }
 
 /* --- HEADER / LANDING PAGE --- */

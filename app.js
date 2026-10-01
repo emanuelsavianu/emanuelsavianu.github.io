@@ -954,13 +954,22 @@ function trapFocus(modal) {
 
     const active = CONFIG.getActiveAbsence();
     let dismissed = false;
-    if (active) {
-        try { dismissed = sessionStorage.getItem('ferie-dismissed-' + active.from) === '1'; } catch(e) {}
+    let lineDismissed = false;
+    try {
+        lineDismissed = sessionStorage.getItem('header-info-dismissed') === '1';
+        if (active) dismissed = sessionStorage.getItem('ferie-dismissed-' + active.from) === '1';
+    } catch(e) {}
+
+    // L'utente ha chiuso la barra informativa: resta chiusa per la sessione.
+    if (lineDismissed) {
+        line.setAttribute('hidden', '');
+        return;
     }
 
     if (isPatient) {
         base.textContent = t.doctolib_banner_text;
         urgenze.textContent = t.urgenze_line;
+        closeBtn.removeAttribute('hidden');   // barra informativa chiudibile dall'utente
     } else if (active && !dismissed) {
         urgenze.textContent = t.urgenze_line;
     } else {
@@ -976,20 +985,20 @@ function trapFocus(modal) {
 })();
 
 export function dismissHeaderInfo() {
-    const isPatient = isPatientSection(currentSection());
     const line = document.getElementById('header-info-line');
     const absence = document.getElementById('header-info-absence');
     const closeBtn = document.getElementById('header-info-close');
     if (!line) return;
 
-    if (isPatient) {
-        if (absence) absence.setAttribute('hidden', '');
-        if (closeBtn) closeBtn.setAttribute('hidden', '');
-    } else {
-        line.setAttribute('hidden', '');
-    }
+    // La X chiude l'intera barra informativa (avviso prenotazioni + urgenze) e
+    // la mantiene chiusa per la sessione. Se c'era un avviso di assenza, resta
+    // ricordato anche dopo la chiusura del browser (come prima).
+    line.setAttribute('hidden', '');
+    if (absence) absence.setAttribute('hidden', '');
+    if (closeBtn) closeBtn.setAttribute('hidden', '');
 
     try {
+        sessionStorage.setItem('header-info-dismissed', '1');
         const active = CONFIG.getActiveAbsence();
         if (active) sessionStorage.setItem('ferie-dismissed-' + active.from, '1');
     } catch(e) {}
