@@ -35,6 +35,16 @@ jobs:
             | sed -e 's/<[^>]*>//g' \
             | jq -R -s -c 'split("\n") | map(select(length > 0))')
 
+          # Include published PDFs (modulistica e facsimili): sitemap.xml lists
+          # pages only, but the downloadable forms are the assets colleagues
+          # search for — tell Bing/Yandex about them explicitly.
+          PDF_LIST=$(git ls-files '*.pdf' \
+            | sed 's|^|https://savianu.it/|' \
+            | jq -R -s -c 'split("\n") | map(select(length > 0))')
+
+          URL_LIST=$(jq -n --argjson pages "$URL_LIST" --argjson pdfs "$PDF_LIST" \
+            '$pages + $pdfs | unique')
+
           # Build the IndexNow payload
           PAYLOAD=$(jq -n \
             --arg host "savianu.it" \
