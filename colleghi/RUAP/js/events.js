@@ -31,6 +31,7 @@ import {
   copyWeekFromCurrentView, pasteWeekToCurrentView,
   toggleMonthlyStats, toggleHideZeroDocs,
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
+  selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday
 } from './renderers.js';
 
@@ -138,10 +139,8 @@ el('btn-unavail-today')?.addEventListener('click', unavailCalToday);
 
 // --- Color swatch selection ---
 document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('color-swatch')) {
-    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('border-slate-800'));
-    e.target.classList.add('border-slate-800');
-  }
+  const swatch = e.target.closest ? e.target.closest('.color-swatch') : null;
+  if (swatch) selectDoctorColor(parseInt(swatch.dataset.index, 10));
 });
 
 // --- Header and toolbar buttons ---
