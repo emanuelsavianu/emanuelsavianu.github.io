@@ -44,7 +44,38 @@ Il paziente accede al II livello **esclusivamente su invio del MMG** (salvo acce
 
 ## 2. Farmaci
 
-Sezione in preparazione: raccoglierà i criteri di appropriatezza prescrittiva (note AIFA, piani terapeutici, farmaci equivalenti, modalità di prescrizione regionale) con i riferimenti normativi verificati.
+### In 30 secondi
+
+- **SGLT2i e DPP4i** (da soli o associati ad altri farmaci non in Nota): **li prescrive il MMG, senza scheda**.
+- **GLP1-RA e tirzepatide** (doppi agonisti GIP/GLP1): serve la **scheda di valutazione e prescrizione** (Allegato 1), che può compilare anche il MMG.
+- **Prima prescrizione** (All. 1a): validità **6 mesi** · **rinnovo** (All. 1b): **12 mesi**.
+- Serve **visita + HbA1c, creatinina (VFG), eventuale albuminuria**: esami già routinari del monitoraggio.
+- Rimborsabilità: **HbA1c > 53 mmol/mol (7,0%)** nell'adulto con DM2, quando la metformina da sola o in associazione non basta.
+- **Associazioni tra farmaci in Nota** (SGLT2i+DPP4i, SGLT2i+GLP1-RA): verificare la versione vigente — le FAQ AIFA le riservano al diabetologo; la scheda All. 1a del 15/12/2025 ammette anche il MMG per SGLT2i+GLP1-RA.
+
+### Chi fa cosa (PDTA regionale, DGRT 5/2020)
+
+| Aspetto | MMG | Diabetologo |
+|---|---|---|
+| Terapia di prima linea | La imposta e la conduce: stile di vita e metformina (o altra molecola se intolleranza/controindicazione). | Consulenza sui casi dubbi e sulle diagnosi differenziali. |
+| Terapie complesse | Monitora compenso e aderenza; chiede supporto specialistico se il target non è raggiunto. | Inizio/intensificazione di schemi complessi, insulina e farmaci con beneficio cardio-renale. |
+| Schede e piani terapeutici | Prescrive e rinnova nei limiti di validità della scheda in corso. | Compila i piani terapeutici dei farmaci a prescrizione specialistica. |
+| Follow-up farmacologico | A ogni controllo (4–6 mesi): efficacia, effetti collaterali, ipoglicemie, aderenza. | Presa in carico fino a stabilizzazione, poi rinvio al MMG. |
+
+### Quando mandare dal diabetologo per un problema di terapia
+
+- **U — entro 72 ore:** scompenso metabolico; ipoglicemie gravi o ricorrenti.
+- **B — entro 10 giorni:** effetti collaterali o intolleranza che impongono di rivedere la terapia; ipoglicemie ripetute non gravi; avvio di terapie che interferiscono con la glicemia (cortisonici, chemioterapia); evoluzione di complicanze che richiede revisione della terapia (insufficienza renale con metformina, scompenso cardiaco con pioglitazone, eventi cardiovascolari maggiori).
+- **Entro 30 giorni:** HbA1c oltre il target in due determinazioni consecutive nonostante le variazioni terapeutiche e lo stile di vita; implementazione o riconferma di terapia con farmaci in piano terapeutico; complicanza d'organo di nuova insorgenza.
+
+### Note pratiche
+
+- **Farmaci in Nota 100:** inibitori SGLT2 (canagliflozin, dapagliflozin, empagliflozin, ertugliflozin) · agonisti GLP1 (dulaglutide, exenatide, exenatide LAR, liraglutide, lixisenatide, semaglutide) · inibitori DPP4 (alogliptin, linagliptin, saxagliptin, sitagliptin, vildagliptin) · doppi agonisti GIP/GLP1 (tirzepatide) · associazioni precostituite.
+- La scheda è oggi **cartacea** (pdf editabile), in attesa dell'informatizzazione tramite sistema tessera sanitaria: una copia va consegnata al paziente (da esibire se prescrive un altro medico) e una conservata dal prescrittore.
+- La Nota riguarda la rimborsabilità per l'indicazione **diabete mellito tipo 2**: per le altre indicazioni (es. scompenso cardiaco) valgono i regimi prescrittivi specifici e il riferimento alla Nota 100 non va apposto in ricetta.
+- Prima di prescrivere, verificare la versione vigente della Nota e della scheda su aifa.gov.it.
+
+**Fonti:** Nota AIFA 100 con scheda di prescrizione All. 1a/1b e FAQ di applicazione (consultate il 02/10/2026); DGRT n. 5 del 7 gennaio 2020 (PDTA diabete dell'adulto, gestione integrata MMG–diabetologia).
 
 ---
 
