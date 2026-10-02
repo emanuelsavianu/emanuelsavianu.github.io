@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-09-02T13:09:45Z",
+  "configDataVersion": "2026-10-02T18:12:53Z",
   "places": [
     "M.S.Savino",
     "Subbiano"
@@ -65,7 +65,7 @@ const CONFIG = {
     },
     {
       "id": "mqgp5xpev7h1m",
-      "name": "Dott. Fiori",
+      "name": "Dott. Pasini",
       "patients": 126,
       "weeklyHours": 38,
       "isPool": false,
