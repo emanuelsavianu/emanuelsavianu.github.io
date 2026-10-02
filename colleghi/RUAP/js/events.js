@@ -61,7 +61,10 @@ document.addEventListener('keydown', (e) => {
   if (mod && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) { e.preventDefault(); redo(); }
   if (e.key === 'ArrowLeft' && mod) { e.preventDefault(); shiftMonth(-1); renderAll(); }
   if (e.key === 'ArrowRight' && mod) { e.preventDefault(); shiftMonth(1); renderAll(); }
-  if (e.key === 'Escape') { closeAssignDropdown(); closeDoctorModal(); closeConflictModal(); closeInstructions(); }
+  if (e.key === 'Escape') {
+    closeAssignDropdown(); closeDoctorModal(); closeConflictModal(); closeInstructions();
+    closeHeaderActions();
+  }
 });
 
 // ====================================================
@@ -141,6 +144,23 @@ el('btn-unavail-today')?.addEventListener('click', unavailCalToday);
 document.addEventListener('click', (e) => {
   const swatch = e.target.closest ? e.target.closest('.color-swatch') : null;
   if (swatch) selectDoctorColor(parseInt(swatch.dataset.index, 10));
+});
+
+// --- Mobile: pannello azioni dell'header ---
+// A schermo stretto le ~15 azioni non stanno in una riga: senza pannello
+// l'header sticky copriva più di metà viewport e nascondeva il calendario.
+function closeHeaderActions() {
+  el('header-actions')?.classList.remove('open');
+  el('btn-toolbar-toggle')?.setAttribute('aria-expanded', 'false');
+}
+el('btn-toolbar-toggle')?.addEventListener('click', () => {
+  const bar = el('header-actions');
+  if (!bar) return;
+  const open = bar.classList.toggle('open');
+  el('btn-toolbar-toggle').setAttribute('aria-expanded', String(open));
+});
+el('header-actions')?.addEventListener('click', (e) => {
+  if (e.target.closest('button')) closeHeaderActions();
 });
 
 // --- Header and toolbar buttons ---
