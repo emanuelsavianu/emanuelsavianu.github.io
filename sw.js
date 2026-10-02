@@ -1,6 +1,6 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Network-First per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v380';
+const CACHE_NAME = 'savianu-v381';
 
 const PRECACHE_URLS = [
   '/offline.html',
@@ -8,6 +8,7 @@ const PRECACHE_URLS = [
   '/colleghi/adi-adp-pai.html',
   '/colleghi/ausili-assistenziali.html',
   '/colleghi/comunicazioni-2026.html',
+  '/colleghi/criteri-appropriatezza.html',
   '/colleghi/guida-accessi-malattie-infettive.html',
   '/colleghi/guida-accessi-pronto-soccorso.html',
   '/colleghi/guida-accessi-vascolari.html',

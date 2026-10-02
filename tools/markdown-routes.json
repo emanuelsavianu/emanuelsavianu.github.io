@@ -32,6 +32,12 @@
       "md": "colleghi/comunicazioni-2026.md",
       "html": "colleghi/comunicazioni-2026.html",
       "stub": "markdown/colleghi-comunicazioni-2026.md"
+    },
+    {
+      "route": "/colleghi/criteri-appropriatezza.html",
+      "md": "colleghi/criteri-appropriatezza.md",
+      "html": "colleghi/criteri-appropriatezza.html",
+      "stub": "markdown/colleghi-criteri-appropriatezza.md"
     }
   ]
 }

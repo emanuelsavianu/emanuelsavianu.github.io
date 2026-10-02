@@ -9,6 +9,7 @@
 - [Certificati INPS e Invalidità ad Arezzo | Dott. Savianu](https://savianu.it/privati/)
 - [Area Colleghi: modulistica e facsimili MMG | Savianu](https://savianu.it/colleghi/)
 - [Comunicazioni 2026 Medicina Generale | Dott. Savianu](https://savianu.it/colleghi/comunicazioni-2026.md)
+- [Criteri di appropriatezza — Invii specialistici e farmaci | Dott. Savianu](https://savianu.it/colleghi/criteri-appropriatezza.md)
 
 ## Markdown per agenti
 
@@ -20,6 +21,7 @@ invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure
 - [/privati/index.md](https://savianu.it/privati/index.md)
 - [/colleghi/index.md](https://savianu.it/colleghi/index.md)
 - [/colleghi/comunicazioni-2026.md](https://savianu.it/colleghi/comunicazioni-2026.md)
+- [/colleghi/criteri-appropriatezza.md](https://savianu.it/colleghi/criteri-appropriatezza.md)
 
 ## Contatti generali
 
