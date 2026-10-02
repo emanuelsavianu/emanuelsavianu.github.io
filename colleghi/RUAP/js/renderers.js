@@ -507,13 +507,88 @@ function renderAvailabilityTable(availability) {
     </tr>`).join('');
 }
 
+// --- Colori dei medici -------------------------------------------------------
+// Il colore selezionato vive qui (non in una classe CSS): il build statico di
+// Tailwind non contiene le utility usate solo da JS, quindi i pallini sono
+// resi con stili inline (come i chip del calendario) e restano sempre visibili.
+
+let modalColorIndex = 0;
+
+/** Normalizza un colorIndex dentro i limiti della palette. */
+export function normalizeColorIndex(idx) {
+  const n = typeof idx === 'number' ? idx : parseInt(idx, 10);
+  if (!Number.isFinite(n)) return 0;
+  const len = COLOR_PALETTE.length;
+  return ((Math.trunc(n) % len) + len) % len;
+}
+
+/** Mappa colorIndex -> nomi dei medici che lo usano (escluso il medico in modifica). */
+function colorsInUse(excludeDoctorId = null) {
+  const used = new Map();
+  state.doctors.forEach(d => {
+    if (excludeDoctorId && d.id === excludeDoctorId) return;
+    const i = normalizeColorIndex(d.colorIndex);
+    if (!used.has(i)) used.set(i, []);
+    used.get(i).push(cleanDoctorName(d.name));
+  });
+  return used;
+}
+
+/** Primo colore libero; se sono tutti occupati, quello usato da meno medici. */
+export function firstFreeColorIndex(excludeDoctorId = null) {
+  const used = colorsInUse(excludeDoctorId);
+  for (let i = 0; i < COLOR_PALETTE.length; i++) if (!used.has(i)) return i;
+  let best = 0, bestCount = Infinity;
+  for (let i = 0; i < COLOR_PALETTE.length; i++) {
+    const c = (used.get(i) || []).length;
+    if (c < bestCount) { bestCount = c; best = i; }
+  }
+  return best;
+}
+
+function colorSwatchLabel(i, usedMap) {
+  const others = usedMap.get(i) || [];
+  return others.length
+    ? `${COLOR_PALETTE[i].label} — già usato da ${others.join(', ')}`
+    : `${COLOR_PALETTE[i].label} — colore libero`;
+}
+
 function renderColorPicker(selectedIndex) {
   const container = el('color-picker');
   if (!container) return;
-  container.innerHTML = COLOR_PALETTE.map((c, i) =>
-    `<div class="w-6 h-6 rounded-full ${c.bg} cursor-pointer border-2 ${i === selectedIndex ? 'border-slate-800' : 'border-transparent'} color-swatch" data-index="${i}"></div>`
-  ).join('');
+  modalColorIndex = normalizeColorIndex(selectedIndex);
+  const usedMap = colorsInUse(state.editingDoctorId || null);
+  const swatches = COLOR_PALETTE.map((c, i) => {
+    const selected = i === modalColorIndex;
+    const others = usedMap.get(i) || [];
+    const badge = others.length
+      ? `<span aria-hidden="true" style="position:absolute;top:-5px;right:-5px;min-width:15px;height:15px;line-height:14px;padding:0 3px;border-radius:9999px;background:#fff;border:1px solid #cbd5e1;color:#475569;font-size:9px;font-weight:700;text-align:center">${others.length}</span>`
+      : '';
+    const check = selected
+      ? `<span aria-hidden="true" style="color:#fff;font-size:14px;font-weight:700;text-shadow:0 1px 2px rgba(0,0,0,.5)">✔</span>`
+      : '';
+    return `<button type="button" role="radio" aria-checked="${selected}"
+      aria-label="${escapeHtml(colorSwatchLabel(i, usedMap))}" title="${escapeHtml(colorSwatchLabel(i, usedMap))}"
+      class="color-swatch" data-index="${i}"
+      style="position:relative;width:34px;height:34px;padding:0;border-radius:9999px;background:${c.hex};border:2px solid ${selected ? '#1e293b' : 'rgba(0,0,0,0.12)'};box-shadow:${selected ? '0 0 0 2px #fff, 0 0 0 4px #1e293b' : 'none'};cursor:pointer;display:inline-flex;align-items:center;justify-content:center">${check}${badge}</button>`;
+  }).join('');
+  const others = usedMap.get(modalColorIndex) || [];
+  const freeCount = COLOR_PALETTE.length - usedMap.size;
+  const info = others.length
+    ? `<span style="color:#b45309">⚠️ ${COLOR_PALETTE[modalColorIndex].label}: già assegnato a ${escapeHtml(others.join(', '))}.</span> <span style="color:#94a3b8">Il numero sul pallino indica quanti medici lo usano.</span>`
+    : `<span style="color:#15803d">✅ ${COLOR_PALETTE[modalColorIndex].label}: colore libero.</span>`;
+  container.innerHTML = `
+    <div role="radiogroup" aria-label="Colore del medico nel calendario" style="display:flex;flex-wrap:wrap;gap:8px">${swatches}</div>
+    <p id="color-picker-info" class="text-xs" style="flex-basis:100%;margin-top:6px">${info} <span style="color:#94a3b8">Colori liberi: ${freeCount} su ${COLOR_PALETTE.length}.</span></p>`;
 }
+
+/** Chiamata dal click su un pallino (events.js). */
+export function selectDoctorColor(index) {
+  const i = normalizeColorIndex(index);
+  if (i === modalColorIndex) return;
+  renderColorPicker(i);
+}
+
 
 export function openDoctorModal(doctorId = null) {
   state.editingDoctorId = doctorId;
@@ -540,7 +615,9 @@ export function openDoctorModal(doctorId = null) {
   el('modal-monthly-budget').value = values.monthlyBudget;
   el('modal-aft').value = values.aft;
   renderAvailabilityTable(doc ? doc.availability : null);
-  renderColorPicker(doc ? doc.colorIndex || 0 : 0);
+  // Nuovo medico: si parte dal primo colore LIBERO (non dal blu di default, che
+  // è già di un altro medico); medico esistente: si mantiene il suo colore.
+  renderColorPicker(doc ? normalizeColorIndex(doc.colorIndex) : firstFreeColorIndex(null));
   populatePlaceSelect(el('modal-preferred-place'), doc ? doc.preferredPlace : null);
   const periodsContainer = el('unavail-periods');
   periodsContainer.innerHTML = '';
@@ -624,8 +701,10 @@ export function saveDoctorFromModal() {
   const budget = el('modal-monthly-budget').value ? parseFloat(el('modal-monthly-budget').value) : undefined;
   const aft = el('modal-aft').value || '';
   const preferredPlace = el('modal-preferred-place').value || null;
-  const selectedSwatch = document.querySelector('.color-swatch.border-slate-800');
-  const colorIndex = selectedSwatch ? parseInt(selectedSwatch.dataset.index) : 0;
+  const colorIndex = normalizeColorIndex(modalColorIndex);
+  // Colori già usati da ALTRI medici (il medico in modifica è escluso): il
+  // duplicato non è bloccante, ma viene segnalato subito.
+  const colorClash = colorsInUse(state.editingDoctorId || null).get(colorIndex) || [];
   const availability = {};
   document.querySelectorAll('.avail-check').forEach(cb => {
     const day = cb.dataset.day;
@@ -664,7 +743,11 @@ export function saveDoctorFromModal() {
   pushHistory();
   closeDoctorModal();
   renderAll();
-  toast(state.editingDoctorId ? 'Medico aggiornato' : 'Medico aggiunto', 'success');
+  if (colorClash.length) {
+    toast(`${state.editingDoctorId ? 'Medico aggiornato' : 'Medico aggiunto'} — attenzione: colore già usato da ${colorClash.join(', ')}`, 'warning');
+  } else {
+    toast(state.editingDoctorId ? 'Medico aggiornato' : 'Medico aggiunto', 'success');
+  }
 }
 
 // --- Conflicts ---
@@ -1662,7 +1745,7 @@ function renderWizardStep4() {
     <button id="w-doctor-add" class="wizard-big-btn outline w-full mb-3" style="padding:0.75rem; font-size:1rem">+ Aggiungi medico</button>
     <div id="w-doctor-list" class="flex flex-wrap gap-2 mb-4">
       ${wDoctors.map((d, i) => `
-        <span class="wizard-chip" style="background:${COLOR_PALETTE[i % COLOR_PALETTE.length].hex}; color:white">
+        <span class="wizard-chip" style="background:${(COLOR_PALETTE[d.colorIndex] || COLOR_PALETTE[i % COLOR_PALETTE.length]).hex}; color:white">
           ${escapeHtml(d.name)}
           <button class="chip-remove w-remove-doctor" data-index="${i}">×</button>
         </span>`).join('')}
@@ -1677,11 +1760,15 @@ function renderWizardStep4() {
     const patients = parseInt(el('w-doctor-patients').value) || 850;
     const preferredPlace = el('w-doctor-place').value || null;
     if (name) {
+      // Primo colore non ancora usato dai medici già inseriti nel wizard.
+      const usedIdx = new Set(wDoctors.map(d => d.colorIndex));
+      let colorIndex = 0;
+      while (usedIdx.has(colorIndex) && colorIndex < COLOR_PALETTE.length - 1) colorIndex++;
       wDoctors.push({
         name: name.startsWith('Dott. ') ? name : 'Dott. ' + name,
         patients,
         weeklyHours: calculateWeeklyHoursByPatients(patients),
-        colorIndex: wDoctors.length % COLOR_PALETTE.length,
+        colorIndex,
         preferredPlace,
         availability: Object.fromEntries(DAY_KEYS.map(k => [k, { mat: true, pom: true }])),
         unavailPeriods: []

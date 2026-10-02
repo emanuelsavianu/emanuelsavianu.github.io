@@ -1,6 +1,6 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Network-First per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v381';
+const CACHE_NAME = 'savianu-v382';
 
 const PRECACHE_URLS = [
   '/offline.html',
@@ -67,7 +67,7 @@ const PRECACHE_URLS = [
   '/assets/fonts/cormorant-garamond-var-latin-ext.woff2',
   '/assets/css/tools.default.min.css',
   '/assets/css/tools.tw.blue.min.css',
-  '/assets/css/tools.tw.navy.min.css',
+  '/assets/css/tools.tw.navy.min.css?v=2',
   '/assets/css/tools.tw.teal.min.css',
 ];
 
