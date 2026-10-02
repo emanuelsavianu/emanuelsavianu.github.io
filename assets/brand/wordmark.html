@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<title>Wordmark Savianu — master</title>
+<!--
+  Master del wordmark "Savianu".
+  Colori presi dal sito (styles.css): navy #1a2f4c, oro #c29b57.
+  Font: Cormorant Garamond self-hosted in /assets/fonts (lo stesso del sito).
+  Render: vedi scripts/render-wordmark.py — non modificare i colori a occhio.
+-->
+<style>
+  @font-face {
+    font-family: 'Cormorant Garamond';
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: block;
+    src: url('../fonts/cormorant-garamond-var-latin.woff2') format('woff2');
+  }
+  :root {
+    --navy: #1a2f4c;   /* styles.css --color-brand */
+    --gold: #c29b57;   /* styles.css --color-accent */
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  .stage {
+    width: 1200px;
+    height: 400px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    overflow: hidden;
+  }
+  .stage.trasparente { background: transparent; }
+
+  .wordmark {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 600;
+    font-size: 250px;
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    /* Nessuna ombra né sfumatura: il navy e l'oro restano i valori esatti del
+       sito (#1a2f4c / #c29b57), senza tonalità intermedie. */
+  }
+</style>
+</head>
+<body>
+  <div class="stage" id="stage-navy">
+    <span class="wordmark" id="wordmark">Savianu</span>
+  </div>
+</body>
+</html>
