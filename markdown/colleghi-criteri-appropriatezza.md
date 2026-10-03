@@ -42,6 +42,35 @@ Il paziente accede al II livello **esclusivamente su invio del MMG** (salvo acce
 - Invio regolato da **agende CUP riservate**, distinte per prime visite e follow-up secondo la classe di priorità.
 - **Rientro al MMG:** la struttura specialistica gestisce il paziente fino a risoluzione o stabilizzazione e poi lo rinvia al medico curante per il follow-up; anche i pazienti stabilizzati in carico da tempo agli specialisti vanno indirizzati ai MMG.
 
+### Disturbi cognitivi e demenze — PDTA Regione Toscana
+
+**Fonte:** Percorso Diagnostico Terapeutico Assistenziale «Disturbi cognitivi e demenze» — codice **PDA-PCUR-003 rev. 0**, Azienda USL Toscana Sud Est, AFD «Prendersi cura» (revisione 08/11/2022, approvazione dicembre 2022). Il percorso è stato divulgato nuovamente nel 2026 per l'avvicendamento generazionale dei medici di medicina generale.
+
+#### Le quattro fasi del percorso
+
+- **Fase 1 — Identificazione e sospetto diagnostico (MMG, responsabile):** anamnesi personale e familiare orientata ai deficit di memoria e ai disturbi comportamentali, anche su segnalazione dei familiari; test di screening di 1° livello eseguiti in ambulatorio (Pfeiffer, GPCog o Mini-Cog); esami di base e valutazione cardiovascolare; richiesta CUP «PRIMA VISITA c/o CDCD» con relazione di accompagnamento.
+- **Fase 2 — Arruolamento e diagnosi (CDCD):** prima visita garantita entro 30–60 giorni su agende CUP dedicate, della durata di 60 minuti; valutazione neuropsicologica e funzionale e approfondimenti di 2° livello in day service. Il MMG è informato (I) dell'inquadramento e collabora (C) con lo specialista per il piano terapeutico e l'orientamento della famiglia ai servizi territoriali (AIMA).
+- **Fase 3 — Follow-up periodico:** pressione arteriosa, ritmo e frequenza cardiaca rilevati e registrati in cartella; ECG ogni 6 mesi con misurazione dell'intervallo QT; adeguamento della terapia (il CDCD collabora); raccordo con l'UVM per l'inserimento in Centri Diurni Alzheimer e Nuclei Alzheimer; gestione dei BPSD con la reperibilità telefonica degli specialisti del CDCD, per evitare accessi inappropriati in Pronto Soccorso.
+- **Fase 4 — Fine vita (PAI specifici):** informazione, consulenza e sostegno alla famiglia sull'appropriatezza di SNG, PEG e nutrizione artificiale e sull'attivazione delle cure palliative/Hospice (MMG responsabile insieme a infermiere e CDCD).
+
+#### Prima dell'invio al CDCD
+
+- **Test di screening di 1° livello:** Pfeiffer, GPCog o Mini-Cog.
+- **Esami di laboratorio di routine**, comprensivi di vitamina B12, acido folico, ormoni tiroidei, esame tossicologico, lue e HIV-AIDS.
+- **Valutazione cardiovascolare:** ECG ed eventuale ecocolordoppler TSA.
+- **Neuroimaging:** TAC cranio senza mezzo di contrasto.
+- **Richiesta CUP** di visita geriatrica o neurologica con la dicitura esatta «PRIMA VISITA c/o CDCD» (CUP 800 575 800 da rete fissa, 0575 379100 da cellulare).
+- **Relazione di accompagnamento** con tutte le informazioni raccolte, la storia clinica e le comorbilità.
+
+#### Indicatori di monitoraggio (rilevazione annuale)
+
+- % di pazienti con richiesta di prima visita per demenza che hanno eseguito i test di screening di 1° livello (Pfeiffer o Mini-Cog) a cura del MMG.
+- Meno del 10% dei pazienti arruolati su proposta del MMG per visite finalizzate alla certificazione di non autosufficienza (le richieste con finalità puramente certificative seguono altri canali).
+- % di pazienti che ricevono la prima visita presso il CDCD entro 30–60 giorni.
+- Esiti: % di pazienti rivalutati ogni 6 mesi per il rinnovo del piano terapeutico; % di pazienti in terapia con antipsicotici con almeno un ECG nell'ultimo anno.
+
+**PDTA integrale:** [PDTA «Disturbi cognitivi e demenze» — PDA-PCUR-003 rev. 0](https://savianu.it/colleghi/modulistica/pdta-disturbi-cognitivi-demenze.pdf) (PDF: percorso, matrice di responsabilità, indicatori, bibliografia). L'Allegato 1 con l'elenco dei CDCD e i recapiti dei referenti non è pubblicato: richiedere l'elenco aggiornato alla Zona Distretto.
+
 ## 2. Farmaci
 
 ### In 30 secondi
