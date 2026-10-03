@@ -91,6 +91,11 @@ const LEGACY_REDIRECTS = {
   '/protocollo-certificati-inps.html': '/colleghi/protocollo-certificati-inps.html',
   '/installazione.html': '/colleghi/',
   '/xsegretarie.html': '/colleghi/',
+  // Percorsi legacy che il merge di zona da dottemanuelsavianu.it reindirizza
+  // qui a percorso invariato (il worker del dominio legacy viene scavalcato
+  // dalla regola di forwarding di zona: il suo map non viene mai valutato).
+  '/RUAP/': '/colleghi/RUAP/',
+  '/gestoreturni/': '/colleghi/gestoreturni/gestoreturni.html',
   '/ferie.html': '/ssn/',
   '/salutementale.html': '/ssn/salutementale.html',
   '/vivisano.html': '/ssn/vivisano.html',
