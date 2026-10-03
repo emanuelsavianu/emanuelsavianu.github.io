@@ -36,3 +36,12 @@
 ^28/12/2000$
 ^1/10/2019$
 ^08/07/2024$
+
+# 03/10/2026 — PDTA "Disturbi cognitivi e demenze" (PDA-PCUR-003 rev. 0, Azienda USL
+# Toscana Sud Est, AFD "Prendersi cura"): documento programmatico pubblico, nessun dato
+# di assistito. 08/11/2022 è la data di revisione stampata nell'intestazione di ogni
+# pagina. L'originale (28 pagg.) contiene in Allegato 1 l'elenco dei CDCD con i recapiti
+# dei referenti (email aziendali e cellulari personali): il PDF pubblicato è ridotto
+# alle pagine 1-16 (percorso, matrice di responsabilità, indicatori, bibliografia)
+# proprio per non esporre i contatti personali di terzi su un sito pubblico.
+^08/11/2022$
