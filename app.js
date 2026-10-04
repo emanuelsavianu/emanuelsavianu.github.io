@@ -108,7 +108,7 @@ class SiteNav extends HTMLElement {
       '<div class="brand-wrap">' +
         '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async">' +
         '<div class="brand-text">' +
-          '<' + brandTag + ' class="brand-name"' + (isRoot ? ' data-i18n="landing_hero_title"' : '') + '>Dott. Savianu Emanuel</' + brandTag + '>' +
+          '<' + brandTag + ' class="brand-name"' + (isRoot ? ' data-i18n="landing_hero_title"' : '') + '>Dott. Emanuele Savianu</' + brandTag + '>' +
           '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
           phone +
         '</div>' +
@@ -118,13 +118,14 @@ class SiteNav extends HTMLElement {
       '<div class="header-info" id="header-info-line">' +
         '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
         '<span class="header-info-base" id="header-info-base"' + (isPatient ? ' data-i18n="doctolib_banner_text"' : '') + '></span>' +
-        '<a class="header-info-link" id="header-info-doctolib" href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" data-i18n="doctolib_banner_link">Prenota su Doctolib</a>' +
+        '<a class="header-info-link" id="header-info-doctolib" href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" data-i18n-title="doctolib_link_title" title="Profilo Doctolib del dott. Emanuel Savianu — Piazza Saione 3, Arezzo" data-i18n="doctolib_banner_link">Prenota su Doctolib</a>' +
         '<span class="header-info-absence" id="header-info-absence" hidden></span>' +
         '<span class="header-info-urgenze" id="header-info-urgenze" data-i18n="urgenze_line"></span>' +
         '<button id="header-info-close" class="header-info-close" hidden onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
       '</div>';
 
-    this.insertAdjacentHTML('beforebegin', skipLink + infoBar);
+    this.insertAdjacentHTML('beforebegin',
+      '<div class="site-notices" role="region" aria-label="Avvisi di servizio">' + skipLink + infoBar + '</div>');
     // Root page (index.html): no brand header — the photo hero is the masthead.
     // All other sections keep the navy brand header with logo/name/phone.
     this.innerHTML =
@@ -183,7 +184,7 @@ class SiteFooter extends HTMLElement {
     this.innerHTML =
       '<footer role="contentinfo">' +
         '<div class="footer-content">' +
-          '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - Dr. Savianu Emanuel</p>' +
+          '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - <span data-i18n="footer_owner">Dott. Emanuele Savianu</span></p>' +
           '<nav class="footer-nav" aria-label="Footer">' +
             footerLink(prefix || './', 'footer_home', isPatient, 'Home') +
             ' <span aria-hidden="true">·</span> ' +
@@ -202,7 +203,7 @@ class SiteFooter extends HTMLElement {
         '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
           '<a href="tel:+390575910904" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria"><i class="fas fa-phone-alt" aria-hidden="true"></i><span data-i18n="qa_call">Chiama</span></a>' +
           '<a href="' + prefix + 'ssn/faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti"><i class="fas fa-question-circle" aria-hidden="true"></i><span>FAQ</span></a>' +
-          '<a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib"><i class="fas fa-calendar-check" aria-hidden="true"></i><span data-i18n="qa_doctolib">Doctolib</span></a>' +
+          '<a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-title="doctolib_link_title" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib"><i class="fas fa-calendar-check" aria-hidden="true"></i><span data-i18n="qa_doctolib">Doctolib</span></a>' +
         '</nav>'
       );
     }
@@ -313,10 +314,14 @@ export const translations = {
         // Contacts
         contacts_title: "Contatti Studio",
         label_doctolib_contacts: "Appuntamenti, Messaggi, Rinnovi Farmaci",
-        label_secretary_fallback: "Segreteria (solo se non puoi usare Doctolib)",
+        label_secretary_fallback: "Segreteria — se preferisci parlare con una persona",
         label_address: "Studio Medico Ippocrate",
         label_via_doctolib: "tramite Doctolib",
         label_address_value: "Piazza Saione 3, Arezzo",
+        footer_owner: "Dott. Emanuele Savianu",
+        doctolib_link_title: "Profilo Doctolib del dott. Emanuel Savianu — Studio Medico Ippocrate, Piazza Saione 3, Arezzo",
+        table_scroll_hint: "Trascina per vedere tutta la tabella",
+        btn_print_checklist: "Stampa la lista",
 
         // Hours
         hours_lun_ven: "Lun - Ven",
@@ -495,9 +500,9 @@ export const translations = {
         intl_step3: '<strong>Visita.</strong> In studio (Piazza Saione 3, Arezzo), in telemedicina o a domicilio dove clinicamente indicato. Follow-up e documentazione sono gestiti direttamente con lei.',
         intl_info_title: 'Informazioni pratiche',
         intl_info_address_l: 'Studio',
-        intl_info_hours_l: 'Orari',
+        intl_info_hours_l: 'Orari dei consulti',
         intl_info_hours_v: 'Martedì e giovedì, 10:00–12:00. Lunedì, mercoledì e venerdì, 16:00–18:00. Visite solo su appuntamento.',
-        intl_info_phone_l: 'Telefono',
+        intl_info_phone_l: 'Telefono consulti privati',
         intl_info_langs_l: 'Lingue',
         intl_info_langs_v: 'English · Italiano',
         intl_ssn_note: "I residenti internazionali in Italia non sono automaticamente iscritti al Servizio Sanitario Nazionale (SSN). La visita privata è una delle opzioni di cura mentre si definiscono residenza, iscrizione al SSN o un soggiorno di breve durata — lo studio può inoltre spiegare cosa comporta l'iscrizione al SSN.",
@@ -673,10 +678,14 @@ export const translations = {
         // Contacts
         contacts_title: "Office Contacts",
         label_doctolib_contacts: "Appointments, Messages, Prescription Renewals",
-        label_secretary_fallback: "Reception (only if you cannot use Doctolib)",
+        label_secretary_fallback: "Reception — if you prefer to speak to a person",
         label_address: "Studio Medico Ippocrate",
         label_via_doctolib: "via Doctolib",
         label_address_value: "Piazza Saione 3, Arezzo",
+        footer_owner: "Dr. Emanuel Savianu",
+        doctolib_link_title: "Doctolib profile of Dr. Emanuel Savianu — Studio Medico Ippocrate, Piazza Saione 3, Arezzo",
+        table_scroll_hint: "Swipe to see the whole table",
+        btn_print_checklist: "Print the checklist",
 
         // Hours
         hours_lun_ven: "Mon - Fri",
@@ -853,9 +862,9 @@ export const translations = {
         intl_step3: '<strong>Consultation.</strong> At the studio (Piazza Saione 3, Arezzo), by telemedicine, or at home where clinically indicated. Follow-up and documentation are handled directly with you.',
         intl_info_title: 'Practical information',
         intl_info_address_l: 'Studio',
-        intl_info_hours_l: 'Opening hours',
+        intl_info_hours_l: 'Consultation hours',
         intl_info_hours_v: 'Tuesday and Thursday, 10:00–12:00. Monday, Wednesday and Friday, 16:00–18:00. Visits by appointment.',
-        intl_info_phone_l: 'Phone',
+        intl_info_phone_l: 'Phone (private consultations)',
         intl_info_langs_l: 'Languages',
         intl_info_langs_v: 'English · Italiano',
         intl_ssn_note: 'International residents in Italy are not automatically enrolled in the national health service (SSN). A private consultation is one option for care while residency, SSN registration, or a short-term stay is being sorted out — and the practice can explain what SSN registration would involve.',
@@ -1012,6 +1021,13 @@ export function setLanguage(lang, opts) {
     document.querySelectorAll('[data-i18n-aria-label]').forEach(el => {
         const key = el.getAttribute('data-i18n-aria-label');
         if (translations[lang]?.[key]) el.setAttribute('aria-label', translations[lang][key]);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        const key = el.getAttribute('data-i18n-title');
+        if (translations[lang]?.[key]) el.setAttribute('title', translations[lang][key]);
+    });
+    document.querySelectorAll('[data-scroll-label]').forEach(el => {
+        if (translations[lang]?.table_scroll_hint) el.setAttribute('aria-label', translations[lang].table_scroll_hint);
     });
     // Tier-2 international card: crawlable default (visible); hidden for non-EN sessions
     document.querySelectorAll('.triage-card--international').forEach(el => {
@@ -1390,10 +1406,54 @@ export function selectVisitType(type, url) {
     window.open(url, '_blank', 'noopener,noreferrer');
 }
 
+// --- WIDE TABLES: scroll affordance + keyboard access (WCAG 2.1.1) ---
+// Wide data tables on a phone show half their columns with no hint that the
+// rest exists (found in the 2026-10 UX review). When a wrapper really
+// overflows we add: a visible hint line, an inset edge shadow, tabindex=0 and
+// a group label so keyboard/screen-reader users can reach every column.
+function initTableScroll() {
+    const wraps = document.querySelectorAll('.table-scroll, .table-container');
+    const hintText = () => {
+        const lang = document.documentElement.lang || 'it';
+        const block = (typeof translations !== 'undefined' && translations[lang]) || translations.it;
+        return block.table_scroll_hint;
+    };
+    const sync = (el) => {
+        const scrollable = el.scrollWidth - el.clientWidth > 4;
+        el.classList.toggle('is-scrollable', scrollable);
+        let hint = el.previousElementSibling;
+        const hasHint = hint && hint.classList.contains('table-scroll-hint');
+        if (scrollable) {
+            el.setAttribute('tabindex', '0');
+            el.setAttribute('role', 'group');
+            el.setAttribute('data-scroll-label', '1');
+            el.setAttribute('aria-label', hintText());
+            if (!hasHint) {
+                hint = document.createElement('p');
+                hint.className = 'table-scroll-hint';
+                hint.setAttribute('aria-hidden', 'true');
+                el.parentNode.insertBefore(hint, el);
+            }
+            hint.textContent = '\u2192 ' + hintText();
+        } else {
+            el.removeAttribute('tabindex');
+            el.removeAttribute('role');
+            el.removeAttribute('data-scroll-label');
+            el.removeAttribute('aria-label');
+            if (hasHint) hint.remove();
+        }
+    };
+    const all = () => wraps.forEach(sync);
+    all();
+    window.addEventListener('resize', all, { passive: true });
+    window.addEventListener('site:i18n', all);
+}
+
 // --- GLOBAL INIT ON LOAD ---
 window.addEventListener('load', function() {
     initBackToTop();
     initGlobalFilters();
+    initTableScroll();
 });
 
 

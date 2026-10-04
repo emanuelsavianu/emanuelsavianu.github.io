@@ -57,7 +57,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261003a">
+    <link rel="stylesheet" href="../styles.css?v=20261004b">
 
     <!-- Lenis smooth scroll (self-hosted, offline-first) -->
     <script type="module">
@@ -198,14 +198,14 @@
 
 <site-nav data-section="ssn">
     <div class="fallback-nav">
-        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><strong>Dott. Emanuele Savianu — Studio Medico Ippocrate</strong></p>
         <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
 </site-nav>
 
 <div id="doctolib-modal" class="modal-overlay">
-    <div class="modal-content">
-        <h2 data-i18n="doctolib_modal_title">Avviso Importante</h2>
+    <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="doctolib-modal-title">
+        <h2 id="doctolib-modal-title" data-i18n="doctolib_modal_title">Avviso Importante</h2>
         <p class="modal-subtitle">STUDIO MEDICO IPPOCRATE</p>
         <div class="modal-text" data-i18n="doctolib_modal_text">Gentili Pazienti...</div>
         <button class="btn-accept" onclick="closeDoctolibModal()" data-i18n="doctolib_modal_btn">Ho letto</button>
@@ -316,7 +316,7 @@
         </section>
 
         <div class="urgency-wrapper">
-            <aside class="alert-emergency" role="alert">
+            <aside class="alert-emergency" aria-label="Avviso urgenze">
                 <i class="fas fa-ambulance" aria-hidden="true"></i>
                 <span data-i18n="emergency_112">Per urgenze ed emergenze mediche, contattare sempre il Numero Unico 112.</span>
             </aside>
@@ -362,7 +362,7 @@
 
     </main>
 
-    <aside role="complementary">
+    <aside role="complementary" aria-label="Contatti studio">
 
         <section class="card reveal">
             <div class="card-header">
@@ -420,7 +420,7 @@
 
 <site-footer data-section="ssn">
     <footer role="contentinfo">
-        <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
+        <p>© <span id="current-year">2026</span> - Dott. Emanuele Savianu</p>
     </footer>
 </site-footer>
 
@@ -430,7 +430,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20261004a"></script>
+<script type="module" src="../app.js?v=20261004b"></script>
 
 </body>
 </html>

@@ -45,7 +45,7 @@
 </script>
     <!-- Marks the page as JS-capable: accordions collapse only when JS runs. -->
     <script>document.documentElement.classList.add('ed-js');</script>
-    <link rel="stylesheet" href="../styles.css?v=20261003a">
+    <link rel="stylesheet" href="../styles.css?v=20261004b">
 
 
     <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
@@ -189,9 +189,9 @@
 </head>
 <body class="ed">
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
-<site-nav data-section="privati" data-no-float="1">
+<site-nav data-section="privati" data-no-float="1" data-lang-fixed="it">
     <div class="fallback-nav">
-        <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
+        <p><strong>Dott. Emanuele Savianu — Studio Medico Ippocrate</strong></p>
         <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
 </site-nav>
@@ -360,7 +360,7 @@
                 </h3>
 
                 <div style="margin-bottom: 20px;">
-                    <p style="font-size: 0.75rem; color: var(--text-medium); text-transform: uppercase; font-weight: 600; margin-bottom: 6px;">Telefono</p>
+                    <p style="font-size: 0.75rem; color: var(--text-medium); text-transform: uppercase; font-weight: 600; margin-bottom: 6px;">Telefono consulti privati</p>
                     <a href="tel:+3905751713428" style="font-size: 1.25rem; color: var(--accent-text); font-weight: 700; text-decoration: none; transition: opacity 0.2s; display: inline-block; padding: 6px 0;">0575 171 3428</a>
                 </div>
 
@@ -411,6 +411,10 @@
                         Documento d'identità
                     </li>
                 </ul>
+
+                <p class="no-print" style="margin: 0 0 18px;">
+                    <button type="button" class="btn-print" onclick="window.print()" data-i18n="btn_print_checklist">Stampa la lista</button>
+                </p>
 
                 <div style="background: var(--bg-gradient-1); border-left: 3px solid var(--accent); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 12px 14px; font-size: 0.82rem; color: var(--text-medium); line-height: 1.65;">
                     <strong style="color: var(--text-dark); display: block; margin-bottom: 5px;"><i class="fa-solid fa-rotate" aria-hidden="true" style="margin-right: 6px;"></i>Riforma D.Lgs. 62/2024 — Arezzo</strong>
@@ -729,13 +733,6 @@
         <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
     </button>
 
-    <!-- ── Footer ────────────────────────────────────────────── -->
-    <site-footer data-section="privati">
-        <footer role="contentinfo">
-            <p>© <span id="current-year">2026</span> - Dr. Savianu Emanuel</p>
-        </footer>
-    </site-footer>
-
     <!-- ── Closing CTA ───────────────────────────────────────── -->
     <section class="ed-band ed-band--deep" aria-labelledby="priv-cta-title">
         <div class="ed-band__inner ed-shell ed-cta">
@@ -753,7 +750,17 @@
 
 </main>
 
-<script type="module" src="../app.js?v=20261004a"></script>
+    <!-- ── Footer ────────────────────────────────────────────── -->
+    <site-footer data-section="privati">
+        <footer role="contentinfo">
+            <p>© <span id="current-year">2026</span> - Dott. Emanuele Savianu</p>
+        </footer>
+    </site-footer>
+
+
+
+
+<script type="module" src="../app.js?v=20261004b"></script>
 <script>
     // ── Scroll to FAQ ──
     function scrollToFaq() {
