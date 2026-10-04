@@ -104,10 +104,10 @@ class SiteNav extends HTMLElement {
       '<nav class="site-nav" aria-label="Navigazione principale">' +
         '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
         '<ul class="nav-menu" id="site-nav-menu">' +
-          navItem(prefix || './', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
-          navItem(prefix + 'ssn/index.html', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
-          navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
-          navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
+          navItem(prefix || './', 'nav_home', isPatient, here === '/' || here === '' || here.endsWith('/index.html'), 'Home') +
+          navItem(prefix + 'ssn/', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
+          navItem(prefix + 'privati/', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
+          navItem(prefix + 'colleghi/', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
           navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
         '</ul>' +
       '</nav>';
@@ -392,7 +392,7 @@ export const translations = {
         faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Prenotazioni e Appuntamenti",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Ricette e Farmaci",
         faq_q1: "Come prenoto una visita?",
-        faq_a1: "Le prenotazioni avvengono tramite <strong>Doctolib</strong>:<ul><li>Clicca \"Prenota su Doctolib\" qui sotto o vai su <a href='index.html'>savianu.it</a></li><li>Scegli il tipo di visita nell'app Doctolib</li><li>Conferma l'appuntamento</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Clicca qui per prenotare →</a></div><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
+        faq_a1: "Le prenotazioni avvengono tramite <strong>Doctolib</strong>:<ul><li>Clicca \"Prenota su Doctolib\" qui sotto o vai su <a href='/'>savianu.it</a></li><li>Scegli il tipo di visita nell'app Doctolib</li><li>Conferma l'appuntamento</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Clicca qui per prenotare →</a></div><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
         faq_q2: "Posso venire senza appuntamento?",
         faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.",
         faq_q3: "Quali sono gli orari dell'ambulatorio?",
@@ -764,7 +764,7 @@ export const translations = {
         faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Appointments &amp; Bookings",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Prescriptions &amp; Medications",
         faq_q1: "How do I book a visit?",
-        faq_a1: "Book your appointment through <strong>Doctolib</strong>:<ul><li>Click \"Book on Doctolib\" below or go to <a href='index.html'>savianu.it</a></li><li>Choose the visit type in the Doctolib app</li><li>Confirm your appointment</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Click here to book →</a></div><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
+        faq_a1: "Book your appointment through <strong>Doctolib</strong>:<ul><li>Click \"Book on Doctolib\" below or go to <a href='/'>savianu.it</a></li><li>Choose the visit type in the Doctolib app</li><li>Confirm your appointment</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent);font-weight:700;'>Click here to book →</a></div><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
         faq_q2: "Can I come without an appointment?",
         faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book via Doctolib, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
         faq_q3: "What are the clinic opening hours?",
