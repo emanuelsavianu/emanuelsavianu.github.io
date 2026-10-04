@@ -20,8 +20,18 @@ function getPathPrefix() {
   return '../'.repeat(dirs);
 }
 
+function pageFixedLang() {
+  const navEl = document.querySelector('site-nav');
+  return (navEl && navEl.dataset.langFixed) || '';
+}
+
 function applyI18n(lang) {
-  if (typeof setLanguage === 'function') setLanguage(lang);
+  if (typeof setLanguage !== 'function') return;
+  // Single-language pages (e.g. /international/) pin the UI: a language
+  // chosen elsewhere on the site never overrides them.
+  const fixed = pageFixedLang();
+  if (fixed) setLanguage(fixed, { persist: false });
+  else setLanguage(lang);
 }
 
 function getPreferredLang() {
@@ -58,6 +68,9 @@ class SiteNav extends HTMLElement {
     const isPatient = isPatientSection(section);
     const isRoot = section === 'root';
     const brandTag = isRoot ? 'h1' : 'div';
+    // Single-language pages (e.g. /international/) pin the UI to one language:
+    // no ITA/ENG switch is rendered and the page stays in that language.
+    const fixedLang = this.dataset.langFixed || '';
 
     // Skip link
     const skipLink =
@@ -66,7 +79,7 @@ class SiteNav extends HTMLElement {
     // Language/control switch
     const darkBtn =
       '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>';
-    const controls = isPatient
+    const controls = (isPatient && !fixedLang)
       ? '<button onclick="setLanguage(\'it\')" class="lang-btn active" id="btn-it">ITA</button>' +
         '<span class="lang-separator" aria-hidden="true">|</span>' +
         '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en">ENG</button>' +
@@ -95,7 +108,7 @@ class SiteNav extends HTMLElement {
       '<div class="brand-wrap">' +
         '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async">' +
         '<div class="brand-text">' +
-          '<' + brandTag + ' class="brand-name">Dott. Savianu Emanuel</' + brandTag + '>' +
+          '<' + brandTag + ' class="brand-name"' + (isRoot ? ' data-i18n="landing_hero_title"' : '') + '>Dott. Savianu Emanuel</' + brandTag + '>' +
           '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
           phone +
         '</div>' +
@@ -115,10 +128,10 @@ class SiteNav extends HTMLElement {
     // Root page (index.html): no brand header — the photo hero is the masthead.
     // All other sections keep the navy brand header with logo/name/phone.
     this.innerHTML =
-      '<nav class="lang-switch" aria-label="' + (isPatient ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
-      (isRoot ? '' : '<header role="banner">' +
+      '<nav class="lang-switch" aria-label="' + (isPatient && !fixedLang ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
+      '<header role="banner">' +
         '<div class="header-content">' + brand + '</div>' +
-      '</header>') +
+      '</header>' +
       (section !== 'static' ? navRow : '');
 
     if (isPatient && this.dataset.noFloat !== '1') {
@@ -537,6 +550,77 @@ export const translations = {
         intl_faq5_a: 'Le visite domiciliari sono disponibili in tutta la Provincia di Arezzo — tra cui Cortona, Castiglion Fiorentino e la Val di Chiana — dove clinicamente indicate. La disponibilità viene confermata insieme all’appuntamento.',
         intl_faq6_q: 'Cosa succede in caso di emergenza medica?',
         intl_faq6_a: 'In caso di emergenza medica chiami sempre il 112. Lo studio offre cure programmate non urgenti; fuori orario, l’assistenza non urgente è disponibile tramite il 116 117.',
+// Landing page "Lo sportello" (index.html) — live state, index, record layer
+        lp_identity_role: 'Medico di Medicina Generale (SSN) · Studio Medico Ippocrate, Piazza Saione 3, Arezzo',
+        lp_lang_label: 'Lingua',
+        lp_theme_toggle: 'Attiva/Disattiva tema scuro',
+        lp_index_label: 'Scegli la tua area',
+        lp_state_open: 'Aperto ora',
+        lp_state_closed: 'Chiuso',
+        lp_state_closes_at: 'chiude alle',
+        lp_state_opens_at: 'apre',
+        lp_state_at: 'alle',
+        lp_state_in: 'tra',
+        lp_state_today: 'oggi',
+        lp_state_tomorrow: 'domani',
+        lp_strip_today: 'Oggi',
+        lp_strip_next: 'Prossima apertura',
+        lp_strip_label: 'Fasce di apertura di oggi',
+        lp_day_0: 'domenica',
+        lp_day_1: 'lunedì',
+        lp_day_2: 'martedì',
+        lp_day_3: 'mercoledì',
+        lp_day_4: 'giovedì',
+        lp_day_5: 'venerdì',
+        lp_day_6: 'sabato',
+        lp_who_pazienti: 'Sono assistito dal Dott. Savianu.',
+        lp_who_inps: 'Mi serve un certificato, una visita privata o una consulenza medico-legale.',
+        lp_who_colleghi: 'Sono un medico, un infermiere o un operatore sanitario.',
+        lp_who_intl: 'I need a family doctor in the Province of Arezzo.',
+        lp_note_pazienti: 'Appuntamenti, messaggi e rinnovi passano da <strong>Doctolib</strong>: è il canale che la segreteria controlla per primo. Se non riesci a usarlo, chiama la segreteria <strong>0575 910 904</strong> negli orari di apertura.',
+        lp_note_inps: 'Certificatore Telematico INPS: rilascia il <strong>Certificato Medico Introduttivo</strong> per invalidità civile, Legge 104 e indennità di accompagnamento (D.Lgs. 62/2024). Redige inoltre <strong>consulenze tecniche di parte (CTP)</strong> a sostegno dei ricorsi contro i verbali INPS.',
+        lp_note_colleghi: 'Protocolli operativi e guide agli accessi (malattie infettive, pronto soccorso, vascolari), modulistica scaricabile, codici di medicina fisica e il <strong>gestore turni RUAP</strong>.',
+        lp_note_intl: 'Consultations, prescriptions and certificates in <strong>English and Italian</strong>, for international residents and visitors across the Province of Arezzo. For an emergency anywhere in Italy, call <strong>112</strong>.',
+        lp_cta_book: 'Prenota su Doctolib',
+        lp_cta_renew: 'Rinnovo ricette',
+        lp_cta_consult: 'Prenota una consulenza',
+        lp_cta_bring: 'Cosa portare',
+        lp_cta_tools: 'Strumenti e protocolli',
+        lp_cta_forms: 'Modulistica',
+        lp_cta_intl_book: 'Book a consultation',
+        lp_cta_intl_bring: 'What to bring',
+        lp_link_ssn: 'Assistito SSN: esenzioni, impegnative, scelte e revoche',
+        lp_link_malattia: 'Certificato di malattia',
+        lp_link_faq: 'Domande frequenti',
+        lp_link_faq2: 'Domande frequenti (FAQ in italiano)',
+        lp_link_invalidita: 'Invalidità civile, Legge 104, indennità di accompagnamento',
+        lp_link_cert_intro: 'Certificato medico introduttivo',
+        lp_link_riforma: 'Domande sulla riforma',
+        lp_link_guida: 'Guida interattiva MMG',
+        lp_link_protocollo: 'Protocollo certificati INPS',
+        lp_link_adi: 'Assistenza domiciliare ADI/ADP/PAI',
+        lp_link_intl: 'Consultations, documents and fees',
+        lp_record_title: 'Dove e quando',
+        lp_record_note: 'Studio Medico Ippocrate, Piazza Saione 3 — Arezzo. Visite su appuntamento.',
+        lp_hours_caption: 'Orari di apertura dello studio',
+        lp_hours_weekend: 'Sabato e domenica',
+        lp_hours_secretary: 'Segreteria',
+        lp_stamp_title: 'Sei qui per un certificato INPS?',
+        lp_stamp_link: 'Cosa portare e come prenotare',
+        lp_locator_note: 'Piazza Saione è nel centro storico, a pochi minuti a piedi da Piazza Grande.',
+        lp_maps_link: 'Indicazioni su Google Maps',
+        lp_em_emergenza: 'Emergenza',
+        lp_em_guardia: 'Guardia medica e consigli non urgenti',
+        lp_facts_lead: 'Numero gratuito, attivo 24 ore su 24. Un medico o un operatore ti aiuterà a capire cosa fare quando il tuo medico non c\'è.',
+        lp_116117_when: 'Quando chiamare il 116 117',
+        lp_116117_when_not: 'Quando non chiamare il 116 117',
+
+        // Editorial pages (/, /privati/, /international/) — shared copy
+        ed_facts_eyebrow: "Assistenza non urgente",
+        ed_cta_title: "Serve una visita, una ricetta o un certificato?",
+        ed_cta_lead: "Gli appuntamenti, i messaggi e i rinnovi passano da Doctolib: è il canale che la segreteria controlla per primo. Per i certificati INPS e le consulenze medico-legali c'è una prenotazione dedicata.",
+        ed_cta_call: "Chiama la segreteria",
+        ed_at_a_glance: "In sintesi",
     },
     en: {
         // Header
@@ -824,10 +908,93 @@ export const translations = {
         intl_faq5_a: 'Home visits are available across the Province of Arezzo — including Cortona, Castiglion Fiorentino and the Val di Chiana — where clinically appropriate. Availability is confirmed together with the appointment.',
         intl_faq6_q: 'What happens in a medical emergency?',
         intl_faq6_a: 'For medical emergencies, always call 112. This practice provides scheduled, non-emergency care; outside opening hours, non-urgent assistance is available through 116 117.',
+// Landing page "Lo sportello" (index.html) — live state, index, record layer
+        lp_identity_role: 'General Practitioner (SSN) · Studio Medico Ippocrate, Piazza Saione 3, Arezzo',
+        lp_lang_label: 'Language',
+        lp_theme_toggle: 'Switch light/dark theme',
+        lp_index_label: 'Choose your area',
+        lp_state_open: 'Open now',
+        lp_state_closed: 'Closed',
+        lp_state_closes_at: 'closes at',
+        lp_state_opens_at: 'opens',
+        lp_state_at: 'at',
+        lp_state_in: 'in',
+        lp_state_today: 'today',
+        lp_state_tomorrow: 'tomorrow',
+        lp_strip_today: 'Today',
+        lp_strip_next: 'Next opening',
+        lp_strip_label: "Today's opening hours",
+        lp_day_0: 'Sunday',
+        lp_day_1: 'Monday',
+        lp_day_2: 'Tuesday',
+        lp_day_3: 'Wednesday',
+        lp_day_4: 'Thursday',
+        lp_day_5: 'Friday',
+        lp_day_6: 'Saturday',
+        lp_who_pazienti: 'I am a patient of Dr Savianu.',
+        lp_who_inps: 'I need a certificate, a private visit or a medico-legal consultation.',
+        lp_who_colleghi: 'I am a doctor, a nurse or a healthcare professional.',
+        lp_who_intl: 'I need a family doctor in the Province of Arezzo.',
+        lp_note_pazienti: 'Appointments, messages and prescription renewals go through <strong>Doctolib</strong>: it is the channel the secretariat checks first. If you cannot use it, call the secretariat on <strong>0575 910 904</strong> during opening hours.',
+        lp_note_inps: 'Authorised INPS electronic certifier: issues the <strong>Certificato Medico Introduttivo</strong> for civil invalidity, Law 104 and attendance allowance (Legislative Decree 62/2024). Also prepares <strong>party technical reports (CTP)</strong> supporting appeals against INPS decisions.',
+        lp_note_colleghi: 'Operational protocols and access guides (infectious diseases, emergency department, vascular access), downloadable forms, physical-medicine codes and the <strong>RUAP shift manager</strong>.',
+        lp_note_intl: 'Consultations, prescriptions and certificates in <strong>English and Italian</strong>, for international residents and visitors across the Province of Arezzo. For an emergency anywhere in Italy, call <strong>112</strong>.',
+        lp_cta_book: 'Book on Doctolib',
+        lp_cta_renew: 'Prescription renewal',
+        lp_cta_consult: 'Book a consultation',
+        lp_cta_bring: 'What to bring',
+        lp_cta_tools: 'Tools and protocols',
+        lp_cta_forms: 'Forms',
+        lp_cta_intl_book: 'Book a consultation',
+        lp_cta_intl_bring: 'What to bring',
+        lp_link_ssn: 'SSN patients: exemptions, referrals, registration and de-registration',
+        lp_link_malattia: 'Sickness certificate',
+        lp_link_faq: 'Frequently asked questions',
+        lp_link_faq2: 'Frequently asked questions (in Italian)',
+        lp_link_invalidita: 'Civil invalidity, Law 104, attendance allowance',
+        lp_link_cert_intro: 'Certificato medico introduttivo',
+        lp_link_riforma: 'Questions about the reform',
+        lp_link_guida: 'Interactive GP guide',
+        lp_link_protocollo: 'INPS certificates protocol',
+        lp_link_adi: 'Home care ADI/ADP/PAI',
+        lp_link_intl: 'Consultations, documents and fees',
+        lp_record_title: 'Where and when',
+        lp_record_note: 'Studio Medico Ippocrate, Piazza Saione 3 — Arezzo. Visits by appointment.',
+        lp_hours_caption: 'Practice opening hours',
+        lp_hours_weekend: 'Saturday and Sunday',
+        lp_hours_secretary: 'Secretariat',
+        lp_stamp_title: 'Are you here for an INPS certificate?',
+        lp_stamp_link: 'What to bring and how to book',
+        lp_locator_note: "Piazza Saione is in the historic centre, a few minutes' walk from Piazza Grande.",
+        lp_maps_link: 'Directions on Google Maps',
+        lp_em_emergenza: 'Emergency',
+        lp_em_guardia: 'Out-of-hours doctor and non-urgent advice',
+        lp_facts_lead: "Free number, available 24 hours a day. A doctor or operator will help you work out what to do when your doctor is not available.",
+        lp_116117_when: 'When to call 116 117',
+        lp_116117_when_not: 'When not to call 116 117',
+
+        // Editorial pages (/, /privati/, /international/) — shared copy
+        ed_facts_eyebrow: "Non-urgent care",
+        ed_cta_title: "Do you need a visit, a prescription or a certificate?",
+        ed_cta_lead: "Appointments, messages and prescription renewals go through Doctolib: it is the channel the secretariat checks first. INPS certificates and medico-legal consultations have their own booking.",
+        ed_cta_call: "Call the secretariat",
+        ed_at_a_glance: "At a glance",
     }
 };
 
-export function setLanguage(lang) {
+/**
+ * Runtime lookup into the translation table — for copy assembled in JS
+ * (the front-door live opening-hours sentence). Returns the key itself
+ * when unknown, so callers can fall back to a literal.
+ */
+export function t(key) {
+    const lang = getPreferredLang();
+    const block = translations[lang] || translations.it;
+    return (block && block[key]) || translations.it[key] || key;
+}
+
+export function setLanguage(lang, opts) {
+    const persist = !opts || opts.persist !== false;
     const btnIt = document.getElementById('btn-it');
     const btnEn = document.getElementById('btn-en');
     if (btnIt) btnIt.classList.toggle('active', lang === 'it');
@@ -855,13 +1022,20 @@ export function setLanguage(lang) {
         triageGrid.classList.toggle('intl-hidden', lang !== 'en');
         triageGrid.classList.toggle('has-international', lang === 'en');
     }
-    try { localStorage.setItem('preferredLanguage', lang); } catch (e) {}
+    try { if (persist) localStorage.setItem('preferredLanguage', lang); } catch (e) {}
     document.dispatchEvent(new CustomEvent('site:i18n', { detail: { lang: lang } }));
 }
 
 try {
-    const savedLang = localStorage.getItem('preferredLanguage');
-    if (savedLang) setLanguage(savedLang);
+    const pageLang = pageFixedLang();
+    if (pageLang) {
+        // Single-language page (e.g. /international/): shown in that language,
+        // and the visitor's site-wide preference is not overwritten.
+        setLanguage(pageLang, { persist: false });
+    } else {
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang) setLanguage(savedLang);
+    }
 } catch (e) {}
 
 // --- SMOOTH SCROLL ---
@@ -1252,6 +1426,7 @@ window.__INTL_I18N__ = {
 
 const GLOBAL_FUNCTIONS = {
     setLanguage: setLanguage,
+    t: t,
     toggleDarkMode: toggleDarkMode,
     dismissHeaderInfo: dismissHeaderInfo,
     closeDoctolibModal: closeDoctolibModal,

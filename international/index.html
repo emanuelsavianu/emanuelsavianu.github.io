@@ -58,46 +58,12 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261001a">
+    <!-- Marks the page as JS-capable: accordions collapse only when JS runs. -->
+    <script>document.documentElement.classList.add('ed-js');</script>
+    <link rel="stylesheet" href="../styles.css?v=20261003a">
 
-    <!-- Lenis smooth scroll (self-hosted, offline-first) -->
-    <script type="module">
-      import Lenis from '/assets/lenis/lenis.mjs';
-      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (!prefersReduced) {
-        const lenis = new Lenis({
-          duration: 2.0,
-          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-          smoothWheel: true,
-          wheelMultiplier: 1.5,
-          touchMultiplier: 2.5
-        });
-        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
-        requestAnimationFrame(raf);
-        window.lenis = lenis;
-      }
-      document.addEventListener('click', (e) => {
-        const anchor = e.target.closest('a[href^="#"]');
-        if (anchor) {
-          const href = anchor.getAttribute('href');
-          if (href.length > 1) {
-            const target = document.querySelector(href);
-            if (target) {
-              e.preventDefault();
-              if (window.lenis) {
-                window.lenis.scrollTo(target, { offset: 0 });
-              } else {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              }
-              target.focus({ preventScroll: true });
-            }
-          }
-        }
-      });
-    </script>
 
     <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
-    <script type="module" src="/assets/scroll-reveal.js"></script>
 
     <!-- JSON-LD: Physician (entity clarity for AI retrieval / Knowledge Graph) + BreadcrumbList -->
     <script type="application/ld+json">
@@ -314,54 +280,64 @@
         @media (min-width: 900px) { .container { grid-template-columns: 1fr; max-width: 900px; } }
     </style>
 </head>
-<body>
+<body class="ed">
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 
-<site-nav data-section="privati">
+<site-nav data-section="privati" data-lang-fixed="en">
     <div class="fallback-nav">
         <p><strong>Dott. Savianu Emanuel — Studio Medico Ippocrate</strong></p>
         <p>Piazza Saione 3, Arezzo · <a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
     </div>
 </site-nav>
 
+        <!-- Hero: the editorial band -->
+        <section class="ed-band" aria-labelledby="intl-hero-heading">
+            <div class="ed-shell">
+                <nav class="ed-crumbs" aria-label="Breadcrumb">
+                    <a href="../index.html"><i class="fas fa-arrow-left" aria-hidden="true"></i> Home</a>
+                    <span class="sep" aria-hidden="true">/</span>
+                    <span aria-current="page">International Patients</span>
+                </nav>
+            </div>
+            <div class="ed-band__inner ed-shell">
+                <div class="ed-split">
+                    <div>
+                        <p class="ed-eyebrow" data-i18n="intl_hero_eyebrow">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</p>
+                        <h1 class="ed-hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">English-Speaking Family Doctor in Arezzo</h1>
+                        <p class="ed-lead" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.</p>
+                        <div class="ed-actions ed-hero-actions">
+                            <a class="ed-btn ed-btn--brass" href="#intl-form-heading" data-i18n="intl_hero_cta">Inquire About Private Primary Care</a>
+                            <a class="ed-btn ed-btn--ghost" href="#intl-faq-heading"><i class="fas fa-circle-question" aria-hidden="true"></i> <span data-i18n="intl_faq_title">Common questions</span></a>
+                        </div>
+                    </div>
+                    <div class="ed-hero-aside">
+                        <p class="ed-eyebrow ed-eyebrow--field" data-i18n="ed_at_a_glance">At a glance</p>
+                        <ul class="ed-meta">
+                            <li><span class="k" data-i18n="intl_info_address_l">Address</span><span class="v">Piazza Saione 3, Arezzo</span></li>
+                            <li><span class="k" data-i18n="intl_info_hours_l">Hours</span><span class="v" data-i18n="intl_info_hours_v">Mon–Fri 09:30–12:30 · 16:00–19:00</span></li>
+                            <li><span class="k" data-i18n="intl_info_langs_l">Languages</span><span class="v" data-i18n="intl_info_langs_v">English · Italian</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
 <div class="container">
     <main role="main" id="main-content">
 
-        <!-- Hero -->
-                <section class="page-hero reveal" aria-labelledby="intl-hero-heading">
-                    <picture>
-                        <source type="image/avif" media="(min-width: 1024px)" srcset="../assets/studio/studio-location-desktop.avif?v=2">
-                        <source type="image/webp" media="(min-width: 1024px)" srcset="../assets/studio/studio-location-desktop.webp?v=2">
-                        <source type="image/avif" media="(min-width: 600px)" srcset="../assets/studio/studio-location-tablet.avif?v=2">
-                        <source type="image/webp" media="(min-width: 600px)" srcset="../assets/studio/studio-location-tablet.webp?v=2">
-                        <source type="image/avif" srcset="../assets/studio/studio-location-mobile.avif?v=2">
-                        <img src="../assets/studio/studio-location-mobile.webp?v=2" alt="Studio Medico Ippocrate — Piazza Saione 3, Arezzo" width="2000" height="848" fetchpriority="high" decoding="async">
-                    </picture>
-                    <div class="hero-overlay" aria-hidden="true"></div>
-                    <div class="hero-content">
-                                    <p class="hero-eyebrow">
-                                        <span data-i18n="intl_hero_eyebrow">Studio Medico Ippocrate · Piazza Saione 3, Arezzo</span>
-                                    </p>
-                                    <h1 class="hero-title" id="intl-hero-heading" data-i18n="intl_hero_title">English-Speaking Family Doctor in Arezzo</h1>
-                                    <p class="hero-desc" data-i18n="intl_hero_sub">Private primary care consultations in English, for residents and visitors across the Province of Arezzo — Cortona, Castiglion Fiorentino, the Val di Chiana and beyond — with the same physician, visit after visit.</p>
-                                    <p style="margin-top:22px;">
-                                        <a class="intl-btn" href="#intl-form-heading" data-i18n="intl_hero_cta">Inquire About Private Primary Care</a>
-                                    </p>
-                                </div>
-                            </section>
-        <section class="card reveal" aria-labelledby="intl-intro-heading">
+        <section class="ed-sec ed-sec--tight" aria-labelledby="intl-intro-heading">
             <h2 id="intl-intro-heading" class="sr-only" data-i18n="intl_intro_heading">About these consultations</h2>
-            <p style="line-height: 1.75; color: var(--text-medium);" data-i18n="intl_intro_1">
+            <p class="ed-p" data-i18n="intl_intro_1">
                 Moving between healthcare systems can be disorienting, especially when language adds another layer to every medical conversation. These consultations are conducted directly in English — no interpreter, no loss of nuance — for international residents, second-home owners, and visitors throughout the Arezzo area.
             </p>
             <div class="intl-divider"></div>
-            <p style="line-height: 1.75; color: var(--text-medium); margin: 0;" data-i18n="intl_intro_2">
+            <p class="ed-p" style="margin: 0;" data-i18n="intl_intro_2">
                 Dr. Emanuel Savianu is a family doctor and general practitioner (GP) based in Arezzo, Tuscany, offering private primary care consultations in English for international residents, second-home owners and visitors. Consultations are also available in Italian.
             </p>
         </section>
 
         <!-- Pillars -->
-        <section class="card reveal" aria-labelledby="intl-pillars-heading">
+        <section class="ed-sec" aria-labelledby="intl-pillars-heading">
             <div class="card-header">
                 <i class="fas fa-circle-info" aria-hidden="true"></i>
                 <h2 id="intl-pillars-heading" data-i18n="intl_pillars_title">How the practice works for international patients</h2>
@@ -391,7 +367,7 @@
         </section>
 
         <!-- How it works -->
-        <section class="card reveal" aria-labelledby="intl-steps-heading">
+        <section class="ed-sec" aria-labelledby="intl-steps-heading">
             <div class="card-header">
                 <i class="fas fa-list-ol" aria-hidden="true"></i>
                 <h2 id="intl-steps-heading" data-i18n="intl_steps_title">What to expect</h2>
@@ -404,7 +380,7 @@
         </section>
 
         <!-- Practical information -->
-        <section class="card reveal" aria-labelledby="intl-info-heading">
+        <section class="ed-sec" aria-labelledby="intl-info-heading">
             <div class="card-header">
                 <i class="fas fa-circle-question" aria-hidden="true"></i>
                 <h2 id="intl-info-heading" data-i18n="intl_info_title">Practical information</h2>
@@ -435,7 +411,7 @@
 
 
         <!-- Common questions -->
-        <section class="card reveal" aria-labelledby="intl-faq-heading">
+        <section class="ed-sec" aria-labelledby="intl-faq-heading">
             <div class="card-header">
                 <i class="fas fa-question" aria-hidden="true"></i>
                 <h2 id="intl-faq-heading" data-i18n="intl_faq_title">Common questions</h2>
@@ -468,7 +444,7 @@
             </div>
         </section>
         <!-- Inquiry form -->
-        <section class="card reveal" aria-labelledby="intl-form-heading">
+        <section class="ed-sec" aria-labelledby="intl-form-heading">
             <div class="card-header">
                 <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
                 <h2 id="intl-form-heading" data-i18n="intl_form_title">Request a consultation</h2>
@@ -536,7 +512,7 @@
 
         <!-- Emergency notice (calm, factual — mirrors site-wide pattern) -->
         <div class="urgency-wrapper">
-            <aside class="alert-emergency reveal" role="note">
+            <aside class="alert-emergency" role="note">
                 <i class="fas fa-ambulance" aria-hidden="true"></i>
                 <span data-i18n="intl_emergency">For medical emergencies, always call 112. Outside opening hours, for non-urgent care, call 116 117.</span>
             </aside>
@@ -739,7 +715,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20261001a"></script>
+<script type="module" src="../app.js?v=20261004a"></script>
 
 </body>
 </html>
