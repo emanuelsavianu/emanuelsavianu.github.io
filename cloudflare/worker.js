@@ -357,8 +357,29 @@ export default {
       });
     }
 
-    // Only modify HTML responses — leave CSS, JS, images, fonts untouched
+    // Asset non-HTML: il max-age di 4h imposto da Cloudflare (Browser Cache TTL)
+    // vanifica il versioning `?v=` del repo — ogni visita riscarica CSS/JS/font
+    // (cache-insight: ~136 KiB). Le URL con `?v=` sono content-addressed (la
+    // chiave viene bumpata a ogni modifica), quindi possono stare immutabili.
     if (!contentType.includes('text/html')) {
+      if (url.searchParams.has('v')) {
+        const assetHeaders = new Headers(response.headers);
+        assetHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: assetHeaders,
+        });
+      }
+      if (url.pathname.startsWith('/assets/')) {
+        const assetHeaders = new Headers(response.headers);
+        assetHeaders.set('Cache-Control', 'public, max-age=86400');
+        return new Response(response.body, {
+          status: response.status,
+          statusText: response.statusText,
+          headers: assetHeaders,
+        });
+      }
       return response;
     }
 
