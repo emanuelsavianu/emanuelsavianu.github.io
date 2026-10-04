@@ -112,9 +112,21 @@ const EXTERNAL_REDIRECTS = {
 };
 
 // ── Inquiry form endpoint (/api/intl-inquiry) ────────────────────────────────
-// Receives the /international/ inquiry form and forwards it via Email Routing
-// (SEND_EMAIL binding). No storage, no auto-reply to the patient. Setup:
-// Setup: docs/cloudflare-email-worker-setup.md
+// Riceve il modulo di /international/ e lo inoltra al medico. Nessuno storage,
+// nessuna risposta automatica al paziente.
+//
+// ATTENZIONE — il binding SEND_EMAIL (Cloudflare Email Routing) NON puo' funzionare
+// su questo dominio: Email Routing richiede che Cloudflare gestisca l'MX della zona,
+// mentre savianu.it ha l'MX su Google Workspace (aspmx.l.google.com) e nessun record
+// cf2024-*.  _domainkey. Con questa configurazione Email Routing non e' attivabile e
+// ogni send() fallisce -> 502 send_failed. Verificato 2026-10-04.
+//
+// Vie di consegna, in ordine di preferenza (vedi deliver()):
+//   1. RESEND_API_KEY  (+ RESEND_FROM opzionale) — API HTTPS, non tocca l'MX.
+//      Setup: creare un account Resend, verificare un dominio mittente con i record
+//      DNS indicati (es. send.savianu.it), poi `wrangler secret put RESEND_API_KEY`.
+//   2. SEND_EMAIL — resta come fallback se un giorno Email Routing gestisse l'MX.
+//   Senza nessuna delle due: 502 no_sender (errore esplicito, non ambiguo).
 
 const INQUIRY_TO = 'private@savianu.it';
 const RATE_LIMIT_HOURS = 5;          // max emails per hour per IP
@@ -128,6 +140,36 @@ function jsonResp(obj, status = 200) {
   });
 }
 
+// Consegna del messaggio: Resend (API, compatibile con MX su Google Workspace),
+// poi Email Routing come fallback. Solleva se non c'e' nessuna via utilizzabile,
+// cosi' la risposta e' esplicita (no_sender) invece di un generico fallimento.
+async function deliver(env, message) {
+  if (env.RESEND_API_KEY) {
+    const from = env.RESEND_FROM || 'savianu.it inquiries <noreply@savianu.it>';
+    const r = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to: [INQUIRY_TO],
+        reply_to: message.reply_to,
+        subject: message.subject,
+        text: message.text,
+      }),
+    });
+    if (!r.ok) throw new Error('resend_' + r.status);
+    return 'resend';
+  }
+  if (env.SEND_EMAIL) {
+    await env.SEND_EMAIL.send(message);
+    return 'email_routing';
+  }
+  throw new Error('no_sender');
+}
+
 async function handleInquiry(request, env, ctx) {
   let data;
   try {
@@ -136,10 +178,13 @@ async function handleInquiry(request, env, ctx) {
     return jsonResp({ ok: false, error: 'invalid_body' }, 400);
   }
 
-  // Honeypot + time-trap: silently accept and drop obvious bots.
+  // Honeypot + time-trap. NON un successo silenzioso: il client deve poter dire
+  // all'utente che il messaggio non e' partito. `sent:false` copre anche i casi
+  // "umani" del trap (invio entro 3 s dal caricamento, scheda aperta da >24 h),
+  // che prima ricevevano "Thank you — your inquiry has been sent" senza invio.
   if (data.website || !data.ts || Date.now() - Number(data.ts) < 3000 ||
       Date.now() - Number(data.ts) > 86400000) {
-    return jsonResp({ ok: true });
+    return jsonResp({ ok: true, sent: false, reason: 'challenge' });
   }
 
   const name = String(data.name || '').trim();
@@ -214,12 +259,12 @@ async function handleInquiry(request, env, ctx) {
   try {
     hits.push(now);
     rate.set(ip, hits);
-    await env.SEND_EMAIL.send(message);   // requires Email Routing active (see setup doc)
-  } catch {
-    return jsonResp({ ok: false, error: 'send_failed' }, 502);
+    const via = await deliver(env, message);
+    return jsonResp({ ok: true, sent: true, via: via });
+  } catch (e) {
+    const code = String((e && e.message) || '');
+    return jsonResp({ ok: false, error: code === 'no_sender' ? 'no_sender' : 'send_failed' }, 502);
   }
-
-  return jsonResp({ ok: true });
 }
 
 // ── Worker entry point ────────────────────────────────────────────────────────

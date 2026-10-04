@@ -30,8 +30,15 @@ function applyI18n(lang) {
   // Single-language pages (e.g. /international/) pin the UI: a language
   // chosen elsewhere on the site never overrides them.
   const fixed = pageFixedLang();
-  if (fixed) setLanguage(fixed, { persist: false });
-  else setLanguage(lang);
+  if (fixed) { setLanguage(fixed, { persist: false }); return; }
+  // Solo le pagine la cui navigazione rende il selettore lingua hanno davvero un
+  // contenuto traducibile. Su /privacy.html, /404.html e /colleghi/* (sezioni
+  // static/colleghi) scrivere 'en' su una pagina italiana significava dichiarare
+  // <html lang="en"> con testo italiano (WCAG 3.1.1) e spegnere la traduzione
+  // automatica del browser. Senza site-nav non si applica nessuna preferenza.
+  const navEl = document.querySelector('site-nav');
+  if (!navEl || !isPatientSection(navEl.dataset.section)) return;
+  setLanguage(lang);
 }
 
 function getPreferredLang() {
@@ -102,7 +109,7 @@ class SiteNav extends HTMLElement {
       '</nav>';
 
     const phone =
-      '<a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> Segreteria: 0575 910 904</a>';
+      '<a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> <span data-i18n="header_phone_label">Segreteria:</span> 0575 910 904</a>';
 
     const brand =
       '<div class="brand-wrap">' +
@@ -114,10 +121,15 @@ class SiteNav extends HTMLElement {
         '</div>' +
       '</div>';
 
+    // Testo del banner: una pagina puo' dichiararne uno proprio con
+    // data-banner-i18n su <site-nav> (es. /international/, dove il primo passo
+    // non e' "prenota su Doctolib"). Deve essere la CHIAVE, non il testo: il
+    // passaggio i18n riscrive gli elementi [data-i18n].
+    const bannerKey = this.dataset.bannerI18n || 'doctolib_banner_text';
     const infoBar =
       '<div class="header-info" id="header-info-line">' +
         '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
-        '<span class="header-info-base" id="header-info-base"' + (isPatient ? ' data-i18n="doctolib_banner_text"' : '') + '></span>' +
+        '<span class="header-info-base" id="header-info-base"' + (isPatient ? ' data-i18n="' + bannerKey + '"' : '') + '></span>' +
         '<a class="header-info-link" id="header-info-doctolib" href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" data-i18n-title="doctolib_link_title" title="Profilo Doctolib del dott. Emanuel Savianu — Piazza Saione 3, Arezzo" data-i18n="doctolib_banner_link">Prenota su Doctolib</a>' +
         '<span class="header-info-absence" id="header-info-absence" hidden></span>' +
         '<span class="header-info-urgenze" id="header-info-urgenze" data-i18n="urgenze_line"></span>' +
@@ -274,6 +286,7 @@ export const translations = {
         landing_hero_title: "Dott. Emanuel Savianu",
         landing_hero_location: "Piazza Saione 3, Arezzo",
         landing_hero_phone: "Segreteria: 0575 910 904",
+        header_phone_label: "Segreteria:",
         triage_ssn_title: "Pazienti",
         triage_ssn_desc: "Sei assistito dal Dott. Savianu: prenota visite su Doctolib, richiedi ricette, consulta guide ed esenzioni.",
         triage_privati_title: "Consulti e certificati INPS",
@@ -448,6 +461,9 @@ export const translations = {
 
         // Doctolib announcement
         doctolib_banner_text: 'Il dott. Savianu visita solo su appuntamento. Si prega di prenotare tramite Doctolib.',
+        // Banner dedicato alle pagine con data-banner-i18n (es. /international/), dove
+        // il primo passo non e' "prenota su Doctolib" ma "scrivi dal modulo".
+        intl_banner_text: 'Consulti privati in inglese: usare il modulo in fondo alla pagina. Assistiti SSN: prenotare su Doctolib.',
         doctolib_banner_link: 'Prenota su Doctolib',
         urgenze_line: 'Per urgenze: Guardia Medica 116 117 — Emergenze: 112.',
         doctolib_modal_title: 'Avviso Importante',
@@ -636,6 +652,7 @@ export const translations = {
         landing_hero_title: "Dr. Emanuel Savianu",
         landing_hero_location: "Piazza Saione 3, Arezzo",
         landing_hero_phone: "Reception: 0575 910 904",
+        header_phone_label: "Front desk:",
         triage_ssn_title: "Patients",
         triage_ssn_desc: "Are you a patient of Dr. Savianu? Book visits on Doctolib, request prescriptions, read guides and exemptions.",
         triage_privati_title: "INPS Consultations & Certificates",
@@ -810,6 +827,7 @@ export const translations = {
 
         // Doctolib announcement
         doctolib_banner_text: 'Dr. Savianu sees patients by appointment only. Please book via Doctolib.',
+        intl_banner_text: 'Private English-language consultations: use the inquiry form below. SSN patients: book on Doctolib.',
         doctolib_banner_link: 'Book on Doctolib',
         urgenze_line: 'For urgent matters: Guardia Medica 116 117 — Emergencies: 112.',
         doctolib_modal_title: 'Important Notice',
@@ -1049,8 +1067,14 @@ try {
         // and the visitor's site-wide preference is not overwritten.
         setLanguage(pageLang, { persist: false });
     } else {
+        // La preferenza salvata si applica SOLO dove esiste davvero la traduzione,
+        // cioe' dove il nav rende il selettore lingua (sezioni "paziente"). Su
+        // /privacy.html, /404.html e tutta la sezione /colleghi/ il corpo e' solo
+        // italiano: applicare 'en' faceva dichiarare <html lang="en"> a una pagina
+        // italiana (WCAG 3.1.1) e spegneva la traduzione automatica del browser
+        // proprio per il visitatore straniero. Nessun site-nav => nessun override.
         const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang) setLanguage(savedLang);
+        if (savedLang) applyI18n(savedLang);   // applyI18n contiene la regola
     }
 } catch (e) {}
 
@@ -1156,8 +1180,11 @@ function trapFocus(modal) {
         return;
     }
 
+    // Una pagina puo' dichiarare un proprio testo di banner (data-banner-i18n su
+    // <site-nav>): serve a /international/, dove il primo passo non e' Doctolib.
+    const bannerKey = (document.querySelector('site-nav') || {}).dataset?.bannerI18n || 'doctolib_banner_text';
     if (isPatient) {
-        base.textContent = t.doctolib_banner_text;
+        base.textContent = t[bannerKey] || t.doctolib_banner_text;
         urgenze.textContent = t.urgenze_line;
         closeBtn.removeAttribute('hidden');   // barra informativa chiudibile dall'utente
     } else if (active && !dismissed) {

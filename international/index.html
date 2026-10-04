@@ -283,7 +283,7 @@
 <body class="ed">
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 
-<site-nav data-section="privati" data-lang-fixed="en">
+<site-nav data-section="privati" data-lang-fixed="en" data-banner-i18n="intl_banner_text">
     <div class="fallback-nav">
         <p><strong>Dott. Emanuele Savianu — Studio Medico Ippocrate</strong></p>
         <p>Piazza Saione 3, Arezzo · <a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
@@ -544,7 +544,15 @@
     // Email injected via JS: Cloudflare Email Obfuscation rewrites plaintext
     // addresses in served HTML — JS-set textContent is never rewritten.
     var ADDR = 'private' + '@' + 'savianu.it';
-    document.querySelectorAll('.js-email').forEach(function (el) { el.textContent = ADDR; });
+    // L'indirizzo va (ri)scritto DOPO ogni passaggio i18n: setLanguage() assegna le
+    // traduzioni con innerHTML e le stringhe intl_f_alt/intl_f_error contengono uno
+    // <span class="js-email"> VUOTO, che sostituirebbe quello gia' riempito (bug: la
+    // pagina diceva "please write to .").
+    function fillEmails() {
+        document.querySelectorAll('.js-email').forEach(function (el) { el.textContent = ADDR; });
+    }
+    fillEmails();
+    document.addEventListener('site:i18n', fillEmails);
 
     // Feedback strings are resolved at submit time from the app.js i18n bridge,
     // so they always follow the active language (the module loads after this
@@ -558,6 +566,8 @@
             success: tbl.intl_f_success || 'Thank you — your inquiry has been sent. We will reply within a few business days.',
             fallback: ((tbl.intl_f_done || 'Your email program should now open with your inquiry pre-filled. If it does not, please write to us directly at ') + ' ').replace('  ', ' '),
             fallbackMsg: tbl.intl_f_fallback || 'If your email app did not open, send your inquiry to',
+            rateLimited: 'We have already received a request from your connection in the last few minutes. Please try again later, or write to us at',
+            callLabel: 'Or call',
             copy: tbl.intl_f_copy || 'Copy inquiry to clipboard',
             copied: tbl.intl_f_copied || 'Copied — paste into your email'
         };
@@ -652,35 +662,18 @@
             if (btn) { btn.disabled = true; btn.textContent = intlStrings().sending; }
             var usedFallback = false;
 
-            fetch(ENDPOINT, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            }).then(function (r) {
-                if (!r.ok) throw new Error('http_' + r.status);
-                return r.json();
-            }).then(function (out) {
-                if (!out || out.ok !== true) throw new Error('endpoint');
-                setFeedback(intlStrings().success, 'success');
-                form.reset();
-                if (tsField) tsField.value = String(Date.now());
-            }).catch(function () {
-                // Endpoint unreachable (offline / worker error): expose every
-                // manual path so the inquiry is never lost — open the mail client,
-                // click the direct mailto link, or copy the pre-filled text.
+            function showManualFallback(messageOverride) {
                 usedFallback = true;
                 var mailBody = lines.join('\n');
                 var mailtoUrl = 'mailto:' + ADDR +
                     '?subject=' + encodeURIComponent(subject) +
                     '&body=' + encodeURIComponent(mailBody);
-                // Best-effort: open the user's mail client.
-                window.location.href = mailtoUrl;
 
-                // Resilient fallback UI inside the polite live region.
                 feedback.innerHTML = '';
-                feedback.dataset.state = '';
+                feedback.dataset.state = 'error';
+
                 var lead = document.createElement('span');
-                lead.textContent = intlStrings().fallbackMsg + ' ';
+                lead.textContent = (messageOverride || intlStrings().fallbackMsg) + ' ';
                 feedback.appendChild(lead);
 
                 var mailLink = document.createElement('a');
@@ -688,6 +681,19 @@
                 mailLink.textContent = ADDR;
                 mailLink.className = 'intl-feedback-link';
                 feedback.appendChild(mailLink);
+                feedback.appendChild(document.createTextNode('. '));
+
+                // Via alternativa senza client di posta: sul telefono il mailto:
+                // spesso non apre nulla. Numero dei consulti privati (come in
+                // "Practical information" piu' sotto nella pagina).
+                var callLead = document.createElement('span');
+                callLead.textContent = intlStrings().callLabel + ' ';
+                feedback.appendChild(callLead);
+                var callLink = document.createElement('a');
+                callLink.href = 'tel:+3905751713428';
+                callLink.textContent = '+39 0575 171 3428';
+                callLink.className = 'intl-feedback-link';
+                feedback.appendChild(callLink);
                 feedback.appendChild(document.createTextNode('. '));
 
                 var copyBtn = document.createElement('button');
@@ -701,9 +707,36 @@
                 });
                 feedback.appendChild(document.createElement('br'));
                 feedback.appendChild(copyBtn);
+            }
+
+            // Nessun "inviato" se il messaggio NON e' partito: il Worker risponde
+            // {ok:true, sent:false} quando l'anti-spam scarta la richiesta (invio
+            // entro 3 s dal caricamento o scheda aperta da >24 h) e 429 quando il
+            // limite per IP e' attivo. In entrambi i casi l'utente deve saperlo.
+            fetch(ENDPOINT, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            }).then(function (r) {
+                return r.json().catch(function () { return {}; }).then(function (out) {
+                    return { status: r.status, out: out || {} };
+                });
+            }).then(function (res) {
+                var out = res.out;
+                if (out.ok === true && out.sent !== false) {
+                    setFeedback(intlStrings().success, 'success');
+                    form.reset();
+                    if (tsField) tsField.value = String(Date.now());
+                    return;
+                }
+                if (out.error === 'rate_limited') throw new Error('rate_limited');
+                throw new Error('not_sent');
+            }).catch(function (err) {
+                showManualFallback(err && err.message === 'rate_limited' ? intlStrings().rateLimited : null);
             }).finally(function () {
-                if (btn && !usedFallback) { btn.disabled = false; btn.textContent = originalLabel; }
-                if (btn) btn.dataset.i18nDone = '1';
+                // Il pulsante torna sempre utilizzabile: se l'invio non e' partito,
+                // l'utente deve poter riprovare dopo aver corretto quello che serve.
+                if (btn) { btn.disabled = false; btn.textContent = originalLabel; btn.dataset.i18nDone = '1'; }
             });
         });
 })();
@@ -715,7 +748,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20261004c"></script>
+<script type="module" src="../app.js?v=20261004e"></script>
 
 </body>
 </html>
