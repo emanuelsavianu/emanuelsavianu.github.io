@@ -1,4 +1,7 @@
-import { CONFIG } from './config.js?v=20261004l';
+import { CONFIG } from './config.js?v=20261004m';
+// Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
+// verità per il render client e per il pre-render statico (vedi chrome.js).
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261004m';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -53,17 +56,9 @@ function getPreferredLang() {
   }
 }
 
-function isPatientSection(section) {
-  return section !== 'colleghi' && section !== 'static';
-}
-
 function currentSection() {
   const navEl = document.querySelector('site-nav');
   return navEl ? navEl.dataset.section : 'root';
-}
-
-function navItem(href, i18nKey, isPatient, isCurrent, label) {
-  return `<li><a href="${href}"${isPatient ? ` data-i18n="${i18nKey}"` : ''}${isCurrent ? ' aria-current="page"' : ''}>${label}</a></li>`;
 }
 
 function footerLink(href, i18nKey, isPatient, label) {
@@ -77,85 +72,24 @@ class SiteNav extends HTMLElement {
     const section = this.dataset.section || 'root'; // root|ssn|privati|colleghi|static
     const prefix = getPathPrefix();
     const isPatient = isPatientSection(section);
-    const isRoot = section === 'root';
-    const brandTag = isRoot ? 'h1' : 'div';
     // Single-language pages (e.g. /international/) pin the UI to one language:
     // no ITA/ENG switch is rendered and the page stays in that language.
     const fixedLang = this.dataset.langFixed || '';
 
-    // Skip link
-    const skipLink =
-      '<a href="#main-content" class="skip-link" data-i18n="skip_link">Vai al contenuto principale</a>';
-
-    // Language/control switch
-    const darkBtn =
-      '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>';
-    const controls = (isPatient && !fixedLang)
-      ? '<button onclick="setLanguage(\'it\')" class="lang-btn active" id="btn-it">ITA</button>' +
-        '<span class="lang-separator" aria-hidden="true">|</span>' +
-        '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en">ENG</button>' +
-        '<span class="lang-separator" aria-hidden="true">|</span>' +
-        darkBtn
-      : darkBtn;
-
-    // Nav links row + mobile menu
+    // Markup della barra e dei controlli: unica fonte di verità in chrome.js,
+    // pre-renderizzata nell'HTML statico da tools/prerender-nav.mjs (CLS).
     const here = location.pathname.replace(/\/$/, '');
-    const navRow =
-      '<nav class="site-nav" aria-label="Navigazione principale">' +
-        '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
-        '<ul class="nav-menu" id="site-nav-menu">' +
-          navItem(prefix || './', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
-          navItem(prefix + 'ssn/index.html', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
-          navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
-          navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
-          navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
-        '</ul>' +
-      '</nav>';
-
-    const phone =
-      '<a href="' + CONFIG.CONTACTS.secretary.href + '" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> <span data-i18n="header_phone_label">Segreteria:</span> ' + CONFIG.CONTACTS.secretary.display + '</a>';
-
-    const brand =
-      '<div class="brand-wrap">' +
-        '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async">' +
-        '<div class="brand-text">' +
-          '<' + brandTag + ' class="brand-name"' + (isRoot ? ' data-i18n="landing_hero_title"' : '') + '>' + CONFIG.NAME + '</' + brandTag + '>' +
-          '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
-          phone +
-        '</div>' +
-      '</div>';
-
-    // La barra informativa permanente (avviso Doctolib + riga urgenze) è stata
-    // rimossa: non serve più e appesantiva ogni pagina. Resta solo l'avviso di
-    // chiusura dello studio, che compare esclusivamente quando CONFIG.ASSENZE
-    // contiene un periodo attivo (vedi getActiveAbsence()).
-    const infoBar =
-      '<div class="header-info" id="header-info-line" hidden>' +
-        '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
-        '<span class="header-info-absence" id="header-info-absence"></span>' +
-        '<button id="header-info-close" class="header-info-close" onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
-      '</div>';
-
-    this.insertAdjacentHTML('beforebegin',
-      '<div class="site-notices" role="region" aria-label="Avvisi di servizio">' + skipLink + infoBar + '</div>');
+    this.insertAdjacentHTML('beforebegin', siteNoticesHTML());
     // Root page (index.html): no brand header — the photo hero is the masthead.
     // All other sections keep the navy brand header with logo/name/phone.
-    this.innerHTML =
-      '<nav class="lang-switch" aria-label="' + (isPatient && !fixedLang ? 'Lingua e controlli pagina' : 'Controlli pagina') + '">' + controls + '</nav>' +
-      '<header role="banner">' +
-        '<div class="header-content">' + brand + '</div>' +
-      '</header>' +
-      (section !== 'static' ? navRow : '');
+    // chrome.js produce esattamente il markup pre-renderizzato in ogni pagina.
+    this.innerHTML = siteNavInnerHTML({ section, prefix, fixedLang, isPatient, here, config: CONFIG });
 
     // Il pulsante FAQ flottante è position:fixed: vive fuori dai landmark della
     // pagina, quindi axe lo segnala "content not contained by landmarks" (moderate).
     // role=button + aria-label servono come contenuto a sé (audit 2026-10-04).
     if (isPatient && this.dataset.noFloat !== '1') {
-      this.insertAdjacentHTML('afterend',
-        '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" role="button" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
-          '<i class="fas fa-question-circle" aria-hidden="true"></i><span class="floating-faq-text">FAQ</span>' +
-        '</a>'
-      );
+      this.insertAdjacentHTML('afterend', floatingFaqHTML(prefix));
     }
 
     // Mobile menu toggle

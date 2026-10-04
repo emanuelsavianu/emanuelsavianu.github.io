@@ -58,7 +58,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="styles.css?v=20261004l">
+    <link rel="stylesheet" href="styles.css?v=20261004m">
 
     <style>
         :root {
@@ -117,10 +117,7 @@
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 
     <site-nav data-section="static">
-        <div class="fallback-nav">
-            <p><strong>Dott. Emanuel Savianu — Studio Medico Ippocrate</strong></p>
-            <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
-        </div>
+        <nav class="lang-switch" aria-label="Controlli pagina"><button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button></nav><header role="banner"><div class="header-content"><div class="brand-wrap"><img class="brand-logo" src="assets/bronzelogo-192.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async"><div class="brand-text"><div class="brand-name">Dott. Emanuel Savianu</div><p class="brand-tagline">Medico di Medicina Generale - Arezzo</p><a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> <span data-i18n="header_phone_label">Segreteria:</span> 0575 910 904</a></div></div></div></header>
     </site-nav>
 
     <main role="main" id="main-content" class="legal-content">
@@ -200,7 +197,7 @@
             <p>© <span id="current-year">2026</span> - Dott. Emanuel Savianu</p>
         </footer>
     </site-footer>
-<script type="module" src="app.js?v=20261004l"></script>
+<script type="module" src="app.js?v=20261004m"></script>
     <script>document.getElementById('current-year').textContent = new Date().getFullYear();</script>
 
 </body>

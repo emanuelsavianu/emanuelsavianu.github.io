@@ -326,6 +326,8 @@
 
 
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="preload" href="../assets/fonts/montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/cormorant-garamond-var-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.subset.woff2?v=2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="../assets/fontawesome/css/solid.subset.css">
@@ -337,7 +339,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261004l">
+    <link rel="stylesheet" href="../styles.css?v=20261004m">
 
     <!-- Lenis smooth scroll (self-hosted, offline-first) -->
     <script type="module">
@@ -387,10 +389,7 @@
 <script>try{if(document.documentElement.classList.contains('dark-mode'))document.body.classList.add('dark-mode')}catch(e){}</script>
 
 <site-nav data-section="colleghi">
-    <div class="fallback-nav">
-        <p><strong>Dott. Emanuel Savianu — Studio Medico Ippocrate</strong></p>
-        <p><a href="tel:+390575910904">Segreteria 0575 910 904</a></p>
-    </div>
+    <nav class="lang-switch" aria-label="Controlli pagina"><button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button></nav><header role="banner"><div class="header-content"><div class="brand-wrap"><img class="brand-logo" src="../assets/bronzelogo-192.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async"><div class="brand-text"><div class="brand-name">Dott. Emanuel Savianu</div><p class="brand-tagline">Medico di Medicina Generale - Arezzo</p><a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> <span data-i18n="header_phone_label">Segreteria:</span> 0575 910 904</a></div></div></div></header><nav class="site-nav" aria-label="Navigazione principale"><button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="Apri il menu"><i class="fas fa-bars" aria-hidden="true"></i></button><ul class="nav-menu" id="site-nav-menu"><li><a href="../">Home</a></li><li><a href="../ssn/index.html">Pazienti</a></li><li><a href="../privati/index.html">Consulti e certificati INPS</a></li><li><a href="../colleghi/index.html" aria-current="page">Colleghi</a></li><li><a href="../ssn/faq.html">FAQ</a></li></ul></nav>
 </site-nav>
 
 <div class="container" id="main-content">
@@ -1178,6 +1177,6 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20261004l"></script>
+<script type="module" src="../app.js?v=20261004m"></script>
 </body>
 </html>
