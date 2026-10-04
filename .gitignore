@@ -4,6 +4,7 @@ cloudflare/node_modules/
 
 # Wrangler cache and auth
 cloudflare/.wrangler/
+/.wrangler/
 cloudflare/node_modules/.cache/
 
 # Design working artifacts (auteur proposals: commit-sheets, mockups, recon, shots).
