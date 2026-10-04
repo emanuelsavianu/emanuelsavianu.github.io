@@ -785,6 +785,10 @@ footer a { color: var(--accent); font-weight: bold; }
     border-radius: 8px; border: 1px solid var(--border-color); font-size: 0.9rem;
 }
 .privacy-notice a { color: var(--primary); text-decoration: underline; font-weight: bold;}
+/* Pagine legali: i link dentro il testo devono essere riconoscibili anche senza
+   percepire il colore (WCAG 1.4.1) — la regola globale `a { text-decoration: none }`
+   li lasciava evidenziati dal solo colore. */
+.legal-content a { text-decoration: underline; text-underline-offset: 2px; }
 .privacy-notice a:hover { color: var(--accent); }
 
 .footer-privacy-note {
