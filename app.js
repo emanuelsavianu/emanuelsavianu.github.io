@@ -1,4 +1,4 @@
-import { CONFIG } from './config.js?v=20261004j';
+import { CONFIG } from './config.js?v=20261004k';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -248,6 +248,18 @@ export function applyContacts() {
     });
 }
 applyContacts();
+
+// Orari settimanali leggibili, dalla config (unica formattazione).
+export function applyHours() {
+    const slots = (CONFIG.SCHEDULE && CONFIG.SCHEDULE[1]) || [];
+    const hhmm = h => String(Math.floor(h)).padStart(2, '0') + ':' +
+        String(Math.round((h - Math.floor(h)) * 60)).padStart(2, '0');
+    const label = slots.map(s => hhmm(s.from) + '–' + hhmm(s.to)).join(' · ');
+    if (!label) return;
+    document.querySelectorAll('[data-hours-week]').forEach(el => { el.textContent = label; });
+}
+applyHours();
+document.addEventListener('site:i18n', applyHours);
 if (typeof window !== 'undefined') window.applyContacts = applyContacts;
 document.addEventListener('site:i18n', applyContacts);
 
@@ -316,7 +328,7 @@ export const translations = {
         triage_privati_title: "Consulti e certificati INPS",
         triage_privati_desc: "Consulenze private, certificati INPS, invalidità civile e Legge 104 — prenota su Google Calendar.",
         triage_colleghi_title: "Colleghi",
-        triage_colleghi_desc: "Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.",
+        triage_colleghi_desc: "Risorse per professionisti sanitari: strumenti, protocolli, normative e applicazioni di servizio.",
         triage_cta: "Entra",
         triage_section_label: "Scegli la tua area",
 
@@ -541,7 +553,10 @@ export const translations = {
         intl_step3: '<strong>Visita.</strong> In studio (Piazza Saione 3, Arezzo), in telemedicina o a domicilio dove clinicamente indicato. Follow-up e documentazione sono gestiti direttamente con lei.',
         intl_info_title: 'Informazioni pratiche',
         intl_info_address_l: 'Studio',
-        intl_info_hours_l: 'Orari dei consulti',
+        intl_info_hours_l: 'Orari dei consulti privati',
+        // Orari dello studio/segreteria: gli stessi di CONFIG.SCHEDULE, riempiti a runtime
+        // da applyHours() (data-hours-week) — vedi NEEDS_EMANUEL: quale orario va dove.
+        intl_info_studio_h_l: 'Orari dello studio e della segreteria',
         intl_info_hours_v: 'Martedì e giovedì, 10:00–12:00. Lunedì, mercoledì e venerdì, 16:00–18:00. Visite solo su appuntamento.',
         intl_info_phone_l: 'Telefono consulti privati',
         intl_info_langs_l: 'Lingue',
@@ -683,7 +698,7 @@ export const translations = {
         triage_privati_title: "INPS Consultations & Certificates",
         triage_privati_desc: "Private consultations, INPS certificates, civil disability and Law 104 — book on Google Calendar.",
         triage_colleghi_title: "Colleagues",
-        triage_colleghi_desc: "Reserved area for professionals: tools, protocols, regulations and service applications.",
+        triage_colleghi_desc: "Resources for healthcare professionals: tools, protocols, regulations and service applications.",
         triage_cta: "Enter",
         triage_section_label: "Choose your area",
 
@@ -905,7 +920,8 @@ export const translations = {
         intl_step3: '<strong>Consultation.</strong> At the studio (Piazza Saione 3, Arezzo), by telemedicine, or at home where clinically indicated. Follow-up and documentation are handled directly with you.',
         intl_info_title: 'Practical information',
         intl_info_address_l: 'Studio',
-        intl_info_hours_l: 'Consultation hours',
+        intl_info_hours_l: 'Private consultation hours',
+        intl_info_studio_h_l: 'Practice and front-desk hours',
         intl_info_hours_v: 'Tuesday and Thursday, 10:00–12:00. Monday, Wednesday and Friday, 16:00–18:00. Visits by appointment.',
         intl_info_phone_l: 'Phone (private consultations)',
         intl_info_langs_l: 'Languages',
@@ -1158,15 +1174,10 @@ function trapFocus(modal) {
 
 // --- OPEN/CLOSED BADGE ---
 (function() {
-    const SCHEDULE = CONFIG.SCHEDULE;
-    // Ora dello studio (Europe/Rome) e chiusura festiva, come nella home.
-    const rome = (typeof CONFIG.getRomeNow === 'function') ? CONFIG.getRomeNow() : null;
-    const now = rome ? null : new Date();
-    const day = rome ? rome.day : now.getDay();
-    const hour = rome ? rome.minutes / 60 : now.getHours() + now.getMinutes() / 60;
-    const closedDay = (typeof CONFIG.isClosedDay === 'function') ? CONFIG.isClosedDay() : false;
-    const slots = closedDay ? [] : (SCHEDULE[day] || []);
-    const isOpen = slots.some(s => hour >= s.from && hour < s.to);
+    // Stessa logica della home: CONFIG.getOpenState() (Europe/Rome + festività).
+    const isOpen = (typeof CONFIG.getOpenState === 'function')
+        ? CONFIG.getOpenState().state === 'open'
+        : false;
 
     const anchor = document.querySelector('[data-badge-anchor]');
     if (!anchor) return;

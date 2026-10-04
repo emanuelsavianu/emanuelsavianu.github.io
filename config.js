@@ -105,6 +105,41 @@ export const CONFIG = {
         }
     },
 
+    // Stato di apertura in un istante dato (o adesso). Unica implementazione:
+    // la usano la home, il badge e il test con orologi finti (tools/check-hours.mjs).
+    // Ritorna:
+    //   { state:'open',    day, minutes, closesAt, inMinutes }
+    //   { state:'closed',  day, minutes, opensAt, inMinutes }            -> apre più tardi oggi
+    //   { state:'closed',  day, minutes, nextDay, nextDelta, nextOpen }  -> chiuso per oggi
+    getOpenState: function(date) {
+        const now = CONFIG.getRomeNow(date);
+        const closedDay = CONFIG.isClosedDay(date);
+        const slots = closedDay ? [] : (CONFIG.SCHEDULE[now.day] || []);
+        for (let i = 0; i < slots.length; i++) {
+            const opens = slots[i].from * 60;
+            const closes = slots[i].to * 60;
+            if (now.minutes >= opens && now.minutes < closes) {
+                return { state: 'open', day: now.day, minutes: now.minutes,
+                         closesAt: slots[i].to, inMinutes: closes - now.minutes };
+            }
+            if (now.minutes < opens) {
+                return { state: 'closed', day: now.day, minutes: now.minutes,
+                         opensAt: slots[i].from, inMinutes: opens - now.minutes };
+            }
+        }
+        const base = date ? date.getTime() : Date.now();
+        for (let d = 1; d <= 10; d++) {
+            const dt = new Date(base + d * 86400000);
+            if (CONFIG.isClosedDay(dt)) continue;
+            const nd = CONFIG.getRomeNow(dt).day;
+            if (CONFIG.SCHEDULE[nd] && CONFIG.SCHEDULE[nd].length) {
+                return { state: 'closed', day: now.day, minutes: now.minutes,
+                         nextDay: nd, nextDelta: d, nextOpen: CONFIG.SCHEDULE[nd][0].from };
+            }
+        }
+        return { state: 'closed', day: now.day, minutes: now.minutes };
+    },
+
     getActiveAbsence: function() {
         const now = new Date();
         const todayUTC = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());

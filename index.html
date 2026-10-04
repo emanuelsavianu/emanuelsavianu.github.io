@@ -62,7 +62,7 @@
 </script>
     <!-- Marks the page as JS-capable: the index ships fully open, JS collapses it. -->
     <script>document.documentElement.classList.add('ed-js');</script>
-    <link rel="stylesheet" href="styles.css?v=20261004j">
+    <link rel="stylesheet" href="styles.css?v=20261004k">
 
     <!-- JSON-LD: MedicalBusiness (clinic umbrella) with Physician as founder -->
     <script type="application/ld+json">
@@ -242,7 +242,7 @@
                         <p class="ed-path__who" data-i18n="lp_who_colleghi">Sono un medico, un infermiere o un operatore sanitario.</p>
                     </div>
                     <div class="ed-path__actions">
-                        <p class="ed-path__index" data-i18n="triage_colleghi_desc">Area riservata ai professionisti: strumenti, protocolli, normative e applicazioni di servizio.</p>
+                        <p class="ed-path__index" data-i18n="triage_colleghi_desc">Risorse per professionisti sanitari: strumenti, protocolli, normative e applicazioni di servizio.</p>
                         <a class="ed-btn ed-btn--brass" href="colleghi/" data-i18n="lp_cta_tools">Strumenti e protocolli</a>
                         <a class="ed-btn ed-btn--ghost" href="colleghi/modulistica/" data-i18n="lp_cta_forms">Modulistica</a>
                     </div>
@@ -270,7 +270,7 @@
                     <div class="ed-path__actions">
                         <p class="ed-path__index" data-i18n="triage_intl_desc">Family doctor &amp; GP consultations in English and Italian — for international residents and visitors across the Province of Arezzo.</p>
                         <a class="ed-btn ed-btn--brass" href="international/#request" data-i18n="lp_cta_intl_book">Book a consultation</a>
-                        <a class="ed-btn ed-btn--ghost" href="international/#practical-info" data-i18n="lp_cta_intl_bring">What to bring</a>
+                        <a class="ed-btn ed-btn--ghost" href="international/#what-to-bring" data-i18n="lp_cta_intl_bring">What to bring</a>
                     </div>
                 </div>
                 <div class="ed-path__panel" id="lp-panel-intl">
@@ -318,7 +318,7 @@
         </div>
         <div>
             <ul class="ed-meta">
-                <li><span class="k" data-i18n="hours_lun_ven">Lun - Ven</span><span class="v" id="lp-hours-week">09:30 – 12:30 · 16:00 – 19:00</span></li>
+                <li><span class="k" data-i18n="hours_lun_ven">Lun - Ven</span><span class="v" id="lp-hours-week" data-hours-week>09:30 – 12:30 · 16:00 – 19:00</span></li>
                 <li><span class="k" data-i18n="lp_hours_weekend">Sabato e domenica</span><span class="v v--closed" data-i18n="lp_state_closed">Chiuso</span></li>
                 <li><span class="k" data-i18n="lp_hours_secretary">Segreteria</span><span class="v"><a href="tel:+390575910904">0575 910 904</a></span></li>
                 <li><span class="k" data-i18n="label_address">Studio Medico Ippocrate</span><span class="v" data-i18n="label_address_value">Piazza Saione 3, Arezzo</span></li>
@@ -401,11 +401,11 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="app.js?v=20261004j"></script>
+<script type="module" src="app.js?v=20261004k"></script>
 
 <!-- ── The live counter: reads CONFIG.SCHEDULE, writes one sentence. ── -->
 <script type="module">
-import { CONFIG } from './config.js?v=20261004j';
+import { CONFIG } from './config.js?v=20261004k';
 
 (function () {
     const SCHEDULE = CONFIG.SCHEDULE || {};
@@ -459,34 +459,20 @@ import { CONFIG } from './config.js?v=20261004j';
         return hoursText(slots);
     }
 
-    // Prossimo giorno di apertura, saltando weekend e festività.
-    function nextOpen(fromDay) {
-        for (let d = 1; d <= 10; d++) {
-            const dt = new Date(Date.now() + d * 86400000);
-            if (typeof CONFIG.isClosedDay === 'function' && CONFIG.isClosedDay(dt)) continue;
-            const nd = (typeof CONFIG.getRomeNow === 'function') ? CONFIG.getRomeNow(dt).day : (fromDay + d) % 7;
-            if (SCHEDULE[nd] && SCHEDULE[nd].length) return { d: d, day: nd, slots: SCHEDULE[nd] };
-        }
-        return null;
-    }
+
 
     function render() {
-        // Ora dello studio (Europe/Rome): la stessa per ogni visitatore, non
-        // quella del suo fuso orario. Weekend e festività = chiuso.
-        const rome = (typeof CONFIG.getRomeNow === 'function') ? CONFIG.getRomeNow() : null;
-        const now = rome ? null : new Date();
-        const mins = rome ? rome.minutes : now.getHours() * 60 + now.getMinutes();
-        const day = rome ? rome.day : now.getDay();
-        const closedToday = (typeof CONFIG.isClosedDay === 'function')
-            ? CONFIG.isClosedDay()
-            : !(SCHEDULE[day] || []).length;
+        // Tutte le decisioni (fuso Europe/Rome, weekend, festività, slot) stanno
+        // in CONFIG.getOpenState(): qui c'è solo la resa a schermo.
+        const info = (typeof CONFIG.getOpenState === 'function') ? CONFIG.getOpenState() : null;
+        const day = info ? info.day : new Date().getDay();
+        const closedToday = (typeof CONFIG.isClosedDay === 'function') && CONFIG.isClosedDay();
         const slots = closedToday ? [] : (SCHEDULE[day] || []);
 
-        // The strip always shows something: today's bands, or the next open day's.
         let stripSlots = slots, stripDay = day;
-        if (!slots.length) {
-            const nxt = nextOpen(day);
-            if (nxt) { stripSlots = nxt.slots; stripDay = nxt.day; }
+        if (!slots.length && info && typeof info.nextDay === 'number') {
+            stripSlots = SCHEDULE[info.nextDay] || [];
+            stripDay = info.nextDay;
         }
         const label = drawStrip(stripSlots);
         if (stripHoursEl) stripHoursEl.textContent = label;
@@ -500,7 +486,7 @@ import { CONFIG } from './config.js?v=20261004j';
                               : T('lp_strip_next', 'Prossima apertura')) +
             ' (' + dayName(stripDay) + '): ' + label);
 
-        const pct = (mins / 60 - STRIP_FROM) / (STRIP_TO - STRIP_FROM);
+        const pct = info ? (info.minutes / 60 - STRIP_FROM) / (STRIP_TO - STRIP_FROM) : -1;
         if (nowEl) {
             if (stripDay === day && pct >= 0 && pct <= 1) { nowEl.hidden = false; nowEl.style.left = (pct * 100) + '%'; }
             else { nowEl.hidden = true; }
@@ -511,7 +497,7 @@ import { CONFIG } from './config.js?v=20261004j';
             textEl.innerHTML = html;
         }
 
-        // An active absence overrides the timetable: state what is true now.
+        // Un'assenza attiva sovrascrive l'orario: si dice ciò che è vero adesso.
         if (typeof CONFIG.getActiveAbsence === 'function') {
             const absence = CONFIG.getActiveAbsence();
             if (absence) {
@@ -520,38 +506,32 @@ import { CONFIG } from './config.js?v=20261004j';
                 return;
             }
         }
+        if (!info) { wordEl.textContent = T('lp_state_closed', 'Chiuso'); say(false, ''); return; }
 
-        for (let i = 0; i < slots.length; i++) {
-            const opens = slots[i].from * 60;
-            const closes = slots[i].to * 60;
-            if (mins >= opens && mins < closes) {
-                wordEl.textContent = T('lp_state_open', 'Aperto ora');
-                say(true, T('lp_state_closes_at', 'chiude alle') + ' ' + hhmm(slots[i].to) +
-                    ' <span class="ed-state__eta">(' + T('lp_state_in', 'tra') + ' ' + dur(closes - mins) + ')</span>');
-                return;
-            }
-            if (mins < opens) {
-                wordEl.textContent = T('lp_state_closed', 'Chiuso');
-                say(false, T('lp_state_opens_at', 'apre') + ' ' + T('lp_state_today', 'oggi') + ' ' +
-                    T('lp_state_at', 'alle') + ' ' + hhmm(slots[i].from) +
-                    ' <span class="ed-state__eta">(' + T('lp_state_in', 'tra') + ' ' + dur(opens - mins) + ')</span>');
-                return;
-            }
-        }
-
-        const next = nextOpen(day);
-        if (next) {
-            const when = next.d === 1 ? T('lp_state_tomorrow', 'domani') : dayName(next.day);
-            wordEl.textContent = T('lp_state_closed', 'Chiuso');
-            say(false, T('lp_state_opens_at', 'apre') + ' ' + when + ' ' +
-                T('lp_state_at', 'alle') + ' ' + hhmm(next.slots[0].from));
+        if (info.state === 'open') {
+            wordEl.textContent = T('lp_state_open', 'Aperto ora');
+            say(true, T('lp_state_closes_at', 'chiude alle') + ' ' + hhmm(info.closesAt) +
+                ' <span class="ed-state__eta">(' + T('lp_state_in', 'tra') + ' ' + dur(info.inMinutes) + ')</span>');
             return;
+        }
+        if (typeof info.opensAt === 'number') {          // chiuso adesso, riapre più tardi oggi
+            wordEl.textContent = T('lp_state_closed', 'Chiuso');
+            say(false, T('lp_state_opens_at', 'apre') + ' ' + T('lp_state_today', 'oggi') + ' ' +
+                T('lp_state_at', 'alle') + ' ' + hhmm(info.opensAt) +
+                ' <span class="ed-state__eta">(' + T('lp_state_in', 'tra') + ' ' + dur(info.inMinutes) + ')</span>');
+            return;
+        }
+        wordEl.textContent = T('lp_state_closed', 'Chiuso');
+        if (typeof info.nextDay === 'number') {          // riapre un altro giorno
+            const when = info.nextDelta === 1 ? T('lp_state_tomorrow', 'domani') : dayName(info.nextDay);
+            say(false, T('lp_state_opens_at', 'apre') + ' ' + when + ' ' +
+                T('lp_state_at', 'alle') + ' ' + hhmm(info.nextOpen));
+        } else {
+            say(false, '');
         }
     }
 
-    // La riga "Lun - Ven" nasce dalla config: nessun orario duplicato a mano.
-    const weekEl = document.getElementById('lp-hours-week');
-    if (weekEl) weekEl.textContent = hoursText(SCHEDULE[1] || []);
+    // La riga "Lun - Ven" è riempita da applyHours() (app.js) dalla config.
 
     render();
     setInterval(render, 60000);
