@@ -380,7 +380,7 @@
         </section>
 
         <!-- Practical information -->
-        <section class="ed-sec" aria-labelledby="intl-info-heading">
+        <section class="ed-sec" id="practical-info" aria-labelledby="intl-info-heading">
             <div class="card-header">
                 <i class="fas fa-circle-question" aria-hidden="true"></i>
                 <h2 id="intl-info-heading" data-i18n="intl_info_title">Practical information</h2>
@@ -396,7 +396,7 @@
                                 </li>
                 <li>
                                     <i class="fas fa-phone" aria-hidden="true"></i>
-                                    <span><strong data-i18n="intl_info_phone_l">Phone</strong><br><a href="tel:+3905751713428" style="color: inherit;">+39 0575 171 3428</a></span>
+                                    <span><strong data-i18n="intl_info_phone_l">Phone</strong><br><a href="tel:+3905751713428" data-contact-link="private" style="color: inherit;">+39 0575 171 3428</a></span>
                                 </li>
                 <li>
                     <i class="fas fa-language" aria-hidden="true"></i>
@@ -444,7 +444,7 @@
             </div>
         </section>
         <!-- Inquiry form -->
-        <section class="ed-sec" aria-labelledby="intl-form-heading">
+        <section class="ed-sec" id="request" aria-labelledby="intl-form-heading">
             <div class="card-header">
                 <i class="fas fa-envelope-open-text" aria-hidden="true"></i>
                 <h2 id="intl-form-heading" data-i18n="intl_form_title">Request a consultation</h2>
@@ -506,6 +506,15 @@
                 <input type="hidden" name="ts" id="intl-ts" value="">
                 <button type="submit" class="intl-btn" data-i18n="intl_f_submit">Inquire About Private Primary Care</button>
                 <p class="intl-feedback" id="intl-feedback" role="status" aria-live="polite"></p>
+                <noscript>
+                    <p class="intl-hint" style="margin-top: 14px;">
+                        This form requires JavaScript. You can write to us at
+                        <strong>private&#160;[at]&#160;savianu&#160;[dot]&#160;it</strong>,
+                        or call the secretariat on <a href="tel:+390575910904">0575 910 904</a>
+                        (Mon&#8211;Fri 09:30&#8211;12:30, 16:00&#8211;19:00).
+                        Administrative details only &#8212; please do not send medical information.
+                    </p>
+                </noscript>
                 <p class="intl-hint" style="margin-top: 14px;" data-i18n="intl_f_alt">For information about fees and availability, please write to <span class="js-email"></span>.</p>
             </form>
         </section>
@@ -543,13 +552,24 @@
 (function () {
     // Email injected via JS: Cloudflare Email Obfuscation rewrites plaintext
     // addresses in served HTML — JS-set textContent is never rewritten.
-    var ADDR = 'private' + '@' + 'savianu.it';
+    // Indirizzo da config.js (unica fonte di verità). Questo è uno script
+    // classico e gira PRIMA di app.js, quindi non si può importare il modulo:
+    // si legge la config esposta su window e si ricade sul medesimo indirizzo.
+    function addr() {
+        try {
+            var c = window.__SAVIANU_CONFIG__;
+            if (c && c.CONTACTS && c.CONTACTS.email && c.CONTACTS.email.private) {
+                return c.CONTACTS.email.private;
+            }
+        } catch (e) {}
+        return 'private' + '@' + 'savianu.it';
+    }
     // L'indirizzo va (ri)scritto DOPO ogni passaggio i18n: setLanguage() assegna le
     // traduzioni con innerHTML e le stringhe intl_f_alt/intl_f_error contengono uno
     // <span class="js-email"> VUOTO, che sostituirebbe quello gia' riempito (bug: la
     // pagina diceva "please write to .").
     function fillEmails() {
-        document.querySelectorAll('.js-email').forEach(function (el) { el.textContent = ADDR; });
+        document.querySelectorAll('.js-email').forEach(function (el) { el.textContent = addr(); });
     }
     fillEmails();
     document.addEventListener('site:i18n', fillEmails);
@@ -665,7 +685,7 @@
             function showManualFallback(messageOverride) {
                 usedFallback = true;
                 var mailBody = lines.join('\n');
-                var mailtoUrl = 'mailto:' + ADDR +
+                var mailtoUrl = 'mailto:' + addr() +
                     '?subject=' + encodeURIComponent(subject) +
                     '&body=' + encodeURIComponent(mailBody);
 
@@ -678,7 +698,7 @@
 
                 var mailLink = document.createElement('a');
                 mailLink.href = mailtoUrl;
-                mailLink.textContent = ADDR;
+                mailLink.textContent = addr();
                 mailLink.className = 'intl-feedback-link';
                 feedback.appendChild(mailLink);
                 feedback.appendChild(document.createTextNode('. '));
