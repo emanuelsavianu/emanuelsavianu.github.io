@@ -85,12 +85,28 @@
                 --btn-color: #c29b57;
             }
         }
+        /* Il tema del sito usa la classe body.dark-mode, non solo la preferenza
+           di sistema: senza questi override la pagina restava bianca con i
+           titoli oro del tema scuro (1.85:1). */
+        body.dark-mode {
+            --bg: #0a1628;
+            --bg-alt: #11223a;
+            --text: #e8e2d2;
+            --heading1: #c29b57;
+            --heading2: #c29b57;
+            --accent: #c29b57;
+            --border: #c29b57;
+            --btn-bg: #162438;
+            --btn-color: #c29b57;
+        }
+        body.dark-mode h1, body.dark-mode h2 { color: var(--heading2); }
+        body.dark-mode a { color: var(--accent); }
         body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); max-width: 800px; margin: 0 auto; padding: 20px; transition: background 0.3s, color 0.3s; }
         h1 { color: var(--heading1); border-bottom: 2px solid var(--border); padding-bottom: 10px; }
         h2 { color: var(--heading2); margin-top: 30px; }
         h3 { color: var(--text); }
         .box { background: var(--bg-alt); padding: 15px; border-left: 5px solid var(--border); margin: 20px 0; border-radius: 4px; }
-        a { color: var(--accent); text-decoration: none; }
+        a { color: var(--accent-text); text-decoration: none; }
         a:hover { text-decoration: underline; }
         .btn-back { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--btn-bg); color: var(--btn-color); border-radius: 5px; border: 1px solid var(--border); }
         .btn-back:hover { text-decoration: none; opacity: 0.85; }
