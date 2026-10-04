@@ -1,6 +1,6 @@
 ---
 title: Comunicazioni 2026 Medicina Generale | Dott. Savianu
-description: Le comunicazioni ufficiali 2026 per i Medici di Medicina Generale, in ordine cronologico — FNOMCeO, Ministero della Salute, AIFA, INPS: sintesi verificate e link alle fonti primarie.
+description: Comunicazioni ufficiali 2026 per i MMG: FNOMCeO, Ministero della Salute, AIFA e INPS, in ordine cronologico con i link alle fonti.
 ---
 
 # Comunicazioni ufficiali 2026 per la Medicina Generale

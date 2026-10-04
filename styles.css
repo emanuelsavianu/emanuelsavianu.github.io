@@ -237,16 +237,7 @@ body.dark-mode .header-info { background: var(--bg-gradient-2); }
     text-align: center;
 }
 .header-info i { color: var(--accent); flex-shrink: 0; font-size: 1rem; }
-.header-info-base { color: rgba(255, 255, 255, 0.95); }
-.header-info-link {
-    color: var(--accent);
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-}
-.header-info-link:hover { color: #ffffff; }
 .header-info-absence { color: var(--accent); font-weight: 600; }
-.header-info-urgenze { color: rgba(255, 255, 255, 0.95); }
 .header-info-close {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.35);
@@ -2978,22 +2969,8 @@ body.ed {
     text-align: left;
     gap: 8px 14px;
 }
-.ed .header-info-base,
-.ed .header-info-urgenze { color: var(--ed-on-field-2); }
 .ed .header-info i { color: var(--ed-brass); }
 .ed .header-info-absence { color: var(--ed-brass); }
-.ed .header-info-link {
-    background: var(--ed-brass);
-    color: #17202e;
-    font-weight: 700;
-    font-size: 0.78rem;
-    text-decoration: none;
-    border: 0;
-    border-radius: 2px;
-    padding: 7px 13px;
-    white-space: nowrap;
-}
-.ed .header-info-link:hover { background: var(--ed-brass-hi); color: #17202e; }
 .ed .header-info-close { border-color: var(--ed-field-rule); color: var(--ed-on-field-2); margin-left: auto; }
 
 .ed header[role="banner"] {
@@ -3870,7 +3847,6 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
 .ed site-footer .footer-nav a { display: inline-block; padding-block: 6px; }
 .ed .intl-consent input { width: 20px; height: 20px; flex: none; }
 @media (max-width: 768px) {
-    .ed .header-info-link { display: inline-flex; align-items: center; min-height: 44px; }
     .ed .lang-btn { padding: 13px 12px; }
     .ed .faq-pill { min-height: 44px; }
     .ed .intl-field input, .ed .intl-field select, .ed .intl-field textarea { min-height: 48px; }
