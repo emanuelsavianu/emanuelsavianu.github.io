@@ -100,6 +100,8 @@ A11y e SEO erano **già 100** su `main`: nessun margine da recuperare lì.
 7. **Onorari** dei servizi privati: intervallo da pubblicare (non inventato).
 8. **Albo/P.IVA**: già nel footer (**3499** · cod. regionale **011189** · P.IVA **02348320512**) — confermare.
 9. **Copy obsoleto**: la card "Gestore Turni" promette "supporto AI (Gemini)" e **non esiste alcuna implementazione AI né alcuna chiave** (né nel tree, né in un branch, né nella history).
+8. **Quale orario va dove (nuovo, da P0-2)**: su `/international/` convivono due orari — studio/segreteria `Lun–Ven 09:30–12:30 · 16:00–19:00` (da `CONFIG.SCHEDULE`) e consulti privati `Mar/Gio 10:00–12:00, Lun/Mer/Ven 16:00–18:00`. Ora sono **etichettati** e distinti, ma **non ho scelto quale sia corretto**. Inoltre il JSON-LD `openingHoursSpecification` di `/international/` dichiara `10:00`/`16:00` (i consulti): **confermare quale orario deve pubblicare lo schema**.
+9. **Bozza privacy (P1-3)**: servono i periodi di conservazione e l'eventuale trasferimento extra-UE della catena form (`/api/intl-inquiry` → Cloudflare Worker → provider email). Non inventati.
 10. **Nessuna chiave da ruotare.**
 
 ---
@@ -146,3 +148,34 @@ A11y e SEO erano **già 100** su `main`: nessun margine da recuperare lì.
 * `diff-summary.json` — confronto pixel per coppia.
 * `seo-structure.json` — titolo/description/h1/canonical/og/hreflang/JSON-LD/immagini per tutte le 43 pagine.
 * Lighthouse grezzi: `lighthouse/{before,after}-*.json` (10 file, ~1 MB) — **non committati**, sintesi in `lighthouse-scores.json`.
+
+---
+
+## 9. Live vs branch (deploy gap) — verificato con comandi sul DEPLOYATO
+
+**Stato:** PR #3 **OPEN**, `mergeable: MERGEABLE`, `mergeStateStatus: CLEAN`, **`mergedAt: null`** → **non mergiata, non deployata**. `main` resta `cb664e8`. Pages non ha pubblicato nulla del branch.
+
+Comandi usati (tutti contro `https://savianu.it?x=$RANDOM`, cache-busting):
+
+| Item | Locale (branch) | **LIVE** | Comando |
+|---|---|---|---|
+| `Emanuele` | 0 | **2 su ognuna delle 5 pagine** | `curl -s "https://savianu.it$u?x=$RANDOM" \| grep -c Emanuele` |
+| `premi qui` | 0 | **1** | `grep -c` sulle 5 pagine |
+| `recognition` | 0 | **2** | idem |
+| `Gemini` / `supporto AI` | 0 | **1 / 1** | idem |
+| `fnomceo.it/ordini-provinciali` | 0 | **1** | idem |
+| `sw.js` servito | `savianu-v394` | **`savianu-v389`** (`last-modified` 13:44 GMT) | `curl -s https://savianu.it/sw.js \| grep -o 'savianu-v[0-9]*'` |
+| `app.js` / `styles.css` | `?v=20261004k` | **`20261004f` / `20261004g`** | `curl -s https://savianu.it/ \| grep -oE '(app.js\|styles.css)\?v=[0-9a-z]+'` |
+| Email `/international/` | `private@savianu.it` a schermo | **`private@savianu.it` a schermo** | Playwright, `document.querySelector('.js-email').textContent` |
+| Widget domenica 11:18 | `Chiuso` / `apre domani alle 09:30` | **`Chiuso` / `opens tomorrow at 9:30`** | Playwright, `#lp-state-word` |
+| `0811141720` | assente (stringa non esiste) | **0 occorrenze anche nel sorgente live** | `grep -c` |
+| Token calendario stantii in HEAD | 0 | 0 | `grep -rE 'AcZss…'` |
+
+**Correzioni a due claim del check esterno:**
+* `/international/` **non** mostra "please write to ." sul live: l'email viene iniettata via JS (necessario perché Cloudflare riscrive le email nel sorgente) e **si vede**. Il check ha verosimilmente letto l'HTML grezzo, dove lo `<span class="js-email">` è vuoto **per progetto**.
+* Il widget **non** dice "Aperto ora" di domenica: il live risponde `Chiuso`. La stringa `0811141720` **non esiste in nessun sorgente**: è la concatenazione a schermo dei tick della scala (`08 11 14 17 20`), quindi il rilievo è corretto come *osservazione di resa*, non come stringa nel codice.
+
+**Token calendario nella storia (P2-2):** il token dell'audit 2026-08-29 (`AcZssZ3do…`) **non esiste** in nessun commit (`git log --all -S` → vuoto). Esistono invece `AcZssZ18R…` e `AcZssZ03W…`, entrambi introdotti in `53c890d`, `d641cbf`, `2e05bfb` (file poi rimossi) e **assenti dall'HEAD**: nessuna esposizione attuale, **nessuna riscrittura di storia consigliata**.
+
+### Nota di metodo
+Il "disallineamento" segnalato non era una contraddizione fra due audit: il check esterno guardava la **produzione**, io guardavo il **branch**. Entrambe le letture erano corrette. Il difetto reale è organizzativo: **finché la PR non viene mergiata, i fix non esistono per i pazienti.**

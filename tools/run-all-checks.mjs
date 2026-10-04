@@ -15,6 +15,7 @@ const NODE = process.execPath;
 const steps = [
   { name: 'JS syntax (app.js)',      cmd: NODE, args: ['--check', 'app.js'] },
   { name: 'JS syntax (config.js)',   cmd: NODE, args: ['--check', 'config.js'] },
+  { name: 'Orari (orologi finti)',   cmd: NODE, args: [join('tools', 'check-hours.mjs')] },
   { name: 'Link integrity',          cmd: NODE, args: [join('tools', 'check-links.mjs')] },
   { name: 'i18n parity + coverage',  cmd: NODE, args: [join('tools', 'check-i18n.mjs')] },
   { name: 'SW precache sync',        cmd: NODE, args: [join('tools', 'check-sw.mjs')] },
