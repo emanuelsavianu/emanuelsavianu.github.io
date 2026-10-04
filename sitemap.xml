@@ -82,8 +82,18 @@
   </url>
   <url>
     <loc>https://savianu.it/colleghi/</loc>
-    <lastmod>2026-10-03</lastmod>
+    <lastmod>2026-10-04</lastmod>
     <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/colleghi/pir.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/colleghi/millewin-tips.html</loc>
+    <lastmod>2026-10-04</lastmod>
+    <priority>0.3</priority>
   </url>
   <url>
     <loc>https://savianu.it/colleghi/comunicazioni-2026.html</loc>
