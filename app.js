@@ -125,19 +125,15 @@ class SiteNav extends HTMLElement {
         '</div>' +
       '</div>';
 
-    // Testo del banner: una pagina puo' dichiararne uno proprio con
-    // data-banner-i18n su <site-nav> (es. /international/, dove il primo passo
-    // non e' "prenota su Doctolib"). Deve essere la CHIAVE, non il testo: il
-    // passaggio i18n riscrive gli elementi [data-i18n].
-    const bannerKey = this.dataset.bannerI18n || 'doctolib_banner_text';
+    // La barra informativa permanente (avviso Doctolib + riga urgenze) è stata
+    // rimossa: non serve più e appesantiva ogni pagina. Resta solo l'avviso di
+    // chiusura dello studio, che compare esclusivamente quando CONFIG.ASSENZE
+    // contiene un periodo attivo (vedi getActiveAbsence()).
     const infoBar =
-      '<div class="header-info" id="header-info-line">' +
+      '<div class="header-info" id="header-info-line" hidden>' +
         '<i class="fas fa-info-circle" aria-hidden="true"></i>' +
-        '<span class="header-info-base" id="header-info-base"' + (isPatient ? ' data-i18n="' + bannerKey + '"' : '') + '></span>' +
-        '<a class="header-info-link" id="header-info-doctolib" href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" data-i18n-title="doctolib_link_title" title="Profilo Doctolib del dott. Emanuel Savianu — Piazza Saione 3, Arezzo" data-i18n="doctolib_banner_link">Prenota su Doctolib</a>' +
-        '<span class="header-info-absence" id="header-info-absence" hidden></span>' +
-        '<span class="header-info-urgenze" id="header-info-urgenze" data-i18n="urgenze_line"></span>' +
-        '<button id="header-info-close" class="header-info-close" hidden onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
+        '<span class="header-info-absence" id="header-info-absence"></span>' +
+        '<button id="header-info-close" class="header-info-close" onclick="dismissHeaderInfo()" aria-label="Chiudi avviso">&times;</button>' +
       '</div>';
 
     this.insertAdjacentHTML('beforebegin',
@@ -1185,18 +1181,12 @@ function trapFocus(modal) {
     anchor.parentNode.appendChild(badge);
 })();
 
-// --- HEADER INFO LINE (merged doctolib + closure notice) ---
+// --- HEADER INFO LINE (solo avviso di chiusura dello studio) ---
 (function() {
-    const isPatient = isPatientSection(currentSection());
     const line = document.getElementById('header-info-line');
-    const base = document.getElementById('header-info-base');
     const absence = document.getElementById('header-info-absence');
-    const urgenze = document.getElementById('header-info-urgenze');
     const closeBtn = document.getElementById('header-info-close');
-    if (!line || !base || !absence || !urgenze || !closeBtn) return;
-
-    const lang = getPreferredLang();
-    const t = translations[lang] || translations['it'];
+    if (!line || !absence || !closeBtn) return;
 
     const active = CONFIG.getActiveAbsence();
     let dismissed = false;
@@ -1206,31 +1196,13 @@ function trapFocus(modal) {
         if (active) dismissed = sessionStorage.getItem('ferie-dismissed-' + active.from) === '1';
     } catch(e) {}
 
-    // L'utente ha chiuso la barra informativa: resta chiusa per la sessione.
-    if (lineDismissed) {
+    // Nessuna chiusura in corso (o già chiusa): la barra NON compare affatto.
+    if (!active || dismissed || lineDismissed) {
         line.setAttribute('hidden', '');
         return;
     }
-
-    // Una pagina puo' dichiarare un proprio testo di banner (data-banner-i18n su
-    // <site-nav>): serve a /international/, dove il primo passo non e' Doctolib.
-    const bannerKey = (document.querySelector('site-nav') || {}).dataset?.bannerI18n || 'doctolib_banner_text';
-    if (isPatient) {
-        base.textContent = t[bannerKey] || t.doctolib_banner_text;
-        urgenze.textContent = t.urgenze_line;
-        closeBtn.removeAttribute('hidden');   // barra informativa chiudibile dall'utente
-    } else if (active && !dismissed) {
-        urgenze.textContent = t.urgenze_line;
-    } else {
-        line.setAttribute('hidden', '');
-        return;
-    }
-
-    if (active && !dismissed) {
-        absence.textContent = active.note;
-        absence.removeAttribute('hidden');
-        closeBtn.removeAttribute('hidden');
-    }
+    absence.textContent = active.note;
+    line.removeAttribute('hidden');
 })();
 
 export function dismissHeaderInfo() {
