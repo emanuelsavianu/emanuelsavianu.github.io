@@ -494,8 +494,9 @@ export const translations = {
         intl_banner_text: 'Consulti privati in inglese: usare il modulo in fondo alla pagina. Assistiti SSN: prenotare su Doctolib.',
         doctolib_banner_link: 'Prenota su Doctolib',
         urgenze_line: 'Per urgenze: Guardia Medica 116 117 — Emergenze: 112.',
-        doctolib_modal_title: 'Avviso Importante',
-        doctolib_modal_text: 'Gentili Pazienti, un caro saluto.<br><br>Il <strong>Dott. Savianu visita solo su appuntamento</strong>. Si prega di prenotare tramite <a href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" class="modal-link">Doctolib</a>.<br><br>🚨 <strong>Urgenze, notte, weekend e festivi</strong><br>Nei fine settimana, nei festivi e nelle ore notturne i medici di medicina generale non sono in servizio. Per qualsiasi urgenza in questi giorni — o se la segreteria non risponde — è sempre attiva la Guardia Medica 24h/24 al 116 117. Per le emergenze, 112.<br><br>📌 <strong>Appuntamenti e richieste</strong><br>Prenotate o scrivetemi su Doctolib, oppure chiamate la segreteria al 0575 910904.<br><br>Dott. Emanuel Savianu<br><em>Medico di Medicina Generale</em>',
+        // Testo dell'avviso: si modifica in config.js (CONFIG.NOTICE) e cambia qui.
+        doctolib_modal_title: (CONFIG.NOTICE && CONFIG.NOTICE.it && CONFIG.NOTICE.it.title) || 'Avviso Importante',
+        doctolib_modal_text: (CONFIG.NOTICE && CONFIG.NOTICE.it && CONFIG.NOTICE.it.body) || '',
         doctolib_modal_btn: 'Ho letto',
 
         // CTA buttons
@@ -858,8 +859,8 @@ export const translations = {
         intl_banner_text: 'Private English-language consultations: use the inquiry form below. SSN patients: book on Doctolib.',
         doctolib_banner_link: 'Book on Doctolib',
         urgenze_line: 'For urgent matters: Guardia Medica 116 117 — Emergencies: 112.',
-        doctolib_modal_title: 'Important Notice',
-        doctolib_modal_text: 'Dear Patients, warm regards.<br><br><strong>Dr. Savianu sees patients by appointment only</strong>. Please book via <a href="' + CONFIG.DOCTOLIB.booking + '" target="_blank" rel="noopener noreferrer" class="modal-link">Doctolib</a>.<br><br>🚨 <strong>Urgencies, night, weekends and public holidays</strong><br>On weekends, public holidays and at night, general practitioners are not on duty. For any urgency on these days — or if the secretariat does not answer — the On-Call Doctor (Guardia Medica) is always available 24/7 at 116 117. For emergencies, 112.<br><br>📌 <strong>Appointments and requests</strong><br>Book or write to me on Doctolib, or call the secretariat at 0575 910904.<br><br>Dr. Emanuel Savianu<br><em>General Practitioner</em>',
+        doctolib_modal_title: (CONFIG.NOTICE && CONFIG.NOTICE.en && CONFIG.NOTICE.en.title) || 'Important Notice',
+        doctolib_modal_text: (CONFIG.NOTICE && CONFIG.NOTICE.en && CONFIG.NOTICE.en.body) || '',
         doctolib_modal_btn: 'I understand',
 
         // CTA buttons
@@ -1253,12 +1254,52 @@ export function dismissHeaderInfo() {
 }
 
 // --- DOCTOLIB WELCOME MODAL ---
+// Dialog modale accessibile: il focus entra nel dialog, resta intrappolato
+// (Tab/Shift+Tab), Escape chiude e alla chiusura il focus torna all'elemento
+// che l'aveva aperto. Il testo arriva da CONFIG.NOTICE.
+let lastFocusedEl = null;
+let modalKeyHandler = null;
+
 export function closeDoctolibModal() {
     const modal = document.getElementById('doctolib-modal');
-    if (modal) modal.style.display = 'none';
+    if (modal) {
+        modal.style.display = 'none';
+        if (modalKeyHandler) modal.removeEventListener('keydown', modalKeyHandler);
+    }
+    modalKeyHandler = null;
+    if (lastFocusedEl && typeof lastFocusedEl.focus === 'function') lastFocusedEl.focus();
+    lastFocusedEl = null;
     try {
         localStorage.setItem('doctolib-modal_seen', '1');
     } catch(e) {}
+}
+
+function openDoctolibModal() {
+    const modal = document.getElementById('doctolib-modal');
+    if (!modal || modal.style.display === 'flex') return;
+    lastFocusedEl = document.activeElement;
+    modal.style.display = 'flex';
+
+    const focusables = modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (first) first.focus();
+
+    modalKeyHandler = function (e) {
+        if (e.key === 'Escape' || e.key === 'Esc') {
+            e.preventDefault();
+            closeDoctolibModal();
+            return;
+        }
+        if (e.key !== 'Tab') return;
+        if (!focusables.length) { e.preventDefault(); return; }
+        if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else if (document.activeElement === last) {
+            e.preventDefault(); first.focus();
+        }
+    };
+    modal.addEventListener('keydown', modalKeyHandler);
 }
 
 (function() {
@@ -1267,7 +1308,7 @@ export function closeDoctolibModal() {
     try {
         if (localStorage.getItem('doctolib-modal_seen')) return;
     } catch(e) {}
-    modal.style.display = 'flex';
+    openDoctolibModal();
 })();
 
 export function startBooking() {
