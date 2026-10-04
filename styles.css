@@ -3560,6 +3560,15 @@ body.dark-mode .ed-alert { background: rgba(246, 176, 176, 0.08); border-color: 
     .ed-path__panel { grid-template-rows: 1fr !important; opacity: 1 !important; }
     .ed-faq__a { grid-template-rows: 1fr !important; }
     .ed-panel { box-shadow: none; }
+    /* Printing must yield paper, not screen chrome: navigation, the sticky
+       appointment banner, the bottom action bar and the floating buttons are
+       screen-only. Added with the printable "what to bring" checklist. */
+    .site-notices, site-nav, site-footer, .quick-actions-bar, .floating-faq,
+    .floating-faq-btn, .back-to-top, #sw-update-toast, .no-print,
+    .table-scroll-hint { display: none !important; }
+    body { background: #fff !important; padding-bottom: 0 !important; }
+    .table-scroll, .table-container { overflow: visible !important; box-shadow: none !important; }
+    a[href] { text-decoration: none; color: #000 !important; }
 }
 
 /* =================================================================
@@ -3845,3 +3854,50 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
     .ed .faq-pill { min-height: 44px; }
     .ed .intl-field input, .ed .intl-field select, .ed .intl-field textarea { min-height: 48px; }
 }
+
+
+/* =================================================================
+   WIDE DATA TABLES ON NARROW SCREENS — UX review 2026-10-04
+   A 2-column comparison table is ~450px wide; on a 390px phone the reader
+   sees half of it and nothing says more exists. app.js adds .is-scrollable
+   (real overflow), a one-line hint above the table, an inset edge shadow and
+   tabindex=0 + aria-label so keyboard and screen-reader users reach every
+   column (WCAG 2.1.1). No rule here changes anything when the table fits.
+   ================================================================= */
+.table-scroll, .table-container {
+    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+/* No decorative edge shadow: measured on this palette a gradient overlay is
+   indistinguishable from the surface in dark mode (and the site defaults to a
+   dark surface), so it would be dead CSS. The affordance is the explicit hint
+   line above the table plus keyboard access. */
+.table-scroll:focus-visible, .table-container:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: 3px;
+}
+.table-scroll-hint {
+    display: none;
+    margin: 0 0 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--text-medium);
+}
+@media (max-width: 900px) { .table-scroll-hint { display: block; } }
+
+/* ---- Print button for the "what to bring" checklist (screen only) ---- */
+.btn-print {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-height: 44px; padding: 10px 16px;
+    font-family: inherit; font-size: 0.85rem; font-weight: 600;
+    color: var(--text-dark); background: transparent; cursor: pointer;
+    border: 1px solid var(--accent); border-radius: var(--radius-md);
+    transition: background 0.2s, color 0.2s;
+}
+.btn-print:hover { background: var(--accent); color: #fff; }
+
+/* ---- Wrapper for the skip link + appointment banner: one labelled landmark
+   so banners are not "content outside any landmark" (axe region rule) ---- */
+.site-notices { display: block; }

@@ -85,6 +85,30 @@ for (const file of files) {
   }
 }
 
+// 3. A page that renders the ITA/ENG switch must actually be translatable.
+// app.js shows the switch for data-section root/ssn/privati unless the page
+// declares data-lang-fixed; for a page with no data-i18n in its body the
+// switch is a no-op (button lights up, text stays Italian) — shipped on six
+// pages until the 2026-10 UX review. Real translated pages carry 40+ keys, so
+// a threshold of 10 separates them from a page that only translated its
+// service-worker toast. Fix the page by translating it, or declare
+// data-lang-fixed="it" on its <site-nav> so no switch is offered.
+const I18N_MIN_KEYS = 10;
+for (const file of files) {
+  const content = readFileSync(file, 'utf8');
+  const nav = content.match(/<site-nav[^>]*>/);
+  if (!nav) continue;
+  const tag = nav[0];
+  const section = (tag.match(/data-section="([^"]+)"/) || [])[1] || 'root';
+  if (section === 'colleghi' || section === 'static') continue; // no switch rendered
+  if (/data-lang-fixed/.test(tag)) continue;                    // single-language page
+  const count = [...content.matchAll(/data-i18n(?:-placeholder|-aria-label|-title)?="/g)].length;
+  if (count < I18N_MIN_KEYS) {
+    errors++;
+    console.log(`DEAD LANGUAGE SWITCH: ${file.replace(ROOT + '\\', '')} renders ITA/ENG but has only ${count} data-i18n (min ${I18N_MIN_KEYS}). Translate it or add data-lang-fixed="it" to <site-nav>.`);
+  }
+}
+
 if (errors > 0) {
   console.log(`\n${errors} i18n issue(s) found.`);
   process.exit(1);
