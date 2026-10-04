@@ -1,0 +1,181 @@
+{
+ "home": {
+  "n": 3,
+  "perf_median": 90,
+  "perf_runs": [
+   90,
+   90,
+   90
+  ],
+  "a11y_median": 100,
+  "bp_median": 100,
+  "seo_median": 100,
+  "LCP_median": 1492,
+  "LCP_runs": [
+   1511,
+   1492,
+   1491
+  ],
+  "CLS_median": 0.207,
+  "CLS_runs": [
+   0.207,
+   0.207,
+   0.207
+  ],
+  "TBT_median": 0,
+  "top_shifts": [
+   {
+    "sel": "body.ed > main#main-content > section.ed-band > ::after",
+    "score": 0.188
+   },
+   {
+    "sel": "section.ed-band > div.ed-band__inner > div.ed-split > div",
+    "score": 0.019
+   }
+  ]
+ },
+ "ssn": {
+  "n": 3,
+  "perf_median": 88,
+  "perf_runs": [
+   88,
+   88,
+   88
+  ],
+  "a11y_median": 100,
+  "bp_median": 100,
+  "seo_median": 100,
+  "LCP_median": 1892,
+  "LCP_runs": [
+   1892,
+   1476,
+   1894
+  ],
+  "CLS_median": 0.231,
+  "CLS_runs": [
+   0.231,
+   0.24,
+   0.23
+  ],
+  "TBT_median": 0,
+  "top_shifts": [
+   {
+    "sel": "body.dark-mode > div.container",
+    "score": 0.229
+   },
+   {
+    "sel": "",
+    "score": 0.002
+   }
+  ]
+ },
+ "privati": {
+  "n": 3,
+  "perf_median": 84,
+  "perf_runs": [
+   84,
+   84,
+   86
+  ],
+  "a11y_median": 100,
+  "bp_median": 79,
+  "seo_median": 100,
+  "LCP_median": 1573,
+  "LCP_runs": [
+   1564,
+   1578,
+   1573
+  ],
+  "CLS_median": 0.301,
+  "CLS_runs": [
+   0.301,
+   0.301,
+   0.272
+  ],
+  "TBT_median": 0,
+  "top_shifts": [
+   {
+    "sel": "body.ed > main#main-content > section.ed-band > ::after",
+    "score": 0.225
+   },
+   {
+    "sel": "header > div.header-content > div.brand-wrap > div.brand-text",
+    "score": 0.075
+   }
+  ]
+ },
+ "international": {
+  "n": 3,
+  "perf_median": 91,
+  "perf_runs": [
+   91,
+   91,
+   91
+  ],
+  "a11y_median": 100,
+  "bp_median": 100,
+  "seo_median": 100,
+  "LCP_median": 1499,
+  "LCP_runs": [
+   1499,
+   1496,
+   1500
+  ],
+  "CLS_median": 0.189,
+  "CLS_runs": [
+   0.189,
+   0.189,
+   0.188
+  ],
+  "TBT_median": 0,
+  "top_shifts": [
+   {
+    "sel": "body.ed > section.ed-band > ::after",
+    "score": 0.188
+   },
+   {
+    "sel": "header > div.header-content > div.brand-wrap > div.brand-text",
+    "score": 0.001
+   },
+   {
+    "sel": "body.ed > nav.quick-actions-bar > a.qa-item",
+    "score": 0.0
+   }
+  ]
+ },
+ "colleghi": {
+  "n": 3,
+  "perf_median": 87,
+  "perf_runs": [
+   87,
+   84,
+   87
+  ],
+  "a11y_median": 100,
+  "bp_median": 79,
+  "seo_median": 100,
+  "LCP_median": 2169,
+  "LCP_runs": [
+   2169,
+   2777,
+   2167
+  ],
+  "CLS_median": 0.231,
+  "CLS_runs": [
+   0.231,
+   0.23,
+   0.231
+  ],
+  "TBT_median": 0,
+  "top_shifts": [
+   {
+    "sel": "body.dark-mode > div#main-content",
+    "score": 0.229
+   },
+   {
+    "sel": "",
+    "score": 0.002
+   }
+  ]
+ }
+}

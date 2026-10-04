@@ -179,3 +179,39 @@ Comandi usati (tutti contro `https://savianu.it?x=$RANDOM`, cache-busting):
 
 ### Nota di metodo
 Il "disallineamento" segnalato non era una contraddizione fra due audit: il check esterno guardava la **produzione**, io guardavo il **branch**. Entrambe le letture erano corrette. Il difetto reale è organizzativo: **finché la PR non viene mergiata, i fix non esistono per i pazienti.**
+
+---
+
+## 10. P2-1 — Core Web Vitals su PRODUZIONE (misurati, non stimati)
+
+`docs/audit/2026-10-04/prod-lighthouse/` — 15 run (3 per pagina) su `https://savianu.it`, mobile, Lighthouse 12, script `prod_lh.py`.
+
+| pagina | Perf | A11y | BP | SEO | LCP | **CLS** | TBT |
+|---|---|---|---|---|---|---|---|
+| home | **90** | 100 | 100 | 100 | 1492 ms | **0.207** | 0 ms |
+| ssn | 88 | 100 | 100 | 100 | 1892 ms | **0.231** | 0 ms |
+| privati | **84** | 100 | **79** | 100 | 1573 ms | **0.301** | 0 ms |
+| international | **91** | 100 | 100 | 100 | 1499 ms | **0.189** | 0 ms |
+| colleghi | 87 | 100 | **79** | 100 | 2169 ms | **0.231** | 0 ms |
+
+Mediane su 3 run; dispersione quasi nulla (perf ±2, CLS ±0.03).
+
+**LCP < 2.5 s ✓ su tutte. TBT 0 ms ✓. A11y/SEO 100 ✓. CLS ✗ su tutte (target < 0.1).**
+
+### Diagnosi CLS (dai `layout-shifts` di Lighthouse, non per ipotesi)
+Elementi colpevoli per pagina: `section.ed-band > ::after` (0.188–0.225 — home/privati/international), `body.dark-mode > div.container` / `> div#main-content` (0.229 — ssn/colleghi), `div.brand-text` (0.075 — privati).
+
+`.ed-band::after` è un overlay decorativo (`content:""; position:absolute; inset:0; pointer-events:none`, solo un rumore SVG all'opacità 0.03): **non può spostare nulla da sé**. Lighthouse glielo attribuisce perché la sua geometria segue quella del genitore — quindi è la **band a cambiare altezza**. La causa è il reflow del testo al `font-display: swap` con i font di Google caricati da CDN esterna (prova indipendente: su /privati/ compare anche `div.brand-text` a 0.075, che è puro reflow di testo, non un elemento decorativo).
+Sulle pagine non-`ed` (ssn/colleghi) lo shift è attribuito al contenitore intero: `site-nav`/`site-footer` sono custom element e in `styles.css` **non esiste alcuna regola `:not(:defined)`** (verificato: 0 occorrenze) → quando l'elemento si popola il contenuto sottostante si sposta.
+
+### Best Practices 79 su /privati/ e /colleghi/ — deviazione accettata e motivata
+Unico audit fallito: `third-party-cookies` → cookie `NID` impostato da `calendar.google.com`. Secondo audit: `inspector-issues` (stessa causa). È la **conseguenza inevitabile e intenzionale** degli embed di Google Calendar (calendario di prenotazione su /privati/, calendario eventi su /colleghi/): gli URL delle schedule sono pubblici per progetto. L'unico modo di alzare il punteggio sarebbe rimuovere gli embed — decisione dell'utente (vedi NEEDS_EMANUEL §6). Non è un difetto del sito.
+
+### Le due correzioni consigliate (non applicate: richiedono una tornata di verifica dedicata)
+1. **CLS** — riservare lo spazio dei custom element (`site-nav:not(:defined), site-footer:not(:defined) { display:block; min-height:… }`) e rendere il font-swap metrico-stabile (preload dei WOFF2 + `size-adjust`/`ascent-override` del fallback, oppure self-hosting dei font). Da misurare con 3 run per pagina dopo la modifica.
+2. **Self-hosting dei font** — oggi 10+ pagine caricano i font da `fonts.googleapis.com` (nessun `@font-face` in `styles.css`: 0 occorrenze). Risolve insieme CLS, un punto privacy (trasferimento IP a Google) e una dipendenza esterna. Va fatto con subset + `@font-face` locali + aggiornamento di `sw.js` e della voce "Google Fonts" in privacy.
+
+### Cosa NON è stato fatto in questa tornata (dichiarato, non nascosto)
+**P2-3** (h1/canonical/og:url/hreflang/JSON-LD puntuali, alt/dimensioni/WebP/lazy sulle immagini) non è stato eseguito: sono verifiche ampie e va preferita una passata dedicata con esito registrato piuttosto che una toccata parziale non verificata. Restano in cima alle raccomandazioni sotto.
+
+---

@@ -122,3 +122,5 @@ ssn/poster-styles.css
 # Internal agent workspaces & private docs (untracked 2026-08-29)
 /docs/
 /email-templates/
+
+docs/audit/**/prod-lighthouse/
