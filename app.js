@@ -1,5 +1,9 @@
 import { CONFIG } from './config.js?v=2';
 
+// Config esposta alle pagine con script classici (es. /international/), che
+// non possono importare il modulo ES: unica fonte di verità per i recapiti.
+if (typeof window !== 'undefined') window.__SAVIANU_CONFIG__ = CONFIG;
+
 // =================================================================
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
 // =================================================================
@@ -205,7 +209,7 @@ class SiteFooter extends HTMLElement {
             ' <span aria-hidden="true">·</span> ' +
             footerLink(prefix + 'ssn/faq.html', 'footer_faq', isPatient, 'FAQ') +
             ' <span aria-hidden="true">·</span> ' +
-            (isPatient ? footerLink(prefix + 'international/index.html', 'footer_international', isPatient, 'International Patients') + ' <span aria-hidden="true">·</span> ' : '') +
+            (isPatient ? footerLink(prefix + 'international/', 'footer_international', isPatient, 'International Patients') + ' <span aria-hidden="true">·</span> ' : '') +
             footerLink(prefix + 'privacy.html', 'link_privacy', isPatient, 'Privacy Policy') +
           '</nav>' +
           '<p class="footer-privacy-note">Questo sito non usa cookie di profilazione né strumenti di tracciamento invasivi. Le statistiche sono aggregate e anonime nel rispetto del GDPR.</p>' +
@@ -229,6 +233,27 @@ class SiteFooter extends HTMLElement {
 
 customElements.define('site-nav', SiteNav);
 customElements.define('site-footer', SiteFooter);
+
+// --- RECAPITI DALLA CONFIG ---
+// Gli elementi con data-contact-link/data-contact-label prendono href, testo e
+// etichetta da CONFIG.CONTACTS: i numeri di telefono vivono in un posto solo.
+// Il testo statico in HTML resta come fallback senza JavaScript.
+export function applyContacts() {
+    const contacts = CONFIG.CONTACTS || {};
+    document.querySelectorAll('[data-contact-link]').forEach(el => {
+        const entry = contacts[el.getAttribute('data-contact-link')];
+        if (!entry) return;
+        el.setAttribute('href', entry.href);
+        if (!el.hasAttribute('data-i18n') && !el.textContent.trim()) el.textContent = entry.display;
+    });
+    document.querySelectorAll('[data-contact-label]').forEach(el => {
+        const entry = contacts[el.getAttribute('data-contact-label')];
+        if (entry && entry.label && !el.hasAttribute('data-i18n')) el.textContent = entry.label;
+    });
+}
+applyContacts();
+if (typeof window !== 'undefined') window.applyContacts = applyContacts;
+document.addEventListener('site:i18n', applyContacts);
 
 // --- AUTOMATIC YEAR ---
 const yearEl = document.getElementById('current-year');
