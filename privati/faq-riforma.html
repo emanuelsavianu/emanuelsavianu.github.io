@@ -37,7 +37,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261004f">
+    <link rel="stylesheet" href="../styles.css?v=20261004g">
 
     <script type="application/ld+json">
     [
@@ -309,7 +309,7 @@
             align-items: center;
             gap: 10px;
             background: var(--accent);
-            color: #ffffff;
+            color: var(--primary);
             font-size: 0.9rem;
             font-weight: 700;
             padding: 14px 28px;
@@ -317,6 +317,12 @@
             text-decoration: none;
             transition: transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 6px 20px rgba(194,155,87,0.4);
+        }
+        /* Dark: in dark-mode --accent diventa oro #e0b976; testo navy invece
+           del bianco su oro (1.85:1 illeggibile — audit 2026-10-04, D2). */
+        body.dark-mode .btn-cta-faq {
+            background: var(--accent);
+            color: var(--primary);
         }
         .btn-cta-faq:hover { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(194,155,87,0.5); opacity: 1; }
 
@@ -493,11 +499,11 @@
             </h2>
 
             <div class="faq-item" data-section="procedura">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-1" aria-expanded="false">
                     <span>Cosa cambia esattamente dal 1° marzo 2026 per i cittadini di Arezzo?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-1">
                     <div class="faq-answer-inner">
                         A partire dal <strong>1° marzo 2026</strong>, la provincia di Arezzo entra nella sperimentazione della nuova <strong>Riforma della Disabilità (D.Lgs. 62/2024)</strong>. La grande novità è che <strong>la burocrazia viene dimezzata</strong>: l'INPS diventa l'unico ente a gestire tutta la pratica, dalla richiesta fino alla valutazione e all'erogazione delle prestazioni.
                         <br><br>
@@ -511,11 +517,11 @@
             </div>
 
             <div class="faq-item" data-section="procedura">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-2" aria-expanded="false">
                     <span>Dopo essere stato dal medico, devo ancora andare al Patronato a fare la domanda all'INPS?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-2">
                     <div class="faq-answer-inner">
                         <strong>Assolutamente no, non serve più.</strong> Questa è la semplificazione più importante della riforma: l'invio telematico del certificato da parte del vostro medico <strong>fa partire automaticamente tutta la pratica</strong>.
                         <br><br>
@@ -529,11 +535,11 @@
             </div>
 
             <div class="faq-item" data-section="procedura">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-3" aria-expanded="false">
                     <span>Cosa succede se il mio medico mi ha fatto il vecchio certificato a febbraio 2026, prima della novità?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-3">
                     <div class="faq-answer-inner">
                         Se il vostro medico ha compilato il certificato prima del <strong>28 febbraio 2026</strong>, siete ancora nel vecchio sistema. Questo significa che dovete ricordarvi di <strong>inviare la domanda all'INPS tramite il vostro Patronato entro il 28 febbraio</strong>.
                         <br><br>
@@ -555,11 +561,11 @@
             </h2>
 
             <div class="faq-item" data-section="certificato">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-4" aria-expanded="false">
                     <span>Quali documenti devo portare al mio medico per fare il certificato introduttivo?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-4">
                     <div class="faq-answer-inner">
                         Quando andate dal medico, dovete portare tutta la vostra <strong>documentazione medica più recente e dettagliata</strong>. In particolare:
                         <ul>
@@ -577,11 +583,11 @@
             </div>
 
             <div class="faq-item" data-section="certificato">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-5" aria-expanded="false">
                     <span>Cosa mi deve rilasciare il medico alla fine della visita?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-5">
                     <div class="faq-answer-inner">
                         Prima di farvi tornare a casa, il medico stamperà e vi consegnerà un foglio molto importante chiamato <strong>"Attestato di trasmissione"</strong>. Su questa ricevuta c'è scritto il <strong>numero di protocollo ufficiale</strong> che dimostra che la vostra pratica è partita.
                         <div class="highlight-box">
@@ -593,11 +599,11 @@
             </div>
 
             <div class="faq-item" data-section="certificato">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-6" aria-expanded="false">
                     <span>Dove fare il certificato di invalidità ad Arezzo?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-6">
                     <div class="faq-answer-inner">
                         Puoi richiedere il certificato medico di invalidità direttamente al tuo medico di medicina generale (di base) ad Arezzo o provincia. Possono redigerlo anche specialisti ASL, pediatri o medici accreditati. Il Dott. Savianu, operante ad Arezzo, è un medico certificatore autorizzato all'invio telematico del certificato INPS.
                     </div>
@@ -613,11 +619,11 @@
             </h2>
 
             <div class="faq-item" data-section="visita">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-7" aria-expanded="false">
                     <span>Cosa succede dopo che il medico ha inviato il certificato? Devo chiamare io l'INPS?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-7">
                     <div class="faq-answer-inner">
                         <strong>Non dovete chiamare nessuno.</strong> Dovete solo attendere tranquilli a casa. L'INPS vi invierà una <strong>lettera raccomandata con ricevuta di ritorno</strong> in cui vi comunicherà il giorno, l'ora e il luogo in cui presentarvi per fare un'unica visita medica collegiale.
                     </div>
@@ -625,11 +631,11 @@
             </div>
 
             <div class="faq-item" data-section="visita">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-8" aria-expanded="false">
                     <span>È obbligatorio fare la visita di persona all'INPS o posso evitarla?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-8">
                     <div class="faq-answer-inner">
                         In molti casi, la visita di persona <strong>si può evitare</strong>. Se la documentazione medica che avete portato al vostro dottore è molto chiara e completa, è possibile chiedere di essere valutati direttamente <strong>"sugli atti"</strong> (cioè solo leggendo le vostre carte mediche).
                         <br><br>
@@ -639,11 +645,11 @@
             </div>
 
             <div class="faq-item" data-section="visita">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-9" aria-expanded="false">
                     <span>Se, in attesa della visita, faccio nuovi esami importanti, posso aggiungerli alla pratica?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-9">
                     <div class="faq-answer-inner">
                         <strong>Sì, certamente.</strong> Avete tempo fino a <strong>7 giorni prima della visita</strong> fissata dall'INPS per inviare o consegnare ulteriori documenti medici o referti rilasciati da strutture pubbliche o private accreditate.
                     </div>
@@ -651,11 +657,11 @@
             </div>
 
             <div class="faq-item" data-section="visita">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-10" aria-expanded="false">
                     <span>Cosa devo fare se nel giorno fissato per la visita non posso muovermi da casa perché sto molto male?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-10">
                     <div class="faq-answer-inner">
                         Se la persona <strong>non può assolutamente essere trasportata</strong> per gravi motivi di salute, il vostro medico può segnalare questa <strong>"intrasportabilità"</strong> inviando un apposito certificato entro 7 giorni dalla convocazione. In questo modo, i medici verranno direttamente a casa vostra con una <strong>visita domiciliare</strong>.
                         <br><br>
@@ -669,11 +675,11 @@
             </div>
 
             <div class="faq-item" data-section="visita">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-11" aria-expanded="false">
                     <span>Mi hanno detto che alla visita mi faranno un "questionario WHODAS". Di cosa si tratta?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-11">
                     <div class="faq-answer-inner">
                         Durante la visita, la Commissione medica vi farà alcune semplici domande attraverso un questionario internazionale chiamato <strong>WHODAS 2.0</strong> (WHO Disability Assessment Schedule).
                         <br><br>
@@ -693,11 +699,11 @@
             </div>
 
             <div class="faq-item" data-section="visita">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-12" aria-expanded="false">
                     <span>Posso farmi accompagnare da qualcuno durante la visita medica all'INPS?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-12">
                     <div class="faq-answer-inner">
                         <strong>Assolutamente sì!</strong> Durante l'eventuale visita medica avete il pieno diritto di farvi assistere dal vostro <strong>medico di fiducia</strong> o da uno <strong>psicologo</strong>.
                         <br><br>
@@ -715,11 +721,11 @@
             </h2>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-13" aria-expanded="false">
                     <span>Quanto tempo ci vorrà per avere una risposta dall'INPS?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-13">
                     <div class="faq-answer-inner">
                         La legge ha stabilito <strong>tempi precisi e veloci</strong>. La pratica si deve concludere al massimo entro <strong>90 giorni</strong> dal momento in cui il vostro medico invia il certificato.
                         <div class="highlight-box">
@@ -731,11 +737,11 @@
             </div>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-14" aria-expanded="false">
                     <span>Ho un tumore. Devo aspettare comunque 90 giorni?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-14">
                     <div class="faq-answer-inner">
                         <strong>No.</strong> Se il certificato medico indica la presenza di una <strong>patologia oncologica (tumore)</strong>, il procedimento ha una corsia preferenziale velocissima e si deve concludere entro soli <strong>15 giorni</strong> da quando il medico ha inviato il certificato.
                     </div>
@@ -743,11 +749,11 @@
             </div>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-15" aria-expanded="false">
                     <span>Cosa devo fare se mi viene riconosciuta l'invalidità e ho diritto a un assegno o all'accompagnamento?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-15">
                     <div class="faq-answer-inner">
                         Se la Commissione INPS vi riconosce il diritto a ricevere dei pagamenti (come la pensione di invalidità o l'indennità di accompagnamento), dovrete comunicare all'INPS i vostri <strong>dati socio-economici</strong>: il vostro IBAN per l'accredito in banca o alla posta, e i dati sul vostro reddito.
                         <br><br>
@@ -761,11 +767,11 @@
             </div>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-16" aria-expanded="false">
                     <span>E se l'INPS mi nega l'invalidità o mi riconosce una percentuale più bassa del previsto?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-16">
                     <div class="faq-answer-inner">
                         Avete sempre il diritto di <strong>difendervi e fare ricorso</strong>. Se pensate che il verbale dell'INPS non rifletta la vostra vera condizione di salute, potete rivolgervi a un <strong>avvocato, al vostro Patronato o Sindacato</strong>.
                         <br><br>
@@ -775,11 +781,11 @@
             </div>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-17" aria-expanded="false">
                     <span>Ho già l'invalidità e l'accompagnamento da anni. Con questa nuova legge rischio di perderli?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-17">
                     <div class="faq-answer-inner">
                         <strong>State assolutamente tranquilli: i vostri diritti non si toccano.</strong> La riforma prevede il principio di <strong>"non regressione"</strong> e la continuità dei diritti.
                         <br><br>
@@ -793,11 +799,11 @@
             </div>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-18" aria-expanded="false">
                     <span>Si parla ancora di "Handicap" e di "Legge 104"? Esistono ancora?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-18">
                     <div class="faq-answer-inner">
                         <strong>I diritti e i benefici della Legge 104 restano tutti validi</strong>, ma cambiano le parole per essere più rispettose e moderne. Dai documenti scompariranno le parole "handicappato" o "disabile grave". Al loro posto si parlerà di:
                         <ul>
@@ -813,11 +819,11 @@
             </div>
 
             <div class="faq-item" data-section="diritti">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-19" aria-expanded="false">
                     <span>Questo nuovo certificato rilasciato dall'INPS ha una scadenza? Dovrò rifare la visita in futuro?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-19">
                     <div class="faq-answer-inner">
                         <strong>No.</strong> Una delle notizie migliori di questa riforma è che il nuovo certificato finale <strong>non ha limiti di tempo</strong>. Una volta ottenuta l'invalidità, il verbale è a <strong>validità illimitata</strong>.
                         <br><br>
@@ -839,11 +845,11 @@
             </h2>
 
             <div class="faq-item" data-section="speciale">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-20" aria-expanded="false">
                     <span>Sento parlare di un nuovo "Progetto di Vita". Che cos'è?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-20">
                     <div class="faq-answer-inner">
                         È l'<strong>innovazione più importante</strong> della riforma per le persone con disabilità. Dopo aver ottenuto il riconoscimento dall'INPS, potrete chiedere che venga preparato per voi un <strong>"Progetto di Vita" su misura</strong>.
                         <br><br>
@@ -857,11 +863,11 @@
             </div>
 
             <div class="faq-item" data-section="speciale">
-                <button type="button" class="faq-question" aria-expanded="false">
+                <button type="button" class="faq-question" id="faq-q-21" aria-expanded="false">
                     <span>Sento parlare di "Budget di Progetto". In parole povere, di cosa si tratta per me?</span>
                     <i class="fa-solid fa-chevron-down chevron" aria-hidden="true"></i>
                 </button>
-                <div class="faq-answer" role="region">
+                <div class="faq-answer" role="region" aria-labelledby="faq-q-21">
                     <div class="faq-answer-inner">
                         Significa che, se vi viene riconosciuta la disabilità, <strong>non verrete lasciati soli con il semplice foglio dell'invalidità</strong>. Potrete chiedere al vostro Comune o ai servizi sociali di sedersi a un tavolo con voi e i vostri cari per decidere di quali aiuti pratici avete bisogno.
                         <br><br>
@@ -909,7 +915,7 @@
         </footer>
     </site-footer>
 
-<script type="module" src="../app.js?v=20261004e"></script>
+<script type="module" src="../app.js?v=20261004f"></script>
 
 <script>
     // ── Accordion ──

@@ -19,7 +19,7 @@
 
         :root {
             --navy: #1A2F4C;
-            --gold: #C29B57;
+            --gold: #7a5c2e;
             --gold-soft: #F3EFE6;
             --cream: #FDFBF7;
             --text: #2c3e50;
@@ -82,7 +82,7 @@
 
         .studio-line a {
             color: var(--gold);
-            text-decoration: none;
+            text-decoration: underline; /* link distinguibile dal testo senza il solo colore (ax 2026-10-04 D4) */
         }
 
         header h1 {
@@ -259,6 +259,7 @@
         <p class="sub">সাধারণ চিকিৎসক (জেনারেল প্র্যাকটিশনার) আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</p>
     </header>
 
+    <main>
     <div class="container">
 
         <div class="intro">
@@ -313,11 +314,11 @@
             </div>
         </div>
 
-    </div>
+    </main>
 
-    <div class="footer">
+    <footer class="footer" role="contentinfo">
         © savianu.it — Studio Medico Ippocrate · Piazza Saione 3, Arezzo — ব্যবহারিক নির্দেশিকা (বাংলা সংস্করণ)
-    </div>
+    </footer>
 
 </body>
 </html>
