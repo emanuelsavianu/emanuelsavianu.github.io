@@ -2043,8 +2043,14 @@ html { text-rendering: optimizeLegibility; }
         .calendar-frame iframe {
             display: block;
             width: 100%;
-            height: 600px;
+            height: clamp(420px, 65vh, 620px);
             border: 0;
+        }
+        .calendar-fallback {
+            margin: 12px 0 0;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--text-medium);
         }
 
         /* ── Entrance animations ── */
