@@ -8,6 +8,8 @@
     "check:i18n": "node tools/check-i18n.mjs",
     "check:sw": "node tools/check-sw.mjs",
     "gen:markdown": "node tools/gen-markdown.mjs",
+    "prerender": "node tools/prerender.mjs",
+    "check:prerender": "node tools/prerender.mjs --check",
     "update-sw": "node tools/update-sw.mjs"
   }
 }

@@ -1682,13 +1682,6 @@ site-nav, site-footer { display: block; align-self: stretch; }
 }
 .brand-tagline { color: rgba(255,255,255,0.9); margin-bottom: 25px; }
 
-/* Fallback content shown when JS is disabled */
-.fallback-nav {
-    background: var(--primary); color: var(--white);
-    padding: 24px 20px; text-align: center;
-}
-.fallback-nav a { color: var(--accent); font-weight: 700; }
-
 .site-nav {
     position: relative;
     background: var(--primary-dark);
