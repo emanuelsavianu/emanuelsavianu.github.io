@@ -1,0 +1,1455 @@
+{
+ "/404.html": {
+  "title": "Pagina non trovata | Dott. Emanuel Savianu",
+  "titleLen": 42,
+  "desc": "Pagina non trovata — torna alla home dello Studio Medico Ippocrate, Dott. Emanuel Savianu, Arezzo.",
+  "descLen": 98,
+  "canonical": null,
+  "ogurl": null,
+  "h1": [
+   "Pagina non trovata"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "noindex, nofollow",
+  "overflow": false
+ },
+ "/assets/brand/wordmark.html": {
+  "title": "Wordmark Savianu — master",
+  "titleLen": 25,
+  "desc": null,
+  "descLen": 0,
+  "canonical": null,
+  "ogurl": null,
+  "h1": [],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/RUAP/index.html": {
+  "title": "RUAP Attività Diurne — Turni",
+  "titleLen": 28,
+  "desc": null,
+  "descLen": 0,
+  "canonical": null,
+  "ogurl": null,
+  "h1": [
+   "Gestione Turni RUAP",
+   "Turni RUAP Attività Diurne"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "noindex, nofollow",
+  "overflow": false
+ },
+ "/colleghi/adi-adp-pai.html": {
+  "title": "Assistenza Domiciliare ADI/ADP/PAI | Dott. Savianu",
+  "titleLen": 50,
+  "desc": "Presa in carico domiciliare: PAI, STU e valutazione iniziale del MMG, cartella ADI/ADP e procedura operativa USL Toscana Sud Est dal 1° ottobre 2026.",
+  "descLen": 149,
+  "canonical": "https://savianu.it/colleghi/adi-adp-pai.html",
+  "ogurl": "https://savianu.it/colleghi/adi-adp-pai.html",
+  "h1": [
+   "Assistenza DomiciliareADI · ADP · PAI · STU"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   },
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/ausili-assistenziali.html": {
+  "title": "Ausili Assistenziali — Elenco 2B | Dott. Savianu",
+  "titleLen": 48,
+  "desc": "Elenco degli ausili assistenziali a carico del SSN (art. 5 DPCM 12 gennaio 2017, Elenco 2B): antidecubiti, letti, sponde, sedie a comoda, carrozzine, ausili WC e sollevamento. Guida per colleghi MMG.",
+  "descLen": 199,
+  "canonical": "https://savianu.it/colleghi/ausili-assistenziali.html",
+  "ogurl": "https://savianu.it/colleghi/ausili-assistenziali.html",
+  "h1": [
+   "Ausili AssistenzialiElenco 2B"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/comunicazioni-2026.html": {
+  "title": "Comunicazioni 2026 Medicina Generale | Dott. Savianu",
+  "titleLen": 52,
+  "desc": "Le comunicazioni ufficiali 2026 per i Medici di Medicina Generale, in ordine cronologico — FNOMCeO, Ministero della Salute, AIFA, INPS: sintesi verificate e link alle fonti primarie.",
+  "descLen": 182,
+  "canonical": "https://savianu.it/colleghi/comunicazioni-2026.html",
+  "ogurl": "https://savianu.it/colleghi/comunicazioni-2026.html",
+  "h1": [
+   "Comunicazioni ufficiali 2026per la Medicina Generale"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/criteri-appropriatezza.html": {
+  "title": "Criteri di appropriatezza — invii e farmaci | Savianu",
+  "titleLen": 53,
+  "desc": "Criteri di appropriatezza per i colleghi MMG: quando inviare allo specialista e come prescrivere — PDTA Diabete (DGRT 5/2020), PDTA Disturbi cognitivi e demenze e Nota AIFA 100.",
+  "descLen": 177,
+  "canonical": "https://savianu.it/colleghi/criteri-appropriatezza.html",
+  "ogurl": "https://savianu.it/colleghi/criteri-appropriatezza.html",
+  "h1": [
+   "Criteri di appropriatezza"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/gestoreturni/gestoreturni.html": {
+  "title": "Gestore Turni — Dott. Emanuel Savianu",
+  "titleLen": 37,
+  "desc": null,
+  "descLen": 0,
+  "canonical": null,
+  "ogurl": null,
+  "h1": [
+   "Gestore Turni Universale Configurabile",
+   "Benvenuto!"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [],
+  "robots": "noindex, nofollow",
+  "overflow": false
+ },
+ "/colleghi/guida-accessi-malattie-infettive.html": {
+  "title": "Guida Accessi Malattie Infettive (MST) | Dott. Savianu",
+  "titleLen": 54,
+  "desc": "Come contattare l'ambulatorio Malattie Infettive (MST) del San Donato di Arezzo: prenotazioni, contatti, prescrizione medica. Guida per colleghi.",
+  "descLen": 145,
+  "canonical": "https://savianu.it/colleghi/guida-accessi-malattie-infettive.html",
+  "ogurl": "https://savianu.it/colleghi/guida-accessi-malattie-infettive.html",
+  "h1": [
+   "Guida AccessiMalattie Infettive · Ambulatorio MST"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/guida-accessi-pronto-soccorso.html": {
+  "title": "Guida Accessi Pronto Soccorso Specialistici | Dott. Savianu",
+  "titleLen": 59,
+  "desc": "Orari e sedi dei Pronto Soccorso specialistici (Oculistico, ORL, Ortopedico, Pediatrico, Ginecologico) del San Donato di Arezzo. Guida per colleghi.",
+  "descLen": 148,
+  "canonical": "https://savianu.it/colleghi/guida-accessi-pronto-soccorso.html",
+  "ogurl": "https://savianu.it/colleghi/guida-accessi-pronto-soccorso.html",
+  "h1": [
+   "Guida AccessiPronto Soccorso Specialistici"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/guida-accessi-vascolari.html": {
+  "title": "Guida Accessi Vascolari | Dott. Savianu",
+  "titleLen": 39,
+  "desc": "Accessi vascolari (PICC, Midline, Port) con la Rete USL Toscana Sud Est: come inviare la richiesta, moduli da compilare e contatti. Guida per MMG.",
+  "descLen": 146,
+  "canonical": "https://savianu.it/colleghi/guida-accessi-vascolari.html",
+  "ogurl": "https://savianu.it/colleghi/guida-accessi-vascolari.html",
+  "h1": [
+   "Guida AccessiAccessi Vascolari · Rete AVA"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   },
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/guida-interattiva-mmg.html": {
+  "title": "MMG: Libero Professionista o Pubblico Dipendente?",
+  "titleLen": 49,
+  "desc": "Guida interattiva sullo status giuridico del Medico di Medicina Generale: libero professionista o pubblico dipendente. Normativa e implicazioni per il MMG.",
+  "descLen": 155,
+  "canonical": "https://savianu.it/colleghi/guida-interattiva-mmg.html",
+  "ogurl": "https://savianu.it/colleghi/guida-interattiva-mmg.html",
+  "h1": [
+   "Libero Professionista o Pubblico Dipendente?"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/index.html": {
+  "title": "Area Colleghi: modulistica e facsimili MMG | Savianu",
+  "titleLen": 52,
+  "desc": "Facsimili dei certificati e modulistica per MMG e PLS: PAI, STU, ADI/ADP, accessi vascolari, esenzioni, ausili. Moduli originali ASL Toscana Sud Est.",
+  "descLen": 149,
+  "canonical": "https://savianu.it/colleghi/",
+  "ogurl": "https://savianu.it/colleghi/",
+  "h1": [
+   "Benvenuto — Seleziona il portale"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList"
+    ]
+   },
+   {
+    "ok": true,
+    "types": [
+     "CollectionPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/malattia.html": {
+  "title": "Certificato di Malattia: Obblighi di Certificazione",
+  "titleLen": 51,
+  "desc": "Chi ha l'obbligo di legge di emettere il certificato di malattia telematico: Pronto Soccorso, dentisti e liberi professionisti. Guida per il medico.",
+  "descLen": 148,
+  "canonical": "https://savianu.it/colleghi/malattia.html",
+  "ogurl": "https://savianu.it/colleghi/malattia.html",
+  "h1": [
+   "Certificato di malattia: chi deve farlo?\n            La verità su Pron"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/medicina-fisica-codici-LR.html": {
+  "title": "Medicina Fisica — Prestazioni Fascia LR | Dott. Savianu",
+  "titleLen": 55,
+  "desc": "Tabella di riferimento delle prestazioni di fascia LR (LR01–LR21) di Medicina Fisica e Riabilitativa previste dal nuovo Catalogo, in sostituzione dei codici PAS. Guida per colleghi MMG.",
+  "descLen": 185,
+  "canonical": "https://savianu.it/colleghi/medicina-fisica-codici-LR.html",
+  "ogurl": "https://savianu.it/colleghi/medicina-fisica-codici-LR.html",
+  "h1": [
+   "Medicina FisicaPrestazioni Fascia LR"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/millewin-tips.html": {
+  "title": "Trucchi e Scorciatoie Millewin | Savianu",
+  "titleLen": 40,
+  "desc": "Scorciatoie da tastiera, trucchi per le prescrizioni, gestione pazienti e GDPR, lavoro in mobilità e risoluzione dei problemi comuni in Millewin.",
+  "descLen": 145,
+  "canonical": "https://savianu.it/colleghi/millewin-tips.html",
+  "ogurl": "https://savianu.it/colleghi/millewin-tips.html",
+  "h1": [
+   "Trucchi e Scorciatoie Millewin"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList"
+    ]
+   },
+   {
+    "ok": true,
+    "types": [
+     "CollectionPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/pir.html": {
+  "title": "Guida PIR — Punti di Intervento Rapido (RUAP) | Savianu",
+  "titleLen": 55,
+  "desc": "Guida operativa ai Punti di Intervento Rapido (PIR) del ruolo unico: cosa si gestisce, red flag, modelli A/B/H, casistica e indicatori.",
+  "descLen": 135,
+  "canonical": "https://savianu.it/colleghi/pir.html",
+  "ogurl": "https://savianu.it/colleghi/pir.html",
+  "h1": [
+   "Guida PIR — Punti di Intervento Rapido"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList"
+    ]
+   },
+   {
+    "ok": true,
+    "types": [
+     "CollectionPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/colleghi/protocollo-certificati-inps.html": {
+  "title": "Protocollo Certificati INPS D.Lgs. 62/2024 | Dott. Savianu",
+  "titleLen": 58,
+  "desc": "Protocollo operativo standard per l'allegazione documentale nel certificato medico introduttivo INPS. Guida tecnica e normativa per medici certificatori.",
+  "descLen": 153,
+  "canonical": "https://savianu.it/colleghi/protocollo-certificati-inps.html",
+  "ogurl": "https://savianu.it/colleghi/protocollo-certificati-inps.html",
+  "h1": [
+   "Protocollo OperativoCertificati INPS D.Lgs. 62/2024"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalWebPage",
+     "HowTo"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/index.html": {
+  "title": "Medico di Famiglia Arezzo | Dott. Savianu",
+  "titleLen": 41,
+  "desc": "Dott. Emanuel Savianu, medico di medicina generale (SSN) ad Arezzo. Studio Medico Ippocrate, Piazza Saione 3. Visite private, certificati INPS e contatti.",
+  "descLen": 154,
+  "canonical": "https://savianu.it/",
+  "ogurl": "https://savianu.it/",
+  "h1": [
+   "Dott. Emanuel Savianu"
+  ],
+  "lang": "it",
+  "hreflang": [
+   "en",
+   "it",
+   "x-default"
+  ],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "MedicalBusiness"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/studio/studio-location-desktop.avif?v=2",
+    "alt": true,
+    "w": "2000",
+    "h": "848",
+    "lazy": "lazy",
+    "dw": 2000,
+    "dh": 875
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/international/index.html": {
+  "title": "English-Speaking Family Doctor & GP in Arezzo | Dr. Savianu",
+  "titleLen": 59,
+  "desc": "Private family doctor and GP services in English in Arezzo, Tuscany. Primary care for international residents, second-home owners and visitors.",
+  "descLen": 143,
+  "canonical": "https://savianu.it/international/",
+  "ogurl": "https://savianu.it/international/",
+  "h1": [
+   "Your English-Speaking Family Doctor in Arezzo"
+  ],
+  "lang": "en",
+  "hreflang": [
+   "en",
+   "it",
+   "x-default"
+  ],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "Physician",
+     "BreadcrumbList",
+     "FAQPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/offline.html": {
+  "title": "Nessuna connessione | Dr. Savianu",
+  "titleLen": 33,
+  "desc": null,
+  "descLen": 0,
+  "canonical": null,
+  "ogurl": null,
+  "h1": [
+   "Nessuna connessione"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [],
+  "robots": "noindex",
+  "overflow": false
+ },
+ "/privacy.html": {
+  "title": "Privacy Policy | Dott. Emanuel Savianu",
+  "titleLen": 38,
+  "desc": "Informativa privacy (GDPR) del sito savianu.it: dati trattati, finalità, servizi esterni e diritti dell'interessato.",
+  "descLen": 116,
+  "canonical": "https://savianu.it/privacy.html",
+  "ogurl": "https://savianu.it/privacy.html",
+  "h1": [
+   "Informativa sulla Privacy (GDPR)"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "WebPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/privati/certificato-invalidita-civile.html": {
+  "title": "Certificato Invalidità Civile Arezzo | Dott. Savianu",
+  "titleLen": 52,
+  "desc": "Come richiedere il certificato di invalidità civile INPS ad Arezzo: documenti, nuova procedura telematica (D.Lgs. 62/2024) e prenotazione visita.",
+  "descLen": 145,
+  "canonical": "https://savianu.it/privati/certificato-invalidita-civile.html",
+  "ogurl": "https://savianu.it/privati/certificato-invalidita-civile.html",
+  "h1": [
+   "Certificato di Invalidità Civile ad Arezzo"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList",
+     "MedicalService",
+     "FAQPage"
+    ]
+   },
+   {
+    "ok": true,
+    "types": [
+     "LocalBusiness",
+     "MedicalOrganization"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/privati/faq-riforma.html": {
+  "title": "Invalidità Civile 2026: Guida e FAQ Arezzo | Dott. Savianu",
+  "titleLen": 58,
+  "desc": "Guida alla riforma dell'invalidità civile 2026 ad Arezzo: come funziona il nuovo certificato medico telematico, domanda INPS, indennità e Legge 104.",
+  "descLen": 148,
+  "canonical": "https://savianu.it/privati/faq-riforma.html",
+  "ogurl": "https://savianu.it/privati/faq-riforma.html",
+  "h1": [
+   "Guida alla Nuova Riforma dell'Invalidità"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "BreadcrumbList",
+     "FAQPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/privati/index.html": {
+  "title": "Certificati INPS e Invalidità ad Arezzo | Dott. Savianu",
+  "titleLen": 55,
+  "desc": "Come richiedere il certificato di invalidità INPS ad Arezzo: dal 1° marzo 2026 la procedura è telematica. Accompagnamento, Legge 104 e prenotazioni.",
+  "descLen": 148,
+  "canonical": "https://savianu.it/privati/",
+  "ogurl": "https://savianu.it/privati/",
+  "h1": [
+   "Invalidità e accompagnamento INPS ad Arezzo: la pratica parte in una v"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "Physician",
+     "BreadcrumbList",
+     "FAQPage",
+     "MedicalClinic"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/ssn/bengalese.html": {
+  "title": "আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা — বাংলা",
+  "titleLen": 51,
+  "desc": "স্বাস্থ্য সম্পর্কে সহজ পরামর্শ: অ্যাপয়েন্টমেন্ট, ওষুধ, জরুরি সাহায্য। ড. সাভিয়ানু, আরেজ্জো, ইতালির রোগীদের জন্য দরকারি তথ্য।",
+  "descLen": 126,
+  "canonical": "https://savianu.it/ssn/bengalese.html",
+  "ogurl": "https://savianu.it/ssn/bengalese.html",
+  "h1": [
+   "আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা"
+  ],
+  "lang": "bn",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/cert-malattia.html": {
+  "title": "Certificato di Malattia: Come Funziona | Dott. Savianu",
+  "titleLen": 54,
+  "desc": "Informativa sui certificati di malattia ad Arezzo: quando serve il certificato, invio telematico all'INPS e regole del medico curante.",
+  "descLen": 134,
+  "canonical": "https://savianu.it/ssn/cert-malattia.html",
+  "ogurl": "https://savianu.it/ssn/cert-malattia.html",
+  "h1": [
+   "Certificato di Malattia"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/ssn/esenzioni.html": {
+  "title": "Come Richiedere l'Esenzione Ticket | Dott. Savianu",
+  "titleLen": 50,
+  "desc": "Esenzione ticket: come richiederla con il Dott. Savianu ad Arezzo. Guida a reddito, patologie croniche, invalidità, documenti e rinnovo.",
+  "descLen": 136,
+  "canonical": "https://savianu.it/ssn/esenzioni.html",
+  "ogurl": "https://savianu.it/ssn/esenzioni.html",
+  "h1": [
+   "Guida alle Esenzioni Ticket"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/ssn/faq.html": {
+  "title": "FAQ Pazienti | Dott. Emanuel Savianu — Arezzo",
+  "titleLen": 45,
+  "desc": "Risposte alle domande frequenti dei pazienti dello Studio Medico Ippocrate ad Arezzo: prenotazioni, ricette, certificati, orari e contatti.",
+  "descLen": 139,
+  "canonical": "https://savianu.it/ssn/faq.html",
+  "ogurl": "https://savianu.it/ssn/faq.html",
+  "h1": [
+   "Domande Frequenti"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "FAQPage"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/ssn/impegnative.html": {
+  "title": "Impegnative e Prenotazioni CUP | Dott. Savianu",
+  "titleLen": 46,
+  "desc": "Come richiedere le impegnative e prenotare visite ed esami al CUP: guida per i pazienti del Dott. Savianu ad Arezzo.",
+  "descLen": 116,
+  "canonical": "https://savianu.it/ssn/impegnative.html",
+  "ogurl": "https://savianu.it/ssn/impegnative.html",
+  "h1": [
+   "Visite Specialistiche e CUP"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/ssn/index.html": {
+  "title": "Pazienti | Dott. Emanuel Savianu — Medico di Famiglia Arezzo",
+  "titleLen": 60,
+  "desc": "Area Pazienti del Dott. Emanuel Savianu, Medico SSN ad Arezzo. Prenota su Doctolib, richiedi ricette e certificati, consulta FAQ, esenzioni e guide.",
+  "descLen": 148,
+  "canonical": "https://savianu.it/ssn/",
+  "ogurl": "https://savianu.it/ssn/",
+  "h1": [
+   "Pazienti"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [
+   {
+    "ok": true,
+    "types": [
+     "Physician",
+     "MedicalClinic"
+    ]
+   }
+  ],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "96",
+    "h": "96",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": "index, follow",
+  "overflow": false
+ },
+ "/ssn/malattia.html": {
+  "title": "Certificato di Malattia: Guida ai Diritti del Paziente",
+  "titleLen": 54,
+  "desc": "Guida ai diritti del paziente sul certificato di malattia: chi deve rilasciarlo (medico, Pronto Soccorso, dentisti) e invio telematico INPS.",
+  "descLen": 140,
+  "canonical": "https://savianu.it/ssn/malattia.html",
+  "ogurl": "https://savianu.it/ssn/malattia.html",
+  "h1": [
+   "Certificato di malattia: chi deve farlo?\n            La verità su Pron"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/poster-bn.html": {
+  "title": "আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা — পোস্টার A3",
+  "titleLen": 56,
+  "desc": "স্বাস্থ্য সম্পর্কে সহজ পরামর্শসহ একটি বিনামূল্যের A3 পোস্টার, ছাপানোর জন্য। অ্যাপয়েন্টমেন্ট, ওষুধ এবং স্বাস্থ্য পরীক্ষা সম্পর্কে দরকারি তথ্য।",
+  "descLen": 142,
+  "canonical": "https://savianu.it/ssn/poster-bn.html",
+  "ogurl": "https://savianu.it/ssn/poster-bn.html",
+  "h1": [
+   "আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা"
+  ],
+  "lang": "bn",
+  "hreflang": [
+   "it",
+   "en",
+   "ro",
+   "bn",
+   "ur",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/poster-en.html": {
+  "title": "Practical guide for your health — A3 Poster | savianu.it",
+  "titleLen": 56,
+  "desc": "Free A3 poster to print: a practical health guide with simple advice on appointments, medicines and check-ups. For patients of Dr. Savianu, Arezzo, Italy.",
+  "descLen": 154,
+  "canonical": "https://savianu.it/ssn/poster-en.html",
+  "ogurl": "https://savianu.it/ssn/poster-en.html",
+  "h1": [
+   "Practical guide for your health"
+  ],
+  "lang": "en",
+  "hreflang": [
+   "it",
+   "en",
+   "ro",
+   "bn",
+   "ur",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/poster-it.html": {
+  "title": "Guida pratica per la tua salute — Poster A3 | savianu.it",
+  "titleLen": 56,
+  "desc": "Poster A3 gratuito da stampare: guida pratica alla salute con consigli semplici su prenotazioni, farmaci e visite. Per i pazienti del Dott. Savianu.",
+  "descLen": 148,
+  "canonical": "https://savianu.it/ssn/poster-it.html",
+  "ogurl": "https://savianu.it/ssn/poster-it.html",
+  "h1": [
+   "Guida pratica per la tua salute"
+  ],
+  "lang": "it",
+  "hreflang": [
+   "it",
+   "en",
+   "ro",
+   "bn",
+   "ur",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/poster-ro.html": {
+  "title": "Ghid practic pentru sănătatea ta — Poster A3 | savianu.it",
+  "titleLen": 57,
+  "desc": "Afiș A3 gratuit de imprimat: ghid practic de sănătate cu sfaturi simple despre programări, medicamente și controale. Pentru pacienții Dr. Savianu, Arezzo.",
+  "descLen": 154,
+  "canonical": "https://savianu.it/ssn/poster-ro.html",
+  "ogurl": "https://savianu.it/ssn/poster-ro.html",
+  "h1": [
+   "Ghid practic pentru sănătatea ta"
+  ],
+  "lang": "ro",
+  "hreflang": [
+   "it",
+   "en",
+   "ro",
+   "bn",
+   "ur",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/poster-ur.html": {
+  "title": "آپ کی صحت کے لیے عملی رہنمائی — پوسٹر A3 | savianu.it",
+  "titleLen": 53,
+  "desc": "صحت کے بارے میں آسان مشوروں کے ساتھ ایک مفت A3 پوسٹر، پرنٹ کرنے کے لیے۔ ملاقاتوں، ادویات اور معائنوں کے بارے میں مفید معلومات۔",
+  "descLen": 126,
+  "canonical": "https://savianu.it/ssn/poster-ur.html",
+  "ogurl": "https://savianu.it/ssn/poster-ur.html",
+  "h1": [
+   "آپ کی صحت کے لیے عملی رہنمائی"
+  ],
+  "lang": "ur",
+  "hreflang": [
+   "it",
+   "en",
+   "ro",
+   "bn",
+   "ur",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/poster_multilingue.html": {
+  "title": "Guida pratica multilingue IT/EN/UR/BN — Poster A3",
+  "titleLen": 49,
+  "desc": "Foglio multilingue in italiano, inglese, urdu e bengali: guida pratica alla salute, per colleghi e operatori sanitari.",
+  "descLen": 118,
+  "canonical": "https://savianu.it/ssn/poster_multilingue.html",
+  "ogurl": "https://savianu.it/ssn/poster_multilingue.html",
+  "h1": [
+   "Guida pratica per la tua salute — in 4 lingue"
+  ],
+  "lang": "it",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/salutementale-ro.html": {
+  "title": "Sănătatea mintală se poate vindeca — Afiș A3 | savianu.it",
+  "titleLen": 57,
+  "desc": "Afiș A3 gratuit de imprimat: sănătatea mintală se poate vindeca. Semne de neliniște, sfaturi practice și ajutor în momentele dificile.",
+  "descLen": 134,
+  "canonical": "https://savianu.it/ssn/salutementale-ro.html",
+  "ogurl": "https://savianu.it/ssn/salutementale-ro.html",
+  "h1": [
+   "Și mintea se poate vindeca"
+  ],
+  "lang": "ro",
+  "hreflang": [
+   "it",
+   "ro",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/salutementale.html": {
+  "title": "Anche la mente si può curare — Poster A3 | savianu.it",
+  "titleLen": 53,
+  "desc": "Poster A3 gratuito da stampare: la salute mentale si può curare. Segnali da non trascurare, consigli pratici e aiuto in caso di difficoltà.",
+  "descLen": 139,
+  "canonical": "https://savianu.it/ssn/salutementale.html",
+  "ogurl": "https://savianu.it/ssn/salutementale.html",
+  "h1": [
+   "Anche la mente si può curare"
+  ],
+  "lang": "it",
+  "hreflang": [
+   "it",
+   "ro",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/urdu.html": {
+  "title": "آپ کی صحت کے لیے عملی رہنمائی — اردو | savianu.it",
+  "titleLen": 49,
+  "desc": "صحت کے بارے میں آسان مشورے: ملاقات، ادویات اور ہنگامی مدد۔ ڈاکٹر ساویانو، اریزو، اٹلی کے مریضوں کے لیے مفید معلومات۔",
+  "descLen": 116,
+  "canonical": "https://savianu.it/ssn/urdu.html",
+  "ogurl": "https://savianu.it/ssn/urdu.html",
+  "h1": [
+   "آپ کی صحت کے لیے عملی رہنمائی"
+  ],
+  "lang": "ur",
+  "hreflang": [],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/vivisano-ro.html": {
+  "title": "Trăiește sănătos, trăiește mai bine — Afiș A3 | savianu.it",
+  "titleLen": 58,
+  "desc": "Afiș A3 gratuit de imprimat: sfaturi simple pentru o viață sănătoasă — alimentație, mișcare, apă și vaccinări.",
+  "descLen": 110,
+  "canonical": "https://savianu.it/ssn/vivisano-ro.html",
+  "ogurl": "https://savianu.it/ssn/vivisano-ro.html",
+  "h1": [
+   "Trăiește sănătos, trăiește mai bine"
+  ],
+  "lang": "ro",
+  "hreflang": [
+   "it",
+   "ro",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ },
+ "/ssn/vivisano.html": {
+  "title": "Vivi sano, vivi meglio — Poster A3 | savianu.it",
+  "titleLen": 47,
+  "desc": "Poster A3 gratuito da stampare: consigli semplici per vivere sano — alimentazione, movimento, acqua e vaccinazioni. Dott. Savianu, Arezzo.",
+  "descLen": 138,
+  "canonical": "https://savianu.it/ssn/vivisano.html",
+  "ogurl": "https://savianu.it/ssn/vivisano.html",
+  "h1": [
+   "Vivi sano, vivi meglio"
+  ],
+  "lang": "it",
+  "hreflang": [
+   "it",
+   "ro",
+   "x-default"
+  ],
+  "ld": [],
+  "imgs": [
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   },
+   {
+    "src": "http://127.0.0.1:8099/assets/bronzelogo.png",
+    "alt": true,
+    "w": "480",
+    "h": "480",
+    "lazy": "auto",
+    "dw": 480,
+    "dh": 480
+   }
+  ],
+  "robots": null,
+  "overflow": false
+ }
+}
