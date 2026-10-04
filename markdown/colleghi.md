@@ -11,6 +11,8 @@
 - **Poster multilingue** — riferimento IT/EN/UR/BN in un foglio
 
 ## RUAP e PIR (Punti di Intervento Rapido)
+
+Guida completa in pagina dedicata: https://savianu.it/colleghi/pir.html
 Modello organizzativo della Regione Toscana (DGR 223 del 02-03-2026 e DM 77/22) per le urgenze differibili di bassa complessità.
 
 - **Obiettivi:** copertura diurna AFT nelle Case della Comunità; riduzione overcrowding PS (codici 4–5); continuità assistenziale MMG/PLS; integrazione professionale; dimissione entro 90 minuti.
@@ -48,6 +50,8 @@ Disposizioni operative dell'Azienda USL Toscana Sud Est — Zona Distretto Areti
 - **Riferimenti:** U.F. Cure Primarie — Via Curtatone 54, 52100 Arezzo · tel. 0575 255802 · tommaso1.condello@uslsudest.toscana.it
 
 ## Guide Millewin (scorciatoie)
+
+Pagina dedicata: https://savianu.it/colleghi/millewin-tips.html
 - **Ctrl+Z** agenda · **Ctrl+F3** rubrica · **Alt+F** familiari · **Alt+Q** Patient Summary · **Alt+H** pianificazione/scadenze · **Ctrl+R** cronologia visite · **F2** monitoraggio · **Ctrl+O** origine spesa · **Ctrl+G** impegnativa dematerializzata.
 - **Prescrizioni:** codici mnemonici (es. "CT"), gruppi di accertamenti ( "." ), copia/modifica terapia (Ctrl+F6), "Non sostituibile", evidenziazione farmaci cronici.
 - **GDPR:** Mille Utilità > Statistiche > Controllo revocati per eliminare/anonimizzare (ZZZANONIMO) pazienti; analisi trend (F2 Timeline, Menu Viste > Grafici).
