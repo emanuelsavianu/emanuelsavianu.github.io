@@ -1,0 +1,118 @@
+{
+ "/|light": [],
+ "/|dark": [],
+ "/ssn/|light": [],
+ "/ssn/|dark": [],
+ "/ssn/faq.html|light": [],
+ "/ssn/faq.html|dark": [],
+ "/ssn/esenzioni.html|light": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 4,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    ".section-block:nth-child(5) > .section-title > h2",
+    ".section-block:nth-child(6) > .section-title > h2",
+    ".section-block:nth-child(7) > .section-title > h2",
+    ".section-block:nth-child(8) > .section-title > h2"
+   ]
+  }
+ ],
+ "/ssn/esenzioni.html|dark": [],
+ "/ssn/impegnative.html|light": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 5,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    ".section-block:nth-child(5) > .section-title > h2",
+    ".section-block:nth-child(6) > .section-title > h2",
+    ".section-block:nth-child(7) > .section-title > h2",
+    ".section-block:nth-child(8) > .section-title > h2"
+   ]
+  }
+ ],
+ "/ssn/impegnative.html|dark": [],
+ "/ssn/cert-malattia.html|light": [],
+ "/ssn/cert-malattia.html|dark": [],
+ "/privati/|light": [],
+ "/privati/|dark": [],
+ "/privati/faq-riforma.html|light": [],
+ "/privati/faq-riforma.html|dark": [],
+ "/privati/certificato-invalidita-civile.html|light": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 3,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    "th:nth-child(1)",
+    "th:nth-child(2)",
+    "th:nth-child(3)"
+   ]
+  }
+ ],
+ "/privati/certificato-invalidita-civile.html|dark": [],
+ "/international/|light": [],
+ "/international/|dark": [],
+ "/colleghi/|light": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 3,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    ".btn-hero-span > small",
+    "a[href$=\"ssn/\"] > small",
+    "a[aria-label=\"Calendario Turni RUAP\"] > small"
+   ]
+  }
+ ],
+ "/colleghi/|dark": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 3,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    ".btn-hero-span > small",
+    "a[href$=\"ssn/\"] > small",
+    "a[aria-label=\"Calendario Turni RUAP\"] > small"
+   ]
+  }
+ ],
+ "/privacy.html|light": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 6,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    "ul:nth-child(11) > li:nth-child(1) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]",
+    "a[href$=\"international/\"]",
+    "ul:nth-child(14) > li:nth-child(1) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]",
+    "li:nth-child(3) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]"
+   ]
+  }
+ ],
+ "/privacy.html|dark": [
+  {
+   "id": "color-contrast",
+   "impact": "serious",
+   "n": 14,
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "targets": [
+    "h2:nth-child(5)",
+    "h2:nth-child(7)",
+    "ul:nth-child(11) > li:nth-child(1) > a[target=\"_blank\"][rel=\"noopener noreferrer\"]",
+    "a[href$=\"international/\"]"
+   ]
+  }
+ ],
+ "/404.html|light": [],
+ "/404.html|dark": [],
+ "/colleghi/adi-adp-pai.html|light": [],
+ "/colleghi/adi-adp-pai.html|dark": []
+}
