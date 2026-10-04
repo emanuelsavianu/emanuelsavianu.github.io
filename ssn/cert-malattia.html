@@ -36,7 +36,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261004f">
+    <link rel="stylesheet" href="../styles.css?v=20261004g">
 
     <style>
         /* --- FALLBACK VARIABILI --- */
@@ -82,10 +82,16 @@
         header[role="banner"], footer[role="contentinfo"] {
             width: 100%;
             text-align: center;
-            background: var(--primary-dark);
+            background: var(--primary);
             color: var(--white);
             padding: 15px 20px;
             box-sizing: border-box;
+        }
+        /* Dark: --primary-dark diventa ORO nel tema scuro (alias --color-brand-dark);
+           lo header/footer resta navy esplicitamente (audit 2026-10-04, D1). */
+        body.dark-mode header[role="banner"],
+        body.dark-mode footer[role="contentinfo"] {
+            background: var(--primary);
         }
 
         .lang-switch {
@@ -402,7 +408,7 @@
     </footer>
 </site-footer>
 
-<script type="module" src="../app.js?v=20261004e"></script>
+<script type="module" src="../app.js?v=20261004f"></script>
 
 
 </body>

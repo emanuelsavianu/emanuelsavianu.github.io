@@ -63,7 +63,7 @@ body {
   text-align: end;
 }
 .studio a {
-  color: var(--border);
+  color: var(--ink); /* era var(--border) crema su bianco 1.4:1 — ax 2026-10-04 D3 */
 }
 
 /* Title */
@@ -177,10 +177,12 @@ body {
   line-height: 1.35;
 }
 
-/* Key strip */
+/* Key strip — testo nero su crema (#e3d9c8): lo strip "chiama il 112" deve
+   essere leggibile a schermo E stampato in sala d'attesa (bianco su crema
+   restava ~1.4:1, ax audit 2026-10-04 difetto D3). */
 .strip {
   background: var(--border);
-  color: #ffffff;
+  color: var(--ink);
   border-radius: 4mm;
   padding: 2.5mm 8mm;
   text-align: center;
