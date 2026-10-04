@@ -115,7 +115,7 @@ class SiteNav extends HTMLElement {
       '<div class="brand-wrap">' +
         '<img class="brand-logo" src="' + prefix + 'assets/bronzelogo.png" alt="Studio Medico Ippocrate" width="96" height="96" decoding="async">' +
         '<div class="brand-text">' +
-          '<' + brandTag + ' class="brand-name"' + (isRoot ? ' data-i18n="landing_hero_title"' : '') + '>Dott. Emanuele Savianu</' + brandTag + '>' +
+          '<' + brandTag + ' class="brand-name"' + (isRoot ? ' data-i18n="landing_hero_title"' : '') + '>' + CONFIG.NAME + '</' + brandTag + '>' +
           '<p class="brand-tagline"' + (isPatient ? ' data-i18n="header_subtitle"' : '') + '>Medico di Medicina Generale - Arezzo</p>' +
           phone +
         '</div>' +
@@ -199,7 +199,7 @@ class SiteFooter extends HTMLElement {
     this.innerHTML =
       '<footer role="contentinfo">' +
         '<div class="footer-content">' +
-          '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - <span data-i18n="footer_owner">Dott. Emanuele Savianu</span></p>' +
+          '<p>&copy; <span id="current-year">' + new Date().getFullYear() + '</span> - <span data-i18n="footer_owner">' + CONFIG.NAME + '</span></p>' +
           '<nav class="footer-nav" aria-label="Footer">' +
             footerLink(prefix || './', 'footer_home', isPatient, 'Home') +
             ' <span aria-hidden="true">·</span> ' +
@@ -334,7 +334,7 @@ export const translations = {
         label_address: "Studio Medico Ippocrate",
         label_via_doctolib: "tramite Doctolib",
         label_address_value: "Piazza Saione 3, Arezzo",
-        footer_owner: "Dott. Emanuele Savianu",
+        footer_owner: CONFIG.NAME,
         doctolib_link_title: "Profilo Doctolib del dott. Emanuel Savianu — Studio Medico Ippocrate, Piazza Saione 3, Arezzo",
         table_scroll_hint: "Trascina per vedere tutta la tabella",
         btn_print_checklist: "Stampa la lista",
@@ -702,7 +702,7 @@ export const translations = {
         label_address: "Studio Medico Ippocrate",
         label_via_doctolib: "via Doctolib",
         label_address_value: "Piazza Saione 3, Arezzo",
-        footer_owner: "Dr. Emanuel Savianu",
+        footer_owner: CONFIG.NAME_EN,
         doctolib_link_title: "Doctolib profile of Dr. Emanuel Savianu — Studio Medico Ippocrate, Piazza Saione 3, Arezzo",
         table_scroll_hint: "Swipe to see the whole table",
         btn_print_checklist: "Print the checklist",
