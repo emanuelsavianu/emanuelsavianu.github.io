@@ -147,9 +147,12 @@ class SiteNav extends HTMLElement {
       '</header>' +
       (section !== 'static' ? navRow : '');
 
+    // Il pulsante FAQ flottante è position:fixed: vive fuori dai landmark della
+    // pagina, quindi axe lo segnala "content not contained by landmarks" (moderate).
+    // role=button + aria-label servono come contenuto a sé (audit 2026-10-04).
     if (isPatient && this.dataset.noFloat !== '1') {
       this.insertAdjacentHTML('afterend',
-        '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
+        '<a href="' + prefix + 'ssn/faq.html" class="floating-faq" role="button" data-i18n-aria-label="floating_faq_label" aria-label="Domande Frequenti">' +
           '<i class="fas fa-question-circle" aria-hidden="true"></i><span class="floating-faq-text">FAQ</span>' +
         '</a>'
       );
