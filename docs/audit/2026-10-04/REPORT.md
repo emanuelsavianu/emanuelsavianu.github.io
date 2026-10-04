@@ -35,6 +35,21 @@ Le performance mobile e il CLS **non** raggiungono i target dichiarati sul serve
 
 ---
 
+## 2bis. Rilievi dell'audit indipendente (review pre-merge) — chiusi
+
+Un reviewer indipendente ha riesaminato il branch su richiesta. Quattro rilievi, tutti chiusi:
+
+| Rilievo | Gravità | Esito |
+|---|---|---|
+| **Numeri di telefono MASCHERATI letteralmente** (`+39` + `****` + `0904`, byte `0x2a` verificati con `od -c`) in `index.html` (JSON-LD `telephone`), `colleghi/adi-adp-pai.html:284` e `colleghi/criteri-appropriatezza.html:153` → `tel:` non componibile e `telephone` invalido per Google | **ALTA** | **Corretto**: sostituiti con il numero reale (costruito da `CONFIG`-equivalente, non copiato dall'output del tool — è esattamente la trappola documentata dalla skill `adversarial-ux-test`). `grep -F '****'` su HTML/JS = **0** |
+| `app.js` header: telefono **hardcoded** nonostante la commit "unica fonte di verità" | MEDIA | **Corretto**: ora `CONFIG.CONTACTS.secretary.href` / `.display` |
+| §3 del report dichiarava `desc >155 → 0` senza che fosse vero (3 pagine ancora lunghe) e §8 elencava artefatti inesistenti (`axe-after.json`, JSON Lighthouse) | MEDIA | **Corretto**: le 3 descrizioni sono state accorciate (161→130, 177→137, 185→126, tutte ≤155) e gli artefatti mancanti sono stati **generati e committati** (`after/axe-after.json`, `lighthouse-scores.json`) |
+| CSS morto della barra rimossa (`.header-info-base/-link/-urgenze`) | BASSA | **Corretto**: 24 righe rimosse; conservate le regole ancora in uso (`.header-info`, `.ed .header-info i`, `.header-info-absence`, `.header-info-close`) |
+
+Nota di merito al reviewer: il difetto dei numeri mascherati è reale, preesistente su `main`, e stava in tre file che questa PR aveva già toccato — l'audit avrebbe dovuto trovarlo.
+
+---
+
 ## 3. Confronto before/after (misurato)
 
 ### Lighthouse 12, mobile — `main` vs branch
@@ -58,7 +73,7 @@ A11y e SEO erano **già 100** su `main`: nessun margine da recuperare lì.
 | Link interni rotti (`npm test`) | 0 | **0** |
 | i18n parity + guard | PASS (312) | PASS |
 | Segreti | 0 | **0** |
-| Title >60 / desc >155 / og:url≠canonical / img senza dim. | 2 / 5 / 2 / 23 | **0 / 0 / 0 / 0** |
+| Title >60 / desc >155 / og:url≠canonical / img senza dim. | 2 / 5 / 2 / 23 | **0 / 0 / 0 / 0** (le 3 descrizioni ancora lunghe sono state chiuse in §2bis) |
 
 ### Diff screenshot (240 coppie, 0 mancanti → `diff-summary.json`)
 
@@ -126,7 +141,8 @@ A11y e SEO erano **già 100** su `main`: nessun margine da recuperare lì.
 ## 8. Artefatti
 
 * `docs/audit/2026-10-04/before/` · `after/` — **240 screenshot** ciascuna (40 pagine × 3 larghezze (360/768/1280) × 2 temi), 0 problematiche. **(locali, non committate: `docs/` è in `.gitignore`)**
-* `axe-before.json` / `axe-after.json` — 28 combinazioni pagina×tema.
+* `before/axe-before.json` (7 combinazioni con violazioni) e `after/axe-after.json` (**0**) — 28 combinazioni pagina×tema ciascuno.
+* `lighthouse-scores.json` — punteggi e metriche delle 5 template (before/after), estratti dai run grezzi (10 file) che restano locali: pesano troppo per il repo.
 * `diff-summary.json` — confronto pixel per coppia.
 * `seo-structure.json` — titolo/description/h1/canonical/og/hreflang/JSON-LD/immagini per tutte le 43 pagine.
-* Lighthouse: `before-{home,ssn,privati,international,colleghi}.json` e relativi `after-`.
+* Lighthouse grezzi: `lighthouse/{before,after}-*.json` (10 file, ~1 MB) — **non committati**, sintesi in `lighthouse-scores.json`.

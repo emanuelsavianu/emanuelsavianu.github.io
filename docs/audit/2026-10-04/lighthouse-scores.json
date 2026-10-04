@@ -1,0 +1,102 @@
+{
+ "after-colleghi": {
+  "perf": 66,
+  "a11y": 100,
+  "best-practices": 79,
+  "seo": 100,
+  "LCP_ms": 4219,
+  "CLS": 0.231,
+  "TBT_ms": 54,
+  "lighthouse": "12.8.2"
+ },
+ "after-home": {
+  "perf": 61,
+  "a11y": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "LCP_ms": 3755,
+  "CLS": 0.502,
+  "TBT_ms": 5,
+  "lighthouse": "12.8.2"
+ },
+ "after-international": {
+  "perf": 59,
+  "a11y": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "LCP_ms": 3755,
+  "CLS": 0.54,
+  "TBT_ms": 98,
+  "lighthouse": "12.8.2"
+ },
+ "after-privati": {
+  "perf": 58,
+  "a11y": 100,
+  "best-practices": 79,
+  "seo": 100,
+  "LCP_ms": 3759,
+  "CLS": 0.631,
+  "TBT_ms": 4,
+  "lighthouse": "12.8.2"
+ },
+ "after-ssn": {
+  "perf": 60,
+  "a11y": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "LCP_ms": 3831,
+  "CLS": 0.558,
+  "TBT_ms": 98,
+  "lighthouse": "12.8.2"
+ },
+ "before-colleghi": {
+  "perf": 50,
+  "a11y": 100,
+  "best-practices": 79,
+  "seo": 100,
+  "LCP_ms": 8658,
+  "CLS": 0.231,
+  "TBT_ms": 0,
+  "lighthouse": "12.8.2"
+ },
+ "before-home": {
+  "perf": 55,
+  "a11y": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "LCP_ms": 3986,
+  "CLS": 1.005,
+  "TBT_ms": 0,
+  "lighthouse": "12.8.2"
+ },
+ "before-international": {
+  "perf": 51,
+  "a11y": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "LCP_ms": 4359,
+  "CLS": 1.015,
+  "TBT_ms": 20,
+  "lighthouse": "12.8.2"
+ },
+ "before-privati": {
+  "perf": 40,
+  "a11y": 100,
+  "best-practices": 79,
+  "seo": 100,
+  "LCP_ms": 7079,
+  "CLS": 0.631,
+  "TBT_ms": 0,
+  "lighthouse": "12.8.2"
+ },
+ "before-ssn": {
+  "perf": 56,
+  "a11y": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "LCP_ms": 4131,
+  "CLS": 0.557,
+  "TBT_ms": 0,
+  "lighthouse": "12.8.2"
+ }
+}
