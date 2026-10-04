@@ -1,4 +1,4 @@
-import { CONFIG } from './config.js?v=20261004h';
+import { CONFIG } from './config.js?v=20261004i';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
