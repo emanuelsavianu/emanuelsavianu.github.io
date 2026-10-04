@@ -1808,7 +1808,7 @@ body.dark-mode .nav-menu { background: var(--bg-gradient-2); } /* don't let --pr
     align-items: center;
     gap: 10px;
     background: var(--accent);
-    color: #ffffff;
+    color: var(--primary);
     font-family: var(--font-sans);
     font-size: 0.9rem;
     font-weight: 700;
@@ -3138,6 +3138,9 @@ body.dark-mode .ed .lang-btn.active { color: var(--ed-brass); }
 .ed-p a:hover { border-bottom-color: currentColor; }
 .ed-field .ed-p, .ed-band .ed-p { color: var(--ed-on-field-2); }
 .ed-band .ed-p strong { color: #fff; }
+/* same override for the hero lead: .ed-lead strong inherits --ed-ink (navy)
+   which is invisible on the navy band (1.2:1) — 2026-10-04 audit */
+.ed-band .ed-lead strong { color: #fff; }
 .ed-band .ed-p a { color: var(--ed-brass); border-bottom-color: rgba(194, 155, 87, 0.45); }
 
 .ed-split {
