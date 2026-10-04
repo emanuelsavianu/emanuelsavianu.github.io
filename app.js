@@ -1137,10 +1137,13 @@ function trapFocus(modal) {
 // --- OPEN/CLOSED BADGE ---
 (function() {
     const SCHEDULE = CONFIG.SCHEDULE;
-    const now = new Date();
-    const day = now.getDay();
-    const hour = now.getHours() + now.getMinutes() / 60;
-    const slots = SCHEDULE[day] || [];
+    // Ora dello studio (Europe/Rome) e chiusura festiva, come nella home.
+    const rome = (typeof CONFIG.getRomeNow === 'function') ? CONFIG.getRomeNow() : null;
+    const now = rome ? null : new Date();
+    const day = rome ? rome.day : now.getDay();
+    const hour = rome ? rome.minutes / 60 : now.getHours() + now.getMinutes() / 60;
+    const closedDay = (typeof CONFIG.isClosedDay === 'function') ? CONFIG.isClosedDay() : false;
+    const slots = closedDay ? [] : (SCHEDULE[day] || []);
     const isOpen = slots.some(s => hour >= s.from && hour < s.to);
 
     const anchor = document.querySelector('[data-badge-anchor]');
