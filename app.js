@@ -1,4 +1,4 @@
-import { CONFIG } from './config.js?v=20261004i';
+import { CONFIG } from './config.js?v=20261004j';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -113,7 +113,7 @@ class SiteNav extends HTMLElement {
       '</nav>';
 
     const phone =
-      '<a href="tel:+390575910904" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> <span data-i18n="header_phone_label">Segreteria:</span> 0575 910 904</a>';
+      '<a href="' + CONFIG.CONTACTS.secretary.href + '" class="btn-telefono-header"><i class="fas fa-phone-alt" aria-hidden="true"></i> <span data-i18n="header_phone_label">Segreteria:</span> ' + CONFIG.CONTACTS.secretary.display + '</a>';
 
     const brand =
       '<div class="brand-wrap">' +
