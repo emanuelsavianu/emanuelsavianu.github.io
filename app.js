@@ -1546,12 +1546,38 @@ export function initServiceWorker() {
   if (!('serviceWorker' in navigator)) return;
 
   let pendingWorker = null;
+  const hadController = !!navigator.serviceWorker.controller;
+
+  // Il toast serve a UN solo caso: una nuova versione è pronta e in attesa
+  // (state "waiting") mentre la pagina è già controllata da un SW attivo.
+  // In ogni altro caso resta nascosto — al primo caricamento non c'è nulla da
+  // aggiornare, e mostrarlo era un falso "aggiornamento disponibile".
+  function hideUpdateToast() {
+    const toast = document.getElementById('sw-update-toast');
+    if (toast) { toast.classList.remove('visible'); toast.setAttribute('hidden', ''); }
+  }
+
+  function showUpdateToast(worker) {
+    if (!worker || !navigator.serviceWorker.controller) return; // solo veri update
+    const toast = document.getElementById('sw-update-toast');
+    if (!toast) return;
+    pendingWorker = worker;
+    toast.removeAttribute('hidden');
+    requestAnimationFrame(() => toast.classList.add('visible'));
+  }
+
+  hideUpdateToast();
 
   window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
+      // updateViaCache:'none' → il browser non può servire dalla cache HTTP lo
+      // script del SW: il controllo di aggiornamento è sempre reale, quindi il
+      // toast compare solo quando c'è davvero una nuova versione in attesa.
+      navigator.serviceWorker.register('/sw.js', { updateViaCache: 'none' })
         .then(registration => {
           registration.update(); // force check for new sw.js
-          if (registration.waiting) showUpdateToast(registration.waiting);
+          if (registration.waiting && navigator.serviceWorker.controller) {
+            showUpdateToast(registration.waiting);
+          }
 
         registration.addEventListener('updatefound', () => {
           const newWorker = registration.installing;
@@ -1568,24 +1594,31 @@ export function initServiceWorker() {
       });
   });
 
-  function showUpdateToast(worker) {
-    pendingWorker = worker;
-    const toast = document.getElementById('sw-update-toast');
-    if (toast) toast.classList.add('visible');
-  }
-
   const updateBtn = document.getElementById('sw-update-btn');
   if (updateBtn) {
     updateBtn.addEventListener('click', () => {
       if (pendingWorker) {
         pendingWorker.postMessage({ type: 'SKIP_WAITING' });
+      } else {
+        window.location.reload();
       }
     });
   }
 
+    // Ricarica SOLO quando una nuova versione prende il controllo di una
+    // pagina che era già controllata. Il primo install (clients.claim) non
+    // deve ricaricare: senza il guard `hadController` ogni prima visita
+    // faceva un reload inutile. `refreshing` + il tetto di sessione (2)
+    // impediscono qualunque loop di ricariche.
     let refreshing = false;
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-      if (!refreshing) { refreshing = true; window.location.reload(); }
+      if (!hadController || refreshing) return;
+      let n = 0;
+      try { n = +(sessionStorage.getItem('sw-reloads') || 0); } catch (e) {}
+      if (n >= 2) return;
+      try { sessionStorage.setItem('sw-reloads', String(n + 1)); } catch (e) {}
+      refreshing = true;
+      window.location.reload();
     });
   }
 
