@@ -176,6 +176,7 @@
                         <span class="ed-strip__now" id="lp-strip-now" hidden></span>
                     </div>
                     <div class="ed-strip__scale" aria-hidden="true"><span>08</span><span>11</span><span>14</span><span>17</span><span>20</span></div>
+                    <p class="ed-strip__hours" id="lp-strip-hours">09:30 – 12:30 · 16:00 – 19:00</p>
                 </div>
             </div>
         </div>
@@ -317,7 +318,7 @@
         </div>
         <div>
             <ul class="ed-meta">
-                <li><span class="k" data-i18n="hours_lun_ven">Lun - Ven</span><span class="v">09:30 – 12:30 · 16:00 – 19:00</span></li>
+                <li><span class="k" data-i18n="hours_lun_ven">Lun - Ven</span><span class="v" id="lp-hours-week">09:30 – 12:30 · 16:00 – 19:00</span></li>
                 <li><span class="k" data-i18n="lp_hours_weekend">Sabato e domenica</span><span class="v v--closed" data-i18n="lp_state_closed">Chiuso</span></li>
                 <li><span class="k" data-i18n="lp_hours_secretary">Segreteria</span><span class="v"><a href="tel:+390575910904">0575 910 904</a></span></li>
                 <li><span class="k" data-i18n="label_address">Studio Medico Ippocrate</span><span class="v" data-i18n="label_address_value">Piazza Saione 3, Arezzo</span></li>
@@ -419,6 +420,7 @@ import { CONFIG } from './config.js?v=2';
     const captionEl = document.getElementById('lp-strip-caption');
     const trackEl = document.getElementById('lp-strip-track');
     const nowEl = document.getElementById('lp-strip-now');
+    const stripHoursEl = document.getElementById('lp-strip-hours');
     if (!wordEl || !textEl || !trackEl) return;
 
     function T(key, fallback) {
@@ -428,7 +430,13 @@ import { CONFIG } from './config.js?v=2';
     function hhmm(h) {
         const H = Math.floor(h);
         const M = Math.round((h - H) * 60);
-        return H + (M ? ':' + (M < 10 ? '0' + M : M) : ':00');
+        return String(H).padStart(2, '0') + (M ? ':' + (M < 10 ? '0' + M : M) : ':00');
+    }
+    // Fasce orarie leggibili ("09:30 – 12:30 · 16:00 – 19:00") lette dalla config.
+    function hoursText(slots) {
+        return slots.length
+            ? slots.map(function (s) { return hhmm(s.from) + ' – ' + hhmm(s.to); }).join(' · ')
+            : T('lp_state_closed', 'Chiuso');
     }
     function dur(mins) {
         const h = Math.floor(mins / 60);
@@ -448,32 +456,49 @@ import { CONFIG } from './config.js?v=2';
             seg.style.width = ((slot.to - slot.from) / (STRIP_TO - STRIP_FROM) * 100) + '%';
             trackEl.insertBefore(seg, nowEl);
         });
-        const label = slots.length
-            ? slots.map(s => hhmm(s.from) + ' – ' + hhmm(s.to)).join(' · ')
-            : T('lp_state_closed', 'Chiuso');
-        trackEl.setAttribute('aria-label', T('lp_strip_label', 'Fasce di apertura di oggi') + ': ' + label);
+        return hoursText(slots);
+    }
+
+    // Prossimo giorno di apertura, saltando weekend e festività.
+    function nextOpen(fromDay) {
+        for (let d = 1; d <= 10; d++) {
+            const dt = new Date(Date.now() + d * 86400000);
+            if (typeof CONFIG.isClosedDay === 'function' && CONFIG.isClosedDay(dt)) continue;
+            const nd = (typeof CONFIG.getRomeNow === 'function') ? CONFIG.getRomeNow(dt).day : (fromDay + d) % 7;
+            if (SCHEDULE[nd] && SCHEDULE[nd].length) return { d: d, day: nd, slots: SCHEDULE[nd] };
+        }
+        return null;
     }
 
     function render() {
-        const now = new Date();
-        const mins = now.getHours() * 60 + now.getMinutes();
-        const day = now.getDay();
-        const slots = SCHEDULE[day] || [];
+        // Ora dello studio (Europe/Rome): la stessa per ogni visitatore, non
+        // quella del suo fuso orario. Weekend e festività = chiuso.
+        const rome = (typeof CONFIG.getRomeNow === 'function') ? CONFIG.getRomeNow() : null;
+        const now = rome ? null : new Date();
+        const mins = rome ? rome.minutes : now.getHours() * 60 + now.getMinutes();
+        const day = rome ? rome.day : now.getDay();
+        const closedToday = (typeof CONFIG.isClosedDay === 'function')
+            ? CONFIG.isClosedDay()
+            : !(SCHEDULE[day] || []).length;
+        const slots = closedToday ? [] : (SCHEDULE[day] || []);
 
         // The strip always shows something: today's bands, or the next open day's.
         let stripSlots = slots, stripDay = day;
         if (!slots.length) {
-            for (let d = 1; d <= 7; d++) {
-                const nd = (day + d) % 7;
-                if (SCHEDULE[nd] && SCHEDULE[nd].length) { stripSlots = SCHEDULE[nd]; stripDay = nd; break; }
-            }
+            const nxt = nextOpen(day);
+            if (nxt) { stripSlots = nxt.slots; stripDay = nxt.day; }
         }
-        drawStrip(stripSlots);
+        const label = drawStrip(stripSlots);
+        if (stripHoursEl) stripHoursEl.textContent = label;
         if (captionEl) {
             captionEl.textContent = stripDay === day
                 ? T('lp_strip_today', 'Oggi') + ' · ' + dayName(day)
                 : T('lp_strip_next', 'Prossima apertura') + ' · ' + dayName(stripDay);
         }
+        trackEl.setAttribute('aria-label',
+            (stripDay === day ? T('lp_strip_label', 'Fasce di apertura di oggi')
+                              : T('lp_strip_next', 'Prossima apertura')) +
+            ' (' + dayName(stripDay) + '): ' + label);
 
         const pct = (mins / 60 - STRIP_FROM) / (STRIP_TO - STRIP_FROM);
         if (nowEl) {
@@ -514,18 +539,19 @@ import { CONFIG } from './config.js?v=2';
             }
         }
 
-        for (let d = 1; d <= 7; d++) {
-            const nextDay = (day + d) % 7;
-            const next = SCHEDULE[nextDay];
-            if (next && next.length) {
-                const when = d === 1 ? T('lp_state_tomorrow', 'domani') : dayName(nextDay);
-                wordEl.textContent = T('lp_state_closed', 'Chiuso');
-                say(false, T('lp_state_opens_at', 'apre') + ' ' + when + ' ' +
-                    T('lp_state_at', 'alle') + ' ' + hhmm(next[0].from));
-                return;
-            }
+        const next = nextOpen(day);
+        if (next) {
+            const when = next.d === 1 ? T('lp_state_tomorrow', 'domani') : dayName(next.day);
+            wordEl.textContent = T('lp_state_closed', 'Chiuso');
+            say(false, T('lp_state_opens_at', 'apre') + ' ' + when + ' ' +
+                T('lp_state_at', 'alle') + ' ' + hhmm(next.slots[0].from));
+            return;
         }
     }
+
+    // La riga "Lun - Ven" nasce dalla config: nessun orario duplicato a mano.
+    const weekEl = document.getElementById('lp-hours-week');
+    if (weekEl) weekEl.textContent = hoursText(SCHEDULE[1] || []);
 
     render();
     setInterval(render, 60000);
