@@ -9,7 +9,7 @@
 - [Certificati INPS e Invalidità ad Arezzo | Dott. Savianu](https://savianu.it/privati/)
 - [Area Colleghi: modulistica e facsimili MMG | Savianu](https://savianu.it/colleghi/)
 - [Comunicazioni 2026 Medicina Generale | Dott. Savianu](https://savianu.it/colleghi/comunicazioni-2026.md)
-- [Criteri di appropriatezza — Invii specialistici e farmaci | Dott. Savianu](https://savianu.it/colleghi/criteri-appropriatezza.md)
+- [Criteri di appropriatezza — invii e farmaci | Savianu](https://savianu.it/colleghi/criteri-appropriatezza.md)
 
 ## Markdown per agenti
 
