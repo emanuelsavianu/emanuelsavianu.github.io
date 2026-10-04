@@ -1,5 +1,5 @@
 ---
-title: Criteri di appropriatezza — Invii specialistici e farmaci | Dott. Savianu
+title: Criteri di appropriatezza — invii e farmaci | Savianu
 description: Criteri di appropriatezza per i colleghi MMG: quando inviare allo specialista e come prescrivere — PDTA Diabete (DGRT 5/2020), PDTA Disturbi cognitivi e demenze e Nota AIFA 100.
 ---
 
