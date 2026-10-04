@@ -27,8 +27,9 @@ export function computePrecacheUrls() {
   const pages = walk(ROOT).map(f => {
     const rel = relative(ROOT, f).split(sep).join('/');
     if (rel === 'index.html') return '/';
-    const url = '/' + rel;
-    return rel.endsWith('/index.html') ? [url, url.replace(/index\.html$/, '')] : [url];
+    // Forma canonica: per le pagine-indice si precachea solo /cartella/
+    // (/cartella/ e /cartella/index.html servono lo stesso file).
+    return '/' + rel.replace(/index\.html$/, '');
   }).flat();
 
   const unique = [...new Set(pages)];
