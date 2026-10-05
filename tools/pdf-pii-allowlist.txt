@@ -45,3 +45,12 @@
 # alle pagine 1-16 (percorso, matrice di responsabilità, indicatori, bibliografia)
 # proprio per non esporre i contatti personali di terzi su un sito pubblico.
 ^08/11/2022$
+
+# 05/10/2026 — bundle "Campagna anti-COVID 2026-2027" pubblicato in colleghi/allegati/:
+# circolare ministeriale n. 4398 (Min. Salute), nota Regione Toscana (prot. 0765217)
+# e RCP Comirnaty XFG. Documenti programmatici PUBBLICI, nessun modulo compilato: i
+# riscontri sono la data di protocollo/redazione stampata su ogni pagina (05/10/2026,
+# 01/10/2026) e il centralino della Direzione Sanità della Regione Toscana (055 4383275).
+^05/10/2026$
+^01/10/2026$
+^055[\s.\-]?4383275$
