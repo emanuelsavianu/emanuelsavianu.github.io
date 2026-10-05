@@ -273,6 +273,101 @@
         body.dark-mode .source-link:hover,
         body.dark-mode .fonti-grid a:hover { color: var(--text-dark); }
 
+        /* ── In evidenza: campagna anti-COVID 2026-2027 ── */
+        .cv-spot {
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--accent);
+            border-radius: var(--radius-md);
+            background: var(--bg-gradient-1);
+            padding: 22px 24px 22px;
+            margin: 22px 0 34px;
+        }
+        .cv-kicker {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 0.5px;
+            text-transform: uppercase; color: var(--accent-text); margin-bottom: 8px;
+        }
+        .cv-kicker i { color: var(--accent); }
+        .cv-spot > h2 {
+            font-size: 1.32rem; font-weight: 700; color: var(--primary);
+            margin: 0 0 8px; line-height: 1.3;
+        }
+        .cv-lede { font-size: 0.9rem; color: var(--text-medium); line-height: 1.6; margin: 0 0 18px; }
+        .cv-lede strong, .cv-list strong, .cv-step-text strong { color: var(--text-dark); }
+
+        /* Timeline (grafico delle date chiave) */
+        .cv-timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 18px; }
+        .cv-step {
+            position: relative; border: 1px solid var(--border-color);
+            border-radius: var(--radius-md); padding: 13px 15px 12px;
+            background: var(--bg-gradient-2);
+        }
+        .cv-step::before {
+            content: ""; position: absolute; top: -3px; left: 15px;
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--accent); box-shadow: 0 0 0 3px var(--bg-gradient-1);
+        }
+        .cv-date { display: block; font-weight: 700; color: var(--accent-text); font-size: 0.88rem; margin-bottom: 6px; }
+        .cv-step-text { font-size: 0.82rem; line-height: 1.5; color: var(--text-medium); margin: 0; }
+
+        /* Due pannelli: chi / dose */
+        .cv-cols { display: grid; grid-template-columns: 1.1fr 1fr; gap: 16px; }
+        .cv-panel {
+            border: 1px solid var(--border-color); border-radius: var(--radius-md);
+            padding: 16px 18px; background: var(--bg-gradient-1);
+        }
+        .cv-panel > h3 {
+            font-size: 0.95rem; font-weight: 700; color: var(--accent-text);
+            margin: 0 0 10px; display: flex; align-items: center; gap: 8px;
+        }
+        .cv-panel > h3 i { color: var(--accent); }
+        .cv-prio {
+            font-size: 0.79rem; line-height: 1.5; color: var(--text-medium);
+            background: var(--bg-gradient-2); border-radius: var(--radius-md);
+            padding: 9px 11px; margin: 0 0 12px;
+        }
+        .cv-prio strong { color: var(--text-dark); }
+        .cv-list { list-style: none; margin: 0; padding: 0; font-size: 0.83rem; line-height: 1.5; color: var(--text-medium); }
+        .cv-list li { padding: 5px 0 5px 19px; position: relative; }
+        .cv-list li::before {
+            content: ""; position: absolute; left: 2px; top: 11px;
+            width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+        }
+
+        /* Matrice dose per fascia d'età */
+        .cv-dose { width: 100%; border-collapse: collapse; font-size: 0.79rem; }
+        .cv-dose th, .cv-dose td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--border-color); vertical-align: top; }
+        .cv-dose tr:last-child td { border-bottom: none; }
+        .cv-dose th { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.4px; color: var(--text-medium); font-weight: 700; }
+        .cv-dose td:first-child { color: var(--text-dark); font-weight: 600; }
+        .cv-dose td { color: var(--text-medium); }
+        .cv-dose .cv-mcg { font-weight: 700; color: var(--accent-text); }
+
+        .cv-ops { margin-top: 16px; font-size: 0.83rem; line-height: 1.6; color: var(--text-medium); }
+        .cv-ops strong { color: var(--text-dark); }
+
+        .cv-attach-label { font-size: 0.72rem; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: var(--text-medium); margin: 18px 0 8px; }
+        .cv-attach { display: flex; flex-wrap: wrap; gap: 10px; }
+        .cv-attach a {
+            display: inline-flex; align-items: center; gap: 8px;
+            border: 1px solid var(--border-color); border-radius: var(--radius-md);
+            background: var(--bg-gradient-2); padding: 9px 13px;
+            font-size: 0.82rem; font-weight: 600; color: var(--accent-text);
+            text-decoration: none; line-height: 1.2;
+        }
+        .cv-attach a i { color: var(--accent); }
+        .cv-attach a:hover { border-color: var(--accent); color: var(--primary); }
+
+        body.dark-mode .cv-spot, body.dark-mode .cv-panel { background: var(--primary); }
+        body.dark-mode .cv-step, body.dark-mode .cv-prio { background: var(--color-surface); }
+        body.dark-mode .cv-spot > h2 { color: var(--accent); }
+        body.dark-mode .cv-step::before { box-shadow: 0 0 0 3px var(--primary); }
+        body.dark-mode .cv-attach a:hover { color: var(--accent); }
+
+        @media (max-width: 720px) {
+            .cv-timeline, .cv-cols { grid-template-columns: 1fr; }
+        }
+
         @media (max-width: 600px) {
             .content-wrapper { padding: 20px 16px; }
             .page-hero { padding: 28px 16px 20px; }
@@ -304,6 +399,72 @@
             Ogni voce è selezionata tra i contenuti ufficiali pubblicati (o comunicati dagli Ordini) a partire dal 1° gennaio 2026 — FNOMCeO, Ministero della Salute, AIFA, INPS, Ministero per le Disabilità — e verificata sul documento originale. Le notizie sono ordinate per <strong>data, dalla più recente alla più vecchia</strong>; i filtri per argomento permettono di isolare le categorie. La pagina viene <strong>controllata e aggiornata automaticamente ogni settimana</strong>.
         </div>
 
+        <section class="cv-spot" id="covid-2627" aria-labelledby="cv-spot-heading">
+        <span class="cv-kicker"><i class="fas fa-shield-virus" aria-hidden="true"></i> In evidenza · Prevenzione · aggiornato al 5 ottobre 2026</span>
+        <h2 id="cv-spot-heading">Campagna anti-COVID 2026-2027 — la scheda rapida per il MMG</h2>
+        <p class="cv-lede">
+            Circolare del Ministero della Salute <strong>n. 4398 del 1° ottobre 2026</strong> e nota della Regione Toscana (<strong>prot. 0765217 del 5 ottobre 2026</strong>). In Toscana la campagna parte <strong>mercoledì 14 ottobre 2026</strong>. Vaccino: <strong>Comirnaty XFG</strong> (mRNA aggiornato alla variante XFG), una dose di richiamo annuale, gratuita per le categorie raccomandate. È possibile la co-somministrazione con l'antinfluenzale.
+        </p>
+
+        <div class="cv-timeline" role="list" aria-label="Date chiave della campagna">
+            <div class="cv-step" role="listitem">
+                <span class="cv-date">mer 7 ottobre</span>
+                <p class="cv-step-text">MMG e PLS <strong>prenotano le dosi</strong> con le consuete procedure.</p>
+            </div>
+            <div class="cv-step" role="listitem">
+                <span class="cv-date">mer 14 ottobre</span>
+                <p class="cv-step-text">Avvio per <strong>RSA e lungodegenze</strong> (a cura dei MMG) e per <strong>tutte le categorie raccomandate</strong> (MMG e PLS). Over 60: possibile anche in farmacia se attiva.</p>
+            </div>
+            <div class="cv-step" role="listitem">
+                <span class="cv-date">mer 21 ottobre</span>
+                <p class="cv-step-text">Anche nei <strong>centri vaccinali ASL</strong> (prenotazioni dal 14 ottobre su prenotavaccino.sanita.toscana.it), con offerta contestuale dell'antinfluenzale.</p>
+            </div>
+        </div>
+
+        <div class="cv-cols">
+            <div class="cv-panel">
+                <h3><i class="fas fa-user-doctor" aria-hidden="true"></i> Chi vaccinare (raccomandato, gratuito)</h3>
+                <p class="cv-prio"><strong>Priorità di avvio:</strong> ≥80 anni · ospiti delle RSA/lungodegenza · elevata fragilità (in particolare immunodepressi) · operatori sanitari e sociosanitari.</p>
+                <ul class="cv-list">
+                    <li>Persone di età <strong>pari o superiore a 60 anni</strong></li>
+                    <li>Ospiti delle strutture per lungodegenti</li>
+                    <li><strong>Gravidanza</strong> (qualsiasi trimestre) e post-partum, compreso l'allattamento</li>
+                    <li>Operatori sanitari e sociosanitari (ospedale, territorio, lungodegenza) e studenti in tirocinio</li>
+                    <li><strong>6 mesi–59 anni con elevata fragilità</strong> (patologie croniche, immunodepressione, ecc. — elenco completo nell'allegato 2 della circolare)</li>
+                    <li>Consigliata a familiari, conviventi e caregiver di persone con gravi fragilità</li>
+                </ul>
+            </div>
+
+            <div class="cv-panel">
+                <h3><i class="fas fa-file-medical" aria-hidden="true"></i> Dose (0,3 mL, IM) e richiamo</h3>
+                <table class="cv-dose">
+                    <thead>
+                        <tr><th>Fascia d'età</th><th>Dose</th><th>Schema</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>≥ 12 anni</td><td><span class="cv-mcg">30 mcg</span></td><td>1 dose</td></tr>
+                        <tr><td>5–11 anni</td><td><span class="cv-mcg">10 mcg</span></td><td>1 dose</td></tr>
+                        <tr><td>6 mesi–4 anni</td><td><span class="cv-mcg">10 mcg</span></td><td>Mai vaccinati: 2 dosi (2ª a 8 settimane) · ciclo base già completo: 1 dose</td></tr>
+                    </tbody>
+                </table>
+                <p class="cv-ops">
+                    Richiamo <strong>annuale</strong>; distanza <strong>≥3 mesi</strong> dall'ultima dose anti-COVID; un'infezione recente <strong>non controindica</strong>. Immunodepressi gravi: possibili dosi aggiuntive. Unica controindicazione: ipersensibilità a principio attivo o eccipienti.
+                </p>
+            </div>
+        </div>
+
+        <p class="cv-ops">
+            <strong>Co-somministrazione:</strong> possibile con l'antinfluenzale; dai 18 anni con pneumococco (PCV) e RSV; dai 65 anni con RSV + antinfluenzale ad alta dose — in sedi di iniezione diverse. <strong>Adempimenti MMG:</strong> registrare puntualmente ogni somministrazione nell'applicativo regionale (Anagrafe Vaccinale) — è requisito essenziale per il calcolo delle coperture — e segnalare le sospette reazioni avverse all'AIFA.
+        </p>
+
+        <p class="cv-attach-label">Documenti allegati</p>
+        <div class="cv-attach">
+            <a href="allegati/covid-2026-2027-circolare-ministeriale-4398-01-10-2026.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Circolare ministeriale n. 4398 (1/10/2026)</a>
+            <a href="allegati/covid-2026-2027-nota-regione-toscana-05-10-2026.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Nota Regione Toscana — prot. 0765217 (5/10/2026)</a>
+            <a href="allegati/covid-2026-2027-RCP-Comirnaty-XFG.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>RCP Comirnaty XFG 30/10 mcg</a>
+        </div>
+        </section>
+
                 <div class="filter-bar" role="group" aria-label="Filtra per argomento">
             <button type="button" class="doc-chip active" data-filter="all">Tutte</button>
             <button type="button" class="doc-chip" data-filter="inps"><i class="fas fa-file-medical" aria-hidden="true"></i>Certificati e INPS</button>
@@ -318,6 +479,21 @@
 
         <div class="month-group" data-month="2026-10">
             <h2 class="month-head"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Ottobre 2026</h2>
+            <article class="doc-card" data-cat="prevenzione">
+                <div class="doc-meta">
+                    <span class="doc-badge ente">Min. Salute · Regione Toscana</span>
+                    <span class="doc-badge date">5 ottobre 2026</span>
+                    <span class="doc-badge cat">Prevenzione</span>
+                </div>
+                <h3>Vaccinazione anti-COVID 2026-2027: la campagna parte il 14 ottobre</h3>
+                <p class="doc-summary">
+                    La <strong>circolare ministeriale n. 4398 del 1° ottobre 2026</strong> e la nota della Regione Toscana (prot. 0765217 del 5 ottobre 2026) avviano la campagna autunno-inverno 2026/2027 con il vaccino <strong>Comirnaty XFG</strong>, aggiornato alla variante XFG: una dose di richiamo annuale, gratuita per le categorie raccomandate (over 60, ospiti delle RSA e lungodegenze, gravidanza e post-partum, operatori sanitari e sociosanitari, 6 mesi–59 anni con elevata fragilità). In Toscana si parte <strong>mercoledì 14 ottobre</strong> (RSA e categorie raccomandate, a cura di MMG e PLS; prenotazione delle dosi dal 7 ottobre) e dal <strong>21 ottobre</strong> anche nei centri vaccinali ASL, con offerta contestuale dell'antinfluenzale. Possibile la co-somministrazione con il vaccino antinfluenzale.
+                </p>
+                <a class="source-link" href="allegati/covid-2026-2027-circolare-ministeriale-4398-01-10-2026.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Circolare ministeriale n. 4398 (PDF)</a>
+                <a class="source-link" href="allegati/covid-2026-2027-nota-regione-toscana-05-10-2026.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>Nota Regione Toscana — prot. 0765217 (PDF)</a>
+                <a class="source-link" href="allegati/covid-2026-2027-RCP-Comirnaty-XFG.pdf" target="_blank" rel="noopener"><i class="fas fa-external-link-alt" aria-hidden="true"></i>RCP Comirnaty XFG 30/10 mcg (PDF)</a>
+                <a class="source-link" href="#covid-2627"><i class="fas fa-shield-virus" aria-hidden="true"></i>Scheda rapida e grafico per il MMG</a>
+            </article>
             <article class="doc-card" data-cat="studio">
                 <div class="doc-meta">
                     <span class="doc-badge ente">Garante disabilità · FNOMCeO</span>
