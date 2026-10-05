@@ -43,7 +43,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261005a">
+    <link rel="stylesheet" href="../styles.css?v=20261005b">
 
     <script type="application/ld+json">
     [
@@ -151,7 +151,7 @@
             font-weight: 700;
             letter-spacing: 0.18em;
             text-transform: uppercase;
-            color: var(--accent);
+            color: var(--accent-text);
             margin-bottom: 14px;
         }
         .booking-label::after {
@@ -238,9 +238,12 @@
         .comparison-table tr:last-child th,
         .comparison-table tr:last-child td { border-bottom: none; }
 
-        .table-check { color: #10b981; font-weight: 700; }
-        .table-cross { color: #ef4444; font-weight: 700; }
-        .table-partial { color: #f59e0b; font-weight: 600; }
+        .table-check { color: #047857; font-weight: 700; }
+        .table-cross { color: #dc2626; font-weight: 700; }
+        .table-partial { color: #b45309; font-weight: 600; }
+        body.dark-mode .table-check { color: #4ade80; }
+        body.dark-mode .table-cross { color: #ff6b6b; }
+        body.dark-mode .table-partial { color: #fbbf24; }
 
         /* ── Service Card Grid ──────────────────────────────────── */
         .service-highlights {
@@ -524,28 +527,28 @@
             </p>
             <ol style="list-style: none; padding: 0; margin: 0;">
                 <li style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
-                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">1</span>
+                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent-text); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">1</span>
                     <div>
                         <strong style="color: var(--primary); display: block; margin-bottom: 4px; font-size: 0.9rem;">Raccolta documentazione</strong>
                         <p style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.6; margin: 0;">Referti specialistici, esami strumentali (TAC, radiografie, analisi), lettere di dimissione, elenco dei farmaci. Più è completa la documentazione, più precisa sarà la valutazione INPS.</p>
                     </div>
                 </li>
                 <li style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
-                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">2</span>
+                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent-text); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">2</span>
                     <div>
                         <strong style="color: var(--primary); display: block; margin-bottom: 4px; font-size: 0.9rem;">Visita medica e compilazione certificato</strong>
                         <p style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.6; margin: 0;">Il medico esamina la documentazione, valuta le condizioni di salute rilevanti e compila il Certificato Medico Introduttivo sul portale INPS.</p>
                     </div>
                 </li>
                 <li style="display: flex; gap: 16px; align-items: flex-start; margin-bottom: 16px; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
-                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">3</span>
+                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent-text); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">3</span>
                     <div>
                         <strong style="color: var(--primary); display: block; margin-bottom: 4px; font-size: 0.9rem;">Invio telematico all'INPS</strong>
                         <p style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.6; margin: 0;">Il certificato viene trasmesso direttamente all'INPS per via telematica. Il paziente riceve l'attestato di trasmissione con il numero di protocollo ufficiale, prova dell'avvio della pratica.</p>
                     </div>
                 </li>
                 <li style="display: flex; gap: 16px; align-items: flex-start; background: var(--white); border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; box-shadow: var(--shadow-sm);">
-                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">4</span>
+                    <span style="flex-shrink: 0; width: 32px; height: 32px; background: var(--accent-text); color: #fff; font-weight: 700; font-size: 0.85rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">4</span>
                     <div>
                         <strong style="color: var(--primary); display: block; margin-bottom: 4px; font-size: 0.9rem;">Risposta dell'INPS</strong>
                         <p style="font-size: 0.88rem; color: var(--text-dark); line-height: 1.6; margin: 0;">L'INPS programma la visita collegiale entro 90 giorni (15 per patologie oncologiche). La convocazione arriva per raccomandata. Non è necessario fare ulteriori domande.</p>
