@@ -1,8 +1,18 @@
 # Comunicazioni ufficiali 2026 per la Medicina Generale
 
-> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 28 settembre 2026.
+> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 5 ottobre 2026.
 
 Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina aggiornata automaticamente ogni settimana.
+
+## Ottobre 2026
+
+- **Accessibilità degli studi MMG e PLS — Raccomandazione del Garante disabilità n. 6/2026** — Delibera n. 33 del 18/9/2026 (com. FNOMCeO n. 103, 1/10/2026). Ricognizione e mappatura degli studi, cronoprogrammi di adeguamento, criteri e indicatori nazionali omogenei; massima diffusione a cura degli Ordini. [PDF](https://portale.fnomceo.it/wp-content/uploads/2026/10/COM-N-103.pdf)
+
+- **Formazione sull'IA in ECM (D.Lgs. 160/2026)** — D.Lgs. 9/9/2026 n. 160 (GU n. 214 del 15/9/2026; com. FNOMCeO n. 102, 1/10/2026). Adeguamento all'AI Act: percorsi di alfabetizzazione e formazione sull'IA integrati nell'ECM per le professioni sanitarie (accordo Stato-Regioni entro 6 mesi; quota di crediti ECM triennali definita dalla Commissione nazionale ECM). [PDF](https://portale.fnomceo.it/wp-content/uploads/2026/10/COM-N-102.pdf)
+
+- **LEA: primo aggiornamento dal 2017** — DM 3/8/2026 e DPCM 7/8/2026 (notizia Min. Salute, 1/10/2026). Circa 800 voci nuove o riviste: screening neonatale SMA, screening neonatale esteso a 8 ulteriori patologie, test prenatali non invasivi, gravidanza fisiologica; nuove esenzioni per malattie croniche, invalidanti e rare; sorveglianza BRCA1/2. [salute.gov.it](https://www.salute.gov.it/new/it/news-e-media/notizie/lea-pubblicati-gu-i-decreti-di-aggiornamento/)
+
+- **Corso FAD AIFA-FIMMG su metodologia della ricerca clinica in medicina generale** — AIFA, 1/10/2026. Nell'ambito del protocollo d'intesa AIFA-FIMMG; 9 crediti ECM. [aifa.gov.it](https://www.aifa.gov.it/-/al-via-corso-fad-aifa-fimmg)
 
 ## Settembre 2026
 
