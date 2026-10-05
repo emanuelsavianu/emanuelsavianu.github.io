@@ -2815,8 +2815,10 @@ html { text-rendering: optimizeLegibility; }
             align-items: center;
             gap: 8px;
         }
-        .pir-summary-yes h4 { color: #28a745; }
-        .pir-summary-no h4 { color: #dc3545; }
+        .pir-summary-yes h4 { color: #1e7a33; }
+        .pir-summary-no h4 { color: #b3261e; }
+        body.dark-mode .pir-summary-yes h4 { color: #4ade80; }
+        body.dark-mode .pir-summary-no h4 { color: #ff8a8a; }
         .pir-summary-box ul {
             margin: 0;
             padding-left: 20px;
@@ -2917,17 +2919,17 @@ body.ed {
     --ed-field-rule: rgba(255, 255, 255, 0.16);
     --ed-on-field:   #ffffff;
     --ed-on-field-2: #c6cfda;   /* muted on the field — 7.4:1 */
-    --ed-paper:      #f7f7f8;   /* true off-white, chroma ~0 */
-    --ed-paper-2:    #ffffff;
-    --ed-paper-edge: #e6e8ec;
+    --ed-paper:      #f3efe6;   /* vanilla-sepia ground — brand cream */
+    --ed-paper-2:    #fbf8f0;   /* warm card, one step above the ground */
+    --ed-paper-edge: #e2dac7;
     --ed-rule:       rgba(26, 47, 76, 0.14);
     --ed-ink:        #14202e;
     --ed-muted:      #55606e;
     --ed-brass:      #c29b57;
     --ed-brass-hi:   #d2ac6b;
     --ed-brass-ink:  #7a5c2e;   /* gold as TEXT on paper — 5.4:1 */
-    --ed-stamp:      #f3efe6;   /* brand cream — rationed */
-    --ed-stamp-edge: #e3dac6;
+    --ed-stamp:      #ece4d2;   /* brand cream — rationed */
+    --ed-stamp-edge: #d8ceb6;
     --ed-danger:     #b91c1c;
     --ed-danger-on-field: #f6b0b0;
     --ed-ok:         #166534;

@@ -38,7 +38,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261005a">
+    <link rel="stylesheet" href="../styles.css?v=20261005b">
 
     <style>
         :root {
@@ -182,7 +182,7 @@
             margin-bottom: 4px;
         }
         .priority-card.urgent .priority-code { color: var(--danger); }
-        .priority-card.short .priority-code  { color: #d97706; }
+        .priority-card.short .priority-code  { color: #b45309; }
         .priority-card.defer .priority-code  { color: #15803d; }
         .priority-card.sched .priority-code  { color: #1d4ed8; }
 
@@ -190,6 +190,17 @@
         body.dark-mode .priority-card.short .priority-code  { color: #fcd34d; }
         body.dark-mode .priority-card.defer .priority-code  { color: #86efac; }
         body.dark-mode .priority-card.sched .priority-code  { color: #93c5fd; }
+
+        /* Lettere di priorità nella tabella branche (AA in chiaro e in scuro) */
+        .prio-letter { font-weight: 700; margin-right: 6px; }
+        .prio-letter--u { color: #b91c1c; }
+        .prio-letter--b { color: #b45309; }
+        .prio-letter--d { color: #15803d; }
+        .prio-letter--p { color: #1d4ed8; }
+        body.dark-mode .prio-letter--u { color: #fca5a5; }
+        body.dark-mode .prio-letter--b { color: #fcd34d; }
+        body.dark-mode .prio-letter--d { color: #86efac; }
+        body.dark-mode .prio-letter--p { color: #93c5fd; }
 
         .priority-card h3 { font-size: 0.95rem; font-weight: 700; margin: 0 0 4px; color: var(--text-dark); }
         body.dark-mode .priority-card h3 { color: #f3efe6; }
@@ -366,22 +377,22 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: var(--danger); margin-right: 6px;">U</span>Urgente</h3></td>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span class="prio-letter prio-letter--u">U</span>Urgente</h3></td>
                             <td>Entro 72 ore (3 giorni)</td>
                             <td>Situazione clinicamente urgente che non può attendere ma non richiede il Pronto Soccorso.</td>
                         </tr>
                         <tr>
-                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: #d97706; margin-right: 6px;">B</span>Breve</h3></td>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span class="prio-letter prio-letter--b">B</span>Breve</h3></td>
                             <td>Entro 10 giorni</td>
                             <td>Problemi che richiedono valutazione rapida per potenziale progressione o dubbio diagnostico.</td>
                         </tr>
                         <tr>
-                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: #15803d; margin-right: 6px;">D</span>Differibile</h3></td>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span class="prio-letter prio-letter--d">D</span>Differibile</h3></td>
                             <td>Entro 30 gg (visite) / 60 gg (diagnostica)</td>
                             <td>Situazioni clinicamente rilevanti ma non urgenti; la condizione è stabile.</td>
                         </tr>
                         <tr>
-                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span style="color: #1d4ed8; margin-right: 6px;">P</span>Programmabile</h3></td>
+                            <td><h3 style="font-size: 0.95rem; font-weight: 700; margin: 0;"><span class="prio-letter prio-letter--p">P</span>Programmabile</h3></td>
                             <td>Entro 120 giorni</td>
                             <td>Controlli programmati, follow-up, patologie croniche stabili in percorso noto.</td>
                         </tr>

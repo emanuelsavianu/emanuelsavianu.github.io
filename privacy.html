@@ -58,12 +58,12 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="styles.css?v=20261005a">
+    <link rel="stylesheet" href="styles.css?v=20261005b">
 
     <style>
         :root {
-            --bg: #ffffff;
-            --bg-alt: #f9f9f9;
+            --bg: #f3efe6;
+            --bg-alt: #e8e2d2;
             --text: #333333;
             --heading1: #1a2f4c;
             --heading2: #285078;
@@ -111,6 +111,9 @@
         .btn-back { display: inline-block; margin-top: 20px; padding: 10px 20px; background: var(--btn-bg); color: var(--btn-color); border-radius: 5px; border: 1px solid var(--border); }
         .btn-back:hover { text-decoration: none; opacity: 0.85; }
         strong { color: var(--heading1); }
+        /* Il footer è su navy: il `strong` qui sopra (navy) lo rendeva invisibile
+           in modalità chiara. I numeri/valori restano in eredità (bianco). */
+        .footer-legal-note strong, footer strong { color: inherit; }
     </style>
 </head>
 <body>
