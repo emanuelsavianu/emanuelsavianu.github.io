@@ -1701,6 +1701,15 @@ site-nav, site-footer { display: block; align-self: stretch; }
 }
 .nav-menu a:hover { color: var(--accent); background: rgba(255,255,255,0.08); opacity: 1; }
 .nav-menu a[aria-current="page"] { color: var(--accent); border-bottom: 2px solid var(--accent); }
+/* CTA della barra (es. International Patients): l'unica voce "bottone" del menu,
+   stesso linguaggio del bottone "Segreteria"/"Front desk" — oro su navy. */
+.nav-menu .nav-cta a { background: var(--accent); color: #17202e; font-weight: 700; }
+.nav-menu .nav-cta a:hover { background: #d2ac6b; color: #17202e; opacity: 1; }
+.nav-menu .nav-cta a[aria-current="page"] { color: #17202e; border-bottom-color: transparent; }
+/* La CTA esiste SOLO in inglese: in italiano la barra resta a cinque voci.
+   Pilotata dall'attributo lang del documento (impostato da setLanguage), quindi
+   vale anche per /international/ (lang="en" fisso) e per chi ha la preferenza EN. */
+html:not([lang^="en"]) .nav-menu .nav-cta { display: none; }
 .nav-toggle {
     display: none; background: none; border: 1px solid rgba(255,255,255,0.35);
     color: var(--accent); border-radius: var(--radius-md);
@@ -1717,6 +1726,8 @@ site-nav, site-footer { display: block; align-self: stretch; }
     }
     .nav-menu.open { display: flex; }
     .nav-menu a { display: block; padding: 14px 12px; font-size: 1rem; }
+    .nav-menu .nav-cta { margin-top: 8px; }
+    .nav-menu .nav-cta a { text-align: center; }
 }
 body.dark-mode .site-nav { background: var(--bg-gradient-2); }
 body.dark-mode .nav-menu { background: var(--bg-gradient-2); } /* don't let --primary-dark (gold in dark mode) make the dropdown unreadable */
@@ -3025,6 +3036,51 @@ body.ed {
 }
 .ed .nav-menu a:hover { color: #fff; background: none; }
 .ed .nav-menu a[aria-current="page"] { color: var(--ed-brass); border-bottom-color: var(--ed-brass); }
+/* CTA della barra: bottone brass compatto, come ".btn-telefono-header" (Front desk) */
+.ed .nav-menu .nav-cta { display: flex; align-items: center; padding-inline: 10px; }
+.ed .nav-menu .nav-cta a {
+    background: var(--ed-brass); color: #17202e;
+    padding: 10px 16px; border-radius: 2px; letter-spacing: 0.12em;
+    border-bottom-color: transparent;
+}
+.ed .nav-menu .nav-cta a:hover { background: var(--ed-brass-hi); color: #17202e; }
+.ed .nav-menu .nav-cta a[aria-current="page"] { color: #17202e; border-bottom-color: transparent; }
+@media (max-width: 1024px) {
+    /* Solo in INGLESE (dove la voce extra compare): ≤1024px la barra ed con le
+       etichette EN + CTA andrebbe a capo su due righe → collassa all'hamburger,
+       come fa la barra base sotto i 900px. In italiano la barra non cambia. */
+    html[lang^="en"] .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    html[lang^="en"] .nav-menu {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: var(--primary-dark);
+        border-top: 2px solid var(--accent); box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        padding: 8px 12px 16px; gap: 0;
+    }
+    html[lang^="en"] .nav-menu.open { display: flex; }
+    html[lang^="en"] .nav-menu a { display: block; padding: 14px 12px; font-size: 1rem; }
+    /* dark mode: --primary-dark diventa ORO, quindi il fondo del dropdown non
+       può venire da lì (stesso motivo della regola base più sopra). Le pagine
+       .ed hanno il proprio fondo (--ed-field) e sono escluse qui. */
+    html[lang^="en"] body.dark-mode:not(.ed) .nav-menu { background: var(--bg-gradient-2); }
+    html[lang^="en"] .ed .nav-toggle { display: inline-flex; align-items: center; justify-content: center; }
+    html[lang^="en"] .ed .nav-menu {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; background: var(--ed-field);
+        border-top: 1px solid var(--ed-field-rule); box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+        padding: 8px 12px 16px; gap: 0;
+    }
+    html[lang^="en"] .ed .nav-menu.open { display: flex; }
+    html[lang^="en"] .ed .nav-menu a { display: block; padding: 14px 12px; font-size: 0.9rem; }
+    html[lang^="en"] .ed .nav-menu .nav-cta { display: block; padding-inline: 12px; margin-top: 8px; }
+    html[lang^="en"] .ed .nav-menu .nav-cta a { display: block; text-align: center; padding: 14px 12px; }
+}
+@media (min-width: 1025px) and (max-width: 1279px) {
+    /* Fra 1025 e 1279px la barra ed in inglese resta su una riga solo con
+       spaziature ridotte (etichette EN + CTA = ~1015px, qui ce ne sono ~945). */
+    html[lang^="en"] .ed .nav-menu a { padding-inline: 10px; letter-spacing: 0.12em; }
+    html[lang^="en"] .ed .nav-menu .nav-cta { padding-inline: 6px; }
+    html[lang^="en"] .ed .nav-menu .nav-cta a { padding: 10px 12px; letter-spacing: 0.06em; }
+}
 .ed .nav-toggle { border-color: var(--ed-field-rule); color: var(--ed-brass); }
 
 .ed .lang-switch {
@@ -3259,7 +3315,9 @@ body.dark-mode .ed .ed-btn--outline { border-color: rgba(255, 255, 255, 0.28); c
     gap: 6px clamp(20px, 3vw, 44px);
     align-items: center;
     padding-block: 14px;
+    cursor: pointer;   /* tutta la riga apre/chiude, non solo il titolo */
 }
+.ed-path__row:hover { background: rgba(255,255,255,0.04); }
 .ed-path__title {
     font-family: var(--font-serif);
     font-weight: 500; line-height: 0.98; letter-spacing: -0.02em;

@@ -19,8 +19,8 @@ export function isPatientSection(section) {
   return section !== 'colleghi' && section !== 'static';
 }
 
-export function navItem(href, i18nKey, isPatient, isCurrent, label) {
-  return `<li><a href="${href}"${isPatient ? ` data-i18n="${i18nKey}"` : ''}${isCurrent ? ' aria-current="page"' : ''}>${label}</a></li>`;
+export function navItem(href, i18nKey, isPatient, isCurrent, label, extraClass = '') {
+  return `<li${extraClass ? ` class="${extraClass}"` : ''}><a href="${href}"${isPatient ? ` data-i18n="${i18nKey}"` : ''}${isCurrent ? ' aria-current="page"' : ''}>${label}</a></li>`;
 }
 
 // Markup inserito PRIMA di <site-nav> da app.js (skip-link + barra avvisi).
@@ -68,6 +68,8 @@ export function siteNavInnerHTML({ section = 'root', prefix = '', fixedLang = ''
         navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
         navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
         navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
+        // CTA "bottone": unica voce colorata della barra (doppio target, IT/EN).
+        navItem(prefix + 'international/', 'nav_international', isPatient, here.includes('/international'), 'International Patients', 'nav-cta') +
       '</ul>' +
     '</nav>';
 
