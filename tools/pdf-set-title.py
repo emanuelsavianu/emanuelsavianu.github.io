@@ -55,6 +55,8 @@ TITLES = {
     'accessi-vascolari-scheda-pre-procedura.pdf': "Accessi vascolari — Scheda di valutazione pre-procedura (Mod. 0607 rev. 002)",
     'accessi-vascolari-consenso-informato.pdf': "Accessi vascolari — Modulo di consenso informato per impianto di dispositivo venoso (PAISCI 011)",
     'pdta-disturbi-cognitivi-demenze.pdf': "PDTA — Disturbi cognitivi e demenze (PDA-PCUR-003)",
+    # segnalazioni obbligatorie
+    'scheda-unica-segnalazione-malattie-infettive.pdf': "Scheda unica di segnalazione delle malattie infettive — D.M. 7 marzo 2022 (Allegato A, decreto n. 21090 del 25/09/2026)",
 }
 
 WS = b'\x00\t\n\x0c\r '
