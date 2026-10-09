@@ -9,6 +9,8 @@ description: Comunicazioni ufficiali 2026 per i MMG: FNOMCeO, Ministero della Sa
 
 Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina aggiornata automaticamente ogni settimana.
 
+> **In evidenza — Campagna antinfluenzale 2026-2027: il prodotto per ogni fascia d'età.** Tabella di riferimento della campagna: FLUCELVAX 6-23 mesi; FLUENZ (spray nasale) 2-6 anni; FLUCELVAX (riservato ai Pediatri di Libera Scelta), VAXIGRIP e INFLUVAC S 7-59 anni; FLUAD 60-79 anni (estensibile a 50-60 anni con patologie croniche e compromissione del sistema immunitario); EFLUELDA dagli 80 anni e per gli ospiti delle RSA di età superiore a 60 anni. Immagine: [tabella dei vaccini per fascia d'età](https://savianu.it/colleghi/allegati/campagna-antinfluenzale-2026-2027-prodotto-per-fascia-eta.png) — pagina: [comunicazioni-2026.html#antinfluenzale-2627](https://savianu.it/colleghi/comunicazioni-2026.html#antinfluenzale-2627).
+
 > **In evidenza — Campagna anti-COVID 2026-2027 (scheda rapida per il MMG).** In Toscana la campagna parte **mercoledì 14 ottobre 2026**. Vaccino **Comirnaty XFG** (mRNA aggiornato alla variante XFG), richiamo annuale gratuito per le categorie raccomandate; co-somministrazione possibile con l'antinfluenzale. Scheda sintetica con grafico e documenti allegati nella pagina: [comunicazioni-2026.html#covid-2627](https://savianu.it/colleghi/comunicazioni-2026.html#covid-2627).
 
 ## Ottobre 2026

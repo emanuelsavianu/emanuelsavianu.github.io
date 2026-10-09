@@ -364,6 +364,16 @@
         body.dark-mode .cv-step::before { box-shadow: 0 0 0 3px var(--primary); }
         body.dark-mode .cv-attach a:hover { color: var(--accent); }
 
+        /* ── In evidenza: campagna antinfluenzale 2026-2027 (tabella per fascia d'età) ── */
+        .fl-figure { margin: 0; }
+        .fl-figure > a { display: block; }
+        .fl-figure img {
+            display: block; width: 100%; height: auto;
+            border: 1px solid var(--border-color); border-radius: var(--radius-md);
+        }
+        .fl-figure figcaption { font-size: 0.78rem; color: var(--text-medium); margin-top: 10px; }
+        body.dark-mode .fl-figure img { border-color: rgba(255, 255, 255, .2); }
+
         @media (max-width: 720px) {
             .cv-timeline, .cv-cols { grid-template-columns: 1fr; }
         }
@@ -393,6 +403,21 @@
     </section>
 
     <div class="content-wrapper">
+
+        <!-- In evidenza: campagna antinfluenzale 2026-2027 — tabella dei prodotti per fascia d'età -->
+        <section class="cv-spot fl-spot" id="antinfluenzale-2627" aria-labelledby="fl-spot-heading">
+            <span class="cv-kicker"><i class="fas fa-shield-virus" aria-hidden="true"></i> In evidenza · Campagna antinfluenzale 2026-2027</span>
+            <h2 id="fl-spot-heading">Vaccino antinfluenzale: il prodotto per ogni fascia d'età</h2>
+            <p class="cv-lede">
+                Tabella di riferimento per la scelta del prodotto nella stagione in corso: per ciascuna fascia d'età indica la tipologia di vaccino e il prodotto da utilizzare. Le due note in calce precisano la riserva di FLUCELVAX ai Pediatri di Libera Scelta e la possibile estensione di FLUAD ai soggetti tra i 50 e i 60 anni con compromissione del sistema immunitario.
+            </p>
+            <figure class="fl-figure">
+                <a href="allegati/campagna-antinfluenzale-2026-2027-prodotto-per-fascia-eta.png" target="_blank" rel="noopener">
+                    <img src="allegati/campagna-antinfluenzale-2026-2027-prodotto-per-fascia-eta.png" alt="Tabella della campagna antinfluenzale 2026-2027 con prodotto e indicazioni per fascia d'età: FLUCELVAX dai 6 ai 23 mesi; FLUENZ spray nasale da 2 a 6 anni; FLUCELVAX (riservato ai Pediatri di Libera Scelta), VAXIGRIP e INFLUVAC S da 7 a 59 anni; FLUAD da 60 a 79 anni; EFLUELDA dagli 80 anni e per gli ospiti delle RSA di età superiore a 60 anni." width="903" height="452" decoding="async">
+                </a>
+                <figcaption>Tabella dei vaccini antinfluenzali per fascia d'età (stagione 2026-2027). Clicca l'immagine per aprirla a dimensione piena.</figcaption>
+            </figure>
+        </section>
 
         <div class="note-box">
             <strong>Come è costruita questa pagina.</strong>
