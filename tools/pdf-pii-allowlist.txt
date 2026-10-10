@@ -54,3 +54,16 @@
 ^05/10/2026$
 ^01/10/2026$
 ^055[\s.\-]?4383275$
+
+# 10/10/2026 — Procedura GOM "PP-PARE-70" (Rev. 0, Direzione P.O. Aretino, Casentino,
+# Valtiberina e Valdichiana Aretina — Azienda USL Toscana Sud Est) pubblicata in
+# colleghi/modulistica/. Documento programmatico pubblico sulla presa in carico del paziente
+# con tumore gastrointestinale sospetto o accertato: nessun dato di assistito. I riscontri
+# sono le date dei riferimenti normativi citati nel testo (DGR Toscana n. 32 del 14/01/2019,
+# DGR n. 699 del 23/01/2019, Deliberazione del DG n. 1191 del 29/10/2019). Nomi e firme
+# presenti nel frontespizio sono quelli dei professionisti in carica che redigono, verificano
+# e approvano la procedura (atto pubblico), non dati di pazienti; non sono presenti recapiti
+# telefonici personali.
+^14/01/2019$
+^23/01/2019$
+^29/10/2019$
