@@ -192,6 +192,14 @@
             margin: 0 0 12px;
         }
         .doc-summary strong { color: var(--primary); }
+        .doc-codes {
+            margin: 0 0 12px 18px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: var(--text-medium);
+        }
+        .doc-codes li { margin-bottom: 6px; }
+        .doc-codes strong { color: var(--primary); }
         .source-link {
             display: inline-flex;
             align-items: center;
@@ -270,6 +278,7 @@
         body.dark-mode .doc-chip.active { background: var(--accent); border-color: var(--accent); color: var(--primary); }
         /* Dark mode: contrasto dei testi su superfici --primary (chiaro su scuro) */
         body.dark-mode .doc-summary strong { color: var(--text-dark); }
+        body.dark-mode .doc-codes strong { color: var(--text-dark); }
         body.dark-mode .source-link:hover,
         body.dark-mode .fonti-grid a:hover { color: var(--text-dark); }
 
@@ -398,7 +407,7 @@
     <section class="page-hero" aria-labelledby="hero-heading">
         <h1 class="hero-title" id="hero-heading">Comunicazioni ufficiali 2026<br>per la Medicina Generale</h1>
         <p class="hero-desc">
-            Raccolta curata e verificata delle comunicazioni, circolari e norme del 2026 rilevanti per i medici di famiglia — in ordine cronologico, dalla più recente alla più vecchia, con sintesi e link diretti alle fonti ufficiali. Aggiornata al 12 ottobre 2026.
+            Raccolta curata e verificata delle comunicazioni, circolari e norme del 2026 rilevanti per i medici di famiglia — in ordine cronologico, dalla più recente alla più vecchia, con sintesi e link diretti alle fonti ufficiali. Aggiornata al 13 ottobre 2026.
         </p>
     </section>
 
@@ -504,6 +513,25 @@
 
         <div class="month-group" data-month="2026-10">
             <h2 class="month-head"><i class="fas fa-calendar-alt" aria-hidden="true"></i>Ottobre 2026</h2>
+            <article class="doc-card" data-cat="studio">
+                <div class="doc-meta">
+                    <span class="doc-badge ente">USL Toscana Sud Est · Consultoriali</span>
+                    <span class="doc-badge date">13 ottobre 2026</span>
+                    <span class="doc-badge cat">Studio</span>
+                </div>
+                <h3>Tamponi vaginali ed endocervicali: i due codici corretti da usare</h3>
+                <p class="doc-summary">
+                    Le richieste di tampone vaginale ed endocervicale continuano a essere inoltrate con codici errati. I codici da utilizzare sono due, distinti per sede del prelievo:
+                </p>
+                <ul class="doc-codes">
+                    <li><strong>90.93.C</strong> — <strong>[6536]</strong> PCR MULTIPLEX AGENTI INFETTIVI MTS E ESAME COLTURALE GONOCOCCO REFLEX <strong>[TAMPONE ENDOCERVICALE]</strong></li>
+                    <li><strong>90.93.B</strong> — <strong>[KBA013]</strong> BATTERI E LIEVITI ESAME COLTURALE E MICROSCOPICO E RICERCA TRICHOMONAS VAGINALIS <strong>[TAMPONE VAGINALE]</strong></li>
+                </ul>
+                <p class="doc-summary">
+                    Segnalazione della Responsabile Ostetrica della U.F. Attività Consultoriali del Distretto (Azienda USL Toscana Sud Est): per il laboratorio gli unici codici da utilizzare sono questi due.
+                </p>
+            </article>
+
             <article class="doc-card" data-cat="ecm">
                 <div class="doc-meta">
                     <span class="doc-badge ente">AIFA · COSIsiFA</span>
@@ -1048,7 +1076,7 @@
         </section>
 
         <div class="note-box">
-            <strong>Disclaimer:</strong> contenuti a scopo informativo per personale sanitario; non sostituiscono i documenti ufficiali né il giudizio clinico. Sintesi redatte e verificate sul testo originale dei documenti citati (ultima verifica: 12 ottobre 2026).
+            <strong>Disclaimer:</strong> contenuti a scopo informativo per personale sanitario; non sostituiscono i documenti ufficiali né il giudizio clinico. Sintesi redatte e verificate sul testo originale dei documenti citati (ultima verifica: 13 ottobre 2026).
         </div>
 
     </div>

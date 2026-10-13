@@ -5,7 +5,7 @@ description: Comunicazioni ufficiali 2026 per i MMG: FNOMCeO, Ministero della Sa
 
 # Comunicazioni ufficiali 2026 per la Medicina Generale
 
-> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 12 ottobre 2026.
+> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 13 ottobre 2026.
 
 Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina aggiornata automaticamente ogni settimana.
 
@@ -14,6 +14,8 @@ Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina
 > **In evidenza — Campagna anti-COVID 2026-2027 (scheda rapida per il MMG).** In Toscana la campagna parte **mercoledì 14 ottobre 2026**. Vaccino **Comirnaty XFG** (mRNA aggiornato alla variante XFG), richiamo annuale gratuito per le categorie raccomandate; co-somministrazione possibile con l'antinfluenzale. Scheda sintetica con grafico e documenti allegati nella pagina: [comunicazioni-2026.html#covid-2627](https://savianu.it/colleghi/comunicazioni-2026.html#covid-2627).
 
 ## Ottobre 2026
+
+- **Tamponi vaginali ed endocervicali: i due codici corretti da usare** — Azienda USL Toscana Sud Est, U.F. Attività Consultoriali del Distretto, 13/10/2026. Le richieste di tampone vaginale ed endocervicale continuano a essere inoltrate con codici errati: i codici da utilizzare sono due, distinti per sede del prelievo — tampone endocervicale **90.93.C — [6536] PCR MULTIPLEX AGENTI INFETTIVI MTS E ESAME COLTURALE GONOCOCCO REFLEX [TAMPONE ENDOCERVICALE]**; tampone vaginale **90.93.B — [KBA013] BATTERI E LIEVITI ESAME COLTURALE E MICROSCOPICO E RICERCA TRICHOMONAS VAGINALIS [TAMPONE VAGINALE]**. Per il laboratorio gli unici codici da utilizzare sono questi due.
 
 - **Corso FAD sull'antimicrobico resistenza "One Health": 13 crediti ECM (COSIsiFA)** — AIFA, 6/10/2026. Gratuito e per tutti gli operatori sanitari (pubblici e privati, tutte le Regioni); 4 moduli su uso appropriato degli antibiotici, antimicrobial stewardship, diagnostica microbiologica, prevenzione delle infezioni correlate all'assistenza e prospettiva One Health; fruibile fino al 9/9/2027. [aifa.gov.it](https://www.aifa.gov.it/-/antimicrobico-resistenza-l-approccio-one-health-al-via-il-corso-fad-del-progetto-cosisifa)
 
