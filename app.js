@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js?v=20261005a';
 // Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
 // verità per il render client e per il pre-render statico (vedi chrome.js).
-import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261005a';
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261005b';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -326,7 +326,7 @@ export const translations = {
         faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Prenotazioni e Appuntamenti",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Ricette e Farmaci",
         faq_q1: "Come prenoto una visita?",
-        faq_a1: "Le prenotazioni avvengono tramite <strong>Doctolib</strong>:<ul><li>Clicca \"Prenota su Doctolib\" qui sotto o vai su <a href='index.html'>savianu.it</a></li><li>Scegli il tipo di visita nell'app Doctolib</li><li>Conferma l'appuntamento</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent-text);font-weight:700;'>Clicca qui per prenotare →</a></div><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
+        faq_a1: "Le prenotazioni avvengono tramite <strong>Doctolib</strong>:<ul><li>Clicca \"Prenota su Doctolib\" qui sotto o vai su <a href='/'>savianu.it</a></li><li>Scegli il tipo di visita nell'app Doctolib</li><li>Conferma l'appuntamento</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent-text);font-weight:700;'>Clicca qui per prenotare →</a></div><div class='highlight-box'>In alternativa, chiama la segreteria al <strong>0575 910 904</strong> durante gli orari di ambulatorio.</div>",
         faq_q2: "Posso venire senza appuntamento?",
         faq_a2: "Il Dottore riceve <strong>solo su appuntamento</strong> per garantire tempi di attesa ragionevoli e dedicare la giusta attenzione a ogni paziente.",
         faq_q3: "Quali sono gli orari dell'ambulatorio?",
@@ -699,7 +699,7 @@ export const translations = {
         faq_sec_prenotazioni: "<i class='fas fa-calendar-check'></i> Appointments &amp; Bookings",
         faq_sec_ricette: "<i class='fas fa-pills'></i> Prescriptions &amp; Medications",
         faq_q1: "How do I book a visit?",
-        faq_a1: "Book your appointment through <strong>Doctolib</strong>:<ul><li>Click \"Book on Doctolib\" below or go to <a href='index.html'>savianu.it</a></li><li>Choose the visit type in the Doctolib app</li><li>Confirm your appointment</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent-text);font-weight:700;'>Click here to book →</a></div><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
+        faq_a1: "Book your appointment through <strong>Doctolib</strong>:<ul><li>Click \"Book on Doctolib\" below or go to <a href='/'>savianu.it</a></li><li>Choose the visit type in the Doctolib app</li><li>Confirm your appointment</li></ul><div class='highlight-box'><a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent-text);font-weight:700;'>Click here to book →</a></div><div class='highlight-box'>Alternatively, call reception on <strong>0575 910 904</strong> during clinic hours.</div>",
         faq_q2: "Can I come without an appointment?",
         faq_a2: "The doctor sees patients <strong>by appointment only</strong> to ensure reasonable waiting times and give each patient the attention they deserve.<br><br>If you are unwell and cannot book via Doctolib, come in anyway: the receptionist will let the doctor know, and he will contact you as soon as he is free.",
         faq_q3: "What are the clinic opening hours?",
