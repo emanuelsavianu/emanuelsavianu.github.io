@@ -137,6 +137,16 @@ body {
   padding: 1mm 10mm 3mm;
 }
 
+/* Schermo stretto (audit 2026-10-14, F4): con 4 colonne da `1fr` la larghezza
+   minima del contenuto vale ~800px, quindi a 390px la pagina usciva dal
+   viewport di 300-540px (lo zoom-out di Chrome rimpiccioliva il poster e il
+   contenuto restava tagliato). Stesso schema già usato da
+   ssn/poster_multilingue.html. Solo `screen`: la stampa resta A3 landscape. */
+@media screen and (max-width: 1200px) { .cards { grid-template-columns: repeat(2, 1fr); } }
+@media screen and (max-width: 700px) { .cards { grid-template-columns: 1fr; } }
+.card { min-width: 0; }
+.card h3, .card p, .img-ph figcaption { overflow-wrap: anywhere; }
+
 .card {
   border: 1mm solid var(--border);
   border-radius: 4mm;
@@ -164,7 +174,7 @@ body {
   font-size: 6.8pt;
 }
 
-.card h3 {
+.card h2, .card h3 {
   font-size: 12pt;
   font-weight: 800;
   color: var(--ink);
