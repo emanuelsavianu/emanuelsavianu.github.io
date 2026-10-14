@@ -7,9 +7,8 @@
   <title>RUAP Attività Diurne — Turni</title>
   <!-- Tailwind CSS (static build) -->
   <link rel="stylesheet" href="/assets/css/tools.tw.navy.min.css?v=2">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Font self-hosted (audit 2026-10-14): nessuna richiesta a Google. -->
+  <link rel="stylesheet" href="../../assets/fonts/fonts.css" />
   <link rel="stylesheet" href="../../assets/fontawesome/css/fontawesome.min.css" />
   <link rel="stylesheet" href="../../assets/fontawesome/css/solid.subset.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -22,7 +21,16 @@
     .thin-scroll::-webkit-scrollbar-track { background: #f1f5f9; }
     .thin-scroll::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 2px; }
     /* Transizione slot calendario */
-    .slot-btn { transition: all 0.15s ease; }
+    #doctor-search::placeholder { color: #475569; }
+  /* Azioni dell'header: bianco su emerald-600/orange-600/amber-500 = 2.15-3.77:1
+     (gli stessi token sono scesi a 700/800, tutti >=4.5:1 con testo bianco). */
+  #header-actions .bg-emerald-600, #btn-export-png { background: #047857 !important; }
+  #header-actions .bg-emerald-600:hover, #btn-export-png:hover { background: #065f46 !important; }
+  #btn-reset-assignments { background: #c2410c !important; }
+  #btn-reset-assignments:hover { background: #9a3412 !important; }
+  #btn-conflicts { background: #b45309 !important; }
+  #btn-conflicts:hover { background: #92400e !important; }
+  .slot-btn { transition: all 0.15s ease; }
     .slot-btn:hover { transform: scale(1.02); }
     /* Legibility: white text on the doctor-color chips needs a shadow to pass contrast on light hues */
     .slot-btn.text-white { text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45); }
@@ -83,7 +91,7 @@
     html.dark .text-slate-800 { color: #e2e8f0 !important; }
     html.dark .text-slate-700 { color: #cbd5e1 !important; }
     html.dark .text-slate-600 { color: #94a3b8 !important; }
-    html.dark .text-slate-500 { color: #64748b !important; }
+    html.dark .text-slate-600 { color: #64748b !important; }
     html.dark .border-slate-200 { border-color: #334155 !important; }
     html.dark .border-slate-100 { border-color: #1e293b !important; }
     html.dark .shadow { box-shadow: 0 1px 3px rgba(0,0,0,.4) !important; }
@@ -240,9 +248,9 @@
 <body class="bg-brand-50 text-slate-800 min-h-screen font-sans">
 
 <!-- Demo banner -->
-<div id="demo-banner" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-2 text-sm text-amber-800 flex items-center justify-between">
+<div id="demo-banner" role="region" aria-label="Avviso dati demo" class="hidden bg-amber-50 border-b border-amber-200 px-4 py-2 text-sm text-amber-800 flex items-center justify-between">
   <span><i class="fa-solid fa-circle-info mr-2"></i>Stai vedendo dati precaricati. Per una nuova configurazione clicca <strong>Setup</strong> tra le azioni in alto.</span>
-  <button onclick="document.getElementById('demo-banner').classList.add('hidden')" class="ml-4 text-amber-600 hover:text-amber-800 font-bold text-lg leading-none">&times;</button>
+  <button onclick="document.getElementById('demo-banner').classList.add('hidden')" aria-label="Chiudi avviso" class="ml-4 text-amber-700 hover:text-amber-800 font-bold text-lg leading-none px-2 py-1">&times;</button>
 </div>
 
 <!-- Update banner — appears when config.js data has changed -->
@@ -255,7 +263,7 @@
     <div class="flex items-center gap-2">
       <button id="update-banner-accept" class="bg-brand-500 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-sm transition">Aggiorna</button>
       <button id="update-banner-keep" class="bg-white hover:bg-brand-100 text-brand-700 px-3 py-1.5 rounded-lg text-xs font-medium border border-brand-300 transition">Mantieni i miei dati</button>
-      <button id="update-banner-close" class="text-brand-400 hover:text-brand-300 font-bold text-lg leading-none ml-0.5 transition">&times;</button>
+      <button id="update-banner-close" class="hover:text-brand-300 font-bold text-lg leading-none ml-0.5 transition" style="color:#7a5c2e" aria-label="Chiudi avviso">&times;</button>
     </div>
   </div>
 </div>
@@ -270,7 +278,7 @@
         class="brand-logo h-11 w-11 rounded-full object-cover ring-2 ring-brand-400/70 shadow-md" / width="480" height="480">
       <div>
         <h1 class="font-display font-bold text-2xl leading-tight tracking-wide">Gestione Turni RUAP</h1>
-        <p id="header-subtitle" class="text-brand-300 text-[11px] tracking-widest">Per suggerimenti scrivi a suggerimenti@savianu.it</p>
+        <p id="header-subtitle" class="text-brand-300 text-xs tracking-widest">Per suggerimenti scrivi a suggerimenti@savianu.it</p>
       </div>
     </div>
     <!-- Mobile: apre/chiude il pannello azioni (su desktop è nascosto) -->
@@ -359,7 +367,7 @@
       <!-- Conflitti -->
       <button id="btn-conflicts" class="bg-amber-500 hover:bg-amber-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5 relative">
         <i class="fa-solid fa-scale-balanced"></i> Conflitti
-        <span id="conflicts-header-badge" class="hidden bg-red-600 text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full absolute -top-1 -right-1 leading-none">0</span>
+        <span id="conflicts-header-badge" class="hidden bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full absolute -top-1 -right-1 leading-none">0</span>
       </button>
       <!-- Configurazione guidata -->
       <button id="btn-restart-wizard" class="bg-brand-200 hover:bg-brand-100 text-brand-900 border border-brand-300 px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
@@ -377,7 +385,7 @@
   <!-- ---- SIDEBAR SINISTRA: Contatori medici ---- -->
   <aside class="w-full lg:w-72 flex-shrink-0 bg-white rounded-xl shadow p-4 lg:sticky top-20 thin-scroll mb-4 lg:mb-0" style="max-height: calc(100vh - 6rem); overflow-y: auto;">
     <!-- Stats row -->
-    <div class="flex justify-between text-xs text-slate-500 mb-2 px-1">
+    <div class="flex justify-between text-xs text-slate-600 mb-2 px-1">
       <span><i class="fas fa-user-md mr-1"></i> <b id="total-doctors">0</b> medici</span>
       <span><i class="fas fa-clock mr-1"></i> <b id="total-hours">0</b>h tot.</span>
       <span id="coverage-badge" class="text-xs font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-600">—%</span>
@@ -386,14 +394,14 @@
     <!-- Bilancio Mensile collassabile -->
     <button id="btn-toggle-monthly-stats" class="w-full text-left text-xs font-semibold text-brand-700 hover:text-brand-500 my-1.5 flex items-center gap-1.5 px-1" onclick="toggleMonthlyStats()">
       <i class="fa-solid fa-chart-simple text-brand-400"></i> Bilancio Mensile
-      <i class="fa-solid fa-eye ml-auto text-slate-400 text-[10px] cursor-pointer hover:text-brand-600" id="btn-hide-zero-docs" title="Nascondi inattivi" onclick="event.stopPropagation(); toggleHideZeroDocs()"></i>
-      <i class="fa-solid fa-chevron-down text-slate-400 text-[10px] transition-transform ml-1" id="monthly-stats-chevron" style="transform: rotate(180deg)"></i>
+      <i class="fa-solid fa-eye ml-auto text-slate-600 text-xs cursor-pointer hover:text-brand-600" id="btn-hide-zero-docs" title="Nascondi inattivi" onclick="event.stopPropagation(); toggleHideZeroDocs()"></i>
+      <i class="fa-solid fa-chevron-down text-slate-600 text-xs transition-transform ml-1" id="monthly-stats-chevron" style="transform: rotate(180deg)"></i>
     </button>
     <div id="monthly-stats-panel" class="text-sm space-y-1.5 mb-3 px-1"></div>
 
     <!-- Filtro AFT (Facoltativo) -->
     <div class="mb-3">
-      <label class="text-xs font-bold text-slate-600 uppercase tracking-widest mb-1 block">Filtra per AFT</label>
+      <label for="filter-aft" class="text-xs font-bold text-slate-600 uppercase tracking-widest mb-1 block">Filtra per AFT</label>
       <select id="filter-aft" class="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-brand-500">
         <option value="">-- Tutti --</option>
         <option value="1">AFT 1</option>
@@ -406,14 +414,14 @@
     </div>
 
     <!-- Search -->
-    <input type="text" id="doctor-search" placeholder="🔍 Cerca medico..."
+    <input type="text" id="doctor-search" aria-label="Cerca medico" placeholder="🔍 Cerca medico..."
       class="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-xs mb-3 focus:outline-none focus:ring-2 focus:ring-brand-500" />
 
     <!-- Selettore settimana per i contatori -->
     <div class="flex items-center justify-between mb-4 bg-slate-50 rounded-lg p-2">
-      <button id="sidebar-week-prev" class="text-brand-700 hover:text-brand-500 px-1"><i class="fa-solid fa-chevron-left"></i></button>
+      <button id="sidebar-week-prev" aria-label="Settimana precedente" class="text-brand-700 hover:text-brand-500 px-2 py-1.5"><i class="fa-solid fa-chevron-left"></i></button>
       <span id="sidebar-week-label" class="text-xs font-semibold text-slate-600 text-center"></span>
-      <button id="sidebar-week-next" class="text-brand-700 hover:text-brand-500 px-1"><i class="fa-solid fa-chevron-right"></i></button>
+      <button id="sidebar-week-next" aria-label="Settimana successiva" class="text-brand-700 hover:text-brand-500 px-2 py-1.5"><i class="fa-solid fa-chevron-right"></i></button>
     </div>
     <!-- Lista medici con contatori — generata dinamicamente -->
     <div id="sidebar-doctors" class="space-y-3"></div>
@@ -423,7 +431,7 @@
   <main id="layout-calendar" class="flex-1 min-w-0 overflow-x-auto">
     <!-- Navigazione mese con toggle vista -->
     <div class="bg-white rounded-xl shadow mb-4 px-4 py-3 flex items-center justify-between flex-wrap gap-2">
-      <button id="cal-prev" class="text-brand-700 hover:text-brand-500 font-bold px-2 py-1 rounded hover:bg-slate-100">
+      <button id="cal-prev" aria-label="Mese precedente" class="text-brand-700 hover:text-brand-500 font-bold px-2 py-1 rounded hover:bg-slate-100">
         <i class="fa-solid fa-chevron-left"></i>
       </button>
       <div class="flex items-center gap-3">
@@ -433,18 +441,18 @@
           <span id="view-toggle-label">Mensile</span>
         </button>
       </div>
-      <button id="cal-next" class="text-brand-700 hover:text-brand-500 font-bold px-2 py-1 rounded hover:bg-slate-100">
+      <button id="cal-next" aria-label="Mese successivo" class="text-brand-700 hover:text-brand-500 font-bold px-2 py-1 rounded hover:bg-slate-100">
         <i class="fa-solid fa-chevron-right"></i>
       </button>
     </div>
 
     <!-- Griglia intestazioni giorni -->
     <div class="grid grid-cols-5 gap-2 mb-2 px-1">
-      <div class="text-center text-xs font-bold text-slate-500 uppercase">Lun</div>
-      <div class="text-center text-xs font-bold text-slate-500 uppercase">Mar</div>
-      <div class="text-center text-xs font-bold text-slate-500 uppercase">Mer</div>
-      <div class="text-center text-xs font-bold text-slate-500 uppercase">Gio</div>
-      <div class="text-center text-xs font-bold text-slate-500 uppercase">Ven</div>
+      <div class="text-center text-xs font-bold text-slate-600 uppercase">Lun</div>
+      <div class="text-center text-xs font-bold text-slate-600 uppercase">Mar</div>
+      <div class="text-center text-xs font-bold text-slate-600 uppercase">Mer</div>
+      <div class="text-center text-xs font-bold text-slate-600 uppercase">Gio</div>
+      <div class="text-center text-xs font-bold text-slate-600 uppercase">Ven</div>
     </div>
 
     <!-- Griglia settimane del mese — generata dinamicamente -->
@@ -458,7 +466,7 @@
 <div id="assign-dropdown" class="hidden fixed bg-white rounded-xl shadow-2xl border border-slate-200 p-3 w-80">
   <div class="flex items-center justify-between mb-2">
     <span id="assign-slot-label" class="text-xs font-bold text-brand-800"></span>
-    <button id="assign-close" class="text-slate-400 hover:text-slate-600 text-lg leading-none">&times;</button>
+    <button id="assign-close" class="text-slate-600 hover:text-slate-600 text-lg leading-none">&times;</button>
   </div>
   <div id="assign-list" class="space-y-1 max-h-52 overflow-y-auto thin-scroll"></div>
   <!-- Trigger eccezione -->
@@ -467,10 +475,10 @@
   </button>
   <!-- Sezione medici non disponibili (appare dopo click su eccezione) -->
   <div id="assign-unavail-section" class="hidden mt-2 pt-2 border-t border-slate-100">
-    <div class="text-xs text-slate-400 uppercase font-bold mb-1 px-1">Tutti i medici</div>
+    <div class="text-xs text-slate-600 uppercase font-bold mb-1 px-1">Tutti i medici</div>
     <div id="assign-unavail-list" class="space-y-1 max-h-32 overflow-y-auto"></div>
     <div class="mt-2 pt-2 border-t border-slate-100" id="assign-custom-section">
-      <div class="text-xs text-slate-400 uppercase font-bold mb-1 px-1">Altro medico</div>
+      <div class="text-xs text-slate-600 uppercase font-bold mb-1 px-1">Altro medico</div>
       <div class="flex gap-1">
         <input id="assign-custom-input" type="text" placeholder="Nome cognome..." class="flex-1 text-xs border border-slate-200 rounded-lg px-2 py-1.5 outline-none focus:border-amber-400" />
         <button id="assign-custom-add" class="bg-amber-500 hover:bg-amber-400 text-white text-xs font-medium px-2.5 py-1.5 rounded-lg flex-shrink-0">Assegna</button>
@@ -528,7 +536,7 @@
         </div>
         <input type="number" id="modal-hours" placeholder="38" min="0" max="38" readonly
           class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm bg-slate-50 cursor-not-allowed focus:outline-none" />
-        <p id="debt-formula-text" class="text-xs text-slate-500 mt-1.5 font-mono bg-slate-50 px-2 py-1.5 rounded border border-slate-200">
+        <p id="debt-formula-text" class="text-xs text-slate-600 mt-1.5 font-mono bg-slate-50 px-2 py-1.5 rounded border border-slate-200">
           Fino a 400: 38h | 401-1.000: 24h | 1.001-1.200: 12h | 1.201-1.500: 6h | 1.500+: 0h
         </p>
       </div>
@@ -545,7 +553,7 @@
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-2">
           Disponibilità Standard
-          <span class="font-normal text-slate-400 ml-1">(M = Mattina 08-14, P = Pomeriggio 14-20)</span>
+          <span class="font-normal text-slate-600 ml-1">(M = Mattina 08-14, P = Pomeriggio 14-20)</span>
         </label>
         <div class="overflow-x-auto">
           <table class="w-full text-sm border-collapse">
@@ -566,12 +574,12 @@
           </button>
         </div>
         <div class="flex items-center gap-3 mb-2">
-          <button id="unavail-cal-prev" class="text-brand-700 hover:text-brand-500 px-1"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="unavail-cal-prev" aria-label="Mese precedente" class="text-brand-700 hover:text-brand-500 px-1"><i class="fa-solid fa-chevron-left"></i></button>
           <span id="unavail-cal-title" class="text-xs font-bold text-slate-600 text-center flex-1"></span>
-          <button id="unavail-cal-next" class="text-brand-700 hover:text-brand-500 px-1"><i class="fa-solid fa-chevron-right"></i></button>
+          <button id="unavail-cal-next" aria-label="Mese successivo" class="text-brand-700 hover:text-brand-500 px-1"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
         <div id="unavail-calendar" class="mb-1"></div>
-        <p class="text-xs text-slate-400 mt-1">Clicca su un giorno per renderlo indisponibile (rosso). Il medico verrà escluso dalle assegnazioni di quel giorno.</p>
+        <p class="text-xs text-slate-600 mt-1">Clicca su un giorno per renderlo indisponibile (rosso). Il medico verrà escluso dalle assegnazioni di quel giorno.</p>
       </div>
 
       <!-- Periodi di indisponibilità -->
@@ -583,7 +591,7 @@
           </button>
         </div>
         <div id="unavail-periods" class="space-y-2"></div>
-        <p class="text-xs text-slate-400 mt-1">Inserisci i periodi in cui il medico NON è disponibile (ferie, assenze, ecc.)</p>
+        <p class="text-xs text-slate-600 mt-1">Inserisci i periodi in cui il medico NON è disponibile (ferie, assenze, ecc.)</p>
       </div>
 
       <!-- Colore identificativo -->
@@ -598,7 +606,7 @@
           <label class="block text-sm font-semibold text-slate-700 mb-1">Budget Mensile (ore)</label>
           <input type="number" id="modal-monthly-budget" placeholder="auto" min="0" max="500"
             class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-          <p class="text-xs text-slate-400 mt-1">Lascia vuoto = weeklyHours × 4</p>
+          <p class="text-xs text-slate-600 mt-1">Lascia vuoto = weeklyHours × 4</p>
         </div>
         <div class="flex items-end pb-2">
           <label class="flex items-center gap-2 cursor-pointer">
@@ -612,7 +620,7 @@
       <div>
         <label class="block text-sm font-semibold text-slate-700 mb-2 flex items-center gap-2">
           <span>AFT (Aggregazione Territoriale)</span>
-          <span class="font-normal text-slate-400 text-xs">(Facoltativo)</span>
+          <span class="font-normal text-slate-600 text-xs">(Facoltativo)</span>
         </label>
         <select id="modal-aft" class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
           <option value="">-- Nessuna (non assegnato) --</option>
@@ -774,7 +782,7 @@
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">
   <div id="pdf-header" style="margin-bottom: 16px; border-bottom: 2px solid #c29b57; padding-bottom: 8px;">
-    <h1 style="font-size: 20px; font-weight: bold; color: #1a2f4c; margin: 0;">Turni RUAP Attività Diurne</h1>
+    <h2 style="font-size: 20px; font-weight: bold; color: #1a2f4c; margin: 0;">Turni RUAP Attività Diurne</h2>
     <p id="pdf-subtitle" style="font-size: 13px; color: #64748b; margin: 4px 0 0;"></p>
   </div>
   <div id="pdf-table"></div>
@@ -794,11 +802,11 @@
   <div class="wizard-card flex flex-col max-h-[92vh]">
     <div class="px-8 pt-6 pb-2">
       <div id="wizard-progress-dots" class="wizard-progress-dots"></div>
-      <p id="wizard-step-label" class="text-center text-sm text-slate-400 mt-2 font-medium sr-only">Passo 1 di 4</p>
+      <p id="wizard-step-label" class="text-center text-sm text-slate-600 mt-2 font-medium sr-only">Passo 1 di 4</p>
     </div>
     <div id="wizard-step-content" class="flex-1 overflow-y-auto px-8 py-5"></div>
     <div class="px-8 pb-6 pt-3 flex items-center gap-3">
-      <button id="wizard-back" class="hidden py-3 px-6 rounded-xl text-slate-500 font-bold hover:bg-slate-100 transition">
+      <button id="wizard-back" class="hidden py-3 px-6 rounded-xl text-slate-600 font-bold hover:bg-slate-100 transition">
         ← Indietro
       </button>
       <div class="flex-1"></div>
@@ -820,7 +828,7 @@
     <div class="w-full bg-slate-200 rounded-full h-3 mb-2">
       <div id="autoassign-progress-bar" class="bg-purple-600 h-3 rounded-full transition-all duration-100" style="width:0%"></div>
     </div>
-    <p id="autoassign-progress-label" class="text-slate-500 text-xs">0 / 0 turni</p>
+    <p id="autoassign-progress-label" class="text-slate-600 text-xs">0 / 0 turni</p>
   </div>
 </div>
 
