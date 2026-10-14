@@ -1,0 +1,78 @@
+{
+ "measured_at": "2026-10-14",
+ "target": "https://savianu.it (produzione, main e43cf8b)",
+ "tool": "lighthouse 12.8.2",
+ "form_factor": "mobile",
+ "runs_per_page": 3,
+ "pages": {
+  "colleghi": {
+   "perf": 90,
+   "a11y": 100,
+   "bp": 79,
+   "seo": 100,
+   "lcp_ms": 3228,
+   "cls": 0,
+   "tbt_ms": 12,
+   "shift_culprit": null,
+   "bp_failed": [
+    "third-party-cookies",
+    "label-content-name-mismatch",
+    "inspector-issues"
+   ]
+  },
+  "home": {
+   "perf": 94,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp_ms": 2914,
+   "cls": 0.06,
+   "tbt_ms": 0,
+   "shift_culprit": "section.ed-band > div.ed-band__inner > div.ed-split > div",
+   "bp_failed": [
+    "label-content-name-mismatch"
+   ]
+  },
+  "international": {
+   "perf": 94,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp_ms": 2910,
+   "cls": 0,
+   "tbt_ms": 51,
+   "shift_culprit": null,
+   "bp_failed": [
+    "label-content-name-mismatch"
+   ]
+  },
+  "privati": {
+   "perf": 92,
+   "a11y": 100,
+   "bp": 79,
+   "seo": 100,
+   "lcp_ms": 3067,
+   "cls": 0,
+   "tbt_ms": 40,
+   "shift_culprit": null,
+   "bp_failed": [
+    "label-content-name-mismatch",
+    "bf-cache"
+   ]
+  },
+  "ssn": {
+   "perf": 98,
+   "a11y": 100,
+   "bp": 100,
+   "seo": 100,
+   "lcp_ms": 2136,
+   "cls": 0,
+   "tbt_ms": 28,
+   "shift_culprit": null,
+   "bp_failed": [
+    "label-content-name-mismatch"
+   ]
+  }
+ },
+ "note": "CLS target <0.1 raggiunto su tutte le pagine (home 0.060 in 2 run su 3, causato dal reflow del testo al font-swap in .ed-band). BP 79 su /privati/ e /colleghi/: cookie NID di calendar.google.com (deviazione intenzionale, dichiarata in privacy.html) + label-content-name-mismatch (risolto il 2026-10-14, da rimisurare) + bf-cache."
+}
