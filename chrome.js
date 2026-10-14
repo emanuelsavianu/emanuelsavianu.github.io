@@ -63,10 +63,10 @@ export function siteNavInnerHTML({ section = 'root', prefix = '', fixedLang = ''
     '<nav class="site-nav" aria-label="Navigazione principale">' +
       '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
       '<ul class="nav-menu" id="site-nav-menu">' +
-        navItem(prefix || './', 'nav_home', isPatient, here.endsWith('/index.html') || here === '', 'Home') +
-        navItem(prefix + 'ssn/index.html', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
-        navItem(prefix + 'privati/index.html', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
-        navItem(prefix + 'colleghi/index.html', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
+        navItem(prefix || './', 'nav_home', isPatient, here === '/' || here === '' || here.endsWith('/index.html'), 'Home') +
+        navItem(prefix + 'ssn/', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
+        navItem(prefix + 'privati/', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
+        navItem(prefix + 'colleghi/', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
         navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
         // CTA "bottone": unica voce colorata della barra (doppio target, IT/EN).
         navItem(prefix + 'international/', 'nav_international', isPatient, here.includes('/international'), 'International Patients', 'nav-cta') +
