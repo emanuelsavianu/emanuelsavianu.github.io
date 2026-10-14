@@ -64,6 +64,11 @@
     --font-sans: 'Montserrat', sans-serif;
     --font-serif: 'Cormorant Garamond', serif;
     --focus-ring: 3px solid var(--color-focus);
+    /* Testo su badge con sfondo `accent*`: in dark l'oro chiaro (#e0b976) chiede
+       testo scuro, altrimenti bianco-su-oro = 1.85:1 (audit 2026-10-14 F2). */
+    --badge-fg: #ffffff;
+    /* Placeholder dei campi: in dark il grigio chiaro spariva sul navy. */
+    --placeholder: #6b7280;
 
     /* Section accents (landing triage cards) */
     --ssn: #1a2f4c;
@@ -109,6 +114,8 @@ body.dark-mode {
     --danger: #ff6b6b;
     --success: #4ade80;
     --warning: var(--color-accent);
+    --badge-fg: #0a1628;
+    --placeholder: #94a3b8;
     --shadow-md: 0 8px 24px var(--color-shadow);
     --focus-ring: 3px solid var(--color-focus);
 }
@@ -142,6 +149,10 @@ body.dark-mode .lang-separator { color: var(--color-text); opacity: 0.5; }
     border-radius: 4px;
 }
 
+/* Placeholder leggibile in entrambi i temi (il default grigio chiaro dava
+   3.47:1 sul navy in dark — audit 2026-10-14 F12). */
+::placeholder { color: var(--placeholder); opacity: 1; }
+
 html {
     font-size: 18px;
 }
@@ -161,9 +172,19 @@ body.modal-open { overflow: hidden; }
 a { text-decoration: none; color: inherit; transition: opacity 0.2s, transform 0.2s; }
 a:hover { opacity: 0.9; }
 a:focus-visible {
-    outline: 3px solid var(--accent);
+    /* `--focus-ring` = bronzo scuro su superfici chiare, oro chiaro in dark.
+       L'oro di brand come anello dava 2.25:1 sulla crema (WCAG 2.2 SC 1.4.11). */
+    outline: var(--focus-ring);
     outline-offset: 2px;
     border-radius: 4px;
+}
+
+/* La barra di navigazione e il footer sono navy in light (e gradienti scuri in
+   dark): lì il bronzo di --focus-ring sparisce (2.19:1), serve l'oro chiaro. */
+.site-nav a:focus-visible, .site-nav button:focus-visible,
+.nav-menu a:focus-visible, footer a:focus-visible, .footer-nav a:focus-visible {
+    outline: 3px solid var(--accent-on-dark);
+    outline-offset: 2px;
 }
 
 .skip-link {
@@ -775,6 +796,9 @@ footer {
     color: var(--text-medium); background: var(--primary); border-top: 4px solid var(--accent);
 }
 .footer-content { max-width: 1000px; margin: 0 auto; color: white;}
+/* Le voci di navigazione del footer erano alte 19-22px: sotto la soglia 24x24 di
+   WCAG 2.5.8 (AA). Il tema `.ed` aveva gia' il padding; lo estendo a tutto il sito. */
+.footer-nav a { display: inline-block; padding-block: 6px; }
 footer a { color: var(--accent); font-weight: bold; }
 
 .hidden { display: none !important; }
@@ -1175,7 +1199,7 @@ body.dark-mode .flow-warning { background: #3a2e00; color: #ffd060; border-color
     transition: border-color 0.2s;
 }
 #faq-search:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
 }
 #faq-search:focus:not(:focus-visible) {
@@ -1306,7 +1330,7 @@ body.dark-mode .quick-actions-bar {
 .qa-item i { font-size: 1.2rem; color: var(--accent); transition: color 0.2s; display: block; }
 .qa-item:hover, .qa-item:active { color: var(--accent); background: rgba(194,155,87,0.12); opacity: 1; }
 .qa-item:hover i, .qa-item:active i { color: #ffffff; }
-.qa-item:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+.qa-item:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; border-radius: 4px; }
 
 /* =================================================================
    TASK D — SW UPDATE TOAST
@@ -1430,7 +1454,7 @@ body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
     box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
 }
 .search-input:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--color-focus);
     outline-offset: 2px;
     border-color: var(--accent);
 }
@@ -1645,6 +1669,10 @@ body.dark-mode .triage-card--ghost:hover { background: var(--white); }
     color: var(--primary);
     margin-bottom: 4px;
 }
+/* In dark `--primary` e' navy (#1f3659) sul gradiente scuro della pagina:
+   1.4:1, titolo di pagina illeggibile (verificato col campione di pixel sul
+   deployato, 2026-10-14). */
+body.dark-mode .section-title { color: var(--color-text); }
 .guide-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -1955,6 +1983,8 @@ html { text-rendering: optimizeLegibility; }
 
 /* --- PRINT: patient pages --- */
 @media print {
+    /* Formato europeo: senza @page Chrome stampa in Letter (612x792pt). */
+    @page { size: A4; margin: 12mm; }
     .skip-link, .lang-switch, .site-nav, .nav-toggle, .floating-faq,
     .quick-actions-bar, .header-info,
     .btn-telefono-header, .back-to-top { display: none !important; }
@@ -2229,7 +2259,7 @@ html { text-rendering: optimizeLegibility; }
             width: 100%;
         }
         .faq-inline-search input:focus-visible {
-            outline: 2px solid var(--accent);
+            outline: 2px solid var(--color-focus);
             outline-offset: 2px;
         }
         .faq-inline-search input::placeholder { color: var(--text-medium); }
@@ -3125,9 +3155,10 @@ body.dark-mode .ed .lang-btn.active { color: var(--ed-brass); }
 
 /* skip link + focus */
 .ed .skip-link { background: var(--ed-brass); color: #17202e; font-weight: 700; }
-.ed :focus-visible,
+.ed :focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+/* La barra `.ed` è navy (--ed-field): anello in oro chiaro. */
 .ed .lang-btn:focus-visible,
-.ed .nav-menu a:focus-visible { outline: 3px solid var(--ed-brass); outline-offset: 2px; }
+.ed .nav-menu a:focus-visible { outline: 3px solid var(--accent-on-dark); outline-offset: 2px; }
 
 /* ----------------------------------------------------------------
    3. SHELL + EDITORIAL RHYTHM
@@ -3839,7 +3870,7 @@ body.dark-mode .ed .booking-title { color: var(--ed-ink); }
     min-height: 48px;
 }
 .ed .intl-field input:focus-visible, .ed .intl-field select:focus-visible, .ed .intl-field textarea:focus-visible {
-    outline: 3px solid var(--ed-brass); outline-offset: 1px; border-color: var(--ed-brass);
+    outline: var(--focus-ring); outline-offset: 1px; border-color: var(--ed-brass);
 }
 .ed .intl-field input::placeholder, .ed .intl-field textarea::placeholder { color: var(--ed-muted); }
 .ed .intl-consent { font-size: 0.86rem; color: var(--ed-muted); line-height: 1.6; }
@@ -3901,7 +3932,7 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
 .ed .ed-path__toggle { min-height: 44px; display: inline-flex; align-items: center; }
 .ed-facts-inline a.num, .ed-emergency a.num { padding: 6px 3px; margin: -6px -3px; }
 .ed site-footer .footer-nav a { display: inline-block; padding-block: 6px; }
-.ed .intl-consent input { width: 20px; height: 20px; flex: none; }
+.ed .intl-consent input { width: 24px; height: 24px; flex: none; }
 @media (max-width: 768px) {
     .ed .lang-btn { padding: 13px 12px; }
     .ed .faq-pill { min-height: 44px; }
@@ -3927,7 +3958,7 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
    dark surface), so it would be dead CSS. The affordance is the explicit hint
    line above the table plus keyboard access. */
 .table-scroll:focus-visible, .table-container:focus-visible {
-    outline: 3px solid var(--accent);
+    outline: 3px solid var(--color-focus);
     outline-offset: 3px;
 }
 .table-scroll-hint {

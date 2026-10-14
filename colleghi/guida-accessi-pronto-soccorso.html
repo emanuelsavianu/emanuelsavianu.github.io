@@ -60,7 +60,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261005b">
+    <link rel="stylesheet" href="../styles.css?v=20261014a">
 
     <style>
         .page-wrapper {
@@ -153,6 +153,10 @@
         }
         body.dark-mode .ps-card { background: var(--primary); }
         body.dark-mode .hours-value { color: var(--accent); }
+        /* In dark la card è navy (--primary): la riga di localizzazione ereditava
+           lo stesso navy come colore del testo → invisibile (1:1).
+           Audit 2026-10-14, F1. */
+        body.dark-mode .ps-location { color: var(--accent); }
 
         /* Nota prescrizione */
         .note-box {
@@ -195,7 +199,7 @@
 <main role="main" class="page-wrapper" id="main-content">
 
     <section class="page-hero" aria-labelledby="hero-heading">
-        <h1 class="hero-title" id="hero-heading">Guida Accessi<br>Pronto Soccorso Specialistici</h1>
+        <h1 class="hero-title" id="hero-heading">Guida Accessi <br>Pronto Soccorso Specialistici</h1>
         <p class="hero-desc">
             Orari e sedi dei Pronto Soccorso specialistici — Ospedale San Donato, Arezzo.
         </p>
@@ -283,6 +287,6 @@
         </footer>
     </site-footer>
 
-<script type="module" src="../app.js?v=20261005a"></script>
+<script type="module" src="../app.js?v=20261014a"></script>
 </body>
 </html>

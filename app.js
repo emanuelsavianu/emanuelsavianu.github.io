@@ -424,9 +424,9 @@ export const translations = {
 
         // Accessibility — aria-label i18n
         skip_link: 'Vai al contenuto principale',
-        floating_faq_label: 'Domande Frequenti',
+        floating_faq_label: 'FAQ — domande frequenti',
         qa_call_label: 'Chiama la segreteria',
-        qa_faq_label: 'Domande frequenti',
+        qa_faq_label: 'FAQ — domande frequenti',
         qa_doctolib_label: 'Apri Doctolib',
 
         // Doctolib announcement
@@ -795,9 +795,9 @@ export const translations = {
 
         // Accessibility — aria-label i18n
         skip_link: 'Skip to main content',
-        floating_faq_label: 'Frequently Asked Questions',
+        floating_faq_label: 'FAQ — frequently asked questions',
         qa_call_label: 'Call reception',
-        qa_faq_label: 'Frequently Asked Questions',
+        qa_faq_label: 'FAQ — frequently asked questions',
         qa_doctolib_label: 'Open Doctolib',
 
         // Doctolib announcement

@@ -13,11 +13,25 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
     body.dark-mode { background: #0f172a !important; color: #e2e8f0; }
+    /* La card del wizard non è `.bg-white`: in dark restava bianca mentre il testo
+       ereditava #e2e8f0 → testo invisibile (audit 2026-10-14). */
+    body.dark-mode #onboarding-wizard { background: linear-gradient(160deg, #0f172a 0%, #111827 100%); }
+    body.dark-mode #onboarding-wizard .wizard-card { background: #1e293b; box-shadow: 0 8px 40px rgba(0,0,0,0.5); }
+    body.dark-mode #onboarding-wizard h1 { color: #e2e8f0; }
+    body.dark-mode #onboarding-wizard .wizard-body-text { color: #cbd5e1; }
     body.dark-mode .bg-white { background: #1e293b !important; }
     body.dark-mode .bg-slate-50 { background: #1e293b !important; }
+    /* .bg-slate-200 non era coperto: i chevron (color #e2e8f0) sparivano sul grigio chiaro. */
+    body.dark-mode .bg-slate-200 { background: #334155 !important; }
     body.dark-mode .text-slate-800 { color: #e2e8f0 !important; }
     body.dark-mode .border-slate-200 { border-color: #334155 !important; }
     #assign-dropdown { z-index: 9999; }
+    /* bianco su blue-500 = 3.68:1 → blue-600/700 (audit 2026-10-14) */
+    .gv-footer { text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem;
+                 color: #475569; border-top: 1px solid #e2e8f0; }
+    body.dark-mode .gv-footer { color: #94a3b8; border-top-color: #334155; }
+    .btn-export { background: #2563eb; }
+    .btn-export:hover { background: #1d4ed8; }
 
     /* Wizard overrides for elderly-friendly UI */
     #onboarding-wizard {
@@ -191,13 +205,13 @@
       <button id="btn-auto-assign" class="bg-purple-600 hover:bg-purple-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-wand-magic-sparkles"></i> Assegna Automaticamente
       </button>
-      <button id="btn-dark-mode" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-sm">
+      <button id="btn-dark-mode" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg text-sm" aria-label="Attiva/disattiva tema scuro" title="Tema scuro">
         <i class="fa-solid fa-moon"></i>
       </button>
       <button id="btn-settings" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
         <i class="fa-solid fa-gear"></i> Impostazioni
       </button>
-<button id="btn-export" class="bg-blue-500 hover:bg-blue-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium">
+<button id="btn-export" class="btn-export text-white px-3 py-1.5 rounded-lg text-sm font-medium">
         <i class="fa-solid fa-file-export"></i> Export
       </button>
       <label class="bg-slate-500 hover:bg-slate-400 text-white px-3 py-1.5 rounded-lg text-sm font-medium cursor-pointer">
@@ -216,11 +230,11 @@
   <main class="col-span-3">
     <div id="cal-container" class="bg-white rounded-xl shadow p-4">
       <div class="flex items-center justify-between mb-4">
-        <h2 id="cal-title" class="font-bold text-xl"></h2>
+        <h2 id="cal-title" class="font-bold text-xl">Calendario</h2>
         <div class="flex gap-2">
-          <button id="cal-prev" class="bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-lg text-sm"><i class="fa-solid fa-chevron-left"></i></button>
+          <button id="cal-prev" class="bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-lg text-sm" aria-label="Mese precedente"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
           <button id="cal-today" class="bg-brand-600 hover:bg-brand-500 text-white px-3 py-1 rounded-lg text-sm">Oggi</button>
-          <button id="cal-next" class="bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-lg text-sm"><i class="fa-solid fa-chevron-right"></i></button>
+          <button id="cal-next" class="bg-slate-200 hover:bg-slate-300 px-3 py-1 rounded-lg text-sm" aria-label="Mese successivo"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
         </div>
       </div>
       <div id="cal-grid" class="space-y-4"></div>
@@ -232,7 +246,7 @@
   <div class="bg-white rounded-xl shadow-lg max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
     <div class="sticky top-0 bg-white border-b p-4 flex items-center justify-between">
       <h2 class="font-bold text-xl">Impostazioni Struttura</h2>
-      <button id="settings-close" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+      <button id="settings-close" class="text-slate-400 hover:text-slate-600" aria-label="Chiudi impostazioni"><i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i></button>
     </div>
     <div id="settings-content" class="p-4">
   <div class="flex gap-4 border-b mb-4">
@@ -309,7 +323,7 @@
         <h2 class="font-bold text-xl" id="unavail-modal-title">Indisponibilità</h2>
         <p class="text-sm text-slate-500" id="unavail-modal-subtitle"></p>
       </div>
-      <button id="unavail-close" class="text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
+      <button id="unavail-close" class="text-slate-400 hover:text-slate-600" aria-label="Chiudi indisponibilità"><i class="fa-solid fa-xmark text-xl" aria-hidden="true"></i></button>
     </div>
     <div class="flex-1 overflow-y-auto p-4">
       <!-- Add form -->
@@ -368,7 +382,7 @@
   </div>
 </div>
 
-<footer style="text-align: center; padding: 20px; margin-top: 40px; font-size: 0.85rem; color: #64748b; border-top: 1px solid #e2e8f0;">
+<footer class="gv-footer">
   <p style="margin: 0;">© 2026 Dott. Emanuel Savianu — Gestore Turni Universale Configurabile</p>
 </footer>
 
@@ -377,7 +391,7 @@
   <div class="wizard-card flex flex-col max-h-[92vh]">
     <!-- Header: progress dots -->
     <div class="px-8 pt-6 pb-2">
-      <div id="wizard-progress-dots" class="wizard-progress-dots" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
+      <div id="wizard-progress-dots" class="wizard-progress-dots" role="progressbar" aria-label="Avanzamento configurazione" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4">
         <!-- dots injected by JS -->
       </div>
       <p id="wizard-step-label" class="text-center text-sm text-slate-400 mt-2 font-medium sr-only">Passo 1 di 4</p>

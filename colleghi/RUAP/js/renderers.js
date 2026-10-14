@@ -97,14 +97,14 @@ function createSlotButton(dateKey, place, slot, inMonth) {
   const slotBtn = document.createElement('button');
   let variantClass;
   if (displayName) variantClass = 'border-transparent text-white shadow-sm';
-  else if (inMonth) variantClass = 'border-dashed border-slate-300 bg-slate-50 text-slate-400 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700';
+  else if (inMonth) variantClass = 'border-dashed border-slate-300 bg-slate-50 text-slate-600 hover:border-brand-400 hover:bg-brand-50 hover:text-brand-700';
   else variantClass = 'border-transparent bg-transparent cursor-default';
   slotBtn.className = `slot-btn w-full text-left rounded-lg px-2 py-1.5 mb-1 text-xs font-medium border transition-all ${variantClass}`;
   if (colorHex && displayName) slotBtn.style.backgroundColor = colorHex;
 
   slotBtn.innerHTML = displayName
-    ? `<div class="truncate font-semibold text-xs">${escapeHtml(displayName)}</div><div class="text-[11px] opacity-80">${slot.icon} ${slot.label}</div>`
-    : `<div class="text-slate-400 text-xs">${slot.icon} <span class="text-slate-400">Assegna</span></div>`;
+    ? `<div class="truncate font-semibold text-xs">${escapeHtml(displayName)}</div><div class="text-xs opacity-80">${slot.icon} ${slot.label}</div>`
+    : `<div class="text-slate-600 text-xs">${slot.icon} <span class="text-slate-600">Assegna</span></div>`;
   slotBtn.setAttribute('aria-label', displayName ? `${displayName} · ${place} · ${slot.label}` : `Assegna turno · ${place} · ${slot.label}`);
 
   if (inMonth) {
@@ -127,10 +127,10 @@ export function renderCalendar() {
 function holidayCellHTML(dayNum, dayName = '') {
   const label = dayName ? `${dayName} ${dayNum}` : `${dayNum}`;
   return `<div class="flex items-center justify-between mb-1">
-    <span class="text-xs font-bold text-slate-500">${label}</span>
+    <span class="text-xs font-bold text-slate-600">${label}</span>
     <span class="text-[9px] font-bold text-red-600 bg-red-50 px-1 py-0.5 rounded uppercase">Festivo</span>
   </div>
-  <div class="flex items-center justify-center py-3 text-[11px] font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
+  <div class="flex items-center justify-center py-3 text-xs font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
 }
 
 function renderCalendarWeek() {
@@ -157,14 +157,14 @@ function renderCalendarWeek() {
     if (isHoliday) {
       cell.innerHTML = holidayCellHTML(dayNum, dayName);
     } else {
-      cell.innerHTML = `<div class="text-xs font-bold text-slate-500 mb-1 pb-1 border-b border-slate-100 flex items-center justify-between">
+      cell.innerHTML = `<div class="text-xs font-bold text-slate-600 mb-1 pb-1 border-b border-slate-100 flex items-center justify-between">
         <span>${dayName} ${dayNum}</span>
       </div>`;
       PLACES.forEach(place => {
         const { coverageClass, coverageIcon } = getCoverageBadge(dateKey, place);
         const placeDiv = document.createElement('div');
         placeDiv.className = 'mb-1';
-        placeDiv.innerHTML = `<div class="flex items-center gap-1 mb-0.5"><span class="text-[11px] font-semibold text-slate-500 flex-1 truncate">${escapeHtml(place)}</span><span class="text-[11px] font-bold px-1 rounded ${coverageClass}">${coverageIcon}</span></div>`;
+        placeDiv.innerHTML = `<div class="flex items-center gap-1 mb-0.5"><span class="text-xs font-semibold text-slate-600 flex-1 truncate">${escapeHtml(place)}</span><span class="text-xs font-bold px-1 rounded ${coverageClass}">${coverageIcon}</span></div>`;
         SLOTS.forEach(slot => {
           placeDiv.appendChild(createSlotButton(dateKey, place, slot, true));
         });
@@ -207,14 +207,14 @@ function renderCalendarMonth() {
         cell.innerHTML = holidayCellHTML(cellDate.getDate());
       } else if (inMonth) {
         cell.innerHTML = `<div class="flex items-center justify-between mb-1">
-          <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-500'}">${cellDate.getDate()}</span>
+          <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-600'}">${cellDate.getDate()}</span>
         </div>`;
         PLACES.forEach(place => {
           const placeSection = document.createElement('div');
           placeSection.className = 'mb-1 pb-1 border-b border-slate-100 last:border-b-0 last:mb-0 last:pb-0';
           const badge = getCoverageBadge(dateKey, place);
           placeSection.innerHTML = `<div class="flex items-center justify-between mb-1">
-            <span class="text-[9px] font-bold text-slate-400 uppercase">${escapeHtml(place)}</span>
+            <span class="text-[9px] font-bold text-slate-600 uppercase">${escapeHtml(place)}</span>
             <span class="text-[9px] font-bold ${badge.coverageClass} px-1 rounded">${badge.coverageIcon}</span>
           </div>`;
           SLOTS.forEach(slot => {
@@ -258,13 +258,13 @@ export function renderSidebar() {
         <div class="flex items-center gap-2 mb-1.5">
           <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
           <span class="font-semibold text-sm text-slate-800 truncate">${escapeHtml(cleanDoctorName(doc.name))}</span>
-          <span class="text-[11px] text-slate-500 ml-auto">${remH}h residue</span>
+          <span class="text-xs text-slate-600 ml-auto">${remH}h residue</span>
         </div>
         <div class="flex items-center gap-1">
           <div class="flex-1 h-1.5 bg-slate-100 rounded-full">
             <div style="width:${pct}%; background:${barColor}" class="h-1.5 rounded-full transition-all"></div>
           </div>
-          <span class="text-[11px] text-slate-500 flex-shrink-0">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
+          <span class="text-xs text-slate-600 flex-shrink-0">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
         </div>
       </div>`;
   }).join('');
@@ -339,7 +339,7 @@ function renderAvailableList(slotKey, slot, dateKey, isAvailable, isBusy) {
       <span class="w-3 h-3 rounded-full flex-shrink-0 mt-0.5" style="background:${color.hex}"></span>
       <span class="flex-1 font-medium text-xs">${escapeHtml(doc.name)}</span>
       <div class="flex flex-col items-end gap-0.5">
-        <span class="text-[11px] text-slate-500">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
+        <span class="text-xs text-slate-600">${weeklyH}/${doc.weeklyHours ?? 38}h</span>
         <div class="w-12 h-1 bg-slate-100 rounded-full"><div style="width:${pct}%; background:${barColor}" class="h-1 rounded-full"></div></div>
       </div>`;
     btn.addEventListener('click', () => assignDoctor(slotKey, doc.id));
@@ -371,7 +371,7 @@ export function openAssignDropdown(slotKey, slot, dateKey, place, rect) {
       <span class="w-3 h-3 rounded-full flex-shrink-0 mt-0.5" style="background:${color.hex}"></span>
       <span class="flex-1 font-medium text-xs">${escapeHtml(doc.name)}</span>
       ${isUnavailReason ? '<i class="fa-solid fa-ban text-red-400 text-xs" title="Non disponibile questo giorno"></i>' : ''}
-      <span class="text-[11px] text-slate-500 italic">${isBusy.has(doc.id) ? 'stessa fascia oraria' : 'eccezione'}</span>`;
+      <span class="text-xs text-slate-600 italic">${isBusy.has(doc.id) ? 'stessa fascia oraria' : 'eccezione'}</span>`;
     btn.addEventListener('click', () => assignDoctor(slotKey, doc.id));
     unavailList.appendChild(btn);
   });
@@ -497,7 +497,7 @@ function renderAvailabilityTable(availability) {
   if (thead) {
     thead.innerHTML = `<tr class="bg-slate-50">
       <th class="px-3 py-2 text-left font-semibold text-slate-600 w-28">Giorno</th>
-      ${SLOTS.map(s => `<th class="px-3 py-2 text-center font-semibold text-slate-600">${escapeHtml(s.icon)} ${escapeHtml(s.label)}<br><span class="text-xs font-normal text-slate-400">${s.hours}h</span></th>`).join('')}
+      ${SLOTS.map(s => `<th class="px-3 py-2 text-center font-semibold text-slate-600">${escapeHtml(s.icon)} ${escapeHtml(s.label)}<br><span class="text-xs font-normal text-slate-600">${s.hours}h</span></th>`).join('')}
     </tr>`;
   }
   tbody.innerHTML = DAY_KEYS.map(dk => `
@@ -682,7 +682,7 @@ export function addUnavailPeriodRow(from = '', to = '') {
   periodEl.className = 'flex gap-2 items-center bg-slate-50 rounded-lg p-2 unavail-period-row';
   periodEl.innerHTML = `
     <input type="date" value="${escapeHtml(from)}" class="border border-slate-300 rounded px-2 py-1 text-xs unavail-from" placeholder="Da">
-    <span class="text-slate-400">—</span>
+    <span class="text-slate-600">—</span>
     <input type="date" value="${escapeHtml(to)}" class="border border-slate-300 rounded px-2 py-1 text-xs unavail-to" placeholder="A">
     <button type="button" onclick="this.parentElement.remove()" class="text-red-500 hover:text-red-700 text-xs">
       <i class="fa-solid fa-trash-can"></i>
@@ -779,9 +779,9 @@ export function openConflictsModal() {
   autoBtn.disabled = conflicts.length === 0;
   if (conflicts.length === 0) {
     list.innerHTML = `
-      <div class="flex flex-col items-center justify-center py-12 text-slate-400">
+      <div class="flex flex-col items-center justify-center py-12 text-slate-600">
         <i class="fa-solid fa-check-circle text-5xl mb-3 text-green-400"></i>
-        <p class="text-lg font-medium text-slate-500">Nessun conflitto trovato</p>
+        <p class="text-lg font-medium text-slate-600">Nessun conflitto trovato</p>
         <p class="text-sm">Tutti i turni sono assegnati correttamente.</p>
       </div>`;
   } else {
@@ -799,7 +799,7 @@ export function openConflictsModal() {
         const place = parts.slice(2).join('_');
         return `<div class="flex items-center justify-between bg-slate-50 rounded-lg px-3 py-2 mb-1">
           <span class="text-sm text-slate-700 flex items-center gap-2">
-            <i class="fa-solid fa-location-dot text-slate-400"></i>${escapeHtml(place)}
+            <i class="fa-solid fa-location-dot text-slate-600"></i>${escapeHtml(place)}
           </span>
           <button class="conflict-remove-btn text-xs text-red-500 hover:text-red-700 font-medium px-2 py-1 rounded hover:bg-red-50 transition-colors" data-key="${k}">
             <i class="fa-solid fa-xmark mr-1"></i>Rimuovi
@@ -808,13 +808,13 @@ export function openConflictsModal() {
       }).join('');
       return `<div class="border border-slate-200 rounded-xl overflow-hidden">
         <div class="bg-slate-50 px-4 py-3 flex items-center gap-3 border-b border-slate-200">
-          <div class="w-3 h-3 rounded-full ${color.bg} flex-shrink-0"></div>
+          <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></div>
           <div class="flex-1 min-w-0">
             <p class="font-semibold text-slate-800 text-sm truncate">${escapeHtml(displayName)}</p>
-            <p class="text-xs text-slate-500">${dateFormatted} · ${slotLabel}</p>
+            <p class="text-xs text-slate-600">${dateFormatted} · ${slotLabel}</p>
           </div>
           <div class="flex items-center gap-1">
-            ${c.isUnavailable ? '<span class="bg-purple-100 text-purple-700 text-[11px] font-bold px-2 py-0.5 rounded-full flex-shrink-0">Assente / Ferie</span>' : ''}
+            ${c.isUnavailable ? '<span class="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0">Assente / Ferie</span>' : ''}
             <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full flex-shrink-0">${c.keys.length} sedi</span>
           </div>
         </div>
@@ -1446,7 +1446,7 @@ export function renderMonthlyStats() {
     <div class="flex items-center gap-2 py-1 cursor-pointer hover:bg-slate-50 rounded px-1 -mx-1 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
       <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
       <span class="flex-1 truncate text-slate-700">${escapeHtml(cleanDoctorName(doc.name))}${label}</span>
-      <span class="text-slate-500 flex-shrink-0">${used}h/${budget}h</span>
+      <span class="text-slate-600 flex-shrink-0">${used}h/${budget}h</span>
       <div class="w-16 h-2.5 bg-slate-200 rounded-full flex-shrink-0">
         <div style="width:${Math.min(100, pct)}%; background:${barColor}" class="h-2.5 rounded-full"></div>
       </div>
@@ -1628,13 +1628,13 @@ function renderWizardStep2() {
     <p class="wizard-body-text" style="margin:0.75rem 0 1.5rem">
       Quali sono le sedi ambulatoriali? (Es. "M.S.Savino", "Subbiano", "Castel Fisa")
     </p>
-    <div class="flex flex-wrap gap-2 mb-4">${chipsHtml || '<span class="text-slate-400 text-sm">Nessuna sede aggiunta</span>'}</div>
+    <div class="flex flex-wrap gap-2 mb-4">${chipsHtml || '<span class="text-slate-600 text-sm">Nessuna sede aggiunta</span>'}</div>
     <div class="flex gap-2 mb-4">
       <input type="text" id="w-place-input" placeholder="Nome sede..." style="flex:1">
       <button id="w-place-add" class="wizard-big-btn outline" style="width:auto; padding:0.75rem 1.25rem; flex-shrink:0">+ Aggiungi</button>
     </div>
     <div class="mt-4 p-3 bg-slate-50 rounded-lg">
-      <p class="text-sm text-slate-500">💡 <strong>Suggerimento:</strong> Puoi usare le sedi del tuo territorio USL</p>
+      <p class="text-sm text-slate-600">💡 <strong>Suggerimento:</strong> Puoi usare le sedi del tuo territorio USL</p>
     </div>`;
 
   el('w-place-add').addEventListener('click', () => {
@@ -1663,7 +1663,7 @@ function renderWizardStep3() {
     <p class="wizard-body-text" style="margin:0.75rem 0 1.5rem">
       Definisci gli orari dei turni. Ogni turno ha una durata in ore.
     </p>
-    <div class="flex flex-wrap gap-2 mb-4">${chipsHtml || '<span class="text-slate-400 text-sm">Nessun turno aggiunto</span>'}</div>
+    <div class="flex flex-wrap gap-2 mb-4">${chipsHtml || '<span class="text-slate-600 text-sm">Nessun turno aggiunto</span>'}</div>
     <div class="grid grid-cols-2 gap-2 mb-3">
       <div>
         <label class="text-sm font-semibold text-slate-600 mb-1 block">Orario inizio</label>
@@ -1684,7 +1684,7 @@ function renderWizardStep3() {
       </div>
     </div>
     <button id="w-slot-add" class="wizard-big-btn outline w-full" style="padding:0.75rem; font-size:1rem">+ Aggiungi turno</button>
-    <p class="text-xs text-slate-400 mt-2">Usa standard 08:00-14:00 (Mattina) e 14:00-20:00 (Pomeriggio)</p>`;
+    <p class="text-xs text-slate-600 mt-2">Usa standard 08:00-14:00 (Mattina) e 14:00-20:00 (Pomeriggio)</p>`;
 
   let selectedIcon = '🌅';
   document.querySelectorAll('.w-slot-icon').forEach(btn => {
@@ -1749,7 +1749,7 @@ function renderWizardStep4() {
           ${escapeHtml(d.name)}
           <button class="chip-remove w-remove-doctor" data-index="${i}">×</button>
         </span>`).join('')}
-      ${wDoctors.length === 0 ? '<span class="text-slate-400 text-sm">Nessun medico aggiunto</span>' : ''}
+      ${wDoctors.length === 0 ? '<span class="text-slate-600 text-sm">Nessun medico aggiunto</span>' : ''}
     </div>
     <button id="w-finish" class="wizard-big-btn success w-full" style="text-align:center; margin-top:1rem; ${wDoctors.length < 1 ? 'opacity:0.4; pointer-events:none' : ''}">
       ✅ Configura e inizia
@@ -1834,10 +1834,10 @@ export function toggleHideZeroDocs() {
   hideZeroDocs = !hideZeroDocs;
   const icon = el('btn-hide-zero-docs');
   if (hideZeroDocs) {
-    icon.className = 'fa-solid fa-eye-slash text-brand-500 text-[11px] cursor-pointer hover:text-brand-600';
+    icon.className = 'fa-solid fa-eye-slash text-brand-500 text-xs cursor-pointer hover:text-brand-600';
     icon.title = 'Mostra tutti';
   } else {
-    icon.className = 'fa-regular fa-eye text-slate-400 text-[11px] cursor-pointer hover:text-brand-600';
+    icon.className = 'fa-regular fa-eye text-slate-600 text-xs cursor-pointer hover:text-brand-600';
     icon.title = 'Nascondi inattivi';
   }
   renderMonthlyStats();
