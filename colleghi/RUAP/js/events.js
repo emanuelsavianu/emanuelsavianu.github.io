@@ -5,7 +5,7 @@
 import {
   state, SLOTS,
   saveToStorage, loadFromStorage, pushHistory, loadHistory, clearHistory,
-  reloadPlaces, reloadSlots,
+  reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
 } from './state.js';
@@ -28,8 +28,9 @@ import {
   openConflictsModal, autoResolveAllConflicts,
   exportJSON, importJSONFromFile, importExcelFromFile,
   exportExcel, exportPDF, exportPNG, exportCalendarScreenshot,
+  buildPdfContent, buildPngContent,
   copyWeekFromCurrentView, pasteWeekToCurrentView,
-  toggleMonthlyStats, toggleHideZeroDocs,
+  toggleMonthlyStats, toggleHideZeroDocs, toggleClosedDay,
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday
@@ -167,6 +168,16 @@ el('header-actions')?.addEventListener('click', (e) => {
 el('btn-add-doctor')?.addEventListener('click', () => openDoctorModal());
 el('btn-auto-assign')?.addEventListener('click', autoAssign);
 el('btn-genera-mese')?.addEventListener('click', generateNextMonth);
+
+// Chiusure straordinarie (prefestivi/ponti): il lucchetto nella cella del giorno.
+// Delegato sul document perché le celle vengono ricostruite a ogni render.
+document.addEventListener('click', (e) => {
+  const btn = e.target instanceof Element ? e.target.closest('[data-closed-toggle]') : null;
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  toggleClosedDay(btn.dataset.closedToggle);
+});
 el('btn-pdf')?.addEventListener('click', exportPDF);
 el('btn-export-png')?.addEventListener('click', exportPNG);
 el('btn-export-screen')?.addEventListener('click', exportCalendarScreenshot);
@@ -267,6 +278,10 @@ window.pasteWeekToCurrentView = pasteWeekToCurrentView;
 window.toggleMonthlyStats = toggleMonthlyStats;
 window.toggleCalendarView = toggleCalendarView;
 window.toggleHideZeroDocs = toggleHideZeroDocs;
+window.toggleClosedDay = toggleClosedDay;
+// Esposti anche per le verifiche automatiche (nessun effetto sull'uso normale).
+window.buildPdfContent = buildPdfContent;
+window.buildPngContent = buildPngContent;
 
 // ====================================================
 // Update banner — shown when config.js data changes
@@ -276,6 +291,7 @@ function seedStateFromConfig() {
   state.doctors = getDefaultDoctors();
   if (typeof CONFIG !== 'undefined' && CONFIG.places) state.places = [...CONFIG.places];
   if (typeof CONFIG !== 'undefined' && CONFIG.slots) state.slots = CONFIG.slots.map(s => ({...s}));
+  if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.closedDays)) state.closedDays = [...CONFIG.closedDays];
   if (typeof CONFIG !== 'undefined' && CONFIG.assignments) {
     state.assignments = {};
     Object.entries(CONFIG.assignments).forEach(([key, docId]) => {
@@ -336,6 +352,7 @@ function init() {
   loadFromStorage();
   reloadPlaces();
   reloadSlots();
+  reloadClosedDays();
   loadHistory();
 
   const isFirstRun = state.doctors.length === 0;

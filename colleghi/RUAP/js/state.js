@@ -4,7 +4,7 @@
 
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
-  STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE,
+  STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
 } from './config.js';
@@ -20,6 +20,7 @@ export let state = {
   assignments: {},
   places: [],
   slots: [],
+  closedDays: [],
   calYear: new Date().getFullYear(),
   calMonth: new Date().getMonth(),
   sidebarWeekStart: getWeekStart(new Date()),
@@ -44,6 +45,7 @@ export function saveToStorage() {
     localStorage.setItem(STORAGE_ASSIGNMENTS, JSON.stringify(state.assignments));
     localStorage.setItem(STORAGE_PLACES, JSON.stringify(state.places));
     localStorage.setItem(STORAGE_SLOTS, JSON.stringify(state.slots));
+    localStorage.setItem(STORAGE_CLOSED, JSON.stringify(state.closedDays));
   } catch (e) {
     toast('Errore salvataggio: ' + e.message, 'error');
     console.error(e);
@@ -56,10 +58,12 @@ export function loadFromStorage() {
     const asgn = localStorage.getItem(STORAGE_ASSIGNMENTS);
     const plcs = localStorage.getItem(STORAGE_PLACES);
     const slts = localStorage.getItem(STORAGE_SLOTS);
+    const clos = localStorage.getItem(STORAGE_CLOSED);
     if (docs) state.doctors = JSON.parse(docs);
     if (asgn) state.assignments = JSON.parse(asgn);
     if (plcs) state.places = JSON.parse(plcs);
     if (slts) state.slots = JSON.parse(slts);
+    if (clos) state.closedDays = JSON.parse(clos);
   } catch (e) { console.error(e); }
 }
 
@@ -70,6 +74,17 @@ export function reloadPlaces() {
     PLACES = [...CONFIG.places];
   } else {
     PLACES = [...DEFAULT_PLACES];
+  }
+}
+
+/** Giorni di chiusura straordinaria (prefestivi, ponti): come le festività, il
+    motore non li riempie e il calendario li mostra chiusi. */
+export function reloadClosedDays() {
+  if (Array.isArray(state.closedDays) && state.closedDays.length > 0) return;
+  if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.closedDays)) {
+    state.closedDays = [...CONFIG.closedDays];
+  } else {
+    state.closedDays = [];
   }
 }
 

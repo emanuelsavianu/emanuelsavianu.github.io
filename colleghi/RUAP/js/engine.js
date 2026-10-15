@@ -7,7 +7,7 @@ import { isItalianHoliday } from './holidays.js';
 import { MONTHS_IT } from './config.js';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
-  getAssignedHoursInMonth, el, toast
+  getAssignedHoursInMonth, el, toast, isClosedDay
 } from './core-utils.js';
 import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js';
 
@@ -22,6 +22,8 @@ export function enumerateEmptySlots(year, month) {
     const cellDate = new Date(year, month, day);
     if (cellDate.getDay() === 0 || cellDate.getDay() === 6 || isItalianHoliday(cellDate)) continue;
     const dateKey = toDateKey(cellDate);
+    // Chiusure straordinarie (prefestivi, ponti): come le festività, niente turni
+    if (isClosedDay(state.closedDays, dateKey)) continue;
     SLOTS.forEach(slot => {
       PLACES.forEach(place => {
         const slotKey = `${dateKey}_${slot.key}_${place}`;

@@ -129,6 +129,11 @@ export function isDoctorUnavailable(doctor, dateKey) {
   });
 }
 
+/** Chiusura straordinaria (prefestivo/ponte): vale come una festività. */
+export function isClosedDay(closedDays, dateKey) {
+  return Array.isArray(closedDays) && closedDays.includes(dateKey);
+}
+
 export function isDoctorAvailableForSlot(doctor, dateKey, slotKey) {
   if (!doctor.availability) return false;
   if (isDoctorUnavailable(doctor, dateKey)) return false;
