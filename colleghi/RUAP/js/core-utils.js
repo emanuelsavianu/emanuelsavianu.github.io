@@ -5,8 +5,8 @@
 import {
   EXCEL_EPOCH_OFFSET, MS_PER_DAY, DAY_KEYS, DAY_NAMES,
   COLOR_PALETTE, MONTHLY_WEEKS
-} from './config.js';
-import { isItalianHoliday } from './holidays.js';
+} from './config.js?v=20261015c';
+import { isItalianHoliday } from './holidays.js?v=20261015c';
 
 // --- ID & Text ---
 

@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js';
+} from './state.js?v=20261015c';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -14,15 +14,15 @@ import {
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
   getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay
-} from './core-utils.js';
+} from './core-utils.js?v=20261015c';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS
-} from './config.js';
-import { isItalianHoliday } from './holidays.js';
+} from './config.js?v=20261015c';
+import { isItalianHoliday } from './holidays.js?v=20261015c';
 
 // ====================================================
 // 7. RENDERING
@@ -198,10 +198,10 @@ function renderCalendarWeek() {
     const dayName = DAY_NAMES[i];
     const dayNum = d.getDate();
 
-    if (isHoliday) {
-      cell.innerHTML = holidayCellHTML(dayNum, dayName);
-    } else if (isClosed) {
+    if (isClosed) {
       cell.innerHTML = closedCellHTML(dateKey, dayNum, dayName);
+    } else if (isHoliday) {
+      cell.innerHTML = holidayCellHTML(dayNum, dayName);
     } else {
       cell.innerHTML = `<div class="text-xs font-bold text-slate-600 mb-1 pb-1 border-b border-slate-100 flex items-center justify-between">
         <span>${dayName} ${dayNum}</span>
@@ -251,10 +251,10 @@ function renderCalendarMonth() {
       const cell = document.createElement('div');
       cell.className = `rounded-xl p-2 border ${isClosed && inMonth ? 'closed-cell border-slate-100' : isHoliday && inMonth ? 'holiday-cell border-slate-100' : inMonth ? 'bg-white shadow-sm border-slate-100' : 'bg-transparent border-transparent'} ${isToday && inMonth ? 'ring-2 ring-brand-400' : ''}`;
 
-      if (isHoliday && inMonth) {
-        cell.innerHTML = holidayCellHTML(cellDate.getDate());
-      } else if (isClosed && inMonth) {
+      if (isClosed && inMonth) {
         cell.innerHTML = closedCellHTML(dateKey, cellDate.getDate());
+      } else if (isHoliday && inMonth) {
+        cell.innerHTML = holidayCellHTML(cellDate.getDate());
       } else if (inMonth) {
         cell.innerHTML = `<div class="flex items-center justify-between mb-1">
           <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-600'}">${cellDate.getDate()}</span>
@@ -1171,7 +1171,7 @@ export function buildPdfContent() {
         <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}${closed ? ' · chiuso' : ''}</td>
         <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[date.getDay()]}</td>`;
       if (closed) {
-        html += `<td colspan="${SLOTS.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
+        html += `<td colspan="${SLOTS.length * PLACES.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
         continue;
       }
       SLOTS.forEach(slot => {
@@ -1263,10 +1263,10 @@ export function buildPngContent() {
       SLOTS.forEach(slot => {
         const id = state.assignments[`${dk}_${slot.key}_${place}`];
         const { display, bg, textColor } = resolveShiftCell(id);
-        if (display) {
-          calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;background:${bg};color:${textColor};font-weight:600;border-radius:3px;font-size:10px;">${escapeHtml(display)}</td>`;
-        } else if (isClosed) {
+        if (isClosed) {
           calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;color:#c2410c;font-size:10px;font-weight:bold;">CHIUSO</td>`;
+        } else if (display) {
+          calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;background:${bg};color:${textColor};font-weight:600;border-radius:3px;font-size:10px;">${escapeHtml(display)}</td>`;
         } else if (isHoliday) {
           calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;color:#ef4444;font-size:10px;font-weight:bold;">CHIUSO</td>`;
         } else {
@@ -1579,6 +1579,7 @@ function pasteWeek(weekStart) {
   pushHistory();
   const offset = Math.round((weekStart - copyWeekSource.weekStart) / (7 * MS_PER_DAY));
   let count = 0;
+  let skipped = 0;
   for (const [key, docId] of Object.entries(copyWeekSource.assignments)) {
     const parts = key.split('_');
     const oldDate = parts[0];
@@ -1587,7 +1588,10 @@ function pasteWeek(weekStart) {
     const oldDateObj = new Date(oldDate + 'T00:00:00');
     const newDateObj = new Date(oldDateObj);
     newDateObj.setDate(newDateObj.getDate() + offset * 7);
-    const newKey = `${toDateKey(newDateObj)}_${slotKey}_${place}`;
+    const newDateKey = toDateKey(newDateObj);
+    // Un giorno chiuso (prefestivo/ponte) non riceve turni, nemmeno incollando
+    if (isClosedDay(state.closedDays, newDateKey)) { skipped++; continue; }
+    const newKey = `${newDateKey}_${slotKey}_${place}`;
     if (!state.assignments[newKey]) {
       state.assignments[newKey] = docId;
       count++;
@@ -1595,7 +1599,7 @@ function pasteWeek(weekStart) {
   }
   saveToStorage();
   renderAll();
-  toast(`${count} turni incollati`, 'success');
+  toast(`${count} turni incollati${skipped ? ` — ${skipped} saltati su giorni chiusi` : ''}`, 'success');
 }
 
 // ====================================================
