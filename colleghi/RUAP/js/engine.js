@@ -2,14 +2,14 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015d';
-import { isItalianHoliday } from './holidays.js?v=20261015d';
-import { MONTHS_IT } from './config.js?v=20261015d';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015e';
+import { isItalianHoliday } from './holidays.js?v=20261015e';
+import { MONTHS_IT } from './config.js?v=20261015e';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast, isClosedDay
-} from './core-utils.js?v=20261015d';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015d';
+} from './core-utils.js?v=20261015e';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015e';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -65,30 +65,46 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
   const availablePrimary = filterAvailable(primaryDocs);
   const availablePool = filterAvailable(poolDocs);
 
-  // 2-tier allocation: flexible (prefer this place OR no preference) first, cross-site second
-  const placeTiers = [
-    availablePrimary.filter(d => d.preferredPlace === place || !d.preferredPlace),
-    availablePrimary.filter(d => d.preferredPlace && d.preferredPlace !== place),
-    availablePool.filter(d => d.preferredPlace === place || !d.preferredPlace),
-    availablePool.filter(d => d.preferredPlace && d.preferredPlace !== place),
-  ];
+  // La preferenza di sede NON e' piu' un tier rigido (referente, 2026-10-15:
+  // «cerca di trovare il modo che sia abbastanza equilibrato sia le ore che le
+  // sedi»). Il tier rigido faceva dipendere le ore dalla numerosita' del gruppo
+  // della sede (chi preferiva una sede con pochi "titolari" assorbiva tutti i suoi
+  // turni: dicembre dava 42h a chi copriva M.S.Savino in 7 turni e 84h a chi
+  // copriva Arezzo in 14). Ora il PRIMO criterio sono le ore del mese su tutte le
+  // sedi; la preferenza decide a parita' di ore, poi la rotazione fra sedi.
+  const shiftsAtPlace = (doc) => {
+    let n = 0;
+    const suffix = '_' + place;
+    for (const k in state.assignments) {
+      if (state.assignments[k] === doc.id && k.startsWith(ym) && k.endsWith(suffix)) n++;
+    }
+    return n;
+  };
+  const ym = dateKey.slice(0, 7);
 
-  // Rest first, place convenience second: every group of rested doctors is tried
-  // before any group of doctors coming off the previous afternoon.
+  // Rest first: rested doctors are tried before doctors coming off the previous
+  // afternoon (preference, not a hard constraint — referente 2026-10-15).
+  const candidates = availablePrimary.concat(availablePool);
   const priorityGroups = [
-    ...placeTiers.map(g => g.filter(d => !hasConsecutiveShiftConflict(d))),
-    ...placeTiers.map(g => g.filter(d => hasConsecutiveShiftConflict(d))),
+    candidates.filter(d => !hasConsecutiveShiftConflict(d)),
+    candidates.filter(d => hasConsecutiveShiftConflict(d)),
   ];
 
   for (const group of priorityGroups) {
     if (group.length > 0) {
       // Fairness first: the doctor with the FEWEST assigned hours this month wins.
-      // On a tie, priority goes to the doctor with the FEWER patients.
-      // (Do NOT fall back to the doctors array order — that was a hidden
-      // seniority bias that made the same doctors win every tie.)
+      // On a tie: the doctor who prefers this place (or has no preference), then
+      // non-pool, then whoever has done fewer shifts AT THIS PLACE (so cross-site
+      // work is spread), then the one with FEWER patients.
       group.sort((a, b) => {
         const hoursDiff = (assignedInTarget[a.id] || 0) - (assignedInTarget[b.id] || 0);
         if (hoursDiff !== 0) return hoursDiff;
+        const prefA = (a.preferredPlace === place || !a.preferredPlace) ? 0 : 1;
+        const prefB = (b.preferredPlace === place || !b.preferredPlace) ? 0 : 1;
+        if (prefA !== prefB) return prefA - prefB;
+        if (!!a.isPool !== !!b.isPool) return a.isPool ? 1 : -1;
+        const placeDiff = shiftsAtPlace(a) - shiftsAtPlace(b);
+        if (placeDiff !== 0) return placeDiff;
         return (a.patients ?? 0) - (b.patients ?? 0);
       });
       return group[0];
