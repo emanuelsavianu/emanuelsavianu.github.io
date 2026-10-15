@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261015f';
+} from './state.js?v=20261015g';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261015f';
+} from './core-utils.js?v=20261015g';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -34,15 +34,15 @@ import {
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday
-} from './renderers.js?v=20261015f';
+} from './renderers.js?v=20261015g';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261015f';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261015g';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
   CONFIG_DATA_KEY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261015f';
+} from './config.js?v=20261015g';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS

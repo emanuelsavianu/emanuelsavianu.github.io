@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-10-15T14:43:25Z",
+  "configDataVersion": "2026-10-15T15:02:24Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
@@ -1106,10 +1106,10 @@ const CONFIG = {
     "2026-12-01_mat_Arezzo": "mqgp5xpehbrke",
     "2026-12-01_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-01_mat_Subbiano": "mqgp5xpe8eeqy",
-    "2026-12-01_pom_Arezzo": "mqgp5xpev7h1m",
+    "2026-12-01_pom_Arezzo": "mqgp5xpec24f6",
     "2026-12-01_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-01_pom_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-02_mat_Arezzo": "mqgp5xpe3wotk",
+    "2026-12-02_mat_Arezzo": "mqgp5xpev7h1m",
     "2026-12-02_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-12-02_mat_Subbiano": "mqgp5xpec24f6",
     "2026-12-02_pom_Arezzo": "mqgp5xpemfnc0",
@@ -1126,7 +1126,7 @@ const CONFIG = {
     "2026-12-04_mat_Subbiano": "mqgp5xpev7h1m",
     "2026-12-04_pom_Arezzo": "mqgp5xpe79zho",
     "2026-12-04_pom_M.S.Savino": "mqgp5xpe6gb6b",
-    "2026-12-04_pom_Subbiano": "mqgp5xpemfnc0",
+    "2026-12-04_pom_Subbiano": "mqgp5xpe3wotk",
     "2026-12-09_mat_Arezzo": "mqgp5xpe79zho",
     "2026-12-09_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-09_mat_Subbiano": "mqgp5xpe6gb6b",
@@ -1142,7 +1142,7 @@ const CONFIG = {
     "2026-12-11_mat_Arezzo": "mqgp5xpehbrke",
     "2026-12-11_mat_M.S.Savino": "mqgp5xpev7h1m",
     "2026-12-11_mat_Subbiano": "mqgp5xpe8eeqy",
-    "2026-12-11_pom_Arezzo": "mqgp5xpemfnc0",
+    "2026-12-11_pom_Arezzo": "mqgp5xpe79zho",
     "2026-12-11_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-11_pom_Subbiano": "mrasudwdk87n",
     "2026-12-14_mat_Arezzo": "mqgp5xpev7h1m",
@@ -1190,7 +1190,7 @@ const CONFIG = {
     "2026-12-23_mat_Arezzo": "mqgp5xpe79zho",
     "2026-12-23_mat_M.S.Savino": "mqgp5xpe6gb6b",
     "2026-12-23_mat_Subbiano": "mqgp5xpev7h1m",
-    "2026-12-23_pom_Arezzo": "mqgp5xpemfnc0",
+    "2026-12-23_pom_Arezzo": "mqgp5xpeohiai",
     "2026-12-23_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-23_pom_Subbiano": "mrasudwdk87n",
     "2026-12-28_mat_Arezzo": "mqgp5xpec24f6",

@@ -2,14 +2,14 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015f';
-import { isItalianHoliday } from './holidays.js?v=20261015f';
-import { MONTHS_IT } from './config.js?v=20261015f';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015g';
+import { isItalianHoliday } from './holidays.js?v=20261015g';
+import { MONTHS_IT } from './config.js?v=20261015g';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast, isClosedDay
-} from './core-utils.js?v=20261015f';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015f';
+} from './core-utils.js?v=20261015g';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015g';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -116,14 +116,21 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
 // ====================================================
 // Post-passo di copertura + equita' (2026-10-15)
 // ====================================================
-// Il greedy a passata singola lascia 1 cella scoperta e fino a 2 turni di scarto
-// fra colleghi con la STESSA capacita': non e' un limite imposto dai vincoli, e'
-// l'ordine con cui riempie (una volta che la cella resta vuota il greedy non ci
-// torna piu'). Qui si applicano mosse SINGOLE — spostare un turno da un medico a
-// un altro — sempre legali (disponibilita', assenze, niente doppio impegno nella
-// stessa fascia, budget INTERO) e senza peggiorare i casi mattina-dopo-pomeriggio,
-// finche' ne esiste una che migliora copertura o equita'. Deterministico: ordine
-// fisso, prima mossa utile, tetto di iterazioni (niente rimpalli infiniti).
+// Il greedy a passata singola NON e' un limite imposto dai vincoli: lascia celle
+// scoperte e scarti di ore che poche mosse legali chiudono (lo ha dimostrato una
+// review avversariale). Qui si lavora solo con mosse SEMPRE legali — spostare un
+// turno da un medico a un altro, con disponibilita', assenze, niente doppio
+// impegno nella stessa fascia, budget INTERO — e senza peggiorare i casi
+// mattina-dopo-pomeriggio. Tre passaggi, deterministici (ordine fisso, prima
+// mossa utile/migliore, tetto di iterazioni):
+//   1. copertura: riempie le celle rimaste scoperte;
+//   2. mosse singole: hill-climb sulle ore;
+//   3. trasferimenti in due salti A -> B -> C (B fa da tramite), che servono
+//      quando il collega meno carico non puo' ricevere direttamente un turno.
+// Obiettivo: somma delle differenze a coppie DENTRO ogni gruppo di pari budget
+// mensile (il gruppo e' la capacita' reale: budget uguale = stesso monte ore).
+// Chi e' gia' il meno carico del suo gruppo non cede mai turni: nessuno viene
+// "spogliato" per pareggiare gli altri.
 
 function hoursSnapshot(year, month) {
   const out = {};
@@ -131,14 +138,6 @@ function hoursSnapshot(year, month) {
     out[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments);
   });
   return out;
-}
-
-function busyInSlot(docId, dateKey, slotKeyOnly, exceptKey) {
-  const prefix = `${dateKey}_${slotKeyOnly}_`;
-  for (const k in state.assignments) {
-    if (k !== exceptKey && state.assignments[k] === docId && k.startsWith(prefix)) return true;
-  }
-  return false;
 }
 
 function blockOn(dateKey, slotKeyOnly, docId, exceptKey) {
@@ -181,8 +180,36 @@ function optimizeMonth(year, month) {
     const s = SLOTS.find(x => x.key === slot);
     return s ? s.hours : 6;
   };
+  const budgetOf = (doc) => getMonthlyBudget(doc);
+  const keysOf = (docId) => Object.keys(state.assignments)
+    .filter(k => k.startsWith(monthPrefix) && (!docId || state.assignments[k] === docId))
+    .sort();
+
   let hours = hoursSnapshot(year, month);
   let moves = 0;
+
+  // Indice "medico|data|fascia": rende O(1) il controllo "impegnato in quella
+  // fascia in un'ALTRA sede" (senza, la ricerca in due salti e' troppo lenta).
+  let busy = new Set();
+  const rebuildBusy = () => {
+    busy = new Set();
+    for (const k in state.assignments) {
+      const p = k.split('_');
+      busy.add(`${state.assignments[k]}|${p[0]}|${p[1]}`);
+    }
+  };
+  rebuildBusy();
+  const isBusy = (docId, dateKey, slotKeyOnly) => busy.has(`${docId}|${dateKey}|${slotKeyOnly}`);
+
+  /** Il medico `doc` puo' prendere il turno `slotKey` (liberandolo da `fromId`)? */
+  const canReceive = (doc, slotKey, fromId, h) => {
+    const p = slotKey.split('_');
+    if (doc.id === fromId) return false;
+    if (!isDoctorAvailableForSlot(doc, p[0], p[1])) return false;
+    if (isBusy(doc.id, p[0], p[1])) return false;
+    if ((h[doc.id] || 0) + slotHoursOf(p[1]) > budgetOf(doc)) return false;
+    return restDelta(slotKey, fromId, doc.id) <= 0;
+  };
 
   // --- 1. copertura: riempi le celle rimaste scoperte ---
   for (const item of enumerateEmptySlots(year, month)) {
@@ -192,39 +219,35 @@ function optimizeMonth(year, month) {
     const available = state.doctors.filter(d => isDoctorAvailableForSlot(d, item.dateKey, slotKeyOnly));
 
     // a) un medico disponibile, libero in quella fascia e con budget
-    const free = available.find(d => !busyInSlot(d.id, item.dateKey, slotKeyOnly, null)
-      && (hours[d.id] || 0) + slotHours <= getMonthlyBudget(d));
+    const free = available.find(d => !isBusy(d.id, item.dateKey, slotKeyOnly)
+      && (hours[d.id] || 0) + slotHours <= budgetOf(d));
     if (free) {
       state.assignments[item.slotKey] = free.id;
+      rebuildBusy();
       hours = hoursSnapshot(year, month);
       moves++;
       continue;
     }
 
     // b) nessuno libero: libera un medico disponibile spostando UN suo turno a chi
-    //    puo' prenderlo (spesso e' il budget il blocco: spostando via un turno si
-    //    libera il posto per questa cella), poi assegnagli la cella.
+    //    puo' prenderlo (spesso e' il budget pieno il blocco: spostando via un
+    //    turno si libera il posto), poi assegnagli la cella.
     let fixed = false;
     for (const d of available) {
       if (fixed) break;
-      const mine = Object.keys(state.assignments)
-        .filter(k => k.startsWith(monthPrefix) && state.assignments[k] === d.id).sort();
+      const mine = keysOf(d.id);
       const sameSlot = mine.filter(k => k.startsWith(`${item.dateKey}_${slotKeyOnly}_`));
-      const movable = sameSlot.length > 0 ? sameSlot : mine;   // se e' occupato li', deve liberare QUELLA fascia
+      const movable = sameSlot.length > 0 ? sameSlot : mine;
       for (const k of movable) {
         const kParts = k.split('_');
         const kSlot = kParts[1];
         const kHours = slotHoursOf(kSlot);
-        // dopo lo spostamento d deve poter prendere la cella vuota
-        if ((hours[d.id] || 0) - kHours + slotHours > getMonthlyBudget(d)) continue;
-        const receiver = state.doctors.find(r => r.id !== d.id
-          && isDoctorAvailableForSlot(r, kParts[0], kSlot)
-          && !busyInSlot(r.id, kParts[0], kSlot, null)
-          && (hours[r.id] || 0) + kHours <= getMonthlyBudget(r)
-          && restDelta(k, d.id, r.id) <= 0);
+        if ((hours[d.id] || 0) - kHours + slotHours > budgetOf(d)) continue;
+        const receiver = state.doctors.find(r => canReceive(r, k, d.id, hours));
         if (!receiver) continue;
         state.assignments[k] = receiver.id;
         state.assignments[item.slotKey] = d.id;
+        rebuildBusy();
         hours = hoursSnapshot(year, month);
         moves += 2;
         fixed = true;
@@ -233,51 +256,101 @@ function optimizeMonth(year, month) {
     }
   }
 
-  // --- 2. equita' delle ore DENTRO la stessa capacita' (stesso budget mensile) ---
-  for (let iter = 0; iter < 300; iter++) {
-    hours = hoursSnapshot(year, month);
+  // --- 2/3. equita' delle ore ---
+  const pairwise = (h) => {
     const groups = {};
     state.doctors.forEach(d => {
-      const b = getMonthlyBudget(d);
-      (groups[b] = groups[b] || []).push(d);
+      const b = budgetOf(d);
+      (groups[b] = groups[b] || []).push(h[d.id] || 0);
     });
-    let applied = false;
-    const budgets = Object.keys(groups).map(Number).sort((a, b) => b - a);
-    for (const b of budgets) {
-      const g = groups[b];
-      if (g.length < 2) continue;
-      const gMax = Math.max(...g.map(d => hours[d.id] || 0));
-      const gMin = Math.min(...g.map(d => hours[d.id] || 0));
-      if (gMax - gMin < 12) continue;                 // scarto accettato: mezzo turno
-      const donors = [...g].sort((a, c) => (hours[c.id] || 0) - (hours[a.id] || 0)
-        || (a.patients ?? 0) - (c.patients ?? 0));
-      const receivers = [...g].sort((a, c) => (hours[a.id] || 0) - (hours[c.id] || 0)
-        || (a.patients ?? 0) - (c.patients ?? 0));
-      for (const from of donors) {
-        if ((hours[from.id] || 0) !== gMax) continue;  // solo da chi e' al massimo del gruppo
-        for (const to of receivers) {
-          if ((hours[to.id] || 0) >= gMax - 6) continue;   // deve ridurre lo scarto di un turno
-          for (const k of Object.keys(state.assignments)
-            .filter(x => x.startsWith(monthPrefix) && state.assignments[x] === from.id).sort()) {
-            const kParts = k.split('_');
-            const kSlot = kParts[1];
-            const kHours = slotHoursOf(kSlot);
-            if (!isDoctorAvailableForSlot(to, kParts[0], kSlot)) continue;
-            if (busyInSlot(to.id, kParts[0], kSlot, null)) continue;
-            if ((hours[to.id] || 0) + kHours > getMonthlyBudget(to)) continue;
-            if (restDelta(k, from.id, to.id) > 0) continue;   // non peggiorare il riposo
-            state.assignments[k] = to.id;
-            moves++;
-            applied = true;
-            break;
-          }
-          if (applied) break;
-        }
-        if (applied) break;
+    let tot = 0;
+    for (const b in groups) {
+      const v = groups[b];
+      for (let i = 0; i < v.length; i++) {
+        for (let j = i + 1; j < v.length; j++) tot += Math.abs(v[i] - v[j]);
       }
-      if (applied) break;
     }
-    if (!applied) break;      // nessuna mossa legale migliorativa: mi fermo qui
+    return tot;
+  };
+  const aboveGroupMin = (h, doc) => {
+    const g = state.doctors.filter(d => budgetOf(d) === budgetOf(doc)).map(d => h[d.id] || 0);
+    return (h[doc.id] || 0) > Math.min(...g);
+  };
+
+  const singleMovePass = () => {
+    const base = pairwise(hours);
+    let best = null;
+    for (const k of keysOf()) {
+      const from = byId(state.assignments[k]);
+      if (!from || !aboveGroupMin(hours, from)) continue;
+      for (const to of state.doctors) {
+        if (!canReceive(to, k, from.id, hours)) continue;
+        const sh = slotHoursOf(k.split('_')[1]);
+        const h2 = { ...hours };
+        h2[from.id] -= sh;
+        h2[to.id] = (h2[to.id] || 0) + sh;
+        const gain = base - pairwise(h2);
+        if (gain > 0 && (!best || gain > best.gain)) best = { k, toId: to.id, gain };
+      }
+    }
+    return best;
+  };
+
+  const twoHopPass = () => {
+    // Trasferimento A -> B -> C: A cede un turno a B, B ne cede uno a C (B resta
+    // con le stesse ore). Serve quando C non puo' ricevere direttamente da A, per
+    // disponibilita' o perche' il riposo peggiorerebbe.
+    const base = pairwise(hours);
+    const pairs = [];
+    for (const a of state.doctors) {
+      if (!aboveGroupMin(hours, a)) continue;
+      for (const c of state.doctors) {
+        if (c.id === a.id) continue;
+        const h2 = { ...hours };
+        h2[a.id] -= 6;
+        h2[c.id] = (h2[c.id] || 0) + 6;
+        const gain = base - pairwise(h2);
+        if (gain > 0) pairs.push({ gain, aId: a.id, cId: c.id });
+      }
+    }
+    pairs.sort((x, y) => y.gain - x.gain || (x.aId + x.cId).localeCompare(y.aId + y.cId));
+    for (const { aId, cId } of pairs) {
+      const c = byId(cId);
+      for (const k1 of keysOf(aId)) {
+        for (const b of state.doctors) {
+          if (b.id === aId || b.id === cId) continue;
+          if (!canReceive(b, k1, aId, hours)) continue;
+          const hMid = { ...hours };
+          hMid[aId] -= 6;
+          hMid[b.id] = (hMid[b.id] || 0) + 6;
+          for (const k2 of keysOf(b.id)) {
+            if (k2 === k1) continue;
+            if (!canReceive(c, k2, b.id, hMid)) continue;
+            return { k1, bId: b.id, k2, cId };
+          }
+        }
+      }
+    }
+    return null;
+  };
+
+  for (let iter = 0; iter < 100; iter++) {
+    if (pairwise(hours) === 0) break;
+    const one = singleMovePass();
+    if (one) {
+      state.assignments[one.k] = one.toId;
+      rebuildBusy();
+      hours = hoursSnapshot(year, month);
+      moves++;
+      continue;
+    }
+    const two = twoHopPass();
+    if (!two) break;                    // nessuna mossa legale migliorativa
+    state.assignments[two.k1] = two.bId;
+    state.assignments[two.k2] = two.cId;
+    rebuildBusy();
+    hours = hoursSnapshot(year, month);
+    moves += 2;
   }
 
   return moves;
@@ -296,8 +369,20 @@ export function runAutoAssignForMonth(year, month) {
   const slotsToProcess = enumerateEmptySlots(year, month);
 
   if (slotsToProcess.length === 0) {
+    // Mese gia' pieno: la rifinitura gira lo stesso, cosi' si puo' chiedere
+    // copertura/equita' senza svuotare il mese (prima si usciva qui e i
+    // commenti promettevano un comportamento che il codice non aveva).
+    const rifinite = optimizeMonth(year, month);
     setProcessing(false);
-    toast(`Nessun turno vuoto in ${monthName}`, 'info');
+    if (rifinite > 0) {
+      saveToStorage();
+      renderAll();
+      renderMonthlyStats();
+      updateConflictsHeaderBadge();
+      toast(`${rifinite} spostamenti di rifinitura in ${monthName}`, 'success');
+    } else {
+      toast(`Nessun turno vuoto in ${monthName}`, 'info');
+    }
     return;
   }
 
@@ -350,9 +435,7 @@ export function runAutoAssignForMonth(year, month) {
       loadingEl.classList.add('hidden');
       progressBar.style.width = '0%';
       setProcessing(false);
-      // Rifinitura: copertura delle celle rimaste scoperte + equita' delle ore e
-      // delle sedi (mosse singole sempre legali, vedi optimizeMonth). Gira anche
-      // su un mese gia' pieno: se trova una mossa migliorativa la applica.
+      // Rifinitura: copertura + equita' (mosse singole e in due salti, sempre legali).
       const rifinite = optimizeMonth(year, month);
       if (count === 0 && rifinite === 0) {
         toast(`Nessun turno da generare in ${monthName}`, 'info');
