@@ -43,7 +43,7 @@ Cache-buster: `styles.css?v=20261014a` (33 occorrenze), `app.js?v=20261014a` (24
 
 ## 3. Metriche prima/dopo (stessa macchina, stesso harness)
 
-| Metrica | Prima (deployato) | Dopo (branch, locale) |
+| Metrica | Prima (deployato, main) | Dopo (fix, verificato **sul deployato** — commit `911ffed`) |
 |---|---|---|
 | Nodi di contrasto (40 pagine × 2 temi, mobile) | **436** | **1** (falso positivo `sr-only`) |
 | Pagine con overflow orizzontale a 390px | 10 | **0** |
@@ -111,3 +111,23 @@ curl -s "https://savianu.it/sw.js?x=$RANDOM" | grep -o 'savianu-v[0-9]*'    # do
 5. **Tabelle**: estendere `.table-scroll` alle altre pagine con tabelle (comunicazioni-2026 ha 1 tabella larga).
 6. **`bf-cache`** su `/privati/`: rimuovere listener `unload`/`visibilitychange` invasivi se presenti.
 7. **RUAP/`gestoreturni`**: tastiera sui div cliccabili, testi 9–10px → 12px, `#btn-toggle-monthly-stats` alto 16px → ≥24px.
+
+---
+
+## 8. Verifica sul DEPLOYATO (dopo merge e deploy — commit `911ffed`)
+
+Deploy: PR #5 mergiata (`--rebase`), PR #4 chiusa come superata, PR #6 (questo lavoro) mergiata; GitHub Pages build **`built`** su `911ffed`, `sw.js` live = **`savianu-v403`**.
+
+**Harness rieseguito sul sito live** — 30 record (15 pagine × light/dark, mobile 390 + axe 4.10.2):
+
+| Esito sul live | Valore |
+|---|---|
+| Nodi di contrasto reali | **0** (1 segnalazione = `p#wizard-step-label`, `sr-only`: non visibile) |
+| Overflow orizzontale | **0** su tutte le pagine |
+| Violazioni axe | **1 per tema** — `heading-order` moderate su `colleghi/pir.html` (pre-esistente, 2 record su 30): da correggere `h2 -> h4` in `.pir-summary-box` |
+| Errori JS/console | **0** |
+| Service worker | `navigator.serviceWorker.controller` = `/sw.js`, cache `savianu-v403` creata, `savianu-v400` in attesa di cleanup, **1 sola navigazione** (nessun loop di reload) |
+
+Controlli puntuali via `curl` sul live: `styles.css?v=20261014a` contiene `--badge-fg` (2), `@page A4` (1), `body.dark-mode .section-title` (1); `poster-styles.css?v=20261014a` contiene la media query (1); `privacy.html` contiene la voce `intl-inquiry`; `criteri-appropriatezza` ha 3 wrapper `table-scroll`; `protocollo-certificati-inps` ha lo spazio prima di `<br>`; `RUAP/js/config.js` serve la palette 700; `gestoreturni` ha `gv-footer`.
+
+Pagine verificate sul live: `/404.html` · `/colleghi/RUAP/` · `/colleghi/criteri-appropriatezza.html` · `/colleghi/gestoreturni/gestoreturni.html` · `/colleghi/guida-accessi-pronto-soccorso.html` · `/colleghi/pir.html` · `/offline.html` · `/privacy.html` · `/privati/certificato-invalidita-civile.html` · `/ssn/` · `/ssn/esenzioni.html` · `/ssn/impegnative.html` · `/ssn/poster-it.html` · `/ssn/poster-ro.html` · `/ssn/salutementale.html`
