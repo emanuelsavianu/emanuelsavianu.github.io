@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js';
+} from './state.js?v=20261015c';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js';
+} from './core-utils.js?v=20261015c';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -34,15 +34,15 @@ import {
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday
-} from './renderers.js';
+} from './renderers.js?v=20261015c';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261015b';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261015c';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
   CONFIG_DATA_KEY,
   EXTERNAL_PREFIX
-} from './config.js';
+} from './config.js?v=20261015c';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -54,12 +54,21 @@ function shiftMonth(delta) {
   else if (state.calMonth > 11) { state.calMonth = 0; state.calYear++; }
 }
 
+/** Dopo undo/redo lo stato cambia: il calendario va ridisegnato. undo()/redo() di
+    per sé non renderizzano, perciò una chiusura annullata restava visivamente
+    chiusa (e i turni ripristinati non ricomparivano) fino al render successivo. */
+function renderAfterHistory() {
+  renderAll();
+  renderMonthlyStats();
+  updateConflictsHeaderBadge();
+}
+
 document.addEventListener('keydown', (e) => {
   const tag = e.target.tagName;
   if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || e.target.isContentEditable) return;
   const mod = e.ctrlKey || e.metaKey;
-  if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo(); }
-  if (mod && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) { e.preventDefault(); redo(); }
+  if (mod && e.key.toLowerCase() === 'z' && !e.shiftKey) { e.preventDefault(); undo(); renderAfterHistory(); }
+  if (mod && (e.key.toLowerCase() === 'y' || (e.shiftKey && e.key.toLowerCase() === 'z'))) { e.preventDefault(); redo(); renderAfterHistory(); }
   if (e.key === 'ArrowLeft' && mod) { e.preventDefault(); shiftMonth(-1); renderAll(); }
   if (e.key === 'ArrowRight' && mod) { e.preventDefault(); shiftMonth(1); renderAll(); }
   if (e.key === 'Escape') {
@@ -196,8 +205,8 @@ el('conflicts-modal')?.addEventListener('click', (e) => {
   if (e.target.id === 'conflicts-modal') closeConflictsModal();
 });
 el('btn-restart-wizard')?.addEventListener('click', restartWizard);
-el('btn-undo')?.addEventListener('click', undo);
-el('btn-redo')?.addEventListener('click', redo);
+el('btn-undo')?.addEventListener('click', () => { undo(); renderAfterHistory(); });
+el('btn-redo')?.addEventListener('click', () => { redo(); renderAfterHistory(); });
 el('btn-oggi')?.addEventListener('click', () => {
   const now = new Date();
   state.calYear = now.getFullYear();

@@ -7,8 +7,8 @@ import {
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
-} from './config.js';
-import { el, toast, toDateKey, getWeekStart } from './core-utils.js';
+} from './config.js?v=20261015c';
+import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261015c';
 
 // --- Global mutable references (module-scoped) ---
 export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;
@@ -78,13 +78,26 @@ export function reloadPlaces() {
 }
 
 /** Giorni di chiusura straordinaria (prefestivi, ponti): come le festività, il
-    motore non li riempie e il calendario li mostra chiusi. */
+    motore non li riempie e il calendario li mostra chiusi. Si semina dal config
+    SOLO se l'utente non ha mai scritto il proprio elenco: una lista vuota salvata
+    (tutti i giorni riaperti) è uno stato valido e non va sovrascritta. */
 export function reloadClosedDays() {
-  if (Array.isArray(state.closedDays) && state.closedDays.length > 0) return;
+  if (hasStoredClosedDays()) {
+    if (!Array.isArray(state.closedDays)) state.closedDays = [];
+    return;
+  }
   if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.closedDays)) {
     state.closedDays = [...CONFIG.closedDays];
   } else {
     state.closedDays = [];
+  }
+}
+
+function hasStoredClosedDays() {
+  try {
+    return localStorage.getItem(STORAGE_CLOSED) !== null;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -139,7 +152,9 @@ export function loadHistory() {
 }
 
 export function pushHistory() {
-  const snapshot = JSON.stringify({ doctors: state.doctors, assignments: state.assignments });
+  const snapshot = JSON.stringify({
+    doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays
+  });
   if (historyIndex < historyStack.length - 1) {
     historyStack = historyStack.slice(0, historyIndex + 1);
   }
@@ -159,6 +174,7 @@ export function undo() {
   const snap = JSON.parse(historyStack[historyIndex]);
   state.assignments = snap.assignments;
   if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
+  if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
   saveToStorage();
   saveHistory();
   updateUndoRedoButtons();
@@ -170,6 +186,7 @@ export function redo() {
   const snap = JSON.parse(historyStack[historyIndex]);
   state.assignments = snap.assignments;
   if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
+  if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
   saveToStorage();
   saveHistory();
   updateUndoRedoButtons();
