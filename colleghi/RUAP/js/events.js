@@ -36,7 +36,7 @@ import {
   unavailCalNav, unavailCalToday
 } from './renderers.js';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261015';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261015b';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
