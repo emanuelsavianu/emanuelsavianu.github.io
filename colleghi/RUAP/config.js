@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-10-15T14:18:09Z",
+  "configDataVersion": "2026-10-15T14:43:25Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
@@ -1109,7 +1109,7 @@ const CONFIG = {
     "2026-12-01_pom_Arezzo": "mqgp5xpev7h1m",
     "2026-12-01_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-01_pom_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-02_mat_Arezzo": "mqgp5xpev7h1m",
+    "2026-12-02_mat_Arezzo": "mqgp5xpe3wotk",
     "2026-12-02_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-12-02_mat_Subbiano": "mqgp5xpec24f6",
     "2026-12-02_pom_Arezzo": "mqgp5xpemfnc0",
@@ -1125,7 +1125,7 @@ const CONFIG = {
     "2026-12-04_mat_M.S.Savino": "mqgp5xpehbrke",
     "2026-12-04_mat_Subbiano": "mqgp5xpev7h1m",
     "2026-12-04_pom_Arezzo": "mqgp5xpe79zho",
-    "2026-12-04_pom_M.S.Savino": "mrasudwdk87n",
+    "2026-12-04_pom_M.S.Savino": "mqgp5xpe6gb6b",
     "2026-12-04_pom_Subbiano": "mqgp5xpemfnc0",
     "2026-12-09_mat_Arezzo": "mqgp5xpe79zho",
     "2026-12-09_mat_M.S.Savino": "mqgp5xpe3wotk",
@@ -1138,7 +1138,7 @@ const CONFIG = {
     "2026-12-10_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-10_pom_Arezzo": "mqgp5xpec24f6",
     "2026-12-10_pom_M.S.Savino": "mqgp5xpe8eeqy",
-    "2026-12-10_pom_Subbiano": "mqgp5xpehbrke",
+    "2026-12-10_pom_Subbiano": "mqgp5xpev7h1m",
     "2026-12-11_mat_Arezzo": "mqgp5xpehbrke",
     "2026-12-11_mat_M.S.Savino": "mqgp5xpev7h1m",
     "2026-12-11_mat_Subbiano": "mqgp5xpe8eeqy",
@@ -1196,6 +1196,7 @@ const CONFIG = {
     "2026-12-28_mat_Arezzo": "mqgp5xpec24f6",
     "2026-12-28_mat_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-28_mat_Subbiano": "mqgp5xpe3wotk",
+    "2026-12-28_pom_Arezzo": "mqgp5xpehbrke",
     "2026-12-28_pom_M.S.Savino": "mrasudwdk87n",
     "2026-12-28_pom_Subbiano": "mqgp5xpemfnc0",
     "2026-12-29_mat_Arezzo": "mqgp5xpemfnc0",

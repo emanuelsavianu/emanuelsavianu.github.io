@@ -2,14 +2,14 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015e';
-import { isItalianHoliday } from './holidays.js?v=20261015e';
-import { MONTHS_IT } from './config.js?v=20261015e';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015f';
+import { isItalianHoliday } from './holidays.js?v=20261015f';
+import { MONTHS_IT } from './config.js?v=20261015f';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast, isClosedDay
-} from './core-utils.js?v=20261015e';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015e';
+} from './core-utils.js?v=20261015f';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015f';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -113,6 +113,176 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
   return null;
 }
 
+// ====================================================
+// Post-passo di copertura + equita' (2026-10-15)
+// ====================================================
+// Il greedy a passata singola lascia 1 cella scoperta e fino a 2 turni di scarto
+// fra colleghi con la STESSA capacita': non e' un limite imposto dai vincoli, e'
+// l'ordine con cui riempie (una volta che la cella resta vuota il greedy non ci
+// torna piu'). Qui si applicano mosse SINGOLE — spostare un turno da un medico a
+// un altro — sempre legali (disponibilita', assenze, niente doppio impegno nella
+// stessa fascia, budget INTERO) e senza peggiorare i casi mattina-dopo-pomeriggio,
+// finche' ne esiste una che migliora copertura o equita'. Deterministico: ordine
+// fisso, prima mossa utile, tetto di iterazioni (niente rimpalli infiniti).
+
+function hoursSnapshot(year, month) {
+  const out = {};
+  state.doctors.forEach(d => {
+    out[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments);
+  });
+  return out;
+}
+
+function busyInSlot(docId, dateKey, slotKeyOnly, exceptKey) {
+  const prefix = `${dateKey}_${slotKeyOnly}_`;
+  for (const k in state.assignments) {
+    if (k !== exceptKey && state.assignments[k] === docId && k.startsWith(prefix)) return true;
+  }
+  return false;
+}
+
+function blockOn(dateKey, slotKeyOnly, docId, exceptKey) {
+  for (const k in state.assignments) {
+    if (k === exceptKey) continue;
+    if (state.assignments[k] !== docId) continue;
+    if (k.startsWith(`${dateKey}_${slotKeyOnly}_`)) return true;
+  }
+  return false;
+}
+
+function shiftDayKey(dateKey, days) {
+  const d = new Date(dateKey + 'T00:00:00');
+  d.setDate(d.getDate() + days);
+  return toDateKey(d);
+}
+
+/** Variazione dei casi "mattina dopo pomeriggio" spostando il turno k da fromId a toId. */
+function restDelta(slotKey, fromId, toId) {
+  const parts = slotKey.split('_');
+  const dateKey = parts[0];
+  const slot = parts[1];
+  let delta = 0;
+  if (slot === 'mat') {
+    const prev = shiftDayKey(dateKey, -1);
+    if (blockOn(prev, 'pom', toId, null)) delta++;
+    if (blockOn(prev, 'pom', fromId, slotKey)) delta--;
+  } else {
+    const next = shiftDayKey(dateKey, 1);
+    if (blockOn(next, 'mat', toId, null)) delta++;
+    if (blockOn(next, 'mat', fromId, slotKey)) delta--;
+  }
+  return delta;
+}
+
+function optimizeMonth(year, month) {
+  const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`;
+  const byId = (id) => state.doctors.find(d => d.id === id);
+  const slotHoursOf = (slot) => {
+    const s = SLOTS.find(x => x.key === slot);
+    return s ? s.hours : 6;
+  };
+  let hours = hoursSnapshot(year, month);
+  let moves = 0;
+
+  // --- 1. copertura: riempi le celle rimaste scoperte ---
+  for (const item of enumerateEmptySlots(year, month)) {
+    const parts = item.slotKey.split('_');
+    const slotKeyOnly = parts[1];
+    const slotHours = slotHoursOf(slotKeyOnly);
+    const available = state.doctors.filter(d => isDoctorAvailableForSlot(d, item.dateKey, slotKeyOnly));
+
+    // a) un medico disponibile, libero in quella fascia e con budget
+    const free = available.find(d => !busyInSlot(d.id, item.dateKey, slotKeyOnly, null)
+      && (hours[d.id] || 0) + slotHours <= getMonthlyBudget(d));
+    if (free) {
+      state.assignments[item.slotKey] = free.id;
+      hours = hoursSnapshot(year, month);
+      moves++;
+      continue;
+    }
+
+    // b) nessuno libero: libera un medico disponibile spostando UN suo turno a chi
+    //    puo' prenderlo (spesso e' il budget il blocco: spostando via un turno si
+    //    libera il posto per questa cella), poi assegnagli la cella.
+    let fixed = false;
+    for (const d of available) {
+      if (fixed) break;
+      const mine = Object.keys(state.assignments)
+        .filter(k => k.startsWith(monthPrefix) && state.assignments[k] === d.id).sort();
+      const sameSlot = mine.filter(k => k.startsWith(`${item.dateKey}_${slotKeyOnly}_`));
+      const movable = sameSlot.length > 0 ? sameSlot : mine;   // se e' occupato li', deve liberare QUELLA fascia
+      for (const k of movable) {
+        const kParts = k.split('_');
+        const kSlot = kParts[1];
+        const kHours = slotHoursOf(kSlot);
+        // dopo lo spostamento d deve poter prendere la cella vuota
+        if ((hours[d.id] || 0) - kHours + slotHours > getMonthlyBudget(d)) continue;
+        const receiver = state.doctors.find(r => r.id !== d.id
+          && isDoctorAvailableForSlot(r, kParts[0], kSlot)
+          && !busyInSlot(r.id, kParts[0], kSlot, null)
+          && (hours[r.id] || 0) + kHours <= getMonthlyBudget(r)
+          && restDelta(k, d.id, r.id) <= 0);
+        if (!receiver) continue;
+        state.assignments[k] = receiver.id;
+        state.assignments[item.slotKey] = d.id;
+        hours = hoursSnapshot(year, month);
+        moves += 2;
+        fixed = true;
+        break;
+      }
+    }
+  }
+
+  // --- 2. equita' delle ore DENTRO la stessa capacita' (stesso budget mensile) ---
+  for (let iter = 0; iter < 300; iter++) {
+    hours = hoursSnapshot(year, month);
+    const groups = {};
+    state.doctors.forEach(d => {
+      const b = getMonthlyBudget(d);
+      (groups[b] = groups[b] || []).push(d);
+    });
+    let applied = false;
+    const budgets = Object.keys(groups).map(Number).sort((a, b) => b - a);
+    for (const b of budgets) {
+      const g = groups[b];
+      if (g.length < 2) continue;
+      const gMax = Math.max(...g.map(d => hours[d.id] || 0));
+      const gMin = Math.min(...g.map(d => hours[d.id] || 0));
+      if (gMax - gMin < 12) continue;                 // scarto accettato: mezzo turno
+      const donors = [...g].sort((a, c) => (hours[c.id] || 0) - (hours[a.id] || 0)
+        || (a.patients ?? 0) - (c.patients ?? 0));
+      const receivers = [...g].sort((a, c) => (hours[a.id] || 0) - (hours[c.id] || 0)
+        || (a.patients ?? 0) - (c.patients ?? 0));
+      for (const from of donors) {
+        if ((hours[from.id] || 0) !== gMax) continue;  // solo da chi e' al massimo del gruppo
+        for (const to of receivers) {
+          if ((hours[to.id] || 0) >= gMax - 6) continue;   // deve ridurre lo scarto di un turno
+          for (const k of Object.keys(state.assignments)
+            .filter(x => x.startsWith(monthPrefix) && state.assignments[x] === from.id).sort()) {
+            const kParts = k.split('_');
+            const kSlot = kParts[1];
+            const kHours = slotHoursOf(kSlot);
+            if (!isDoctorAvailableForSlot(to, kParts[0], kSlot)) continue;
+            if (busyInSlot(to.id, kParts[0], kSlot, null)) continue;
+            if ((hours[to.id] || 0) + kHours > getMonthlyBudget(to)) continue;
+            if (restDelta(k, from.id, to.id) > 0) continue;   // non peggiorare il riposo
+            state.assignments[k] = to.id;
+            moves++;
+            applied = true;
+            break;
+          }
+          if (applied) break;
+        }
+        if (applied) break;
+      }
+      if (applied) break;
+    }
+    if (!applied) break;      // nessuna mossa legale migliorativa: mi fermo qui
+  }
+
+  return moves;
+}
+
 export function runAutoAssignForMonth(year, month) {
   if (isProcessing) return;
   if (state.doctors.length === 0) {
@@ -180,7 +350,11 @@ export function runAutoAssignForMonth(year, month) {
       loadingEl.classList.add('hidden');
       progressBar.style.width = '0%';
       setProcessing(false);
-      if (count === 0) {
+      // Rifinitura: copertura delle celle rimaste scoperte + equita' delle ore e
+      // delle sedi (mosse singole sempre legali, vedi optimizeMonth). Gira anche
+      // su un mese gia' pieno: se trova una mossa migliorativa la applica.
+      const rifinite = optimizeMonth(year, month);
+      if (count === 0 && rifinite === 0) {
         toast(`Nessun turno da generare in ${monthName}`, 'info');
         return;
       }
@@ -188,7 +362,8 @@ export function runAutoAssignForMonth(year, month) {
       renderAll();
       renderMonthlyStats();
       updateConflictsHeaderBadge();
-      toast(`Generati ${count} turni per ${monthName}`, 'success');
+      toast(`Generati ${count} turni per ${monthName}` +
+            (rifinite ? ` + ${rifinite} spostamenti di rifinitura` : ''), 'success');
     }
   }
 

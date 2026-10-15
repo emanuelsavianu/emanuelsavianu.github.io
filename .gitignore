@@ -122,3 +122,10 @@ ssn/poster-styles.css
 # Internal agent workspaces & private docs (untracked 2026-08-29)
 /docs/
 /email-templates/
+
+# RUAP: file di lavoro/backup locali (non vanno pubblicati)
+colleghi/RUAP/*.bak
+colleghi/RUAP/*.bak-*
+colleghi/RUAP/*.tmp-write
+colleghi/RUAP/export-*.json
+colleghi/RUAP/config-prefs-*.js
