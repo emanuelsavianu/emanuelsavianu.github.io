@@ -7,8 +7,8 @@ import {
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
-} from './config.js?v=20261015c';
-import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261015c';
+} from './config.js?v=20261015d';
+import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261015d';
 
 // --- Global mutable references (module-scoped) ---
 export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;
@@ -32,7 +32,7 @@ export let state = {
 
 // --- History ---
 let historyStack = [];
-let historyIndex = -1;
+let redoStack = [];
 export let isProcessing = false;
 
 export function setProcessing(v) { isProcessing = v; }
@@ -91,6 +91,10 @@ export function reloadClosedDays() {
   } else {
     state.closedDays = [];
   }
+  // Il seme va anche SALVATO: altrimenti per un client esistente senza la chiave
+  // il riallineo dal config si ripeterebbe a ogni caricamento (stato non
+  // deterministico e non ispezionabile in localStorage).
+  saveToStorage();
 }
 
 function hasStoredClosedDays() {
@@ -134,9 +138,25 @@ export function toggleDarkMode() {
 
 // --- History ---
 
+// Modello (riscritto 2026-10-15): `historyStack` = stati PRE-azione (cima = ultima
+// azione), `redoStack` = stati consumati dagli undo. Undo e redo spostano UNA sola
+// azione; il modello precedente a indice (pushHistory registrava lo stato prima
+// della mutazione e undo() leggeva stack[index-1]) saltava due azioni per volta.
+function currentSnapshot() {
+  return JSON.stringify({
+    doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays
+  });
+}
+
+function applySnapshot(snap) {
+  state.assignments = snap.assignments;
+  if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
+  if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
+}
+
 function saveHistory() {
   try {
-    localStorage.setItem(STORAGE_HISTORY, JSON.stringify({ stack: historyStack, index: historyIndex }));
+    localStorage.setItem(STORAGE_HISTORY, JSON.stringify({ stack: historyStack, redo: redoStack }));
   } catch (e) { console.error(e); }
 }
 
@@ -145,48 +165,42 @@ export function loadHistory() {
     const saved = localStorage.getItem(STORAGE_HISTORY);
     if (saved) {
       const data = JSON.parse(saved);
-      historyStack = data.stack || [];
-      historyIndex = data.index ?? -1;
+      historyStack = Array.isArray(data.stack) ? data.stack : [];
+      redoStack = Array.isArray(data.redo) ? data.redo : [];
     }
   } catch (e) { console.error(e); }
 }
 
+/** Da chiamare PRIMA di mutare lo stato: registra lo stato corrente come punto di
+    ripristino dell'undo e invalida la storia "futura" (redo). */
 export function pushHistory() {
-  const snapshot = JSON.stringify({
-    doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays
-  });
-  if (historyIndex < historyStack.length - 1) {
-    historyStack = historyStack.slice(0, historyIndex + 1);
-  }
-  historyStack.push(snapshot);
-  if (historyStack.length > HISTORY_MAX) {
-    historyStack.shift();
-  } else {
-    historyIndex++;
-  }
+  historyStack.push(currentSnapshot());
+  while (historyStack.length > HISTORY_MAX) historyStack.shift();
+  redoStack = [];
   saveHistory();
   updateUndoRedoButtons();
 }
 
+/** Annulla l'ultima azione: ripristina lo stato pre-azione e mette da parte quello
+    attuale, così il redo può riapplicarla. */
 export function undo() {
-  if (historyIndex <= 0) return;
-  historyIndex--;
-  const snap = JSON.parse(historyStack[historyIndex]);
-  state.assignments = snap.assignments;
-  if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
-  if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
+  if (historyStack.length === 0) return;
+  const current = currentSnapshot();
+  const prev = historyStack.pop();
+  redoStack.push(current);
+  applySnapshot(JSON.parse(prev));
   saveToStorage();
   saveHistory();
   updateUndoRedoButtons();
 }
 
 export function redo() {
-  if (historyIndex >= historyStack.length - 1) return;
-  historyIndex++;
-  const snap = JSON.parse(historyStack[historyIndex]);
-  state.assignments = snap.assignments;
-  if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
-  if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
+  if (redoStack.length === 0) return;
+  const current = currentSnapshot();
+  const next = redoStack.pop();
+  historyStack.push(current);
+  while (historyStack.length > HISTORY_MAX) historyStack.shift();
+  applySnapshot(JSON.parse(next));
   saveToStorage();
   saveHistory();
   updateUndoRedoButtons();
@@ -194,20 +208,23 @@ export function redo() {
 
 export function clearHistory() {
   historyStack = [];
-  historyIndex = -1;
+  redoStack = [];
   saveHistory();
+  updateUndoRedoButtons();
 }
 
 export function updateUndoRedoButtons() {
   const undoBtn = el('btn-undo');
   const redoBtn = el('btn-redo');
+  const noUndo = historyStack.length === 0;
+  const noRedo = redoStack.length === 0;
   if (undoBtn) {
-    undoBtn.classList.toggle('opacity-30', historyIndex <= 0);
-    undoBtn.classList.toggle('pointer-events-none', historyIndex <= 0);
+    undoBtn.classList.toggle('opacity-30', noUndo);
+    undoBtn.classList.toggle('pointer-events-none', noUndo);
   }
   if (redoBtn) {
-    redoBtn.classList.toggle('opacity-30', historyIndex >= historyStack.length - 1);
-    redoBtn.classList.toggle('pointer-events-none', historyIndex >= historyStack.length - 1);
+    redoBtn.classList.toggle('opacity-30', noRedo);
+    redoBtn.classList.toggle('pointer-events-none', noRedo);
   }
 }
 

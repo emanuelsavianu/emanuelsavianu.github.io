@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261015c';
+} from './state.js?v=20261015d';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -14,15 +14,15 @@ import {
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
   getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay
-} from './core-utils.js?v=20261015c';
+} from './core-utils.js?v=20261015d';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS
-} from './config.js?v=20261015c';
-import { isItalianHoliday } from './holidays.js?v=20261015c';
+} from './config.js?v=20261015d';
+import { isItalianHoliday } from './holidays.js?v=20261015d';
 
 // ====================================================
 // 7. RENDERING
@@ -1171,7 +1171,7 @@ export function buildPdfContent() {
         <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}${closed ? ' · chiuso' : ''}</td>
         <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[date.getDay()]}</td>`;
       if (closed) {
-        html += `<td colspan="${SLOTS.length * PLACES.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
+        html += `<td colspan="${SLOTS.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
         continue;
       }
       SLOTS.forEach(slot => {
