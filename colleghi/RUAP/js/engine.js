@@ -38,7 +38,10 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
     return !Object.entries(state.assignments).some(([k, v]) => v === doc.id && k.startsWith(prefix));
   };
 
-  // Prevent mat (08-14) after pom (14-20) on the previous calendar day
+  // Prevent mat (08-14) after pom (14-20) on the previous calendar day.
+  // NOT a hard constraint (referente turni, 2026-10-15): it is a PREFERENCE —
+  // rested doctors are picked first, and a doctor who worked the previous
+  // afternoon is used only when no other candidate is available.
   const hasConsecutiveShiftConflict = (doc) => {
     if (slotKeyOnly !== 'mat') return false;
     const parts = dateKey.split('-');
@@ -54,7 +57,6 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
   const filterAvailable = (docs) => docs.filter(doc =>
     isDoctorAvailableForSlot(doc, dateKey, slotKeyOnly)
     && notBusy(doc)
-    && !hasConsecutiveShiftConflict(doc)
     && getEffectiveRemaining(doc) >= slotHours
   );
 
@@ -62,11 +64,18 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
   const availablePool = filterAvailable(poolDocs);
 
   // 2-tier allocation: flexible (prefer this place OR no preference) first, cross-site second
-  const priorityGroups = [
+  const placeTiers = [
     availablePrimary.filter(d => d.preferredPlace === place || !d.preferredPlace),
     availablePrimary.filter(d => d.preferredPlace && d.preferredPlace !== place),
     availablePool.filter(d => d.preferredPlace === place || !d.preferredPlace),
     availablePool.filter(d => d.preferredPlace && d.preferredPlace !== place),
+  ];
+
+  // Rest first, place convenience second: every group of rested doctors is tried
+  // before any group of doctors coming off the previous afternoon.
+  const priorityGroups = [
+    ...placeTiers.map(g => g.filter(d => !hasConsecutiveShiftConflict(d))),
+    ...placeTiers.map(g => g.filter(d => hasConsecutiveShiftConflict(d))),
   ];
 
   for (const group of priorityGroups) {
