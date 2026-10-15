@@ -1,6 +1,6 @@
 # Comunicazioni ufficiali 2026 per la Medicina Generale
 
-> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 13 ottobre 2026.
+> Raccolta curata e verificata delle comunicazioni, circolari e norme pubblicate (o comunicate dagli Ordini) dal 1° gennaio 2026, rilevanti per i medici di medicina generale. Le sintesi sono redatte e verificate sul testo originale; fanno sempre fede i documenti ufficiali linkati. Ultimo aggiornamento: 15 ottobre 2026.
 
 Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina aggiornata automaticamente ogni settimana.
 
@@ -9,6 +9,8 @@ Le voci sono in ordine cronologico, dalla più recente alla più vecchia. Pagina
 > **In evidenza — Campagna anti-COVID 2026-2027 (scheda rapida per il MMG).** In Toscana la campagna parte **mercoledì 14 ottobre 2026**. Vaccino **Comirnaty XFG** (mRNA aggiornato alla variante XFG), richiamo annuale gratuito per le categorie raccomandate; co-somministrazione possibile con l'antinfluenzale. Scheda sintetica con grafico e documenti allegati nella pagina: [comunicazioni-2026.html#covid-2627](https://savianu.it/colleghi/comunicazioni-2026.html#covid-2627).
 
 ## Ottobre 2026
+
+- **Vaccino antipneumococcico coniugato 21-valente (PCV21, CAPVAXIVE) agli ospiti delle RSA: destinatari e modalità di richiesta** — Azienda USL Toscana Sud Est, 15/10/2026. La Regione Toscana ha reso disponibile il vaccino antipneumococcico coniugato **21-valente (PCV21) CAPVAXIVE** per gli ospiti delle RSA, destinato ai pazienti che: non hanno mai effettuato la vaccinazione antipneumococcica; hanno effettuato l'ultima vaccinazione antipneumococcica da oltre un anno con PCV13/PCV15/PPSV23; hanno effettuato la vaccinazione da oltre 5 anni con schedula sequenziale (PCV13 + PPSV23). La richiesta va fatta **per singolo assistito**, con le medesime modalità già previste per gli altri prodotti farmaceutici destinati agli ospiti delle RSA: trasmissione ai consueti indirizzi aziendali allegando la prescrizione tramite la modulistica in uso (**ricetta DEM, modulo prescrittivo**). La RSA può inoltre **anticipare la richiesta via posta elettronica**, contestualmente all'invio della documentazione prescrittiva, specificando nome e cognome dell'ospite, anno di nascita e nominativo del MMG richiedente. La distribuzione è curata dalle Farmaceutiche Aziendali.
 
 - **Tamponi vaginali ed endocervicali: i due codici corretti da usare** — Azienda USL Toscana Sud Est, U.F. Attività Consultoriali del Distretto, 13/10/2026. Le richieste di tampone vaginale ed endocervicale continuano a essere inoltrate con codici errati: i codici da utilizzare sono due, distinti per sede del prelievo — tampone endocervicale **90.93.C — [6536] PCR MULTIPLEX AGENTI INFETTIVI MTS E ESAME COLTURALE GONOCOCCO REFLEX [TAMPONE ENDOCERVICALE]**; tampone vaginale **90.93.B — [KBA013] BATTERI E LIEVITI ESAME COLTURALE E MICROSCOPICO E RICERCA TRICHOMONAS VAGINALIS [TAMPONE VAGINALE]**. Per il laboratorio gli unici codici da utilizzare sono questi due.
 
