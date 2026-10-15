@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261015g';
+} from './state.js?v=20261015h';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -14,15 +14,15 @@ import {
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
   getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay
-} from './core-utils.js?v=20261015g';
+} from './core-utils.js?v=20261015h';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS
-} from './config.js?v=20261015g';
-import { isItalianHoliday } from './holidays.js?v=20261015g';
+} from './config.js?v=20261015h';
+import { isItalianHoliday } from './holidays.js?v=20261015h';
 
 // ====================================================
 // 7. RENDERING

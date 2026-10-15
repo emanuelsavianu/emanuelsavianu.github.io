@@ -2,14 +2,14 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015g';
-import { isItalianHoliday } from './holidays.js?v=20261015g';
-import { MONTHS_IT } from './config.js?v=20261015g';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015h';
+import { isItalianHoliday } from './holidays.js?v=20261015h';
+import { MONTHS_IT } from './config.js?v=20261015h';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast, isClosedDay
-} from './core-utils.js?v=20261015g';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015g';
+} from './core-utils.js?v=20261015h';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015h';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -173,6 +173,10 @@ function restDelta(slotKey, fromId, toId) {
   return delta;
 }
 
+function plural(n, sing, plur) {
+  return `${n} ${n === 1 ? sing : plur}`;
+}
+
 function optimizeMonth(year, month) {
   const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`;
   const byId = (id) => state.doctors.find(d => d.id === id);
@@ -301,14 +305,19 @@ function optimizeMonth(year, month) {
     // con le stesse ore). Serve quando C non puo' ricevere direttamente da A, per
     // disponibilita' o perche' il riposo peggiorerebbe.
     const base = pairwise(hours);
+    // Il filtro sulle coppie (A, C) usa un turno canonico di 6h: serve solo a
+    // ordinare i candidati. Il guadagno VERO viene ricalcolato sui turni reali
+    // (k1, k2) prima di applicare, cosi' non si "prezza" a vuoto se un giorno gli
+    // slot avessero ore diverse da 6.
+    const CANON = 6;
     const pairs = [];
     for (const a of state.doctors) {
       if (!aboveGroupMin(hours, a)) continue;
       for (const c of state.doctors) {
         if (c.id === a.id) continue;
         const h2 = { ...hours };
-        h2[a.id] -= 6;
-        h2[c.id] = (h2[c.id] || 0) + 6;
+        h2[a.id] -= CANON;
+        h2[c.id] = (h2[c.id] || 0) + CANON;
         const gain = base - pairwise(h2);
         if (gain > 0) pairs.push({ gain, aId: a.id, cId: c.id });
       }
@@ -317,15 +326,21 @@ function optimizeMonth(year, month) {
     for (const { aId, cId } of pairs) {
       const c = byId(cId);
       for (const k1 of keysOf(aId)) {
+        const h1 = slotHoursOf(k1.split('_')[1]);
         for (const b of state.doctors) {
           if (b.id === aId || b.id === cId) continue;
           if (!canReceive(b, k1, aId, hours)) continue;
           const hMid = { ...hours };
-          hMid[aId] -= 6;
-          hMid[b.id] = (hMid[b.id] || 0) + 6;
+          hMid[aId] -= h1;
+          hMid[b.id] = (hMid[b.id] || 0) + h1;
           for (const k2 of keysOf(b.id)) {
             if (k2 === k1) continue;
+            const h2h = slotHoursOf(k2.split('_')[1]);
             if (!canReceive(c, k2, b.id, hMid)) continue;
+            const hEnd = { ...hours };
+            hEnd[aId] -= h1;
+            hEnd[c.id] = (hEnd[c.id] || 0) + h2h;
+            if (base - pairwise(hEnd) <= 0) continue;   // guadagno reale, non canonico
             return { k1, bId: b.id, k2, cId };
           }
         }
@@ -379,7 +394,7 @@ export function runAutoAssignForMonth(year, month) {
       renderAll();
       renderMonthlyStats();
       updateConflictsHeaderBadge();
-      toast(`${rifinite} spostamenti di rifinitura in ${monthName}`, 'success');
+      toast(plural(rifinite, 'spostamento di rifinitura', 'spostamenti di rifinitura') + ` in ${monthName}`, 'success');
     } else {
       toast(`Nessun turno vuoto in ${monthName}`, 'info');
     }
@@ -445,8 +460,8 @@ export function runAutoAssignForMonth(year, month) {
       renderAll();
       renderMonthlyStats();
       updateConflictsHeaderBadge();
-      toast(`Generati ${count} turni per ${monthName}` +
-            (rifinite ? ` + ${rifinite} spostamenti di rifinitura` : ''), 'success');
+      toast((count === 1 ? `Generato 1 turno per ${monthName}` : `Generati ${count} turni per ${monthName}`) +
+            (rifinite ? ` + ${plural(rifinite, 'spostamento di rifinitura', 'spostamenti di rifinitura')}` : ''), 'success');
     }
   }
 
