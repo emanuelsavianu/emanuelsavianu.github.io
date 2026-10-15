@@ -8,6 +8,7 @@ export const STORAGE_HISTORY = 'ruap-turni-history';
 export const STORAGE_VERSION_KEY = 'ruap-storage-version';
 export const STORAGE_PLACES = 'ruap-places';
 export const STORAGE_SLOTS = 'ruap-slots';
+export const STORAGE_CLOSED = 'ruap-giorni-chiusi';
 export const STORAGE_DARK_MODE = 'ruap-dark-mode';
 export const STORAGE_VERSION = 2;
 export const CONFIG_DATA_KEY = 'ruap-config-data-version';

@@ -13,7 +13,7 @@ import {
   getDoctorColor, getMonthlyBudget, getProgressBarData,
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
-  getRemainingMonthlyHours, matchDoctorBySurname
+  getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay
 } from './core-utils.js';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
@@ -133,6 +133,49 @@ function holidayCellHTML(dayNum, dayName = '') {
   <div class="flex items-center justify-center py-3 text-xs font-bold text-red-500 uppercase tracking-widest">Chiuso</div>`;
 }
 
+/** Bottone per chiudere/riaprire un giorno (prefestivo, ponte, chiusura straordinaria). */
+function closedToggleHTML(dateKey, isClosed) {
+  return `<button type="button" class="day-toggle" data-closed-toggle="${dateKey}"
+    title="${isClosed ? 'Riapri questo giorno' : 'Segna come chiuso (prefestivo/ponte)'}"
+    aria-label="${isClosed ? 'Riapri' : 'Chiudi'} ${dateKey}">${isClosed ? '🔓' : '🔒'}</button>`;
+}
+
+/** Cella di un giorno di chiusura straordinaria (come una festività, ma riapribile). */
+function closedCellHTML(dateKey, dayNum, dayName = '') {
+  const label = dayName ? `${dayName} ${dayNum}` : `${dayNum}`;
+  return `<div class="flex items-center justify-between mb-1">
+    <span class="text-xs font-bold text-slate-600">${label}</span>
+    ${closedToggleHTML(dateKey, true)}
+  </div>
+  <div class="flex items-center justify-center py-3 text-xs font-bold text-amber-600 uppercase tracking-widest">Chiuso · prefestivo</div>`;
+}
+
+/** Chiude/riapre un giorno. Chiudendo, i turni già assegnati vengono rimossi (previo avviso). */
+export function toggleClosedDay(dateKey) {
+  if (isClosedDay(state.closedDays, dateKey)) {
+    pushHistory();
+    state.closedDays = state.closedDays.filter(k => k !== dateKey);
+    saveToStorage();
+    renderAll();
+    toast(`${dateKey} riaperto`, 'info');
+    return;
+  }
+  const dayKeys = Object.keys(state.assignments).filter(k => k.startsWith(dateKey + '_'));
+  const closeIt = () => {
+    pushHistory();
+    state.closedDays = [...state.closedDays, dateKey].sort();
+    dayKeys.forEach(k => delete state.assignments[k]);
+    saveToStorage();
+    renderAll();
+    toast(`${dateKey} chiuso${dayKeys.length ? ` — ${dayKeys.length} turni rimossi` : ''}`, 'success');
+  };
+  if (dayKeys.length > 0) {
+    confirmToast(`Chiudere ${dateKey} e rimuovere ${dayKeys.length} turni già assegnati?`, closeIt);
+  } else {
+    closeIt();
+  }
+}
+
 function renderCalendarWeek() {
   const weekStart = state.calendarWeekStart;
   const weekEnd = new Date(weekStart);
@@ -148,17 +191,21 @@ function renderCalendarWeek() {
     d.setDate(d.getDate() + i);
     const dateKey = toDateKey(d);
     const isHoliday = isItalianHoliday(d);
+    const isClosed = isClosedDay(state.closedDays, dateKey);
     const isToday = toDateKey(new Date()) === dateKey;
     const cell = document.createElement('div');
-    cell.className = `rounded-xl p-2 border ${isHoliday ? 'holiday-cell border-slate-100' : 'bg-white shadow-sm border-slate-200'} ${isToday ? 'ring-2 ring-brand-400' : ''}`;
+    cell.className = `rounded-xl p-2 border ${isClosed ? 'closed-cell border-slate-100' : isHoliday ? 'holiday-cell border-slate-100' : 'bg-white shadow-sm border-slate-200'} ${isToday ? 'ring-2 ring-brand-400' : ''}`;
     const dayName = DAY_NAMES[i];
     const dayNum = d.getDate();
 
     if (isHoliday) {
       cell.innerHTML = holidayCellHTML(dayNum, dayName);
+    } else if (isClosed) {
+      cell.innerHTML = closedCellHTML(dateKey, dayNum, dayName);
     } else {
       cell.innerHTML = `<div class="text-xs font-bold text-slate-600 mb-1 pb-1 border-b border-slate-100 flex items-center justify-between">
         <span>${dayName} ${dayNum}</span>
+        ${closedToggleHTML(dateKey, false)}
       </div>`;
       PLACES.forEach(place => {
         const { coverageClass, coverageIcon } = getCoverageBadge(dateKey, place);
@@ -199,15 +246,19 @@ function renderCalendarMonth() {
       const inMonth = cellDate.getMonth() === month;
       const isToday = toDateKey(new Date()) === dateKey;
       const isHoliday = isItalianHoliday(cellDate);
+      const isClosed = isClosedDay(state.closedDays, dateKey);
 
       const cell = document.createElement('div');
-      cell.className = `rounded-xl p-2 border ${isHoliday && inMonth ? 'holiday-cell border-slate-100' : inMonth ? 'bg-white shadow-sm border-slate-100' : 'bg-transparent border-transparent'} ${isToday && inMonth ? 'ring-2 ring-brand-400' : ''}`;
+      cell.className = `rounded-xl p-2 border ${isClosed && inMonth ? 'closed-cell border-slate-100' : isHoliday && inMonth ? 'holiday-cell border-slate-100' : inMonth ? 'bg-white shadow-sm border-slate-100' : 'bg-transparent border-transparent'} ${isToday && inMonth ? 'ring-2 ring-brand-400' : ''}`;
 
       if (isHoliday && inMonth) {
         cell.innerHTML = holidayCellHTML(cellDate.getDate());
+      } else if (isClosed && inMonth) {
+        cell.innerHTML = closedCellHTML(dateKey, cellDate.getDate());
       } else if (inMonth) {
         cell.innerHTML = `<div class="flex items-center justify-between mb-1">
           <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-600'}">${cellDate.getDate()}</span>
+          ${closedToggleHTML(dateKey, false)}
         </div>`;
         PLACES.forEach(place => {
           const placeSection = document.createElement('div');
@@ -887,7 +938,7 @@ export function closeInstructions() {
 // ====================================================
 
 export function exportJSON() {
-  const data = { version: 1, exportDate: new Date().toISOString(), doctors: state.doctors, assignments: state.assignments };
+  const data = { version: 1, exportDate: new Date().toISOString(), doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -904,6 +955,7 @@ export function importJSONFromFile(e) {
       if (!Array.isArray(data.doctors) || typeof data.assignments !== 'object' || data.assignments === null) throw new Error('Formato non valido');
       pushHistory();
       state.doctors = data.doctors; state.assignments = data.assignments;
+      if (Array.isArray(data.closedDays)) state.closedDays = data.closedDays;
       saveToStorage(); renderAll(); toast('Importazione completata!', 'success');
     } catch (err) { toast('Errore importazione: ' + err.message, 'error'); }
   };
@@ -1071,7 +1123,8 @@ export function exportExcel() {
   rows.push(headers);
 
   for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
-    const row = [`${day}/${month + 1}`, DAY_SHORT[date.getDay()]];
+    const closed = isClosedDay(state.closedDays, dk);
+    const row = [closed ? `${day}/${month + 1} (CHIUSO)` : `${day}/${month + 1}`, DAY_SHORT[date.getDay()]];
     PLACES.forEach(place => {
       SLOTS.forEach(slot => {
         row.push(getDocName(dk, slot.key, place));
@@ -1113,9 +1166,14 @@ export function buildPdfContent() {
     html += `</tr></thead><tbody>`;
 
     for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
-      html += `<tr>
-        <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}</td>
+      const closed = isClosedDay(state.closedDays, dk);
+      html += `<tr${closed ? ' style="background:#fff7ed"' : ''}>
+        <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}${closed ? ' · chiuso' : ''}</td>
         <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[date.getDay()]}</td>`;
+      if (closed) {
+        html += `<td colspan="${SLOTS.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
+        continue;
+      }
       SLOTS.forEach(slot => {
         const id = state.assignments[`${dk}_${slot.key}_${place}`];
         const { display: name, bg: bgColor, textColor } = resolveShiftCell(id);
@@ -1197,7 +1255,8 @@ export function buildPngContent() {
 
     for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
       const isHoliday = isItalianHoliday(date);
-      const rowBg = isHoliday ? 'background:#fef2f2;' : '';
+      const isClosed = isClosedDay(state.closedDays, dk);
+      const rowBg = isClosed ? 'background:#fff7ed;' : isHoliday ? 'background:#fef2f2;' : '';
       calHtml += `<tr style="${rowBg}">
         <td style="padding:6px 8px;border:1px solid #e2e8f0;font-weight:600;color:#334155;">${day}/${month + 1}</td>
         <td style="padding:6px 8px;border:1px solid #e2e8f0;color:#475569;">${DAY_SHORT[date.getDay()]}</td>`;
@@ -1206,6 +1265,8 @@ export function buildPngContent() {
         const { display, bg, textColor } = resolveShiftCell(id);
         if (display) {
           calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;background:${bg};color:${textColor};font-weight:600;border-radius:3px;font-size:10px;">${escapeHtml(display)}</td>`;
+        } else if (isClosed) {
+          calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;color:#c2410c;font-size:10px;font-weight:bold;">CHIUSO</td>`;
         } else if (isHoliday) {
           calHtml += `<td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;color:#ef4444;font-size:10px;font-weight:bold;">CHIUSO</td>`;
         } else {

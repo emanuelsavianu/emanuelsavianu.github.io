@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-10-15T11:15:54Z",
+  "configDataVersion": "2026-10-15T11:27:00Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
@@ -1127,12 +1127,6 @@ const CONFIG = {
     "2026-12-04_pom_Arezzo": "mrasudwdk87n",
     "2026-12-04_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-12-04_pom_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-07_mat_Arezzo": "mqgp5xpev7h1m",
-    "2026-12-07_mat_M.S.Savino": "mqgp5xpekiw12",
-    "2026-12-07_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-07_pom_Arezzo": "mqgp5xpe8eeqy",
-    "2026-12-07_pom_M.S.Savino": "mqgp5xpemfnc0",
-    "2026-12-07_pom_Subbiano": "mrasudwdk87n",
     "2026-12-09_mat_Arezzo": "mqgp5xpec24f6",
     "2026-12-09_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-09_mat_Subbiano": "mqgp5xpe6gb6b",
@@ -1199,15 +1193,10 @@ const CONFIG = {
     "2026-12-23_pom_Arezzo": "mrasudwdk87n",
     "2026-12-23_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-23_pom_Subbiano": "mqgp5xpemfnc0",
-    "2026-12-24_mat_Arezzo": "mqgp5xpeohiai",
-    "2026-12-24_mat_M.S.Savino": "mqgp5xpe3wotk",
-    "2026-12-24_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-24_pom_Arezzo": "mqgp5xpec24f6",
-    "2026-12-24_pom_M.S.Savino": "mqgp5xpe79zho",
-    "2026-12-24_pom_Subbiano": "mqgp5xpev7h1m",
     "2026-12-28_mat_Arezzo": "mqgp5xpev7h1m",
     "2026-12-28_mat_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-28_mat_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-28_pom_Arezzo": "mqgp5xpe8eeqy",
     "2026-12-28_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-12-28_pom_Subbiano": "mrasudwdk87n",
     "2026-12-29_mat_Arezzo": "mrasudwdk87n",
@@ -1221,12 +1210,11 @@ const CONFIG = {
     "2026-12-30_mat_Subbiano": "mqgp5xpev7h1m",
     "2026-12-30_pom_Arezzo": "mrasudwdk87n",
     "2026-12-30_pom_M.S.Savino": "mqgp5xpekiw12",
-    "2026-12-30_pom_Subbiano": "mqgp5xpemfnc0",
-    "2026-12-31_mat_Arezzo": "mqgp5xpeohiai",
-    "2026-12-31_mat_M.S.Savino": "mqgp5xpe3wotk",
-    "2026-12-31_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-31_pom_Arezzo": "mqgp5xpec24f6",
-    "2026-12-31_pom_M.S.Savino": "mqgp5xpe79zho",
-    "2026-12-31_pom_Subbiano": "mqgp5xpev7h1m"
-  }
+    "2026-12-30_pom_Subbiano": "mqgp5xpemfnc0"
+  },
+  "closedDays": [
+    "2026-12-07",
+    "2026-12-24",
+    "2026-12-31"
+  ]
 };
