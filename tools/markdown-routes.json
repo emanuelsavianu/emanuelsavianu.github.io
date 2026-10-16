@@ -44,6 +44,12 @@
       "md": "colleghi/adhd.md",
       "html": "colleghi/adhd.html",
       "stub": "markdown/colleghi-adhd.md"
+    },
+    {
+      "route": "/colleghi/codici-analisi-genetiche.html",
+      "md": "colleghi/codici-analisi-genetiche.md",
+      "html": "colleghi/codici-analisi-genetiche.html",
+      "stub": "markdown/colleghi-codici-analisi-genetiche.md"
     }
   ]
 }

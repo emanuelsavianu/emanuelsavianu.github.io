@@ -11,6 +11,7 @@
 - [Comunicazioni 2026 Medicina Generale | Dott. Savianu](https://savianu.it/colleghi/comunicazioni-2026.md)
 - [Criteri di appropriatezza — invii e farmaci | Savianu](https://savianu.it/colleghi/criteri-appropriatezza.md)
 - [Batterie ADHD sovrapposte — modulo unico compilabile | Dott. Savianu](https://savianu.it/colleghi/adhd.md)
+- [Codici regionali — Analisi genetiche | Dott. Savianu](https://savianu.it/colleghi/codici-analisi-genetiche.md)
 
 ## Markdown per agenti
 
@@ -24,6 +25,7 @@ invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure
 - [/colleghi/comunicazioni-2026.md](https://savianu.it/colleghi/comunicazioni-2026.md)
 - [/colleghi/criteri-appropriatezza.md](https://savianu.it/colleghi/criteri-appropriatezza.md)
 - [/colleghi/adhd.md](https://savianu.it/colleghi/adhd.md)
+- [/colleghi/codici-analisi-genetiche.md](https://savianu.it/colleghi/codici-analisi-genetiche.md)
 
 ## Contatti generali
 
