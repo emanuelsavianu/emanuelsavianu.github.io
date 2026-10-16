@@ -38,6 +38,12 @@
       "md": "colleghi/criteri-appropriatezza.md",
       "html": "colleghi/criteri-appropriatezza.html",
       "stub": "markdown/colleghi-criteri-appropriatezza.md"
+    },
+    {
+      "route": "/colleghi/adhd.html",
+      "md": "colleghi/adhd.md",
+      "html": "colleghi/adhd.html",
+      "stub": "markdown/colleghi-adhd.md"
     }
   ]
 }

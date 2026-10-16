@@ -8,7 +8,7 @@ import { join, dirname, resolve, normalize, sep } from 'path';
 import { fileURLToPath } from 'url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const EXCLUDE_DIRS = new Set(['node_modules', 'cloudflare', '.claude', '.git', 'docs', 'email-templates', 'schema-templates', '.superpowers', 'design']);
+const EXCLUDE_DIRS = new Set(['node_modules', 'cloudflare', '.claude', '.git', 'docs', 'email-templates', 'schema-templates', '.superpowers', 'design', 'adhd']);
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {
