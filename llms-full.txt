@@ -61,12 +61,11 @@
 
 - I referti degli esami sono disponibili sul Fascicolo Sanitario Elettronico regionale, accessibile su salute.toscana.it con SPID o CIE; il medico può visionarli e commentarli durante la visita.
 
-## Materiali multilingue
+## Materiali multilingue e Schede Paziente A4
 
-- Poster guida alla salute (A3 gratuiti da stampare): [italiano](/ssn/poster-it.html), [inglese](/ssn/poster-en.html), [romeno](/ssn/poster-ro.html), [bengalese](/ssn/poster-bn.html), [urdu](/ssn/poster-ur.html).
-- Salute mentale: [italiano](/ssn/salutementale.html), [romeno](/ssn/salutementale-ro.html).
-- Vivere sano: [italiano](/ssn/vivisano.html), [romeno](/ssn/vivisano-ro.html).
-- [Foglio multilingue](/ssn/poster_multilingue.html) in italiano, inglese, urdu e bengali per colleghi e operatori sanitari; guide pratiche in [urdu](/ssn/urdu.html) e [bengalese](/ssn/bengalese.html).
+- Schede paziente A4 fronte/retro (gratuiti da stampare, con QR Doctolib, regole studio, numeri 112/116 117/CUP e guida per vivere sano): [italiano](/ssn/scheda-it.html) ([PDF](/ssn/pdf/scheda-it.pdf)), [romeno](/ssn/scheda-ro.html) ([PDF](/ssn/pdf/scheda-ro.pdf)), [inglese](/ssn/scheda-en.html) ([PDF](/ssn/pdf/scheda-en.pdf)), [bengalese](/ssn/scheda-bn.html) ([PDF](/ssn/pdf/scheda-bn.pdf)), [urdu](/ssn/scheda-ur.html) ([PDF](/ssn/pdf/scheda-ur.pdf)), [Kit PDF completo 5 lingue](/ssn/pdf/kit-schede-pazienti-5-lingue.pdf).
+- Versioni compatibili: [italiano](/ssn/poster-it.html), [inglese](/ssn/poster-en.html), [romeno](/ssn/poster-ro.html), [bengalese](/ssn/poster-bn.html), [urdu](/ssn/poster-ur.html), [salute mentale](/ssn/salutementale.html) ([RO](/ssn/salutementale-ro.html)), [vivere sano](/ssn/vivisano.html) ([RO](/ssn/vivisano-ro.html)).
+- [Guida pratica multilingue in 5 lingue](/ssn/poster_multilingue.html) ([PDF](/ssn/pdf/guida-multilingue-5-lingue.pdf)) in italiano, romeno, inglese, bengalese e urdu per la sala d'attesa e per i colleghi; guide estese in [urdu](/ssn/urdu.html) e [bengalese](/ssn/bengalese.html).
 
 ## Pazienti internazionali — International patients
 

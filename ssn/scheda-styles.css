@@ -1,0 +1,493 @@
+/* Schede paziente A4 fronte/retro — savianu.it
+   Stile: fogli "Doctors of the World UK" (fasce-triage, illustrazioni flat, numeri giganti, QR).
+   Vincoli: fondo bianco #fff, testo #000, colore solo su fasce/badge/bordi/icone.
+    Font statici self-hosted o Noto di sistema per PDF CID TrueType nitidi (zero Type 3). */
+
+@font-face {
+  font-family: 'BrandSans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'), local('Noto Sans'), local('NotoSans-Regular');
+}
+@font-face {
+  font-family: 'BrandSans';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Montserrat Medium'), local('Montserrat-Medium'), local('Noto Sans Medium'), local('NotoSans-Medium');
+}
+@font-face {
+  font-family: 'BrandSans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Montserrat SemiBold'), local('Montserrat-SemiBold'), local('Noto Sans SemiBold'), local('NotoSans-Bold');
+}
+@font-face {
+  font-family: 'BrandSans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat Bold'), local('Montserrat-Bold'), local('Noto Sans Bold'), local('NotoSans-Bold');
+}
+@font-face {
+  font-family: 'BrandSans';
+  font-style: normal;
+  font-weight: 800;
+  src: local('Montserrat ExtraBold'), local('Montserrat-ExtraBold'), local('Montserrat Bold'), local('Noto Sans Black');
+}
+
+:root {
+  --navy: #1A2F4C;
+  --gold: #C29B57;
+  --teal: #3E8E7E;
+  --green: #4C8C6F;
+  --danger: #B3261E;
+  --ink: #000000;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Stampa: A4 portrait duplex, margine 10mm su ogni lato. */
+@page { size: A4 portrait; margin: 10mm; }
+
+html, body { margin: 0; padding: 0; background: #fff; color: var(--ink); }
+
+body {
+  font-family: 'BrandSans', 'Noto Sans', system-ui, sans-serif;
+  font-size: 10pt;
+  line-height: 1.32;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+/* Override font per lingue con alfabeti / diacritici specifici */
+html[lang="ro"] body {
+  font-family: 'Noto Sans', system-ui, sans-serif;
+}
+html[lang="bn"] body {
+  font-family: 'Noto Sans Bengali', 'Noto Sans', system-ui, sans-serif;
+}
+html[lang="ur"] body {
+  font-family: 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Noto Sans', system-ui, sans-serif;
+  line-height: 1.48;
+}
+
+/* Foglio: DUE .page espliciti per scheda (fronte + retro).
+   190x276mm = leggermente meno del foglio A4 utile (190x277mm), per evitare pagine extra. */
+.page {
+  width: 190mm;
+  height: 276mm;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: visible;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.page-front { break-after: page; }
+
+/* Su schermo aggiungiamo un minimo distacco visivo tra fronte e retro */
+@media screen {
+  body { background: #F3EFE6; padding: 6mm 0; }
+  .page {
+    padding: 6mm;
+    margin-bottom: 8mm;
+    border: 1px solid #e3d9c8;
+    border-radius: 3mm;
+  }
+}
+@media print {
+  body { background: #fff; padding: 0; }
+  .page { padding: 0; margin: 0; border: none; border-radius: 0; }
+}
+
+/* ---------- Header ---------- */
+.sheet-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4mm;
+  border-bottom: 1.2mm solid var(--gold);
+  padding-bottom: 2.5mm;
+  margin-bottom: 3.5mm;
+}
+.sheet-header .brand-left {
+  display: flex;
+  align-items: center;
+  gap: 3.5mm;
+}
+.sheet-header img { display: block; width: 11mm; height: 11mm; border-radius: 2mm; }
+.sheet-header .brand-text { display: flex; flex-direction: column; gap: 0.5mm; min-width: 0; }
+.sheet-header .site { font-size: 14pt; font-weight: 800; color: var(--navy); line-height: 1.05; }
+.sheet-header .studio { font-size: 8.8pt; font-weight: 600; color: var(--ink); }
+.sheet-header .lang-pill {
+  background: var(--navy);
+  color: #fff;
+  font-size: 8.5pt;
+  font-weight: 700;
+  padding: 1.2mm 3.2mm;
+  border-radius: 10mm;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ---------- Hero Fronte (Titolo + Illustrazione DoW style) ---------- */
+.front-hero {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 4mm;
+  align-items: center;
+  margin-bottom: 3.5mm;
+}
+.front-hero-text h1 {
+  font-size: 22pt;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.08;
+  margin: 0 0 2mm;
+}
+.front-hero-text .sub {
+  font-size: 10.5pt;
+  font-weight: 600;
+  color: var(--ink);
+  margin: 0;
+  line-height: 1.3;
+}
+.front-hero-art {
+  margin: 0;
+  height: 36mm;
+  border: 0.8mm solid var(--gold);
+  border-radius: 3mm;
+  overflow: hidden;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.front-hero-art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Blocco Doctolib (fascia navy + QR) ---------- */
+.doctolib {
+  display: flex;
+  gap: 5mm;
+  align-items: center;
+  background: var(--navy);
+  color: #fff;
+  border: 1mm solid var(--navy);
+  border-radius: 3mm;
+  padding: 4mm 5mm;
+  margin-bottom: 3.5mm;
+}
+.doctolib .qr-box {
+  flex: 0 0 26mm;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1mm;
+}
+.doctolib .qr {
+  width: 24mm;
+  height: 24mm;
+  background: #fff;
+  border-radius: 1.5mm;
+  padding: 1.2mm;
+  display: block;
+}
+.doctolib .qr-caption {
+  font-size: 7.2pt;
+  font-weight: 700;
+  color: var(--gold);
+  text-align: center;
+  line-height: 1.1;
+}
+.doctolib .dl-body { flex: 1 1 auto; min-width: 0; }
+.doctolib h2 {
+  font-size: 13pt;
+  font-weight: 800;
+  color: var(--gold);
+  letter-spacing: 0.3px;
+  margin: 0 0 1.8mm;
+}
+.doctolib ul { margin: 0 0 2mm; padding: 0; list-style: none; }
+.doctolib li {
+  position: relative;
+  padding-inline-start: 4mm;
+  margin-bottom: 1.2mm;
+  font-size: 9.6pt;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
+}
+.doctolib li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 1.5mm;
+  width: 1.6mm;
+  height: 1.6mm;
+  background: var(--gold);
+  border-radius: 0.4mm;
+}
+.doctolib .qr-line { margin: 0; font-size: 9.2pt; font-weight: 700; color: var(--gold); overflow-wrap: anywhere; }
+.doctolib a { color: #fff; text-decoration: underline; overflow-wrap: anywhere; }
+
+/* ---------- Griglia 2 box regole studio (Segreteria + Certificati/Farmaci) ---------- */
+.studio-rules-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4mm;
+  margin-bottom: 3.5mm;
+}
+.card-segreteria {
+  border: 1.1mm solid var(--gold);
+  border-radius: 3mm;
+  padding: 3.2mm 4mm;
+  background: #fff;
+}
+.card-segreteria h2 { font-size: 11.5pt; font-weight: 800; color: var(--navy); margin: 0 0 1.5mm; line-height: 1.15; }
+.card-segreteria .phone { font-size: 14pt; font-weight: 800; color: var(--navy); white-space: nowrap; }
+.card-segreteria p { margin: 0; font-size: 9.3pt; font-weight: 500; line-height: 1.3; overflow-wrap: anywhere; }
+
+.card-cert {
+  border: 1.1mm solid var(--teal);
+  border-radius: 3mm;
+  padding: 3.2mm 4mm;
+  background: #fff;
+}
+.card-cert h2 { font-size: 11.5pt; font-weight: 800; color: var(--teal); margin: 0 0 1.5mm; line-height: 1.15; }
+.card-cert p { margin: 0; font-size: 9.3pt; font-weight: 500; line-height: 1.3; overflow-wrap: anywhere; }
+
+/* ---------- Triage semaforo (stile Doctors of the World UK) ---------- */
+.triage { margin-bottom: 3mm; }
+.triage > h2 {
+  font-size: 12.5pt;
+  font-weight: 800;
+  color: var(--navy);
+  margin: 0 0 2mm;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+}
+.triage-row {
+  display: grid;
+  grid-template-columns: 52mm 1fr;
+  gap: 3.5mm;
+  align-items: center;
+  border: 0.8mm solid #d8d0c0;
+  border-inline-start: 3.5mm solid;
+  border-radius: 2.5mm;
+  padding: 2.5mm 3.5mm;
+  margin-bottom: 2.2mm;
+  background: #fff;
+}
+.triage-row .t-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5mm;
+}
+.triage-row .t-label {
+  font-size: 9.5pt;
+  font-weight: 800;
+  line-height: 1.15;
+}
+.triage-row .num {
+  font-size: 17pt;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: 0.3px;
+}
+.triage-row .t-desc {
+  margin: 0;
+  font-size: 9.3pt;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.triage-green { border-inline-start-color: var(--green); }
+.triage-green .t-label, .triage-green .num { color: var(--green); }
+.triage-yellow { border-inline-start-color: var(--gold); }
+.triage-yellow .t-label, .triage-yellow .num { color: #8A6421; }
+.triage-red { border-inline-start-color: var(--danger); }
+.triage-red .t-label, .triage-red .num { color: var(--danger); }
+
+/* ---------- Box Diritti & Accoglienza SSN ---------- */
+.rights-strip {
+  border: 0.9mm solid var(--navy);
+  border-radius: 2.5mm;
+  padding: 2.2mm 4mm;
+  font-size: 9pt;
+  font-weight: 600;
+  color: var(--navy);
+  text-align: center;
+  margin-bottom: 2mm;
+}
+
+/* ---------- Footer ---------- */
+.sheet-footer {
+  margin-top: auto;
+  border-top: 1mm solid var(--gold);
+  padding-top: 2mm;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4mm;
+  font-size: 8.2pt;
+  font-weight: 600;
+  color: var(--navy);
+}
+
+/* ---------- RETRO ---------- */
+.back-header-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1.2mm solid var(--gold);
+  padding-bottom: 2mm;
+  margin-bottom: 3.5mm;
+}
+.sheet-title-back {
+  font-size: 18pt;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  margin: 0;
+}
+.back-sub {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: var(--teal);
+  margin: 0;
+}
+
+.section-label {
+  font-size: 10.5pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--navy);
+  margin: 0 0 2mm;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.8mm;
+  margin-bottom: 3.5mm;
+}
+.card-flat {
+  border: 0.9mm solid var(--gold);
+  border-radius: 3mm;
+  padding: 2.8mm 3.2mm;
+  display: grid;
+  grid-template-columns: 28mm 1fr;
+  gap: 3mm;
+  align-items: center;
+  min-width: 0;
+  break-inside: avoid;
+  background: #fff;
+}
+.grid-farmaci .card-flat { border-color: var(--teal); }
+.grid-lifestyle .card-flat { border-color: var(--green); }
+
+.card-flat .card-art {
+  margin: 0;
+  width: 28mm;
+  height: 24mm;
+  border-radius: 2mm;
+  overflow: hidden;
+  background: #fff;
+  border: 0.4mm solid #e3d9c8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card-flat .card-art img, .img-real {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+.card-flat .card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 1mm;
+  min-width: 0;
+}
+.card-flat h3 {
+  font-size: 10.8pt;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.15;
+  margin: 0;
+}
+.card-flat p {
+  margin: 0;
+  font-size: 9.1pt;
+  font-weight: 500;
+  line-height: 1.28;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+/* ---------- Sezione Benessere Mentale e Sonno (Retro) ---------- */
+.grid-mind {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.8mm;
+  margin-bottom: 3.5mm;
+}
+.grid-mind .card-flat {
+  border-color: var(--gold);
+}
+
+/* ---------- Strip navy ---------- */
+.strip-navy {
+  background: var(--navy);
+  color: #fff;
+  border-radius: 2.5mm;
+  padding: 2.8mm 4mm;
+  margin: 0 0 2mm;
+  text-align: center;
+  font-size: 11.5pt;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- Placeholder immagine fallback ---------- */
+.img-ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 24mm;
+  margin: 0;
+  border: 0.8mm dashed var(--gold);
+  border-radius: 2mm;
+  background: #fff;
+  padding: 2mm;
+}
+.img-ph .code {
+  font-size: 7pt;
+  font-weight: 700;
+  color: var(--navy);
+  text-align: center;
+}
+
+/* ---------- Mobile (SOLO screen: la stampa resta A4) ---------- */
+@media screen and (max-width: 700px) {
+  body { padding: 2mm; background: #fff; }
+  .page { width: 100%; height: auto; padding: 3mm; margin-bottom: 4mm; }
+  .front-hero { grid-template-columns: 1fr; }
+  .front-hero-art { height: 44mm; }
+  .studio-rules-grid, .grid2, .grid-mind { grid-template-columns: 1fr; }
+  .triage-row { grid-template-columns: 1fr; gap: 1mm; }
+  .doctolib { flex-direction: column; align-items: flex-start; }
+  .doctolib .qr-box { align-self: center; }
+  .sheet-header { flex-wrap: wrap; }
+  .sheet-footer { flex-direction: column; text-align: center; }
+}
