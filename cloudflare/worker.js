@@ -313,6 +313,7 @@ export default {
       '/colleghi/comunicazioni-2026.html':                 '/colleghi/comunicazioni-2026.md',
       '/colleghi/criteri-appropriatezza.html':                 '/colleghi/criteri-appropriatezza.md',
       '/colleghi/adhd.html':                 '/colleghi/adhd.md',
+      '/colleghi/codici-analisi-genetiche.html':                 '/colleghi/codici-analisi-genetiche.md',
     };
     const acceptHeader = request.headers.get('Accept') || '';
     if (acceptHeader.includes('text/markdown')) {
