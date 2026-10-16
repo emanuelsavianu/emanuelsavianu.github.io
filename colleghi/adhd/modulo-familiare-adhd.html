@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="it"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Osservazioni di un familiare — questionario guidato per la visita specialistica</title>
+<style>
+:root{--navy:#1A2F4C;--gold:#C29B57;--cream:#F3EFE6;--ink:#16202e;--mut:#6b7280;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font:16px/1.45 Montserrat,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header{position:sticky;top:0;z-index:20;background:var(--navy);color:#fff;padding:10px 14px}
+header h1{margin:0 0 4px;font:600 17px/1.2 Georgia,serif}
+header .sub{font-size:12px;opacity:.85}
+.bar{height:6px;background:#0e1b2c;border-radius:4px;margin-top:8px;overflow:hidden}
+.bar>i{display:block;height:100%;width:0;background:var(--gold);transition:width .25s}
+.acts{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+button{font:600 12.5px/1 Montserrat,sans-serif;padding:9px 11px;border-radius:8px;border:0;background:var(--gold);color:#1a2f4c;cursor:pointer}
+button.g{background:#2f6f4f;color:#fff} button.s{background:rgba(255,255,255,.16);color:#fff}
+main{max-width:900px;margin:0 auto;padding:14px 12px 90px}
+.block{background:#fff;border:1px solid #e4dfd2;border-radius:12px;padding:14px 14px 6px;margin:0 0 16px}
+h2{font:600 17px/1.25 Georgia,serif;color:var(--navy);margin:0 0 6px}
+h3.area{font:600 14px/1.3 Georgia,serif;color:var(--navy);margin:14px 0 2px;border-bottom:1px solid #ece7dc;padding-bottom:4px}
+.note{font-size:12.5px;color:var(--mut);margin:0 0 10px;border-left:3px solid var(--gold);padding-left:9px}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px;margin:6px 0 10px;font-size:11.5px;color:var(--mut)}
+.chip b{color:var(--navy)}
+ol.items{list-style:none;margin:0;padding:0}
+ol.items>li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;justify-content:space-between;
+ border-top:1px solid #f0ece2;padding:9px 0}
+ol.items>li:first-child{border-top:0}
+.q{flex:1 1 330px;font-size:14.5px} .num{color:var(--gold);font-weight:700;font-size:12px}
+.opts{display:flex;gap:4px;flex:0 0 auto}
+.opts .opt input{position:absolute;opacity:0;width:0;height:0}
+.opts .opt span{display:inline-flex;align-items:center;justify-content:center;min-width:44px;height:36px;padding:0 9px;
+ border:1.5px solid #d8d2c4;border-radius:9px;background:#fdfcf9;color:#5b6572;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.opts .opt span:hover{border-color:var(--gold)}
+.opts .opt input:checked+span{background:var(--navy);border-color:var(--navy);color:#fff}
+.fields{display:flex;flex-direction:column;gap:10px;padding-bottom:10px}
+.fld{display:flex;flex-direction:column;gap:4px;font-size:13.5px;color:var(--navy);font-weight:600}
+.fld input{font:15px system-ui,sans-serif;color:var(--ink);background:#fdfcf9;border:1px solid #d8d2c4;border-radius:9px;padding:9px 10px;width:100%;height:40px}
+.gq{padding:10px 0;border-top:1px solid #f0ece2}
+.gq:first-of-type{border-top:0}
+.gq h3{font:600 15px/1.3 Georgia,serif;color:var(--navy);margin:0 0 4px}
+.hint{font-size:12.5px;color:var(--mut);margin:0 0 7px;background:#faf8f2;border-radius:8px;padding:8px 10px}
+.gq textarea{font:15px/1.45 system-ui,sans-serif;color:var(--ink);background:#fdfcf9;border:1px solid #d8d2c4;
+ border-radius:9px;padding:10px;width:100%;resize:vertical}
+footer{position:fixed;bottom:0;left:0;right:0;background:rgba(26,47,76,.96);color:#fff;padding:8px 12px;
+ display:flex;justify-content:space-between;align-items:center;font-size:12.5px;gap:8px}
+footer .cnt{font-weight:700;color:var(--gold)}
+#toast{position:fixed;left:50%;bottom:70px;transform:translateX(-50%);background:#16202e;color:#fff;
+ padding:10px 16px;border-radius:10px;font-size:13px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}
+#toast.on{opacity:1}
+#panel{position:fixed;inset:0;background:rgba(10,16,26,.72);z-index:60;display:none;padding:14px}
+#panel.on{display:flex;flex-direction:column;gap:8px}
+#panel .box{background:#fff;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;max-height:100%}
+#panel textarea{flex:1;min-height:55vh;font:13px/1.45 ui-monospace,Menlo,Consolas,monospace;border:1px solid #d8d2c4;border-radius:9px;padding:10px;resize:vertical}
+@media(max-width:520px){.opts .opt span{min-width:40px;font-size:12.5px} .q{font-size:14px}}
+</style></head><body>
+<header>
+  <h1>Osservazioni di un familiare — questionario guidato per la visita specialistica</h1>
+  <div class="sub">Strumento per colleghi · da far compilare a un familiare o convivente</div>
+  <div class="bar"><i id="pbar"></i></div>
+  <div class="acts">
+    <button class="g" id="bSave">Salva</button>
+    <button id="bReport">Anteprima report</button>
+    <button id="bShow">Mostra dati</button>
+    <button class="s" id="bJson">Scarica .json</button>
+    <button class="s" id="bTxt">Scarica report (.txt)</button>
+    <button class="s" id="bReset">Azzera</button>
+  </div>
+</header>
+<main>
+<div class="block"><h2>Quattro cose da sapere prima</h2>
+<p class="note"><b>1.</b> Non è un esame e non ci sono risposte giuste. La sezione <b>C</b> è la più importante: sono le tue parole,
+ed è quella che il clinico leggerà per prima.<br>
+<b>2.</b> Ci vogliono 10-15 minuti. Puoi fermarti e riprendere: le risposte si salvano da sole su questo dispositivo
+(se il browser non lo permette, premi ogni tanto «Scarica .json» e riprendi da lì).<br>
+<b>3.</b> Se hai solo cinque minuti: compila <b>Chi compila</b> + <b>C</b>, e lascia il resto a dopo.
+Meglio un episodio raccontato bene che dieci caselle spuntate.<br>
+<b>4.</b> Alla fine <b>non basta rimandare questo file</b>: le risposte restano dentro il browser di questo dispositivo.
+Premi <b>«Scarica report (.txt)»</b> (il foglio da consegnare) — e, se puoi, anche <b>«Scarica .json»</b>, che serve a noi per ricompilare i test.</p></div>
+<section class="block"><h2>Chi compila</h2><p class="note">Sei tu che scrivi. Non serve essere precisa né obiettiva: servono esempi concreti e il tuo punto di vista.</p><div class="fields"><label class="fld"><span>Mio nome e cognome</span><input type="text" name="f_nome"></label><label class="fld"><span>Rapporto con la persona</span><input type="text" name="f_rapporto"></label><label class="fld"><span>Da quanti anni lo conosco</span><input type="text" name="f_da_quanto"></label><label class="fld"><span>Quanto lo conosco: poco / abbastanza / molto bene</span><input type="text" name="f_conoscenza"></label><label class="fld"><span>Viviamo insieme? Da quando</span><input type="text" name="f_convivenza"></label><label class="fld"><span>Data di oggi</span><input type="text" name="f_data"></label></div></section><section class="block" id="sec-SIN"><h2>A. Come lo vedo io — 18 cose (2 minuti)</h2><p class="note">Quello che il clinico chiama «informazioni collaterali»: la versione del familiare, non quella della persona interessata. Rispondi pensando a come si comporta <b>oggi</b>, negli ultimi mesi. Se non lo sai, lascia vuoto.</p><div class="legend"><span class="chip"><b>No</b> non lo vedo</span><span class="chip"><b>Qualche volta</b> ogni tanto</span><span class="chip"><b>Sì, chiaramente</b> è evidente, capita spesso</span></div><ol class="items"><li data-id="SY01"><span class="q">Non presta adeguata attenzione ai particolari o commette errori di distrazione (lavoro, casa, pratiche)</span><div class="opts"><label class="opt" for="SY01_0"><input type="radio" id="SY01_0" name="SY01" value="0"><span>No</span></label><label class="opt" for="SY01_1"><input type="radio" id="SY01_1" name="SY01" value="1"><span>Qualche volta</span></label><label class="opt" for="SY01_2"><input type="radio" id="SY01_2" name="SY01" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY02"><span class="q">Ha difficoltà a mantenere l&#x27;attenzione su un compito o un&#x27;attività, anche su cose che gli interessano</span><div class="opts"><label class="opt" for="SY02_0"><input type="radio" id="SY02_0" name="SY02" value="0"><span>No</span></label><label class="opt" for="SY02_1"><input type="radio" id="SY02_1" name="SY02" value="1"><span>Qualche volta</span></label><label class="opt" for="SY02_2"><input type="radio" id="SY02_2" name="SY02" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY03"><span class="q">Non sembra ascoltare quando gli si parla direttamente</span><div class="opts"><label class="opt" for="SY03_0"><input type="radio" id="SY03_0" name="SY03" value="0"><span>No</span></label><label class="opt" for="SY03_1"><input type="radio" id="SY03_1" name="SY03" value="1"><span>Qualche volta</span></label><label class="opt" for="SY03_2"><input type="radio" id="SY03_2" name="SY03" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY04"><span class="q">Non segue le istruzioni e non porta a termine compiti o doveri: inizia ma non finisce, non rispetta le scadenze</span><div class="opts"><label class="opt" for="SY04_0"><input type="radio" id="SY04_0" name="SY04" value="0"><span>No</span></label><label class="opt" for="SY04_1"><input type="radio" id="SY04_1" name="SY04" value="1"><span>Qualche volta</span></label><label class="opt" for="SY04_2"><input type="radio" id="SY04_2" name="SY04" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY05"><span class="q">Ha difficoltà a organizzarsi (ordine, materiali, tempi, pianificazione)</span><div class="opts"><label class="opt" for="SY05_0"><input type="radio" id="SY05_0" name="SY05" value="0"><span>No</span></label><label class="opt" for="SY05_1"><input type="radio" id="SY05_1" name="SY05" value="1"><span>Qualche volta</span></label><label class="opt" for="SY05_2"><input type="radio" id="SY05_2" name="SY05" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY06"><span class="q">Evita o rimanda i compiti che richiedono sforzo mentale prolungato</span><div class="opts"><label class="opt" for="SY06_0"><input type="radio" id="SY06_0" name="SY06" value="0"><span>No</span></label><label class="opt" for="SY06_1"><input type="radio" id="SY06_1" name="SY06" value="1"><span>Qualche volta</span></label><label class="opt" for="SY06_2"><input type="radio" id="SY06_2" name="SY06" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY07"><span class="q">Perde gli oggetti che gli servono (chiavi, telefono, documenti, occhiali, portafoglio)</span><div class="opts"><label class="opt" for="SY07_0"><input type="radio" id="SY07_0" name="SY07" value="0"><span>No</span></label><label class="opt" for="SY07_1"><input type="radio" id="SY07_1" name="SY07" value="1"><span>Qualche volta</span></label><label class="opt" for="SY07_2"><input type="radio" id="SY07_2" name="SY07" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY08"><span class="q">Si distrae facilmente per stimoli esterni o per pensieri suoi</span><div class="opts"><label class="opt" for="SY08_0"><input type="radio" id="SY08_0" name="SY08" value="0"><span>No</span></label><label class="opt" for="SY08_1"><input type="radio" id="SY08_1" name="SY08" value="1"><span>Qualche volta</span></label><label class="opt" for="SY08_2"><input type="radio" id="SY08_2" name="SY08" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY09"><span class="q">È sbadato nelle cose quotidiane; si dimentica appuntamenti, impegni, scadenze</span><div class="opts"><label class="opt" for="SY09_0"><input type="radio" id="SY09_0" name="SY09" value="0"><span>No</span></label><label class="opt" for="SY09_1"><input type="radio" id="SY09_1" name="SY09" value="1"><span>Qualche volta</span></label><label class="opt" for="SY09_2"><input type="radio" id="SY09_2" name="SY09" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY10"><span class="q">Muove di continuo mani e piedi, non sta fermo sulla sedia</span><div class="opts"><label class="opt" for="SY10_0"><input type="radio" id="SY10_0" name="SY10" value="0"><span>No</span></label><label class="opt" for="SY10_1"><input type="radio" id="SY10_1" name="SY10" value="1"><span>Qualche volta</span></label><label class="opt" for="SY10_2"><input type="radio" id="SY10_2" name="SY10" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY11"><span class="q">Si alza o lascia il posto in situazioni in cui dovrebbe restare seduto</span><div class="opts"><label class="opt" for="SY11_0"><input type="radio" id="SY11_0" name="SY11" value="0"><span>No</span></label><label class="opt" for="SY11_1"><input type="radio" id="SY11_1" name="SY11" value="1"><span>Qualche volta</span></label><label class="opt" for="SY11_2"><input type="radio" id="SY11_2" name="SY11" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY12"><span class="q">Si sente irrequieto o agitato</span><div class="opts"><label class="opt" for="SY12_0"><input type="radio" id="SY12_0" name="SY12" value="0"><span>No</span></label><label class="opt" for="SY12_1"><input type="radio" id="SY12_1" name="SY12" value="1"><span>Qualche volta</span></label><label class="opt" for="SY12_2"><input type="radio" id="SY12_2" name="SY12" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY13"><span class="q">Ha difficoltà a stare tranquillo e rilassato anche quando è il momento di riposare</span><div class="opts"><label class="opt" for="SY13_0"><input type="radio" id="SY13_0" name="SY13" value="0"><span>No</span></label><label class="opt" for="SY13_1"><input type="radio" id="SY13_1" name="SY13" value="1"><span>Qualche volta</span></label><label class="opt" for="SY13_2"><input type="radio" id="SY13_2" name="SY13" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY14"><span class="q">È &#x27;sotto pressione&#x27;, come se fosse azionato da un motore: deve essere sempre impegnato in qualcosa</span><div class="opts"><label class="opt" for="SY14_0"><input type="radio" id="SY14_0" name="SY14" value="0"><span>No</span></label><label class="opt" for="SY14_1"><input type="radio" id="SY14_1" name="SY14" value="1"><span>Qualche volta</span></label><label class="opt" for="SY14_2"><input type="radio" id="SY14_2" name="SY14" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY15"><span class="q">Parla troppo, anche nelle situazioni sociali</span><div class="opts"><label class="opt" for="SY15_0"><input type="radio" id="SY15_0" name="SY15" value="0"><span>No</span></label><label class="opt" for="SY15_1"><input type="radio" id="SY15_1" name="SY15" value="1"><span>Qualche volta</span></label><label class="opt" for="SY15_2"><input type="radio" id="SY15_2" name="SY15" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY16"><span class="q">Risponde prima che la domanda sia finita, completa le frasi degli altri, li anticipa</span><div class="opts"><label class="opt" for="SY16_0"><input type="radio" id="SY16_0" name="SY16" value="0"><span>No</span></label><label class="opt" for="SY16_1"><input type="radio" id="SY16_1" name="SY16" value="1"><span>Qualche volta</span></label><label class="opt" for="SY16_2"><input type="radio" id="SY16_2" name="SY16" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY17"><span class="q">Ha difficoltà ad aspettare il suo turno</span><div class="opts"><label class="opt" for="SY17_0"><input type="radio" id="SY17_0" name="SY17" value="0"><span>No</span></label><label class="opt" for="SY17_1"><input type="radio" id="SY17_1" name="SY17" value="1"><span>Qualche volta</span></label><label class="opt" for="SY17_2"><input type="radio" id="SY17_2" name="SY17" value="2"><span>Sì, chiaramente</span></label></div></li><li data-id="SY18"><span class="q">Interrompe gli altri o è invadente; si inserisce in conversazioni o attività altrui</span><div class="opts"><label class="opt" for="SY18_0"><input type="radio" id="SY18_0" name="SY18" value="0"><span>No</span></label><label class="opt" for="SY18_1"><input type="radio" id="SY18_1" name="SY18" value="1"><span>Qualche volta</span></label><label class="opt" for="SY18_2"><input type="radio" id="SY18_2" name="SY18" value="2"><span>Sì, chiaramente</span></label></div></li></ol></section><section class="block" id="sec-IMP"><h2>B. Quanto pesa (10 secondi)</h2><p class="note">Quanto questi comportamenti creano difficoltà in questi ambiti.</p><ol class="items"><li data-id="i_vita"><span class="q">Nella vita quotidiana e in casa</span><div class="opts"><label class="opt" for="i_vita_0"><input type="radio" id="i_vita_0" name="i_vita" value="0"><span>Per niente</span></label><label class="opt" for="i_vita_1"><input type="radio" id="i_vita_1" name="i_vita" value="1"><span>Poco</span></label><label class="opt" for="i_vita_2"><input type="radio" id="i_vita_2" name="i_vita" value="2"><span>Abbastanza</span></label><label class="opt" for="i_vita_3"><input type="radio" id="i_vita_3" name="i_vita" value="3"><span>Molto</span></label></div></li><li data-id="i_lavoro"><span class="q">Nel lavoro</span><div class="opts"><label class="opt" for="i_lavoro_0"><input type="radio" id="i_lavoro_0" name="i_lavoro" value="0"><span>Per niente</span></label><label class="opt" for="i_lavoro_1"><input type="radio" id="i_lavoro_1" name="i_lavoro" value="1"><span>Poco</span></label><label class="opt" for="i_lavoro_2"><input type="radio" id="i_lavoro_2" name="i_lavoro" value="2"><span>Abbastanza</span></label><label class="opt" for="i_lavoro_3"><input type="radio" id="i_lavoro_3" name="i_lavoro" value="3"><span>Molto</span></label></div></li><li data-id="i_relazioni"><span class="q">Nelle relazioni e in famiglia</span><div class="opts"><label class="opt" for="i_relazioni_0"><input type="radio" id="i_relazioni_0" name="i_relazioni" value="0"><span>Per niente</span></label><label class="opt" for="i_relazioni_1"><input type="radio" id="i_relazioni_1" name="i_relazioni" value="1"><span>Poco</span></label><label class="opt" for="i_relazioni_2"><input type="radio" id="i_relazioni_2" name="i_relazioni" value="2"><span>Abbastanza</span></label><label class="opt" for="i_relazioni_3"><input type="radio" id="i_relazioni_3" name="i_relazioni" value="3"><span>Molto</span></label></div></li></ol></section><section class="block" id="sec-GUI"><h2>C. Le tue osservazioni — è la parte che conta di più</h2><p class="note">Per ogni punto c'è scritto <b>cosa scrivere</b>: bastano 2-5 righe. Anche una frase secca va bene; meglio ancora un episodio vero. Se un punto non lo sai, salta al successivo.</p><div class="gq"><h3>1. Come ci siamo conosciuti e da quando lo vedo da vicino</h3><p class="hint">Due righe: anno, come vi siete conosciuti, da quando convivete. Serve per capire quanto è attendibile quello che scrivi dopo.</p><textarea name="g_conoscenza" rows="2" placeholder="…"></textarea></div><div class="gq"><h3>2. La prima cosa che ho notato nei primi tempi</h3><p class="hint">Cose piccole e concrete, prima che ci fosse una spiegazione: arrivava sempre in ritardo? dimenticava gli appuntamenti? iniziava mille cose e ne finiva poche? perdeva le chiavi?</p><textarea name="g_prima" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>3. Organizzazione e tempo</h3><p class="hint">Come gestisce appuntamenti, scadenze, orari, il disordine. Esempi: bollette o multe dimenticate, valigie preparate all&#x27;ultimo minuto, ricerca di chiavi/telefono, ritardi. Se puoi, scrivi ogni quanto succede (ogni giorno? ogni settimana?).</p><textarea name="g_organizzazione" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>4. Attenzione e memoria</h3><p class="hint">Si distrae mentre gli parli? dimentica cosa stava facendo o dicendo? perde oggetti? ti capita di dovergli ripetere la stessa cosa? Quante volte, più o meno, in una giornata normale?</p><textarea name="g_attenzione" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>5. Iniziare e portare a termine</h3><p class="hint">Quante cose iniziate e non finite ci sono in casa o nella sua vita (lavoretti, corsi, progetti, pratiche)? A che punto arrivano di solito? Cosa succede quando deve fare l&#x27;ultimo pezzo, la parte noiosa?</p><textarea name="g_finire" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>6. Irrequietezza e impulsività</h3><p class="hint">Sta fermo quando serve? Parla sopra gli altri, interrompe, si alza da tavola? Compra o decide d&#x27;impulso? Come guida (velocità, distrazioni, multe, incidenti)? Com&#x27;è nelle code, in riunione, davanti a un film?</p><textarea name="g_impulsivita" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>7. Emozioni e reazioni</h3><p class="hint">Irritabilità, reazioni sproporzionate a piccole cose, sbalzi d&#x27;umore. Cosa lo accende, quanto durano (5 minuti o due giorni?), come si calma, se poi si pente o se ne accorge.</p><textarea name="g_emozioni" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>8. Sonno e risveglio</h3><p class="hint">A che ora va a letto e si alza, quanto gli costa alzarsi la mattina, come dorme (agitato? ronfamento? pause nel respiro?), se è stanco durante il giorno.</p><textarea name="g_sonno" rows="3" placeholder="…"></textarea></div><div class="gq"><h3>9. Lavoro e studio</h3><p class="hint">Consegne e scadenze rispettate? Errori banali? Quanti lavori o progetti ha cambiato e perché? Quanto gli costa la parte burocratica e amministrativa?</p><textarea name="g_lavoro" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>10. Denaro, burocrazia, cose pratiche</h3><p class="hint">Bollette, multe, scadenze, documenti, acquisti impulsivi, gestione del denaro. Cosa finisce su di te e cosa gestisce lui senza problemi?</p><textarea name="g_denaro" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>11. Casa, famiglia, figli</h3><p class="hint">Chi tiene il carico mentale delle cose di casa? Come vive le routine (mattina, impegni dei figli)? Cosa fa lui e cosa salta?</p><textarea name="g_casa" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>12. Relazioni e amicizie</h3><p class="hint">Ha amici di vecchia data o sono tutti recenti? Mantiene i contatti o si dimentica di rispondere? Quanto tempo riesce a dedicare alle persone?</p><textarea name="g_relazioni" rows="3" placeholder="…"></textarea></div><div class="gq"><h3>13. Quello che so della sua infanzia o della sua famiglia</h3><p class="hint">Anche solo riferito: &#x27;mi ha raccontato che…&#x27;, &#x27;sua madre diceva che…&#x27;. Com&#x27;era a scuola (pagelle, ripetizioni, richiami), se era sempre in movimento, se era distratto o &#x27;sulle nuvole&#x27;.</p><textarea name="g_infanzia" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>14. Cosa mi preoccupa di più e cosa penso che gli servirebbe</h3><p class="hint">Scrivi liberamente: cosa ti pesa, cosa hai paura che succeda, cosa secondo te lo aiuterebbe davvero.</p><textarea name="g_preoccupa" rows="4" placeholder="…"></textarea></div><div class="gq"><h3>15. Tre episodi concreti (la parte più utile di tutte)</h3><p class="hint">Racconta tre episodi reali, uno per volta. Per ciascuno: cosa è successo, quando (anche approssimativo), cosa lo ha scatenato — e com&#x27;è finita. Anche cose banali: servono gli esempi, non i giudizi.</p><textarea name="g_episodi" rows="8" placeholder="…"></textarea></div></section>
+</main>
+<footer><span>Risposte date: <span class="cnt" id="cnt">0</span> / 21</span><span id="saved">—</span></footer>
+<div id="toast"></div>
+<div id="panel"><div class="box">
+  <b style="color:#1A2F4C" id="panelTitle">Risposte</b>
+  <textarea id="panelTxt" spellcheck="false" readonly></textarea>
+  <div style="display:flex;gap:8px"><button class="g" id="pCopy">Copia negli appunti</button>
+  <button id="pClose" style="background:#e6e1d6;color:#1a2f4c">Chiudi</button></div>
+</div></div>
+<script>
+const KEY='adhd-familiare-v1';
+function ids(){return [...document.querySelectorAll('li[data-id]')].map(li=>li.dataset.id);}
+function collect(){
+  const o={scales:{},fields:{},meta:{}};
+  ids().forEach(id=>{const c=document.querySelector('input[name="'+id+'"]:checked');o.scales[id]=c?c.value:null;});
+  document.querySelectorAll('main input[type=text],main textarea').forEach(e=>o.fields[e.name]=e.value);
+  o.meta.ts=new Date().toISOString();o.meta.app='modulo-familiare-adhd';o.meta.v=1;
+  return o;
+}
+function restore(o){
+  if(!o)return;
+  Object.entries(o.scales||{}).forEach(([n,v])=>{if(v===null)return;const e=document.querySelector('input[name="'+n+'"][value="'+v+'"]');if(e)e.checked=true;});
+  Object.entries(o.fields||{}).forEach(([n,v])=>{const e=document.querySelector('[name="'+n+'"]');if(e)e.value=v;});
+  progress();
+}
+function progress(){
+  let d=0;ids().forEach(id=>{if(document.querySelector('input[name="'+id+'"]:checked'))d++;});
+  document.getElementById('cnt').textContent=d;
+  document.getElementById('pbar').style.width=(100*d/21)+'%';
+  if(d>=21&&!window.__done){window.__done=1;
+    setTimeout(()=>toast('Fatto! Ora premi «Scarica report (.txt)» o «Copia» e consegnalo al curante'),1200);}
+}
+function lsGet(){try{return localStorage.getItem(KEY);}catch(e){return null;}}
+function lsSet(v){try{localStorage.setItem(KEY,v);return true;}catch(e){return false;}}
+function lsDel(){try{localStorage.removeItem(KEY);}catch(e){}}
+function save(silent){
+  const ok=lsSet(JSON.stringify(collect()));progress();
+  const t=new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit'});
+  document.getElementById('saved').textContent=(ok?'salvato ':'')+t;
+  if(!silent)toast(ok?'Salvato sul dispositivo':'Browser senza archivio locale: usa «Scarica .json»');
+}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),1700);}
+function asText(){
+  const o=collect();let L=['OSSERVAZIONI DI UN FAMILIARE',''];
+  Object.entries(o.fields).forEach(([k,v])=>{if(v&&v.trim())L.push(k+': '+v.trim().replace(/\n/g,' | '));});
+  L.push('');
+  document.querySelectorAll('section.block[id]').forEach(s=>{
+    const h=s.querySelector('h2');if(!h)return;
+    const rows=[...s.querySelectorAll('li[data-id]')].map(li=>{const c=li.querySelector('input:checked');
+      return li.dataset.id+'='+(c?c.value:'-');});
+    if(rows.length)L.push('['+h.textContent+']'),L.push(rows.join(' ')),L.push('');
+  });
+  return L.join('\n');
+}
+const GUIDA_IDS=["g_conoscenza", "g_prima", "g_organizzazione", "g_attenzione", "g_finire", "g_impulsivita", "g_emozioni", "g_sonno", "g_lavoro", "g_denaro", "g_casa", "g_relazioni", "g_infanzia", "g_preoccupa", "g_episodi"];
+const SINTOMI_JS=["Non presta adeguata attenzione ai particolari o commette errori di distrazione (lavoro, casa, pratiche)", "Ha difficoltà a mantenere l'attenzione su un compito o un'attività, anche su cose che gli interessano", "Non sembra ascoltare quando gli si parla direttamente", "Non segue le istruzioni e non porta a termine compiti o doveri: inizia ma non finisce, non rispetta le scadenze", "Ha difficoltà a organizzarsi (ordine, materiali, tempi, pianificazione)", "Evita o rimanda i compiti che richiedono sforzo mentale prolungato", "Perde gli oggetti che gli servono (chiavi, telefono, documenti, occhiali, portafoglio)", "Si distrae facilmente per stimoli esterni o per pensieri suoi", "È sbadato nelle cose quotidiane; si dimentica appuntamenti, impegni, scadenze", "Muove di continuo mani e piedi, non sta fermo sulla sedia", "Si alza o lascia il posto in situazioni in cui dovrebbe restare seduto", "Si sente irrequieto o agitato", "Ha difficoltà a stare tranquillo e rilassato anche quando è il momento di riposare", "È 'sotto pressione', come se fosse azionato da un motore: deve essere sempre impegnato in qualcosa", "Parla troppo, anche nelle situazioni sociali", "Risponde prima che la domanda sia finita, completa le frasi degli altri, li anticipa", "Ha difficoltà ad aspettare il suo turno", "Interrompe gli altri o è invadente; si inserisce in conversazioni o attività altrui"];
+const IMPATTO_JS=[["i_vita", "Nella vita quotidiana e in casa"], ["i_lavoro", "Nel lavoro"], ["i_relazioni", "Nelle relazioni e in famiglia"]];
+function report(){
+  const o=collect();const L=[];
+  L.push('OSSERVAZIONI DI UN FAMILIARE');
+  L.push('');
+  L.push('Chi compila: '+(o.fields.f_nome||'—')+'  ·  Rapporto: '+(o.fields.f_rapporto||'—')+
+         '  ·  Lo conosco da: '+(o.fields.f_da_quanto||'—')+'  ·  Conoscenza: '+(o.fields.f_conoscenza||'—'));
+  L.push('Conviviamo: '+(o.fields.f_convivenza||'—')+'  ·  Data: '+(o.fields.f_data||new Date().toLocaleDateString('it-IT')));
+  L.push('');
+  const sin=SINTOMI_JS.map((t,i)=>[i+1,t,o.scales['SY'+String(i+1).padStart(2,'0')]]);
+  const chiari=sin.filter(r=>r[2]==='2'), qualche=sin.filter(r=>r[2]==='1');
+  L.push('COSA HO NOTATO (18 sintomi)');
+  L.push('Evidenti e frequenti: '+(chiari.length?chiari.map(r=>r[0]+'. '+r[1]).join('; '):'nessuno'));
+  L.push('Ogni tanto: '+(qualche.length?qualche.map(r=>r[0]+'. '+r[1]).join('; '):'nessuno'));
+  L.push('');
+  const imp=IMPATTO_JS.map(([id,t])=>{const v=o.scales[id];const l={'0':'per niente','1':'poco','2':'abbastanza','3':'molto'}[v]||'non indicato';return '– '+t+': '+l;});
+  L.push('QUANTO PESA');L.push(imp.join('\n'));L.push('');
+  L.push('LE MIE OSSERVAZIONI');
+  GUIDA_IDS.forEach(gid=>{const v=(o.fields[gid]||'').trim();
+    const h=[...document.querySelectorAll('.gq')].find(d=>d.querySelector('textarea').name===gid);
+    L.push('');L.push('## '+(h?h.querySelector('h3').textContent:gid));L.push(v||'(non compilato)');});
+  L.push('');
+  if(document.getElementById('sec-BR')){
+    const spesso=[];
+    document.querySelectorAll('#sec-BR li[data-id]').forEach(li=>{const c=li.querySelector('input:checked');
+      if(c&&c.value==='O')spesso.push(li.querySelector('.q').textContent.trim());});
+    L.push('BRIEF-A — voci segnate «Spesso» ('+spesso.length+'/75)');
+    L.push(spesso.length?spesso.map(s=>'– '+s).join('\n'):'(nessuna)');
+  }
+  return L.join('\n');
+}
+document.addEventListener('change',e=>{if(e.target.matches('input,textarea'))save(true);});
+document.addEventListener('input',e=>{if(e.target.matches('textarea,input[type=text]'))save(true);});
+setInterval(()=>save(true),20000);
+document.getElementById('bSave').onclick=()=>save(false);
+function show(txt,title){const ta=document.getElementById('panelTxt');ta.value=txt;
+  document.getElementById('panelTitle').textContent=title;
+  document.getElementById('panel').classList.add('on');ta.scrollTop=0;}
+document.getElementById('bShow').onclick=()=>show(asText(),'Dati grezzi (per me)');
+document.getElementById('bReport').onclick=()=>show(report(),'Anteprima del report');
+document.getElementById('pClose').onclick=()=>document.getElementById('panel').classList.remove('on');
+document.getElementById('pCopy').onclick=async()=>{const ta=document.getElementById('panelTxt');
+  try{await navigator.clipboard.writeText(ta.value);toast('Copiato');}catch(e){ta.focus();ta.select();toast('Premi Cmd/Ctrl+C');}};
+function dl(name,text,mime){const b=new Blob([text],{type:mime||'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),4000);}
+document.getElementById('bJson').onclick=()=>{dl('osservazioni-familiare.json',JSON.stringify(collect(),null,1),'application/json');toast('.json scaricato');};
+document.getElementById('bTxt').onclick=()=>{dl('osservazioni-familiare.txt',report(),'text/plain');toast('.txt scaricato');};
+document.getElementById('bReset').onclick=()=>{if(confirm('Cancellare tutte le risposte?')){lsDel();location.reload();}};
+const _raw=lsGet();restore(_raw?JSON.parse(_raw):null);
+if(!_raw)setTimeout(()=>toast('Le risposte si salvano da sole'),900);
+</script></body></html>
