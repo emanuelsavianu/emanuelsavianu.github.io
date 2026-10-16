@@ -135,13 +135,19 @@ if (CHECK) {
 
 // ── worker MARKDOWN_MAP block ──────────────────────────────────────────────
 if (MAP) {
+  // La chiave e' la ROTTA HTML servita (r.route), non il percorso del .md:
+  // derivare la chiave dal nome del file sbaglia sia le rotte .html
+  // (/colleghi/adhd.html finiva mappato come /colleghi/adhd.md) sia le rotte
+  // a cartella con slash finale (/ssn/ diventava /ssn, cioe' un 404).
   const entries = manifest.routes.flatMap((r) => {
+    const route = r.route;
     const ep = relEndpoint(r.md);
-    const url = relUrl(r.md);
-    const key = url === '/' ? '/' : url.replace(/\/$/, '');
-    const out = [];
-    out.push(`  '${key}':                 '${ep}',`);
-    if (key !== '/' && key !== '') out.push(`  '${key}/index.html':   '${ep}',`);
+    const out = [`  '${route}':                 '${ep}',`];
+    if (route === '/') {
+      out.push(`  '/index.html':        '${ep}',`);
+    } else if (route.endsWith('/')) {
+      out.push(`  '${route}index.html': '${ep}',`);
+    }
     return out;
   });
   console.log('const MARKDOWN_MAP = {');

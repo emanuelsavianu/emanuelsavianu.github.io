@@ -302,15 +302,17 @@ export default {
     // tools/markdown-routes.json. To add a page, edit the manifest (and its
     // markdown/<name>.md stub) and re-run, then redeploy this worker.
     const MARKDOWN_MAP = {
-      '/':                  '/home.md',
+      '/':                 '/home.md',
       '/index.html':        '/home.md',
-      '/ssn/':             '/ssn/index.md',
-      '/ssn/index.html':    '/ssn/index.md',
-      '/privati/':         '/privati/index.md',
+      '/ssn/':                 '/ssn/index.md',
+      '/ssn/index.html': '/ssn/index.md',
+      '/privati/':                 '/privati/index.md',
       '/privati/index.html': '/privati/index.md',
-      '/colleghi/':        '/colleghi/index.md',
+      '/colleghi/':                 '/colleghi/index.md',
       '/colleghi/index.html': '/colleghi/index.md',
-      '/colleghi/comunicazioni-2026.html': '/colleghi/comunicazioni-2026.md',
+      '/colleghi/comunicazioni-2026.html':                 '/colleghi/comunicazioni-2026.md',
+      '/colleghi/criteri-appropriatezza.html':                 '/colleghi/criteri-appropriatezza.md',
+      '/colleghi/adhd.html':                 '/colleghi/adhd.md',
     };
     const acceptHeader = request.headers.get('Accept') || '';
     if (acceptHeader.includes('text/markdown')) {
