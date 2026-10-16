@@ -111,48 +111,73 @@
     <priority>0.4</priority>
   </url>
   <url>
+    <loc>https://savianu.it/ssn/scheda-it.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/ssn/scheda-ro.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/ssn/scheda-en.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/ssn/scheda-bn.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/ssn/scheda-ur.html</loc>
+    <lastmod>2026-10-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://savianu.it/ssn/poster-it.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/poster-en.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/poster-ro.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/poster-bn.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/poster-ur.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/salutementale.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/salutementale-ro.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/vivisano.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://savianu.it/ssn/vivisano-ro.html</loc>
-    <lastmod>2026-08-15</lastmod>
+    <lastmod>2026-10-16</lastmod>
     <priority>0.5</priority>
   </url>
   <url>
