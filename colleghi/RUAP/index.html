@@ -15,6 +15,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/dom-to-image-more@3.10.2/dist/dom-to-image-more.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <!-- Banner (header) richiudibile: applica lo stato salvato PRIMA del primo paint -->
+  <script>try{if(localStorage.getItem('ruap-header-collapsed')==='1')document.documentElement.classList.add('ruap-header-collapsed')}catch(e){}</script>
   <style>
     /* Scrollbar sottile per sidebar */
     .thin-scroll::-webkit-scrollbar { width: 4px; }
@@ -65,6 +67,34 @@
       #update-banner { padding: 0.5rem 0.75rem; font-size: 0.75rem; line-height: 1.25; }
       #demo-banner { padding: 0.4rem 0.75rem; font-size: 0.7rem; line-height: 1.3; }
     }
+    /* --- Banner (header) richiudibile ---------------------------------------
+       Richiesta della referente (2026-10-20): su un laptop piccolo la barra
+       azioni va a capo e l'header sticky ruba metà schermo. Collassato resta
+       una riga sottile (logo + titolo + chevron); lo stato è ricordato in
+       localStorage e riapplicato prima del paint dallo script in <head>.
+       Selettori con classe/elemento extra per battere le utility Tailwind
+       (.text-2xl, .h-11) senza !important sul testo; il pannello "Azioni"
+       mobile resta nascosto mentre è collassato (il chevron è l'unico
+       controllo attivo, altrimenti resterebbe un bottone morto). */
+    #btn-header-collapse {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 2.25rem; min-height: 2.25rem; flex-shrink: 0;
+      color: #c29b57; background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.25); border-radius: 0.5rem;
+      cursor: pointer; transition: background 0.15s ease;
+    }
+    #btn-header-collapse:hover { background: rgba(255,255,255,0.18); }
+    #btn-header-collapse:focus-visible { outline: 2px solid #c29b57; outline-offset: 2px; }
+    #btn-header-collapse svg { transition: transform 0.2s ease; }
+    html.ruap-header-collapsed #btn-header-collapse svg { transform: rotate(180deg); }
+    header .header-row, header img.brand-logo { transition: padding 0.2s ease, height 0.2s ease, width 0.2s ease; }
+    html.ruap-header-collapsed header .header-row { padding-top: 0.25rem; padding-bottom: 0.25rem; flex-wrap: nowrap; gap: 0.5rem; }
+    html.ruap-header-collapsed header .header-row h1 { font-size: 1.05rem; }
+    html.ruap-header-collapsed header img.brand-logo { height: 1.75rem; width: 1.75rem; }
+    html.ruap-header-collapsed #header-subtitle { display: none; }
+    html.ruap-header-collapsed #header-actions,
+    html.ruap-header-collapsed #btn-toolbar-toggle { display: none !important; }
+
     /* Mobile/tablet: prima il calendario, poi contatori e schede medici.
        In ordine di DOM la sidebar (748px su un telefono da 844px) precedeva il
        calendario, che quindi partiva fuori schermo. Su desktop nulla cambia.
@@ -287,6 +317,13 @@
         <p id="header-subtitle" class="text-brand-300 text-xs tracking-widest">Per suggerimenti scrivi a suggerimenti@savianu.it</p>
       </div>
     </div>
+    <!-- Banner richiudibile: collassa l'header a una riga sottile (stato in localStorage) -->
+    <button id="btn-header-collapse" type="button" aria-expanded="true"
+      aria-label="Riduci l'intestazione" title="Riduci l'intestazione">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round" aria-hidden="true"><path d="m18 15-6-6-6 6"/></svg>
+    </button>
     <!-- Mobile: apre/chiude il pannello azioni (su desktop è nascosto) -->
     <button id="btn-toolbar-toggle" type="button" aria-expanded="false" aria-controls="header-actions"
       class="bg-brand-400 hover:bg-brand-300 text-brand-900 px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1.5 shadow-sm">
@@ -783,7 +820,7 @@
      MODULES — App logic (ES modules)
      =================================================== -->
 <script src="config.js?v=2026-10-15T15:02:24Z"></script>
-<script type="module" src="js/events.js?v=20261015h"></script>
+<script type="module" src="js/events.js?v=20261020a"></script>
 
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">

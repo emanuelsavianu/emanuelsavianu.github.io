@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261015h';
+} from './state.js?v=20261020a';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261015h';
+} from './core-utils.js?v=20261020a';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -34,15 +34,16 @@ import {
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday
-} from './renderers.js?v=20261015h';
+} from './renderers.js?v=20261020a';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261015h';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261020a';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
   CONFIG_DATA_KEY,
+  STORAGE_HEADER_COLLAPSED,
   EXTERNAL_PREFIX
-} from './config.js?v=20261015h';
+} from './config.js?v=20261020a';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -172,6 +173,27 @@ el('btn-toolbar-toggle')?.addEventListener('click', () => {
 el('header-actions')?.addEventListener('click', (e) => {
   if (e.target.closest('button')) closeHeaderActions();
 });
+
+// --- Banner (header) richiudibile -------------------------------------------
+// Richiesta della referente (2026-10-20): su un laptop piccolo l'header sticky
+// con la barra azioni va a capo e occupa troppo spazio verticale. Collassato
+// diventa una riga sottile (logo + titolo + chevron); lo stato e' ricordato in
+// localStorage e riapplicato prima del paint da uno script inline in <head>.
+function applyHeaderCollapsed(collapsed) {
+  document.documentElement.classList.toggle('ruap-header-collapsed', collapsed);
+  const btn = el('btn-header-collapse');
+  if (!btn) return;
+  btn.setAttribute('aria-expanded', String(!collapsed));
+  const label = collapsed ? 'Espandi l\u2019intestazione' : 'Riduci l\u2019intestazione';
+  btn.setAttribute('title', label);
+  btn.setAttribute('aria-label', label);
+}
+el('btn-header-collapse')?.addEventListener('click', () => {
+  const collapsed = !document.documentElement.classList.contains('ruap-header-collapsed');
+  applyHeaderCollapsed(collapsed);
+  try { localStorage.setItem(STORAGE_HEADER_COLLAPSED, collapsed ? '1' : '0'); } catch (e) {}
+});
+applyHeaderCollapsed(localStorage.getItem(STORAGE_HEADER_COLLAPSED) === '1');
 
 // --- Header and toolbar buttons ---
 el('btn-add-doctor')?.addEventListener('click', () => openDoctorModal());
