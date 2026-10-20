@@ -2,14 +2,14 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261015h';
-import { isItalianHoliday } from './holidays.js?v=20261015h';
-import { MONTHS_IT } from './config.js?v=20261015h';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261020a';
+import { isItalianHoliday } from './holidays.js?v=20261020a';
+import { MONTHS_IT } from './config.js?v=20261020a';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast, isClosedDay
-} from './core-utils.js?v=20261015h';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261015h';
+} from './core-utils.js?v=20261020a';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261020a';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
