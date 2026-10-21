@@ -291,14 +291,15 @@
         <p class="hero-desc">
             Presa in carico domiciliare: facsimili dei moduli aziendali e nuova procedura
             operativa dell'Azienda USL Toscana Sud Est — Zona Distretto Aretina, U.F. Cure Primarie,
-            in vigore dal 1° ottobre 2026.
+            in vigore dal 1° ottobre 2026. Da ottobre 2026 l'invio avviene <strong>solo</strong> tramite
+            le Cure Primarie, che inoltrano al Servizio ADI.
         </p>
     </section>
 
     <div class="content-wrapper">
 
         <!-- Moduli -->
-        <section class="protocol-section">
+        <section class="protocol-section" id="moduli">
             <h2><i class="fa-solid fa-book-medical" style="margin-right:10px;color:var(--accent)"></i>Moduli e facsimili scaricabili</h2>
             <p>I facsimili dei moduli aziendali, negli originali trasmessi con la nota del 21/09/2026.</p>
 
@@ -336,9 +337,82 @@
 
             <div class="note-box">
                 <strong><i class="fa-solid fa-circle-info" style="margin-right:6px;color:var(--accent)"></i>Nota:</strong>
-                i moduli sono pubblicati negli originali aziendali (facsimili non modificati). Per la compilazione
-                il PAI va stampato o compilato digitalmente; la STU va firmata e timbrata dal medico prescrivente.
+                i moduli sono pubblicati negli originali aziendali (facsimili non modificati) e sono <strong>PDF
+                compilabili</strong>: si compilano a video, poi si firmano e si timbrano (o si firmano digitalmente).
+                Il PAI contiene le voci da biffare per medicazioni, gestione del catetere vescicale e le altre
+                prestazioni infermieristiche; la STU va firmata e timbrata dal medico prescrivente.
             </div>
+        </section>
+
+        <!-- Canale unico e scelta del modulo -->
+        <section class="protocol-section" id="canale-unico">
+            <h2><i class="fa-solid fa-route" style="margin-right:10px;color:var(--accent)"></i>Canale unico e modulo per tipo di richiesta</h2>
+            <p>
+                Riepilogo operativo delle disposizioni ricevute il <strong>21 ottobre 2026</strong>: integrano la nota
+                aziendale del 21/09/2026 riportata più sotto e valgono per <strong>ogni tipo di richiesta</strong> di
+                assistenza domiciliare.
+            </p>
+
+            <div class="note-box" style="border-left-color: var(--danger);">
+                <strong><i class="fa-solid fa-circle-info" style="margin-right:6px;color:var(--accent)"></i>La casella ADI non si usa più.</strong>
+                La documentazione va inviata sempre alle <strong>Cure Primarie</strong> della Zona Distretto Aretina, che
+                provvede a inoltrarla al Servizio ADI. Il <strong>ricettario bianco dello studio non si usa più</strong>
+                per nessun tipo di richiesta: al suo posto si compilano i moduli aziendali pubblicati in questa pagina.
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-pills" aria-hidden="true"></i>
+                    <span>
+                        <span class="contact-label">Terapie endovenose o intramuscolo</span>
+                        <span class="contact-value">STU</span>
+                        <span style="font-size:0.82rem;color:var(--text-medium);">
+                            Scheda Terapeutica Unica: farmaco, posologia, via, diluente, velocità/tempo, durata del
+                            ciclo, firma e timbro del medico.
+                        </span>
+                    </span>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                    <span>
+                        <span class="contact-label">Catetere vescicale, medicazioni, altre prestazioni</span>
+                        <span class="contact-value">PAI</span>
+                        <span style="font-size:0.82rem;color:var(--text-medium);">
+                            Cambio e gestione del catetere vescicale, medicazioni e ulcere: si biffano nel PAI
+                            editabile le voci corrispondenti.
+                        </span>
+                    </span>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-stethoscope" aria-hidden="true"></i>
+                    <span>
+                        <span class="contact-label">Assistito non noto — prima attivazione</span>
+                        <span class="contact-value">PAI + scheda anamnestica</span>
+                        <span style="font-size:0.82rem;color:var(--text-medium);">
+                            Oltre al PAI si compila la Valutazione iniziale — inquadramento clinico del MMG
+                            (mod. 010 rev. 1): anamnesi, esame obiettivo, diagnosi clinico-funzionale.
+                        </span>
+                    </span>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-file-medical" aria-hidden="true"></i>
+                    <span>
+                        <span class="contact-label">Prelievi domiciliari</span>
+                        <span class="contact-value">Invariato</span>
+                        <span style="font-size:0.82rem;color:var(--text-medium);">
+                            Restano indirizzati agli Infermieri di Famiglia e Comunità.
+                        </span>
+                    </span>
+                </div>
+            </div>
+
+            <p style="margin-top:16px;">
+                I tre moduli sono quelli trasmessi dall'Azienda e già pubblicati <a href="#moduli">qui sopra</a> in
+                versione editabile: <a href="modulistica/PAI.pdf" target="_blank" rel="noopener">PAI</a>,
+                <a href="modulistica/STU-scheda-terapeutica-unica.pdf" target="_blank" rel="noopener">STU</a>,
+                <a href="modulistica/valutazione-iniziale-inquadramento-clinico.pdf" target="_blank" rel="noopener">scheda
+                anamnestica (mod. 010 rev. 1)</a>. Si compilano a video, si firmano e si inviano a Cure Primarie.
+            </p>
         </section>
 
         <!-- Procedura -->
@@ -346,18 +420,18 @@
             <h2><i class="fa-solid fa-house-medical" style="margin-right:10px;color:var(--accent)"></i>La procedura in sintesi (dal 1° ottobre 2026)</h2>
 
             <ol style="margin: 12px 0; padding-left: 22px; line-height: 1.9;">
-                <li><strong>Valutazione iniziale del MMG</strong> (mod. 010): anamnesi ed esame obiettivo all'ingresso, con diagnosi clinico-funzionale attuale.</li>
-                <li><strong>Compilazione del PAI cartaceo</strong> per ogni assistito per il quale si richiede la presa in carico domiciliare. La valutazione e la programmazione clinica iniziale del MMG sono il presupposto dell'intervento dell'equipe multiprofessionale (medico, infermiere, fisioterapista, specialista di branca).</li>
+                <li><strong>Valutazione iniziale del MMG</strong> (mod. 010 rev. 1): anamnesi ed esame obiettivo all'ingresso, con diagnosi clinico-funzionale attuale. Va compilata anche quando l'assistito non è noto, all'avvio dell'attivazione.</li>
+                <li><strong>Compilazione del PAI</strong> (modello editabile o stampabile) per ogni assistito per il quale si richiede la presa in carico domiciliare. La valutazione e la programmazione clinica iniziale del MMG sono il presupposto dell'intervento dell'equipe multiprofessionale (medico, infermiere, fisioterapista, specialista di branca).</li>
                 <li><strong>Il PAI resta nella cartella clinica domiciliare</strong> custodita presso l'abitazione dell'assistito per tutto il periodo definito nel PAI.</li>
                 <li><strong>Terapie parenterali: STU obbligatoria</strong> (infusionale, intramuscolare, sottocutanea, intradermica) con principio attivo/farmaco, posologia, via di somministrazione, diluente, velocità/tempo, durata del ciclo (data inizio e fine) e firma e timbro del medico.</li>
-                <li><strong>Trasmissione alle Cure Primarie</strong> della Zona Distretto di tutta la documentazione (PAI e STU ove prevista), che verifica la conformità formale e la congruità del PAI.</li>
+                <li><strong>Trasmissione alle Cure Primarie</strong> della Zona Distretto di tutta la documentazione (PAI e STU ove prevista): è l'<strong>unico canale di invio</strong>, la casella ADI non va più utilizzata. Le Cure Primarie verificano la conformità formale e la congruità del PAI prima dell'inoltro al Servizio ADI.</li>
                 <li><strong>Inoltro al Servizio Infermieristico</strong> per la presa in carico operativa entro 24 ore dalla ricezione, e comunque il primo giorno lavorativo utile nei fine settimana e nei festivi e prefestivi.</li>
                 <li><strong>Richieste incomplete o prive di modulistica</strong> vengono restituite al medico mittente per le necessarie integrazioni.</li>
             </ol>
 
             <h3>Non più accolto</h3>
             <ul style="margin: 12px 0; padding-left: 20px; line-height: 1.8;">
-                <li>Richieste informali su ricettario cartaceo per prestazioni infermieristiche (medicazioni, catetere vescicale, accessi vascolari, ecc.): sono sostituite dal PAI.</li>
+                <li>Richieste informali su ricettario cartaceo per prestazioni infermieristiche (medicazioni, catetere vescicale, accessi vascolari, ecc.): sono sostituite dal PAI. Il ricettario bianco dello studio non si usa più per nessun tipo di richiesta.</li>
                 <li>Richieste generiche su carta bianca o ricettario regionale per terapie parenterali (es. «si richiede ciclo di flebo»), prive dei requisiti minimi di sicurezza e tracciabilità farmacologica.</li>
             </ul>
 
