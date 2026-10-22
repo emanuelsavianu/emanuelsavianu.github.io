@@ -106,6 +106,15 @@ Il paziente accede al II livello **esclusivamente su invio del MMG** (salvo acce
 
 **Fonti:** Nota AIFA 100 con scheda di prescrizione All. 1a/1b e FAQ di applicazione (consultate il 02/10/2026); DGRT n. 5 del 7 gennaio 2020 (PDTA diabete dell'adulto, gestione integrata MMG–diabetologia).
 
+## 3. Trasporto sanitario cod. 06 — soggetto non deambulante
+
+Indicazioni dell'Azienda USL Toscana Sud Est per una prescrizione appropriata del trasporto con mezzo attrezzato (pedana mobile), nota prot. 0256686 del 15/10/2025.
+
+- **Quando spetta:** soggetto non deambulante, portatore di inabilità temporanea o permanente, costretto a muoversi in carrozzina ortopedica obbligata, che in ragione della condizione clinica necessita di trasporto protetto e al quale va garantito il mezzo con pedana mobile.
+- **La sola carrozzina non basta:** l'assistito deve trovarsi nella condizione clinica di non poter eseguire gli atti quotidiani della vita e di necessitare di assistenza continua.
+- **Cosa documenta il prescrittore (MMG o specialista):** (1) non deambulanza con deficit non compensabile tramite mezzi di appoggio, protesi o ortesi, e non trasportabilità con altre tipologie di mezzi; (2) il quadro clinico o la compromissione a cui si riferisce il criterio, indicando la categoria — ortopedica, cardiocircolatoria, respiratoria, neurologica, gastroenterologica, urologica, oculistica, otorinolaringoiatrica, ostetrico-ginecologica, altra; (3) ulteriori elementi a supporto della scelta clinica.
+- **Obiettivo aziendale 2026:** tasso di prescrizione dei trasporti sanitari ≤ 35 per 1.000 assistiti; per i medici già sotto soglia nel 2025, mantenimento con non più di 25 prescrizioni/anno (fonte ESTAR). Priorità ASL complete nella pagina [Area Colleghi](https://savianu.it/colleghi/#priorita-asl-2026).
+
 ---
 
 **Nota:** scheda di riferimento a uso professionale. I criteri del PDTA regionale possono essere aggiornati: verificare eventuali novità normative e le modalità di accesso aziendali.
