@@ -12,6 +12,7 @@ export const STORAGE_CLOSED = 'ruap-giorni-chiusi';
 export const STORAGE_DARK_MODE = 'ruap-dark-mode';
 export const STORAGE_HEADER_COLLAPSED = 'ruap-header-collapsed';
 export const STORAGE_FILL_ONLY = 'ruap-solo-riempimento';
+export const STORAGE_EXTRA = 'ruap-turni-extra';
 export const STORAGE_VERSION = 2;
 export const CONFIG_DATA_KEY = 'ruap-config-data-version';
 export const HISTORY_MAX = 50;
@@ -32,6 +33,13 @@ export const DEFAULT_PLACE_SCHEDULE = {
 };
 /** Giorni di apertura di default (le sedi senza orario proprio). */
 export const DEFAULT_OPEN_DAYS = ['lun', 'mar', 'mer', 'gio', 'ven'];
+
+/* Turni extra (guardia, rinforzo, reperibilità): turni FUORI griglia, inseriti a
+   mano dal bottone «+» in qualunque giorno del mese — anche sabato, domenica,
+   festivo o giorno chiuso. Non esistono di default: `state.extraShifts` parte
+   vuoto e il motore non ne genera mai. `hours` è la durata (4 o 6 ore). */
+export const EXTRA_TYPES = ['Guardia', 'Rinforzo', 'Reperibilità', 'Altro'];
+export const EXTRA_HOURS = [4, 6];
 export const DEFAULT_SLOTS = [
   { key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' },
   { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' },

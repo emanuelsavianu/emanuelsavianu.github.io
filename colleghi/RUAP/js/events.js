@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261030c';
+} from './state.js?v=20261030e';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261030c';
+} from './core-utils.js?v=20261030e';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -33,10 +33,11 @@ import {
   toggleMonthlyStats, toggleHideZeroDocs, toggleClosedDay,
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
-  unavailCalNav, unavailCalToday
-} from './renderers.js?v=20261030c';
+  unavailCalNav, unavailCalToday,
+  openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary
+} from './renderers.js?v=20261030e';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261030c';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261030e';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -44,7 +45,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261030c';
+} from './config.js?v=20261030e';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -74,7 +75,7 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft' && mod) { e.preventDefault(); shiftMonth(-1); renderAll(); }
   if (e.key === 'ArrowRight' && mod) { e.preventDefault(); shiftMonth(1); renderAll(); }
   if (e.key === 'Escape') {
-    closeAssignDropdown(); closeDoctorModal(); closeConflictModal(); closeInstructions();
+    closeAssignDropdown(); closeDoctorModal(); closeConflictModal(); closeInstructions(); closeExtraModal();
     closeHeaderActions();
   }
 });
@@ -198,6 +199,23 @@ applyHeaderCollapsed(localStorage.getItem(STORAGE_HEADER_COLLAPSED) === '1');
 
 // --- Header and toolbar buttons ---
 el('btn-add-doctor')?.addEventListener('click', () => openDoctorModal());
+// Turni extra (guardia/rinforzo): bottone «+» flottante + modale
+el('btn-add-extra')?.addEventListener('click', () => openExtraModal());
+el('extra-modal-close')?.addEventListener('click', closeExtraModal);
+el('extra-cancel')?.addEventListener('click', closeExtraModal);
+el('extra-save')?.addEventListener('click', saveExtraShift);
+el('extra-doctor')?.addEventListener('change', updateExtraSummary);
+el('extra-hours')?.addEventListener('change', updateExtraSummary);
+el('extra-date')?.addEventListener('change', updateExtraSummary);
+// Cestino nell'elenco della modale e click sul chip del calendario (delegati:
+// le celle vengono ricostruite a ogni render).
+document.addEventListener('click', (e) => {
+  const del = e.target instanceof Element ? e.target.closest('[data-extra-del]') : null;
+  if (del) { e.preventDefault(); askDeleteExtra(del.dataset.extraDel); return; }
+  const chip = e.target instanceof Element ? e.target.closest('[data-extra-id]') : null;
+  if (chip) { e.preventDefault(); askDeleteExtra(chip.dataset.extraId); }
+});
+
 el('btn-auto-assign')?.addEventListener('click', autoAssign);
 el('btn-genera-mese')?.addEventListener('click', generateNextMonth);
 
@@ -345,6 +363,11 @@ function seedStateFromConfig() {
   if (typeof CONFIG !== 'undefined' && CONFIG.places) state.places = [...CONFIG.places];
   if (typeof CONFIG !== 'undefined' && CONFIG.slots) state.slots = CONFIG.slots.map(s => ({...s}));
   if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.closedDays)) state.closedDays = [...CONFIG.closedDays];
+  // Turni extra pubblicati nel seed (guardia/rinforzo): come le chiusure, il seed
+  // vince quando l'utente accetta «Aggiorna».
+  if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.extraShifts)) {
+    state.extraShifts = CONFIG.extraShifts.map(x => ({ ...x }));
+  }
   if (typeof CONFIG !== 'undefined' && CONFIG.assignments) {
     state.assignments = {};
     Object.entries(CONFIG.assignments).forEach(([key, docId]) => {

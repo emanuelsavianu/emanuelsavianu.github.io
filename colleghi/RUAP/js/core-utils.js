@@ -6,8 +6,8 @@ import {
   EXCEL_EPOCH_OFFSET, MS_PER_DAY, DAY_KEYS, DAY_NAMES,
   COLOR_PALETTE, MONTHLY_WEEKS,
   DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS
-} from './config.js?v=20261030c';
-import { isItalianHoliday } from './holidays.js?v=20261030c';
+} from './config.js?v=20261030e';
+import { isItalianHoliday } from './holidays.js?v=20261030e';
 
 // --- ID & Text ---
 
@@ -115,6 +115,29 @@ export function toast(message, type = 'info', duration = 3000) {
 }
 
 // --- Domain queries that need state (passed as param) ---
+
+/** Turni extra del mese (guardia/rinforzo), già filtrati per anno-mese. */
+export function getExtraShiftsInMonth(extraShifts, year, month) {
+  const prefix = `${year}-${String(month + 1).padStart(2, '0')}`;
+  return (extraShifts || []).filter(x => String(x.dateKey || '').startsWith(prefix));
+}
+
+/** Ore di turni extra di un medico nel mese. */
+export function getExtraHoursInMonth(docId, month, year, extraShifts) {
+  return getExtraShiftsInMonth(extraShifts, year, month)
+    .filter(x => x.doctorId === docId)
+    .reduce((tot, x) => tot + (Number(x.hours) || 0), 0);
+}
+
+/** Il medico ha già un turno extra in quella data? */
+export function hasExtraOnDate(docId, dateKey, extraShifts) {
+  return (extraShifts || []).some(x => x.doctorId === docId && x.dateKey === dateKey);
+}
+
+/** Etichetta breve di un turno extra: «Guardia 6h». */
+export function extraLabel(x) {
+  return `${(x && x.type) || 'Turno'} ${Number(x && x.hours) || 0}h`;
+}
 
 export function getDoctorById(doctors, id) {
   return doctors.find(d => d.id === id);
