@@ -1,11 +1,12 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-10-15T15:02:24Z",
+  "configDataVersion": "2026-10-30T12:51:09Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
-    "Arezzo"
+    "Arezzo",
+    "COT"
   ],
   "slots": [
     {
@@ -50,6 +51,10 @@ const CONFIG = {
         "ven": {
           "mat": true,
           "pom": false
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -91,6 +96,10 @@ const CONFIG = {
           "pom": true
         },
         "ven": {
+          "mat": true,
+          "pom": false
+        },
+        "sab": {
           "mat": true,
           "pom": false
         }
@@ -160,6 +169,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -231,6 +244,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -338,6 +355,10 @@ const CONFIG = {
         "ven": {
           "mat": true,
           "pom": false
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -407,6 +428,10 @@ const CONFIG = {
           "pom": true
         },
         "ven": {
+          "mat": true,
+          "pom": false
+        },
+        "sab": {
           "mat": true,
           "pom": false
         }
@@ -488,6 +513,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -551,6 +580,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -614,6 +647,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": false
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [],
@@ -648,6 +685,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -739,6 +780,10 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true,
+          "pom": false
         }
       },
       "unavailPeriods": [
@@ -1104,18 +1149,21 @@ const CONFIG = {
     "2026-11-30_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-11-30_pom_Subbiano": "mrasudwdk87n",
     "2026-12-01_mat_Arezzo": "mqgp5xpehbrke",
+    "2026-12-01_mat_COT": "mqgp5xpemfnc0",
     "2026-12-01_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-01_mat_Subbiano": "mqgp5xpe8eeqy",
     "2026-12-01_pom_Arezzo": "mqgp5xpec24f6",
     "2026-12-01_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-01_pom_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-02_mat_Arezzo": "mqgp5xpev7h1m",
+    "2026-12-02_mat_COT": "mqgp5xpe6gb6b",
     "2026-12-02_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-12-02_mat_Subbiano": "mqgp5xpec24f6",
     "2026-12-02_pom_Arezzo": "mqgp5xpemfnc0",
     "2026-12-02_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-02_pom_Subbiano": "mrasudwdk87n",
     "2026-12-03_mat_Arezzo": "mqgp5xpeohiai",
+    "2026-12-03_mat_COT": "mqgp5xpekiw12",
     "2026-12-03_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-03_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-03_pom_Arezzo": "mqgp5xpe8eeqy",
@@ -1127,43 +1175,52 @@ const CONFIG = {
     "2026-12-04_pom_Arezzo": "mqgp5xpe79zho",
     "2026-12-04_pom_M.S.Savino": "mqgp5xpe6gb6b",
     "2026-12-04_pom_Subbiano": "mqgp5xpe3wotk",
+    "2026-12-05_mat_COT": "mqgp5xpekiw12",
     "2026-12-09_mat_Arezzo": "mqgp5xpe79zho",
+    "2026-12-09_mat_COT": "mqgp5xpev7h1m",
     "2026-12-09_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-09_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-09_pom_Arezzo": "mrasudwdk87n",
     "2026-12-09_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-09_pom_Subbiano": "mqgp5xpeohiai",
     "2026-12-10_mat_Arezzo": "mqgp5xpe3wotk",
+    "2026-12-10_mat_COT": "mqgp5xpekiw12",
     "2026-12-10_mat_M.S.Savino": "mqgp5xpemfnc0",
     "2026-12-10_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-10_pom_Arezzo": "mqgp5xpec24f6",
     "2026-12-10_pom_M.S.Savino": "mqgp5xpe8eeqy",
     "2026-12-10_pom_Subbiano": "mqgp5xpev7h1m",
     "2026-12-11_mat_Arezzo": "mqgp5xpehbrke",
+    "2026-12-11_mat_COT": "mqgp5xpec24f6",
     "2026-12-11_mat_M.S.Savino": "mqgp5xpev7h1m",
     "2026-12-11_mat_Subbiano": "mqgp5xpe8eeqy",
     "2026-12-11_pom_Arezzo": "mqgp5xpe79zho",
     "2026-12-11_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-11_pom_Subbiano": "mrasudwdk87n",
+    "2026-12-12_mat_COT": "mqgp5xpemfnc0",
     "2026-12-14_mat_Arezzo": "mqgp5xpev7h1m",
+    "2026-12-14_mat_COT": "mqgp5xpe3wotk",
     "2026-12-14_mat_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-14_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-14_pom_Arezzo": "mqgp5xpe8eeqy",
     "2026-12-14_pom_M.S.Savino": "mrasudwdk87n",
     "2026-12-14_pom_Subbiano": "mqgp5xpemfnc0",
     "2026-12-15_mat_Arezzo": "mrasudwdk87n",
+    "2026-12-15_mat_COT": "mqgp5xpemfnc0",
     "2026-12-15_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-15_mat_Subbiano": "mqgp5xpehbrke",
     "2026-12-15_pom_Arezzo": "mqgp5xpec24f6",
     "2026-12-15_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-15_pom_Subbiano": "mqgp5xpe79zho",
     "2026-12-16_mat_Arezzo": "mqgp5xpe79zho",
+    "2026-12-16_mat_COT": "mqgp5xpe3wotk",
     "2026-12-16_mat_M.S.Savino": "mqgp5xpe6gb6b",
     "2026-12-16_mat_Subbiano": "mqgp5xpev7h1m",
     "2026-12-16_pom_Arezzo": "mqgp5xpemfnc0",
     "2026-12-16_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-16_pom_Subbiano": "mqgp5xpeohiai",
     "2026-12-17_mat_Arezzo": "mrasudwdk87n",
+    "2026-12-17_mat_COT": "mqgp5xpeohiai",
     "2026-12-17_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-17_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-17_pom_Arezzo": "mqgp5xpehbrke",
@@ -1175,25 +1232,30 @@ const CONFIG = {
     "2026-12-18_pom_Arezzo": "mqgp5xpe79zho",
     "2026-12-18_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-18_pom_Subbiano": "mqgp5xpe3wotk",
+    "2026-12-19_mat_COT": "mrasudwdk87n",
     "2026-12-21_mat_Arezzo": "mqgp5xpev7h1m",
+    "2026-12-21_mat_COT": "mqgp5xpe79zho",
     "2026-12-21_mat_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-21_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-21_pom_Arezzo": "mrasudwdk87n",
     "2026-12-21_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-12-21_pom_Subbiano": "mqgp5xpehbrke",
     "2026-12-22_mat_Arezzo": "mqgp5xpehbrke",
+    "2026-12-22_mat_COT": "mrasudwdk87n",
     "2026-12-22_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-22_mat_Subbiano": "mqgp5xpemfnc0",
     "2026-12-22_pom_Arezzo": "mqgp5xpec24f6",
     "2026-12-22_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-22_pom_Subbiano": "mqgp5xpe79zho",
     "2026-12-23_mat_Arezzo": "mqgp5xpe79zho",
+    "2026-12-23_mat_COT": "mqgp5xpec24f6",
     "2026-12-23_mat_M.S.Savino": "mqgp5xpe6gb6b",
     "2026-12-23_mat_Subbiano": "mqgp5xpev7h1m",
     "2026-12-23_pom_Arezzo": "mqgp5xpeohiai",
     "2026-12-23_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-23_pom_Subbiano": "mrasudwdk87n",
     "2026-12-28_mat_Arezzo": "mqgp5xpec24f6",
+    "2026-12-28_mat_COT": "mqgp5xpev7h1m",
     "2026-12-28_mat_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-28_mat_Subbiano": "mqgp5xpe3wotk",
     "2026-12-28_pom_Arezzo": "mqgp5xpehbrke",
@@ -1206,6 +1268,7 @@ const CONFIG = {
     "2026-12-29_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-29_pom_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-30_mat_Arezzo": "mqgp5xpev7h1m",
+    "2026-12-30_mat_COT": "mqgp5xpe6gb6b",
     "2026-12-30_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-12-30_mat_Subbiano": "mqgp5xpec24f6",
     "2026-12-30_pom_Arezzo": "mrasudwdk87n",
@@ -1216,5 +1279,20 @@ const CONFIG = {
     "2026-12-07",
     "2026-12-24",
     "2026-12-31"
-  ]
+  ],
+  "placeSchedules": {
+    "COT": {
+      "slots": [
+        "mat"
+      ],
+      "days": [
+        "lun",
+        "mar",
+        "mer",
+        "gio",
+        "ven",
+        "sab"
+      ]
+    }
+  }
 };

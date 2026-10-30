@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261020a';
+} from './state.js?v=20261030c';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261020a';
+} from './core-utils.js?v=20261030c';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -34,16 +34,17 @@ import {
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday
-} from './renderers.js?v=20261020a';
+} from './renderers.js?v=20261030c';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261020a';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261030c';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
   CONFIG_DATA_KEY,
   STORAGE_HEADER_COLLAPSED,
+  STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261020a';
+} from './config.js?v=20261030c';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -199,6 +200,27 @@ applyHeaderCollapsed(localStorage.getItem(STORAGE_HEADER_COLLAPSED) === '1');
 el('btn-add-doctor')?.addEventListener('click', () => openDoctorModal());
 el('btn-auto-assign')?.addEventListener('click', autoAssign);
 el('btn-genera-mese')?.addEventListener('click', generateNextMonth);
+
+// «Solo celle vuote»: la spunta accompagna Genera/Auto-Assegna e si ricorda.
+(function initFillOnlyToggle() {
+  const cb = el('chk-fill-only');
+  if (!cb) return;
+  try {
+    const saved = localStorage.getItem(STORAGE_FILL_ONLY);
+    if (saved !== null) cb.checked = saved === '1';
+  } catch (e) { /* storage bloccato: resta il default */ }
+  const syncStyle = () => {
+    const wrap = el('fill-only-wrap');
+    if (wrap) wrap.style.borderColor = cb.checked ? '#c29b57' : '#e2e8f0';
+    const lbl = el('fill-only-state');
+    if (lbl) lbl.textContent = cb.checked ? 'Solo celle vuote' : 'Rifinitura libera';
+  };
+  cb.addEventListener('change', () => {
+    try { localStorage.setItem(STORAGE_FILL_ONLY, cb.checked ? '1' : '0'); } catch (e) {}
+    syncStyle();
+  });
+  syncStyle();
+})();
 
 // Chiusure straordinarie (prefestivi/ponti): il lucchetto nella cella del giorno.
 // Delegato sul document perché le celle vengono ricostruite a ogni render.

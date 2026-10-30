@@ -6,23 +6,24 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261020a';
+} from './state.js?v=20261030c';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
   getDoctorColor, getMonthlyBudget, getProgressBarData,
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
-  getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay
-} from './core-utils.js?v=20261020a';
+  getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay,
+  isPlaceOpenOn, slotsForPlace, dayKeyOf
+} from './core-utils.js?v=20261030c';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS
-} from './config.js?v=20261020a';
-import { isItalianHoliday } from './holidays.js?v=20261020a';
+} from './config.js?v=20261030c';
+import { isItalianHoliday } from './holidays.js?v=20261030c';
 
 // ====================================================
 // 7. RENDERING
@@ -52,15 +53,17 @@ function filterDoctors() {
   return filtered;
 }
 
+/** Copertura di una sede in un giorno: tutte le fasce in cui la sede apre. */
 function getCoverageBadge(dateKey, place) {
-  const matKey = `${dateKey}_mat_${place}`;
-  const pomKey = `${dateKey}_pom_${place}`;
-  const matAssigned = !!state.assignments[matKey];
-  const pomAssigned = !!state.assignments[pomKey];
-  const bothAssigned = matAssigned && pomAssigned;
+  const slots = slotsForPlace(place, SLOTS);
+  const assigned = slots.filter(s => state.assignments[`${dateKey}_${s.key}_${place}`]).length;
+  const total = slots.length;
+  const all = total > 0 && assigned === total;
   return {
-    coverageClass: bothAssigned ? 'bg-green-100 text-green-700' : (matAssigned || pomAssigned) ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700',
-    coverageIcon: bothAssigned ? '✓' : (matAssigned || pomAssigned) ? '◐' : '○',
+    coverageClass: all ? 'bg-green-100 text-green-700' : assigned > 0 ? 'bg-amber-100 text-amber-700' : 'bg-red-100 text-red-700',
+    coverageIcon: all ? '✓' : assigned > 0 ? '◐' : '○',
+    assigned,
+    total,
   };
 }
 
@@ -71,7 +74,8 @@ function getMonthWorkdays(year, month) {
   const workdays = [];
   for (let day = 1; day <= lastDay; day++) {
     const d = new Date(year, month, day);
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
+    // Domenica sempre esclusa; il sabato entra perché COT apre 08–14 anche lì
+    if (d.getDay() === 0) continue;
     workdays.push({ day, date: d, dateKey: toDateKey(d) });
   }
   return workdays;
@@ -179,14 +183,15 @@ export function toggleClosedDay(dateKey) {
 function renderCalendarWeek() {
   const weekStart = state.calendarWeekStart;
   const weekEnd = new Date(weekStart);
-  weekEnd.setDate(weekEnd.getDate() + 4);
+  weekEnd.setDate(weekEnd.getDate() + 5);
   const header = el('cal-title');
   if (header) header.textContent = `${formatDateShort(weekStart)} – ${formatDateShort(weekEnd)}`;
   const container = el('cal-grid');
   if (!container) return;
-  container.className = 'grid grid-cols-5 gap-2';
+  container.className = 'grid gap-2';
+  container.style.gridTemplateColumns = 'repeat(6, minmax(0, 1fr))';
   container.innerHTML = '';
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const d = new Date(weekStart);
     d.setDate(d.getDate() + i);
     const dateKey = toDateKey(d);
@@ -197,6 +202,7 @@ function renderCalendarWeek() {
     cell.className = `rounded-xl p-2 border ${isClosed ? 'closed-cell border-slate-100' : isHoliday ? 'holiday-cell border-slate-100' : 'bg-white shadow-sm border-slate-200'} ${isToday ? 'ring-2 ring-brand-400' : ''}`;
     const dayName = DAY_NAMES[i];
     const dayNum = d.getDate();
+    const openPlaces = PLACES.filter(p => isPlaceOpenOn(p, d));
 
     if (isClosed) {
       cell.innerHTML = closedCellHTML(dateKey, dayNum, dayName);
@@ -207,12 +213,18 @@ function renderCalendarWeek() {
         <span>${dayName} ${dayNum}</span>
         ${closedToggleHTML(dateKey, false)}
       </div>`;
-      PLACES.forEach(place => {
+      if (openPlaces.length === 0) {
+        const empty = document.createElement('div');
+        empty.className = 'text-[10px] text-slate-400 uppercase tracking-widest text-center py-3';
+        empty.textContent = 'Nessuna sede';
+        cell.appendChild(empty);
+      }
+      openPlaces.forEach(place => {
         const { coverageClass, coverageIcon } = getCoverageBadge(dateKey, place);
         const placeDiv = document.createElement('div');
         placeDiv.className = 'mb-1';
         placeDiv.innerHTML = `<div class="flex items-center gap-1 mb-0.5"><span class="text-xs font-semibold text-slate-600 flex-1 truncate">${escapeHtml(place)}</span><span class="text-xs font-bold px-1 rounded ${coverageClass}">${coverageIcon}</span></div>`;
-        SLOTS.forEach(slot => {
+        slotsForPlace(place, SLOTS).forEach(slot => {
           placeDiv.appendChild(createSlotButton(dateKey, place, slot, true));
         });
         cell.appendChild(placeDiv);
@@ -238,8 +250,9 @@ function renderCalendarMonth() {
   let currentWeekStart = new Date(startDate);
   while (currentWeekStart <= lastDay) {
     const weekRow = document.createElement('div');
-    weekRow.className = 'grid grid-cols-5 gap-2 mb-2';
-    for (let i = 0; i < 5; i++) {
+    weekRow.className = 'cal-week grid gap-2 mb-2';
+    weekRow.style.gridTemplateColumns = 'repeat(6, minmax(0, 1fr))';
+    for (let i = 0; i < 6; i++) {
       const cellDate = new Date(currentWeekStart);
       cellDate.setDate(cellDate.getDate() + i);
       const dateKey = toDateKey(cellDate);
@@ -260,7 +273,7 @@ function renderCalendarMonth() {
           <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-600'}">${cellDate.getDate()}</span>
           ${closedToggleHTML(dateKey, false)}
         </div>`;
-        PLACES.forEach(place => {
+        PLACES.filter(p => isPlaceOpenOn(p, cellDate)).forEach(place => {
           const placeSection = document.createElement('div');
           placeSection.className = 'mb-1 pb-1 border-b border-slate-100 last:border-b-0 last:mb-0 last:pb-0';
           const badge = getCoverageBadge(dateKey, place);
@@ -268,7 +281,7 @@ function renderCalendarMonth() {
             <span class="text-[9px] font-bold text-slate-600 uppercase">${escapeHtml(place)}</span>
             <span class="text-[9px] font-bold ${badge.coverageClass} px-1 rounded">${badge.coverageIcon}</span>
           </div>`;
-          SLOTS.forEach(slot => {
+          slotsForPlace(place, SLOTS).forEach(slot => {
             placeSection.appendChild(createSlotButton(dateKey, place, slot, true));
           });
           cell.appendChild(placeSection);
@@ -554,7 +567,9 @@ function renderAvailabilityTable(availability) {
   tbody.innerHTML = DAY_KEYS.map(dk => `
     <tr>
       <td class="px-2 py-1 text-xs font-medium text-slate-600">${DAY_NAMES[DAY_KEYS.indexOf(dk)]}</td>
-      ${SLOTS.map(s => `<td class="px-2 py-1"><input type="checkbox" ${(availability?.[dk]?.[s.key] ?? true) ? 'checked' : ''} class="avail-check" data-day="${dk}" data-slot="${s.key}"></td>`).join('')}
+      ${SLOTS.map(s => (dk === 'sab' && s.key !== 'mat')
+        ? `<td class="px-2 py-1 text-center text-xs text-slate-400" title="Il sabato non ha il pomeriggio">—</td>`
+        : `<td class="px-2 py-1"><input type="checkbox" ${(availability?.[dk]?.[s.key] ?? (dk === 'sab' ? s.key === 'mat' : true)) ? 'checked' : ''} class="avail-check" data-day="${dk}" data-slot="${s.key}"></td>`).join('')}
     </tr>`).join('');
 }
 
@@ -1116,7 +1131,7 @@ export function exportExcel() {
 
   const headers = ['Data', 'Giorno'];
   PLACES.forEach(place => {
-    SLOTS.forEach(slot => {
+    slotsForPlace(place, SLOTS).forEach(slot => {
       headers.push(`${place} ${slot.label}`);
     });
   });
@@ -1126,8 +1141,9 @@ export function exportExcel() {
     const closed = isClosedDay(state.closedDays, dk);
     const row = [closed ? `${day}/${month + 1} (CHIUSO)` : `${day}/${month + 1}`, DAY_SHORT[date.getDay()]];
     PLACES.forEach(place => {
-      SLOTS.forEach(slot => {
-        row.push(getDocName(dk, slot.key, place));
+      const open = isPlaceOpenOn(place, date);
+      slotsForPlace(place, SLOTS).forEach(slot => {
+        row.push(open ? getDocName(dk, slot.key, place) : '');
       });
     });
     rows.push(row);
@@ -1141,7 +1157,7 @@ export function exportExcel() {
 
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.aoa_to_sheet(rows);
-  ws['!cols'] = [{ wch: 10 }, { wch: 8 }, ...PLACES.flatMap(() => SLOTS.map(() => ({ wch: 24 })))];
+  ws['!cols'] = [{ wch: 10 }, { wch: 8 }, ...PLACES.flatMap(p => slotsForPlace(p, SLOTS).map(() => ({ wch: 24 })))];
   XLSX.utils.book_append_sheet(wb, ws, monthName);
   XLSX.writeFile(wb, `turni-ruap-${monthName.toLowerCase()}-${year}.xlsx`);
   toast('Excel scaricato', 'success');
@@ -1157,24 +1173,27 @@ export function buildPdfContent() {
   let html = '';
 
   PLACES.forEach(place => {
+    const placeSlots = slotsForPlace(place, SLOTS);
     html += `<h3 style="font-size:14px;font-weight:bold;margin:10px 0 4px;color:#1e3a5f">${escapeHtml(place)}</h3>`;
     html += `<table style="width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px">
       <thead><tr style="background:#1e3a5f;color:white">
         <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Data</th>
         <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Giorno</th>`;
-    SLOTS.forEach(s => { html += `<th style="padding:4px 6px;border:1px solid #ccc;text-align:left">${s.label}</th>`; });
+    placeSlots.forEach(s => { html += `<th style="padding:4px 6px;border:1px solid #ccc;text-align:left">${s.label}</th>`; });
     html += `</tr></thead><tbody>`;
 
     for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
+      // Solo i giorni in cui questa sede apre (COT lavora anche il sabato)
+      if (!isPlaceOpenOn(place, date)) continue;
       const closed = isClosedDay(state.closedDays, dk);
       html += `<tr${closed ? ' style="background:#fff7ed"' : ''}>
         <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}${closed ? ' · chiuso' : ''}</td>
         <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[date.getDay()]}</td>`;
       if (closed) {
-        html += `<td colspan="${SLOTS.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
+        html += `<td colspan="${placeSlots.length}" style="padding:5px 6px;border:1px solid #ddd;color:#c2410c;font-weight:700;text-align:center">CHIUSO (prefestivo)</td></tr>`;
         continue;
       }
-      SLOTS.forEach(slot => {
+      placeSlots.forEach(slot => {
         const id = state.assignments[`${dk}_${slot.key}_${place}`];
         const { display: name, bg: bgColor, textColor } = resolveShiftCell(id);
         const cellStyle = `padding:5px 6px;border:1px solid #ddd${bgColor ? `;background:${bgColor};color:${textColor};font-weight:600` : ''}`;
@@ -1239,6 +1258,7 @@ export function buildPngContent() {
     </div>`;
 
   PLACES.forEach(place => {
+    const placeSlots = slotsForPlace(place, SLOTS);
     calHtml += `<div style="margin-bottom:18px;">
       <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
         <span style="background:#1a2f4c;color:white;font-size:10px;font-weight:bold;padding:2px 10px;border-radius:4px;letter-spacing:0.5px;">${escapeHtml(place)}</span>
@@ -1248,19 +1268,20 @@ export function buildPngContent() {
         <thead><tr style="background:#1e3a5f;color:white;">
           <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:left;">Data</th>
           <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:left;">Giorno</th>`;
-    SLOTS.forEach(s => {
+    placeSlots.forEach(s => {
       calHtml += `<th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:center;">${s.icon} ${escapeHtml(s.label)}</th>`;
     });
     calHtml += `</tr></thead><tbody>`;
 
     for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
+      if (!isPlaceOpenOn(place, date)) continue;
       const isHoliday = isItalianHoliday(date);
       const isClosed = isClosedDay(state.closedDays, dk);
       const rowBg = isClosed ? 'background:#fff7ed;' : isHoliday ? 'background:#fef2f2;' : '';
       calHtml += `<tr style="${rowBg}">
         <td style="padding:6px 8px;border:1px solid #e2e8f0;font-weight:600;color:#334155;">${day}/${month + 1}</td>
         <td style="padding:6px 8px;border:1px solid #e2e8f0;color:#475569;">${DAY_SHORT[date.getDay()]}</td>`;
-      SLOTS.forEach(slot => {
+      placeSlots.forEach(slot => {
         const id = state.assignments[`${dk}_${slot.key}_${place}`];
         const { display, bg, textColor } = resolveShiftCell(id);
         if (isClosed) {
@@ -1443,10 +1464,14 @@ function getMonthlyStats() {
   for (let day = 1; day <= lastDay; day++) {
     const cellDate = new Date(year, month, day);
     const jsDay = cellDate.getDay();
-    if (jsDay === 0 || jsDay === 6) continue;
+    if (jsDay === 0) continue;
     const dateKey = toDateKey(cellDate);
+    // Festività e chiusure straordinarie non sono celle da coprire: senza questo
+    // salto la percentuale non arriva mai a 100% in un mese pieno.
+    if (isItalianHoliday(cellDate) || isClosedDay(state.closedDays, dateKey)) continue;
     PLACES.forEach(place => {
-      SLOTS.forEach(slot => {
+      if (!isPlaceOpenOn(place, cellDate)) return;
+      slotsForPlace(place, SLOTS).forEach(slot => {
         totalSlots++;
         const key = `${dateKey}_${slot.key}_${place}`;
         if (state.assignments[key]) {
@@ -1555,12 +1580,12 @@ export function pasteWeekToCurrentView() {
 function copyWeek(weekStart) {
   const startDate = weekStart instanceof Date ? weekStart : new Date(weekStart + 'T00:00:00');
   copyWeekSource = { weekStart: startDate, assignments: {} };
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {
     const d = new Date(startDate);
     d.setDate(d.getDate() + i);
     const dateKey = toDateKey(d);
-    PLACES.forEach(place => {
-      SLOTS.forEach(slot => {
+    PLACES.filter(p => isPlaceOpenOn(p, d)).forEach(place => {
+      slotsForPlace(place, SLOTS).forEach(slot => {
         const key = `${dateKey}_${slot.key}_${place}`;
         if (state.assignments[key]) {
           copyWeekSource.assignments[key] = state.assignments[key];
@@ -1591,6 +1616,9 @@ function pasteWeek(weekStart) {
     const newDateKey = toDateKey(newDateObj);
     // Un giorno chiuso (prefestivo/ponte) non riceve turni, nemmeno incollando
     if (isClosedDay(state.closedDays, newDateKey)) { skipped++; continue; }
+    // Sede chiusa in quel giorno o fascia inesistente per la sede (es. COT: solo mattina)
+    if (!isPlaceOpenOn(place, newDateObj)) continue;
+    if (!slotsForPlace(place, SLOTS).some(s => s.key === slotKey)) continue;
     const newKey = `${newDateKey}_${slotKey}_${place}`;
     if (!state.assignments[newKey]) {
       state.assignments[newKey] = docId;
