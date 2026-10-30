@@ -11,14 +11,27 @@ export const STORAGE_SLOTS = 'ruap-slots';
 export const STORAGE_CLOSED = 'ruap-giorni-chiusi';
 export const STORAGE_DARK_MODE = 'ruap-dark-mode';
 export const STORAGE_HEADER_COLLAPSED = 'ruap-header-collapsed';
+export const STORAGE_FILL_ONLY = 'ruap-solo-riempimento';
 export const STORAGE_VERSION = 2;
 export const CONFIG_DATA_KEY = 'ruap-config-data-version';
 export const HISTORY_MAX = 50;
 
-export const DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì'];
-export const DAY_KEYS  = ['lun', 'mar', 'mer', 'gio', 'ven'];
+export const DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
+export const DAY_KEYS  = ['lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
 
-export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'Arezzo'];
+export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'Arezzo', 'COT'];
+
+/* Orario per sede. Una sede senza voce qui è aperta lun-ven in tutte le fasce.
+   COT (Centrale Operativa Territoriale) è aperta lun-sab con il solo turno
+   del mattino 08:00–14:00: `days` elenca i giorni feriali in cui la sede apre
+   (il motore e il calendario chiedono `isPlaceOpenOn`/`slotsForPlace`, mai
+   questi valori a mano). Il seed può sovrascrivere questa mappa con
+   `CONFIG.placeSchedules` — è dato, non codice. */
+export const DEFAULT_PLACE_SCHEDULE = {
+  'COT': { slots: ['mat'], days: ['lun', 'mar', 'mer', 'gio', 'ven', 'sab'] },
+};
+/** Giorni di apertura di default (le sedi senza orario proprio). */
+export const DEFAULT_OPEN_DAYS = ['lun', 'mar', 'mer', 'gio', 'ven'];
 export const DEFAULT_SLOTS = [
   { key: 'mat', label: '08:00–14:00', hours: 6, icon: '🌅' },
   { key: 'pom', label: '14:00–20:00', hours: 6, icon: '🌆' },

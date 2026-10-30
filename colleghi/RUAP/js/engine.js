@@ -2,14 +2,15 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261020a';
-import { isItalianHoliday } from './holidays.js?v=20261020a';
-import { MONTHS_IT } from './config.js?v=20261020a';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261030c';
+import { isItalianHoliday } from './holidays.js?v=20261030c';
+import { MONTHS_IT } from './config.js?v=20261030c';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
-  getAssignedHoursInMonth, el, toast, isClosedDay
-} from './core-utils.js?v=20261020a';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261020a';
+  getAssignedHoursInMonth, el, toast, isClosedDay,
+  isPlaceOpenOn, slotsForPlace
+} from './core-utils.js?v=20261030c';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261030c';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -20,12 +21,16 @@ export function enumerateEmptySlots(year, month) {
   const slots = [];
   for (let day = 1; day <= lastDay; day++) {
     const cellDate = new Date(year, month, day);
-    if (cellDate.getDay() === 0 || cellDate.getDay() === 6 || isItalianHoliday(cellDate)) continue;
+    // Domenica sempre chiusa; il sabato è aperto solo per le sedi che lo prevedono
+    // (COT), quindi non si salta più a priori.
+    if (cellDate.getDay() === 0 || isItalianHoliday(cellDate)) continue;
     const dateKey = toDateKey(cellDate);
     // Chiusure straordinarie (prefestivi, ponti): come le festività, niente turni
     if (isClosedDay(state.closedDays, dateKey)) continue;
+    const openPlaces = PLACES.filter(p => isPlaceOpenOn(p, cellDate));
     SLOTS.forEach(slot => {
-      PLACES.forEach(place => {
+      openPlaces.forEach(place => {
+        if (!slotsForPlace(place, SLOTS).some(s => s.key === slot.key)) return;
         const slotKey = `${dateKey}_${slot.key}_${place}`;
         if (!state.assignments[slotKey]) slots.push({ dateKey, slotKey, cellDate });
       });
@@ -177,7 +182,7 @@ function plural(n, sing, plur) {
   return `${n} ${n === 1 ? sing : plur}`;
 }
 
-function optimizeMonth(year, month) {
+function optimizeMonth(year, month, lockedKeys = new Set()) {
   const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`;
   const byId = (id) => state.doctors.find(d => d.id === id);
   const slotHoursOf = (slot) => {
@@ -185,8 +190,12 @@ function optimizeMonth(year, month) {
     return s ? s.hours : 6;
   };
   const budgetOf = (doc) => getMonthlyBudget(doc);
+  // `lockedKeys` = turni già presenti all'inizio della generazione: con l'opzione
+  // "solo celle vuote" l'utente chiede che NON vengano toccati, quindi restano
+  // fuori da ogni mossa (le celle nuove invece si possono ancora spostare per
+  // pareggiare le ore).
   const keysOf = (docId) => Object.keys(state.assignments)
-    .filter(k => k.startsWith(monthPrefix) && (!docId || state.assignments[k] === docId))
+    .filter(k => k.startsWith(monthPrefix) && !lockedKeys.has(k) && (!docId || state.assignments[k] === docId))
     .sort();
 
   let hours = hoursSnapshot(year, month);
@@ -239,9 +248,12 @@ function optimizeMonth(year, month) {
     let fixed = false;
     for (const d of available) {
       if (fixed) break;
-      const mine = keysOf(d.id);
-      const sameSlot = mine.filter(k => k.startsWith(`${item.dateKey}_${slotKeyOnly}_`));
-      const movable = sameSlot.length > 0 ? sameSlot : mine;
+      // Chi e' gia' impegnato in QUESTA fascia non puo' prendere la cella: spostare
+      // altrove uno dei suoi turni non lo libererebbe. Senza questo salto il passo
+      // creava DOPPI IMPIEGNI quando i turni della stessa fascia erano bloccati
+      // (trovato il 2026-10-30: 3 doppie assegnazioni su dicembre con COT).
+      if (isBusy(d.id, item.dateKey, slotKeyOnly)) continue;
+      const movable = keysOf(d.id);
       for (const k of movable) {
         const kParts = k.split('_');
         const kSlot = kParts[1];
@@ -371,7 +383,7 @@ function optimizeMonth(year, month) {
   return moves;
 }
 
-export function runAutoAssignForMonth(year, month) {
+export function runAutoAssignForMonth(year, month, opts = {}) {
   if (isProcessing) return;
   if (state.doctors.length === 0) {
     toast('Aggiungi prima dei medici', 'warning');
@@ -380,6 +392,10 @@ export function runAutoAssignForMonth(year, month) {
 
   setProcessing(true);
   pushHistory();
+  // Turni già presenti quando si preme il bottone: con `preserveExisting` la
+  // rifinitura non li sposta (le celle nuove sì). Serve a «riempi le celle
+  // vuote senza toccare il resto» — richiesta esplicita del referente.
+  const lockedKeys = opts.preserveExisting ? new Set(Object.keys(state.assignments)) : new Set();
   const monthName = MONTHS_IT[month];
   const slotsToProcess = enumerateEmptySlots(year, month);
 
@@ -387,7 +403,7 @@ export function runAutoAssignForMonth(year, month) {
     // Mese gia' pieno: la rifinitura gira lo stesso, cosi' si puo' chiedere
     // copertura/equita' senza svuotare il mese (prima si usciva qui e i
     // commenti promettevano un comportamento che il codice non aveva).
-    const rifinite = optimizeMonth(year, month);
+    const rifinite = optimizeMonth(year, month, lockedKeys);
     setProcessing(false);
     if (rifinite > 0) {
       saveToStorage();
@@ -451,7 +467,7 @@ export function runAutoAssignForMonth(year, month) {
       progressBar.style.width = '0%';
       setProcessing(false);
       // Rifinitura: copertura + equita' (mosse singole e in due salti, sempre legali).
-      const rifinite = optimizeMonth(year, month);
+      const rifinite = optimizeMonth(year, month, lockedKeys);
       if (count === 0 && rifinite === 0) {
         toast(`Nessun turno da generare in ${monthName}`, 'info');
         return;
@@ -468,12 +484,18 @@ export function runAutoAssignForMonth(year, month) {
   processChunk(0);
 }
 
+/** «Solo celle vuote»: la spunta in toolbar blocca i turni già assegnati. */
+export function isFillOnlyChecked() {
+  const cb = el('chk-fill-only');
+  return !!(cb && cb.checked);
+}
+
 export function autoAssign() {
-  runAutoAssignForMonth(state.calYear, state.calMonth);
+  runAutoAssignForMonth(state.calYear, state.calMonth, { preserveExisting: isFillOnlyChecked() });
 }
 
 export function generateNextMonth() {
   const nextMonth = state.calMonth + 1;
   const year = nextMonth > 11 ? state.calYear + 1 : state.calYear;
-  runAutoAssignForMonth(year, nextMonth % 12);
+  runAutoAssignForMonth(year, nextMonth % 12, { preserveExisting: isFillOnlyChecked() });
 }

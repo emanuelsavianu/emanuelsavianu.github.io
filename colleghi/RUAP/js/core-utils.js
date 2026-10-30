@@ -4,9 +4,10 @@
 
 import {
   EXCEL_EPOCH_OFFSET, MS_PER_DAY, DAY_KEYS, DAY_NAMES,
-  COLOR_PALETTE, MONTHLY_WEEKS
-} from './config.js?v=20261020a';
-import { isItalianHoliday } from './holidays.js?v=20261020a';
+  COLOR_PALETTE, MONTHLY_WEEKS,
+  DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS
+} from './config.js?v=20261030c';
+import { isItalianHoliday } from './holidays.js?v=20261030c';
 
 // --- ID & Text ---
 
@@ -134,13 +135,41 @@ export function isClosedDay(closedDays, dateKey) {
   return Array.isArray(closedDays) && closedDays.includes(dateKey);
 }
 
+/** Chiave giorno (lun…sab) di una data; null per la domenica. */
+export function dayKeyOf(date) {
+  const d = date.getDay();
+  return d === 0 ? null : DAY_KEYS[d - 1];
+}
+
+/** Orario di una sede: {slots: null(=tutte le fasce), days: [...]}. */
+export function getPlaceSchedule(place) {
+  const configured = (typeof CONFIG !== 'undefined' && CONFIG.placeSchedules) ? CONFIG.placeSchedules[place] : null;
+  const sch = configured || DEFAULT_PLACE_SCHEDULE[place] || {};
+  const slots = Array.isArray(sch.slots) && sch.slots.length > 0 ? sch.slots.slice() : null;
+  const days = Array.isArray(sch.days) && sch.days.length > 0 ? sch.days.slice() : DEFAULT_OPEN_DAYS.slice();
+  return { slots, days };
+}
+
+/** Le fasce in cui una sede apre, nell'ordine di SLOTS. */
+export function slotsForPlace(place, SLOTS) {
+  const { slots } = getPlaceSchedule(place);
+  return slots ? SLOTS.filter(s => slots.includes(s.key)) : SLOTS;
+}
+
+/** La sede è aperta in questa data? (domenica mai) */
+export function isPlaceOpenOn(place, date) {
+  const dk = dayKeyOf(date);
+  if (!dk) return false;
+  return getPlaceSchedule(place).days.includes(dk);
+}
+
 export function isDoctorAvailableForSlot(doctor, dateKey, slotKey) {
   if (!doctor.availability) return false;
   if (isDoctorUnavailable(doctor, dateKey)) return false;
   const d = new Date(dateKey + 'T00:00:00');
-  if (d.getDay() === 0 || d.getDay() === 6) return false;
+  const dayKey = dayKeyOf(d);           // null = domenica
+  if (!dayKey) return false;
   if (isItalianHoliday(d)) return false;
-  const dayKey = DAY_KEYS[d.getDay() - 1];
   const avail = doctor.availability[dayKey];
   if (!avail) return false;
   return avail[slotKey] === true;
@@ -158,7 +187,7 @@ function sumSlotHours(SLOTS, PLACES, assignments, predicate) {
 
 export function getWeeklyAssignedHours(doctorId, weekStart, SLOTS, PLACES, assignments) {
   let hours = 0;
-  for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 6; i++) {   // lun-sab: il sabato è aperto solo dove previsto
     const d = new Date(weekStart);
     d.setDate(d.getDate() + i);
     const dk = toDateKey(d);
@@ -174,7 +203,7 @@ export function getAssignedHoursInMonth(docId, month, year, SLOTS, PLACES, assig
   let hours = 0;
   for (let day = 1; day <= lastDay; day++) {
     const d = new Date(year, month, day);
-    if (d.getDay() === 0 || d.getDay() === 6) continue;
+    if (d.getDay() === 0) continue;
     const dk = toDateKey(d);
     hours += sumSlotHours(SLOTS, PLACES, assignments, (slot, place) =>
       assignments[`${dk}_${slot.key}_${place}`] === docId
@@ -192,7 +221,8 @@ export function getDefaultDoctors() {
   return CONFIG.doctors.map(d => ({
     ...d,
     availability: d.availability ? JSON.parse(JSON.stringify(d.availability)) : Object.fromEntries(
-      DAY_KEYS.map(k => [k, { mat: true, pom: true }])
+      // il sabato non ha il pomeriggio: si apre solo la mattina dove serve
+      DAY_KEYS.map(k => [k, { mat: true, pom: k !== 'sab' }])
     ),
     unavailPeriods: d.unavailPeriods ? JSON.parse(JSON.stringify(d.unavailPeriods)) : [],
   }));
