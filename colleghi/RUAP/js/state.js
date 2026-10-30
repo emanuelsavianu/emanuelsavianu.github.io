@@ -4,11 +4,11 @@
 
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
-  STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED,
+  STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED, STORAGE_EXTRA,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
-} from './config.js?v=20261030c';
-import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261030c';
+} from './config.js?v=20261030e';
+import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261030e';
 
 // --- Global mutable references (module-scoped) ---
 export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;
@@ -21,6 +21,8 @@ export let state = {
   places: [],
   slots: [],
   closedDays: [],
+  // Turni extra (guardia/rinforzo): fuori griglia, inseriti a mano, mai generati.
+  extraShifts: [],
   calYear: new Date().getFullYear(),
   calMonth: new Date().getMonth(),
   sidebarWeekStart: getWeekStart(new Date()),
@@ -46,6 +48,7 @@ export function saveToStorage() {
     localStorage.setItem(STORAGE_PLACES, JSON.stringify(state.places));
     localStorage.setItem(STORAGE_SLOTS, JSON.stringify(state.slots));
     localStorage.setItem(STORAGE_CLOSED, JSON.stringify(state.closedDays));
+    localStorage.setItem(STORAGE_EXTRA, JSON.stringify(state.extraShifts || []));
   } catch (e) {
     toast('Errore salvataggio: ' + e.message, 'error');
     console.error(e);
@@ -59,11 +62,13 @@ export function loadFromStorage() {
     const plcs = localStorage.getItem(STORAGE_PLACES);
     const slts = localStorage.getItem(STORAGE_SLOTS);
     const clos = localStorage.getItem(STORAGE_CLOSED);
+    const extra = localStorage.getItem(STORAGE_EXTRA);
     if (docs) state.doctors = JSON.parse(docs);
     if (asgn) state.assignments = JSON.parse(asgn);
     if (plcs) state.places = JSON.parse(plcs);
     if (slts) state.slots = JSON.parse(slts);
     if (clos) state.closedDays = JSON.parse(clos);
+    if (extra) state.extraShifts = JSON.parse(extra) || [];
   } catch (e) { console.error(e); }
 }
 
@@ -144,7 +149,8 @@ export function toggleDarkMode() {
 // della mutazione e undo() leggeva stack[index-1]) saltava due azioni per volta.
 function currentSnapshot() {
   return JSON.stringify({
-    doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays
+    doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays,
+    extraShifts: state.extraShifts
   });
 }
 
@@ -152,6 +158,9 @@ function applySnapshot(snap) {
   state.assignments = snap.assignments;
   if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
   if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
+  // Campo aggiunto 2026-10-30: se non lo si annulla qui, l'undo di un turno extra
+  // lascerebbe le ore contate con un turno che non c'è più.
+  if (Array.isArray(snap.extraShifts)) state.extraShifts = snap.extraShifts;
 }
 
 function saveHistory() {

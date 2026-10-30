@@ -2,15 +2,15 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261030c';
-import { isItalianHoliday } from './holidays.js?v=20261030c';
-import { MONTHS_IT } from './config.js?v=20261030c';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261030e';
+import { isItalianHoliday } from './holidays.js?v=20261030e';
+import { MONTHS_IT } from './config.js?v=20261030e';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast, isClosedDay,
-  isPlaceOpenOn, slotsForPlace
-} from './core-utils.js?v=20261030c';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261030c';
+  isPlaceOpenOn, slotsForPlace, getExtraHoursInMonth, hasExtraOnDate
+} from './core-utils.js?v=20261030e';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261030e';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -42,7 +42,9 @@ export function enumerateEmptySlots(year, month) {
 function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, assignedInTarget, getEffectiveRemaining, slotHours) {
   const notBusy = (doc) => {
     const prefix = `${dateKey}_${slotKeyOnly}_`;
-    return !Object.entries(state.assignments).some(([k, v]) => v === doc.id && k.startsWith(prefix));
+    if (Object.entries(state.assignments).some(([k, v]) => v === doc.id && k.startsWith(prefix))) return false;
+    // Un turno extra (guardia/rinforzo) nella stessa data impegna il medico tutto il giorno.
+    return !hasExtraOnDate(doc.id, dateKey, state.extraShifts);
   };
 
   // Prevent mat (08-14) after pom (14-20) on the previous calendar day.
@@ -140,7 +142,8 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
 function hoursSnapshot(year, month) {
   const out = {};
   state.doctors.forEach(d => {
-    out[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments);
+    out[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments)
+      + getExtraHoursInMonth(d.id, month, year, state.extraShifts);
   });
   return out;
 }
@@ -210,6 +213,11 @@ function optimizeMonth(year, month, lockedKeys = new Set()) {
       const p = k.split('_');
       busy.add(`${state.assignments[k]}|${p[0]}|${p[1]}`);
     }
+    // I turni extra non hanno una fascia: occupano l'intera giornata.
+    (state.extraShifts || []).forEach(x => {
+      busy.add(`${x.doctorId}|${x.dateKey}|mat`);
+      busy.add(`${x.doctorId}|${x.dateKey}|pom`);
+    });
   };
   rebuildBusy();
   const isBusy = (docId, dateKey, slotKeyOnly) => busy.has(`${docId}|${dateKey}|${slotKeyOnly}`);
@@ -418,7 +426,10 @@ export function runAutoAssignForMonth(year, month, opts = {}) {
   }
 
   const assignedInTarget = {};
-  state.doctors.forEach(d => { assignedInTarget[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments); });
+  state.doctors.forEach(d => {
+    assignedInTarget[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments)
+      + getExtraHoursInMonth(d.id, month, year, state.extraShifts);
+  });
   function getEffectiveRemaining(doc) {
     return Math.max(0, getMonthlyBudget(doc) - (assignedInTarget[doc.id] || 0));
   }

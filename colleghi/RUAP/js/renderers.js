@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261030c';
+} from './state.js?v=20261030e';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -14,16 +14,17 @@ import {
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
   getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay,
-  isPlaceOpenOn, slotsForPlace, dayKeyOf
-} from './core-utils.js?v=20261030c';
+  isPlaceOpenOn, slotsForPlace, dayKeyOf,
+  getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
+} from './core-utils.js?v=20261030e';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
-  DEFAULT_SLOTS
-} from './config.js?v=20261030c';
-import { isItalianHoliday } from './holidays.js?v=20261030c';
+  DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
+} from './config.js?v=20261030e';
+import { isItalianHoliday } from './holidays.js?v=20261030e';
 
 // ====================================================
 // 7. RENDERING
@@ -120,6 +121,41 @@ function createSlotButton(dateKey, place, slot, inMonth) {
   return slotBtn;
 }
 
+// ====================================================
+// Turni extra (guardia, rinforzo): fuori griglia, manuali
+// ====================================================
+// Un turno extra non è una cella sede×fascia: è una riga a sé (`state.extraShifts`),
+// quindi compare anche su sabato, domenica, festivi e giorni chiusi — è proprio lì
+// che serve la guardia. Non viene mai generato dal motore e non tocca le celle.
+
+/** Chip HTML dei turni extra di una data ('' se non ce ne sono). */
+function extraChipsForDate(dateKey) {
+  const list = (state.extraShifts || []).filter(x => x.dateKey === dateKey);
+  if (list.length === 0) return '';
+  return list.map(x => {
+    const doc = getDoctorById(state.doctors, x.doctorId);
+    const name = doc ? cleanDoctorName(doc.name) : '—';
+    const color = doc ? getDoctorColor(doc).hex : '#334155';
+    const label = extraLabel(x);
+    return `<button type="button" class="extra-chip" data-extra-id="${escapeHtml(x.id)}"
+      style="background:${color}"
+      title="${escapeHtml(label)} · ${escapeHtml(name)}${x.note ? ' · ' + escapeHtml(x.note) : ''} — clic per eliminare"
+      aria-label="${escapeHtml(label)} ${escapeHtml(name)}, clic per eliminare">
+      <i class="fa-solid fa-shield-halved"></i> ${escapeHtml(x.type || 'Turno')} ${Number(x.hours) || 0}h · ${escapeHtml(name)}
+    </button>`;
+  }).join('');
+}
+
+/** Appende i chip dei turni extra a una cella del calendario. */
+function appendExtraChips(cell, dateKey) {
+  const html = extraChipsForDate(dateKey);
+  if (!html) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'mt-1 space-y-1 extra-chip-wrap';
+  wrap.innerHTML = html;
+  cell.appendChild(wrap);
+}
+
 export function renderCalendar() {
   if (state.calendarView === 'weekly') {
     renderCalendarWeek();
@@ -180,6 +216,127 @@ export function toggleClosedDay(dateKey) {
   }
 }
 
+// --- Modale «turno extra» (guardia, rinforzo, reperibilità) ------------------
+
+let extraModalDate = null;
+
+function refreshExtraDoctorOptions(selectedId) {
+  const sel = el('extra-doctor');
+  if (!sel) return;
+  const month = state.calMonth, year = state.calYear;
+  const rows = state.doctors.map(d => {
+    const used = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments)
+      + getExtraHoursInMonth(d.id, month, year, state.extraShifts);
+    return `<option value="${d.id}"${d.id === selectedId ? ' selected' : ''}>${escapeHtml(cleanDoctorName(d.name))} — ${used}h/${getMonthlyBudget(d)}h</option>`;
+  }).join('');
+  sel.innerHTML = rows || '<option value="">Nessun medico</option>';
+}
+
+export function updateExtraSummary() {
+  const out = el('extra-summary');
+  if (!out) return;
+  const docId = el('extra-doctor')?.value;
+  const doc = docId ? getDoctorById(state.doctors, docId) : null;
+  if (!doc) { out.textContent = ''; return; }
+  const month = state.calMonth, year = state.calYear;
+  const assigned = getAssignedHoursInMonth(doc.id, month, year, SLOTS, PLACES, state.assignments);
+  const extra = getExtraHoursInMonth(doc.id, month, year, state.extraShifts);
+  const budget = getMonthlyBudget(doc);
+  const hours = parseInt(el('extra-hours')?.value, 10) || 6;
+  const total = assigned + extra;
+  const over = total + hours > budget;
+  out.className = `text-xs mt-2 ${over ? 'text-amber-700 font-semibold' : 'text-slate-600'}`;
+  out.textContent = `${cleanDoctorName(doc.name)}: ${total}h su ${budget}h` + (over
+    ? ` — con questo turno arriverebbe a ${total + hours}h, oltre il budget`
+    : ` → con questo turno ${total + hours}h`);
+}
+
+export function openExtraModal(dateKey = null) {
+  const modal = el('extra-modal');
+  if (!modal) return;
+  extraModalDate = dateKey || toDateKey(new Date());
+  if (el('extra-date')) el('extra-date').value = extraModalDate;
+  if (el('extra-type')) el('extra-type').value = 'Guardia';
+  if (el('extra-hours')) el('extra-hours').value = '6';
+  if (el('extra-note')) el('extra-note').value = '';
+  refreshExtraDoctorOptions();
+  updateExtraSummary();
+  renderExtraList();
+  modal.classList.remove('hidden');
+}
+
+export function closeExtraModal() {
+  el('extra-modal')?.classList.add('hidden');
+}
+
+export function saveExtraShift() {
+  const dateKey = (el('extra-date')?.value || '').trim();
+  const type = (el('extra-type')?.value || 'Guardia').trim() || 'Guardia';
+  const hours = parseInt(el('extra-hours')?.value, 10) || 6;
+  const doctorId = el('extra-doctor')?.value || '';
+  const note = (el('extra-note')?.value || '').trim();
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(dateKey)) { toast('Scegli una data valida', 'warning'); return; }
+  if (!doctorId) { toast('Scegli il medico', 'warning'); return; }
+  const doc = getDoctorById(state.doctors, doctorId);
+  // Il turno extra si può salvare anche se il medico quel giorno è già in sede: si
+  // avvisa e si lascia a lui decidere (la guardia può nascere da un accordo, non
+  // deve essere bloccata dalla regola delle celle).
+  const sameDay = Object.keys(state.assignments)
+    .filter(k => k.startsWith(dateKey + '_') && state.assignments[k] === doctorId);
+  pushHistory();
+  state.extraShifts = [...(state.extraShifts || []), { id: generateId(), dateKey, type, hours, doctorId, note }];
+  saveToStorage();
+  renderAll();
+  toast(`${type} ${hours}h · ${cleanDoctorName(doc ? doc.name : '')} — ${dateKey}`, 'success');
+  if (sameDay.length > 0) {
+    toast(`${cleanDoctorName(doc.name)} quel giorno ha già ${sameDay.length} turno/i in sede: controlla i conflitti`, 'warning', 6000);
+  }
+  renderExtraList();
+  updateExtraSummary();
+}
+
+/** Chiede conferma e poi elimina (undo disponibile con Ctrl+Z). */
+export function askDeleteExtra(id) {
+  const x = (state.extraShifts || []).find(e => e.id === id);
+  if (!x) return;
+  const doc = getDoctorById(state.doctors, x.doctorId);
+  confirmToast(`Eliminare ${extraLabel(x)} di ${doc ? cleanDoctorName(doc.name) : '—'} del ${x.dateKey}?`, () => deleteExtraShift(id));
+}
+
+export function deleteExtraShift(id) {
+  const x = (state.extraShifts || []).find(e => e.id === id);
+  if (!x) return;
+  pushHistory();
+  state.extraShifts = (state.extraShifts || []).filter(e => e.id !== id);
+  saveToStorage();
+  renderAll();
+  renderExtraList();
+  updateExtraSummary();
+  toast(`${extraLabel(x)} del ${x.dateKey} eliminato`, 'info');
+}
+
+/** Elenco dei turni extra del mese mostrato nella modale. */
+function renderExtraList() {
+  const box = el('extra-list');
+  if (!box) return;
+  const list = getExtraShiftsInMonth(state.extraShifts, state.calYear, state.calMonth);
+  if (list.length === 0) {
+    box.innerHTML = `<p class="text-xs text-slate-500 italic">Nessun turno extra in ${MONTHS_IT[state.calMonth]} ${state.calYear}.</p>`;
+    return;
+  }
+  box.innerHTML = list.slice().sort((a, b) => a.dateKey.localeCompare(b.dateKey)).map(x => {
+    const doc = getDoctorById(state.doctors, x.doctorId);
+    const d = new Date(x.dateKey + 'T00:00:00');
+    return `<div class="flex items-center gap-2 bg-slate-50 rounded-lg px-2 py-1.5 mb-1">
+      <span class="text-xs font-semibold text-slate-700">${d.toLocaleDateString('it-IT', { weekday: 'short', day: 'numeric' })}</span>
+      <span class="text-xs text-slate-600 flex-1 truncate">${escapeHtml(extraLabel(x))} · ${escapeHtml(doc ? cleanDoctorName(doc.name) : '—')}${x.note ? ' · ' + escapeHtml(x.note) : ''}</span>
+      <button type="button" class="extra-del text-red-500 hover:text-red-700 text-xs px-1" data-extra-del="${escapeHtml(x.id)}" title="Elimina">
+        <i class="fa-solid fa-trash-can"></i>
+      </button>
+    </div>`;
+  }).join('');
+}
+
 function renderCalendarWeek() {
   const weekStart = state.calendarWeekStart;
   const weekEnd = new Date(weekStart);
@@ -206,8 +363,10 @@ function renderCalendarWeek() {
 
     if (isClosed) {
       cell.innerHTML = closedCellHTML(dateKey, dayNum, dayName);
+      appendExtraChips(cell, dateKey);
     } else if (isHoliday) {
       cell.innerHTML = holidayCellHTML(dayNum, dayName);
+      appendExtraChips(cell, dateKey);
     } else {
       cell.innerHTML = `<div class="text-xs font-bold text-slate-600 mb-1 pb-1 border-b border-slate-100 flex items-center justify-between">
         <span>${dayName} ${dayNum}</span>
@@ -229,6 +388,7 @@ function renderCalendarWeek() {
         });
         cell.appendChild(placeDiv);
       });
+      appendExtraChips(cell, dateKey);
     }
     container.appendChild(cell);
   }
@@ -266,8 +426,10 @@ function renderCalendarMonth() {
 
       if (isClosed && inMonth) {
         cell.innerHTML = closedCellHTML(dateKey, cellDate.getDate());
+        appendExtraChips(cell, dateKey);
       } else if (isHoliday && inMonth) {
         cell.innerHTML = holidayCellHTML(cellDate.getDate());
+        appendExtraChips(cell, dateKey);
       } else if (inMonth) {
         cell.innerHTML = `<div class="flex items-center justify-between mb-1">
           <span class="text-xs font-bold ${isToday ? 'bg-brand-700 text-white rounded-full w-5 h-5 flex items-center justify-center' : 'text-slate-600'}">${cellDate.getDate()}</span>
@@ -286,6 +448,7 @@ function renderCalendarMonth() {
           });
           cell.appendChild(placeSection);
         });
+        appendExtraChips(cell, dateKey);
       }
       weekRow.appendChild(cell);
     }
@@ -312,9 +475,16 @@ export function renderSidebar() {
   const filtered = filterDoctors();
   container.innerHTML = filtered.map(doc => {
     const color = getDoctorColor(doc);
-    const weeklyH = getWeeklyAssignedHours(doc.id, state.sidebarWeekStart, SLOTS, PLACES, state.assignments);
+    const weekFrom = toDateKey(state.sidebarWeekStart);
+    const weekToDate = new Date(state.sidebarWeekStart); weekToDate.setDate(weekToDate.getDate() + 5);
+    const weekTo = toDateKey(weekToDate);
+    const extraWeek = (state.extraShifts || [])
+      .filter(x => x.doctorId === doc.id && x.dateKey >= weekFrom && x.dateKey <= weekTo)
+      .reduce((t, x) => t + (Number(x.hours) || 0), 0);
+    const weeklyH = getWeeklyAssignedHours(doc.id, state.sidebarWeekStart, SLOTS, PLACES, state.assignments) + extraWeek;
     const { pct, barColor } = getProgressBarData(weeklyH, doc.weeklyHours ?? 38);
-    const monthH = getAssignedHoursInMonth(doc.id, state.calMonth, state.calYear, SLOTS, PLACES, state.assignments);
+    const monthH = getAssignedHoursInMonth(doc.id, state.calMonth, state.calYear, SLOTS, PLACES, state.assignments)
+      + getExtraHoursInMonth(doc.id, state.calMonth, state.calYear, state.extraShifts);
     const budget = getMonthlyBudget(doc);
     const remH = Math.max(0, budget - monthH);
     return `
@@ -832,6 +1002,18 @@ function getConflicts() {
     const isUnavailable = doc ? isDoctorUnavailable(doc, dateKey) : false;
     if (keys.length > 1 || isUnavailable) conflicts.push({ docId, dateKey, slotKey, keys, isUnavailable });
   }
+  // Turni extra: stesso medico già in sede quel giorno, oppure due extra nello stesso
+  // giorno. La guardia lavora quando l'ambulatorio è chiuso: se il medico è anche in
+  // sede, è un doppio impegno da vedere.
+  const extras = state.extraShifts || [];
+  extras.forEach(x => {
+    const sameDay = Object.entries(state.assignments)
+      .filter(([k, v]) => v === x.doctorId && k.startsWith(x.dateKey + '_')).map(([k]) => k);
+    const twins = extras.filter(y => y.id !== x.id && y.doctorId === x.doctorId && y.dateKey === x.dateKey);
+    if (sameDay.length > 0 || twins.length > 0) {
+      conflicts.push({ docId: x.doctorId, dateKey: x.dateKey, slotKey: 'extra', keys: sameDay, isUnavailable: false, extra: x });
+    }
+  });
   return conflicts;
 }
 
@@ -856,7 +1038,7 @@ export function openConflictsModal() {
       const displayName = doc ? doc.name : c.docId.startsWith(EXTERNAL_PREFIX) ? c.docId.replace(EXTERNAL_PREFIX, '') : 'Medico sconosciuto';
       const color = COLOR_PALETTE[doc?.colorIndex ?? 0] || COLOR_PALETTE[0];
       const slot = SLOTS.find(s => s.key === c.slotKey);
-      const slotLabel = slot ? `${slot.icon} ${slot.label}` : c.slotKey;
+      const slotLabel = c.extra ? `🛡️ ${extraLabel(c.extra)} (turno extra)` : (slot ? `${slot.icon} ${slot.label}` : c.slotKey);
       const [year, month, day] = c.dateKey.split('-');
       const dateObj = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
       const dateFormatted = dateObj.toLocaleDateString('it-IT', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -872,6 +1054,12 @@ export function openConflictsModal() {
           </button>
         </div>`;
       }).join('');
+      const extraRow = c.extra
+        ? `<div class="flex items-center justify-between bg-amber-50 rounded-lg px-3 py-2 mb-1">
+             <span class="text-sm text-amber-800 flex items-center gap-2"><i class="fa-solid fa-shield-halved"></i>${escapeHtml(extraLabel(c.extra))}${c.extra.note ? ' · ' + escapeHtml(c.extra.note) : ''}</span>
+             <button class="conflict-remove-extra text-xs text-red-500 hover:text-red-700 font-medium px-2 py-1 rounded hover:bg-red-50" data-extra-id="${escapeHtml(c.extra.id)}"><i class="fa-solid fa-xmark mr-1"></i>Rimuovi</button>
+           </div>`
+        : '';
       return `<div class="border border-slate-200 rounded-xl overflow-hidden">
         <div class="bg-slate-50 px-4 py-3 flex items-center gap-3 border-b border-slate-200">
           <div class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></div>
@@ -881,16 +1069,22 @@ export function openConflictsModal() {
           </div>
           <div class="flex items-center gap-1">
             ${c.isUnavailable ? '<span class="bg-purple-100 text-purple-700 text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0">Assente / Ferie</span>' : ''}
-            <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full flex-shrink-0">${c.keys.length} sedi</span>
+            <span class="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded-full flex-shrink-0">${c.extra ? 'turno extra' : c.keys.length + ' sedi'}</span>
           </div>
         </div>
-        <div class="p-3 bg-white">${placesHtml}</div>
+        <div class="p-3 bg-white">${placesHtml}${extraRow}</div>
       </div>`;
     }).join('');
     // Attach conflict remove listeners
     document.querySelectorAll('.conflict-remove-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         removeAssignment(btn.dataset.key);
+        openConflictsModal();
+      });
+    });
+    document.querySelectorAll('.conflict-remove-extra').forEach(btn => {
+      btn.addEventListener('click', () => {
+        deleteExtraShift(btn.dataset.extraId);
         openConflictsModal();
       });
     });
@@ -913,6 +1107,7 @@ export function autoResolveAllConflicts() {
   if (conflicts.length === 0) return;
   pushHistory();
   for (const c of conflicts) {
+    if (c.extra) continue;      // i turni extra si eliminano a mano dal conflitto
     if (c.isUnavailable) {
       for (const k of c.keys) delete state.assignments[k];
     } else {
@@ -953,7 +1148,7 @@ export function closeInstructions() {
 // ====================================================
 
 export function exportJSON() {
-  const data = { version: 1, exportDate: new Date().toISOString(), doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays };
+  const data = { version: 1, exportDate: new Date().toISOString(), doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays, extraShifts: state.extraShifts || [] };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -971,6 +1166,7 @@ export function importJSONFromFile(e) {
       pushHistory();
       state.doctors = data.doctors; state.assignments = data.assignments;
       if (Array.isArray(data.closedDays)) state.closedDays = data.closedDays;
+      if (Array.isArray(data.extraShifts)) state.extraShifts = data.extraShifts;
       saveToStorage(); renderAll(); toast('Importazione completata!', 'success');
     } catch (err) { toast('Errore importazione: ' + err.message, 'error'); }
   };
@@ -1152,8 +1348,21 @@ export function exportExcel() {
   rows.push([]);
   rows.push(['Medico', 'Ore residue mensili']);
   state.doctors.forEach(doc => {
-    rows.push([cleanDoctorName(doc.name), Math.round(getRemainingMonthlyHours(doc, month, year, SLOTS, PLACES, state.assignments))]);
+    const used = getAssignedHoursInMonth(doc.id, month, year, SLOTS, PLACES, state.assignments)
+      + getExtraHoursInMonth(doc.id, month, year, state.extraShifts);
+    rows.push([cleanDoctorName(doc.name), Math.round(Math.max(0, getMonthlyBudget(doc) - used))]);
   });
+
+  // Turni extra (guardia/rinforzo): sezione a parte, non sono celle della griglia
+  const mExtras = getExtraShiftsInMonth(state.extraShifts, year, month);
+  if (mExtras.length > 0) {
+    rows.push([]);
+    rows.push([`Turni extra (${monthName})`, 'Tipo', 'Ore', 'Medico', 'Nota']);
+    mExtras.slice().sort((a, b) => a.dateKey.localeCompare(b.dateKey)).forEach(x => {
+      const doc = getDoctorById(state.doctors, x.doctorId);
+      rows.push([x.dateKey, x.type || 'Turno', Number(x.hours) || 0, doc ? cleanDoctorName(doc.name) : '', x.note || '']);
+    });
+  }
 
   const wb = XLSX.utils.book_new();
   const ws = XLSX.utils.aoa_to_sheet(rows);
@@ -1203,6 +1412,32 @@ export function buildPdfContent() {
     }
     html += `</tbody></table>`;
   });
+
+  const extras = getExtraShiftsInMonth(state.extraShifts, year, month);
+  if (extras.length > 0) {
+    html += `<h3 style="font-size:14px;font-weight:bold;margin:10px 0 4px;color:#1e3a5f">Guardia / turni extra</h3>`;
+    html += `<table style="width:100%;border-collapse:collapse;font-size:10px">
+      <thead><tr style="background:#1e3a5f;color:white">
+        <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Data</th>
+        <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Giorno</th>
+        <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Tipo</th>
+        <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Ore</th>
+        <th style="padding:4px 6px;border:1px solid #ccc;text-align:left">Medico</th>
+      </tr></thead><tbody>`;
+    extras.slice().sort((a, b) => a.dateKey.localeCompare(b.dateKey)).forEach(x => {
+      const doc = getDoctorById(state.doctors, x.doctorId);
+      const { bg: bgColor, textColor } = resolveShiftCell(x.doctorId);
+      const d = new Date(x.dateKey + 'T00:00:00');
+      html += `<tr>
+        <td style="padding:5px 6px;border:1px solid #ddd">${d.getDate()}/${d.getMonth() + 1}</td>
+        <td style="padding:5px 6px;border:1px solid #ddd">${DAY_SHORT[d.getDay()]}</td>
+        <td style="padding:5px 6px;border:1px solid #ddd">${escapeHtml(x.type || 'Turno')}</td>
+        <td style="padding:5px 6px;border:1px solid #ddd">${Number(x.hours) || 0}h</td>
+        <td style="padding:5px 6px;border:1px solid #ddd${bgColor ? `;background:${bgColor};color:${textColor};font-weight:600` : ''}">${escapeHtml(doc ? cleanDoctorName(doc.name) : '')}</td>
+      </tr>`;
+    });
+    html += `</tbody></table>`;
+  }
 
   table.innerHTML = html;
 }
@@ -1298,6 +1533,36 @@ export function buildPngContent() {
     }
     calHtml += `</tbody></table></div>`;
   });
+
+  const pngExtras = getExtraShiftsInMonth(state.extraShifts, year, month);
+  if (pngExtras.length > 0) {
+    calHtml += `<div style="margin-bottom:18px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="background:#c29b57;color:#fff;font-size:10px;font-weight:bold;padding:2px 10px;border-radius:4px;letter-spacing:0.5px;">GUARDIA / EXTRA</span>
+        <span style="font-size:11px;color:#64748b;">Turni fuori griglia</span>
+      </div>
+      <table style="width:100%;border-collapse:collapse;font-size:11px;">
+        <thead><tr style="background:#1e3a5f;color:white;">
+          <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:left;">Data</th>
+          <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:left;">Giorno</th>
+          <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:left;">Tipo</th>
+          <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:center;">Ore</th>
+          <th style="padding:6px 8px;border:1px solid #cbd5e1;text-align:left;">Medico</th>
+        </tr></thead><tbody>`;
+    pngExtras.slice().sort((a, b) => a.dateKey.localeCompare(b.dateKey)).forEach(x => {
+      const doc = getDoctorById(state.doctors, x.doctorId);
+      const { bg, textColor, display } = resolveShiftCell(x.doctorId);
+      const d = new Date(x.dateKey + 'T00:00:00');
+      calHtml += `<tr>
+        <td style="padding:6px 8px;border:1px solid #e2e8f0;font-weight:600;color:#334155;">${d.getDate()}/${d.getMonth() + 1}</td>
+        <td style="padding:6px 8px;border:1px solid #e2e8f0;color:#475569;">${DAY_SHORT[d.getDay()]}</td>
+        <td style="padding:6px 8px;border:1px solid #e2e8f0;color:#475569;">${escapeHtml(x.type || 'Turno')}</td>
+        <td style="padding:6px 8px;border:1px solid #e2e8f0;text-align:center;color:#475569;">${Number(x.hours) || 0}h</td>
+        <td style="padding:5px 8px;border:1px solid #e2e8f0;text-align:center;${display ? `background:${bg};color:${textColor};font-weight:600;` : ''}">${escapeHtml(display || (doc ? cleanDoctorName(doc.name) : ''))}</td>
+      </tr>`;
+    });
+    calHtml += `</tbody></table></div>`;
+  }
 
   el('png-calendar').innerHTML = calHtml;
 
@@ -1482,12 +1747,22 @@ function getMonthlyStats() {
       });
     });
   }
+  // Turni extra (guardia/rinforzo): contano nelle ore del medico e nel totale, non
+  // nelle celle da coprire (non sono celle della griglia sedi×fasce).
+  let extraHours = 0;
+  getExtraShiftsInMonth(state.extraShifts, year, month).forEach(x => {
+    const h = Number(x.hours) || 0;
+    extraHours += h;
+    if (doctorHours[x.doctorId] !== undefined) doctorHours[x.doctorId] += h;
+  });
   return {
     totalSlots,
     filledSlots,
     emptySlots: totalSlots - filledSlots,
     coverage: totalSlots > 0 ? Math.round((filledSlots / totalSlots) * 100) : 0,
     doctorHours,
+    extraCount: getExtraShiftsInMonth(state.extraShifts, year, month).length,
+    extraHours,
     totalHours: Object.values(doctorHours).reduce((a, b) => a + b, 0),
   };
 }
@@ -1528,7 +1803,10 @@ export function renderMonthlyStats() {
     label: doc.isPool ? ' (pool)' : '',
   }));
 
-  panel.innerHTML = rows.map(({ doc, stats: { budget, used, pct, barColor }, color, label }) => `
+  const extraLine = stats.extraCount
+    ? `<div class="text-[11px] text-slate-600 mb-1 pb-1 border-b border-slate-100">＋ ${stats.extraCount} turni extra (${stats.extraHours}h): guardia/rinforzo</div>`
+    : '';
+  panel.innerHTML = extraLine + rows.map(({ doc, stats: { budget, used, pct, barColor }, color, label }) => `
     <div class="flex items-center gap-2 py-1 cursor-pointer hover:bg-slate-50 rounded px-1 -mx-1 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
       <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
       <span class="flex-1 truncate text-slate-700">${escapeHtml(cleanDoctorName(doc.name))}${label}</span>

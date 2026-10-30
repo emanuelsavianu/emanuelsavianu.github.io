@@ -260,7 +260,7 @@
     #ruap-wizard #wizard-step-content { animation: wizard-pop 0.25s ease-out; }
     @media print {
       header, aside, #demo-banner, #toast-container,
-      #assign-dropdown, #doctor-modal, #conflict-modal, #conflicts-modal,
+      #assign-dropdown, #doctor-modal, #conflict-modal, #conflicts-modal, #extra-modal,
       #instructions-modal, #ruap-wizard, #autoassign-loading,
       .fixed.bottom-4.right-4 { display: none !important; }
       body { background: white !important; }
@@ -271,6 +271,12 @@
       #cal-grid .rounded-xl { border: 1px solid #e2e8f0 !important; min-height: auto !important; }
       #print-bilancio { display: block !important; page-break-before: always; }
     }
+    /* Turni extra (guardia/rinforzo): chip fuori griglia, visibili anche sui giorni chiusi */
+    .extra-chip { display:flex; align-items:center; gap:.25rem; width:100%; text-align:left;
+      border-radius:.5rem; padding:.2rem .4rem; font-size:10px; font-weight:600; color:#fff;
+      line-height:1.25; box-shadow:0 1px 2px rgba(0,0,0,.18); cursor:pointer; border:0; }
+    .extra-chip i { font-size:9px; opacity:.9; }
+    .extra-chip:hover { filter:brightness(1.12); }
     #print-bilancio { display: none; }
     #print-bilancio h2 { font-size: 18px; font-weight: bold; margin-bottom: 16px; border-bottom: 2px solid #1e293b; padding-bottom: 8px; }
     #print-bilancio .p-row { display: flex; align-items: center; padding: 5px 0; font-size: 13px; border-bottom: 1px solid #e2e8f0; }
@@ -746,13 +752,91 @@
 <!-- ===================================================
      UNDO/REDO BUTTONS (floating)
      =================================================== -->
-<div class="fixed bottom-4 right-4 flex gap-2 z-40">
+<div class="fixed bottom-4 right-4 flex items-center gap-2 z-40">
+  <button id="btn-add-extra" type="button"
+    class="bg-brand-500 hover:bg-brand-400 text-white rounded-full shadow-2xl flex items-center justify-center transition-transform hover:scale-110"
+    style="width:56px;height:56px" title="Aggiungi un turno extra (guardia, rinforzo…) in qualunque giorno"
+    aria-label="Aggiungi turno extra">
+    <i class="fa-solid fa-plus" style="font-size:22px"></i>
+  </button>
   <button id="btn-undo" class="bg-slate-700 text-white p-2.5 rounded-full shadow-lg hover:bg-slate-600 transition" title="Annulla (Ctrl+Z)">
     <i class="fas fa-undo text-sm"></i>
   </button>
   <button id="btn-redo" class="bg-slate-700 text-white p-2.5 rounded-full shadow-lg hover:bg-slate-600 transition" title="Ripristina (Ctrl+Y)">
     <i class="fas fa-redo text-sm"></i>
   </button>
+</div>
+
+<!-- ===================================================
+     MODAL TURNO EXTRA (guardia, rinforzo, reperibilità)
+     =================================================== -->
+<div id="extra-modal" class="hidden fixed inset-0 bg-black/50 z-[60] flex items-start justify-center pt-8 px-4 pb-8 overflow-y-auto">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+    <div class="bg-brand-700 text-white px-5 py-3 rounded-t-2xl flex items-center justify-between">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <i class="fa-solid fa-shield-halved"></i> Aggiungi turno extra
+      </h3>
+      <button id="extra-modal-close" class="text-white/70 hover:text-white text-2xl leading-none" aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="p-5 space-y-4">
+      <p class="text-xs text-slate-600">
+        Guardia, rinforzo, reperibilità: turni <strong>fuori griglia</strong>, in qualunque giorno
+        (anche sabato, domenica o festivo). Non vengono mai generati in automatico e non occupano
+        le celle delle sedi.
+      </p>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" for="extra-date">Data *</label>
+          <input type="date" id="extra-date"
+            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" for="extra-hours">Durata</label>
+          <select id="extra-hours"
+            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500">
+            <option value="6">6 ore</option>
+            <option value="4">4 ore</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" for="extra-type">Tipo</label>
+          <input type="text" id="extra-type" list="extra-type-list" value="Guardia"
+            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+          <datalist id="extra-type-list">
+            <option value="Guardia"></option>
+            <option value="Rinforzo"></option>
+            <option value="Reperibilità"></option>
+            <option value="Altro"></option>
+          </datalist>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1" for="extra-doctor">Medico *</label>
+          <select id="extra-doctor"
+            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"></select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-slate-700 mb-1" for="extra-note">Nota (facoltativa)</label>
+        <input type="text" id="extra-note" placeholder="Es. rinforzo CA, 2 turni spezzati, domiciliari"
+          class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+      </div>
+      <p id="extra-summary" class="text-xs text-slate-600"></p>
+      <div class="flex gap-2">
+        <button id="extra-save" class="bg-brand-500 hover:bg-brand-600 text-white px-4 py-2 rounded-lg text-sm font-semibold flex-1">
+          <i class="fa-solid fa-plus mr-1"></i> Aggiungi turno
+        </button>
+        <button id="extra-cancel" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-semibold">
+          Chiudi
+        </button>
+      </div>
+      <div>
+        <p class="text-xs font-semibold text-slate-700 mb-1">Turni extra del mese visualizzato</p>
+        <div id="extra-list" class="max-h-48 overflow-y-auto"></div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ===================================================
@@ -828,7 +912,7 @@
      MODULES — App logic (ES modules)
      =================================================== -->
 <script src="config.js?v=2026-10-30T12:51:09Z"></script>
-<script type="module" src="js/events.js?v=20261030c"></script>
+<script type="module" src="js/events.js?v=20261030e"></script>
 
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">
