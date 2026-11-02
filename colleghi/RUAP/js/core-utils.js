@@ -192,7 +192,11 @@ export function placeOpenDays(place) {
  */
 export function isClosedDay(closedDays, dateKey, place) {
   if (!Array.isArray(closedDays) || !closedDays.includes(dateKey)) return false;
-  if (place && placeOpenDays(place).includes(dateKey)) return false;
+  // L'apertura straordinaria di una sede non scavalca mai una FESTIVITÀ nazionale:
+  // il motore salta comunque i festivi (`enumerateEmptySlots`), calendario ed
+  // export devono dire la stessa cosa.
+  if (place && placeOpenDays(place).includes(dateKey)
+      && !isItalianHoliday(new Date(dateKey + 'T00:00:00'))) return false;
   return true;
 }
 

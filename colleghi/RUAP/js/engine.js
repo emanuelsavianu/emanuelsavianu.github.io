@@ -192,6 +192,7 @@ function plural(n, sing, plur) {
 
 function optimizeMonth(year, month, lockedKeys = new Set()) {
   const monthPrefix = `${year}-${String(month + 1).padStart(2, '0')}`;
+  const monthPlaces = activePlacesInMonth(PLACES, year, month);
   const byId = (id) => state.doctors.find(d => d.id === id);
   const slotHoursOf = (slot) => {
     const s = SLOTS.find(x => x.key === slot);
@@ -203,7 +204,12 @@ function optimizeMonth(year, month, lockedKeys = new Set()) {
   // fuori da ogni mossa (le celle nuove invece si possono ancora spostare per
   // pareggiare le ore).
   const keysOf = (docId) => Object.keys(state.assignments)
-    .filter(k => k.startsWith(monthPrefix) && !lockedKeys.has(k) && (!docId || state.assignments[k] === docId))
+    .filter(k => k.startsWith(monthPrefix) && !lockedKeys.has(k)
+      // chiavi di sedi silenziate in QUESTO mese (orfane da import/merge vecchi)
+      // non entrano nell'obiettivo: `hoursSnapshot` non le conta, spostarle
+      // "migliorerebbe" un totale che non le include.
+      && monthPlaces.includes(k.split('_').slice(2).join('_'))
+      && (!docId || state.assignments[k] === docId))
     .sort();
 
   let hours = hoursSnapshot(year, month);

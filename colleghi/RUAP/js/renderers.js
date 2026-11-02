@@ -191,7 +191,10 @@ function closedCellHTML(dateKey, dayNum, dayName = '') {
   <div class="flex items-center justify-center py-3 text-xs font-bold text-amber-600 uppercase tracking-widest">Chiuso · prefestivo</div>`;
 }
 
-/** Chiude/riapre un giorno. Chiudendo, i turni già assegnati vengono rimossi (previo avviso). */
+/** Chiude/riapre un giorno. Chiudendo, i turni già assegnati vengono rimossi (previo avviso),
+    TRANNE quelli delle sedi che quel giorno hanno l'apertura straordinaria
+    (`CONFIG.placeOpenDays`, es. COT 7 e 24 dicembre): chiudere il RUAP non deve
+    cancellare la COT che lavora. */
 export function toggleClosedDay(dateKey) {
   if (isClosedDay(state.closedDays, dateKey)) {
     pushHistory();
@@ -201,17 +204,22 @@ export function toggleClosedDay(dateKey) {
     toast(`${dateKey} riaperto`, 'info');
     return;
   }
+  const placeOf = (k) => k.split('_').slice(2).join('_');
   const dayKeys = Object.keys(state.assignments).filter(k => k.startsWith(dateKey + '_'));
+  const removable = dayKeys.filter(k => !placeOpenDays(placeOf(k)).includes(dateKey));
+  const kept = dayKeys.length - removable.length;
   const closeIt = () => {
     pushHistory();
     state.closedDays = [...state.closedDays, dateKey].sort();
-    dayKeys.forEach(k => delete state.assignments[k]);
+    removable.forEach(k => delete state.assignments[k]);
     saveToStorage();
     renderAll();
-    toast(`${dateKey} chiuso${dayKeys.length ? ` — ${dayKeys.length} turni rimossi` : ''}`, 'success');
+    toast(`${dateKey} chiuso${removable.length ? ` — ${removable.length} turni rimossi` : ''}`
+      + (kept ? ` (${kept} mantenuti: sede con apertura straordinaria)` : ''), 'success');
   };
-  if (dayKeys.length > 0) {
-    confirmToast(`Chiudere ${dateKey} e rimuovere ${dayKeys.length} turni già assegnati?`, closeIt);
+  if (removable.length > 0) {
+    confirmToast(`Chiudere ${dateKey} e rimuovere ${removable.length} turni già assegnati?`
+      + (kept ? ` Restano i ${kept} turni delle sedi aperte quel giorno.` : ''), closeIt);
   } else {
     closeIt();
   }
@@ -345,7 +353,13 @@ function renderCalendarWeek() {
   weekEnd.setDate(weekEnd.getDate() + 5);
   const header = el('cal-title');
   if (header) header.textContent = `${formatDateShort(weekStart)} – ${formatDateShort(weekEnd)}`;
-  renderPlaceNote(weekStart);
+  const weekDays = [];
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(weekStart);
+    d.setDate(d.getDate() + i);
+    weekDays.push(d);
+  }
+  renderPlaceNote(weekDays);
   const container = el('cal-grid');
   if (!container) return;
   container.className = 'grid gap-2';
@@ -482,22 +496,31 @@ function renderCalendarMonth() {
  * (`CONFIG.placeInactive`) e quali hanno un'apertura straordinaria nel mese.
  * Serve a spiegare perché una sede non compare e perché la COT lavora in un
  * giorno chiuso per gli altri — senza, sembrano bug.
+ * Accetta una data o un elenco di date: la vista settimana passa i 6 giorni, così
+ * una settimana a cavallo di due mesi non mostra le sedi del mese sbagliato.
  */
-function renderPlaceNote(refDate) {
+function renderPlaceNote(refDates) {
   const note = el('cal-place-note');
   if (!note) return;
-  const year = refDate.getFullYear();
-  const month = refDate.getMonth();
-  const ym = `${year}-${String(month + 1).padStart(2, '0')}`;
-  const silenced = PLACES.filter(p => !isPlaceActiveInMonth(p, year, month));
+  const dates = Array.isArray(refDates) ? refDates : [refDates];
+  const months = [];
+  dates.forEach(d => {
+    const year = d.getFullYear(), month = d.getMonth();
+    if (!months.some(m => m.year === year && m.month === month)) months.push({ year, month });
+  });
   const parts = [];
-  if (silenced.length > 0) parts.push(`Sed${silenced.length === 1 ? 'e' : 'i'} non attiv${silenced.length === 1 ? 'a' : 'e'} questo mese: ${silenced.join(', ')}`);
-  const openDays = PLACES
-    .filter(p => isPlaceActiveInMonth(p, year, month))
-    .map(p => ({ place: p, days: placeOpenDays(p).filter(d => d.startsWith(ym)) }))
-    .filter(x => x.days.length > 0)
-    .map(x => `${x.place} ${x.days.map(d => `${parseInt(d.slice(8, 10), 10)}/${month + 1}`).join(', ')}`);
-  if (openDays.length > 0) parts.push(`Aperte anche in giorni chiusi: ${openDays.join(' · ')}`);
+  months.forEach(({ year, month }) => {
+    const ym = `${year}-${String(month + 1).padStart(2, '0')}`;
+    const monthName = MONTHS_IT[month].toLowerCase();
+    const silenced = PLACES.filter(p => !isPlaceActiveInMonth(p, year, month));
+    if (silenced.length > 0) parts.push(`Non attive a ${monthName}: ${silenced.join(', ')}`);
+    const openDays = PLACES
+      .filter(p => isPlaceActiveInMonth(p, year, month))
+      .map(p => ({ place: p, days: placeOpenDays(p).filter(d => d.startsWith(ym)) }))
+      .filter(x => x.days.length > 0)
+      .map(x => `${x.place} ${x.days.map(d => `${parseInt(d.slice(8, 10), 10)}/${month + 1}`).join(', ')}`);
+    if (openDays.length > 0) parts.push(`Aperte anche in giorni chiusi: ${openDays.join(' · ')}`);
+  });
   note.textContent = parts.join(' · ');
   note.classList.toggle('hidden', parts.length === 0);
 }
@@ -1442,9 +1465,11 @@ export function buildPdfContent() {
     html += `</tr></thead><tbody>`;
 
     for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
-      // Solo i giorni in cui questa sede apre (COT lavora anche il sabato e nei
-      // giorni chiusi per gli altri ma aperti per lei: apertura per sede).
-      if (!isPlaceOpenOn(place, date, state.closedDays)) continue;
+      // Solo i giorni in cui questa sede apre PER ORARIO (COT lavora anche il sabato).
+      // Le chiusure straordinarie NON si saltano qui: il ramo sotto deve poter
+      // stampare la riga «CHIUSO (prefestivo)», altrimenti il PDF perde il
+      // prefestivo invece di mostrarlo (regressione trovata in review).
+      if (!isPlaceOpenOn(place, date)) continue;
       const closed = isClosedDay(state.closedDays, dk, place);
       html += `<tr${closed ? ' style="background:#fff7ed"' : ''}>
         <td style="padding:5px 6px;border:1px solid #ddd">${day}/${month + 1}${closed ? ' · chiuso' : ''}</td>
@@ -1560,7 +1585,10 @@ export function buildPngContent() {
     calHtml += `</tr></thead><tbody>`;
 
     for (const { day, date, dateKey: dk } of getMonthWorkdays(year, month)) {
-      if (!isPlaceOpenOn(place, date, state.closedDays)) continue;
+      // Come il PDF: si salta solo per orario della sede, non per chiusura, così la
+      // riga «CHIUSO» del prefestivo continua a esistere (e il 7/24 restano aperti
+      // per la COT grazie a `isClosedDay(..., place)`).
+      if (!isPlaceOpenOn(place, date)) continue;
       const isHoliday = isItalianHoliday(date);
       const isClosed = isClosedDay(state.closedDays, dk, place);
       const rowBg = isClosed ? 'background:#fff7ed;' : isHoliday ? 'background:#fef2f2;' : '';
@@ -1911,7 +1939,10 @@ export function pasteWeekToCurrentView() {
 
 function copyWeek(weekStart) {
   const startDate = weekStart instanceof Date ? weekStart : new Date(weekStart + 'T00:00:00');
-  copyWeekSource = { weekStart: startDate, assignments: {} };
+  // COPIA della data: `state.sidebarWeekStart`/`calendarWeekStart` vengono mutati in
+  // place dalle frecce settimana (`setDate`), e tenersi lo stesso oggetto rendeva
+  // l'offset di `pasteWeek` sempre 0 → «0 turni incollati».
+  copyWeekSource = { weekStart: new Date(startDate.getTime()), assignments: {} };
   for (let i = 0; i < 6; i++) {
     const d = new Date(startDate);
     d.setDate(d.getDate() + i);
@@ -1947,11 +1978,16 @@ function pasteWeek(weekStart) {
     const newDateObj = new Date(oldDateObj);
     newDateObj.setDate(newDateObj.getDate() + offset * 7);
     const newDateKey = toDateKey(newDateObj);
-    // Un giorno chiuso (prefestivo/ponte) non riceve turni, nemmeno incollando —
-    // salvo le sedi che quel giorno hanno l'apertura straordinaria (COT 7 e 24/12).
+    // Un giorno chiuso (prefestivo/ponte) o FESTIVO non riceve turni, nemmeno
+    // incollando — salvo le sedi che quel giorno hanno l'apertura straordinaria
+    // (COT 7 e 24/12). Le festività restano chiuse comunque.
+    if (isItalianHoliday(newDateObj)) { skipped++; continue; }
     if (isClosedDay(state.closedDays, newDateKey, place)) { skipped++; continue; }
+    // Sede silenziata nel mese di DESTINAZIONE: incollare creerebbe chiavi orfane
+    // (celle invisibili ma contate nelle ore settimanali e nei conflitti).
+    if (!isPlaceActiveInMonth(place, newDateObj.getFullYear(), newDateObj.getMonth())) { skipped++; continue; }
     // Sede chiusa in quel giorno o fascia inesistente per la sede (es. COT: solo mattina)
-    if (!isPlaceOpenOn(place, newDateObj, state.closedDays)) continue;
+    if (!isPlaceOpenOn(place, newDateObj)) continue;
     if (!slotsForPlace(place, SLOTS).some(s => s.key === slotKey)) continue;
     const newKey = `${newDateKey}_${slotKey}_${place}`;
     if (!state.assignments[newKey]) {
