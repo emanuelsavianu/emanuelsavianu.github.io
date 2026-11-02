@@ -2,15 +2,16 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261030e';
-import { isItalianHoliday } from './holidays.js?v=20261030e';
-import { MONTHS_IT } from './config.js?v=20261030e';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261102a';
+import { isItalianHoliday } from './holidays.js?v=20261102a';
+import { MONTHS_IT } from './config.js?v=20261102a';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
-  getAssignedHoursInMonth, el, toast, isClosedDay,
-  isPlaceOpenOn, slotsForPlace, getExtraHoursInMonth, hasExtraOnDate
-} from './core-utils.js?v=20261030e';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261030e';
+  getAssignedHoursInMonth, el, toast,
+  isPlaceOpenOn, slotsForPlace, getExtraHoursInMonth, hasExtraOnDate,
+  activePlacesInMonth
+} from './core-utils.js?v=20261102a';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261102a';
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -18,6 +19,8 @@ import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './ren
 
 export function enumerateEmptySlots(year, month) {
   const lastDay = new Date(year, month + 1, 0).getDate();
+  // Le sedi silenziate in questo mese non fanno parte del piano (CONFIG.placeInactive).
+  const monthPlaces = activePlacesInMonth(PLACES, year, month);
   const slots = [];
   for (let day = 1; day <= lastDay; day++) {
     const cellDate = new Date(year, month, day);
@@ -25,9 +28,10 @@ export function enumerateEmptySlots(year, month) {
     // (COT), quindi non si salta più a priori.
     if (cellDate.getDay() === 0 || isItalianHoliday(cellDate)) continue;
     const dateKey = toDateKey(cellDate);
-    // Chiusure straordinarie (prefestivi, ponti): come le festività, niente turni
-    if (isClosedDay(state.closedDays, dateKey)) continue;
-    const openPlaces = PLACES.filter(p => isPlaceOpenOn(p, cellDate));
+    // «Questa sede lavora quel giorno?»: tiene conto di orario della sede E delle
+    // chiusure straordinarie, salvo l'apertura per sede (COT il 7 e il 24 dicembre).
+    const openPlaces = monthPlaces.filter(p => isPlaceOpenOn(p, cellDate, state.closedDays));
+    if (openPlaces.length === 0) continue;
     SLOTS.forEach(slot => {
       openPlaces.forEach(place => {
         if (!slotsForPlace(place, SLOTS).some(s => s.key === slot.key)) return;
@@ -141,8 +145,9 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
 
 function hoursSnapshot(year, month) {
   const out = {};
+  const monthPlaces = activePlacesInMonth(PLACES, year, month);
   state.doctors.forEach(d => {
-    out[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments)
+    out[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, monthPlaces, state.assignments)
       + getExtraHoursInMonth(d.id, month, year, state.extraShifts);
   });
   return out;
@@ -426,8 +431,9 @@ export function runAutoAssignForMonth(year, month, opts = {}) {
   }
 
   const assignedInTarget = {};
+  const monthPlaces = activePlacesInMonth(PLACES, year, month);
   state.doctors.forEach(d => {
-    assignedInTarget[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, PLACES, state.assignments)
+    assignedInTarget[d.id] = getAssignedHoursInMonth(d.id, month, year, SLOTS, monthPlaces, state.assignments)
       + getExtraHoursInMonth(d.id, month, year, state.extraShifts);
   });
   function getEffectiveRemaining(doc) {

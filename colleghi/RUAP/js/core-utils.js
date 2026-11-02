@@ -5,9 +5,10 @@
 import {
   EXCEL_EPOCH_OFFSET, MS_PER_DAY, DAY_KEYS, DAY_NAMES,
   COLOR_PALETTE, MONTHLY_WEEKS,
-  DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS
-} from './config.js?v=20261030e';
-import { isItalianHoliday } from './holidays.js?v=20261030e';
+  DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS,
+  DEFAULT_PLACE_INACTIVE, DEFAULT_PLACE_OPEN_DAYS
+} from './config.js?v=20261102a';
+import { isItalianHoliday } from './holidays.js?v=20261102a';
 
 // --- ID & Text ---
 
@@ -153,15 +154,46 @@ export function isDoctorUnavailable(doctor, dateKey) {
   });
 }
 
-/** Chiusura straordinaria (prefestivo/ponte): vale come una festività. */
-export function isClosedDay(closedDays, dateKey) {
-  return Array.isArray(closedDays) && closedDays.includes(dateKey);
-}
-
 /** Chiave giorno (lun…sab) di una data; null per la domenica. */
 export function dayKeyOf(date) {
   const d = date.getDay();
   return d === 0 ? null : DAY_KEYS[d - 1];
+}
+
+/** Mappa delle sedi silenziate per mese (`CONFIG.placeInactive`). */
+export function placeInactiveMap() {
+  const cfg = (typeof CONFIG !== 'undefined' && CONFIG.placeInactive) ? CONFIG.placeInactive : null;
+  return cfg || DEFAULT_PLACE_INACTIVE;
+}
+
+/** La sede è attiva (non silenziata) in quel mese? */
+export function isPlaceActiveInMonth(place, year, month) {
+  const ym = `${year}-${String(month + 1).padStart(2, '0')}`;
+  const list = placeInactiveMap()[place];
+  return !(Array.isArray(list) && list.includes(ym));
+}
+
+/** Le sedi che il mese copre davvero (le silenziate restano fuori). */
+export function activePlacesInMonth(places, year, month) {
+  return (places || []).filter(p => isPlaceActiveInMonth(p, year, month));
+}
+
+/** Giorni in cui QUESTA sede lavora anche se il giorno è chiuso per gli altri. */
+export function placeOpenDays(place) {
+  const cfg = (typeof CONFIG !== 'undefined' && CONFIG.placeOpenDays) ? CONFIG.placeOpenDays[place] : null;
+  return Array.isArray(cfg) ? cfg : [];
+}
+
+/**
+ * Chiusura straordinaria (prefestivo/ponte): vale come una festività.
+ * Con `place`, la chiusura non vale per le sedi che quel giorno hanno
+ * un'apertura straordinaria (`CONFIG.placeOpenDays`): es. la COT il 7 e il 24
+ * dicembre lavora mentre ambulatori e RUAP sono chiusi.
+ */
+export function isClosedDay(closedDays, dateKey, place) {
+  if (!Array.isArray(closedDays) || !closedDays.includes(dateKey)) return false;
+  if (place && placeOpenDays(place).includes(dateKey)) return false;
+  return true;
 }
 
 /** Orario di una sede: {slots: null(=tutte le fasce), days: [...]}. */
@@ -179,11 +211,18 @@ export function slotsForPlace(place, SLOTS) {
   return slots ? SLOTS.filter(s => slots.includes(s.key)) : SLOTS;
 }
 
-/** La sede è aperta in questa data? (domenica mai) */
-export function isPlaceOpenOn(place, date) {
+/**
+ * La sede è aperta in questa data? (domenica mai)
+ * Con `closedDays` si tiene conto anche delle chiusure straordinarie, salvo
+ * l'apertura straordinaria della sede stessa: è il modo corretto di chiedere
+ * «questa sede lavora quel giorno?» nel calendario, negli export e nel motore.
+ */
+export function isPlaceOpenOn(place, date, closedDays) {
   const dk = dayKeyOf(date);
   if (!dk) return false;
-  return getPlaceSchedule(place).days.includes(dk);
+  if (!getPlaceSchedule(place).days.includes(dk)) return false;
+  if (closedDays && isClosedDay(closedDays, toDateKey(date), place)) return false;
+  return true;
 }
 
 export function isDoctorAvailableForSlot(doctor, dateKey, slotKey) {
@@ -214,7 +253,10 @@ export function getWeeklyAssignedHours(doctorId, weekStart, SLOTS, PLACES, assig
     const d = new Date(weekStart);
     d.setDate(d.getDate() + i);
     const dk = toDateKey(d);
-    hours += sumSlotHours(SLOTS, PLACES, assignments, (slot, place) =>
+    // Le sedi silenziate nel mese di QUEL giorno non contano (la settimana può
+    // scavalcare due mesi): si filtra per giorno, non una volta per settimana.
+    const dayPlaces = activePlacesInMonth(PLACES, d.getFullYear(), d.getMonth());
+    hours += sumSlotHours(SLOTS, dayPlaces, assignments, (slot, place) =>
       assignments[`${dk}_${slot.key}_${place}`] === doctorId
     );
   }
@@ -223,12 +265,15 @@ export function getWeeklyAssignedHours(doctorId, weekStart, SLOTS, PLACES, assig
 
 export function getAssignedHoursInMonth(docId, month, year, SLOTS, PLACES, assignments) {
   const lastDay = new Date(year, month + 1, 0).getDate();
+  // Chi passa l'elenco globale (PLACES) deve comunque ottenere le ore del piano
+  // REALE: le sedi silenziate in questo mese non entrano nel conteggio.
+  const activePlaces = activePlacesInMonth(PLACES, year, month);
   let hours = 0;
   for (let day = 1; day <= lastDay; day++) {
     const d = new Date(year, month, day);
     if (d.getDay() === 0) continue;
     const dk = toDateKey(d);
-    hours += sumSlotHours(SLOTS, PLACES, assignments, (slot, place) =>
+    hours += sumSlotHours(SLOTS, activePlaces, assignments, (slot, place) =>
       assignments[`${dk}_${slot.key}_${place}`] === docId
     );
   }
