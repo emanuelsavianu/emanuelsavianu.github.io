@@ -34,6 +34,21 @@ export const DEFAULT_PLACE_SCHEDULE = {
 /** Giorni di apertura di default (le sedi senza orario proprio). */
 export const DEFAULT_OPEN_DAYS = ['lun', 'mar', 'mer', 'gio', 'ven'];
 
+/* Sedi «silenziate» per singolo mese: { "<sede>": ["YYYY-MM", ...] }.
+   Una sede silenziata in un mese NON compare nel calendario, il motore non la
+   riempie e gli export non la stampano — ma resta in `places` (le sedi sono
+   globali) e i mesi non elencati continuano a coprirla. Serve al caso «la sede
+   X apre a fine mese / non è ancora operativa»: il seed silenzia, il mese dopo
+   si toglie la voce e la sede torna. Il seed può sovrascrivere questa mappa con
+   `CONFIG.placeInactive`; si legge SOLO da `isPlaceActiveInMonth`. */
+export const DEFAULT_PLACE_INACTIVE = {};
+
+/* Giorni in cui UNA sede lavora anche se il giorno è chiuso per gli altri
+   (chiusura straordinaria «per sede»): { "<sede>": ["YYYY-MM-DD", ...] }.
+   Le festività nazionali restano chiuse comunque. Il seed lo sovrascrive con
+   `CONFIG.placeOpenDays`; si legge SOLO da `isClosedDay(..., place)`. */
+export const DEFAULT_PLACE_OPEN_DAYS = {};
+
 /* Turni extra (guardia, rinforzo, reperibilità): turni FUORI griglia, inseriti a
    mano dal bottone «+» in qualunque giorno del mese — anche sabato, domenica,
    festivo o giorno chiuso. Non esistono di default: `state.extraShifts` parte
