@@ -13,6 +13,7 @@ export const STORAGE_DARK_MODE = 'ruap-dark-mode';
 export const STORAGE_HEADER_COLLAPSED = 'ruap-header-collapsed';
 export const STORAGE_FILL_ONLY = 'ruap-solo-riempimento';
 export const STORAGE_EXTRA = 'ruap-turni-extra';
+export const STORAGE_FOCUS = 'ruap-focus-medico';
 export const STORAGE_VERSION = 2;
 export const CONFIG_DATA_KEY = 'ruap-config-data-version';
 export const HISTORY_MAX = 50;

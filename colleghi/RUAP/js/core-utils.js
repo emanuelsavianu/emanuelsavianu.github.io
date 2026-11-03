@@ -7,8 +7,8 @@ import {
   COLOR_PALETTE, MONTHLY_WEEKS,
   DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS,
   DEFAULT_PLACE_INACTIVE, DEFAULT_PLACE_OPEN_DAYS
-} from './config.js?v=20261103a';
-import { isItalianHoliday } from './holidays.js?v=20261103a';
+} from './config.js?v=20261103b';
+import { isItalianHoliday } from './holidays.js?v=20261103b';
 
 // --- ID & Text ---
 

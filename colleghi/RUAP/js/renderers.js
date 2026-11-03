@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261103a';
+} from './state.js?v=20261103b';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -17,15 +17,15 @@ import {
   isPlaceOpenOn, slotsForPlace, dayKeyOf,
   activePlacesInMonth, isPlaceActiveInMonth, placeOpenDays,
   getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
-} from './core-utils.js?v=20261103a';
+} from './core-utils.js?v=20261103b';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
-} from './config.js?v=20261103a';
-import { isItalianHoliday } from './holidays.js?v=20261103a';
+} from './config.js?v=20261103b';
+import { isItalianHoliday } from './holidays.js?v=20261103b';
 
 // ====================================================
 // 7. RENDERING
@@ -99,6 +99,8 @@ function createSlotButton(dateKey, place, slot, inMonth) {
   const slotKey = `${dateKey}_${slot.key}_${place}`;
   const assignedId = state.assignments[slotKey];
   const { display: displayName, bg: colorHex } = resolveShiftCell(assignedId);
+  const focus = state.focusDoctorId;
+  const dimmed = !!(focus && displayName && assignedId !== focus);
 
   const slotBtn = document.createElement('button');
   let variantClass;
@@ -107,6 +109,16 @@ function createSlotButton(dateKey, place, slot, inMonth) {
   else variantClass = 'border-transparent bg-transparent cursor-default';
   slotBtn.className = `slot-btn w-full text-left rounded-lg px-2 py-1.5 mb-1 text-xs font-medium border transition-all ${variantClass}`;
   if (colorHex && displayName) slotBtn.style.backgroundColor = colorHex;
+  // Evidenziazione del singolo medico: il suo turno resta pieno e con un bordo
+  // oro, quelli degli altri si spengono (grigio + trasparenti). Inline: le utility
+  // `grayscale`/`opacity-*` non sono garantite nel bundle Tailwind statico.
+  if (focus && assignedId === focus) {
+    slotBtn.style.outline = '2px solid #C29B57';
+    slotBtn.style.outlineOffset = '1px';
+  } else if (dimmed) {
+    slotBtn.style.opacity = '0.28';
+    slotBtn.style.filter = 'grayscale(1)';
+  }
 
   slotBtn.innerHTML = displayName
     ? `<div class="truncate font-semibold text-xs">${escapeHtml(displayName)}</div><div class="text-xs opacity-80">${slot.icon} ${slot.label}</div>`
@@ -133,13 +145,18 @@ function createSlotButton(dateKey, place, slot, inMonth) {
 function extraChipsForDate(dateKey) {
   const list = (state.extraShifts || []).filter(x => x.dateKey === dateKey);
   if (list.length === 0) return '';
+  const focus = state.focusDoctorId;
   return list.map(x => {
     const doc = getDoctorById(state.doctors, x.doctorId);
     const name = doc ? cleanDoctorName(doc.name) : '—';
     const color = doc ? getDoctorColor(doc).hex : '#334155';
     const label = extraLabel(x);
+    // stesso criterio delle celle: con un medico in evidenza gli altri si spengono
+    const mark = !focus ? ''
+      : x.doctorId === focus ? ';outline:2px solid #C29B57;outline-offset:1px'
+        : ';opacity:.28;filter:grayscale(1)';
     return `<button type="button" class="extra-chip" data-extra-id="${escapeHtml(x.id)}"
-      style="background:${color}"
+      style="background:${color}${mark}"
       title="${escapeHtml(label)} · ${escapeHtml(name)}${x.note ? ' · ' + escapeHtml(x.note) : ''} — clic per eliminare"
       aria-label="${escapeHtml(label)} ${escapeHtml(name)}, clic per eliminare">
       <i class="fa-solid fa-shield-halved"></i> ${escapeHtml(x.type || 'Turno')} ${Number(x.hours) || 0}h · ${escapeHtml(name)}
@@ -556,11 +573,21 @@ export function renderSidebar() {
       + getExtraHoursInMonth(doc.id, state.calMonth, state.calYear, state.extraShifts);
     const budget = getMonthlyBudget(doc);
     const remH = Math.max(0, budget - monthH);
+    const focused = state.focusDoctorId === doc.id;
     return `
-      <div class="doctor-card bg-white rounded-xl shadow-sm border border-slate-200 p-3 cursor-pointer hover:shadow-md transition-shadow" onclick="window.openDoctorModal('${doc.id}')" title="Click per modificare">
+      <div class="doctor-card bg-white rounded-xl shadow-sm p-3 cursor-pointer hover:shadow-md transition-shadow ${focused ? '' : 'border border-slate-200'}"
+           style="${focused ? 'border:2px solid #C29B57' : ''}"
+           onclick="window.openDoctorModal('${doc.id}')" title="Click per modificare">
         <div class="flex items-center gap-2 mb-1.5">
           <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
           <span class="font-semibold text-sm text-slate-800 truncate">${escapeHtml(cleanDoctorName(doc.name))}</span>
+          <button type="button" data-focus-doctor="${doc.id}"
+                  aria-pressed="${focused ? 'true' : 'false'}"
+                  title="${focused ? 'Togli l’evidenziazione' : `Evidenzia i turni di ${escapeHtml(cleanDoctorName(doc.name))}`}"
+                  class="ml-1 px-1.5 py-0.5 rounded"
+                  style="color:${focused ? '#C29B57' : '#94a3b8'};background:${focused ? '#F3EFE6' : 'transparent'};line-height:1">
+            <i class="fa-solid fa-eye"></i>
+          </button>
           <span class="text-xs text-slate-600 ml-auto">${remH}h residue</span>
         </div>
         <div class="flex items-center gap-1">
@@ -572,6 +599,18 @@ export function renderSidebar() {
       </div>`;
   }).join('');
   updateConflictsHeaderBadge();
+}
+
+export function toggleFocusDoctor(id) {
+  const doc = getDoctorById(state.doctors, id);
+  state.focusDoctorId = (state.focusDoctorId === id) ? null : (doc ? id : null);
+  saveToStorage();
+  renderAll();
+  if (state.focusDoctorId && doc) {
+    toast(`Turni di ${cleanDoctorName(doc.name)} in evidenza — clic sull'occhio per togliere`, 'info', 4000);
+  } else {
+    toast('Evidenziazione tolta', 'info');
+  }
 }
 
 export function renderAll() {
@@ -1158,14 +1197,22 @@ function getConflicts() {
 }
 
 export function openConflictsModal() {
-  const conflicts = getConflicts();
+  const all = getConflicts();
+  const prefix = `${state.calYear}-${String(state.calMonth + 1).padStart(2, '0')}`;
+  // Il mese a schermo è quello su cui si sta lavorando: i conflitti degli altri
+  // mesi (es. settembre, storico) non devono tenere acceso il badge per sempre —
+  // è esattamente ciò che faceva sembrare «non risolta» la risoluzione.
+  const inMonth = all.filter(c => String(c.dateKey).startsWith(prefix));
+  const others = all.filter(c => !String(c.dateKey).startsWith(prefix));
   const modal = el('conflicts-modal');
   const list = el('conflicts-list');
   const badge = el('conflicts-count-badge');
   const autoBtn = el('btn-auto-resolve-all');
-  badge.textContent = conflicts.length;
-  autoBtn.disabled = conflicts.length === 0;
-  if (conflicts.length === 0) {
+  badge.textContent = inMonth.length;
+  autoBtn.disabled = all.length === 0;
+  autoBtn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles mr-1"></i> Risolvi tutti automaticamente`
+    + (others.length ? ` (${all.length})` : '');
+  if (all.length === 0) {
     list.innerHTML = `
       <div class="flex flex-col items-center justify-center py-12 text-slate-600">
         <i class="fa-solid fa-check-circle text-5xl mb-3 text-green-400"></i>
@@ -1173,7 +1220,7 @@ export function openConflictsModal() {
         <p class="text-sm">Tutti i turni sono assegnati correttamente.</p>
       </div>`;
   } else {
-    list.innerHTML = conflicts.map((c) => {
+    const card = (c) => {
       const doc = getDoctorById(state.doctors, c.docId);
       const displayName = doc ? doc.name : c.docId.startsWith(EXTERNAL_PREFIX) ? c.docId.replace(EXTERNAL_PREFIX, '') : 'Medico sconosciuto';
       const color = COLOR_PALETTE[doc?.colorIndex ?? 0] || COLOR_PALETTE[0];
@@ -1214,7 +1261,17 @@ export function openConflictsModal() {
         </div>
         <div class="p-3 bg-white">${placesHtml}${extraRow}</div>
       </div>`;
-    }).join('');
+    };
+    const section = (label, items) => items.length
+      ? `<p class="text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">${label}</p>` + items.map(card).join('')
+      : '';
+    list.innerHTML = `<p class="text-xs font-bold uppercase tracking-wide text-slate-500 mb-2">${MONTHS_IT[state.calMonth]} ${state.calYear} · ${inMonth.length}</p>`
+      + (inMonth.length
+        ? inMonth.map(card).join('')
+        : '<p class="text-sm text-slate-500 mb-2">Nessun conflitto in questo mese.</p>')
+      + (others.length
+        ? `<div class="mt-2 pt-3 border-t border-slate-200">${section(`Altri mesi · ${others.length}`, others)}</div>`
+        : '');
     // Attach conflict remove listeners
     document.querySelectorAll('.conflict-remove-btn').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -1245,6 +1302,9 @@ export function closeConflictsModal() {
 export function autoResolveAllConflicts() {
   const conflicts = getConflicts();
   if (conflicts.length === 0) return;
+  const prefix = `${state.calYear}-${String(state.calMonth + 1).padStart(2, '0')}`;
+  const inMonth = conflicts.filter(c => String(c.dateKey).startsWith(prefix)).length;
+  const others = conflicts.length - inMonth;
   pushHistory();
   for (const c of conflicts) {
     if (c.extra) continue;      // i turni extra si eliminano a mano dal conflitto
@@ -1258,18 +1318,29 @@ export function autoResolveAllConflicts() {
   saveToStorage();
   renderAll();
   openConflictsModal();
-  toast(`Risolti ${conflicts.length} conflitti automaticamente`, 'success');
+  toast(`Risolti ${conflicts.length} conflitti`
+    + (others ? ` (${inMonth} in ${MONTHS_IT[state.calMonth]}, ${others} in altri mesi)` : ''), 'success');
 }
 
 export function updateConflictsHeaderBadge() {
   const conflicts = getConflicts();
+  const prefix = `${state.calYear}-${String(state.calMonth + 1).padStart(2, '0')}`;
+  // Il badge conta il MESE A SCHERMO. Contando tutti i mesi, due conflitti storici
+  // (settembre) tenevano il numero acceso per sempre e la risoluzione sembrava non
+  // funzionare. Gli altri mesi restano visibili dentro la modale e nel tooltip.
+  const inMonth = conflicts.filter(c => String(c.dateKey).startsWith(prefix)).length;
+  const others = conflicts.length - inMonth;
   const badge = el('conflicts-header-badge');
-  if (conflicts.length > 0) {
-    badge.textContent = conflicts.length;
+  if (!badge) return;
+  if (inMonth > 0) {
+    badge.textContent = inMonth;
     badge.classList.remove('hidden');
   } else {
     badge.classList.add('hidden');
   }
+  badge.title = others > 0 ? `${others} conflitti in altri mesi (apri per vederli)` : '';
+  const btn = el('btn-conflicts');
+  if (btn) btn.title = others > 0 ? `Conflitti: ${others} in altri mesi` : 'Conflitti';
 }
 
 function doctorsPoolLast() {
