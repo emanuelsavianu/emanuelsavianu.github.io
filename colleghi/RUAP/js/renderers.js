@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261102a';
+} from './state.js?v=20261103a';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -17,15 +17,15 @@ import {
   isPlaceOpenOn, slotsForPlace, dayKeyOf,
   activePlacesInMonth, isPlaceActiveInMonth, placeOpenDays,
   getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
-} from './core-utils.js?v=20261102a';
+} from './core-utils.js?v=20261103a';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
-} from './config.js?v=20261102a';
-import { isItalianHoliday } from './holidays.js?v=20261102a';
+} from './config.js?v=20261103a';
+import { isItalianHoliday } from './holidays.js?v=20261103a';
 
 // ====================================================
 // 7. RENDERING
@@ -725,12 +725,25 @@ export function renderUnavailCalendar() {
   const lastDay = new Date(year, month + 1, 0);
   const startDate = getWeekStart(firstDay);
 
+  // Calendario delle indisponibilità: 6 colonne finché il sabato è lavorativo
+  // (la COT apre lun-sab, 2026-10-30). `grid-cols-6` non è nel bundle statico.
+  const head = document.createElement('div');
+  head.className = 'grid gap-1 mb-1';
+  head.style.gridTemplateColumns = 'repeat(6, minmax(0, 1fr))';
+  ['L', 'M', 'M', 'G', 'V', 'S'].forEach(name => {
+    const h = document.createElement('div');
+    h.className = 'text-center text-[9px] font-bold text-slate-400 uppercase';
+    h.textContent = name;
+    head.appendChild(h);
+  });
+
   const grid = document.createElement('div');
-  grid.className = 'grid grid-cols-5 gap-1';
+  grid.className = 'grid gap-1';
+  grid.style.gridTemplateColumns = 'repeat(6, minmax(0, 1fr))';
 
   const weekStart = new Date(startDate);
   while (weekStart <= lastDay) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 6; i++) {
       const cellDate = new Date(weekStart);
       cellDate.setDate(cellDate.getDate() + i);
       if (cellDate > lastDay) break;
@@ -758,6 +771,7 @@ export function renderUnavailCalendar() {
     weekStart.setDate(weekStart.getDate() + 7);
   }
   container.innerHTML = '';
+  container.appendChild(head);
   container.appendChild(grid);
 }
 
@@ -970,14 +984,71 @@ export function deleteDoctor(id) {
   });
 }
 
+/** Toast con N scelte esplicite (per le azioni distruttive: niente scorciatoie nascoste). */
+function chooseToast(message, choices) {
+  const toastEl = document.createElement('div');
+  toastEl.className = 'toast-item pointer-events-auto flex items-center gap-3 bg-white border border-slate-200 rounded-xl shadow-lg px-4 py-3 text-sm';
+  toastEl.innerHTML = `<span>${message}</span>`;
+  choices.forEach((c, i) => {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = `px-3 py-1 rounded-lg text-xs font-bold ${c.className || 'bg-slate-200 text-slate-700 hover:bg-slate-300'}`;
+    btn.textContent = c.label;
+    btn.dataset.choice = String(i);
+    btn.addEventListener('click', () => {
+      toastEl.remove();
+      if (c.onClick) c.onClick();
+    });
+    toastEl.appendChild(btn);
+  });
+  el('toast-container').appendChild(toastEl);
+}
+
+/**
+ * Svuota le assegnazioni: SOLO il mese a schermo (default, richiesta della
+ * referente) oppure tutti i mesi, con la scelta scritta a chiare lettere.
+ * Prima esisteva solo «tutte»: chi voleva ripartire col mese in corso si
+ * portava via anche i mesi precedenti, utili per consultazione.
+ * I turni extra (guardia/rinforzo) NON vengono toccati: sono un elenco a parte.
+ */
 export function resetAssignments() {
-  confirmToast('Eliminare <strong>tutte le assegnazioni</strong>?', () => {
+  const monthName = MONTHS_IT[state.calMonth];
+  const prefix = `${state.calYear}-${String(state.calMonth + 1).padStart(2, '0')}`;
+  const all = Object.keys(state.assignments);
+  const inMonth = all.filter(k => k.startsWith(prefix));
+  const others = all.length - inMonth.length;
+  if (all.length === 0) {
+    toast('Nessuna assegnazione da svuotare', 'info');
+    return;
+  }
+  const clearKeys = (keys) => {
     pushHistory();
-    state.assignments = {};
+    keys.forEach(k => delete state.assignments[k]);
     saveToStorage();
     renderAll();
-    toast('Tutte le assegnazioni cancellate', 'success');
-  });
+  };
+  chooseToast(
+    `Assegnazioni: <strong>${inMonth.length}</strong> in ${monthName} ${state.calYear}, <strong>${others}</strong> negli altri mesi.`,
+    [
+      {
+        label: `Svuota solo ${monthName}`,
+        className: 'bg-red-500 text-white hover:bg-red-600',
+        onClick: () => {
+          clearKeys(inMonth);
+          toast(`${monthName}: ${inMonth.length} turni rimossi (altri mesi intatti)`, 'success');
+        },
+      },
+      {
+        label: 'Svuota tutti i mesi',
+        className: 'bg-slate-700 text-white hover:bg-slate-800',
+        onClick: () => {
+          clearKeys(all);
+          toast('Tutte le assegnazioni cancellate', 'success');
+        },
+      },
+      { label: 'Annulla', onClick: null },
+    ]
+  );
 }
 
 export function addUnavailPeriodRow(from = '', to = '') {
