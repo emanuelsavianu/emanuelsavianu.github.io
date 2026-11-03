@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261103a';
+} from './state.js?v=20261103b';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261103a';
+} from './core-utils.js?v=20261103b';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -34,10 +34,11 @@ import {
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday,
-  openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary
-} from './renderers.js?v=20261103a';
+  openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary,
+  toggleFocusDoctor
+} from './renderers.js?v=20261103b';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261103a';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261103b';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -45,7 +46,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261103a';
+} from './config.js?v=20261103b';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -353,6 +354,17 @@ window.toggleClosedDay = toggleClosedDay;
 // Esposti anche per le verifiche automatiche (nessun effetto sull'uso normale).
 window.buildPdfContent = buildPdfContent;
 window.buildPngContent = buildPngContent;
+
+// --- Evidenziazione del medico -------------------------------------------
+// Il bottone «occhio» sta DENTRO la card che apre la modale del medico: il click
+// va intercettato in fase di cattura e fermato, altrimenti si apre anche il modal.
+document.addEventListener('click', (e) => {
+  const btn = e.target && e.target.closest ? e.target.closest('[data-focus-doctor]') : null;
+  if (!btn) return;
+  e.preventDefault();
+  e.stopPropagation();
+  toggleFocusDoctor(btn.dataset.focusDoctor);
+}, true);
 
 // ====================================================
 // Update banner — shown when config.js data changes

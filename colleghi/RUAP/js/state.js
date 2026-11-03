@@ -5,10 +5,11 @@
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED, STORAGE_EXTRA,
+  STORAGE_FOCUS,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
-} from './config.js?v=20261103a';
-import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261103a';
+} from './config.js?v=20261103b';
+import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261103b';
 
 // --- Global mutable references (module-scoped) ---
 export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;
@@ -23,6 +24,9 @@ export let state = {
   closedDays: [],
   // Turni extra (guardia/rinforzo): fuori griglia, inseriti a mano, mai generati.
   extraShifts: [],
+  // Medico «in evidenza»: i suoi turni restano pieni, gli altri si spengono.
+  // È una preferenza di vista per singolo browser (localStorage), non un dato del seed.
+  focusDoctorId: null,
   calYear: new Date().getFullYear(),
   calMonth: new Date().getMonth(),
   sidebarWeekStart: getWeekStart(new Date()),
@@ -49,6 +53,7 @@ export function saveToStorage() {
     localStorage.setItem(STORAGE_SLOTS, JSON.stringify(state.slots));
     localStorage.setItem(STORAGE_CLOSED, JSON.stringify(state.closedDays));
     localStorage.setItem(STORAGE_EXTRA, JSON.stringify(state.extraShifts || []));
+    localStorage.setItem(STORAGE_FOCUS, state.focusDoctorId || '');
   } catch (e) {
     toast('Errore salvataggio: ' + e.message, 'error');
     console.error(e);
@@ -69,6 +74,8 @@ export function loadFromStorage() {
     if (slts) state.slots = JSON.parse(slts);
     if (clos) state.closedDays = JSON.parse(clos);
     if (extra) state.extraShifts = JSON.parse(extra) || [];
+    const focus = localStorage.getItem(STORAGE_FOCUS);
+    if (focus) state.focusDoctorId = focus;
   } catch (e) { console.error(e); }
 }
 
