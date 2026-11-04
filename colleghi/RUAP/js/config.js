@@ -24,7 +24,7 @@ export const HISTORY_MAX = 50;
 export const DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
 export const DAY_KEYS  = ['lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
 
-export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'Arezzo', 'COT'];
+export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'Arezzo', 'COT', 'Baldaccio', 'Guadagnoli'];
 
 /* Orario per sede. Una sede senza voce qui è aperta lun-ven in tutte le fasce.
    COT (Centrale Operativa Territoriale) è aperta lun-sab con il solo turno
@@ -46,6 +46,16 @@ export const DEFAULT_OPEN_DAYS = ['lun', 'mar', 'mer', 'gio', 'ven'];
    si toglie la voce e la sede torna. Il seed può sovrascrivere questa mappa con
    `CONFIG.placeInactive`; si legge SOLO da `isPlaceActiveInMonth`. */
 export const DEFAULT_PLACE_INACTIVE = {};
+
+/* Finestra di attività di una sede: { "<sede>": "YYYY-MM" }.
+   `placeActiveFrom[place]`  = primo mese in cui la sede è pianificabile
+   `placeActiveUntil[place]` = ultimo mese in cui lo è (dal mese dopo è silenziata).
+   Servono a NON cancellare una sede dal roster quando la geografia dei servizi
+   cambia (apre la CdC X, chiude l'ambulatorio Y): le sedi sono globali e i turni
+   dei mesi passati devono restare leggibili. `placeInactive` resta per i buchi
+   puntuali. Si leggono SOLO da `isPlaceActiveInMonth`. */
+export const DEFAULT_PLACE_ACTIVE_FROM = {};
+export const DEFAULT_PLACE_ACTIVE_UNTIL = {};
 
 /* Giorni in cui UNA sede lavora anche se il giorno è chiuso per gli altri
    (chiusura straordinaria «per sede»): { "<sede>": ["YYYY-MM-DD", ...] }.

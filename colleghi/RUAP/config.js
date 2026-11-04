@@ -1,12 +1,14 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-04T20:48:37Z",
+  "configDataVersion": "2026-11-04T21:15:10Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
     "Arezzo",
-    "COT"
+    "COT",
+    "Baldaccio",
+    "Guadagnoli"
   ],
   "slots": [
     {
@@ -1133,10 +1135,17 @@ const CONFIG = {
       ]
     }
   },
-  "placeInactive": {
-    "Arezzo": [
-      "2026-12"
-    ]
+  "placeInactive": {},
+  // Finestra di attività delle sedi (vedi js/config.js): Arezzo resta nel roster
+  // per i mesi storici (ago-nov) ma da dicembre 2026 non si pianifica più; le due
+  // CdC di Arezzo entrano da gennaio 2027. Le sedi NON si cancellano da `places`:
+  // cancellarle orfanerebbe i turni già pubblicati.
+  "placeActiveUntil": {
+    "Arezzo": "2026-11"
+  },
+  "placeActiveFrom": {
+    "Baldaccio": "2027-01",
+    "Guadagnoli": "2027-01"
   },
   "placeOpenDays": {
     "COT": [

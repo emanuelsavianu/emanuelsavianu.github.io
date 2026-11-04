@@ -9,8 +9,8 @@ import {
   STORAGE_FOCUS,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
-} from './config.js?v=20261104b';
-import { el, toast, toDateKey, getWeekStart, setPlaceOpenDaysMap } from './core-utils.js?v=20261104b';
+} from './config.js?v=20261104c';
+import { el, toast, toDateKey, getWeekStart, setPlaceOpenDaysMap } from './core-utils.js?v=20261104c';
 
 // --- Global mutable references (module-scoped) ---
 export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;

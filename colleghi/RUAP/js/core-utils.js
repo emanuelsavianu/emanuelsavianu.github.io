@@ -6,9 +6,10 @@ import {
   EXCEL_EPOCH_OFFSET, MS_PER_DAY, DAY_KEYS, DAY_NAMES,
   COLOR_PALETTE, MONTHLY_WEEKS,
   DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS,
-  DEFAULT_PLACE_INACTIVE, DEFAULT_PLACE_OPEN_DAYS
-} from './config.js?v=20261104b';
-import { isItalianHoliday } from './holidays.js?v=20261104b';
+  DEFAULT_PLACE_INACTIVE, DEFAULT_PLACE_OPEN_DAYS,
+  DEFAULT_PLACE_ACTIVE_FROM, DEFAULT_PLACE_ACTIVE_UNTIL
+} from './config.js?v=20261104c';
+import { isItalianHoliday } from './holidays.js?v=20261104c';
 
 // --- ID & Text ---
 
@@ -167,10 +168,33 @@ export function placeInactiveMap() {
 }
 
 /** La sede è attiva (non silenziata) in quel mese? */
+export function placeActiveFromMap() {
+  const cfg = (typeof CONFIG !== 'undefined' && CONFIG.placeActiveFrom) ? CONFIG.placeActiveFrom : null;
+  return cfg || DEFAULT_PLACE_ACTIVE_FROM;
+}
+
+export function placeActiveUntilMap() {
+  const cfg = (typeof CONFIG !== 'undefined' && CONFIG.placeActiveUntil) ? CONFIG.placeActiveUntil : null;
+  return cfg || DEFAULT_PLACE_ACTIVE_UNTIL;
+}
+
+/**
+ * La sede è pianificabile in quel mese? Tre criteri, in quest'ordine:
+ * (a) `placeInactive` la elenca per quel mese (buco puntuale);
+ * (b) `placeActiveFrom` la fa partire più avanti (ym < from → non attiva);
+ * (c) `placeActiveUntil` la chiude dopo (ym > until → non attiva).
+ * `ym` è "YYYY-MM": il confronto è lessicografico, quindi funziona.
+ * Una sede mai elencata da nessuna delle tre mappe è attiva da sempre.
+ */
 export function isPlaceActiveInMonth(place, year, month) {
   const ym = `${year}-${String(month + 1).padStart(2, '0')}`;
   const list = placeInactiveMap()[place];
-  return !(Array.isArray(list) && list.includes(ym));
+  if (Array.isArray(list) && list.includes(ym)) return false;
+  const from = placeActiveFromMap()[place];
+  if (from && ym < String(from)) return false;
+  const until = placeActiveUntilMap()[place];
+  if (until && ym > String(until)) return false;
+  return true;
 }
 
 /** Le sedi che il mese copre davvero (le silenziate restano fuori). */
