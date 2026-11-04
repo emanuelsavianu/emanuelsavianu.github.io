@@ -24,7 +24,7 @@ export const HISTORY_MAX = 50;
 export const DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato'];
 export const DAY_KEYS  = ['lun', 'mar', 'mer', 'gio', 'ven', 'sab'];
 
-export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'Arezzo', 'COT', 'Baldaccio', 'Guadagnoli'];
+export const DEFAULT_PLACES = ['M.S.Savino', 'Subbiano', 'COT', 'Baldaccio', 'Guadagnoli'];
 
 /* Orario per sede. Una sede senza voce qui è aperta lun-ven in tutte le fasce.
    COT (Centrale Operativa Territoriale) è aperta lun-sab con il solo turno
