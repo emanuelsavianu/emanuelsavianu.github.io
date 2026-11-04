@@ -289,16 +289,18 @@
     .extra-chip i { font-size:9px; opacity:.9; }
     .extra-chip:hover { filter:brightness(1.12); }
     /* Bilancio mensile: riga del medico in evidenza + occhiolino (stesso criterio
-       del calendario, colori brand navy/gold/cream). */
+       del calendario, colori brand navy/gold/cream). L'occhiolino sta fuori dal
+       flusso finché non servi (display:none): così non ruba 18px al nome del medico
+       — misurato: con l'icona sempre in riga «Cerofolini» e «Zuppardo» perdevano 7px
+       e finivano con i puntini di sospensione. */
     .bilancio-row { transition: opacity .15s ease; }
     .bilancio-row.is-dim { opacity: .45; }
     .bilancio-row.is-dim .bilancio-dot { filter: grayscale(1); }
-    .bilancio-eye { opacity: 0; color: #94a3b8; line-height: 1; padding: 0 2px; flex-shrink: 0;
-      background: transparent; border: 0; cursor: pointer; transition: opacity .15s ease; }
-    .bilancio-row:hover .bilancio-eye { opacity: 1; }
-    .bilancio-eye[aria-pressed="true"] { opacity: 1; color: #C29B57; }
-    .bilancio-eye:hover { color: #C29B57; }
-    @media (hover: none) { .bilancio-eye { opacity: .55; } .bilancio-eye[aria-pressed="true"] { opacity: 1; } }
+    .bilancio-eye { display: none; color: #94a3b8; line-height: 1; padding: 0; margin-left: -5px;
+      font-size: 11px; flex-shrink: 0; background: transparent; border: 0; cursor: pointer; }
+    .bilancio-row:hover .bilancio-eye, .bilancio-eye[aria-pressed="true"] { display: inline-block; }
+    .bilancio-row:hover .bilancio-eye, .bilancio-eye:hover, .bilancio-eye[aria-pressed="true"] { color: #C29B57; }
+    @media (hover: none) { .bilancio-eye { display: inline-block; } }
     #print-bilancio { display: none; }
     #print-bilancio h2 { font-size: 18px; font-weight: bold; margin-bottom: 16px; border-bottom: 2px solid #1e293b; padding-bottom: 8px; }
     #print-bilancio .p-row { display: flex; align-items: center; padding: 5px 0; font-size: 13px; border-bottom: 1px solid #e2e8f0; }
