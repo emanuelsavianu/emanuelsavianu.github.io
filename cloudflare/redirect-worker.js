@@ -14,8 +14,8 @@ const REDIRECTS = {
   '/cert-malattia.html': '/ssn/cert-malattia.html',
   '/visite-private.html': '/privati/',
   '/colleghi.html': '/colleghi/',
-  '/malattia.html': '/colleghi/malattia.html',
-  '/guida_interattiva_mmg.html': '/colleghi/guida-interattiva-mmg.html',
+  '/malattia.html': '/ssn/cert-malattia.html',
+  '/guida_interattiva_mmg.html': '/colleghi/',
   // Pagine rimosse dal sito (scudo del medico, calcolatori ferie): 301 sulla
   // sezione Colleghi invece del 404 (preserva eventuali link in entrata).
   '/lo_scudo_del_medico.html': '/colleghi/',

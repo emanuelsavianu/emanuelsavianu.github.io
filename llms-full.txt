@@ -81,7 +81,6 @@
 - [Esenzione ticket](/ssn/esenzioni.html): guida a reddito, patologie croniche, invalidità, documenti e rinnovo.
 - [Impegnative e CUP](/ssn/impegnative.html): come richiedere le impegnative e prenotare visite ed esami.
 - [Certificato di malattia](/ssn/cert-malattia.html): quando serve, invio telematico all'INPS e regole del medico curante.
-- [Diritti del paziente — malattia](/ssn/malattia.html): chi deve rilasciare il certificato di malattia.
 - [Certificato di invalidità INPS](/privati/): procedura telematica dal 1° marzo 2026, accompagnamento e Legge 104.
 - [Certificato di invalidità civile](/privati/certificato-invalidita-civile.html): documenti e nuova procedura (D.Lgs. 62/2024).
 - [FAQ riforma invalidità 2026](/privati/faq-riforma.html): nuovo certificato telematico, domanda INPS, indennità e Legge 104.
