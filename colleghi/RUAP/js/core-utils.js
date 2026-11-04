@@ -7,8 +7,8 @@ import {
   COLOR_PALETTE, MONTHLY_WEEKS,
   DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS,
   DEFAULT_PLACE_INACTIVE, DEFAULT_PLACE_OPEN_DAYS
-} from './config.js?v=20261103b';
-import { isItalianHoliday } from './holidays.js?v=20261103b';
+} from './config.js?v=20261104a';
+import { isItalianHoliday } from './holidays.js?v=20261104a';
 
 // --- ID & Text ---
 
@@ -178,10 +178,29 @@ export function activePlacesInMonth(places, year, month) {
   return (places || []).filter(p => isPlaceActiveInMonth(p, year, month));
 }
 
+/* Aperture per sede nei giorni chiusi: mappa effettiva in uso. Il seed
+   (`CONFIG.placeOpenDays`) è il punto di partenza, ma la mappa è modificabile
+   dall'app — una sede alla volta, sui giorni chiusi — e ogni browser la salva in
+   localStorage. `state.js` la inietta qui con `setPlaceOpenDaysMap()` perché
+   questa funzione è chiamata anche da helper puri e dal motore, che non possono
+   leggere `state` (dipendenza circolare). */
+let placeOpenDaysMap = null;
+
+export function setPlaceOpenDaysMap(map) {
+  placeOpenDaysMap = (map && typeof map === 'object' && !Array.isArray(map)) ? map : null;
+}
+
+/** Mappa delle aperture per sede attualmente in uso (override → seed → default). */
+export function placeOpenDaysMapSnapshot() {
+  if (placeOpenDaysMap) return placeOpenDaysMap;
+  if (typeof CONFIG !== 'undefined' && CONFIG.placeOpenDays) return CONFIG.placeOpenDays;
+  return DEFAULT_PLACE_OPEN_DAYS;
+}
+
 /** Giorni in cui QUESTA sede lavora anche se il giorno è chiuso per gli altri. */
 export function placeOpenDays(place) {
-  const cfg = (typeof CONFIG !== 'undefined' && CONFIG.placeOpenDays) ? CONFIG.placeOpenDays[place] : null;
-  return Array.isArray(cfg) ? cfg : [];
+  const days = placeOpenDaysMapSnapshot()[place];
+  return Array.isArray(days) ? days : [];
 }
 
 /**

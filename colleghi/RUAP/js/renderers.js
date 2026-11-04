@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261103b';
+} from './state.js?v=20261104a';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -14,18 +14,18 @@ import {
   el, toast, getDoctorById, isDoctorAvailableForSlot,
   isDoctorUnavailable, getWeeklyAssignedHours, getAssignedHoursInMonth,
   getRemainingMonthlyHours, matchDoctorBySurname, isClosedDay,
-  isPlaceOpenOn, slotsForPlace, dayKeyOf,
+  isPlaceOpenOn, slotsForPlace, dayKeyOf, getPlaceSchedule,
   activePlacesInMonth, isPlaceActiveInMonth, placeOpenDays,
   getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
-} from './core-utils.js?v=20261103b';
+} from './core-utils.js?v=20261104a';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
-} from './config.js?v=20261103b';
-import { isItalianHoliday } from './holidays.js?v=20261103b';
+} from './config.js?v=20261104a';
+import { isItalianHoliday } from './holidays.js?v=20261104a';
 
 // ====================================================
 // 7. RENDERING
@@ -199,13 +199,89 @@ function closedToggleHTML(dateKey, isClosed) {
 }
 
 /** Cella di un giorno di chiusura straordinaria (come una festività, ma riapribile). */
-function closedCellHTML(dateKey, dayNum, dayName = '') {
+function closedCellHTML(dateKey, dayNum, dayName = '', candidates = []) {
   const label = dayName ? `${dayName} ${dayNum}` : `${dayNum}`;
+  // Il lucchetto riapre TUTTO il giorno (tutte le sedi). Quando serve una sola
+  // sede — la COT il 31/12 — si usa questa riga di bottoni: un'apertura per sede.
+  const controls = candidates.length ? `<div class="mt-1 text-center">
+      <div class="text-[9px] font-semibold text-amber-700 uppercase tracking-wide mb-0.5">Apri una sede</div>
+      <div class="flex flex-wrap gap-1.5 justify-center">${candidates.map(place =>
+        `<button type="button" class="place-open-btn" data-open-place="${escapeHtml(place)}" data-open-date="${dateKey}"
+           title="Apri solo ${escapeHtml(place)} il ${dateKey}: le altre sedi restano chiuse">+ ${escapeHtml(place)}</button>`
+      ).join('')}</div>
+    </div>` : '';
   return `<div class="flex items-center justify-between mb-1">
     <span class="text-xs font-bold text-slate-600">${label}</span>
     ${closedToggleHTML(dateKey, true)}
   </div>
-  <div class="flex items-center justify-center py-3 text-xs font-bold text-amber-600 uppercase tracking-widest">Chiuso · prefestivo</div>`;
+  <div class="flex items-center justify-center py-2 text-xs font-bold text-amber-600 uppercase tracking-widest">Chiuso · prefestivo</div>
+  ${controls}`;
+}
+
+/** Sedi che quel giorno potrebbero lavorare (orario della sede) ma non sono
+    aperte: sono le scelte offerte sui giorni chiusi («+ COT», «+ Subbiano»…). */
+function closedDayOpenCandidates(date, monthPlaces) {
+  const dk = dayKeyOf(date);
+  if (!dk) return [];
+  const dateKey = toDateKey(date);
+  return monthPlaces.filter(place =>
+    getPlaceSchedule(place).days.includes(dk) && !placeOpenDays(place).includes(dateKey));
+}
+
+/** Chip «<sede> aperta ✕» sulle sedi aperte per eccezione in un giorno chiuso. */
+function extraOpenChipsHTML(dateKey, openPlaces) {
+  return openPlaces
+    .filter(place => placeOpenDays(place).includes(dateKey))
+    .map(place => `<button type="button" class="place-open-chip" data-close-place="${escapeHtml(place)}" data-close-date="${dateKey}"
+        title="Rimetti chiusa ${escapeHtml(place)} il ${dateKey} (rimuove i turni di quella sede in quel giorno)">${escapeHtml(place)} <span aria-hidden="true">✕</span></button>`)
+    .join('');
+}
+
+/**
+ * Apre UNA sede in un giorno chiuso per gli altri (es. COT il 31/12): il giorno
+ * resta «chiuso · altre sedi chiuse», la sede mostra le sue fasce e si può
+ * assegnare il turno dal menù della cella. Apre una sede alla volta, è annullabile
+ * con Ctrl+Z e resta nel browser (localStorage) finché non si accetta «Aggiorna».
+ */
+export function openPlaceOnClosedDay(place, dateKey) {
+  if (!place || !dateKey) return;
+  if (!Array.isArray(state.closedDays) || !state.closedDays.includes(dateKey)) {
+    toast(`${dateKey} non è un giorno chiuso: usa il lucchetto per chiuderlo`, 'info');
+    return;
+  }
+  const cur = Array.isArray(state.placeOpenDays[place]) ? state.placeOpenDays[place] : [];
+  if (cur.includes(dateKey)) return;
+  pushHistory();
+  state.placeOpenDays = { ...state.placeOpenDays, [place]: [...cur, dateKey].sort() };
+  saveToStorage();
+  renderAll();
+  renderMonthlyStats();
+  toast(`${place} aperta il ${dateKey}: le altre sedi restano chiuse`, 'success');
+}
+
+/** Richiude una sede aperta per eccezione in un giorno chiuso, rimuovendo i suoi turni. */
+export function closePlaceOnClosedDay(place, dateKey) {
+  const cur = Array.isArray(state.placeOpenDays[place]) ? state.placeOpenDays[place] : [];
+  if (!cur.includes(dateKey)) return;
+  const keys = Object.keys(state.assignments).filter(k =>
+    k.startsWith(dateKey + '_') && k.split('_').slice(2).join('_') === place);
+  const doIt = () => {
+    pushHistory();
+    const next = cur.filter(d => d !== dateKey);
+    const map = { ...state.placeOpenDays };
+    if (next.length > 0) map[place] = next; else delete map[place];
+    state.placeOpenDays = map;
+    keys.forEach(k => delete state.assignments[k]);
+    saveToStorage();
+    renderAll();
+    renderMonthlyStats();
+    toast(`${place} richiusa il ${dateKey}${keys.length ? ` — ${keys.length} turni rimossi` : ''}`, 'info');
+  };
+  if (keys.length > 0) {
+    confirmToast(`Richiudere ${place} il ${dateKey} e rimuovere ${keys.length} turni già assegnati?`, doIt);
+  } else {
+    doIt();
+  }
 }
 
 /** Chiude/riapre un giorno. Chiudendo, i turni già assegnati vengono rimossi (previo avviso),
@@ -391,7 +467,8 @@ function renderCalendarWeek() {
     const cell = document.createElement('div');
     const dayName = DAY_NAMES[i];
     const dayNum = d.getDate();
-    const openPlaces = activePlacesInMonth(PLACES, d.getFullYear(), d.getMonth())
+    const cellPlaces = activePlacesInMonth(PLACES, d.getFullYear(), d.getMonth());
+    const openPlaces = cellPlaces
       .filter(p => isPlaceOpenOn(p, d, state.closedDays));
     // Chiuso «per tutti»: se una sede ha l'apertura straordinaria, il giorno resta
     // lavorativo per quella sede (es. COT il 7 e il 24 dicembre).
@@ -399,7 +476,7 @@ function renderCalendarWeek() {
     cell.className = `rounded-xl p-2 border ${isClosed ? 'closed-cell border-slate-100' : isHoliday ? 'holiday-cell border-slate-100' : 'bg-white shadow-sm border-slate-200'} ${isToday ? 'ring-2 ring-brand-400' : ''}`;
 
     if (isClosed) {
-      cell.innerHTML = closedCellHTML(dateKey, dayNum, dayName);
+      cell.innerHTML = closedCellHTML(dateKey, dayNum, dayName, closedDayOpenCandidates(d, cellPlaces));
       appendExtraChips(cell, dateKey);
     } else if (isHoliday) {
       cell.innerHTML = holidayCellHTML(dayNum, dayName);
@@ -409,6 +486,12 @@ function renderCalendarWeek() {
         <span>${dayName} ${dayNum}${isClosedDay(state.closedDays, dateKey) ? ' · altre sedi chiuse' : ''}</span>
         ${closedToggleHTML(dateKey, isClosedDay(state.closedDays, dateKey))}
       </div>`;
+      if (isClosedDay(state.closedDays, dateKey) && extraOpenChipsHTML(dateKey, openPlaces)) {
+        const chips = document.createElement('div');
+        chips.className = 'flex flex-wrap gap-1 mb-1';
+        chips.innerHTML = extraOpenChipsHTML(dateKey, openPlaces);
+        cell.appendChild(chips);
+      }
       if (openPlaces.length === 0) {
         const empty = document.createElement('div');
         empty.className = 'text-[10px] text-slate-400 uppercase tracking-widest text-center py-3';
@@ -470,7 +553,7 @@ function renderCalendarMonth() {
       cell.className = `rounded-xl p-2 border ${isClosed ? 'closed-cell border-slate-100' : isHoliday && inMonth ? 'holiday-cell border-slate-100' : inMonth ? 'bg-white shadow-sm border-slate-100' : 'bg-transparent border-transparent'} ${isToday && inMonth ? 'ring-2 ring-brand-400' : ''}`;
 
       if (isClosed) {
-        cell.innerHTML = closedCellHTML(dateKey, cellDate.getDate());
+        cell.innerHTML = closedCellHTML(dateKey, cellDate.getDate(), '', closedDayOpenCandidates(cellDate, monthPlaces));
         appendExtraChips(cell, dateKey);
       } else if (isHoliday && inMonth) {
         cell.innerHTML = holidayCellHTML(cellDate.getDate());
@@ -485,6 +568,12 @@ function renderCalendarMonth() {
           note.className = 'text-[9px] font-bold text-amber-600 uppercase tracking-wide mb-1';
           note.textContent = `${openPlaces.map(p => escapeHtml(p)).join(' + ')} aperta · altre sedi chiuse`;
           cell.appendChild(note);
+        }
+        if (extraOpenChipsHTML(dateKey, openPlaces)) {
+          const chips = document.createElement('div');
+          chips.className = 'flex flex-wrap gap-1 mb-1';
+          chips.innerHTML = extraOpenChipsHTML(dateKey, openPlaces);
+          cell.appendChild(chips);
         }
         openPlaces.forEach(place => {
           const placeSection = document.createElement('div');
@@ -533,7 +622,7 @@ function renderPlaceNote(refDates) {
     if (silenced.length > 0) parts.push(`Non attive a ${monthName}: ${silenced.join(', ')}`);
     const openDays = PLACES
       .filter(p => isPlaceActiveInMonth(p, year, month))
-      .map(p => ({ place: p, days: placeOpenDays(p).filter(d => d.startsWith(ym)) }))
+      .map(p => ({ place: p, days: placeOpenDays(p).filter(d => d.startsWith(ym) && state.closedDays.includes(d)) }))
       .filter(x => x.days.length > 0)
       .map(x => `${x.place} ${x.days.map(d => `${parseInt(d.slice(8, 10), 10)}/${month + 1}`).join(', ')}`);
     if (openDays.length > 0) parts.push(`Aperte anche in giorni chiusi: ${openDays.join(' · ')}`);
@@ -1359,7 +1448,7 @@ export function closeInstructions() {
 // ====================================================
 
 export function exportJSON() {
-  const data = { version: 1, exportDate: new Date().toISOString(), doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays, extraShifts: state.extraShifts || [] };
+  const data = { version: 1, exportDate: new Date().toISOString(), doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays, placeOpenDays: state.placeOpenDays || {}, extraShifts: state.extraShifts || [] };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1377,6 +1466,9 @@ export function importJSONFromFile(e) {
       pushHistory();
       state.doctors = data.doctors; state.assignments = data.assignments;
       if (Array.isArray(data.closedDays)) state.closedDays = data.closedDays;
+      if (data.placeOpenDays && typeof data.placeOpenDays === 'object' && !Array.isArray(data.placeOpenDays)) {
+        state.placeOpenDays = data.placeOpenDays;
+      }
       if (Array.isArray(data.extraShifts)) state.extraShifts = data.extraShifts;
       saveToStorage(); renderAll(); toast('Importazione completata!', 'success');
     } catch (err) { toast('Errore importazione: ' + err.message, 'error'); }
