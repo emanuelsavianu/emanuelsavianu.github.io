@@ -75,13 +75,13 @@ const SECURITY_HEADERS = {
 
 const LEGACY_REDIRECTS = {
   '/faq.html': '/ssn/faq.html',
-  '/malattia.html': '/ssn/malattia.html',
+  '/malattia.html': '/ssn/cert-malattia.html',
   '/esenzioni.html': '/ssn/esenzioni.html',
   '/impegnative.html': '/ssn/impegnative.html',
   '/cert-malattia.html': '/ssn/cert-malattia.html',
   '/visite-private.html': '/privati/',
   '/colleghi.html': '/colleghi/',
-  '/guida_interattiva_mmg.html': '/colleghi/guida-interattiva-mmg.html',
+  '/guida_interattiva_mmg.html': '/colleghi/',
   // Pagine rimosse dal sito: 301 sulla sezione Colleghi invece del 404.
   '/lo_scudo_del_medico.html': '/colleghi/',
   '/calcolatore-ferie.html': '/colleghi/',
