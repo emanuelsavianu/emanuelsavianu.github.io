@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-04T11:46:11Z",
+  "configDataVersion": "2026-11-04T16:23:58Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
@@ -30,7 +30,7 @@ const CONFIG = {
       "weeklyHours": 38,
       "isPool": false,
       "colorIndex": 0,
-      "preferredPlace": "Arezzo",
+      "preferredPlace": "M.S.Savino",
       "availability": {
         "lun": {
           "mat": true,
@@ -53,20 +53,10 @@ const CONFIG = {
           "pom": false
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
-      "unavailPeriods": [
-        {
-          "from": "2026-07-10",
-          "to": "2026-07-10"
-        },
-        {
-          "from": "2026-07-27",
-          "to": "2026-07-31"
-        }
-      ],
+      "unavailPeriods": [],
       "monthlyBudget": 152,
       "aft": ""
     },
@@ -77,7 +67,7 @@ const CONFIG = {
       "weeklyHours": 38,
       "isPool": false,
       "colorIndex": 1,
-      "preferredPlace": "Arezzo",
+      "preferredPlace": "Subbiano",
       "availability": {
         "lun": {
           "mat": true,
@@ -93,26 +83,17 @@ const CONFIG = {
         },
         "gio": {
           "mat": false,
-          "pom": true
+          "pom": false
         },
         "ven": {
           "mat": true,
           "pom": false
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-08-01",
-          "to": "2026-08-31"
-        },
-        {
-          "from": "2026-09-01",
-          "to": "2026-09-30"
-        },
         {
           "from": "2026-11-05",
           "to": "2026-11-05"
@@ -136,6 +117,18 @@ const CONFIG = {
         {
           "from": "2026-11-26",
           "to": "2026-11-26"
+        },
+        {
+          "from": "2026-12-03",
+          "to": "2026-12-03"
+        },
+        {
+          "from": "2026-12-10",
+          "to": "2026-12-10"
+        },
+        {
+          "from": "2026-12-17",
+          "to": "2026-12-17"
         }
       ],
       "monthlyBudget": 152,
@@ -148,7 +141,7 @@ const CONFIG = {
       "weeklyHours": 38,
       "isPool": false,
       "colorIndex": 2,
-      "preferredPlace": "Arezzo",
+      "preferredPlace": "M.S.Savino",
       "availability": {
         "lun": {
           "mat": true,
@@ -167,39 +160,14 @@ const CONFIG = {
           "pom": true
         },
         "ven": {
-          "mat": false,
-          "pom": true
-        },
-        "sab": {
           "mat": true,
           "pom": false
+        },
+        "sab": {
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-07-01",
-          "to": "2026-07-03"
-        },
-        {
-          "from": "2026-07-21",
-          "to": "2026-07-21"
-        },
-        {
-          "from": "2026-09-03",
-          "to": "2026-09-03"
-        },
-        {
-          "from": "2026-09-04",
-          "to": "2026-09-04"
-        },
-        {
-          "from": "2026-09-18",
-          "to": "2026-09-18"
-        },
-        {
-          "from": "2026-11-03",
-          "to": "2026-11-03"
-        },
         {
           "from": "2026-11-10",
           "to": "2026-11-10"
@@ -211,6 +179,10 @@ const CONFIG = {
         {
           "from": "2026-11-24",
           "to": "2026-11-24"
+        },
+        {
+          "from": "2026-12-03",
+          "to": "2026-12-03"
         }
       ],
       "monthlyBudget": 152,
@@ -219,11 +191,11 @@ const CONFIG = {
     {
       "id": "mqgp5xpemfnc0",
       "name": "Dott. Gavetta",
-      "patients": 648,
+      "patients": 730,
       "weeklyHours": 24,
       "isPool": false,
       "colorIndex": 3,
-      "preferredPlace": "Arezzo",
+      "preferredPlace": null,
       "availability": {
         "lun": {
           "mat": false,
@@ -246,55 +218,10 @@ const CONFIG = {
           "pom": true
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-07-21",
-          "to": "2026-07-21"
-        },
-        {
-          "from": "2026-09-01",
-          "to": "2026-09-01"
-        },
-        {
-          "from": "2026-09-08",
-          "to": "2026-09-08"
-        },
-        {
-          "from": "2026-09-14",
-          "to": "2026-09-14"
-        },
-        {
-          "from": "2026-09-15",
-          "to": "2026-09-15"
-        },
-        {
-          "from": "2026-09-16",
-          "to": "2026-09-16"
-        },
-        {
-          "from": "2026-09-17",
-          "to": "2026-09-17"
-        },
-        {
-          "from": "2026-09-18",
-          "to": "2026-09-18"
-        },
-        {
-          "from": "2026-09-22",
-          "to": "2026-09-22"
-        },
-        {
-          "from": "2026-09-29",
-          "to": "2026-09-29"
-        },
-        {
-          "from": "2026-11-03",
-          "to": "2026-11-03"
-        },
         {
           "from": "2026-11-05",
           "to": "2026-11-05"
@@ -322,6 +249,34 @@ const CONFIG = {
         {
           "from": "2026-11-26",
           "to": "2026-11-26"
+        },
+        {
+          "from": "2026-12-01",
+          "to": "2026-12-01"
+        },
+        {
+          "from": "2026-12-03",
+          "to": "2026-12-03"
+        },
+        {
+          "from": "2026-12-10",
+          "to": "2026-12-10"
+        },
+        {
+          "from": "2026-12-15",
+          "to": "2026-12-15"
+        },
+        {
+          "from": "2026-12-17",
+          "to": "2026-12-17"
+        },
+        {
+          "from": "2026-12-22",
+          "to": "2026-12-22"
+        },
+        {
+          "from": "2026-12-29",
+          "to": "2026-12-29"
         }
       ],
       "monthlyBudget": 96,
@@ -330,7 +285,7 @@ const CONFIG = {
     {
       "id": "mqgp5xpehbrke",
       "name": "Dott. Sodo",
-      "patients": 1220,
+      "patients": 1322,
       "weeklyHours": 6,
       "isPool": false,
       "colorIndex": 4,
@@ -357,35 +312,10 @@ const CONFIG = {
           "pom": false
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-09-01",
-          "to": "2026-09-01"
-        },
-        {
-          "from": "2026-09-02",
-          "to": "2026-09-02"
-        },
-        {
-          "from": "2026-09-03",
-          "to": "2026-09-03"
-        },
-        {
-          "from": "2026-09-04",
-          "to": "2026-09-04"
-        },
-        {
-          "from": "2026-09-07",
-          "to": "2026-09-07"
-        },
-        {
-          "from": "2026-09-08",
-          "to": "2026-09-08"
-        },
         {
           "from": "2026-11-19",
           "to": "2026-11-19"
@@ -397,19 +327,35 @@ const CONFIG = {
         {
           "from": "2026-11-26",
           "to": "2026-11-26"
+        },
+        {
+          "from": "2026-12-04",
+          "to": "2026-12-04"
+        },
+        {
+          "from": "2026-12-05",
+          "to": "2026-12-05"
+        },
+        {
+          "from": "2026-12-07",
+          "to": "2026-12-07"
+        },
+        {
+          "from": "2026-12-08",
+          "to": "2026-12-08"
         }
       ],
-      "monthlyBudget": 48,
-      "aft": ""
+      "aft": "",
+      "monthlyBudget": 48
     },
     {
       "id": "mqgp5xpe8eeqy",
       "name": "Dott. Bensi",
-      "patients": 1126,
+      "patients": 1246,
       "weeklyHours": 12,
       "isPool": false,
       "colorIndex": 5,
-      "preferredPlace": "Arezzo",
+      "preferredPlace": "Subbiano",
       "availability": {
         "lun": {
           "mat": false,
@@ -424,51 +370,18 @@ const CONFIG = {
           "pom": true
         },
         "gio": {
+          "mat": true,
+          "pom": false
+        },
+        "ven": {
           "mat": false,
           "pom": true
         },
-        "ven": {
-          "mat": true,
-          "pom": false
-        },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-08-13",
-          "to": "2026-08-13"
-        },
-        {
-          "from": "2026-09-07",
-          "to": "2026-09-07"
-        },
-        {
-          "from": "2026-09-08",
-          "to": "2026-09-08"
-        },
-        {
-          "from": "2026-09-09",
-          "to": "2026-09-09"
-        },
-        {
-          "from": "2026-09-10",
-          "to": "2026-09-10"
-        },
-        {
-          "from": "2026-09-11",
-          "to": "2026-09-11"
-        },
-        {
-          "from": "2026-11-02",
-          "to": "2026-11-02"
-        },
-        {
-          "from": "2026-11-03",
-          "to": "2026-11-03"
-        },
         {
           "from": "2026-11-04",
           "to": "2026-11-04"
@@ -482,13 +395,13 @@ const CONFIG = {
           "to": "2026-11-06"
         }
       ],
-      "monthlyBudget": 45,
-      "aft": ""
+      "aft": "",
+      "monthlyBudget": 45
     },
     {
       "id": "mqgp5xpe3wotk",
       "name": "Dott. Gabrielli",
-      "patients": 52,
+      "patients": 171,
       "weeklyHours": 38,
       "isPool": false,
       "colorIndex": 6,
@@ -515,23 +428,10 @@ const CONFIG = {
           "pom": true
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-08-06",
-          "to": "2026-08-06"
-        },
-        {
-          "from": "2026-08-14",
-          "to": "2026-08-14"
-        },
-        {
-          "from": "2026-09-14",
-          "to": "2026-09-25"
-        },
         {
           "from": "2026-11-09",
           "to": "2026-11-09"
@@ -547,6 +447,30 @@ const CONFIG = {
         {
           "from": "2026-11-27",
           "to": "2026-11-27"
+        },
+        {
+          "from": "2026-12-07",
+          "to": "2026-12-07"
+        },
+        {
+          "from": "2026-12-08",
+          "to": "2026-12-08"
+        },
+        {
+          "from": "2026-12-09",
+          "to": "2026-12-09"
+        },
+        {
+          "from": "2026-12-10",
+          "to": "2026-12-10"
+        },
+        {
+          "from": "2026-12-11",
+          "to": "2026-12-11"
+        },
+        {
+          "from": "2026-12-12",
+          "to": "2026-12-12"
         }
       ],
       "monthlyBudget": 152,
@@ -582,38 +506,25 @@ const CONFIG = {
           "pom": true
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
         {
-          "from": "2026-07-17",
-          "to": "2026-07-17"
-        },
-        {
-          "from": "2026-07-24",
-          "to": "2026-07-24"
-        },
-        {
-          "from": "2026-09-11",
-          "to": "2026-09-11"
-        },
-        {
-          "from": "2026-09-28",
-          "to": "2026-09-28"
-        },
-        {
-          "from": "2026-09-29",
-          "to": "2026-09-29"
-        },
-        {
-          "from": "2026-09-30",
-          "to": "2026-09-30"
-        },
-        {
           "from": "2026-11-20",
           "to": "2026-11-20"
+        },
+        {
+          "from": "2026-12-03",
+          "to": "2026-12-03"
+        },
+        {
+          "from": "2026-12-05",
+          "to": "2026-12-05"
+        },
+        {
+          "from": "2026-12-07",
+          "to": "2026-12-07"
         }
       ],
       "monthlyBudget": 152,
@@ -649,8 +560,7 @@ const CONFIG = {
           "pom": false
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [],
@@ -687,51 +597,10 @@ const CONFIG = {
           "pom": true
         },
         "sab": {
-          "mat": true,
-          "pom": false
+          "mat": true
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-08-03",
-          "to": "2026-08-03"
-        },
-        {
-          "from": "2026-08-17",
-          "to": "2026-08-17"
-        },
-        {
-          "from": "2026-08-21",
-          "to": "2026-08-21"
-        },
-        {
-          "from": "2026-08-28",
-          "to": "2026-08-28"
-        },
-        {
-          "from": "2026-09-03",
-          "to": "2026-09-03"
-        },
-        {
-          "from": "2026-09-04",
-          "to": "2026-09-04"
-        },
-        {
-          "from": "2026-09-07",
-          "to": "2026-09-07"
-        },
-        {
-          "from": "2026-09-11",
-          "to": "2026-09-11"
-        },
-        {
-          "from": "2026-09-18",
-          "to": "2026-09-18"
-        },
-        {
-          "from": "2026-09-21",
-          "to": "2026-09-21"
-        },
         {
           "from": "2026-11-06",
           "to": "2026-11-06"
@@ -747,6 +616,26 @@ const CONFIG = {
         {
           "from": "2026-11-20",
           "to": "2026-11-20"
+        },
+        {
+          "from": "2026-12-04",
+          "to": "2026-12-04"
+        },
+        {
+          "from": "2026-12-11",
+          "to": "2026-12-11"
+        },
+        {
+          "from": "2026-12-14",
+          "to": "2026-12-14"
+        },
+        {
+          "from": "2026-12-18",
+          "to": "2026-12-18"
+        },
+        {
+          "from": "2026-12-24",
+          "to": "2026-12-24"
         }
       ],
       "monthlyBudget": 152,
@@ -759,7 +648,7 @@ const CONFIG = {
       "weeklyHours": 38,
       "isPool": false,
       "colorIndex": 15,
-      "preferredPlace": "Arezzo",
+      "preferredPlace": null,
       "availability": {
         "lun": {
           "mat": false,
@@ -780,30 +669,9 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
-        },
-        "sab": {
-          "mat": true,
-          "pom": false
         }
       },
-      "unavailPeriods": [
-        {
-          "from": "2026-09-02",
-          "to": "2026-09-02"
-        },
-        {
-          "from": "2026-09-24",
-          "to": "2026-09-24"
-        },
-        {
-          "from": "2026-09-25",
-          "to": "2026-09-25"
-        },
-        {
-          "from": "2026-09-28",
-          "to": "2026-09-28"
-        }
-      ],
+      "unavailPeriods": [],
       "aft": ""
     }
   ],
@@ -1134,10 +1002,10 @@ const CONFIG = {
     "2026-11-24_pom_Subbiano": "mqgp5xpec24f6",
     "2026-11-25_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-11-25_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-11-25_pom_M.S.Savino": "mqgp5xpeohiai",
-    "2026-11-25_pom_Subbiano": "mqgp5xpekiw12",
+    "2026-11-25_pom_M.S.Savino": "mqgp5xpekiw12",
+    "2026-11-25_pom_Subbiano": "mrasudwdk87n",
     "2026-11-26_mat_M.S.Savino": "mqgp5xpe3wotk",
-    "2026-11-26_mat_Subbiano": "mrasudwdk87n",
+    "2026-11-26_mat_Subbiano": "mqgp5xpeohiai",
     "2026-11-26_pom_M.S.Savino": "mqgp5xpe79zho",
     "2026-11-26_pom_Subbiano": "mqgp5xpec24f6",
     "2026-11-27_mat_M.S.Savino": "mqgp5xpec24f6",
@@ -1148,102 +1016,102 @@ const CONFIG = {
     "2026-11-30_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-11-30_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-11-30_pom_Subbiano": "mrasudwdk87n",
-    "2026-12-01_mat_COT": "mqgp5xpehbrke",
+    "2026-12-01_mat_COT": "mrasudwdk87n",
     "2026-12-01_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-01_mat_Subbiano": "mqgp5xpe8eeqy",
-    "2026-12-01_pom_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-01_pom_M.S.Savino": "mqgp5xpe79zho",
     "2026-12-01_pom_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-02_mat_COT": "mqgp5xpec24f6",
-    "2026-12-02_mat_M.S.Savino": "mqgp5xpev7h1m",
-    "2026-12-02_mat_Subbiano": "mqgp5xpe79zho",
-    "2026-12-02_pom_M.S.Savino": "mqgp5xpekiw12",
-    "2026-12-02_pom_Subbiano": "mrasudwdk87n",
-    "2026-12-03_mat_COT": "mqgp5xpe3wotk",
-    "2026-12-03_mat_M.S.Savino": "mqgp5xpemfnc0",
+    "2026-12-02_mat_COT": "mqgp5xpe79zho",
+    "2026-12-02_mat_M.S.Savino": "mqgp5xpec24f6",
+    "2026-12-02_mat_Subbiano": "mqgp5xpev7h1m",
+    "2026-12-02_pom_M.S.Savino": "mqgp5xpeohiai",
+    "2026-12-02_pom_Subbiano": "mqgp5xpekiw12",
+    "2026-12-03_mat_COT": "mrasudwdk87n",
+    "2026-12-03_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-03_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-03_pom_M.S.Savino": "mqgp5xpe79zho",
-    "2026-12-03_pom_Subbiano": "mqgp5xpev7h1m",
-    "2026-12-04_mat_COT": "mqgp5xpe8eeqy",
-    "2026-12-04_mat_M.S.Savino": "mqgp5xpec24f6",
-    "2026-12-04_mat_Subbiano": "mqgp5xpehbrke",
-    "2026-12-04_pom_M.S.Savino": "mqgp5xpe79zho",
-    "2026-12-04_pom_Subbiano": "mqgp5xpemfnc0",
-    "2026-12-05_mat_COT": "mrasudwdk87n",
-    "2026-12-07_mat_COT": "mqgp5xpekiw12",
+    "2026-12-03_pom_M.S.Savino": "mqgp5xpec24f6",
+    "2026-12-03_pom_Subbiano": "mqgp5xpehbrke",
+    "2026-12-04_mat_COT": "mqgp5xpec24f6",
+    "2026-12-04_mat_M.S.Savino": "mqgp5xpe79zho",
+    "2026-12-04_mat_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-04_pom_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-04_pom_Subbiano": "mqgp5xpeohiai",
+    "2026-12-05_mat_COT": "mqgp5xpe79zho",
+    "2026-12-07_mat_COT": "mrasudwdk87n",
     "2026-12-09_mat_COT": "mqgp5xpev7h1m",
-    "2026-12-09_mat_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-09_mat_M.S.Savino": "mqgp5xpe79zho",
     "2026-12-09_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-09_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-09_pom_Subbiano": "mqgp5xpeohiai",
-    "2026-12-10_mat_COT": "mqgp5xpe6gb6b",
-    "2026-12-10_mat_M.S.Savino": "mrasudwdk87n",
-    "2026-12-10_mat_Subbiano": "mqgp5xpemfnc0",
-    "2026-12-10_pom_M.S.Savino": "mqgp5xpe8eeqy",
-    "2026-12-10_pom_Subbiano": "mqgp5xpec24f6",
-    "2026-12-11_mat_COT": "mqgp5xpec24f6",
-    "2026-12-11_mat_M.S.Savino": "mqgp5xpehbrke",
+    "2026-12-10_mat_COT": "mrasudwdk87n",
+    "2026-12-10_mat_M.S.Savino": "mqgp5xpeohiai",
+    "2026-12-10_mat_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-10_pom_M.S.Savino": "mqgp5xpec24f6",
+    "2026-12-10_pom_Subbiano": "mqgp5xpe79zho",
+    "2026-12-11_mat_COT": "mqgp5xpe79zho",
+    "2026-12-11_mat_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-11_mat_Subbiano": "mqgp5xpev7h1m",
-    "2026-12-11_pom_M.S.Savino": "mqgp5xpe79zho",
-    "2026-12-11_pom_Subbiano": "mqgp5xpe3wotk",
-    "2026-12-12_mat_COT": "mqgp5xpeohiai",
-    "2026-12-14_mat_COT": "mqgp5xpe6gb6b",
-    "2026-12-14_mat_M.S.Savino": "mqgp5xpekiw12",
+    "2026-12-11_pom_M.S.Savino": "mqgp5xpeohiai",
+    "2026-12-11_pom_Subbiano": "mrasudwdk87n",
+    "2026-12-12_mat_COT": "mqgp5xpec24f6",
+    "2026-12-14_mat_COT": "mqgp5xpev7h1m",
+    "2026-12-14_mat_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-14_mat_Subbiano": "mqgp5xpe79zho",
-    "2026-12-14_pom_M.S.Savino": "mrasudwdk87n",
-    "2026-12-14_pom_Subbiano": "mqgp5xpe8eeqy",
-    "2026-12-15_mat_COT": "mqgp5xpeohiai",
-    "2026-12-15_mat_M.S.Savino": "mqgp5xpemfnc0",
+    "2026-12-14_pom_M.S.Savino": "mqgp5xpemfnc0",
+    "2026-12-14_pom_Subbiano": "mrasudwdk87n",
+    "2026-12-15_mat_COT": "mrasudwdk87n",
+    "2026-12-15_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-15_mat_Subbiano": "mqgp5xpehbrke",
     "2026-12-15_pom_M.S.Savino": "mqgp5xpe3wotk",
-    "2026-12-15_pom_Subbiano": "mqgp5xpec24f6",
-    "2026-12-16_mat_COT": "mqgp5xpe6gb6b",
-    "2026-12-16_mat_M.S.Savino": "mqgp5xpev7h1m",
-    "2026-12-16_mat_Subbiano": "mqgp5xpe79zho",
+    "2026-12-15_pom_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-16_mat_COT": "mqgp5xpe79zho",
+    "2026-12-16_mat_M.S.Savino": "mqgp5xpec24f6",
+    "2026-12-16_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-16_pom_M.S.Savino": "mqgp5xpekiw12",
-    "2026-12-16_pom_Subbiano": "mrasudwdk87n",
-    "2026-12-17_mat_COT": "mqgp5xpeohiai",
-    "2026-12-17_mat_M.S.Savino": "mqgp5xpemfnc0",
-    "2026-12-17_mat_Subbiano": "mqgp5xpe3wotk",
-    "2026-12-17_pom_M.S.Savino": "mqgp5xpe8eeqy",
-    "2026-12-17_pom_Subbiano": "mqgp5xpehbrke",
-    "2026-12-18_mat_COT": "mqgp5xpe8eeqy",
-    "2026-12-18_mat_M.S.Savino": "mqgp5xpec24f6",
-    "2026-12-18_mat_Subbiano": "mqgp5xpev7h1m",
-    "2026-12-18_pom_M.S.Savino": "mrasudwdk87n",
+    "2026-12-16_pom_Subbiano": "mqgp5xpeohiai",
+    "2026-12-17_mat_COT": "mrasudwdk87n",
+    "2026-12-17_mat_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-17_mat_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-17_pom_M.S.Savino": "mqgp5xpe79zho",
+    "2026-12-17_pom_Subbiano": "mqgp5xpec24f6",
+    "2026-12-18_mat_COT": "mqgp5xpev7h1m",
+    "2026-12-18_mat_M.S.Savino": "mqgp5xpe79zho",
+    "2026-12-18_mat_Subbiano": "mqgp5xpec24f6",
+    "2026-12-18_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-18_pom_Subbiano": "mqgp5xpemfnc0",
-    "2026-12-19_mat_COT": "mqgp5xpe79zho",
-    "2026-12-21_mat_COT": "mqgp5xpe3wotk",
-    "2026-12-21_mat_M.S.Savino": "mqgp5xpekiw12",
+    "2026-12-19_mat_COT": "mqgp5xpeohiai",
+    "2026-12-21_mat_COT": "mqgp5xpev7h1m",
+    "2026-12-21_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-21_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-21_pom_M.S.Savino": "mqgp5xpehbrke",
+    "2026-12-21_pom_M.S.Savino": "mqgp5xpemfnc0",
     "2026-12-21_pom_Subbiano": "mrasudwdk87n",
-    "2026-12-22_mat_COT": "mqgp5xpemfnc0",
+    "2026-12-22_mat_COT": "mqgp5xpehbrke",
     "2026-12-22_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-22_mat_Subbiano": "mqgp5xpe8eeqy",
-    "2026-12-22_pom_M.S.Savino": "mqgp5xpev7h1m",
-    "2026-12-22_pom_Subbiano": "mqgp5xpec24f6",
-    "2026-12-23_mat_COT": "mqgp5xpe3wotk",
-    "2026-12-23_mat_M.S.Savino": "mqgp5xpe79zho",
+    "2026-12-22_pom_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-22_pom_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-23_mat_COT": "mqgp5xpe79zho",
+    "2026-12-23_mat_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-23_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-23_pom_M.S.Savino": "mqgp5xpekiw12",
-    "2026-12-23_pom_Subbiano": "mqgp5xpehbrke",
-    "2026-12-24_mat_COT": "mrasudwdk87n",
-    "2026-12-28_mat_COT": "mqgp5xpev7h1m",
-    "2026-12-28_mat_M.S.Savino": "mqgp5xpeohiai",
-    "2026-12-28_mat_Subbiano": "mqgp5xpekiw12",
-    "2026-12-28_pom_M.S.Savino": "mqgp5xpehbrke",
-    "2026-12-28_pom_Subbiano": "mqgp5xpemfnc0",
-    "2026-12-29_mat_COT": "mqgp5xpemfnc0",
+    "2026-12-23_pom_M.S.Savino": "mqgp5xpeohiai",
+    "2026-12-23_pom_Subbiano": "mqgp5xpemfnc0",
+    "2026-12-24_mat_COT": "mqgp5xpe3wotk",
+    "2026-12-28_mat_COT": "mqgp5xpec24f6",
+    "2026-12-28_mat_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-28_mat_Subbiano": "mqgp5xpe6gb6b",
+    "2026-12-28_pom_M.S.Savino": "mqgp5xpemfnc0",
+    "2026-12-28_pom_Subbiano": "mrasudwdk87n",
+    "2026-12-29_mat_COT": "mqgp5xpe8eeqy",
     "2026-12-29_mat_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-29_mat_Subbiano": "mrasudwdk87n",
-    "2026-12-29_pom_M.S.Savino": "mqgp5xpec24f6",
+    "2026-12-29_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-29_pom_Subbiano": "mqgp5xpe79zho",
     "2026-12-30_mat_COT": "mqgp5xpev7h1m",
-    "2026-12-30_mat_M.S.Savino": "mqgp5xpe3wotk",
+    "2026-12-30_mat_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-30_mat_Subbiano": "mqgp5xpe6gb6b",
-    "2026-12-30_pom_M.S.Savino": "mqgp5xpekiw12",
-    "2026-12-30_pom_Subbiano": "mqgp5xpeohiai",
-    "2026-12-31_mat_COT": "mqgp5xpemfnc0"
+    "2026-12-30_pom_M.S.Savino": "mqgp5xpeohiai",
+    "2026-12-30_pom_Subbiano": "mqgp5xpekiw12",
+    "2026-12-31_mat_COT": "mqgp5xpekiw12"
   },
   "closedDays": [
     "2026-12-07",
