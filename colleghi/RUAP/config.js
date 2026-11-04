@@ -1,11 +1,10 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-04T21:15:10Z",
+  "configDataVersion": "2026-11-04T21:40:00Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
-    "Arezzo",
     "COT",
     "Baldaccio",
     "Guadagnoli"
@@ -1133,20 +1132,48 @@ const CONFIG = {
         "ven",
         "sab"
       ]
+    },
+    // Le due CdC di Arezzo: lun-ven a giornata intera (08-14 e 14-20).
+    // Voce esplicita (e non il default implicito) così il giorno in cui
+    // cambieranno orari si vede a colpo d'occhio cosa era stato deciso.
+    "Baldaccio": {
+      "slots": [
+        "mat",
+        "pom"
+      ],
+      "days": [
+        "lun",
+        "mar",
+        "mer",
+        "gio",
+        "ven"
+      ]
+    },
+    "Guadagnoli": {
+      "slots": [
+        "mat",
+        "pom"
+      ],
+      "days": [
+        "lun",
+        "mar",
+        "mer",
+        "gio",
+        "ven"
+      ]
     }
   },
   "placeInactive": {},
-  // Finestra di attività delle sedi (vedi js/config.js): Arezzo resta nel roster
-  // per i mesi storici (ago-nov) ma da dicembre 2026 non si pianifica più; le due
-  // CdC di Arezzo entrano da gennaio 2027. Le sedi NON si cancellano da `places`:
-  // cancellarle orfanerebbe i turni già pubblicati.
-  "placeActiveUntil": {
-    "Arezzo": "2026-11"
-  },
+  // Finestra di attività delle sedi (vedi js/config.js): le due CdC di Arezzo
+  // entrano da gennaio 2027. Arezzo è stata TOLTA da `places` il 2026-11-04: non
+  // ha mai avuto un turno (0 chiavi in tutti i mesi e in tutti gli archivi), quindi
+  // non c'era nulla da orfanare — se una sede ha turni si usa la finestra qui sotto,
+  // non la cancellazione.
   "placeActiveFrom": {
     "Baldaccio": "2027-01",
     "Guadagnoli": "2027-01"
   },
+  "placeActiveUntil": {},
   "placeOpenDays": {
     "COT": [
       "2026-12-07",
