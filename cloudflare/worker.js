@@ -71,7 +71,7 @@ const SECURITY_HEADERS = {
 
 // ── Legacy path redirects (pre-merge URLs -> new structure) ─────────────────
 // Same map as cloudflare/redirect-worker.js (spec §10), except /malattia.html
-// which was the patient guide on this domain -> ssn/malattia.html.
+// which was the patient guide on this domain -> ssn/cert-malattia.html.
 
 const LEGACY_REDIRECTS = {
   '/faq.html': '/ssn/faq.html',
@@ -89,6 +89,10 @@ const LEGACY_REDIRECTS = {
   '/certificato-invalidita-civile.html': '/privati/certificato-invalidita-civile.html',
   '/faq-riforma.html': '/privati/faq-riforma.html',
   '/protocollo-certificati-inps.html': '/colleghi/protocollo-certificati-inps.html',
+  // Pagine "vibecoded" rimosse il 2026-11-04 (301, non 404: erano indicizzate).
+  '/colleghi/guida-interattiva-mmg.html': '/colleghi/',
+  '/ssn/malattia.html': '/ssn/cert-malattia.html',
+  '/colleghi/malattia.html': '/ssn/cert-malattia.html',
   '/installazione.html': '/colleghi/',
   '/xsegretarie.html': '/colleghi/',
   // Percorsi legacy che il merge di zona da dottemanuelsavianu.it reindirizza
