@@ -9,6 +9,9 @@ export const STORAGE_VERSION_KEY = 'ruap-storage-version';
 export const STORAGE_PLACES = 'ruap-places';
 export const STORAGE_SLOTS = 'ruap-slots';
 export const STORAGE_CLOSED = 'ruap-giorni-chiusi';
+// Aperture per sede nei giorni chiusi (la COT il 31/12, per esempio): mappa
+// { "<sede>": ["YYYY-MM-DD", …] } modificabile dall'app, una sede alla volta.
+export const STORAGE_PLACE_OPEN = 'ruap-aperture-sedi';
 export const STORAGE_DARK_MODE = 'ruap-dark-mode';
 export const STORAGE_HEADER_COLLAPSED = 'ruap-header-collapsed';
 export const STORAGE_FILL_ONLY = 'ruap-solo-riempimento';

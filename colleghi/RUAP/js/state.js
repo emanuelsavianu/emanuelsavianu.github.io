@@ -5,11 +5,12 @@
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_DARK_MODE, STORAGE_CLOSED, STORAGE_EXTRA,
+  STORAGE_PLACE_OPEN,
   STORAGE_FOCUS,
   STORAGE_VERSION_KEY, STORAGE_VERSION, HISTORY_MAX,
   DEFAULT_PLACES, DEFAULT_SLOTS
-} from './config.js?v=20261103b';
-import { el, toast, toDateKey, getWeekStart } from './core-utils.js?v=20261103b';
+} from './config.js?v=20261104a';
+import { el, toast, toDateKey, getWeekStart, setPlaceOpenDaysMap } from './core-utils.js?v=20261104a';
 
 // --- Global mutable references (module-scoped) ---
 export let PLACES = (typeof CONFIG !== 'undefined' && CONFIG.places) ? [...CONFIG.places] : DEFAULT_PLACES;
@@ -22,6 +23,9 @@ export let state = {
   places: [],
   slots: [],
   closedDays: [],
+  // Aperture per sede nei giorni chiusi (mappa {sede: [dateKey]}): parte dal seed
+  // `CONFIG.placeOpenDays`, poi ogni browser può aprirne una dal calendario.
+  placeOpenDays: {},
   // Turni extra (guardia/rinforzo): fuori griglia, inseriti a mano, mai generati.
   extraShifts: [],
   // Medico «in evidenza»: i suoi turni restano pieni, gli altri si spengono.
@@ -52,6 +56,10 @@ export function saveToStorage() {
     localStorage.setItem(STORAGE_PLACES, JSON.stringify(state.places));
     localStorage.setItem(STORAGE_SLOTS, JSON.stringify(state.slots));
     localStorage.setItem(STORAGE_CLOSED, JSON.stringify(state.closedDays));
+    localStorage.setItem(STORAGE_PLACE_OPEN, JSON.stringify(state.placeOpenDays || {}));
+    // La mappa delle aperture è letta da core-utils (helper puri e motore): va
+    // iniettata a ogni salvataggio, altrimenti resta quella caricata all'avvio.
+    setPlaceOpenDaysMap(state.placeOpenDays);
     localStorage.setItem(STORAGE_EXTRA, JSON.stringify(state.extraShifts || []));
     localStorage.setItem(STORAGE_FOCUS, state.focusDoctorId || '');
   } catch (e) {
@@ -67,12 +75,17 @@ export function loadFromStorage() {
     const plcs = localStorage.getItem(STORAGE_PLACES);
     const slts = localStorage.getItem(STORAGE_SLOTS);
     const clos = localStorage.getItem(STORAGE_CLOSED);
+    const placeOpen = localStorage.getItem(STORAGE_PLACE_OPEN);
     const extra = localStorage.getItem(STORAGE_EXTRA);
     if (docs) state.doctors = JSON.parse(docs);
     if (asgn) state.assignments = JSON.parse(asgn);
     if (plcs) state.places = JSON.parse(plcs);
     if (slts) state.slots = JSON.parse(slts);
     if (clos) state.closedDays = JSON.parse(clos);
+    if (placeOpen) {
+      const parsed = JSON.parse(placeOpen);
+      if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) state.placeOpenDays = parsed;
+    }
     if (extra) state.extraShifts = JSON.parse(extra) || [];
     const focus = localStorage.getItem(STORAGE_FOCUS);
     if (focus) state.focusDoctorId = focus;
@@ -117,6 +130,34 @@ function hasStoredClosedDays() {
   }
 }
 
+/**
+ * Aperture per sede nei giorni chiusi: come le chiusure, si seminano dal config
+ * SOLO se il browser non ha mai scritto la propria mappa (una mappa svuotata a
+ * mano — tutte le sedi richiuse — è uno stato valido e non va sovrascritta).
+ * In ogni caso la mappa effettiva va iniettata in core-utils: è da lì che la
+ * leggono `isClosedDay`/`isPlaceOpenOn`, quindi calendario, motore ed export.
+ */
+export function reloadPlaceOpenDays() {
+  let stored = null;
+  try {
+    stored = localStorage.getItem(STORAGE_PLACE_OPEN);
+  } catch (e) { /* storage bloccato: si resta sul seed */ }
+  if (stored !== null) {
+    try {
+      const parsed = JSON.parse(stored);
+      state.placeOpenDays = (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) ? parsed : {};
+    } catch (e) {
+      state.placeOpenDays = {};
+    }
+  } else if (typeof CONFIG !== 'undefined' && CONFIG.placeOpenDays && typeof CONFIG.placeOpenDays === 'object') {
+    state.placeOpenDays = JSON.parse(JSON.stringify(CONFIG.placeOpenDays));
+  } else {
+    state.placeOpenDays = {};
+  }
+  setPlaceOpenDaysMap(state.placeOpenDays);
+  if (stored === null) saveToStorage();
+}
+
 export function reloadSlots() {
   if (state.slots && state.slots.length > 0) {
     SLOTS = [...state.slots];
@@ -157,6 +198,7 @@ export function toggleDarkMode() {
 function currentSnapshot() {
   return JSON.stringify({
     doctors: state.doctors, assignments: state.assignments, closedDays: state.closedDays,
+    placeOpenDays: state.placeOpenDays,
     extraShifts: state.extraShifts
   });
 }
@@ -165,8 +207,12 @@ function applySnapshot(snap) {
   state.assignments = snap.assignments;
   if (Array.isArray(snap.doctors)) state.doctors = snap.doctors;
   if (Array.isArray(snap.closedDays)) state.closedDays = snap.closedDays;
-  // Campo aggiunto 2026-10-30: se non lo si annulla qui, l'undo di un turno extra
-  // lascerebbe le ore contate con un turno che non c'è più.
+  // Campi aggiunti dopo il modello base: se non si annullano qui, l'undo lascia
+  // lo stato a metà (un'apertura per sede annullata senza il turno, o viceversa).
+  if (snap.placeOpenDays && typeof snap.placeOpenDays === 'object' && !Array.isArray(snap.placeOpenDays)) {
+    state.placeOpenDays = snap.placeOpenDays;
+    setPlaceOpenDaysMap(state.placeOpenDays);
+  }
   if (Array.isArray(snap.extraShifts)) state.extraShifts = snap.extraShifts;
 }
 

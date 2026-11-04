@@ -5,15 +5,15 @@
 import {
   state, SLOTS,
   saveToStorage, loadFromStorage, loadHistory, clearHistory,
-  reloadPlaces, reloadSlots, reloadClosedDays,
+  reloadPlaces, reloadSlots, reloadClosedDays, reloadPlaceOpenDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261103b';
+} from './state.js?v=20261104a';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261103b';
+} from './core-utils.js?v=20261104a';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -31,14 +31,15 @@ import {
   buildPdfContent, buildPngContent,
   copyWeekFromCurrentView, pasteWeekToCurrentView,
   toggleMonthlyStats, toggleHideZeroDocs, toggleClosedDay,
+  openPlaceOnClosedDay, closePlaceOnClosedDay,
   startWizard, restartWizard, wizardGoBack, wizardGoNext,
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday,
   openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary,
   toggleFocusDoctor
-} from './renderers.js?v=20261103b';
+} from './renderers.js?v=20261104a';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261103b';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261104a';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -46,7 +47,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261103b';
+} from './config.js?v=20261104a';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -250,6 +251,27 @@ document.addEventListener('click', (e) => {
   e.stopPropagation();
   toggleClosedDay(btn.dataset.closedToggle);
 });
+
+// Aperture per sede sui giorni chiusi («+ COT» nel giorno 31/12) e richiusura
+// («COT ✕»). In fase di cattura: i bottoni stanno dentro la cella del giorno e
+// il click non deve arrivare all'handler della griglia (assegnazione turno).
+document.addEventListener('click', (e) => {
+  const el2 = e.target instanceof Element ? e.target : null;
+  if (!el2) return;
+  const open = el2.closest('[data-open-place]');
+  if (open) {
+    e.preventDefault();
+    e.stopPropagation();
+    openPlaceOnClosedDay(open.dataset.openPlace, open.dataset.openDate);
+    return;
+  }
+  const close = el2.closest('[data-close-place]');
+  if (close) {
+    e.preventDefault();
+    e.stopPropagation();
+    closePlaceOnClosedDay(close.dataset.closePlace, close.dataset.closeDate);
+  }
+}, true);
 el('btn-pdf')?.addEventListener('click', exportPDF);
 el('btn-export-png')?.addEventListener('click', exportPNG);
 el('btn-export-screen')?.addEventListener('click', exportCalendarScreenshot);
@@ -375,6 +397,14 @@ function seedStateFromConfig() {
   if (typeof CONFIG !== 'undefined' && CONFIG.places) state.places = [...CONFIG.places];
   if (typeof CONFIG !== 'undefined' && CONFIG.slots) state.slots = CONFIG.slots.map(s => ({...s}));
   if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.closedDays)) state.closedDays = [...CONFIG.closedDays];
+  // Aperture per sede nei giorni chiusi: come le chiusure, il seed vince quando
+  // l'utente accetta «Aggiorna» (è così che un'apertura pubblicata — COT 31/12 —
+  // arriva a tutti i browser).
+  if (typeof CONFIG !== 'undefined' && CONFIG.placeOpenDays && typeof CONFIG.placeOpenDays === 'object') {
+    state.placeOpenDays = JSON.parse(JSON.stringify(CONFIG.placeOpenDays));
+  } else {
+    state.placeOpenDays = {};
+  }
   // Turni extra pubblicati nel seed (guardia/rinforzo): come le chiusure, il seed
   // vince quando l'utente accetta «Aggiorna».
   if (typeof CONFIG !== 'undefined' && Array.isArray(CONFIG.extraShifts)) {
@@ -441,6 +471,7 @@ function init() {
   reloadPlaces();
   reloadSlots();
   reloadClosedDays();
+  reloadPlaceOpenDays();
   loadHistory();
 
   const isFirstRun = state.doctors.length === 0;
