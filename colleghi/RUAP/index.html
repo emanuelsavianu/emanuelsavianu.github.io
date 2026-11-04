@@ -288,6 +288,17 @@
       line-height:1.25; box-shadow:0 1px 2px rgba(0,0,0,.18); cursor:pointer; border:0; }
     .extra-chip i { font-size:9px; opacity:.9; }
     .extra-chip:hover { filter:brightness(1.12); }
+    /* Bilancio mensile: riga del medico in evidenza + occhiolino (stesso criterio
+       del calendario, colori brand navy/gold/cream). */
+    .bilancio-row { transition: opacity .15s ease; }
+    .bilancio-row.is-dim { opacity: .45; }
+    .bilancio-row.is-dim .bilancio-dot { filter: grayscale(1); }
+    .bilancio-eye { opacity: 0; color: #94a3b8; line-height: 1; padding: 0 2px; flex-shrink: 0;
+      background: transparent; border: 0; cursor: pointer; transition: opacity .15s ease; }
+    .bilancio-row:hover .bilancio-eye { opacity: 1; }
+    .bilancio-eye[aria-pressed="true"] { opacity: 1; color: #C29B57; }
+    .bilancio-eye:hover { color: #C29B57; }
+    @media (hover: none) { .bilancio-eye { opacity: .55; } .bilancio-eye[aria-pressed="true"] { opacity: 1; } }
     #print-bilancio { display: none; }
     #print-bilancio h2 { font-size: 18px; font-weight: bold; margin-bottom: 16px; border-bottom: 2px solid #1e293b; padding-bottom: 8px; }
     #print-bilancio .p-row { display: flex; align-items: center; padding: 5px 0; font-size: 13px; border-bottom: 1px solid #e2e8f0; }
@@ -927,8 +938,8 @@
 <!-- ===================================================
      MODULES — App logic (ES modules)
      =================================================== -->
-<script src="config.js?v=2026-11-04T18:14:21Z"></script>
-<script type="module" src="js/events.js?v=20261104a"></script>
+<script src="config.js?v=2026-11-04T20:48:37Z"></script>
+<script type="module" src="js/events.js?v=20261104b"></script>
 
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">

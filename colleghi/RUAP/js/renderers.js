@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261104a';
+} from './state.js?v=20261104b';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -17,15 +17,15 @@ import {
   isPlaceOpenOn, slotsForPlace, dayKeyOf, getPlaceSchedule,
   activePlacesInMonth, isPlaceActiveInMonth, placeOpenDays,
   getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
-} from './core-utils.js?v=20261104a';
+} from './core-utils.js?v=20261104b';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
-} from './config.js?v=20261104a';
-import { isItalianHoliday } from './holidays.js?v=20261104a';
+} from './config.js?v=20261104b';
+import { isItalianHoliday } from './holidays.js?v=20261104b';
 
 // ====================================================
 // 7. RENDERING
@@ -2122,16 +2122,31 @@ export function renderMonthlyStats() {
   const extraLine = stats.extraCount
     ? `<div class="text-[11px] text-slate-600 mb-1 pb-1 border-b border-slate-100">＋ ${stats.extraCount} turni extra (${stats.extraHours}h): guardia/rinforzo</div>`
     : '';
-  panel.innerHTML = extraLine + rows.map(({ doc, stats: { budget, used, pct, barColor }, color, label }) => `
-    <div class="flex items-center gap-2 py-1 cursor-pointer hover:bg-slate-50 rounded px-1 -mx-1 transition-colors" onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
-      <span class="w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
-      <span class="flex-1 truncate text-slate-700">${escapeHtml(cleanDoctorName(doc.name))}${label}</span>
+  // Evidenziazione del singolo medico anche qui: stesso criterio del calendario —
+  // la riga del medico in evidenza resta piena con bordo oro, le altre si spengono.
+  // L'occhiolino (stessa meccanica della card: `data-focus-doctor`, listener in
+  // fase di cattura in events.js) permette di accendere/spegnere da qui.
+  const focusId = state.focusDoctorId || null;
+  panel.innerHTML = extraLine + rows.map(({ doc, stats: { budget, used, pct, barColor }, color, label }) => {
+    const focused = focusId === doc.id;
+    const dimmed = !!focusId && !focused;
+    const shortName = cleanDoctorName(doc.name);
+    return `
+    <div class="bilancio-row flex items-center gap-2 py-1 cursor-pointer hover:bg-slate-50 rounded px-1 -mx-1 transition-colors${focused ? ' is-focused' : ''}${dimmed ? ' is-dim' : ''}"
+      ${focused ? 'style="background:#F3EFE6;box-shadow:inset 0 0 0 1.5px #C29B57"' : ''}
+      onclick="window.openDoctorModal('${doc.id}')" title="Clicca per modificare ${escapeHtml(doc.name)}">
+      <span class="bilancio-dot w-3 h-3 rounded-full flex-shrink-0" style="background:${color.hex}"></span>
+      <span class="flex-1 truncate text-slate-700${focused ? ' font-semibold' : ''}">${escapeHtml(shortName)}${label}</span>
+      <button type="button" class="bilancio-eye" data-focus-doctor="${doc.id}"
+              aria-pressed="${focused ? 'true' : 'false'}"
+              title="${focused ? 'Togli l’evidenziazione' : `Evidenzia ${escapeHtml(shortName)}`}"
+              aria-label="${focused ? 'Togli l’evidenziazione di' : 'Evidenzia'} ${escapeHtml(shortName)}"><i class="fa-solid fa-eye"></i></button>
       <span class="text-slate-600 flex-shrink-0">${used}h/${budget}h</span>
       <div class="w-16 h-2.5 bg-slate-200 rounded-full flex-shrink-0">
         <div style="width:${Math.min(100, pct)}%; background:${barColor}" class="h-2.5 rounded-full"></div>
       </div>
-      </div>`
-  ).join('');
+      </div>`;
+  }).join('');
 
   const printGrid = el('print-bilancio-grid');
   if (printGrid) {
