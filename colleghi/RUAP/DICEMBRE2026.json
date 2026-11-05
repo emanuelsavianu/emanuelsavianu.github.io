@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "exportDate": "2026-11-05T10:43:00.000Z",
+  "exportDate": "2026-11-05T13:40:00.000Z",
   "doctors": [
     {
       "id": "mqgp5xpec24f6",
@@ -593,10 +593,6 @@
           "to": "2026-11-20"
         },
         {
-          "from": "2026-12-04",
-          "to": "2026-12-04"
-        },
-        {
           "from": "2026-12-11",
           "to": "2026-12-11"
         },
@@ -1080,7 +1076,7 @@
     "2026-12-14_mat_Subbiano": "mqgp5xpe79zho",
     "2026-12-09_pom_M.S.Savino": "mqgp5xpekiw12",
     "2026-12-14_mat_M.S.Savino": "mqgp5xpec24f6",
-    "2026-12-04_mat_Subbiano": "mqgp5xpev7h1m",
+    "2026-12-04_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-11_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-28_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-18_pom_M.S.Savino": "mqgp5xpe3wotk",

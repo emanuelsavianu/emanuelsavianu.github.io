@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-05T10:43:00Z",
+  "configDataVersion": "2026-11-05T13:40:00Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
@@ -615,10 +615,6 @@ const CONFIG = {
           "to": "2026-11-20"
         },
         {
-          "from": "2026-12-04",
-          "to": "2026-12-04"
-        },
-        {
           "from": "2026-12-11",
           "to": "2026-12-11"
         },
@@ -1030,7 +1026,7 @@ const CONFIG = {
     "2026-12-03_pom_Subbiano": "mqgp5xpehbrke",
     "2026-12-04_mat_COT": "mqgp5xpec24f6",
     "2026-12-04_mat_M.S.Savino": "mqgp5xpe79zho",
-    "2026-12-04_mat_Subbiano": "mqgp5xpev7h1m",
+    "2026-12-04_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-04_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-04_pom_Subbiano": "mqgp5xpeohiai",
     "2026-12-05_mat_COT": "mqgp5xpe6gb6b",
