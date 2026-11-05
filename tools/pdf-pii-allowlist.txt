@@ -67,3 +67,10 @@
 ^14/01/2019$
 ^23/01/2019$
 ^29/10/2019$
+
+# 05/11/2026 — DGR Toscana n. 1007 del 03/08/2026 (identificazione precoce melanoma /
+# valutazione nevi) + Informativa operativa per MMG/PLS/specialisti. Documenti
+# programmatici PUBBLICI, nessun dato di assistito: il riscontro è la data della
+# seduta della Giunta (03/08/2026) stampata nel frontespizio. Il numero a 9 cifre
+# presente nel PDF della delibera è un frammento dell'hash SHA interno dell'allegato.
+^03/08/2026$

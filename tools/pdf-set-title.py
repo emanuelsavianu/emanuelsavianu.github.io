@@ -57,6 +57,9 @@ TITLES = {
     'pdta-disturbi-cognitivi-demenze.pdf': "PDTA — Disturbi cognitivi e demenze (PDA-PCUR-003)",
     # segnalazioni obbligatorie
     'scheda-unica-segnalazione-malattie-infettive.pdf': "Scheda unica di segnalazione delle malattie infettive — D.M. 7 marzo 2022 (Allegato A, decreto n. 21090 del 25/09/2026)",
+    # PDTA dermatologia — identificazione precoce melanoma / valutazione nevi
+    'dgr-1007-2026-identificazione-precoce-melanoma.pdf': "DGR Toscana n. 1007 del 03/08/2026 — Identificazione precoce dei soggetti a rischio melanoma e delle lesioni pigmentate sospette (Allegato A)",
+    'informativa-valutazione-nevi-mmg-pls-specialisti.pdf': "Informativa — Identificazione precoce del melanoma: sintesi operativa per MMG, PLS e specialisti (DGR n. 1007/2026)",
 }
 
 WS = b'\x00\t\n\x0c\r '
