@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-04T21:40:00Z",
+  "configDataVersion": "2026-11-05T10:43:00Z",
   "places": [
     "M.S.Savino",
     "Subbiano",
@@ -383,10 +383,6 @@ const CONFIG = {
         }
       },
       "unavailPeriods": [
-        {
-          "from": "2026-11-04",
-          "to": "2026-11-04"
-        },
         {
           "from": "2026-11-05",
           "to": "2026-11-05"
@@ -1081,7 +1077,7 @@ const CONFIG = {
     "2026-12-18_pom_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-18_pom_Subbiano": "mqgp5xpemfnc0",
     "2026-12-19_mat_COT": "mqgp5xpeohiai",
-    "2026-12-21_mat_COT": "mqgp5xpev7h1m",
+    "2026-12-21_mat_COT": "mqgp5xpekiw12",
     "2026-12-21_mat_M.S.Savino": "mqgp5xpe3wotk",
     "2026-12-21_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-21_pom_M.S.Savino": "mqgp5xpemfnc0",
@@ -1112,7 +1108,7 @@ const CONFIG = {
     "2026-12-30_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-30_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-30_pom_Subbiano": "mqgp5xpekiw12",
-    "2026-12-31_mat_COT": "mqgp5xpekiw12"
+    "2026-12-31_mat_COT": "mqgp5xpe79zho"
   },
   "closedDays": [
     "2026-12-07",
@@ -1133,9 +1129,6 @@ const CONFIG = {
         "sab"
       ]
     },
-    // Le due CdC di Arezzo: lun-ven a giornata intera (08-14 e 14-20).
-    // Voce esplicita (e non il default implicito) così il giorno in cui
-    // cambieranno orari si vede a colpo d'occhio cosa era stato deciso.
     "Baldaccio": {
       "slots": [
         "mat",
@@ -1164,11 +1157,6 @@ const CONFIG = {
     }
   },
   "placeInactive": {},
-  // Finestra di attività delle sedi (vedi js/config.js): le due CdC di Arezzo
-  // entrano da gennaio 2027. Arezzo è stata TOLTA da `places` il 2026-11-04: non
-  // ha mai avuto un turno (0 chiavi in tutti i mesi e in tutti gli archivi), quindi
-  // non c'era nulla da orfanare — se una sede ha turni si usa la finestra qui sotto,
-  // non la cancellazione.
   "placeActiveFrom": {
     "Baldaccio": "2027-01",
     "Guadagnoli": "2027-01"
