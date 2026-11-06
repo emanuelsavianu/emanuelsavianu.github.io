@@ -7,6 +7,8 @@
     "check:links": "node tools/check-links.mjs",
     "check:i18n": "node tools/check-i18n.mjs",
     "check:sw": "node tools/check-sw.mjs",
+    "build:colleghi": "node tools/build-colleghi.mjs",
+    "check:colleghi": "node tools/build-colleghi.mjs --check",
     "gen:markdown": "node tools/gen-markdown.mjs",
     "prerender": "node tools/prerender.mjs",
     "check:prerender": "node tools/prerender.mjs --check",

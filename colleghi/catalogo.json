@@ -1,0 +1,1513 @@
+{
+ "versione": "2026-11-06",
+ "voci": [
+  {
+   "id": "risorse-informative",
+   "titolo": "Risorse informative e manualistica",
+   "sub": "22 PDF · manuali Millewin, moduli, procedure",
+   "desc": "Manuali Millewin, istruzioni di studio, codici e nomenclatori, fogli per il paziente, procedure aziendali.",
+   "href": "risorse-informative.html",
+   "area": "strumenti",
+   "tag": [
+    "manuale",
+    "pdf"
+   ],
+   "kw": "manuali pdf scaricabili",
+   "icona": "fa-file-pdf",
+   "tipo": "page"
+  },
+  {
+   "id": "RUAP",
+   "titolo": "Calcolatore turni RUAP",
+   "sub": "Ruolo Unico di Assistenza Primaria",
+   "desc": "Calcolo e consultazione dei turni RUAP della cooperativa.",
+   "href": "./RUAP/",
+   "area": "strumenti",
+   "tag": [
+    "ruap"
+   ],
+   "kw": "turni calendario",
+   "icona": "fa-calendar-check",
+   "tipo": "page"
+  },
+  {
+   "id": "portale",
+   "titolo": "Portale Medico",
+   "sub": "SSR Toscana",
+   "desc": "SSR Toscana",
+   "href": "https://portalemedico.ssr.toscana.it/portale/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-laptop-medical",
+   "tipo": "link"
+  },
+  {
+   "id": "gru-portale.ssr.toscana.it",
+   "titolo": "Portale Dipendenti",
+   "sub": "Cedolini GRU",
+   "desc": "Cedolini GRU",
+   "href": "https://gru-portale.ssr.toscana.it",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-file-invoice-dollar",
+   "tipo": "link"
+  },
+  {
+   "id": "opportunita-e-scadenze",
+   "titolo": "Bandi Toscana",
+   "sub": "Opportunità e scadenze",
+   "desc": "Opportunità e scadenze",
+   "href": "https://www.regione.toscana.it/-/opportunita-e-scadenze",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-landmark",
+   "tipo": "link"
+  },
+  {
+   "id": "albopretorio.uslsudest.toscana.it",
+   "titolo": "Albo Pretorio",
+   "sub": "USL Sud Est",
+   "desc": "USL Sud Est",
+   "href": "https://albopretorio.uslsudest.toscana.it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-gavel",
+   "tipo": "link"
+  },
+  {
+   "id": "supporto",
+   "titolo": "Supporto Millewin",
+   "sub": "Assistenza tecnica",
+   "desc": "Assistenza tecnica",
+   "href": "https://millewin.it/supporto/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-headset",
+   "tipo": "link"
+  },
+  {
+   "id": "sispc",
+   "titolo": "SISPC",
+   "sub": "Prevenzione collettiva",
+   "desc": "Prevenzione collettiva",
+   "href": "https://www.prevenzionecollettiva.toscana.it/sispc/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-shield-alt",
+   "tipo": "link"
+  },
+  {
+   "id": "herodema",
+   "titolo": "HeroDema",
+   "sub": "Prescrizioni SSR",
+   "desc": "Prescrizioni SSR",
+   "href": "https://prescrizione.ssr.toscana.it/herodema/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-pills",
+   "tipo": "link"
+  },
+  {
+   "id": "area-riservata-operatore",
+   "titolo": "SistemaTS",
+   "sub": "Tessera sanitaria",
+   "desc": "Tessera sanitaria",
+   "href": "https://sistemats1.sanita.finanze.it/portale/area-riservata-operatore",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-id-card",
+   "tipo": "link"
+  },
+  {
+   "id": "piani-terapeutici",
+   "titolo": "Piani Terapeutici",
+   "sub": "PTWeb SSR",
+   "desc": "PTWeb SSR",
+   "href": "https://ptweb.ssr.toscana.it/piani-terapeutici/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-clipboard-list",
+   "tipo": "link"
+  },
+  {
+   "id": "it",
+   "titolo": "Mediately",
+   "sub": "Prontuario medico",
+   "desc": "Prontuario medico",
+   "href": "https://mediately.co/it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-book-medical",
+   "tipo": "link"
+  },
+  {
+   "id": "elenco-note-aifa",
+   "titolo": "Note AIFA",
+   "sub": "Elenco ufficiale",
+   "desc": "Elenco ufficiale",
+   "href": "https://www.aifa.gov.it/elenco-note-aifa",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-list-ul",
+   "tipo": "link"
+  },
+  {
+   "id": "happymamma.sanita.toscana.it",
+   "titolo": "HappyMamma",
+   "sub": "Gravidanza e maternità",
+   "desc": "Gravidanza e maternità",
+   "href": "https://happymamma.sanita.toscana.it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-heart-pulse",
+   "tipo": "link"
+  },
+  {
+   "id": "www.medicodigitale.it",
+   "titolo": "Medico Digitale",
+   "sub": "Telemedicina e FAD",
+   "desc": "Telemedicina e FAD",
+   "href": "https://www.medicodigitale.it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-laptop",
+   "tipo": "link"
+  },
+  {
+   "id": "www.fnomceo.it",
+   "titolo": "FNOMCEO",
+   "sub": "Ordini medici",
+   "desc": "Ordini medici",
+   "href": "https://www.fnomceo.it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-user-tie",
+   "tipo": "link"
+  },
+  {
+   "id": "www.omceoar.it",
+   "titolo": "Ordine Medici",
+   "sub": "Arezzo",
+   "desc": "Arezzo",
+   "href": "https://www.omceoar.it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-landmark",
+   "tipo": "link"
+  },
+  {
+   "id": "www.simg.it",
+   "titolo": "SIMG",
+   "sub": "MMG Italia",
+   "desc": "MMG Italia",
+   "href": "https://www.simg.it/",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-stethoscope",
+   "tipo": "link"
+  },
+  {
+   "id": "sst",
+   "titolo": "SST Toscana",
+   "sub": "Servizio Sanitario",
+   "desc": "Servizio Sanitario",
+   "href": "https://www.regione.toscana.it/sst",
+   "area": "strumenti",
+   "tag": [
+    "portale"
+   ],
+   "kw": "portale esterno",
+   "icona": "fa-hospital",
+   "tipo": "link"
+  },
+  {
+   "id": "poster_multilingue",
+   "titolo": "Schede pazienti A4 — 5 lingue",
+   "sub": "IT · RO · EN · BN · UR",
+   "desc": "Il poster con le schede informative nelle cinque lingue dello studio.",
+   "href": "../ssn/poster_multilingue.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "traduzioni romeno bengali urdu",
+   "icona": "fa-layer-group",
+   "tipo": "page"
+  },
+  {
+   "id": "pir",
+   "titolo": "Guida PIR — Punti di Intervento Rapido",
+   "sub": "Urgenze differibili · modelli · casistica",
+   "desc": "Quando e come attivare i Punti di Intervento Rapido, con i modelli e la casistica.",
+   "href": "pir.html",
+   "area": "percorsi",
+   "tag": [
+    "accessi"
+   ],
+   "kw": "urgenze differibili",
+   "icona": "fa-book-open",
+   "tipo": "page"
+  },
+  {
+   "id": "gestoreturni",
+   "titolo": "Gestore turni universale",
+   "sub": "Configurabile · ferie e coperture",
+   "desc": "Applicazione per costruire i turni e calcolare ferie e coperture.",
+   "href": "gestoreturni/gestoreturni.html",
+   "area": "strumenti",
+   "tag": [
+    "ruap"
+   ],
+   "kw": "ferie",
+   "icona": "fa-wand-magic-sparkles",
+   "tipo": "page"
+  },
+  {
+   "id": "protocollo-certificati-inps",
+   "titolo": "Certificati INPS — D.Lgs. 62/2024",
+   "sub": "Allegazioni · PDF · WHODAS",
+   "desc": "Il protocollo operativo per la certificazione di malattia: standard del PDF, allegazioni, WHODAS.",
+   "href": "protocollo-certificati-inps.html",
+   "area": "prescrivere",
+   "tag": [
+    "inps",
+    "certificati"
+   ],
+   "kw": "certificato malattia telematico",
+   "icona": "fa-gavel",
+   "tipo": "page"
+  },
+  {
+   "id": "adi-adp-pai",
+   "titolo": "Assistenza domiciliare ADI · ADP · PAI",
+   "sub": "Moduli · invio a Cure Primarie · dal 1/10/2026",
+   "desc": "Canale unico e modulo per tipo di richiesta, procedura aggiornata, facsimili da scaricare.",
+   "href": "adi-adp-pai.html",
+   "area": "compilare",
+   "tag": [
+    "adi",
+    "modulo"
+   ],
+   "kw": "domicilio domiciliare cure primarie",
+   "icona": "fa-house-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "criteri-appropriatezza",
+   "titolo": "Criteri di appropriatezza",
+   "sub": "PDTA · farmaci · trasporto 06 · endoscopia",
+   "desc": "Le regole che rendono una richiesta appropriate: diagnostica per immagini, farmaci, trasporto, endoscopia, MOC.",
+   "href": "criteri-appropriatezza.html",
+   "area": "prescrivere",
+   "tag": [
+    "prescrizione",
+    "codici"
+   ],
+   "kw": "appropriatezza ticket esenzioni",
+   "icona": "fa-stethoscope",
+   "tipo": "page"
+  },
+  {
+   "id": "note-operative",
+   "titolo": "Note operative e contatti",
+   "sub": "Indirizzi · codici · vaccini · farmaci · esenzioni",
+   "desc": "Il prontuario di studio: telefoni e percorsi, codici prescrittivi, vaccinazioni, gravidanza, presidi.",
+   "href": "note-operative.html",
+   "area": "strumenti",
+   "tag": [
+    "contatti"
+   ],
+   "kw": "telefoni recapiti indirizzi vaccinazioni vaccino influenza esenzioni presidi",
+   "icona": "fa-book-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "criteri-appropriatezza-2",
+   "titolo": "Trasporto sanitario cod. 06 — criteri",
+   "sub": "",
+   "desc": "trasporto sanitario cod. 06",
+   "href": "criteri-appropriatezza.html#trasporto-sanitario",
+   "area": "strumenti",
+   "tag": [],
+   "kw": "",
+   "icona": "fa-truck-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "PAI",
+   "titolo": "PAI — Piano Assistenziale Integrato",
+   "sub": "ADI · ADP · AD infermieristica",
+   "desc": "Il modulo del piano assistenziale integrato per l'assistenza domiciliare.",
+   "href": "modulistica/PAI.pdf",
+   "area": "compilare",
+   "tag": [
+    "adi",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "pai domicilio",
+   "icona": "fa-clipboard-list",
+   "tipo": "page"
+  },
+  {
+   "id": "STU-scheda-terapeutica-unica",
+   "titolo": "STU — scheda terapeutica unica",
+   "sub": "Mod. 031-std · domiciliare",
+   "desc": "La scheda terapeutica unica per la gestione dei farmaci a domicilio.",
+   "href": "modulistica/STU-scheda-terapeutica-unica.pdf",
+   "area": "compilare",
+   "tag": [
+    "adi",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "terapia farmaci domicilio",
+   "icona": "fa-syringe",
+   "tipo": "page"
+  },
+  {
+   "id": "valutazione-iniziale-inquadramento-clinico",
+   "titolo": "Valutazione iniziale — inquadramento clinico",
+   "sub": "Mod. 010 rev. 1",
+   "desc": "Scheda di valutazione iniziale: anamnesi ed esame obiettivo per l'ADI.",
+   "href": "modulistica/valutazione-iniziale-inquadramento-clinico.pdf",
+   "area": "compilare",
+   "tag": [
+    "adi",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "valutazione iniziale anamnesi",
+   "icona": "fa-stethoscope",
+   "tipo": "page"
+  },
+  {
+   "id": "note-operative-2",
+   "titolo": "Note operative e contatti",
+   "sub": "",
+   "desc": "Note operative e contatti",
+   "href": "note-operative.html#codici-heading",
+   "area": "strumenti",
+   "tag": [],
+   "kw": "",
+   "icona": "fa-address-book",
+   "tipo": "page"
+  },
+  {
+   "id": "comunicazioni-2026",
+   "titolo": "Vaccinazione pneumococco nelle RSA (scheda)",
+   "sub": "",
+   "desc": "scheda completa",
+   "href": "comunicazioni-2026.html#pcv21-rsa",
+   "area": "strumenti",
+   "tag": [],
+   "kw": "",
+   "icona": "fa-syringe",
+   "tipo": "page"
+  },
+  {
+   "id": "pdta-disturbi-cognitivi-demenze",
+   "titolo": "PDTA disturbi cognitivi e demenze",
+   "sub": "PDA-PCUR-003 rev. 0",
+   "desc": "Il percorso diagnostico-terapeutico aziendale per i disturbi cognitivi, integrale.",
+   "href": "modulistica/pdta-disturbi-cognitivi-demenze.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "demenze alzheimer cdcd",
+   "icona": "fa-brain",
+   "tipo": "page"
+  },
+  {
+   "id": "dgr-1007-2026-identificazione-precoce-melanoma",
+   "titolo": "DGR 1007/2026 — melanoma",
+   "sub": "Delibera con allegato A",
+   "desc": "La delibera regionale sull'identificazione precoce del melanoma.",
+   "href": "modulistica/dgr-1007-2026-identificazione-precoce-melanoma.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "nevi melanoma screening",
+   "icona": "fa-file-shield",
+   "tipo": "page"
+  },
+  {
+   "id": "informativa-valutazione-nevi-mmg-pls-specialisti",
+   "titolo": "Informativa — valutazione dei nevi",
+   "sub": "MMG · PLS · specialisti",
+   "desc": "L'informativa operativa per la valutazione dei nevi in studio.",
+   "href": "modulistica/informativa-valutazione-nevi-mmg-pls-specialisti.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "nevi melanoma mappatura",
+   "icona": "fa-file-shield",
+   "tipo": "page"
+  },
+  {
+   "id": "scheda-unica-segnalazione-malattie-infettive",
+   "titolo": "Scheda unica di segnalazione — malattie infettive",
+   "sub": "Igiene pubblica",
+   "desc": "La scheda unica per segnalare una malattia infettiva all'igiene pubblica.",
+   "href": "modulistica/scheda-unica-segnalazione-malattie-infettive.pdf",
+   "area": "compilare",
+   "tag": [
+    "modulo",
+    "pdf",
+    "accessi"
+   ],
+   "kw": "segnalazione infettiva",
+   "icona": "fa-file-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "guida-accessi-malattie-infettive",
+   "titolo": "Accessi — malattie infettive / MST",
+   "sub": "Dove · come accedere · segnalazione",
+   "desc": "Sedi, orari e modalità di accesso all'ambulatorio MST e alla segnalazione obbligatoria.",
+   "href": "guida-accessi-malattie-infettive.html",
+   "area": "percorsi",
+   "tag": [
+    "accessi"
+   ],
+   "kw": "mst infettive igiene",
+   "icona": "fa-hospital-user",
+   "tipo": "page"
+  },
+  {
+   "id": "procedura-gom-tumori-gastrointestinali",
+   "titolo": "Procedura PP-PARE-70 — tumori gastrointestinali",
+   "sub": "Sospetto o accertato",
+   "desc": "La procedura per il percorso del paziente con sospetto tumore gastrointestinale.",
+   "href": "modulistica/procedura-gom-tumori-gastrointestinali.pdf",
+   "area": "percorsi",
+   "tag": [
+    "accessi",
+    "pdf"
+   ],
+   "kw": "gastrointestinale oncologia percorso",
+   "icona": "fa-hospital",
+   "tipo": "page"
+  },
+  {
+   "id": "medicina-fisica-codici-LR",
+   "titolo": "Medicina fisica — codici fascia LR",
+   "sub": "LR01–LR21 · nuovo catalogo",
+   "desc": "Codici e denominazioni delle prestazioni di medicina fisica e come prescriverle dal MMG.",
+   "href": "medicina-fisica-codici-LR.html",
+   "area": "prescrivere",
+   "tag": [
+    "codici",
+    "prescrizione"
+   ],
+   "kw": "riabilitazione fisioterapia",
+   "icona": "fa-file-prescription",
+   "tipo": "page"
+  },
+  {
+   "id": "ausili-assistenziali",
+   "titolo": "Ausili assistenziali — Elenco 2B",
+   "sub": "Anticaduta · letti · carrozzine · WC · sollevamento",
+   "desc": "Gli ausili prescrivibili dal MMG con codice ISO e indicazione, tratti dall'Elenco 2B.",
+   "href": "ausili-assistenziali.html",
+   "area": "prescrivere",
+   "tag": [
+    "ausili",
+    "codici"
+   ],
+   "kw": "protesi presidi carrozzina deambulatore",
+   "icona": "fa-file-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "codici-analisi-genetiche",
+   "titolo": "Analisi genetiche — codici regionali",
+   "sub": "40 voci · catalogo di lavoro",
+   "desc": "Codice regionale e nazionale delle analisi genetiche, con punto di prelievo e tempi.",
+   "href": "codici-analisi-genetiche.html",
+   "area": "prescrivere",
+   "tag": [
+    "codici",
+    "prescrizione"
+   ],
+   "kw": "genetica cariotipo fish",
+   "icona": "fa-file-prescription",
+   "tipo": "page"
+  },
+  {
+   "id": "guida-accessi-pronto-soccorso",
+   "titolo": "Accessi — pronto soccorso specialistici",
+   "sub": "Oculistico · ORL · ortopedico · pediatrico · ginecologico",
+   "desc": "Orari e sedi dei pronto soccorso specialistici di San Donato.",
+   "href": "guida-accessi-pronto-soccorso.html",
+   "area": "percorsi",
+   "tag": [
+    "accessi"
+   ],
+   "kw": "ps oculistica orl ortopedia",
+   "icona": "fa-truck-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "guida-accessi-vascolari",
+   "titolo": "Accessi vascolari — rete AVA",
+   "sub": "PICC · Port · moduli ed email",
+   "desc": "Chi si occupa degli accessi vascolari, come si attiva la richiesta e quali moduli servono.",
+   "href": "guida-accessi-vascolari.html",
+   "area": "percorsi",
+   "tag": [
+    "accessi"
+   ],
+   "kw": "picc port catetere",
+   "icona": "fa-house-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "adhd",
+   "titolo": "Batterie ADHD — modulo unico",
+   "sub": "Metodo · regola di fusione · licenze",
+   "desc": "Come si fondono le scale ADHD sovrapposte in un modulo unico e cosa consegnare.",
+   "href": "adhd.html",
+   "area": "prescrivere",
+   "tag": [
+    "modulo"
+   ],
+   "kw": "asrs diva wurs scale",
+   "icona": "fa-book-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-unico-adhd",
+   "titolo": "Modulo ADHD — paziente",
+   "sub": "153 voci · ASRS-18 · DIVA-5 · WURS · WHODAS",
+   "desc": "Il questionario unico da far compilare al paziente, con report guidato.",
+   "href": "adhd/modulo-unico-adhd.html",
+   "area": "compilare",
+   "tag": [
+    "modulo"
+   ],
+   "kw": "adhd scale",
+   "icona": "fa-clipboard-list",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-familiare-adhd",
+   "titolo": "Modulo ADHD — familiare",
+   "sub": "18 sintomi · report guidato",
+   "desc": "La scheda per il familiare o il convivente, con la lettura dei risultati.",
+   "href": "adhd/modulo-familiare-adhd.html",
+   "area": "compilare",
+   "tag": [
+    "modulo"
+   ],
+   "kw": "adhd familiare",
+   "icona": "fa-users",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-anamnestico-patente-guida",
+   "titolo": "Anamnestico — patente di guida",
+   "sub": "Facsimile · condizioni a rischio",
+   "desc": "Scheda anamnestica per il rinnovo della patente: condizioni che controindicano la guida.",
+   "href": "modulistica/facsimile-anamnestico-patente-guida.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "pdf"
+   ],
+   "kw": "patente guida rinnovo",
+   "icona": "fa-id-card",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-capacita-intendere-volere",
+   "titolo": "Capacità di intendere e di volere",
+   "sub": "Facsimile · certificazione",
+   "desc": "Facsimile di certificazione della capacità di intendere e di volere.",
+   "href": "modulistica/facsimile-capacita-intendere-volere.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "pdf"
+   ],
+   "kw": "amministratore sostegno interdizione",
+   "icona": "fa-scale-balanced",
+   "tipo": "page"
+  },
+  {
+   "id": "certificati-gratuiti-a-pagamento-iva-omceo-arezzo",
+   "titolo": "Certificati gratuiti, a pagamento e con IVA",
+   "sub": "Nota OMCeO Arezzo · prot. 1012/2014",
+   "desc": "Quali certificati sono gratuiti, quali a pagamento e quali con IVA, secondo l'Ordine di Arezzo.",
+   "href": "modulistica/certificati-gratuiti-a-pagamento-iva-omceo-arezzo.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "certificati",
+    "pdf"
+   ],
+   "kw": "onorari tariffa certificato",
+   "icona": "fa-file-invoice-dollar",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-constatazione-decesso",
+   "titolo": "Constatazione di decesso",
+   "sub": "Facsimile · riconoscimento",
+   "desc": "Modello per il riconoscimento e la constatazione del decesso.",
+   "href": "modulistica/facsimile-constatazione-decesso.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "pdf"
+   ],
+   "kw": "morte salma",
+   "icona": "fa-file-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-inail-infortunio-mod1ss",
+   "titolo": "INAIL — infortunio sul lavoro",
+   "sub": "Mod. 1 SS",
+   "desc": "Certificazione medica di infortunio sul lavoro, modello 1 SS.",
+   "href": "modulistica/facsimile-inail-infortunio-mod1ss.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "inps",
+    "pdf"
+   ],
+   "kw": "inail infortunio",
+   "icona": "fa-user-injured",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-inail-malattia-professionale-mod5ssbis",
+   "titolo": "INAIL — malattia professionale",
+   "sub": "Mod. 5 SS bis",
+   "desc": "Certificazione di malattia professionale, modello 5 SS bis.",
+   "href": "modulistica/facsimile-inail-malattia-professionale-mod5ssbis.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "inps",
+    "pdf"
+   ],
+   "kw": "inail tecnopatia",
+   "icona": "fa-flask",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-certificato-malattia-inps",
+   "titolo": "Certificato di malattia INPS",
+   "sub": "Facsimile · diagnosi e prognosi",
+   "desc": "Facsimile di certificato di malattia con diagnosi e prognosi.",
+   "href": "modulistica/facsimile-certificato-malattia-inps.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "inps",
+    "pdf"
+   ],
+   "kw": "certificato malattia",
+   "icona": "fa-clipboard-check",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-anamnestico-porto-armi",
+   "titolo": "Anamnestico — porto d'armi",
+   "sub": "Art. 25 L. 833/1978",
+   "desc": "Scheda anamnestica per il rilascio o rinnovo del porto d'armi.",
+   "href": "modulistica/facsimile-anamnestico-porto-armi.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "pdf"
+   ],
+   "kw": "armi licenza",
+   "icona": "fa-shield-alt",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-attestato-trasporto-salma",
+   "titolo": "Trasporto di salma",
+   "sub": "Art. 10 c. 2 L.R. 19/2004",
+   "desc": "Attestato per il trasporto di salma secondo la legge regionale toscana.",
+   "href": "modulistica/facsimile-attestato-trasporto-salma.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "pdf"
+   ],
+   "kw": "salma trasporto",
+   "icona": "fa-ambulance",
+   "tipo": "page"
+  },
+  {
+   "id": "facsimile-consenso-vaccinazione",
+   "titolo": "Consenso informato alla vaccinazione",
+   "sub": "Regione Toscana",
+   "desc": "Modulo di consenso informato per la vaccinazione, modello regionale.",
+   "href": "modulistica/facsimile-consenso-vaccinazione.pdf",
+   "area": "compilare",
+   "tag": [
+    "facsimile",
+    "pdf"
+   ],
+   "kw": "vaccino consenso",
+   "icona": "fa-shield-virus",
+   "tipo": "page"
+  },
+  {
+   "id": "cert-malattia",
+   "titolo": "Certificati di malattia — informativa INPS",
+   "sub": "Obbligo di visita",
+   "desc": "Come funziona il certificato di malattia telematico e l'obbligo di visita, spiegato al paziente.",
+   "href": "../ssn/cert-malattia.html",
+   "area": "paziente",
+   "tag": [
+    "inps",
+    "stampa"
+   ],
+   "kw": "malattia certificato paziente",
+   "icona": "fa-file-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "faq",
+   "titolo": "FAQ pazienti",
+   "sub": "Ricette · certificati · specialisti",
+   "desc": "Le risposte alle domande più frequenti dei pazienti.",
+   "href": "../ssn/faq.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "domande frequenti",
+   "icona": "fa-question-circle",
+   "tipo": "page"
+  },
+  {
+   "id": "esenzioni",
+   "titolo": "Esenzioni ticket",
+   "sub": "Guida · codici · come richiederle",
+   "desc": "Guida alle esenzioni per reddito e per patologia.",
+   "href": "../ssn/esenzioni.html",
+   "area": "paziente",
+   "tag": [
+    "esenzione",
+    "stampa"
+   ],
+   "kw": "ticket esenzione paziente",
+   "icona": "fa-tag",
+   "tipo": "page"
+  },
+  {
+   "id": "impegnative",
+   "titolo": "Visite specialistiche",
+   "sub": "Impegnative · CUP · priorità",
+   "desc": "Come si prenota una visita, cosa sono le impegnative e le priorità.",
+   "href": "../ssn/impegnative.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "cup prenotazione",
+   "icona": "fa-hospital-user",
+   "tipo": "page"
+  },
+  {
+   "id": "RUAP-2",
+   "titolo": "Vademecum RUAP",
+   "sub": "Cooperativa sanitaria · procedure",
+   "desc": "Procedure della cooperativa per il Ruolo Unico di Assistenza Primaria.",
+   "href": "RUAP/",
+   "area": "strumenti",
+   "tag": [
+    "ruap"
+   ],
+   "kw": "turni",
+   "icona": "fa-book",
+   "tipo": "page"
+  },
+  {
+   "id": "scheda-it",
+   "titolo": "Scheda paziente A4 — Italiano",
+   "sub": "Fronte/retro · Doctolib + triage + salute",
+   "desc": "La scheda informativa A4 in Italiano, fronte/retro, pronta da stampare.",
+   "href": "../ssn/scheda-it.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "stampa scheda lingua",
+   "icona": "fa-print",
+   "tipo": "page"
+  },
+  {
+   "id": "scheda-ro",
+   "titolo": "Scheda paziente A4 — Română",
+   "sub": "Fronte/retro in romeno",
+   "desc": "La scheda informativa A4 in Română, fronte/retro, pronta da stampare.",
+   "href": "../ssn/scheda-ro.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "stampa scheda lingua",
+   "icona": "fa-globe",
+   "tipo": "page"
+  },
+  {
+   "id": "scheda-en",
+   "titolo": "Scheda paziente A4 — English",
+   "sub": "Fronte/retro in inglese",
+   "desc": "La scheda informativa A4 in English, fronte/retro, pronta da stampare.",
+   "href": "../ssn/scheda-en.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "stampa scheda lingua",
+   "icona": "fa-globe",
+   "tipo": "page"
+  },
+  {
+   "id": "scheda-bn",
+   "titolo": "Scheda paziente A4 — বাংলা (Bengali)",
+   "sub": "Fronte/retro in bengalese",
+   "desc": "La scheda informativa A4 in বাংলা, fronte/retro, pronta da stampare.",
+   "href": "../ssn/scheda-bn.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "stampa scheda lingua",
+   "icona": "fa-globe",
+   "tipo": "page"
+  },
+  {
+   "id": "scheda-ur",
+   "titolo": "Scheda paziente A4 — اردو (Urdu)",
+   "sub": "Fronte/retro in urdu, RTL",
+   "desc": "La scheda informativa A4 in اردو, fronte/retro, pronta da stampare.",
+   "href": "../ssn/scheda-ur.html",
+   "area": "paziente",
+   "tag": [
+    "stampa"
+   ],
+   "kw": "stampa scheda lingua",
+   "icona": "fa-globe",
+   "tipo": "page"
+  },
+  {
+   "id": "kit-schede-pazienti-5-lingue",
+   "titolo": "Kit schede pazienti 5 lingue (PDF)",
+   "sub": "10 pagine A4 pronte da stampare",
+   "desc": "Il kit completo da stampare per il banco: cinque lingue, fronte/retro.",
+   "href": "../ssn/pdf/kit-schede-pazienti-5-lingue.pdf",
+   "area": "paziente",
+   "tag": [
+    "stampa",
+    "pdf"
+   ],
+   "kw": "stampa kit",
+   "icona": "fa-file-pdf",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-domanda-scelta-mmg-pls-deroga-territoriale",
+   "titolo": "Scelta MMG/PLS in deroga",
+   "sub": "Deroga territoriale · USL Sud Est",
+   "desc": "Domanda di scelta del medico in deroga al bacino territoriale.",
+   "href": "modulistica/modulo-domanda-scelta-mmg-pls-deroga-territoriale.pdf",
+   "area": "compilare",
+   "tag": [
+    "modulo",
+    "pdf"
+   ],
+   "kw": "cambio medico deroga",
+   "icona": "fa-user-plus",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-comunicazione-sostituzione-mmg-pls",
+   "titolo": "Comunicazione di sostituzione MMG/PLS",
+   "sub": "USL Sud Est",
+   "desc": "Comunicazione di sostituzione temporanea del medico o del pediatra.",
+   "href": "modulistica/modulo-comunicazione-sostituzione-mmg-pls.pdf",
+   "area": "compilare",
+   "tag": [
+    "modulo",
+    "pdf"
+   ],
+   "kw": "sostituzione medico",
+   "icona": "fa-user-doctor",
+   "tipo": "page"
+  },
+  {
+   "id": "cartella-clinico-assistenziale-territoriale-adi-adp",
+   "titolo": "Cartella clinico-assistenziale territoriale",
+   "sub": "ADI · ADP",
+   "desc": "La cartella territoriale per i pazienti in assistenza domiciliare.",
+   "href": "modulistica/cartella-clinico-assistenziale-territoriale-adi-adp.pdf",
+   "area": "compilare",
+   "tag": [
+    "adi",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "cartella adi",
+   "icona": "fa-house-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-picc-team-accessi-vascolari",
+   "titolo": "Modulo PICC team — accessi vascolari",
+   "sub": "Allegato 2 · consenso e informativa",
+   "desc": "Richiesta al PICC team con consenso e informativa per gli accessi vascolari.",
+   "href": "modulistica/modulo-picc-team-accessi-vascolari.pdf",
+   "area": "compilare",
+   "tag": [
+    "accessi",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "picc port catetere",
+   "icona": "fa-file-contract",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-attivazione-afa",
+   "titolo": "Attivazione AFA",
+   "sub": "Attività fisica adattata · Allegato B",
+   "desc": "Modulo per attivare i corsi di attività fisica adattata.",
+   "href": "modulistica/modulo-attivazione-afa.pdf",
+   "area": "compilare",
+   "tag": [
+    "modulo",
+    "pdf"
+   ],
+   "kw": "afa palestra",
+   "icona": "fa-heart-pulse",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-esenzione-diabete",
+   "titolo": "Esenzione — diabete",
+   "sub": "Certificazione del MMG",
+   "desc": "Modulo di certificazione per l'esenzione ticket per diabete.",
+   "href": "modulistica/modulo-esenzione-diabete.pdf",
+   "area": "compilare",
+   "tag": [
+    "esenzione",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "diabete esenzione 013",
+   "icona": "fa-flask",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-esenzione-ipertensione",
+   "titolo": "Esenzione — ipertensione",
+   "sub": "Certificazione del MMG",
+   "desc": "Modulo di certificazione per l'esenzione ticket per ipertensione.",
+   "href": "modulistica/modulo-esenzione-ipertensione.pdf",
+   "area": "compilare",
+   "tag": [
+    "esenzione",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "ipertensione esenzione",
+   "icona": "fa-tachometer-alt",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-rinnovo-esenzione-048",
+   "titolo": "Rinnovo esenzione 048",
+   "sub": "Patologia oncologica · MMG e CORD",
+   "desc": "Rinnovo dell'esenzione per patologia oncologica (codice 048).",
+   "href": "modulistica/modulo-rinnovo-esenzione-048.pdf",
+   "area": "compilare",
+   "tag": [
+    "esenzione",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "oncologia esenzione 048",
+   "icona": "fa-tag",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-prescrizione-incontinenza-urinaria",
+   "titolo": "Prescrizione — incontinenza urinaria",
+   "sub": "Dispositivi medici",
+   "desc": "Modulo per la prescrizione dei dispositivi per l'incontinenza.",
+   "href": "modulistica/modulo-prescrizione-incontinenza-urinaria.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "ausili",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "pannoloni cateteri assorbenti",
+   "icona": "fa-clipboard-list",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-prescrizione-dispositivi-stomia",
+   "titolo": "Prescrizione — presidi per stomia",
+   "sub": "Colostomia · ileostomia · urostomia",
+   "desc": "Modulo per la prescrizione dei presidi per stomia.",
+   "href": "modulistica/modulo-prescrizione-dispositivi-stomia.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "ausili",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "stomia sacca",
+   "icona": "fa-prescription-bottle",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-prescrizione-autocontrollo-glicemico",
+   "titolo": "Prescrizione — autocontrollo glicemico",
+   "sub": "Allegato B · DGRT 806/2024",
+   "desc": "Prescrizione di strisce e glucometro per l'autocontrollo glicemico.",
+   "href": "modulistica/modulo-prescrizione-autocontrollo-glicemico.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "ausili",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "glicemia glucometro strisce",
+   "icona": "fa-file-prescription",
+   "tipo": "page"
+  },
+  {
+   "id": "modulo-richiesta-fornitura-protesi-ausili",
+   "titolo": "Richiesta protesi e ausili",
+   "sub": "Mod. 0583 rev. 002",
+   "desc": "Richiesta di fornitura di protesi e ausili all'USL.",
+   "href": "modulistica/modulo-richiesta-fornitura-protesi-ausili.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "ausili",
+    "modulo",
+    "pdf"
+   ],
+   "kw": "protesi ausili fornitura",
+   "icona": "fa-file-medical",
+   "tipo": "page"
+  },
+  {
+   "id": "millewin-tips",
+   "titolo": "Trucchi e scorciatoie Millewin",
+   "sub": "Scorciatoie · prescrizioni · anagrafica · mobilità",
+   "desc": "Le combinazioni da tastiera e le procedure rapide per lavorare più veloce in Millewin.",
+   "href": "millewin-tips.html",
+   "area": "strumenti",
+   "tag": [
+    "manuale"
+   ],
+   "kw": "tasti scorciatoie tastiera",
+   "icona": "fa-keyboard",
+   "tipo": "page"
+  },
+  {
+   "id": "manuale-millewin-in-un-ora",
+   "titolo": "Millewin in un’ora",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Il percorso guidato completo: dalle prime schermate alla gestione della cartella, agenda, prescrizioni, certificati e stampe. È il manuale da cui partire per imparare il programma da zero o per rinfrescare i passaggi che si usano meno.",
+   "href": "modulistica/manuale-millewin-in-un-ora.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millewin-startup",
+   "titolo": "Millewin StartUp",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Installazione, primo avvio, configurazione dello studio, database e parametri di rete. La parte tecnica che serve quando si cambia postazione, si reinstalla il programma o si configura un nuovo studio.",
+   "href": "modulistica/manuale-millewin-startup.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "nuova-sanita-iniziativa-millewin",
+   "titolo": "Nuova Sanità di Iniziativa",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Gestione dei registri di sanità di iniziativa: arruolamento dei pazienti complessi (Target A) e dei pazienti a rischio, motivazioni di arruolamento, compilazione e stampa del PAI, estrazione degli arruolati.",
+   "href": "modulistica/nuova-sanita-iniziativa-millewin.pdf",
+   "area": "strumenti",
+   "tag": [
+    "manuale",
+    "pdf"
+   ],
+   "kw": "sanita iniziativa target pai arruolamento cronicita",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millewin-millebook-medico",
+   "titolo": "Millebook Medico",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Agenda online e appuntamenti condivisi con la segreteria e con i pazienti: calendari, disponibilità, inviti e gestione degli appuntamenti dal lato del medico.",
+   "href": "modulistica/manuale-millewin-millebook-medico.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millebook-paziente",
+   "titolo": "Millebook — manuale per il paziente",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Il libretto pensato per il paziente: come prenotare, spostare o disdire un appuntamento in autonomia. Utile da stampare o da linkare a chi chiede come si prenota online.",
+   "href": "modulistica/manuale-millebook-paziente.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millewin-millelight",
+   "titolo": "Millelight",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Accesso alla cartella da tablet o smartphone per le visite domiciliari: cosa si può fare in mobilità e come avviene la sincronizzazione con lo studio.",
+   "href": "modulistica/manuale-millewin-millelight.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millewin-millelight-smartcard",
+   "titolo": "Millelight smartcard",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "La variante di Millelight con lettore di smart card/CNS: accesso in mobilità con autenticazione su carta.",
+   "href": "modulistica/manuale-millewin-millelight-smartcard.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millewin-gestione-allegati",
+   "titolo": "Gestione allegati",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Come importare, classificare e ritrovare gli allegati nella cartella del paziente (referti, immagini, documentazione scansionata).",
+   "href": "modulistica/manuale-millewin-gestione-allegati.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "manuale-millewin-live-update",
+   "titolo": "Mille Live Update",
+   "sub": "PDF · Manualistica Millewin",
+   "desc": "Aggiornamenti, patch e tabelle del programma: cosa fa il Live Update e cosa controllare quando un aggiornamento non parte (l’errore «controllo iniziale fallito» al primo avvio su un PC nuovo).",
+   "href": "modulistica/manuale-millewin-live-update.pdf",
+   "area": "strumenti",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "istruzioni-studio-millewin-doctolib",
+   "titolo": "Istruzioni operative di studio",
+   "sub": "PDF · Istruzioni e promemoria di studio",
+   "desc": "Farmaci (fascia A e C, note AIFA, piani terapeutici, numero di confezioni), esenzioni (quando Millewin le applica da solo, E01, C01–C03, M00 e M99 in gravidanza), certificati di malattia e vaccinazioni dell’adulto. È il documento che risponde alla maggior parte delle domande di sportello.",
+   "href": "modulistica/istruzioni-studio-millewin-doctolib.pdf",
+   "area": "strumenti",
+   "tag": [
+    "manuale",
+    "pdf"
+   ],
+   "kw": "farmaci esenzioni certificati vaccini note aifa piano terapeutico",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "spunti-pratici-studio",
+   "titolo": "Spunti di natura pratica",
+   "sub": "PDF · Istruzioni e promemoria di studio",
+   "desc": "Appunti operativi messi insieme negli anni: recapiti e percorsi (telepneumoconsulto, ADI, RSA, assistenti sociali, screening), codici utili, regole pratiche su certificati, presidi, ausili e accessi. La versione sempre aggiornata è la pagina Note operative.",
+   "href": "modulistica/spunti-pratici-studio.pdf",
+   "area": "strumenti",
+   "tag": [
+    "manuale",
+    "pdf"
+   ],
+   "kw": "appunti recapiti percorsi adi rsa assistenti sociali screening",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "ausili-elenco-2b-pa-dgam-002",
+   "titolo": "Ausili assistenziali — Elenco 2B",
+   "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
+   "desc": "La tabella ufficiale degli ausili dell’Elenco 2B con descrizione e codice di classificazione ISO: è il documento da cui è tratta la pagina Ausili assistenziali, da allegare alla richiesta quando serve il riferimento normativo.",
+   "href": "modulistica/ausili-elenco-2b-pa-dgam-002.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "ausili",
+    "pdf"
+   ],
+   "kw": "ausili elenco 2B dgam presidi protesi",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "codici-esami-genetici-prato-2025",
+   "titolo": "Codici degli esami genetici",
+   "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
+   "desc": "Codice regionale e nazionale di ogni esame, punto di prelievo, tempi di risposta e modalità di ritiro del laboratorio di genetica di Prato. Fonte della pagina Codici regionali — analisi genetiche.",
+   "href": "modulistica/codici-esami-genetici-prato-2025.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "codici",
+    "pdf"
+   ],
+   "kw": "genetica cariotipo fish prato laboratorio prelievo",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "nomenclatore-tariffario-regionale",
+   "titolo": "Nomenclatore tariffario regionale",
+   "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
+   "desc": "Nomenclatore tariffario delle prestazioni specialistiche ambulatoriali: codice, nota, branca, descrizione, tariffa, delibera integrativa e indicazioni clinico-diagnostiche. Serve per verificare un codice, una tariffa o la nota che accompagna una prestazione.",
+   "href": "modulistica/nomenclatore-tariffario-regionale.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "codici",
+    "pdf"
+   ],
+   "kw": "nomenclatore tariffario tariffa prestazioni codice",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "criteri-densitometria-osteoporosi",
+   "titolo": "Criteri per la densitometria ossea",
+   "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
+   "desc": "Le indicazioni clinico-diagnostiche che rendono la MOC erogabile dal SSR (osteoporosi secondaria, terapie prolungate, carenza estrogenica, fattori di rischio, fratture pregresse), la tempistica dei controlli (non prima di 18–24 mesi) e l’obbligo di motivare la richiesta.",
+   "href": "modulistica/criteri-densitometria-osteoporosi.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "prescrizione",
+    "pdf"
+   ],
+   "kw": "moc densitometria osteoporosi dgr 1238",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "preparazione-colonscopia",
+   "titolo": "Preparazione alla colonscopia",
+   "sub": "PDF · Preparazioni e istruzioni per il paziente",
+   "desc": "Schemi orari di preparazione intestinale per Clensia, Plenvu e Selg Esse, distinti per orario dell’esame (mattina presto, tarda mattina, pomeriggio) e per la necessità di una pulizia ad alto volume dopo preparazioni precedenti inadeguate.",
+   "href": "modulistica/preparazione-colonscopia.pdf",
+   "area": "paziente",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "colonscopia gastroscopia clensia plenvu selg esse pulizia intestinale",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "raccolta-urine-24-ore-acido",
+   "titolo": "Raccolta urine delle 24 ore con acido",
+   "sub": "PDF · Preparazioni e istruzioni per il paziente",
+   "desc": "Come versare l’acido, quali urine scartare, come etichettare la provetta e cosa consegnare al punto prelievi; include il caso della doppia raccolta con e senza acido (contenitori A e B e volume totale).",
+   "href": "modulistica/raccolta-urine-24-ore-acido.pdf",
+   "area": "paziente",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "urine 24 ore raccolta acido cloridrico esame urine",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "prestazioni-esenti-gravidanza",
+   "titolo": "Prestazioni esenti in gravidanza",
+   "sub": "PDF · Preparazioni e istruzioni per il paziente",
+   "desc": "L’elenco ministeriale delle prestazioni specialistiche esenti per la tutela della maternità responsabile, in gravidanza e in epoca preconcezionale. È il documento da mostrare quando il paziente contesta il ticket su un esame che rientra nell’allegato.",
+   "href": "modulistica/prestazioni-esenti-gravidanza.pdf",
+   "area": "paziente",
+   "tag": [
+    "esenzione",
+    "pdf"
+   ],
+   "kw": "gravidanza gestante maternita ticket esenzione allegato 10A",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "procedura-trasfusione-domiciliare",
+   "titolo": "Trasfusione domiciliare di emazie concentrate",
+   "sub": "PDF · Procedure e percorsi aziendali",
+   "desc": "Chi è candidabile alla trasfusione a domicilio (paziente non trasportabile, anziano fragile, paziente fragile) e chi no, con le fasi della procedura: richiesta e invio di campioni alla struttura trasfusionale, consegna degli emocomponenti, preparazione del paziente, esecuzione, sorveglianza e gestione delle reazioni.",
+   "href": "modulistica/procedura-trasfusione-domiciliare.pdf",
+   "area": "percorsi",
+   "tag": [
+    "accessi",
+    "pdf"
+   ],
+   "kw": "trasfusione emazie sangue domicilio",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "profilassi-antibiotica-odontoiatria",
+   "titolo": "Profilassi antibiotica in odontoiatria",
+   "sub": "PDF · Procedure e percorsi aziendali",
+   "desc": "Documento di indirizzo sull’uso appropriato della profilassi antibiotica negli interventi ambulatoriali odontoiatrici, con le raccomandazioni cliniche e il ragionamento che le sostiene; in coda l’infografica destinata ai pazienti.",
+   "href": "modulistica/profilassi-antibiotica-odontoiatria.pdf",
+   "area": "percorsi",
+   "tag": [
+    "prescrizione",
+    "pdf"
+   ],
+   "kw": "antibiotico profilassi dentista odontoiatria",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "linee-guida-inps-esenzione-reperibilita",
+   "titolo": "Esenzione dall’obbligo di reperibilità",
+   "sub": "PDF · Procedure e percorsi aziendali",
+   "desc": "Le linee guida INPS sulle fasce di esenzione dalla reperibilità previste dal DM 11 gennaio 2016 (art. 25 del D.Lgs. 151/2015): patologie gravi che richiedono terapie salvavita, nozione di gravità, documentazione sanitaria necessaria e ruolo del medico certificatore.",
+   "href": "modulistica/linee-guida-inps-esenzione-reperibilita.pdf",
+   "area": "percorsi",
+   "tag": [
+    "inps",
+    "pdf"
+   ],
+   "kw": "reperibilita certificato inps visita fiscale esenzione",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "risorse-informative.html"
+  },
+  {
+   "id": "ditte-cpap-acquisto-noleggio",
+   "titolo": "Ditte per acquisto e noleggio CPAP",
+   "sub": "PDF · elenco di studio",
+   "desc": "Elenco delle ditte fornitrici di CPAP con i riferimenti commerciali, per acquisto e noleggio.",
+   "href": "modulistica/ditte-cpap-acquisto-noleggio.pdf",
+   "area": "prescrivere",
+   "tag": [
+    "pdf"
+   ],
+   "kw": "cpap ventiloterapia apnee ossigeno noleggio",
+   "icona": "fa-file-pdf",
+   "tipo": "doc",
+   "parent": "note-operative.html"
+  }
+ ]
+}

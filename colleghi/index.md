@@ -7,6 +7,18 @@ description: Facsimili dei certificati e modulistica per MMG e PLS: PAI, STU, AD
 
 > **Disclaimer medico-legale:** le informazioni e i collegamenti in questa sezione sono destinati esclusivamente a personale medico e sanitario autorizzato. I contenuti hanno scopo puramente informativo e di supporto alla pratica clinica e non sostituiscono il giudizio diagnostico e terapeutico del medico. L'utilizzatore è l'unico responsabile delle decisioni cliniche intraprese.
 
+## Come è organizzata la pagina
+
+Una sola pagina con barra di ricerca e cinque aree; i portali esterni stanno in un blocco separato in fondo. La barra cerca su titolo, descrizione, tag e sinonimi di tutte le voci (80 risorse in pagina più 22 documenti dentro le raccolte) e suggerisce i filtri con i conteggi aggiornati mentre si digita; `/` porta il cursore nella barra, `Esc` azzera.
+
+- **Compilare e inviare** (24) — moduli, facsimili, richieste ADI/PAI/STU, esenzioni, protesi e ausili, segnalazioni.
+- **Prescrivere e certificare** (14) — criteri di appropriatezza, protocollo INPS, codici (genetica, medicina fisica, nomenclatore), certificati.
+- **Percorsi e accessi** (5) — guide agli accessi (pronto soccorso, infettive, vascolari), PIR, comunicazioni 2026.
+- **Software, turni e strumenti di studio** (9) — Millewin e manuali, trucchi, note operative, RUAP e turni, calcolatori.
+- **Per il paziente** (11) — schede A4 in cinque lingue, FAQ, esenzioni, impegnative.
+
+Il contenuto della pagina è generato da `colleghi/catalogo.json` con `node tools/build-colleghi.mjs`: per aggiungere, spostare o ritaggare una voce si modifica il catalogo, non l'HTML (il controllo `build-colleghi --check` in `npm test` blocca i disallineamenti).
+
 ## Portali e risorse
 - **Pazienti del Dott. Savianu** — Prenotazioni · Ricette · FAQ · Contatti
 - **Calendario RUAP** — turni e coperture
