@@ -391,6 +391,46 @@
     <script type="module" src="/assets/scroll-reveal.js"></script>
 
     <style>
+        /* ── Scorciatoia Turni RUAP nell'hero ─────────────────────────── */
+        .cat-hero-grid { display: grid; grid-template-columns: minmax(0, 1fr) auto;
+            gap: 46px; align-items: center; }
+        .cat-hero-text .cat-lede { max-width: 52ch; }
+        .cat-hero .card-header h1 { font-size: clamp(1.32rem, 2.4vw, 1.55rem); }
+        .cat-cta {
+            position: relative; display: flex; align-items: center; gap: 14px;
+            min-width: 292px; padding: 16px 18px; border-radius: 14px;
+            background: var(--primary); color: #f6f1e7; text-decoration: none;
+            border: 1px solid rgba(194, 155, 87, .45);
+            box-shadow: 0 10px 24px -12px rgba(26, 47, 76, .55);
+            transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+        }
+        .cat-cta::after {
+            content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+            background: radial-gradient(120% 130% at 0% 0%, rgba(194, 155, 87, .20), transparent 62%);
+        }
+        .cat-cta:hover, .cat-cta:focus-visible {
+            transform: translateY(-2px); border-color: var(--accent);
+            box-shadow: 0 18px 34px -14px rgba(26, 47, 76, .65);
+        }
+        .cat-cta:focus-visible { outline: 3px solid var(--accent-text); outline-offset: 3px; }
+        body.dark-mode .cat-cta { background: var(--color-brand-light);
+            border-color: rgba(224, 185, 118, .5); }
+        body.dark-mode .cat-cta:focus-visible { outline-color: var(--accent-on-dark); }
+        .cat-cta-logo { width: 64px; height: 64px; flex: none;
+            filter: drop-shadow(0 0 12px rgba(194, 155, 87, .28)); }
+        .cat-cta-text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+        .cat-cta-kicker { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+            color: var(--accent-on-dark); opacity: .9; }
+        .cat-cta-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.45rem;
+            line-height: 1.08; font-weight: 600; color: #f6f1e7; }
+        .cat-cta-sub { font-size: .76rem; color: rgba(246, 241, 231, .74); }
+        .cat-cta-go { margin-left: auto; color: var(--accent-on-dark); flex: none;
+            width: 30px; height: 30px; display: grid; place-items: center;
+            border: 1px solid rgba(224, 185, 118, .55); border-radius: 50%;
+            font-size: .8rem; transition: transform .18s ease, background .18s ease; }
+        .cat-cta:hover .cat-cta-go { background: rgba(224, 185, 118, .14); }
+        .cat-cta:hover .cat-cta-go, .cat-cta:focus-visible .cat-cta-go { transform: translateX(4px); }
+
         /* ── Catalogo colleghi (2026-11-06) ───────────────────────────── */
         .cat-lede { max-width: 68ch; margin: 0; font-size: .95rem; color: var(--text-medium);
             line-height: 1.7; text-wrap: pretty; }
@@ -490,7 +530,17 @@
         .cat-events[open] summary::after { content: "\2013"; }
         .cat-events .cat-intro { margin-top: 12px; }
 
+        @media (max-width: 760px) {
+            .cat-hero-grid { grid-template-columns: 1fr; gap: 16px; }
+            .cat-cta { min-width: 0; width: 100%; }
+        }
+
         @media (max-width: 600px) {
+            .cat-cta { padding: 12px 14px; gap: 12px; }
+            .cat-cta-logo { width: 52px; height: 52px; }
+            .cat-cta-kicker { display: none; }
+            .cat-cta-title { font-size: 1.35rem; }
+            .cat-cta-sub { font-size: .72rem; }
             .cat-toolbar { margin-top: 8px; }
             .cat-field input { font-size: 16px; }
             .cat-h2 { font-size: 1.25rem; }
@@ -527,16 +577,33 @@
                      HERO — Risorse per i colleghi
                      ══════════════════════════════════════════════ -->
         <section class="card cat-hero reveal" aria-labelledby="colleghi-heading">
-            <div class="card-header">
-                <i class="fas fa-briefcase-medical" aria-hidden="true"></i>
-                <h1 id="colleghi-heading">Risorse e strumenti per i colleghi</h1>
+            <div class="cat-hero-grid">
+                <div class="cat-hero-text">
+                    <div class="card-header">
+                        <i class="fas fa-briefcase-medical" aria-hidden="true"></i>
+                        <h1 id="colleghi-heading">Risorse e strumenti per i colleghi</h1>
+                    </div>
+                    <p class="cat-lede">
+                        Una sola pagina per quello che serve in studio: moduli da compilare, criteri di
+                        prescrizione, percorsi per il paziente, manuali e turni. Cerca per parola chiave
+                        oppure per tipo di documento &mdash; se non sai dove sta una cosa, digita quello
+                        che devi fare: <em>PAI</em>, <em>ticket</em>, <em>colonscopia</em>.
+                    </p>
+                </div>
+
+                <!-- Scorciatoia allo strumento che si apre piu' spesso -->
+                <a class="cat-cta" href="./RUAP/"
+                   aria-label="Apri i turni RUAP: calendario, coperture e ferie">
+                    <img class="cat-cta-logo" src="../assets/bronzelogo-192.png" alt=""
+                         width="72" height="72" decoding="async">
+                    <span class="cat-cta-text">
+                        <span class="cat-cta-kicker">Si apre tutti i giorni</span>
+                        <span class="cat-cta-title">Turni RUAP</span>
+                        <span class="cat-cta-sub">Calendario, coperture, ferie</span>
+                    </span>
+                    <i class="fas fa-arrow-right cat-cta-go" aria-hidden="true"></i>
+                </a>
             </div>
-            <p class="cat-lede">
-                Una sola pagina per quello che serve in studio: moduli da compilare, criteri di
-                prescrizione, percorsi per il paziente, manuali e turni. Cerca per parola chiave
-                oppure per tipo di documento &mdash; se non sai dove sta una cosa, digita quello
-                che devi fare: <em>PAI</em>, <em>ticket</em>, <em>colonscopia</em>.
-            </p>
         </section>
 
         <!-- Barra di ricerca: resta in vista mentre si scorre il catalogo -->
