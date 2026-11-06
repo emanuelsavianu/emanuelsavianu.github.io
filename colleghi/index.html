@@ -338,7 +338,7 @@
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <link rel="preload" href="../assets/fonts/montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/cormorant-garamond-var-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.subset.woff2?v=2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../assets/fontawesome/webfonts/fa-solid-900.subset.woff2?v=4" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="../assets/fontawesome/css/fontawesome.min.css">
     <link rel="stylesheet" href="../assets/fontawesome/css/solid.subset.css">
     <script>
@@ -391,6 +391,112 @@
     <script type="module" src="/assets/scroll-reveal.js"></script>
 
     <style>
+        /* ── Catalogo colleghi (2026-11-06) ───────────────────────────── */
+        .cat-lede { max-width: 68ch; margin: 0; font-size: .95rem; color: var(--text-medium);
+            line-height: 1.7; text-wrap: pretty; }
+
+        .cat-toolbar { position: sticky; top: 0; z-index: 30; margin: 16px 0 6px;
+            padding: 10px 0 8px; background: linear-gradient(var(--color-bg) 72%, transparent); }
+        .cat-field { display: flex; align-items: center; gap: 10px; background: var(--white);
+            border: 1.5px solid var(--border-color); border-radius: var(--radius-md); padding: 10px 14px;
+            box-shadow: 0 1px 2px var(--color-shadow); }
+        .cat-field:focus-within { border-color: var(--accent); }
+        .cat-field > i { color: var(--accent-text); }
+        .cat-field input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit;
+            font-size: 1rem; color: var(--text-dark); outline: none; }
+        .cat-field input::placeholder { color: var(--text-medium); opacity: .85; }
+        /* niente doppia "x": quella nativa di type=search la disegna il nostro pulsante */
+        .cat-field input[type="search"]::-webkit-search-cancel-button,
+        .cat-field input[type="search"]::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+        .cat-clear { border: 0; background: transparent; color: var(--text-medium); cursor: pointer;
+            font-size: 1rem; padding: 2px 4px; }
+        .cat-clear:hover { color: var(--primary); }
+        .cat-kbd { font: 600 11px/1 ui-monospace, monospace; padding: 4px 6px;
+            border: 1px solid var(--border-color); border-radius: 5px; color: var(--text-medium); }
+        .cat-field:focus-within .cat-kbd, .cat-toolbar.has-q .cat-kbd { display: none; }
+
+        .cat-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; align-items: center; }
+        .cat-chips-label { font-size: .68rem; letter-spacing: .1em; text-transform: uppercase;
+            color: var(--text-medium); opacity: .85; margin-right: 2px; }
+        .cat-chips-label:not(:first-child) { margin-left: 8px; }
+        .cat-legal { font-size: .84rem; line-height: 1.55; }
+        .cat-legal p { margin: 0; }
+        .cat-legal strong { display: inline; }
+        .cat-chips:empty { display: none; }
+        .cat-chip { font: inherit; font-size: .78rem; font-weight: 600; padding: 5px 10px;
+            border-radius: 999px; border: 1px solid var(--border-color); background: var(--white);
+            color: var(--text-medium); cursor: pointer; }
+        .cat-chip b { font-weight: 600; opacity: .65; }
+        .cat-chip:hover { border-color: var(--accent); color: var(--primary); }
+        .cat-chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--white); }
+        .cat-chip[aria-pressed="true"] b { opacity: .85; }
+        .cat-chip-reset { border-style: dashed; color: var(--accent-text); }
+
+        .cat-count { margin: 8px 0 0; font-size: .8rem; color: var(--text-medium); }
+        .cat-count b { color: var(--primary); }
+        body.dark-mode .cat-count b { color: var(--accent-on-dark); }
+
+        .cat-area { margin: 26px 0 0; }
+        .cat-h2 { display: flex; align-items: center; gap: 10px;
+            font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.45rem; line-height: 1.2;
+            margin: 0 0 6px; color: var(--primary-dark); }
+        .cat-h2 i { color: var(--accent); font-size: 1rem; }
+        body.dark-mode .cat-h2 { color: var(--accent-on-dark); }
+        .cat-n { margin-left: auto; font-family: Montserrat, sans-serif; font-size: .72rem; font-weight: 600;
+            color: var(--text-medium); border: 1px solid var(--border-color); border-radius: 999px;
+            padding: 1px 8px; }
+        .cat-intro { margin: 0 0 10px; font-size: .85rem; color: var(--text-medium);
+            max-width: 62ch; text-wrap: pretty; }
+        .cat-intro a { color: var(--accent-text); }
+
+        .cat-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border-color); }
+        .cat-item { border-bottom: 1px solid var(--border-color); }
+        .cat-item.is-hidden { display: none; }
+        .cat-item > a { display: grid; grid-template-columns: 22px 1fr; gap: 10px; align-items: start;
+            padding: 11px 8px; margin: 0 -8px; border-radius: 8px; text-decoration: none; color: inherit; }
+        .cat-item > a:hover, .cat-item > a:focus-visible { background: var(--white); }
+        .cat-item > a > i { color: var(--accent-text); padding-top: 3px; }
+        .cat-title { display: block; font-weight: 700; font-size: .93rem; line-height: 1.35;
+            color: var(--primary); }
+        body.dark-mode .cat-title { color: var(--accent-on-dark); }
+        .cat-item > a:hover .cat-title { text-decoration: underline; text-underline-offset: 2px; }
+        .cat-sub { display: block; margin-top: 2px; font-size: .8rem; color: var(--text-medium); }
+
+        .cat-list.is-collapsed > .cat-item:nth-child(n+6) { display: none; }
+        .cat-more { margin: 8px 0 0; background: none; border: 0; padding: 4px 0; font: inherit;
+            font-size: .8rem; font-weight: 600; color: var(--accent-text); cursor: pointer;
+            text-decoration: underline; text-underline-offset: 3px; }
+
+        .cat-linklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px 18px;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+        .cat-linklist .cat-item { border: 0; }
+        .cat-linklist a { display: block; padding: 6px 0; text-decoration: none; color: var(--primary);
+            font-size: .88rem; font-weight: 600; }
+        body.dark-mode .cat-linklist a { color: var(--accent-on-dark); }
+        .cat-linklist a span { display: block; font-weight: 400; font-size: .78rem; color: var(--text-medium); }
+        .cat-linklist a:hover { text-decoration: underline; text-underline-offset: 2px; }
+
+        .cat-empty { margin: 20px 0; padding: 16px; border: 1px dashed var(--border-color);
+            border-radius: var(--radius-md); color: var(--text-medium); font-size: .88rem; }
+        .cat-empty strong { display: block; color: var(--primary); margin-bottom: 4px; }
+        .cat-empty a { color: var(--accent-text); }
+
+        .cat-events summary { cursor: pointer; display: flex; align-items: center; gap: 10px;
+            font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.3rem; color: var(--primary-dark); }
+        body.dark-mode .cat-events summary { color: var(--accent-on-dark); }
+        .cat-events summary::-webkit-details-marker { display: none; }
+        .cat-events summary::after { content: "+"; margin-left: auto; font-family: Montserrat, sans-serif;
+            font-size: 1.1rem; color: var(--accent-text); }
+        .cat-events[open] summary::after { content: "\2013"; }
+        .cat-events .cat-intro { margin-top: 12px; }
+
+        @media (max-width: 600px) {
+            .cat-toolbar { margin-top: 8px; }
+            .cat-field input { font-size: 16px; }
+            .cat-h2 { font-size: 1.25rem; }
+            .cat-kbd { display: none; }
+        }
+
         /* Banner "Comunicazioni" a tutta larghezza in testa alla sezione */
         .split-hero .action-grid > .btn-hero-span { grid-column: 1 / -1; }
         /* Misura di lettura 45-80 caratteri per riga (audit 2026-11-06 P1);
@@ -418,62 +524,206 @@
         </nav>
 
         <!-- ══════════════════════════════════════════════
-                     HERO — The Split: Pazienti vs. Colleghi
+                     HERO — Risorse per i colleghi
                      ══════════════════════════════════════════════ -->
-                <section class="card split-hero reveal" aria-label="Seleziona il portale">
+        <section class="card cat-hero reveal" aria-labelledby="colleghi-heading">
             <div class="card-header">
-                <i class="fas fa-door-open" aria-hidden="true"></i>
-                <h1>Benvenuto — Seleziona il portale</h1>
+                <i class="fas fa-briefcase-medical" aria-hidden="true"></i>
+                <h1 id="colleghi-heading">Risorse e strumenti per i colleghi</h1>
             </div>
-            <div class="action-grid">
-                <a href="comunicazioni-2026.html"
-                   class="btn-prenota-large btn-hero-span"
-                   aria-label="Comunicazioni ufficiali 2026 per la Medicina Generale">
-                    <i class="fas fa-book-open" aria-hidden="true"></i>
-                    <span>Comunicazioni</span>
-                    <small>Ufficiali 2026 · INPS · AIFA · Ministero · Ordini</small>
-                </a>
+            <p class="cat-lede">
+                Una sola pagina per quello che serve in studio: moduli da compilare, criteri di
+                prescrizione, percorsi per il paziente, manuali e turni. Cerca per parola chiave
+                oppure per tipo di documento &mdash; se non sai dove sta una cosa, digita quello
+                che devi fare: <em>PAI</em>, <em>ticket</em>, <em>colonscopia</em>.
+            </p>
+        </section>
 
-                <a href="../ssn/"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="btn-prenota-large"
-                   aria-label="Accedi al sito dei pazienti (apre in una nuova scheda)">
-                    <i class="fas fa-users" aria-hidden="true"></i>
-                    <span>Pazienti del Dott. Savianu</span>
-                    <small>Prenotazioni · Ricette · FAQ · Contatti</small>
-                </a>
-
-                <a href="./RUAP/"
-                   class="btn-prenota-large"
-                   aria-label="Calendario Turni RUAP">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                    <span>Calendario RUAP</span>
-                    <small><i class="fas fa-clock" aria-hidden="true"></i> RUAP</small>
-                </a>
+        <!-- Barra di ricerca: resta in vista mentre si scorre il catalogo -->
+        <div class="cat-toolbar" id="cat-toolbar">
+            <div class="cat-field">
+                <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+                <input type="search" id="cat-q" autocomplete="off" spellcheck="false"
+                       placeholder="Cerca: PAI, esenzione, colonscopia, INPS, Millewin…"
+                       aria-label="Cerca tra le risorse per i colleghi" aria-describedby="cat-count">
+                <button type="button" class="cat-clear" id="cat-clear" aria-label="Cancella la ricerca" hidden>
+                    <i class="fas fa-xmark" aria-hidden="true"></i>
+                </button>
+                <kbd class="cat-kbd" aria-hidden="true">/</kbd>
             </div>
+            <div class="cat-chips" id="cat-chips" role="group" aria-label="Filtra per tipo di documento"></div>
+            <p class="cat-count" id="cat-count" aria-live="polite"></p>
+        </div>
+
+        <!-- Risultati dentro le raccolte di documenti (solo durante la ricerca) -->
+        <section class="cat-area cat-docs" id="cat-docs-wrap" aria-labelledby="h-docs" hidden>
+            <h2 class="cat-h2" id="h-docs">
+                <i class="fas fa-file-pdf" aria-hidden="true"></i>Dentro le raccolte di documenti
+                <span class="cat-n" id="cat-docs-n"></span>
+            </h2>
+            <p class="cat-intro">Documenti singoli contenuti in <a href="risorse-informative.html">Risorse informative</a> e nelle note operative.</p>
+            <ul class="cat-list" id="cat-docs-list"></ul>
         </section>
 
         <!-- ═══════════════════════════════════════════════
              AREA COLLEGHI
              ═══════════════════════════════════════════════ -->
-        <section id="area-colleghi" aria-labelledby="colleghi-heading">
+        <section id="area-colleghi" aria-label="Catalogo delle risorse per i colleghi">
 
             <!-- Disclaimer medico-legale -->
-            <div class="alert-box reveal" role="note" aria-label="Avviso medico-legale">
-                <p><strong><i class="fas fa-balance-scale" aria-hidden="true"></i>&ensp;DISCLAIMER MEDICO-LEGALE:</strong></p>
-                <p>Le informazioni e i collegamenti in questa sezione sono destinati esclusivamente a personale medico e sanitario autorizzato. I contenuti hanno scopo puramente informativo e di supporto alla pratica clinica e non sostituiscono il giudizio diagnostico e terapeutico del medico. L'utilizzatore è l'unico responsabile delle decisioni cliniche intraprese.</p>
+            <div class="alert-box cat-legal" role="note" aria-label="Avviso medico-legale">
+                <p><strong><i class="fas fa-balance-scale" aria-hidden="true"></i>&ensp;Solo per personale sanitario.</strong>
+                    Le informazioni e i collegamenti di questa sezione sono destinati esclusivamente a personale medico e sanitario autorizzato: hanno scopo informativo e di supporto alla pratica clinica e non sostituiscono il giudizio diagnostico e terapeutico del medico. L'utilizzatore è l'unico responsabile delle decisioni cliniche intraprese.</p>
             </div>
 
-            <!-- Calendario (in alto) -->
-            <div class="card reveal">
+<!-- catalogo:start -->
+            <!-- Generato da tools/build-colleghi.mjs a partire da colleghi/catalogo.json.
+                 Non modificare a mano: le modifiche vanno fatte nel catalogo. -->
+            <section class="cat-area" id="area-compilare" data-area="compilare" aria-labelledby="h-compilare">
+                <h2 class="cat-h2" id="h-compilare"><i class="fas fa-file-signature" aria-hidden="true"></i>Compilare e inviare<span class="cat-n"> 24</span></h2>
+                <p class="cat-intro">Moduli, facsimili e richieste da consegnare o inviare.</p>
+                <ul class="cat-list" data-area="compilare" data-more="Mostra tutte le 24 risorse">
+                    <li class="cat-item" data-g="adi modulo" data-k="assistenza domiciliare adi · adp · pai canale unico e modulo per tipo di richiesta, procedura aggiornata, facsimili da scaricare. domicilio domiciliare cure primarie adi modulo"><a href="adi-adp-pai.html"><i class="fas fa-house-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Assistenza domiciliare ADI · ADP · PAI</span><span class="cat-sub">Moduli · invio a Cure Primarie · dal 1/10/2026</span></span></a></li>
+                    <li class="cat-item" data-g="adi modulo pdf" data-k="pai — piano assistenziale integrato il modulo del piano assistenziale integrato per l'assistenza domiciliare. pai domicilio adi modulo pdf"><a href="modulistica/PAI.pdf"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">PAI — Piano Assistenziale Integrato</span><span class="cat-sub">ADI · ADP · AD infermieristica</span></span></a></li>
+                    <li class="cat-item" data-g="adi modulo pdf" data-k="stu — scheda terapeutica unica la scheda terapeutica unica per la gestione dei farmaci a domicilio. terapia farmaci domicilio adi modulo pdf"><a href="modulistica/STU-scheda-terapeutica-unica.pdf"><i class="fas fa-syringe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">STU — scheda terapeutica unica</span><span class="cat-sub">Mod. 031-std · domiciliare</span></span></a></li>
+                    <li class="cat-item" data-g="adi modulo pdf" data-k="valutazione iniziale — inquadramento clinico scheda di valutazione iniziale: anamnesi ed esame obiettivo per l'adi. valutazione iniziale anamnesi adi modulo pdf"><a href="modulistica/valutazione-iniziale-inquadramento-clinico.pdf"><i class="fas fa-stethoscope" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Valutazione iniziale — inquadramento clinico</span><span class="cat-sub">Mod. 010 rev. 1</span></span></a></li>
+                    <li class="cat-item" data-g="modulo pdf accessi" data-k="scheda unica di segnalazione — malattie infettive la scheda unica per segnalare una malattia infettiva all'igiene pubblica. segnalazione infettiva modulo pdf accessi"><a href="modulistica/scheda-unica-segnalazione-malattie-infettive.pdf"><i class="fas fa-file-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda unica di segnalazione — malattie infettive</span><span class="cat-sub">Igiene pubblica</span></span></a></li>
+                    <li class="cat-item" data-g="modulo" data-k="modulo adhd — paziente il questionario unico da far compilare al paziente, con report guidato. adhd scale modulo"><a href="adhd/modulo-unico-adhd.html"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Modulo ADHD — paziente</span><span class="cat-sub">153 voci · ASRS-18 · DIVA-5 · WURS · WHODAS</span></span></a></li>
+                    <li class="cat-item" data-g="modulo" data-k="modulo adhd — familiare la scheda per il familiare o il convivente, con la lettura dei risultati. adhd familiare modulo"><a href="adhd/modulo-familiare-adhd.html"><i class="fas fa-users" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Modulo ADHD — familiare</span><span class="cat-sub">18 sintomi · report guidato</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile pdf" data-k="anamnestico — patente di guida scheda anamnestica per il rinnovo della patente: condizioni che controindicano la guida. patente guida rinnovo facsimile pdf"><a href="modulistica/facsimile-anamnestico-patente-guida.pdf"><i class="fas fa-id-card" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Anamnestico — patente di guida</span><span class="cat-sub">Facsimile · condizioni a rischio</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile pdf" data-k="capacita di intendere e di volere facsimile di certificazione della capacita di intendere e di volere. amministratore sostegno interdizione facsimile pdf"><a href="modulistica/facsimile-capacita-intendere-volere.pdf"><i class="fas fa-scale-balanced" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Capacità di intendere e di volere</span><span class="cat-sub">Facsimile · certificazione</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile pdf" data-k="constatazione di decesso modello per il riconoscimento e la constatazione del decesso. morte salma facsimile pdf"><a href="modulistica/facsimile-constatazione-decesso.pdf"><i class="fas fa-file-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Constatazione di decesso</span><span class="cat-sub">Facsimile · riconoscimento</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile inps pdf" data-k="inail — infortunio sul lavoro certificazione medica di infortunio sul lavoro, modello 1 ss. inail infortunio facsimile inps pdf"><a href="modulistica/facsimile-inail-infortunio-mod1ss.pdf"><i class="fas fa-user-injured" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">INAIL — infortunio sul lavoro</span><span class="cat-sub">Mod. 1 SS</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile inps pdf" data-k="inail — malattia professionale certificazione di malattia professionale, modello 5 ss bis. inail tecnopatia facsimile inps pdf"><a href="modulistica/facsimile-inail-malattia-professionale-mod5ssbis.pdf"><i class="fas fa-flask" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">INAIL — malattia professionale</span><span class="cat-sub">Mod. 5 SS bis</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile inps pdf" data-k="certificato di malattia inps facsimile di certificato di malattia con diagnosi e prognosi. certificato malattia facsimile inps pdf"><a href="modulistica/facsimile-certificato-malattia-inps.pdf"><i class="fas fa-clipboard-check" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Certificato di malattia INPS</span><span class="cat-sub">Facsimile · diagnosi e prognosi</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile pdf" data-k="anamnestico — porto d'armi scheda anamnestica per il rilascio o rinnovo del porto d'armi. armi licenza facsimile pdf"><a href="modulistica/facsimile-anamnestico-porto-armi.pdf"><i class="fas fa-shield-alt" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Anamnestico — porto d'armi</span><span class="cat-sub">Art. 25 L. 833/1978</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile pdf" data-k="trasporto di salma attestato per il trasporto di salma secondo la legge regionale toscana. salma trasporto facsimile pdf"><a href="modulistica/facsimile-attestato-trasporto-salma.pdf"><i class="fas fa-ambulance" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Trasporto di salma</span><span class="cat-sub">Art. 10 c. 2 L.R. 19/2004</span></span></a></li>
+                    <li class="cat-item" data-g="facsimile pdf" data-k="consenso informato alla vaccinazione modulo di consenso informato per la vaccinazione, modello regionale. vaccino consenso facsimile pdf"><a href="modulistica/facsimile-consenso-vaccinazione.pdf"><i class="fas fa-shield-virus" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Consenso informato alla vaccinazione</span><span class="cat-sub">Regione Toscana</span></span></a></li>
+                    <li class="cat-item" data-g="modulo pdf" data-k="scelta mmg/pls in deroga domanda di scelta del medico in deroga al bacino territoriale. cambio medico deroga modulo pdf"><a href="modulistica/modulo-domanda-scelta-mmg-pls-deroga-territoriale.pdf"><i class="fas fa-user-plus" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scelta MMG/PLS in deroga</span><span class="cat-sub">Deroga territoriale · USL Sud Est</span></span></a></li>
+                    <li class="cat-item" data-g="modulo pdf" data-k="comunicazione di sostituzione mmg/pls comunicazione di sostituzione temporanea del medico o del pediatra. sostituzione medico modulo pdf"><a href="modulistica/modulo-comunicazione-sostituzione-mmg-pls.pdf"><i class="fas fa-user-doctor" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Comunicazione di sostituzione MMG/PLS</span><span class="cat-sub">USL Sud Est</span></span></a></li>
+                    <li class="cat-item" data-g="adi modulo pdf" data-k="cartella clinico-assistenziale territoriale la cartella territoriale per i pazienti in assistenza domiciliare. cartella adi adi modulo pdf"><a href="modulistica/cartella-clinico-assistenziale-territoriale-adi-adp.pdf"><i class="fas fa-house-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Cartella clinico-assistenziale territoriale</span><span class="cat-sub">ADI · ADP</span></span></a></li>
+                    <li class="cat-item" data-g="accessi modulo pdf" data-k="modulo picc team — accessi vascolari richiesta al picc team con consenso e informativa per gli accessi vascolari. picc port catetere accessi modulo pdf"><a href="modulistica/modulo-picc-team-accessi-vascolari.pdf"><i class="fas fa-file-contract" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Modulo PICC team — accessi vascolari</span><span class="cat-sub">Allegato 2 · consenso e informativa</span></span></a></li>
+                    <li class="cat-item" data-g="modulo pdf" data-k="attivazione afa modulo per attivare i corsi di attivita fisica adattata. afa palestra modulo pdf"><a href="modulistica/modulo-attivazione-afa.pdf"><i class="fas fa-heart-pulse" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Attivazione AFA</span><span class="cat-sub">Attività fisica adattata · Allegato B</span></span></a></li>
+                    <li class="cat-item" data-g="esenzione modulo pdf" data-k="esenzione — diabete modulo di certificazione per l'esenzione ticket per diabete. diabete esenzione 013 esenzione modulo pdf"><a href="modulistica/modulo-esenzione-diabete.pdf"><i class="fas fa-flask" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Esenzione — diabete</span><span class="cat-sub">Certificazione del MMG</span></span></a></li>
+                    <li class="cat-item" data-g="esenzione modulo pdf" data-k="esenzione — ipertensione modulo di certificazione per l'esenzione ticket per ipertensione. ipertensione esenzione esenzione modulo pdf"><a href="modulistica/modulo-esenzione-ipertensione.pdf"><i class="fas fa-tachometer-alt" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Esenzione — ipertensione</span><span class="cat-sub">Certificazione del MMG</span></span></a></li>
+                    <li class="cat-item" data-g="esenzione modulo pdf" data-k="rinnovo esenzione 048 rinnovo dell'esenzione per patologia oncologica (codice 048). oncologia esenzione 048 esenzione modulo pdf"><a href="modulistica/modulo-rinnovo-esenzione-048.pdf"><i class="fas fa-tag" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Rinnovo esenzione 048</span><span class="cat-sub">Patologia oncologica · MMG e CORD</span></span></a></li>
+                </ul>
+            </section>
+            <section class="cat-area" id="area-prescrivere" data-area="prescrivere" aria-labelledby="h-prescrivere">
+                <h2 class="cat-h2" id="h-prescrivere"><i class="fas fa-file-prescription" aria-hidden="true"></i>Prescrivere e certificare<span class="cat-n"> 14</span></h2>
+                <p class="cat-intro">Criteri, codici, protocolli e moduli di prescrizione o certificazione.</p>
+                <ul class="cat-list" data-area="prescrivere" data-more="Mostra tutte le 14 risorse">
+                    <li class="cat-item" data-g="inps certificati" data-k="certificati inps — d.lgs. 62/2024 il protocollo operativo per la certificazione di malattia: standard del pdf, allegazioni, whodas. certificato malattia telematico inps certificati"><a href="protocollo-certificati-inps.html"><i class="fas fa-gavel" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Certificati INPS — D.Lgs. 62/2024</span><span class="cat-sub">Allegazioni · PDF · WHODAS</span></span></a></li>
+                    <li class="cat-item" data-g="prescrizione codici" data-k="criteri di appropriatezza le regole che rendono una richiesta appropriate: diagnostica per immagini, farmaci, trasporto, endoscopia, moc. appropriatezza ticket esenzioni prescrizione codici"><a href="criteri-appropriatezza.html"><i class="fas fa-stethoscope" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Criteri di appropriatezza</span><span class="cat-sub">PDTA · farmaci · trasporto 06 · endoscopia</span></span></a></li>
+                    <li class="cat-item" data-g="pdf" data-k="pdta disturbi cognitivi e demenze il percorso diagnostico-terapeutico aziendale per i disturbi cognitivi, integrale. demenze alzheimer cdcd pdf"><a href="modulistica/pdta-disturbi-cognitivi-demenze.pdf"><i class="fas fa-brain" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">PDTA disturbi cognitivi e demenze</span><span class="cat-sub">PDA-PCUR-003 rev. 0</span></span></a></li>
+                    <li class="cat-item" data-g="pdf" data-k="dgr 1007/2026 — melanoma la delibera regionale sull'identificazione precoce del melanoma. nevi melanoma screening pdf"><a href="modulistica/dgr-1007-2026-identificazione-precoce-melanoma.pdf"><i class="fas fa-file-shield" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">DGR 1007/2026 — melanoma</span><span class="cat-sub">Delibera con allegato A</span></span></a></li>
+                    <li class="cat-item" data-g="pdf" data-k="informativa — valutazione dei nevi l'informativa operativa per la valutazione dei nevi in studio. nevi melanoma mappatura pdf"><a href="modulistica/informativa-valutazione-nevi-mmg-pls-specialisti.pdf"><i class="fas fa-file-shield" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Informativa — valutazione dei nevi</span><span class="cat-sub">MMG · PLS · specialisti</span></span></a></li>
+                    <li class="cat-item" data-g="codici prescrizione" data-k="medicina fisica — codici fascia lr codici e denominazioni delle prestazioni di medicina fisica e come prescriverle dal mmg. riabilitazione fisioterapia codici prescrizione"><a href="medicina-fisica-codici-LR.html"><i class="fas fa-file-prescription" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Medicina fisica — codici fascia LR</span><span class="cat-sub">LR01–LR21 · nuovo catalogo</span></span></a></li>
+                    <li class="cat-item" data-g="ausili codici" data-k="ausili assistenziali — elenco 2b gli ausili prescrivibili dal mmg con codice iso e indicazione, tratti dall'elenco 2b. protesi presidi carrozzina deambulatore ausili codici"><a href="ausili-assistenziali.html"><i class="fas fa-file-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Ausili assistenziali — Elenco 2B</span><span class="cat-sub">Anticaduta · letti · carrozzine · WC · sollevamento</span></span></a></li>
+                    <li class="cat-item" data-g="codici prescrizione" data-k="analisi genetiche — codici regionali codice regionale e nazionale delle analisi genetiche, con punto di prelievo e tempi. genetica cariotipo fish codici prescrizione"><a href="codici-analisi-genetiche.html"><i class="fas fa-file-prescription" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Analisi genetiche — codici regionali</span><span class="cat-sub">40 voci · catalogo di lavoro</span></span></a></li>
+                    <li class="cat-item" data-g="modulo" data-k="batterie adhd — modulo unico come si fondono le scale adhd sovrapposte in un modulo unico e cosa consegnare. asrs diva wurs scale modulo"><a href="adhd.html"><i class="fas fa-book-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Batterie ADHD — modulo unico</span><span class="cat-sub">Metodo · regola di fusione · licenze</span></span></a></li>
+                    <li class="cat-item" data-g="certificati pdf" data-k="certificati gratuiti, a pagamento e con iva quali certificati sono gratuiti, quali a pagamento e quali con iva, secondo l'ordine di arezzo. onorari tariffa certificato certificati pdf"><a href="modulistica/certificati-gratuiti-a-pagamento-iva-omceo-arezzo.pdf"><i class="fas fa-file-invoice-dollar" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Certificati gratuiti, a pagamento e con IVA</span><span class="cat-sub">Nota OMCeO Arezzo · prot. 1012/2014</span></span></a></li>
+                    <li class="cat-item" data-g="ausili modulo pdf" data-k="prescrizione — incontinenza urinaria modulo per la prescrizione dei dispositivi per l'incontinenza. pannoloni cateteri assorbenti ausili modulo pdf"><a href="modulistica/modulo-prescrizione-incontinenza-urinaria.pdf"><i class="fas fa-clipboard-list" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Prescrizione — incontinenza urinaria</span><span class="cat-sub">Dispositivi medici</span></span></a></li>
+                    <li class="cat-item" data-g="ausili modulo pdf" data-k="prescrizione — presidi per stomia modulo per la prescrizione dei presidi per stomia. stomia sacca ausili modulo pdf"><a href="modulistica/modulo-prescrizione-dispositivi-stomia.pdf"><i class="fas fa-prescription-bottle" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Prescrizione — presidi per stomia</span><span class="cat-sub">Colostomia · ileostomia · urostomia</span></span></a></li>
+                    <li class="cat-item" data-g="ausili modulo pdf" data-k="prescrizione — autocontrollo glicemico prescrizione di strisce e glucometro per l'autocontrollo glicemico. glicemia glucometro strisce ausili modulo pdf"><a href="modulistica/modulo-prescrizione-autocontrollo-glicemico.pdf"><i class="fas fa-file-prescription" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Prescrizione — autocontrollo glicemico</span><span class="cat-sub">Allegato B · DGRT 806/2024</span></span></a></li>
+                    <li class="cat-item" data-g="ausili modulo pdf" data-k="richiesta protesi e ausili richiesta di fornitura di protesi e ausili all'usl. protesi ausili fornitura ausili modulo pdf"><a href="modulistica/modulo-richiesta-fornitura-protesi-ausili.pdf"><i class="fas fa-file-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Richiesta protesi e ausili</span><span class="cat-sub">Mod. 0583 rev. 002</span></span></a></li>
+                </ul>
+            </section>
+            <section class="cat-area" id="area-percorsi" data-area="percorsi" aria-labelledby="h-percorsi">
+                <h2 class="cat-h2" id="h-percorsi"><i class="fas fa-route" aria-hidden="true"></i>Percorsi e accessi<span class="cat-n"> 5</span></h2>
+                <p class="cat-intro">Dove mandare il paziente: sedi, orari, procedure e contatti dei percorsi.</p>
+                <ul class="cat-list" data-area="percorsi" data-more="Mostra tutte le 5 risorse">
+                    <li class="cat-item" data-g="accessi" data-k="guida pir — punti di intervento rapido quando e come attivare i punti di intervento rapido, con i modelli e la casistica. urgenze differibili accessi"><a href="pir.html"><i class="fas fa-book-open" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Guida PIR — Punti di Intervento Rapido</span><span class="cat-sub">Urgenze differibili · modelli · casistica</span></span></a></li>
+                    <li class="cat-item" data-g="accessi" data-k="accessi — malattie infettive / mst sedi, orari e modalita di accesso all'ambulatorio mst e alla segnalazione obbligatoria. mst infettive igiene accessi"><a href="guida-accessi-malattie-infettive.html"><i class="fas fa-hospital-user" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Accessi — malattie infettive / MST</span><span class="cat-sub">Dove · come accedere · segnalazione</span></span></a></li>
+                    <li class="cat-item" data-g="accessi pdf" data-k="procedura pp-pare-70 — tumori gastrointestinali la procedura per il percorso del paziente con sospetto tumore gastrointestinale. gastrointestinale oncologia percorso accessi pdf"><a href="modulistica/procedura-gom-tumori-gastrointestinali.pdf"><i class="fas fa-hospital" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Procedura PP-PARE-70 — tumori gastrointestinali</span><span class="cat-sub">Sospetto o accertato</span></span></a></li>
+                    <li class="cat-item" data-g="accessi" data-k="accessi — pronto soccorso specialistici orari e sedi dei pronto soccorso specialistici di san donato. ps oculistica orl ortopedia accessi"><a href="guida-accessi-pronto-soccorso.html"><i class="fas fa-truck-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Accessi — pronto soccorso specialistici</span><span class="cat-sub">Oculistico · ORL · ortopedico · pediatrico · ginecologico</span></span></a></li>
+                    <li class="cat-item" data-g="accessi" data-k="accessi vascolari — rete ava chi si occupa degli accessi vascolari, come si attiva la richiesta e quali moduli servono. picc port catetere accessi"><a href="guida-accessi-vascolari.html"><i class="fas fa-house-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Accessi vascolari — rete AVA</span><span class="cat-sub">PICC · Port · moduli ed email</span></span></a></li>
+                </ul>
+            </section>
+            <section class="cat-area" id="area-strumenti" data-area="strumenti" aria-labelledby="h-strumenti">
+                <h2 class="cat-h2" id="h-strumenti"><i class="fas fa-toolbox" aria-hidden="true"></i>Software, turni e strumenti di studio<span class="cat-n"> 9</span></h2>
+                <p class="cat-intro">Millewin e i suoi manuali, RUAP e turni, calcolatori, note operative sempre aggiornate.</p>
+                <ul class="cat-list" data-area="strumenti" data-more="Mostra tutte le 9 risorse">
+                    <li class="cat-item" data-g="manuale pdf" data-k="risorse informative e manualistica manuali millewin, istruzioni di studio, codici e nomenclatori, fogli per il paziente, procedure aziendali. manuali pdf scaricabili manuale pdf"><a href="risorse-informative.html"><i class="fas fa-file-pdf" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Risorse informative e manualistica</span><span class="cat-sub">22 PDF · manuali Millewin, moduli, procedure</span></span></a></li>
+                    <li class="cat-item" data-g="ruap" data-k="calcolatore turni ruap calcolo e consultazione dei turni ruap della cooperativa. turni calendario ruap"><a href="./RUAP/"><i class="fas fa-calendar-check" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Calcolatore turni RUAP</span><span class="cat-sub">Ruolo Unico di Assistenza Primaria</span></span></a></li>
+                    <li class="cat-item" data-g="ruap" data-k="gestore turni universale applicazione per costruire i turni e calcolare ferie e coperture. ferie ruap"><a href="gestoreturni/gestoreturni.html"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Gestore turni universale</span><span class="cat-sub">Configurabile · ferie e coperture</span></span></a></li>
+                    <li class="cat-item" data-g="contatti" data-k="note operative e contatti il prontuario di studio: telefoni e percorsi, codici prescrittivi, vaccinazioni, gravidanza, presidi. telefoni recapiti indirizzi vaccinazioni vaccino influenza esenzioni presidi contatti"><a href="note-operative.html"><i class="fas fa-book-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Note operative e contatti</span><span class="cat-sub">Indirizzi · codici · vaccini · farmaci · esenzioni</span></span></a></li>
+                    <li class="cat-item" data-g="" data-k="trasporto sanitario cod. 06 — criteri trasporto sanitario cod. 06"><a href="criteri-appropriatezza.html#trasporto-sanitario"><i class="fas fa-truck-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Trasporto sanitario cod. 06 — criteri</span><span class="cat-sub">trasporto sanitario cod. 06</span></span></a></li>
+                    <li class="cat-item" data-g="" data-k="note operative e contatti note operative e contatti"><a href="note-operative.html#codici-heading"><i class="fas fa-address-book" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Note operative e contatti</span><span class="cat-sub">Note operative e contatti</span></span></a></li>
+                    <li class="cat-item" data-g="" data-k="vaccinazione pneumococco nelle rsa (scheda) scheda completa"><a href="comunicazioni-2026.html#pcv21-rsa"><i class="fas fa-syringe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Vaccinazione pneumococco nelle RSA (scheda)</span><span class="cat-sub">scheda completa</span></span></a></li>
+                    <li class="cat-item" data-g="ruap" data-k="vademecum ruap procedure della cooperativa per il ruolo unico di assistenza primaria. turni ruap"><a href="RUAP/"><i class="fas fa-book" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Vademecum RUAP</span><span class="cat-sub">Cooperativa sanitaria · procedure</span></span></a></li>
+                    <li class="cat-item" data-g="manuale" data-k="trucchi e scorciatoie millewin le combinazioni da tastiera e le procedure rapide per lavorare piu veloce in millewin. tasti scorciatoie tastiera manuale"><a href="millewin-tips.html"><i class="fas fa-keyboard" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Trucchi e scorciatoie Millewin</span><span class="cat-sub">Scorciatoie · prescrizioni · anagrafica · mobilità</span></span></a></li>
+                </ul>
+            </section>
+            <section class="cat-area" id="area-paziente" data-area="paziente" aria-labelledby="h-paziente">
+                <h2 class="cat-h2" id="h-paziente"><i class="fas fa-print" aria-hidden="true"></i>Per il paziente<span class="cat-n"> 11</span></h2>
+                <p class="cat-intro">Fogli da stampare o da linkare: schede multilingue, FAQ, esenzioni, impegnative.</p>
+                <ul class="cat-list" data-area="paziente" data-more="Mostra tutte le 11 risorse">
+                    <li class="cat-item" data-g="stampa" data-k="schede pazienti a4 — 5 lingue il poster con le schede informative nelle cinque lingue dello studio. traduzioni romeno bengali urdu stampa"><a href="../ssn/poster_multilingue.html"><i class="fas fa-layer-group" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Schede pazienti A4 — 5 lingue</span><span class="cat-sub">IT · RO · EN · BN · UR</span></span></a></li>
+                    <li class="cat-item" data-g="inps stampa" data-k="certificati di malattia — informativa inps come funziona il certificato di malattia telematico e l'obbligo di visita, spiegato al paziente. malattia certificato paziente inps stampa"><a href="../ssn/cert-malattia.html"><i class="fas fa-file-medical" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Certificati di malattia — informativa INPS</span><span class="cat-sub">Obbligo di visita</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="faq pazienti le risposte alle domande piu frequenti dei pazienti. domande frequenti stampa"><a href="../ssn/faq.html"><i class="fas fa-question-circle" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">FAQ pazienti</span><span class="cat-sub">Ricette · certificati · specialisti</span></span></a></li>
+                    <li class="cat-item" data-g="esenzione stampa" data-k="esenzioni ticket guida alle esenzioni per reddito e per patologia. ticket esenzione paziente esenzione stampa"><a href="../ssn/esenzioni.html"><i class="fas fa-tag" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Esenzioni ticket</span><span class="cat-sub">Guida · codici · come richiederle</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="visite specialistiche come si prenota una visita, cosa sono le impegnative e le priorita. cup prenotazione stampa"><a href="../ssn/impegnative.html"><i class="fas fa-hospital-user" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Visite specialistiche</span><span class="cat-sub">Impegnative · CUP · priorità</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — italiano la scheda informativa a4 in italiano, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-it.html"><i class="fas fa-print" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — Italiano</span><span class="cat-sub">Fronte/retro · Doctolib + triage + salute</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — romana la scheda informativa a4 in romana, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-ro.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — Română</span><span class="cat-sub">Fronte/retro in romeno</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — english la scheda informativa a4 in english, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-en.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — English</span><span class="cat-sub">Fronte/retro in inglese</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — বাংলা (bengali) la scheda informativa a4 in বাংলা, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-bn.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — বাংলা (Bengali)</span><span class="cat-sub">Fronte/retro in bengalese</span></span></a></li>
+                    <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — اردو (urdu) la scheda informativa a4 in اردو, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-ur.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — اردو (Urdu)</span><span class="cat-sub">Fronte/retro in urdu, RTL</span></span></a></li>
+                    <li class="cat-item" data-g="stampa pdf" data-k="kit schede pazienti 5 lingue (pdf) il kit completo da stampare per il banco: cinque lingue, fronte/retro. stampa kit stampa pdf"><a href="../ssn/pdf/kit-schede-pazienti-5-lingue.pdf"><i class="fas fa-file-pdf" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Kit schede pazienti 5 lingue (PDF)</span><span class="cat-sub">10 pagine A4 pronte da stampare</span></span></a></li>
+                </ul>
+            </section>
+            <section class="cat-area cat-links" id="area-link" aria-labelledby="h-link">
+                <h2 class="cat-h2" id="h-link"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i>Portali e link esterni<span class="cat-n"> 17</span></h2>
+                <p class="cat-intro">Siti che si aprono fuori da savianu.it: portali regionali, ordini, agenzie. Restano cercabili dalla barra qui sopra.</p>
+                <ul class="cat-linklist">
+                    <li class="cat-item" data-g="portale" data-k="portale medico ssr toscana portale esterno"><a href="https://portalemedico.ssr.toscana.it/portale/" target="_blank" rel="noopener noreferrer">Portale Medico<span>SSR Toscana</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="portale dipendenti cedolini gru portale esterno"><a href="https://gru-portale.ssr.toscana.it" target="_blank" rel="noopener noreferrer">Portale Dipendenti<span>Cedolini GRU</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="bandi toscana opportunita e scadenze portale esterno"><a href="https://www.regione.toscana.it/-/opportunita-e-scadenze" target="_blank" rel="noopener noreferrer">Bandi Toscana<span>Opportunità e scadenze</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="albo pretorio usl sud est portale esterno"><a href="https://albopretorio.uslsudest.toscana.it/" target="_blank" rel="noopener noreferrer">Albo Pretorio<span>USL Sud Est</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="supporto millewin assistenza tecnica portale esterno"><a href="https://millewin.it/supporto/" target="_blank" rel="noopener noreferrer">Supporto Millewin<span>Assistenza tecnica</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="sispc prevenzione collettiva portale esterno"><a href="https://www.prevenzionecollettiva.toscana.it/sispc/" target="_blank" rel="noopener noreferrer">SISPC<span>Prevenzione collettiva</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="herodema prescrizioni ssr portale esterno"><a href="https://prescrizione.ssr.toscana.it/herodema/" target="_blank" rel="noopener noreferrer">HeroDema<span>Prescrizioni SSR</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="sistemats tessera sanitaria portale esterno"><a href="https://sistemats1.sanita.finanze.it/portale/area-riservata-operatore" target="_blank" rel="noopener noreferrer">SistemaTS<span>Tessera sanitaria</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="piani terapeutici ptweb ssr portale esterno"><a href="https://ptweb.ssr.toscana.it/piani-terapeutici/" target="_blank" rel="noopener noreferrer">Piani Terapeutici<span>PTWeb SSR</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="mediately prontuario medico portale esterno"><a href="https://mediately.co/it/" target="_blank" rel="noopener noreferrer">Mediately<span>Prontuario medico</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="note aifa elenco ufficiale portale esterno"><a href="https://www.aifa.gov.it/elenco-note-aifa" target="_blank" rel="noopener noreferrer">Note AIFA<span>Elenco ufficiale</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="happymamma gravidanza e maternita portale esterno"><a href="https://happymamma.sanita.toscana.it/" target="_blank" rel="noopener noreferrer">HappyMamma<span>Gravidanza e maternità</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="medico digitale telemedicina e fad portale esterno"><a href="https://www.medicodigitale.it/" target="_blank" rel="noopener noreferrer">Medico Digitale<span>Telemedicina e FAD</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="fnomceo ordini medici portale esterno"><a href="https://www.fnomceo.it/" target="_blank" rel="noopener noreferrer">FNOMCEO<span>Ordini medici</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="ordine medici arezzo portale esterno"><a href="https://www.omceoar.it/" target="_blank" rel="noopener noreferrer">Ordine Medici<span>Arezzo</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="simg mmg italia portale esterno"><a href="https://www.simg.it/" target="_blank" rel="noopener noreferrer">SIMG<span>MMG Italia</span></a></li>
+                    <li class="cat-item" data-g="portale" data-k="sst toscana servizio sanitario portale esterno"><a href="https://www.regione.toscana.it/sst" target="_blank" rel="noopener noreferrer">SST Toscana<span>Servizio Sanitario</span></a></li>
+                </ul>
+            </section>
+            <script type="application/json" id="cat-docs">
+[{"t":"Millewin in un’ora","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-in-un-ora.pdf","k":"millewin in un’ora il percorso guidato completo: dalle prime schermate alla gestione della cartella, agenda, prescrizioni, certificati e stampe. e il manuale da cui partire per imparare il programma da zero o per rinfrescare i passaggi che si usano meno. pdf","g":"pdf"},{"t":"Millewin StartUp","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-startup.pdf","k":"millewin startup installazione, primo avvio, configurazione dello studio, database e parametri di rete. la parte tecnica che serve quando si cambia postazione, si reinstalla il programma o si configura un nuovo studio. pdf","g":"pdf"},{"t":"Nuova Sanità di Iniziativa","s":"PDF · Manualistica Millewin","h":"modulistica/nuova-sanita-iniziativa-millewin.pdf","k":"nuova sanita di iniziativa gestione dei registri di sanita di iniziativa: arruolamento dei pazienti complessi (target a) e dei pazienti a rischio, motivazioni di arruolamento, compilazione e stampa del pai, estrazione degli arruolati. sanita iniziativa target pai arruolamento cronicita manuale pdf","g":"manuale pdf"},{"t":"Millebook Medico","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-millebook-medico.pdf","k":"millebook medico agenda online e appuntamenti condivisi con la segreteria e con i pazienti: calendari, disponibilita, inviti e gestione degli appuntamenti dal lato del medico. pdf","g":"pdf"},{"t":"Millebook — manuale per il paziente","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millebook-paziente.pdf","k":"millebook — manuale per il paziente il libretto pensato per il paziente: come prenotare, spostare o disdire un appuntamento in autonomia. utile da stampare o da linkare a chi chiede come si prenota online. pdf","g":"pdf"},{"t":"Millelight","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-millelight.pdf","k":"millelight accesso alla cartella da tablet o smartphone per le visite domiciliari: cosa si puo fare in mobilita e come avviene la sincronizzazione con lo studio. pdf","g":"pdf"},{"t":"Millelight smartcard","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-millelight-smartcard.pdf","k":"millelight smartcard la variante di millelight con lettore di smart card/cns: accesso in mobilita con autenticazione su carta. pdf","g":"pdf"},{"t":"Gestione allegati","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-gestione-allegati.pdf","k":"gestione allegati come importare, classificare e ritrovare gli allegati nella cartella del paziente (referti, immagini, documentazione scansionata). pdf","g":"pdf"},{"t":"Mille Live Update","s":"PDF · Manualistica Millewin","h":"modulistica/manuale-millewin-live-update.pdf","k":"mille live update aggiornamenti, patch e tabelle del programma: cosa fa il live update e cosa controllare quando un aggiornamento non parte (l’errore «controllo iniziale fallito» al primo avvio su un pc nuovo). pdf","g":"pdf"},{"t":"Istruzioni operative di studio","s":"PDF · Istruzioni e promemoria di studio","h":"modulistica/istruzioni-studio-millewin-doctolib.pdf","k":"istruzioni operative di studio farmaci (fascia a e c, note aifa, piani terapeutici, numero di confezioni), esenzioni (quando millewin le applica da solo, e01, c01–c03, m00 e m99 in gravidanza), certificati di malattia e vaccinazioni dell’adulto. e il documento che risponde alla maggior parte delle domande di sportello. farmaci esenzioni certificati vaccini note aifa piano terapeutico manuale pdf","g":"manuale pdf"},{"t":"Spunti di natura pratica","s":"PDF · Istruzioni e promemoria di studio","h":"modulistica/spunti-pratici-studio.pdf","k":"spunti di natura pratica appunti operativi messi insieme negli anni: recapiti e percorsi (telepneumoconsulto, adi, rsa, assistenti sociali, screening), codici utili, regole pratiche su certificati, presidi, ausili e accessi. la versione sempre aggiornata e la pagina note operative. appunti recapiti percorsi adi rsa assistenti sociali screening manuale pdf","g":"manuale pdf"},{"t":"Ausili assistenziali — Elenco 2B","s":"PDF · Codici, nomenclatori e criteri di prescrizione","h":"modulistica/ausili-elenco-2b-pa-dgam-002.pdf","k":"ausili assistenziali — elenco 2b la tabella ufficiale degli ausili dell’elenco 2b con descrizione e codice di classificazione iso: e il documento da cui e tratta la pagina ausili assistenziali, da allegare alla richiesta quando serve il riferimento normativo. ausili elenco 2b dgam presidi protesi ausili pdf","g":"ausili pdf"},{"t":"Codici degli esami genetici","s":"PDF · Codici, nomenclatori e criteri di prescrizione","h":"modulistica/codici-esami-genetici-prato-2025.pdf","k":"codici degli esami genetici codice regionale e nazionale di ogni esame, punto di prelievo, tempi di risposta e modalita di ritiro del laboratorio di genetica di prato. fonte della pagina codici regionali — analisi genetiche. genetica cariotipo fish prato laboratorio prelievo codici pdf","g":"codici pdf"},{"t":"Nomenclatore tariffario regionale","s":"PDF · Codici, nomenclatori e criteri di prescrizione","h":"modulistica/nomenclatore-tariffario-regionale.pdf","k":"nomenclatore tariffario regionale nomenclatore tariffario delle prestazioni specialistiche ambulatoriali: codice, nota, branca, descrizione, tariffa, delibera integrativa e indicazioni clinico-diagnostiche. serve per verificare un codice, una tariffa o la nota che accompagna una prestazione. nomenclatore tariffario tariffa prestazioni codice codici pdf","g":"codici pdf"},{"t":"Criteri per la densitometria ossea","s":"PDF · Codici, nomenclatori e criteri di prescrizione","h":"modulistica/criteri-densitometria-osteoporosi.pdf","k":"criteri per la densitometria ossea le indicazioni clinico-diagnostiche che rendono la moc erogabile dal ssr (osteoporosi secondaria, terapie prolungate, carenza estrogenica, fattori di rischio, fratture pregresse), la tempistica dei controlli (non prima di 18–24 mesi) e l’obbligo di motivare la richiesta. moc densitometria osteoporosi dgr 1238 prescrizione pdf","g":"prescrizione pdf"},{"t":"Preparazione alla colonscopia","s":"PDF · Preparazioni e istruzioni per il paziente","h":"modulistica/preparazione-colonscopia.pdf","k":"preparazione alla colonscopia schemi orari di preparazione intestinale per clensia, plenvu e selg esse, distinti per orario dell’esame (mattina presto, tarda mattina, pomeriggio) e per la necessita di una pulizia ad alto volume dopo preparazioni precedenti inadeguate. colonscopia gastroscopia clensia plenvu selg esse pulizia intestinale pdf","g":"pdf"},{"t":"Raccolta urine delle 24 ore con acido","s":"PDF · Preparazioni e istruzioni per il paziente","h":"modulistica/raccolta-urine-24-ore-acido.pdf","k":"raccolta urine delle 24 ore con acido come versare l’acido, quali urine scartare, come etichettare la provetta e cosa consegnare al punto prelievi; include il caso della doppia raccolta con e senza acido (contenitori a e b e volume totale). urine 24 ore raccolta acido cloridrico esame urine pdf","g":"pdf"},{"t":"Prestazioni esenti in gravidanza","s":"PDF · Preparazioni e istruzioni per il paziente","h":"modulistica/prestazioni-esenti-gravidanza.pdf","k":"prestazioni esenti in gravidanza l’elenco ministeriale delle prestazioni specialistiche esenti per la tutela della maternita responsabile, in gravidanza e in epoca preconcezionale. e il documento da mostrare quando il paziente contesta il ticket su un esame che rientra nell’allegato. gravidanza gestante maternita ticket esenzione allegato 10a esenzione pdf","g":"esenzione pdf"},{"t":"Trasfusione domiciliare di emazie concentrate","s":"PDF · Procedure e percorsi aziendali","h":"modulistica/procedura-trasfusione-domiciliare.pdf","k":"trasfusione domiciliare di emazie concentrate chi e candidabile alla trasfusione a domicilio (paziente non trasportabile, anziano fragile, paziente fragile) e chi no, con le fasi della procedura: richiesta e invio di campioni alla struttura trasfusionale, consegna degli emocomponenti, preparazione del paziente, esecuzione, sorveglianza e gestione delle reazioni. trasfusione emazie sangue domicilio accessi pdf","g":"accessi pdf"},{"t":"Profilassi antibiotica in odontoiatria","s":"PDF · Procedure e percorsi aziendali","h":"modulistica/profilassi-antibiotica-odontoiatria.pdf","k":"profilassi antibiotica in odontoiatria documento di indirizzo sull’uso appropriato della profilassi antibiotica negli interventi ambulatoriali odontoiatrici, con le raccomandazioni cliniche e il ragionamento che le sostiene; in coda l’infografica destinata ai pazienti. antibiotico profilassi dentista odontoiatria prescrizione pdf","g":"prescrizione pdf"},{"t":"Esenzione dall’obbligo di reperibilità","s":"PDF · Procedure e percorsi aziendali","h":"modulistica/linee-guida-inps-esenzione-reperibilita.pdf","k":"esenzione dall’obbligo di reperibilita le linee guida inps sulle fasce di esenzione dalla reperibilita previste dal dm 11 gennaio 2016 (art. 25 del d.lgs. 151/2015): patologie gravi che richiedono terapie salvavita, nozione di gravita, documentazione sanitaria necessaria e ruolo del medico certificatore. reperibilita certificato inps visita fiscale esenzione inps pdf","g":"inps pdf"},{"t":"Ditte per acquisto e noleggio CPAP","s":"PDF · elenco di studio","h":"modulistica/ditte-cpap-acquisto-noleggio.pdf","k":"ditte per acquisto e noleggio cpap elenco delle ditte fornitrici di cpap con i riferimenti commerciali, per acquisto e noleggio. cpap ventiloterapia apnee ossigeno noleggio pdf","g":"pdf"}]
+            </script>
+<!-- catalogo:end -->
+
+            <!-- Feedback Section -->
+            <div class="card reveal feedback-card" id="suggerimenti">
                 <div class="card-header">
-                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
-                    <h2>Organizzazione Eventi e Formazione</h2>
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <h2>Hai suggerimenti?</h2>
                 </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Pianificazione eventi clinici, riunioni e formazione dello studio.
-                </p>
+                <div style="padding: 20px 0; text-align: center;">
+                    <p style="margin-bottom: 15px; font-size: 1rem;">Hai suggerimenti o risorse da aggiungere? Inviamele!</p>
+                    <a href="mailto:emanuel@savianu.it?subject=Suggerimento%20per%20il%20portale%20MMG"
+                       class="btn-main btn-prenota"
+                       style="display: inline-block; background: var(--primary); color: var(--accent);">
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                        <span>emanuel@savianu.it</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Eventi e formazione: il calendario si carica solo se lo apri -->
+            <details class="card reveal cat-events" id="eventi">
+                <summary>
+                    <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+                    <span>Calendario eventi e formazione</span>
+                </summary>
+                <p class="cat-intro">Pianificazione di eventi clinici, riunioni e formazione dello studio.</p>
                 <div class="calendar-container">
                     <iframe
                         loading="lazy"
@@ -490,1015 +740,7 @@
                 <p class="calendar-fallback">
                     Non vedi il calendario? <a href="https://calendar.google.com/calendar/embed?src=c_b1cb83455dd147a9eed267ca93664b7b7e428369b1fd28c99775b94e29aada51%40group.calendar.google.com&amp;ctz=Europe%2FRome" target="_blank" rel="noopener noreferrer">Aprilo in una nuova scheda</a>.
                 </p>
-            </div>
-
-            <!-- Strumenti e Risorse MMG -->
-            <div class="card reveal">
-                <div class="card-header">
-                    <i class="fas fa-tools" aria-hidden="true"></i>
-                    <h2>Strumenti e Risorse</h2>
-                </div>
-
-                <!-- Strumenti Filter -->
-                <div class="search-container" style="margin-bottom: 20px;">
-                    <div class="search-input-group">
-                        <i class="fas fa-search search-input-icon" aria-hidden="true"></i>
-                        <input type="text" id="search-tools" class="search-input" placeholder="Cerca tra gli strumenti..." aria-label="Filtra strumenti e risorse">
-                    </div>
-                </div>
-
-                <div class="action-grid tools-grid-auto">
-                    <a href="risorse-informative.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Risorse informative e manualistica: raccolta di PDF per i colleghi">
-                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
-                        <span>Risorse informative</span>
-                        <small><i class="fas fa-download" aria-hidden="true"></i> Manuali e PDF</small>
-                    </a>
-
-                    <a href="./RUAP/"
-                       class="btn-main btn-prenota"
-                       aria-label="Calcolatore Turni RUAP">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                        <span>Calcolatore Turni RUAP</span>
-                        <small><i class="fas fa-clock" aria-hidden="true"></i> RUAP</small>
-                    </a>
-
-                    <a href="https://portalemedico.ssr.toscana.it/portale/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Portale Medico SSR Toscana">
-                        <i class="fas fa-laptop-medical" aria-hidden="true"></i>
-                        <span>Portale Medico</span>
-                        <small>SSR Toscana</small>
-                    </a>
-
-                    <a href="https://gru-portale.ssr.toscana.it"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Portale Dipendenti GRU">
-                        <i class="fas fa-file-invoice-dollar" aria-hidden="true"></i>
-                        <span>Portale Dipendenti</span>
-                        <small>Cedolini GRU</small>
-                    </a>
-
-                    <a href="https://www.regione.toscana.it/-/opportunita-e-scadenze"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Bandi e scadenze Regione Toscana">
-                        <i class="fas fa-landmark" aria-hidden="true"></i>
-                        <span>Bandi Toscana</span>
-                        <small>Opportunità e scadenze</small>
-                    </a>
-
-                    <a href="https://albopretorio.uslsudest.toscana.it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Albo Pretorio USL Sud Est Toscana">
-                        <i class="fas fa-gavel" aria-hidden="true"></i>
-                        <span>Albo Pretorio</span>
-                        <small>USL Sud Est</small>
-                    </a>
-
-                    <a href="https://millewin.it/supporto/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Supporto tecnico Millewin">
-                        <i class="fas fa-headset" aria-hidden="true"></i>
-                        <span>Supporto Millewin</span>
-                        <small>Assistenza tecnica</small>
-                    </a>
-
-                    <a href="https://www.prevenzionecollettiva.toscana.it/sispc/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="SISPC Prevenzione Collettiva Toscana">
-                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                        <span>SISPC</span>
-                        <small>Prevenzione collettiva</small>
-                    </a>
-
-                    <a href="https://prescrizione.ssr.toscana.it/herodema/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="HeroDema SSR Toscana">
-                        <i class="fas fa-pills" aria-hidden="true"></i>
-                        <span>HeroDema</span>
-                        <small>Prescrizioni SSR</small>
-                    </a>
-
-                    <a href="https://sistemats1.sanita.finanze.it/portale/area-riservata-operatore"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Sistema Tessera Sanitaria - area riservata operatore">
-                        <i class="fas fa-id-card" aria-hidden="true"></i>
-                        <span>SistemaTS</span>
-                        <small>Tessera sanitaria</small>
-                    </a>
-
-                    <a href="https://ptweb.ssr.toscana.it/piani-terapeutici/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Piani Terapeutici SSR Toscana">
-                        <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                        <span>Piani Terapeutici</span>
-                        <small>PTWeb SSR</small>
-                    </a>
-
-                    <a href="https://mediately.co/it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Mediately — Prontuario Medico">
-                        <i class="fas fa-book-medical" aria-hidden="true"></i>
-                        <span>Mediately</span>
-                        <small>Prontuario medico</small>
-                    </a>
-
-                    <a href="https://www.aifa.gov.it/elenco-note-aifa"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Elenco note AIFA">
-                        <i class="fas fa-list-ul" aria-hidden="true"></i>
-                        <span>Note AIFA</span>
-                        <small>Elenco ufficiale</small>
-                    </a>
-
-                    <a href="https://happymamma.sanita.toscana.it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="HappyMamma — Gravidanza e maternità Toscana">
-                        <i class="fas fa-heart-pulse" aria-hidden="true"></i>
-                        <span>HappyMamma</span>
-                        <small>Gravidanza e maternità</small>
-                    </a>
-
-                    <a href="https://www.medicodigitale.it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Medico Digitale — Telemedicina e FAD">
-                        <i class="fas fa-laptop" aria-hidden="true"></i>
-                        <span>Medico Digitale</span>
-                        <small>Telemedicina e FAD</small>
-                    </a>
-
-                    <a href="https://www.fnomceo.it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="FNOMCEO — Federazione Nazionale Ordini Medici">
-                        <i class="fas fa-user-tie" aria-hidden="true"></i>
-                        <span>FNOMCEO</span>
-                        <small>Ordini medici</small>
-                    </a>
-
-                    <a href="https://www.omceoar.it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Ordine Medici Arezzo">
-                        <i class="fas fa-landmark" aria-hidden="true"></i>
-                        <span>Ordine Medici</span>
-                        <small>Arezzo</small>
-                    </a>
-
-                    <a href="https://www.simg.it/"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="SIMG — Società Italiana di Medicina Generale">
-                        <i class="fas fa-stethoscope" aria-hidden="true"></i>
-                        <span>SIMG</span>
-                        <small>MMG Italia</small>
-                    </a>
-
-                    <a href="https://www.regione.toscana.it/sst"
-                       target="_blank" rel="noopener noreferrer"
-                       class="btn-main btn-prenota"
-                       aria-label="Servizio Sanitario della Toscana">
-                        <i class="fas fa-hospital" aria-hidden="true"></i>
-                        <span>SST Toscana</span>
-                        <small>Servizio Sanitario</small>
-                    </a>
-                
-                    <a href="../ssn/poster_multilingue.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Guida pratica multilingue 5 lingue e schede A4 per i pazienti">
-                        <i class="fas fa-layer-group" aria-hidden="true"></i>
-                        <span>Schede Pazienti A4 (5 lingue)</span>
-                        <small>IT · RO · EN · BN · UR fronte/retro + PDF</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Feedback Section -->
-            <div class="card reveal feedback-card">
-                <div class="card-header">
-                    <i class="fas fa-envelope" aria-hidden="true"></i>
-                    <h2>Hai suggerimenti?</h2>
-                </div>
-                <div style="padding: 20px 0; text-align: center;">
-                    <p style="margin-bottom: 15px; font-size: 1rem;">Hai suggerimenti o risorse da aggiungere? Inviamele!</p>
-                    <a href="mailto:emanuel@savianu.it?subject=Suggerimento%20per%20il%20portale%20MMG"
-                       class="btn-main btn-prenota"
-                       style="display: inline-block; background: var(--primary); color: var(--accent);">
-                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
-                        <span>emanuel@savianu.it</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- RUAP / PIR Section -->
-            <div class="card reveal" id="pir-card">
-                <div class="card-header">
-                    <i class="fas fa-hospital-user" aria-hidden="true"></i>
-                    <h2>Ruolo Unico di Assistenza Primaria (RUAP)</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Cos'è il ruolo unico, quali urgenze differibili gestisce un PIR e cosa va invece indirizzato al Pronto Soccorso. La guida completa è nella pagina dedicata.
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="pir.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Guida PIR — Punti di Intervento Rapido">
-                        <i class="fas fa-book-open" aria-hidden="true"></i>
-                        <span>Guida PIR</span>
-                        <small>Urgenze differibili &middot; modelli &middot; casistica</small>
-                    </a>
-                    <a href="./RUAP/"
-                       class="btn-main btn-prenota"
-                       aria-label="Calendario Turni RUAP">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                        <span>Turni RUAP</span>
-                        <small>Calendario e calcolatore turni</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Gestore Turni Universale Configurabile -->
-            <div class="card reveal">
-                <div class="card-header">
-                    <i class="fas fa-calendar-check" aria-hidden="true"></i>
-                    <h2>Gestore Turni Universale Configurabile</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Sistema completamente dinamico per la pianificazione e assegnazione dei turni. Configurazione di ruoli, turni, sedi e personale. Assegnazione dei turni, tracking orario, export/import dati e dark mode.
-                </p>
-                <a href="gestoreturni/gestoreturni.html" class="btn-main btn-prenota" style="max-width: 320px; display: inline-flex;">
-                    <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-                    <span>Apri Gestore Turni</span>
-                </a>
-            </div>
-
-            <!-- Protocolli e Normative -->
-            <div class="card reveal">
-                <div class="card-header">
-                    <i class="fas fa-file-contract" aria-hidden="true"></i>
-                    <h2>Protocolli e Normative</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Linee guida tecniche e normative per certificatori. Standard operativi, requisiti documentali e procedure INPS.
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="protocollo-certificati-inps.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Protocollo Operativo Certificati INPS D.Lgs. 62/2024">
-                        <i class="fas fa-gavel" aria-hidden="true"></i>
-                        <span>Protocollo INPS</span>
-                        <small>D.Lgs. 62/2024 · Allegazioni · WHODAS</small>
-                    </a>
-                    <a href="adi-adp-pai.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Assistenza Domiciliare ADI/ADP/PAI — PAI, Scheda Terapeutica Unica e comunicazione USL Sud Est">
-                        <i class="fas fa-house-medical" aria-hidden="true"></i>
-                        <span>Assistenza Domiciliare — ADI/ADP/PAI</span>
-                        <small>PAI · STU · invio a Cure Primarie · dal 1° ottobre 2026</small>
-                    </a>
-                    <a href="criteri-appropriatezza.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Criteri di appropriatezza — invii specialistici e diagnostica per immagini (PDTA diabete e demenze), farmaci">
-                        <i class="fas fa-stethoscope" aria-hidden="true"></i>
-                        <span>Criteri di appropriatezza</span>
-                        <small>PDTA diabete e demenze · Farmaci · Trasporti · Endoscopia</small>
-                    </a>
-                    <a href="note-operative.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Note operative e contatti — indirizzi, codici vaccini, gravidanza, INPS, regole di farmaci ed esenzioni per l'uso ambulatoriale ad Arezzo">
-                        <i class="fas fa-book-medical" aria-hidden="true"></i>
-                        <span>Note operative e contatti</span>
-                        <small>Indirizzi · codici · vaccini · farmaci · esenzioni</small>
-                    </a>
-                </div>
-
-                <p class="tip-category" id="priorita-asl-2026">Priorità ASL 2026 — obiettivi per i MMG</p>
-                <div class="note-box" style="border-top:2px solid var(--border-color);padding-top:14px;">
-                    <ol style="margin:0;padding-left:20px;line-height:1.7;">
-                        <li>
-                            <strong>Copertura vaccinazione Pneumococcica</strong> — Percentuale di copertura
-                            <strong>&gt;= 65%</strong> (75% dal secondo anno) o incremento di almeno il 10% sulle
-                            coorti 65-74 anni 2026 vs 2025 (fonte del dato: Dip. Prevenzione).
-                        </li>
-                        <li>
-                            <strong>Appropriatezza trasporti</strong> — Tasso prescrizione trasporti sanitari
-                            <strong>&lt;= 35x1000</strong>. Per i medici che nel 2025 avevano un tasso prescrittivo
-                            inferiore: mantenimento con un numero di prescrizioni assolute inferiore o pari a
-                            <strong>25/anno</strong> (fonte del dato: ESTAR). Criteri clinici e cosa documentare:
-                            <a href="criteri-appropriatezza.html#trasporto-sanitario">trasporto sanitario cod. 06</a>.
-                        </li>
-                        <li>
-                            <strong>Farmaceutica</strong> — % DDD antibiotici <strong>ACCESS</strong> rispetto a tutti
-                            gli altri antibiotici <strong>&gt; 60</strong> (Fonte del dato: Dipartimento del
-                            Farmaco/Marno).
-                        </li>
-                    </ol>
-                    <p style="margin:10px 0 0;font-size:0.78rem;color:var(--text-medium);">
-                        Testo delle priorità come trasmesso dall'Azienda (copia incolla).
-                    </p>
-                </div>
-
-                <p class="tip-category">Nuove disposizioni ADI — canale unico Cure Primarie (21 ottobre 2026)</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>La casella ADI non si usa più:</strong> tutta la documentazione va inviata alle
-                        <strong>Cure Primarie</strong> della Zona Distretto Aretina, che provvede a inoltrarla al
-                        Servizio ADI.
-                    </li>
-                    <li>
-                        <strong>Niente più ricettario bianco:</strong> per nessun tipo di richiesta si usa il
-                        ricettario dello studio; al suo posto si compilano i moduli aziendali (PDF editabili).
-                    </li>
-                    <li>
-                        <strong>Terapie endovenose o intramuscolo → STU</strong> (Scheda Terapeutica Unica: farmaco,
-                        posologia, via, diluente, tempi, durata del ciclo, firma e timbro del medico).
-                    </li>
-                    <li>
-                        <strong>Cambio o gestione del catetere vescicale, medicazioni e altre prestazioni
-                        infermieristiche → PAI</strong>: si biffano nel PAI editabile le voci corrispondenti.
-                    </li>
-                    <li>
-                        <strong>Assistito non noto:</strong> oltre al PAI si compila anche la
-                        <strong>scheda anamnestica</strong> (Valutazione iniziale — inquadramento clinico del MMG,
-                        mod. 010 rev. 1) all'avvio dell'attivazione. I prelievi domiciliari restano agli
-                        Infermieri di Famiglia e Comunità.
-                    </li>
-                    <li>
-                        <strong>Moduli e procedura:</strong>
-                        <a href="adi-adp-pai.html">pagina ADI/ADP/PAI</a> ·
-                        <a href="modulistica/PAI.pdf" target="_blank" rel="noopener">PAI</a> ·
-                        <a href="modulistica/STU-scheda-terapeutica-unica.pdf" target="_blank" rel="noopener">STU</a> ·
-                        <a href="modulistica/valutazione-iniziale-inquadramento-clinico.pdf" target="_blank" rel="noopener">scheda anamnestica</a>
-                    </li>
-                </ul>
-
-                <p class="tip-category">Nota operativa 2026 — Codici prescrittivi</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>Prime visite nutrizionali:</strong> per le richieste di primo accesso
-                        a valutazione nutrizionale inserire il codice <strong>2229 (Visita Dietetica)</strong>
-                        e non il codice <strong>1070</strong>.
-                    </li>
-                    <li>
-                        Se dalla visita emerge la necessità di coinvolgere il nutrizionista, sarà lo
-                        stesso specialista ad attivarsi per la prescrizione.
-                    </li>
-                    <li>
-                        <strong>Tutti gli altri codici utili</strong> (analisi, tamponi, ossigeno,
-                        medicazioni delle ferite, esenzioni): pagina <a href="note-operative.html#codici-heading">Note operative e contatti</a>.
-                    </li>
-                </ul>
-                <p style="margin-top: 12px; font-size: 0.78rem; color: var(--text-medium);">
-                    Indicazione della Direzione della Nutrizione Clinica — sede operativa di Arezzo
-                    (Azienda USL Toscana Sud Est), 2026. Valida fino a nuova comunicazione.
-                </p>
-
-                <p class="tip-category">Nota operativa 2026 — Vaccinazione pneumococco nelle RSA</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>Prodotto disponibile:</strong> per gli ospiti delle RSA il vaccino
-                        disponibile è il <strong>PCV21 CAPVAXIVE (CAPVAXIVE IM 1 SIR 0,5 ML + 2 AGHI)</strong>,
-                        che può essere richiesto per singolo assistito con le stesse modalità già in uso per
-                        gli altri prodotti farmaceutici destinati agli ospiti delle RSA.
-                    </li>
-                    <li>
-                        <strong>Destinatari (nota aziendale del 15 ottobre 2026):</strong> il PCV21 è destinato
-                        agli ospiti che <strong>non hanno mai effettuato</strong> la vaccinazione antipneumococcica,
-                        a chi ha effettuato l'ultima vaccinazione <strong>da oltre un anno</strong> con
-                        PCV13/PCV15/PPSV23 e a chi ha effettuato la vaccinazione <strong>da oltre 5 anni</strong>
-                        con schedula sequenziale (PCV13 + PPSV23). La RSA può anticipare la richiesta via email,
-                        contestualmente all'invio della documentazione prescrittiva, indicando nome e cognome
-                        dell'ospite, anno di nascita e nominativo del MMG richiedente —
-                        <a href="comunicazioni-2026.html#pcv21-rsa">scheda completa</a>.
-                    </li>
-                    <li>
-                        <strong>Prescrizione DEMA e distribuzione:</strong> la prescrizione tramite
-                        ricetta <strong>DEMA</strong> dovrà essere trasmessa agli indirizzi aziendali
-                        già utilizzati per l'invio della documentazione farmaceutica; la distribuzione
-                        sarà effettuata contestualmente ai viaggi già programmati per la consegna
-                        diretta di medicinali e altri beni farmaceutici alle RSA.
-                    </li>
-                </ul>
-
-                <p class="tip-category" id="pdta-demenze">PDTA — Disturbi cognitivi e demenze (nuova divulgazione 2026)</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>Fase 1 — MMG responsabile:</strong> anamnesi mirata a deficit di memoria e
-                        disturbi comportamentali, test di screening di 1° livello in ambulatorio
-                        (<strong>Pfeiffer, GPCog o Mini-Cog</strong>), esami di base (laboratorio con vitamina B12,
-                        acido folico, ormoni tiroidei, esame tossicologico, lue, HIV-AIDS; ECG ed eventuale
-                        ecocolordoppler TSA; TAC cranio senza mezzo di contrasto).
-                    </li>
-                    <li>
-                        <strong>Invio al CDCD:</strong> richiesta CUP di visita geriatrica o neurologica con la
-                        dicitura esatta «<strong>PRIMA VISITA c/o CDCD</strong>» (agende CUP dedicate) e relazione
-                        di accompagnamento con storia clinica e comorbilità.
-                    </li>
-                    <li>
-                        <strong>Follow-up — MMG responsabile:</strong> PA, ritmo e frequenza cardiaca in cartella ed
-                        <strong>ECG con misurazione del QT ogni 6 mesi</strong>; adeguamento della terapia; raccordo
-                        con l'UVM per Centri Diurni e Nuclei Alzheimer; reperibilità telefonica del CDCD per i
-                        disturbi comportamentali (BPSD).
-                    </li>
-                    <li>
-                        <strong>Approfondimenti:</strong>
-                        <a href="criteri-appropriatezza.html">criteri di appropriatezza — PDTA demenze</a> ·
-                        <a href="modulistica/pdta-disturbi-cognitivi-demenze.pdf" target="_blank" rel="noopener">PDTA integrale (PDF)</a>
-                    </li>
-                </ul>
-
-                <p class="tip-category">PDTA dermatologia — Visita per Valutazione Nevi (DGR 1007/2026)</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>Cos'è:</strong> la <strong>DGR Toscana n. 1007 del 03/08/2026</strong> istituisce
-                        un percorso regionale dedicato all'identificazione precoce dei soggetti a rischio
-                        melanoma, distinto dall'ordinaria prima visita dermatologica. L'accesso avviene con la
-                        prestazione <strong>«Visita per Valutazione Nevi»</strong>, prescritta dal MMG
-                        (primo livello del percorso) ed erogata su <strong>agenda dedicata e separata</strong>
-                        da quella delle visite con priorità clinica.
-                    </li>
-                    <li>
-                        <strong>Chi è eleggibile:</strong> <strong>under 18</strong> con più di <strong>50 nevi</strong>,
-                        immunodeficienza congenita o acquisita, oppure nevi congeniti medi (1,5–19,9 cm),
-                        grandi (20–40 cm) o giganti (&gt;40 cm); <strong>adulti 25–70 anni</strong> con più di
-                        <strong>60 nevi</strong>, oppure più di <strong>40 nevi</strong> e almeno un fattore
-                        concomitante (immunodeficienza documentata, fototipo I–II, capelli rossi, lavoro
-                        foto-esposto, mutazioni genetiche a rischio melanoma).
-                    </li>
-                    <li>
-                        <strong>Come si prescrive:</strong> soggetto eleggibile <strong>senza</strong> specifico
-                        sospetto clinico → «Visita per Valutazione Nevi» (cadenza <strong>annuale</strong> per gli
-                        adulti, <strong>triennale</strong> in età pediatrica; intervalli diversi li definisce il
-                        dermatologo, non il prescrittore). <strong>Lesione clinicamente sospetta</strong> → prima
-                        visita dermatologica con la classe di priorità appropriata, come da disposizioni
-                        regionali vigenti. Sospetto di <strong>nevo di Spitz in età pediatrica</strong> →
-                        <strong>non</strong> al percorso Valutazione Nevi: prima visita dermatologica con priorità.
-                        La rimozione preventiva di lesioni benigne/non sospette <strong>non rientra</strong> nel
-                        percorso.
-                    </li>
-                    <li>
-                        <strong>Documenti:</strong>
-                        <a href="modulistica/dgr-1007-2026-identificazione-precoce-melanoma.pdf" target="_blank" rel="noopener">Delibera GRT n. 1007/2026 con allegato A (PDF)</a> ·
-                        <a href="modulistica/informativa-valutazione-nevi-mmg-pls-specialisti.pdf" target="_blank" rel="noopener">Informativa operativa per MMG, PLS e specialisti (PDF)</a>
-                    </li>
-                </ul>
-
-                <p class="tip-category">Obbligo di segnalazione — malattie infettive (scheda unica)</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>Obbligo di legge:</strong> il medico che, nell'esercizio delle sue funzioni,
-                        rileva un caso di <strong>malattia infettiva diffusiva o sospetta di esserlo</strong> deve
-                        inviare la segnalazione all'<strong>U.F. Igiene Pubblica e Nutrizione (IPN)</strong>
-                        competente per territorio — artt. 253 e 254 R.D. 1265/1934 e D.M. 7 marzo 2022
-                        (revisione del sistema di segnalazione, PREMAL). L'obbligo vale anche per le malattie
-                        non comprese nell'elenco, quando il quadro clinico o le caratteristiche epidemiologiche
-                        si presentino in modo inusuale nella collettività.
-                    </li>
-                    <li>
-                        <strong>Zona Aretina (Arezzo, Casentino, Valtiberina) — invio a:</strong>
-                        <a href="mailto:igienedipprev.ar@uslsudest.toscana.it" style="overflow-wrap:anywhere;">igienedipprev.ar@uslsudest.toscana.it</a>
-                        — U.F. Igiene Pubblica e Nutrizione, resp. dr.ssa Elena De Sanctis.
-                    </li>
-                    <li>
-                        <strong>Tempi:</strong> <strong>12 ore</strong> per i casi contrassegnati in scheda con il
-                        telefono, <strong>48 ore</strong> per gli altri; le malattie soggette a sorveglianza speciale
-                        seguono le indicazioni dell'U.F. IPN.
-                    </li>
-                    <li>
-                        <strong>Come:</strong> scheda compilata in ogni sua parte con i dati disponibili, firmata e
-                        datata. Modulo in bianco:
-                        <a href="modulistica/scheda-unica-segnalazione-malattie-infettive.pdf" target="_blank" rel="noopener">scheda unica di segnalazione delle malattie infettive (PDF)</a>
-                        · procedura nella <a href="guida-accessi-malattie-infettive.html">guida Malattie Infettive</a>.
-                    </li>
-                </ul>
-                <p style="margin-top: 12px; font-size: 0.78rem; color: var(--text-medium);">
-                    Fonte: scheda unica di segnalazione delle malattie infettive (D.M. 7 marzo 2022) —
-                    Allegato A del decreto n. 21090 del 25/09/2026; indirizzi delle U.F. IPN dell'Azienda
-                    USL Toscana Sud Est.
-                </p>
-
-                <p class="tip-category" id="gom-digerente">Procedura GOM — tumore gastrointestinale sospetto o accertato</p>
-                <ul class="shortcut-list">
-                    <li>
-                        <strong>Cos'è:</strong> procedura aziendale <strong>PP-PARE-70 (Rev. 0)</strong> della Direzione
-                        P.O. Aretino, Casentino, Valtiberina e Valdichiana Aretina per la presa in carico
-                        multidisciplinare del paziente con neoplasia del tratto gastrointestinale sospetta o
-                        accertata. Riferimenti normativi: DGR Toscana n. 32 del 14/01/2019 (GOM per le neoplasie
-                        dell'età adulta), DGR n. 699 del 23/01/2019 (Rete Oncologica Regionale — modello di referto
-                        GOM), Deliberazione del DG n. 1191 del 29/10/2019 (nomina dei coordinatori GOM) e
-                        protocollo PD-DONC-004.
-                    </li>
-                    <li>
-                        <strong>Come attivare il percorso:</strong> il gestore del caso (MMG o specialista che formula
-                        il sospetto diagnostico) indirizza il paziente all'ambulatorio di presa in carico con una
-                        comunicazione via email a
-                        <a href="mailto:gom.sandonato@uslsudest.toscana.it" style="overflow-wrap:anywhere;">gom.sandonato@uslsudest.toscana.it</a>,
-                        indipendentemente dalla residenza del paziente e dalla sede in cui è stato posto il sospetto.
-                    </li>
-                    <li>
-                        <strong>Quando va al GOM multidisciplinare:</strong> tumore esofago-gastrico, tumore retto,
-                        tumore pancreatico-biliare, tumori primitivi epatici e tumori rari (GIST, neuroendocrini);
-                        in caso di neoplasia metastatica il paziente è inviato al GOM in ogni caso.
-                    </li>
-                    <li>
-                        <strong>Organizzazione:</strong> ambulatorio di presa in carico il <strong>giovedì mattina</strong> e
-                        GOM multidisciplinare deliberato il <strong>giovedì pomeriggio</strong> (Ospedale S. Donato di
-                        Arezzo); GOM aziendale da remoto il <strong>lunedì alterni</strong> per i casi di maggiore
-                        complessità. La stadiazione si esegue in Day Service Oncologico con slot dedicati e
-                        preferenziali; l'<strong>infermiere di percorso (case manager)</strong> controlla e ottimizza
-                        l'intero iter diagnostico-terapeutico. La relazione è redatta su documento
-                        <strong>ISPRO</strong> (DGR 699/2019).
-                    </li>
-                    <li>
-                        <strong>Dove si cura:</strong> i trattamenti chirurgici sono centralizzati all'Ospedale San
-                        Donato; i trattamenti antiblastici sistemici, se previsti dal percorso e su richiesta del
-                        paziente, possono essere eseguiti presso le oncologie di riferimento territoriale.
-                    </li>
-                    <li>
-                        <strong>Documento integrale:</strong>
-                        <a href="modulistica/procedura-gom-tumori-gastrointestinali.pdf" target="_blank" rel="noopener">Procedura PP-PARE-70 — tumore gastrointestinale sospetto o accertato (PDF)</a>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- Medicina Fisica - Prestazioni Fascia LR -->
-            <div class="card reveal">
-                <div class="card-header">
-                    <i class="fas fa-heart-pulse" aria-hidden="true"></i>
-                    <h2>Medicina Fisica</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Tabella di riferimento delle prestazioni di fascia LR del nuovo Catalogo, al posto dei codici PAS.
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="medicina-fisica-codici-LR.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Codici LR Medicina Fisica — nuovo Catalogo">
-                        <i class="fas fa-file-prescription" aria-hidden="true"></i>
-                        <span>Codici Fascia LR</span>
-                        <small>LR01–LR21 · Nuovo Catalogo</small>
-                    </a>
-                    <a href="ausili-assistenziali.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Ausili assistenziali SSN — Elenco 2B DPCM 12 gennaio 2017">
-                        <i class="fas fa-file-medical" aria-hidden="true"></i>
-                        <span>Ausili Assistenziali</span>
-                        <small>Elenco 2B · DPCM 12/01/2017</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Analisi Genetiche — Codici regionali (catalogo di lavoro) -->
-            <div class="card reveal" id="codici-genetici">
-                <div class="card-header">
-                    <i class="fas fa-flask" aria-hidden="true"></i>
-                    <h2>Analisi Genetiche</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Codici regionali di prescrizione delle analisi genetiche: citogenetica e cariotipo, FISH,
-                    trombofilia ereditaria, tipizzazione HLA, mutazioni geniche e oncogenetica ereditaria.
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="codici-analisi-genetiche.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Codici regionali delle analisi genetiche — catalogo di lavoro">
-                        <i class="fas fa-file-prescription" aria-hidden="true"></i>
-                        <span>Codici Analisi Genetiche</span>
-                        <small>40 voci · catalogo di lavoro</small>
-                    </a>
-                </div>
-                <p style="margin-top: 18px; font-size: 0.82rem; line-height: 1.55; color: var(--danger);">
-                    <i class="fas fa-triangle-exclamation" aria-hidden="true"></i>
-                    <strong>Elenco non ufficiale:</strong> catalogo sperimentale individuale, non validato dall'Azienda
-                    USL Toscana Sud Est né dalla Regione Toscana e non verificato. Prima della prescrizione controllare
-                    il codice sul catalogo regionale vigente.
-                </p>
-            </div>
-
-            <!-- Guida Accessi -->
-            <div class="card reveal">
-                <div class="card-header">
-                    <i class="fas fa-route" aria-hidden="true"></i>
-                    <h2>Guida Accessi</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Come contattare servizi, ambulatori e strutture per inviare correttamente i pazienti.
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="guida-accessi-pronto-soccorso.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Pronto Soccorso specialistici — orari e sedi San Donato">
-                        <i class="fa-solid fa-truck-medical" aria-hidden="true"></i>
-                        <span>Pronto Soccorso</span>
-                        <small>Orari e sedi · San Donato</small>
-                    </a>
-                    <a href="guida-accessi-malattie-infettive.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Come contattare le Malattie Infettive (ambulatorio MST San Donato) e come segnalare un caso di malattia infettiva all'Igiene Pubblica e Nutrizione">
-                        <i class="fas fa-shield-virus" aria-hidden="true"></i>
-                        <span>Malattie Infettive (MST)</span>
-                        <small>Ambulatorio MST · Segnalazione obbligatoria</small>
-                    </a>
-                    <a href="guida-accessi-vascolari.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Come attivare gli accessi vascolari — moduli ed email Rete AVA USL Sud Est">
-                        <i class="fas fa-house-medical" aria-hidden="true"></i>
-                        <span>Accessi Vascolari</span>
-                        <small>PICC · Port · Moduli e email</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Batterie ADHD -->
-            <div class="card reveal" id="adhd-batterie">
-                <div class="card-header">
-                    <i class="fas fa-stethoscope" aria-hidden="true"></i>
-                    <h2>ADHD &#8212; batterie di scale</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Quando lo specialista consegna al paziente una batteria di scale che ripetono gli stessi criteri:
-                    un modulo unico da compilare una volta sola, e le regole per ricompilare ogni strumento originale.
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="adhd.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Batterie ADHD sovrapposte &#8212; metodo, regola di fusione e moduli compilabili">
-                        <i class="fas fa-book-medical" aria-hidden="true"></i>
-                        <span>Metodo e moduli</span>
-                        <small>Modulo unico &#183; regola di fusione &#183; licenze</small>
-                    </a>
-                    <a href="adhd/modulo-unico-adhd.html" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo unico ADHD per il paziente (HTML)">
-                        <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                        <span>Modulo unico &#8212; paziente</span>
-                        <small>HTML &#183; 153 voci &#183; ASRS-18 &#183; DIVA-5 &#183; WURS &#183; WHODAS &#183; Zung</small>
-                    </a>
-                    <a href="adhd/modulo-familiare-adhd.html" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo osservazioni di un familiare (HTML)">
-                        <i class="fas fa-users" aria-hidden="true"></i>
-                        <span>Modulo &#8212; familiare</span>
-                        <small>HTML &#183; 18 sintomi &#183; report guidato</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Facsimili e Certificati -->
-            <div class="card reveal" id="facsimili">
-                <div class="card-header">
-                    <i class="fas fa-file-medical" aria-hidden="true"></i>
-                    <h2>Facsimili e Certificati</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Facsimili dei certificati e documenti informativi da consegnare ai pazienti o da esporre in sala d'attesa. I moduli sono pubblicati in bianco, negli originali aziendali (ASL Toscana Sud Est) e regionali.
-                </p>
-                <p class="tip-category">Facsimili dei certificati — PDF scaricabili</p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="modulistica/facsimile-anamnestico-patente-guida.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile del certificato anamnestico per patente di guida (PDF)">
-                        <i class="fas fa-id-card" aria-hidden="true"></i>
-                        <span>Anamnestico — Patente di guida</span>
-                        <small>Facsimile · condizioni a rischio per la guida · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-capacita-intendere-volere.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile della certificazione di capacità di intendere e di volere (PDF)">
-                        <i class="fas fa-scale-balanced" aria-hidden="true"></i>
-                        <span>Capacità di intendere e di volere</span>
-                        <small>Facsimile · certificazione del medico curante · PDF</small>
-                    </a>
-                    <a href="modulistica/certificati-gratuiti-a-pagamento-iva-omceo-arezzo.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Nota OMCeO Arezzo sui certificati gratuiti, a pagamento e soggetti a IVA (PDF)">
-                        <i class="fas fa-file-invoice-dollar" aria-hidden="true"></i>
-                        <span>Certificati gratuiti, a pagamento e IVA</span>
-                        <small>Nota OMCeO Arezzo · prot. 1012/2014 · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-constatazione-decesso.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile di constatazione di decesso (PDF)">
-                        <i class="fas fa-file-medical" aria-hidden="true"></i>
-                        <span>Constatazione di decesso</span>
-                        <small>Facsimile · riconoscimento e constatazione · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-inail-infortunio-mod1ss.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile INAIL — certificazione medica di infortunio sul lavoro, Mod. 1 SS (PDF)">
-                        <i class="fas fa-user-injured" aria-hidden="true"></i>
-                        <span>INAIL — Infortunio sul lavoro</span>
-                        <small>Mod. 1 SS · certificazione medica · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-inail-malattia-professionale-mod5ssbis.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile INAIL — certificazione medica di malattia professionale, Mod. 5 SS bis (PDF)">
-                        <i class="fas fa-flask" aria-hidden="true"></i>
-                        <span>INAIL — Malattia professionale</span>
-                        <small>Mod. 5 SS bis · certificazione medica · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-certificato-malattia-inps.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile del certificato di malattia da recapitare all'INPS (PDF)">
-                        <i class="fas fa-clipboard-check" aria-hidden="true"></i>
-                        <span>Certificato di malattia INPS</span>
-                        <small>Facsimile · diagnosi e prognosi · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-anamnestico-porto-armi.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile del certificato anamnestico per porto d'armi (PDF)">
-                        <i class="fas fa-shield-alt" aria-hidden="true"></i>
-                        <span>Anamnestico — Porto d'armi</span>
-                        <small>Facsimile · art. 25 L. 833/1978 · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-attestato-trasporto-salma.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile dell'attestato medico per il trasporto di salma (PDF)">
-                        <i class="fas fa-ambulance" aria-hidden="true"></i>
-                        <span>Trasporto di salma</span>
-                        <small>Facsimile · art. 10 c. 2 L.R. 19/2004 · PDF</small>
-                    </a>
-                    <a href="modulistica/facsimile-consenso-vaccinazione.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Facsimile del modulo di consenso informato alla vaccinazione (PDF)">
-                        <i class="fas fa-shield-virus" aria-hidden="true"></i>
-                        <span>Consenso informato alla vaccinazione</span>
-                        <small>Facsimile · Regione Toscana · PDF</small>
-                    </a>
-                </div>
-
-                <p class="tip-category">Guide per i pazienti</p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="../ssn/cert-malattia.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Informativa Certificati di Malattia INPS">
-                        <i class="fas fa-file-medical" aria-hidden="true"></i>
-                        <span>Certificati di Malattia</span>
-                        <small>Informativa INPS · Obbligo visita</small>
-                    </a>
-                    <a href="../ssn/faq.html"
-                       class="btn-main btn-prenota"
-                       aria-label="FAQ Pazienti — Domande frequenti">
-                        <i class="fas fa-question-circle" aria-hidden="true"></i>
-                        <span>FAQ Pazienti</span>
-                        <small>Ricette · Certificati · Specialisti</small>
-                    </a>
-                    <a href="../ssn/esenzioni.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Guida Esenzioni Ticket">
-                        <i class="fas fa-tag" aria-hidden="true"></i>
-                        <span>Esenzioni Ticket</span>
-                        <small>Guida · Codici · Come richiederle</small>
-                    </a>
-                    <a href="../ssn/impegnative.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Guida Impegnative e CUP">
-                        <i class="fas fa-hospital-user" aria-hidden="true"></i>
-                        <span>Visite Specialistiche</span>
-                        <small>Impegnative · CUP · Priorità</small>
-                    </a>
-                    <a href="RUAP/"
-                       class="btn-main btn-prenota"
-                       aria-label="Vademecum RUAP">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                        <span>Vademecum RUAP</span>
-                        <small>Cooperativa Sanitaria · Procedure</small>
-                    </a>
-                    <a href="../ssn/scheda-it.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Scheda Paziente A4 Italiano">
-                        <i class="fas fa-print" aria-hidden="true"></i>
-                        <span>Scheda Paziente A4 — Italiano</span>
-                        <small>Fronte/retro · Doctolib + Triage + Salute</small>
-                    </a>
-                    <a href="../ssn/scheda-ro.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Scheda Paziente A4 Romeno">
-                        <i class="fas fa-globe" aria-hidden="true"></i>
-                        <span>Scheda Paziente A4 — Română</span>
-                        <small>Fronte/retro in lingua romena</small>
-                    </a>
-                    <a href="../ssn/scheda-en.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Scheda Paziente A4 Inglese">
-                        <i class="fas fa-globe" aria-hidden="true"></i>
-                        <span>Scheda Paziente A4 — English</span>
-                        <small>Fronte/retro in lingua inglese</small>
-                    </a>
-                    <a href="../ssn/scheda-bn.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Scheda Paziente A4 Bengalese">
-                        <i class="fas fa-globe" aria-hidden="true"></i>
-                        <span>Scheda Paziente A4 — বাংলা (Bengali)</span>
-                        <small>Fronte/retro in lingua bengalese</small>
-                    </a>
-                    <a href="../ssn/scheda-ur.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Scheda Paziente A4 Urdu">
-                        <i class="fas fa-globe" aria-hidden="true"></i>
-                        <span>Scheda Paziente A4 — اردو (Urdu)</span>
-                        <small>Fronte/retro in lingua urdu (RTL)</small>
-                    </a>
-                    <a href="../ssn/pdf/kit-schede-pazienti-5-lingue.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Scarica il Kit completo PDF con tutte le 5 lingue">
-                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
-                        <span>Kit Completo 5 Lingue (PDF)</span>
-                        <small>10 pagine A4 pronte da stampare</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Modulistica -->
-            <div class="card reveal" id="modulistica">
-                <div class="card-header">
-                    <i class="fas fa-book-medical" aria-hidden="true"></i>
-                    <h2>Modulistica</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Moduli operativi da compilare per l'assistenza territoriale, scaricabili in PDF: modulistica aziendale ASL Toscana Sud Est e Regione Toscana per MMG e PLS (ADI/ADP e PAI, accessi vascolari, esenzioni, prescrizioni, protesi e ausili).
-                </p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="modulistica/PAI.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo PAI — Piano Assistenziale Integrato (PDF)">
-                        <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                        <span>PAI — Piano Assistenziale Integrato</span>
-                        <small>ADI · ADP · AD Infermieristica · Cure intermedie · PDF</small>
-                    </a>
-                    <a href="modulistica/STU-scheda-terapeutica-unica.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo STU — Scheda Terapeutica Unica per terapie parenterali (PDF)">
-                        <i class="fas fa-pills" aria-hidden="true"></i>
-                        <span>STU — Scheda Terapeutica Unica</span>
-                        <small>Mod. 031-std domiciliare · PDF</small>
-                    </a>
-                    <a href="modulistica/valutazione-iniziale-inquadramento-clinico.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo Valutazione iniziale — inquadramento clinico del MMG (PDF)">
-                        <i class="fas fa-stethoscope" aria-hidden="true"></i>
-                        <span>Valutazione iniziale — Inquadramento clinico</span>
-                        <small>Mod. 010 rev. 1 · Anamnesi ed esame obiettivo · PDF</small>
-                    </a>
-                    <a href="adi-adp-pai.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Guida Assistenza Domiciliare ADI/ADP/PAI — procedura e comunicazione USL Sud Est">
-                        <i class="fas fa-house-medical" aria-hidden="true"></i>
-                        <span>Procedura ADI/ADP/PAI</span>
-                        <small>Modulo per tipo di richiesta · invio a Cure Primarie</small>
-                    </a>
-                </div>
-
-                <p class="tip-category">Modulistica aziendale e regionale — PDF scaricabili</p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="modulistica/modulo-domanda-scelta-mmg-pls-deroga-territoriale.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo per la domanda di scelta del MMG/PLS in deroga territoriale per i residenti (PDF)">
-                        <i class="fas fa-user-plus" aria-hidden="true"></i>
-                        <span>Domanda di scelta MMG/PLS in deroga</span>
-                        <small>Deroga territoriale · ASL Toscana Sud Est · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-comunicazione-sostituzione-mmg-pls.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di comunicazione di sostituzione temporanea di MMG o PLS (PDF)">
-                        <i class="fas fa-user-doctor" aria-hidden="true"></i>
-                        <span>Comunicazione di sostituzione</span>
-                        <small>MMG · PLS · Azienda USL Toscana Sud Est · PDF</small>
-                    </a>
-                    <a href="modulistica/cartella-clinico-assistenziale-territoriale-adi-adp.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo della Cartella Clinico-Assistenziale Territoriale per ADI e ADP (PDF)">
-                        <i class="fas fa-house-medical" aria-hidden="true"></i>
-                        <span>Cartella clinico-assistenziale territoriale</span>
-                        <small>ADI · ADP · USL Toscana Sud Est · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-picc-team-accessi-vascolari.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo PICC team — scheda di valutazione, consenso informato e informativa (PDF)">
-                        <i class="fas fa-file-contract" aria-hidden="true"></i>
-                        <span>Modulo PICC team — Accessi vascolari</span>
-                        <small>Allegato 2 · consenso · informativa · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-attivazione-afa.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di attivazione AFA — Attività Fisica Adattata (PDF)">
-                        <i class="fas fa-heart-pulse" aria-hidden="true"></i>
-                        <span>Attivazione AFA</span>
-                        <small>Attività Fisica Adattata · Allegato B · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-esenzione-diabete.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di certificazione per l'esenzione ticket per diabete (PDF)">
-                        <i class="fas fa-flask" aria-hidden="true"></i>
-                        <span>Esenzione — Diabete</span>
-                        <small>Certificazione del MMG · modulo · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-esenzione-ipertensione.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di certificazione per l'esenzione ticket per ipertensione (PDF)">
-                        <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
-                        <span>Esenzione — Ipertensione</span>
-                        <small>Certificazione del MMG · modulo · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-rinnovo-esenzione-048.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo per il rinnovo dell'esenzione 048 per patologia oncologica (PDF)">
-                        <i class="fas fa-tag" aria-hidden="true"></i>
-                        <span>Rinnovo esenzione 048</span>
-                        <small>Patologia oncologica · MMG e CORD · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-prescrizione-incontinenza-urinaria.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di prescrizione dispositivi medici per incontinenza urinaria stabilizzata (PDF)">
-                        <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                        <span>Prescrizione — incontinenza urinaria</span>
-                        <small>Dispositivi medici · USL Toscana Sud Est · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-prescrizione-dispositivi-stomia.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di prescrizione dispositivi medici per stomia — rinnovo della fornitura dei presidi per colostomia, ileostomia e urostomia (PDF)">
-                        <i class="fas fa-prescription-bottle" aria-hidden="true"></i>
-                        <span>Prescrizione — presidi per stomia</span>
-                        <small>Colostomia · ileostomia · urostomia · USL Toscana Sud Est · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-prescrizione-autocontrollo-glicemico.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di prescrizione dispositivi medici per l'autocontrollo glicemico (PDF)">
-                        <i class="fas fa-file-prescription" aria-hidden="true"></i>
-                        <span>Prescrizione — autocontrollo glicemico</span>
-                        <small>MMG/PLS · Allegato B · DGRT 806/2024 · PDF</small>
-                    </a>
-                    <a href="modulistica/modulo-richiesta-fornitura-protesi-ausili.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Modulo di richiesta fornitura o riparazione di protesi e ausili (PDF)">
-                        <i class="fas fa-file-medical" aria-hidden="true"></i>
-                        <span>Richiesta protesi e ausili</span>
-                        <small>Mod. 0583 rev. 002 · USL Toscana Sud Est · PDF</small>
-                    </a>
-                </div>
-
-                <p class="tip-category">Segnalazioni obbligatorie — malattie infettive</p>
-                <div class="action-grid tools-grid-auto">
-                    <a href="modulistica/scheda-unica-segnalazione-malattie-infettive.pdf" target="_blank" rel="noopener"
-                       class="btn-main btn-prenota"
-                       aria-label="Scheda unica di segnalazione delle malattie infettive — modulo in bianco da inviare all'Igiene Pubblica e Nutrizione (PDF)">
-                        <i class="fas fa-clipboard-list" aria-hidden="true"></i>
-                        <span>Scheda unica di segnalazione — malattie infettive</span>
-                        <small>Da inviare a igienedipprev.ar@uslsudest.toscana.it · D.M. 7 marzo 2022 · PDF</small>
-                    </a>
-                    <a href="guida-accessi-malattie-infettive.html"
-                       class="btn-main btn-prenota"
-                       aria-label="Guida alla segnalazione obbligatoria delle malattie infettive — tempi e indirizzi IPN">
-                        <i class="fas fa-shield-virus" aria-hidden="true"></i>
-                        <span>Come segnalare — tempi e indirizzi</span>
-                        <small>12 h / 48 h · U.F. Igiene Pubblica e Nutrizione · Guida</small>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Trucchi e Scorciatoie Millewin -->
-            <div class="card reveal" id="millewin-accordion">
-                <div class="card-header">
-                    <i class="fas fa-keyboard" aria-hidden="true"></i>
-                    <h2>Trucchi e Scorciatoie Millewin</h2>
-                </div>
-                <p style="margin-bottom: 20px; font-size: 0.9rem; color: var(--text-medium);">
-                    Scorciatoie da tastiera, trucchi per le prescrizioni, pulizia dell'anagrafica e risoluzione dei problemi più comuni.
-                </p>
-                <a href="millewin-tips.html" class="btn-main btn-prenota" style="max-width: 320px; display: inline-flex;">
-                    <i class="fas fa-keyboard" aria-hidden="true"></i>
-                    <span>Apri i trucchi Millewin</span>
-                </a>
-            </div>
-
-            <!-- Calcolatore Ferie e Coperture -->
-            <div class="card card-spotlight">
-                <div class="card-header">
-                    <i class="fas fa-umbrella-beach" aria-hidden="true"></i>
-                    <h2>Calcolatore Ferie e Coperture</h2>
-                </div>
-                <p style="font-size: 1rem; color: var(--text-medium); max-width: 620px; margin: 0 auto; line-height: 1.7;">
-                    Pianifica le ferie del gruppo medico, verifica le coperture giornaliere e individua le scoperture. I dati vengono salvati localmente nel browser.
-                </p>
-                <a href="gestoreturni/gestoreturni.html" class="btn-main btn-prenota" style="display: inline-flex; margin-top: 18px;">
-                    <i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i>
-                    <span>Apri il gestore turni e coperture</span>
-                </a>
-            </div>
+            </details>
 
         </section>
 
@@ -1516,6 +758,219 @@
     <span data-i18n="sw_update_available">Aggiornamento disponibile</span>
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
+
+
+<script>
+/* Catalogo /colleghi: ricerca e filtri. Progressive enhancement:
+   senza JS tutte le voci restano visibili, questa script solo le restringe. */
+(function () {
+    'use strict';
+    var qEl = document.getElementById('cat-q');
+    if (!qEl) return;
+
+    var clearEl = document.getElementById('cat-clear');
+    var chipsEl = document.getElementById('cat-chips');
+    var countEl = document.getElementById('cat-count');
+    var toolbar = document.getElementById('cat-toolbar');
+    var docsWrap = document.getElementById('cat-docs-wrap');
+    var docsList = document.getElementById('cat-docs-list');
+    var docsN = document.getElementById('cat-docs-n');
+    var areasWrap = document.getElementById('area-colleghi');
+
+    var items = Array.prototype.slice.call(document.querySelectorAll('.cat-item'));
+    var lists = Array.prototype.slice.call(document.querySelectorAll('.cat-list[data-area]'));
+    var pageItems = items.filter(function (el) { return !el.closest('#cat-docs-list'); });
+
+    var docs = [];
+    var docsEl = document.getElementById('cat-docs');
+    if (docsEl) { try { docs = JSON.parse(docsEl.textContent) || []; } catch (e) { docs = []; } }
+
+    var LABEL = {
+        modulo: 'modulo', facsimile: 'facsimile', pdf: 'PDF', manuale: 'manuale',
+        portale: 'portale esterno', stampa: 'da stampare', inps: 'INPS', certificati: 'certificati',
+        esenzione: 'esenzione', ausili: 'ausili e protesi', adi: 'domicilio', accessi: 'accessi',
+        codici: 'codici', prescrizione: 'prescrizione', ruap: 'RUAP', formazione: 'formazione',
+        contatti: 'contatti'
+    };
+    var GROUPS = [
+        { nome: 'Tipo', tag: ['modulo', 'facsimile', 'pdf', 'manuale', 'portale', 'stampa'] },
+        { nome: 'Argomento', tag: ['inps', 'certificati', 'esenzione', 'ausili', 'adi', 'accessi',
+                                   'codici', 'prescrizione', 'ruap', 'formazione', 'contatti'] }
+    ];
+
+    var norm = function (s) {
+        return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    };
+    var state = { q: '', tags: [] };
+    var collapsed = {};
+
+    // "Mostra tutte": solo con JS, cosi' senza JS si vede tutto
+    lists.forEach(function (ul) {
+        var n = ul.children.length;
+        if (n <= 5) return;
+        ul.classList.add('is-collapsed');
+        collapsed[ul.dataset.area] = true;
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'cat-more';
+        b.textContent = ul.dataset.more || ('Mostra tutte le ' + n + ' risorse');
+        b.addEventListener('click', function () {
+            ul.classList.remove('is-collapsed');
+            collapsed[ul.dataset.area] = false;
+            b.remove();
+        });
+        ul.parentNode.insertBefore(b, ul.nextSibling);
+    });
+
+    var tokens = function () { return norm(state.q).split(/\s+/).filter(Boolean); };
+    var has = function (el, toks) {
+        var k = el.dataset.k || '';
+        for (var i = 0; i < toks.length; i++) { if (k.indexOf(toks[i]) === -1) return false; }
+        return true;
+    };
+    var hasTags = function (el) {
+        if (!state.tags.length) return true;
+        var g = (el.dataset.g || '').split(' ');
+        for (var i = 0; i < state.tags.length; i++) { if (g.indexOf(state.tags[i]) === -1) return false; }
+        return true;
+    };
+
+    function renderChips(matched) {
+        var counts = {};
+        matched.forEach(function (el) {
+            (el.dataset.g || '').split(' ').forEach(function (t) { if (t) counts[t] = (counts[t] || 0) + 1; });
+        });
+        var active = !!state.q || state.tags.length > 0;
+        var html = '';
+        GROUPS.forEach(function (g) {
+            var tags = g.tag.filter(function (t) {
+                return state.tags.indexOf(t) !== -1 || (active ? (counts[t] || 0) > 0 : (counts[t] || 0) > 3);
+            }).sort(function (a, b) {
+                var sa = state.tags.indexOf(b) - state.tags.indexOf(a);
+                return sa !== 0 ? sa : (counts[b] || 0) - (counts[a] || 0);
+            });
+            if (!tags.length) return;
+            html += '<span class="cat-chips-label">' + g.nome + '</span>';
+            if (g.nome === 'Tipo' && state.tags.length) {
+                html += '<button type="button" class="cat-chip cat-chip-reset" data-tag="">Azzera i filtri \u00d7</button>';
+            }
+            tags.forEach(function (t) {
+                html += '<button type="button" class="cat-chip" data-tag="' + t + '" aria-pressed="' +
+                    (state.tags.indexOf(t) !== -1) + '">' + (LABEL[t] || t) + ' <b>' + (counts[t] || 0) + '</b></button>';
+            });
+        });
+        chipsEl.innerHTML = html;
+    }
+
+    function renderDocs(toks) {
+        if (!toks.length) { docsWrap.hidden = true; docsList.innerHTML = ''; return []; }
+        var hits = docs.filter(function (d) {
+            for (var i = 0; i < toks.length; i++) { if ((d.k || '').indexOf(toks[i]) === -1) return false; }
+            if (state.tags.length) {
+                var g = (d.g || '').split(' ');
+                for (var j = 0; j < state.tags.length; j++) { if (g.indexOf(state.tags[j]) === -1) return false; }
+            }
+            return true;
+        });
+        if (!hits.length) { docsWrap.hidden = true; docsList.innerHTML = ''; return []; }
+        docsList.innerHTML = hits.map(function (d) {
+            return '<li class="cat-item"><a data-h="' + d.h + '"><i class="fas fa-file-pdf" aria-hidden="true"></i>' +
+                '<span class="cat-body"><span class="cat-title">' + d.t + '</span>' +
+                (d.s ? '<span class="cat-sub">' + d.s + '</span>' : '') + '</span></a></li>';
+        }).join('');
+        Array.prototype.forEach.call(docsList.querySelectorAll('a[data-h]'), function (a) {
+            a.setAttribute('href', a.getAttribute('data-h'));
+            a.removeAttribute('data-h');
+        });
+        docsN.textContent = hits.length;
+        docsWrap.hidden = false;
+        return hits;
+    }
+
+    function render() {
+        var toks = tokens();
+        var matched = [];
+        var active = !!state.q || state.tags.length > 0;
+        lists.forEach(function (ul) {
+            if (active) ul.classList.remove('is-collapsed');
+            else if (collapsed[ul.dataset.area]) ul.classList.add('is-collapsed');
+        });
+        pageItems.forEach(function (el) {
+            var ok = has(el, toks) && hasTags(el);
+            el.classList.toggle('is-hidden', !ok);
+            if (ok) matched.push(el);
+        });
+        var docsHits = renderDocs(toks);
+
+        // aree vuote fuori dai piedi
+        Array.prototype.slice.call(document.querySelectorAll('.cat-area[data-area], #area-link')).forEach(function (sec) {
+            var vis = sec.querySelectorAll('.cat-item:not(.is-hidden)').length;
+            sec.classList.toggle('is-hidden', vis === 0);
+            sec.hidden = vis === 0;
+        });
+        document.querySelectorAll('.cat-more').forEach(function (b) {
+            b.hidden = !!(state.q || state.tags.length);
+        });
+
+        renderChips(matched);
+        toolbar.classList.toggle('has-q', !!state.q || state.tags.length > 0);
+        clearEl.hidden = !state.q && !state.tags.length;
+
+        var empty = document.getElementById('cat-empty');
+        if (!matched.length && !docsHits.length) {
+            if (!empty) {
+                empty = document.createElement('div');
+                empty.id = 'cat-empty';
+                empty.className = 'cat-empty';
+                empty.innerHTML = '<strong>Nessuna corrispondenza.</strong>Prova con una parola pi\u00f9 corta, ' +
+                    'oppure parti da <a href="#area-compilare">Compilare e inviare</a>, ' +
+                    '<a href="#area-prescrivere">Prescrivere</a> o <a href="#area-percorsi">Percorsi e accessi</a>.';
+                areasWrap.parentNode.insertBefore(empty, areasWrap);
+            }
+            empty.hidden = false;
+        } else if (empty) { empty.hidden = true; }
+
+        if (!state.q && !state.tags.length) {
+            countEl.innerHTML = '<b>' + pageItems.length + '</b> risorse in 5 aree \u00b7 la ricerca trova anche <b>' +
+                docs.length + '</b> documenti dentro le raccolte';
+        } else if (!matched.length && docsHits.length) {
+            countEl.innerHTML = '<b>' + docsHits.length + '</b> risultat' + (docsHits.length === 1 ? 'o' : 'i') +
+                ' dentro le raccolte di documenti';
+        } else if (!matched.length) {
+            countEl.innerHTML = '<b>0</b> risultati';
+        } else {
+            countEl.innerHTML = '<b>' + matched.length + '</b> risultat' + (matched.length === 1 ? 'o' : 'i') +
+                (docsHits.length ? ' \u00b7 <b>' + docsHits.length + '</b> dentro le raccolte' : '');
+        }
+    }
+
+    qEl.addEventListener('input', function () { state.q = qEl.value; render(); });
+    clearEl.addEventListener('click', function () {
+        qEl.value = ''; state.q = ''; state.tags = []; render(); qEl.focus();
+    });
+    chipsEl.addEventListener('click', function (ev) {
+        var b = ev.target.closest('button[data-tag]');
+        if (!b) return;
+        var t = b.dataset.tag;
+        if (!t) { state.tags = []; }
+        else {
+            var i = state.tags.indexOf(t);
+            if (i === -1) state.tags.push(t); else state.tags.splice(i, 1);
+        }
+        render();
+    });
+    document.addEventListener('keydown', function (ev) {
+        if (ev.key === '/' && document.activeElement !== qEl && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+            ev.preventDefault(); qEl.focus(); return;
+        }
+        if (ev.key === 'Escape' && (document.activeElement === qEl || state.q || state.tags.length)) {
+            qEl.value = ''; state.q = ''; state.tags = []; render();
+        }
+    });
+
+    render();
+})();
+</script>
 
 <script type="module" src="../app.js?v=20261104a"></script>
 </body>

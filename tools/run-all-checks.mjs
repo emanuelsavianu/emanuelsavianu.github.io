@@ -18,6 +18,7 @@ const steps = [
   { name: 'Orari (orologi finti)',   cmd: NODE, args: [join('tools', 'check-hours.mjs')] },
   { name: 'URL canoniche',            cmd: NODE, args: [join('tools', 'check-urls.mjs')] },
   { name: 'Link integrity',          cmd: NODE, args: [join('tools', 'check-links.mjs')] },
+  { name: 'Hub colleghi <- catalogo', cmd: NODE, args: [join('tools', 'build-colleghi.mjs'), '--check'] },
   { name: 'Pre-render allineato',    cmd: NODE, args: [join('tools', 'prerender.mjs'), '--check'] },
   { name: 'i18n parity + coverage',  cmd: NODE, args: [join('tools', 'check-i18n.mjs')] },
   { name: 'SW precache sync',        cmd: NODE, args: [join('tools', 'check-sw.mjs')] },
