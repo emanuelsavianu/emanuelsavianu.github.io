@@ -74,3 +74,68 @@
 # seduta della Giunta (03/08/2026) stampata nel frontespizio. Il numero a 9 cifre
 # presente nel PDF della delibera è un frammento dell'hash SHA interno dell'allegato.
 ^03/08/2026$
+
+# 06/11/2026 — "Risorse informative" dello Studio Ippocrate pubblicate in
+# colleghi/modulistica/: manualistica Millewin (date di revisione stampate in
+# copertina/tabelle di revisione), procedure aziendali e schede di studio.
+# Nessun dato di assistito: i riscontri sono date di revisione di documento,
+# recapiti di ufficio/fornitori e l'esempio di codice fiscale citato nel testo
+# del manuale Millewin ("Fattura 1 2015-01-20 SSRMRA45R50F839E.pdf").
+^SSRMRA45R50F839E$
+^366[\s.]?6782315$
+^389[\s.]?5472857$
+^0552[\s.]?053263$
+^3333769161$
+^3339185339$
+^3357383680$
+^3357570431$
+^3387144178$
+^3665425870$
+^3713513422$
+^01/02/2022$
+^01/02/2024$
+^01/12/2025$
+^02/02/2021$
+^2/02/2021$
+^02/11/2015$
+^03/06/2025$
+^03/07/2025$
+^04/08/2021$
+^04/08/2022$
+^05/06/2023$
+^05/10/2022$
+^06/12/2022$
+^08/01/2020$
+^08/06/2023$
+^09/07/2020$
+^10/03/2021$
+^11/01/2023$
+^12/05/2023$
+^12/06/2024$
+^13/05/2024$
+^14/04/2021$
+^14/04/2025$
+^14/06/2023$
+^15/11/2021$
+^16/06/2022$
+^16/09/2025$
+^18/11/2025$
+^19/03/2020$
+^19/11/2025$
+^19/12/2023$
+^20/10/1992$
+^20/11/2024$
+^21/07/2023$
+^22/09/2012$
+^22/11/2023$
+^25/02/2025$
+^26/09/2024$
+^27/02/2023$
+^27/03/2024$
+^27/04/2022$
+^27/05/2021$
+^27/09/2023$
+^27/10/2025$
+^28/03/2022$
+^29/11/2001$
+^31/01/2022$
