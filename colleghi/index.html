@@ -393,6 +393,12 @@
     <style>
         /* Banner "Comunicazioni" a tutta larghezza in testa alla sezione */
         .split-hero .action-grid > .btn-hero-span { grid-column: 1 / -1; }
+        /* Misura di lettura 45-80 caratteri per riga (audit 2026-11-06 P1);
+           60ch misurato a runtime sul font reale: media 67, max 85. */
+        #area-colleghi ol, #codici-genetici p, #modulistica p {
+            max-width: 60ch;
+            text-wrap: pretty;
+        }
     </style>
 </head>
 <body>
@@ -773,7 +779,7 @@
                 </div>
 
                 <p class="tip-category" id="priorita-asl-2026">Priorità ASL 2026 — obiettivi per i MMG</p>
-                <div class="note-box" style="border:2px solid var(--accent);border-left-width:2px;border-radius:var(--radius-md);">
+                <div class="note-box" style="border-top:2px solid var(--border-color);padding-top:14px;">
                     <ol style="margin:0;padding-left:20px;line-height:1.7;">
                         <li>
                             <strong>Copertura vaccinazione Pneumococcica</strong> — Percentuale di copertura
