@@ -9,6 +9,8 @@ description: Facsimili dei certificati e modulistica per MMG e PLS: PAI, STU, AD
 
 ## Come è organizzata la pagina
 
+In testa alla pagina, accanto al titolo, c'è il pulsante **Turni RUAP** (simbolo dello studio, collegamento diretto a https://savianu.it/colleghi/RUAP/): è lo strumento che si apre più spesso, spesso i colleghi entrano solo per quello.
+
 Una sola pagina con barra di ricerca e cinque aree; i portali esterni stanno in un blocco separato in fondo. La barra cerca su titolo, descrizione, tag e sinonimi di tutte le voci (80 risorse in pagina più 22 documenti dentro le raccolte) e suggerisce i filtri con i conteggi aggiornati mentre si digita; `/` porta il cursore nella barra, `Esc` azzera.
 
 - **Compilare e inviare** (24) — moduli, facsimili, richieste ADI/PAI/STU, esenzioni, protesi e ausili, segnalazioni.
