@@ -12,6 +12,7 @@
 - [Criteri di appropriatezza — invii e farmaci | Savianu](https://savianu.it/colleghi/criteri-appropriatezza.md)
 - [Batterie ADHD sovrapposte — modulo unico compilabile | Dott. Savianu](https://savianu.it/colleghi/adhd.md)
 - [Codici regionali — Analisi genetiche | Dott. Savianu](https://savianu.it/colleghi/codici-analisi-genetiche.md)
+- [Note operative e contatti — MMG Arezzo | Dott. Savianu](https://savianu.it/colleghi/note-operative.md)
 
 ## Markdown per agenti
 
@@ -26,6 +27,7 @@ invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure
 - [/colleghi/criteri-appropriatezza.md](https://savianu.it/colleghi/criteri-appropriatezza.md)
 - [/colleghi/adhd.md](https://savianu.it/colleghi/adhd.md)
 - [/colleghi/codici-analisi-genetiche.md](https://savianu.it/colleghi/codici-analisi-genetiche.md)
+- [/colleghi/note-operative.md](https://savianu.it/colleghi/note-operative.md)
 
 ## Contatti generali
 

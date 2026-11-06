@@ -318,6 +318,7 @@ export default {
       '/colleghi/criteri-appropriatezza.html':                 '/colleghi/criteri-appropriatezza.md',
       '/colleghi/adhd.html':                 '/colleghi/adhd.md',
       '/colleghi/codici-analisi-genetiche.html':                 '/colleghi/codici-analisi-genetiche.md',
+      '/colleghi/note-operative.html':                 '/colleghi/note-operative.md',
     };
     const acceptHeader = request.headers.get('Accept') || '';
     if (acceptHeader.includes('text/markdown')) {

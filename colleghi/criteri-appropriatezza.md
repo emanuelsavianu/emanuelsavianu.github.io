@@ -1,6 +1,6 @@
 ---
 title: Criteri di appropriatezza — invii e farmaci | Savianu
-description: Criteri di appropriatezza per i colleghi MMG: quando inviare allo specialista, come prescrivere (PDTA Diabete, Demenze, Nota AIFA 100) e trasporto sanitario cod. 06.
+description: Criteri di appropriatezza per i colleghi MMG: quando inviare allo specialista, come prescrivere (PDTA Diabete, Demenze, Nota AIFA 100), trasporto sanitario cod. 06 e checklist endoscopia digestiva.
 ---
 
 # Criteri di appropriatezza — invii specialistici e farmaci
@@ -119,6 +119,22 @@ Indicazioni dell'Azienda USL Toscana Sud Est per una prescrizione appropriata de
 - **La sola carrozzina non basta:** l'assistito deve trovarsi nella condizione clinica di non poter eseguire gli atti quotidiani della vita e di necessitare di assistenza continua.
 - **Cosa documenta il prescrittore (MMG o specialista):** (1) non deambulanza con deficit non compensabile tramite mezzi di appoggio, protesi o ortesi, e non trasportabilità con altre tipologie di mezzi; (2) il quadro clinico o la compromissione a cui si riferisce il criterio, indicando la categoria — ortopedica, cardiocircolatoria, respiratoria, neurologica, gastroenterologica, urologica, oculistica, otorinolaringoiatrica, ostetrico-ginecologica, altra; (3) ulteriori elementi a supporto della scelta clinica.
 - **Obiettivo aziendale 2026:** tasso di prescrizione dei trasporti sanitari ≤ 35 per 1.000 assistiti; per i medici già sotto soglia nel 2025, mantenimento con non più di 25 prescrizioni/anno (fonte ESTAR). Priorità ASL complete nella pagina [Area Colleghi](https://savianu.it/colleghi/#priorita-asl-2026).
+
+
+## 4. Endoscopia digestiva — abbattimento delle liste d'attesa
+
+Checklist richiesta dal distretto per il contenimento delle liste d'attesa di gastroenterologia.
+
+- **Pazienti over 80 o under 30:** eseguire prima la visita gastroenterologica.
+- **Non eseguire mai il sangue occulto fecale fuori dal programma di screening;** eventualmente, in caso di sintomo sospetto, richiedere una visita gastroenterologica.
+- Non richiedere **colonscopia** per controllo della diverticolosi e **gastroscopia** per controllo dell'ernia iatale.
+- **Referti istologici:** quando possibile fare scrivere dal patologo il successivo step di controllo, organizzato dal gastroenterologo.
+- **Diverticolosi del sigma:** l'endoscopia di controllo non andrebbe mai fatta, specie dopo una certa età.
+- **Sospetto celiachia o MICI:** non chiedere endoscopia, mandare direttamente al gastroenterologo.
+- **Familiarità per tumore del colon:** colonscopia a partire dai 35–40 anni (follow-up successivo a gestione gastroenterologica, circa ogni 5 anni; discendenti o collaterali diretti fino ai nonni). Tumore del colon in un genitore prima dei 35 anni → screening da 20 anni e invio per presa in carico gastroenterologica.
+- **Deficit di emoglobina nel giovane** (soprattutto maschio; donna con valore stabilmente basso, non oscillante in età fertile): gastro e colon andrebbero sempre fatte.
+
+Fonte: checklist del distretto (nota interna, trascritta in pagina note-operative.html).
 
 ---
 
