@@ -82,6 +82,6 @@ Come si legge: il **codice regionale** è quello da usare in prescrizione; fra p
 - Il documento di origine riporta per ogni voce anche canali di prenotazione e tempi di risposta del laboratorio emittente (Prato): non sono riportati qui perché riferiti a quella struttura.
 - Alcune voci sono contrassegnate nel documento di origine come eseguite presso altro centro: l'indicazione non è stata riportata.
 
-**Fonte della trascrizione:** elenco «SOS Genetica e Diagnostica di Laboratorio — AUTC, sede Ospedale Santo Stefano, via suor Niccolina 20, Prato», contenuto nella Carta dei servizi 2025 (documento dell'Azienda USL Toscana Centro, novembre 2025). Trascrizione effettuata il 16 ottobre 2026 e non validata dall'azienda di origine.
+**Fonte della trascrizione:** elenco «SOS Genetica e Diagnostica di Laboratorio — AUTC, sede Ospedale Santo Stefano, via suor Niccolina 20, Prato», contenuto nella Carta dei servizi 2025 (documento dell'Azienda USL Toscana Centro, novembre 2025). Trascrizione effettuata il 16 ottobre 2026 e non validata dall'azienda di origine. Documento originale: [Carta dei servizi 2025 — SOS Genetica e Diagnostica di Laboratorio](https://savianu.it/colleghi/modulistica/codici-esami-genetici-prato-2025.pdf) (PDF con codice regionale e nazionale, punti di prelievo, tempi di risposta e ritiro).
 
 Pagina di supporto alla prescrizione, a uso esclusivo del personale sanitario. Codici e denominazioni possono cambiare con l'aggiornamento del catalogo regionale.

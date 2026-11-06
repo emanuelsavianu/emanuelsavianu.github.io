@@ -16,7 +16,7 @@ Pagina completa: https://savianu.it/colleghi/note-operative.html
 
 ## Gravidanza
 
-- **Prestazioni esenti:** le gestanti (e i pre-concezionali, in parte anche per il maschio) riportate nell'allegato del decreto ministeriale; l'elenco stampabile è sul Drive dello Studio («Risorse informative» → «Prestazioni esenti in gravidanza»).
+- **Prestazioni esenti:** le gestanti (e i pre-concezionali, in parte anche per il maschio) riportate nell'allegato del decreto ministeriale; elenco stampabile: [prestazioni esenti in gravidanza (PDF, allegato 10A)](https://savianu.it/colleghi/modulistica/prestazioni-esenti-gravidanza.pdf), da mostrare al paziente che contesta il ticket.
 - **Ricette:** in genere niente impegnativa: le ricette sono sul sito HappyMamma e sono fruibili dalle pazienti una volta sbloccate dal ginecologo o dal MMG.
 - **Fuori dell'allegato** (es. TSH, sierologia CMV): a carico del SSN ma MAI con esenzione.
 - **Visita anestesiologica** per parto-analgesia nel quesito, priorità D; PT e PTT pre-parto servono all'anestesista con esenzione M99 inserita a mano in cartella.
@@ -25,7 +25,7 @@ Pagina completa: https://savianu.it/colleghi/note-operative.html
 
 ## Certificati, INPS e invalidità
 
-- **Reperibilità:** cambio via app INPS (circolare 106 del 23/09/2020) a cura del paziente; il medico NON può richiamare il certificato.
+- **Reperibilità:** cambio via app INPS (circolare 106 del 23/09/2020) a cura del paziente; il medico NON può richiamare il certificato. Fasce di esenzione dalla reperibilità (DM 11/01/2016: patologie gravi con terapie salvavita, gravità, documentazione): [linee guida INPS, circolare n. 95/2016 all. 2](https://savianu.it/colleghi/modulistica/linee-guida-inps-esenzione-reperibilita.pdf).
 - **Rettifiche certificati INPS:** PEC **medicolegale.arezzo@postacert.inps.it** con certificato in carta bianca con timbro (anche sotto), protocollo del vecchio certificato e data di rientro al lavoro.
 - **COVID confermato:** certificato codice **079.02**. **NASpI e forze dell'ordine:** certificato di malattia in carta bianca.
 - **Certificato ISTAT:** nell'ultima riga usa «causa naturale indeterminata», mai «arresto cardiocircolatorio».
@@ -48,6 +48,7 @@ Pagina completa: https://savianu.it/colleghi/note-operative.html
 - **Radiologia interventistica:** cell **333 9185339**.
 - **GOM digerente:** per sospetta neoplasia dell'apparato digerente o metastasi epatiche da primitivo non noto, invio diretto al GOM — cell **333 3769161** (infermiera di percorso) e **gomsandonato.ar@uslsudest.toscana.it** — procedura in pagina Area Colleghi.
 - **Bombola di ossigeno:** «OSSIGENO*COMPR 200BAR 14LT VAL», cod. **038901296**.
+- **CPAP — acquisto e noleggio:** elenco di studio delle ditte (Sapio, Medigas, Vitalair, Linde) in [ditte per acquisto e noleggio CPAP (PDF)](https://savianu.it/colleghi/modulistica/ditte-cpap-acquisto-noleggio.pdf); prescrizione e fornitura secondo le indicazioni del TPC.
 
 ## Accessi e percorsi
 

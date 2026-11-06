@@ -71,6 +71,8 @@ Il paziente accede al II livello **esclusivamente su invio del MMG** (salvo acce
 
 **PDTA integrale:** [PDTA «Disturbi cognitivi e demenze» — PDA-PCUR-003 rev. 0](https://savianu.it/colleghi/modulistica/pdta-disturbi-cognitivi-demenze.pdf) (PDF: percorso, matrice di responsabilità, indicatori, bibliografia). L'Allegato 1 con l'elenco dei CDCD e i recapiti dei referenti non è pubblicato: richiedere l'elenco aggiornato alla Zona Distretto.
 
+**Densitometria ossea (MOC):** erogabile dal SSR solo per le indicazioni della DGR Toscana n. 1238/2003 — osteoporosi secondaria (Cushing, malassorbimenti, MICI e resezioni, ipogonadismo primitivo, ipertiroidismo/iperparatiroidismo, epatopatie croniche, insufficienza renale cronica e sindrome nefrosica, trapiantati), terapie prolungate oltre 6 mesi (corticosteroidi > 5 mg/die di prednisone-equivalenti, tiroxina a dosi soppressive, antiepilettici, antiretrovirali, farmaci che inducono ipogonadismo, eparina), carenza estrogenica (amenorrea primaria non trattata, ovariectomia bilaterale precoce, amenorrea secondaria > 2 anni, menopausa prima dei 45 anni), menopausa da almeno sei mesi con fattori di rischio accertati, fratture osteoporotiche o evidenza radiologica di osteoporosi. Richiesta sempre motivata; controlli non prima di 18–24 mesi. [Criteri integrali (PDF)](https://savianu.it/colleghi/modulistica/criteri-densitometria-osteoporosi.pdf).
+
 ## 2. Farmaci
 
 ### In 30 secondi
@@ -130,6 +132,8 @@ Checklist richiesta dal distretto per il contenimento delle liste d'attesa di ga
 - **Deficit di emoglobina nel giovane** (soprattutto maschio; donna con valore stabilmente basso, non oscillante in età fertile): gastro e colon andrebbero sempre fatte.
 
 Fonte: checklist del distretto (nota interna, trascritta in pagina note-operative.html).
+
+**Preparazione alla colonscopia:** schemi orari per Clensia, Plenvu e Selg Esse secondo l'orario dell'esame e la necessità di pulizia ad alto volume — [preparazione alla colonscopia (PDF)](https://savianu.it/colleghi/modulistica/preparazione-colonscopia.pdf).
 
 ---
 

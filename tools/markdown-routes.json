@@ -56,6 +56,12 @@
       "md": "colleghi/note-operative.md",
       "html": "colleghi/note-operative.html",
       "stub": "markdown/colleghi-note-operative.md"
+    },
+    {
+      "route": "/colleghi/risorse-informative.html",
+      "md": "colleghi/risorse-informative.md",
+      "html": "colleghi/risorse-informative.html",
+      "stub": "markdown/colleghi-risorse-informative.md"
     }
   ]
 }

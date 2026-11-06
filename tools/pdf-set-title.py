@@ -60,6 +60,30 @@ TITLES = {
     # PDTA dermatologia — identificazione precoce melanoma / valutazione nevi
     'dgr-1007-2026-identificazione-precoce-melanoma.pdf': "DGR Toscana n. 1007 del 03/08/2026 — Identificazione precoce dei soggetti a rischio melanoma e delle lesioni pigmentate sospette (Allegato A)",
     'informativa-valutazione-nevi-mmg-pls-specialisti.pdf': "Informativa — Identificazione precoce del melanoma: sintesi operativa per MMG, PLS e specialisti (DGR n. 1007/2026)",
+    # manualistica Millewin
+    'manuale-millewin-gestione-allegati.pdf': "Millewin 20.0.66 — Manuale utente: gestione allegati (rev. 5)",
+    'manuale-millewin-live-update.pdf': "Millewin 20.0.66 — Manuale utente: Mille Live Update (rev. 3)",
+    'manuale-millewin-millebook-medico.pdf': "Millewin 20.0.66 — Manuale utente: Millebook Medico (rev. 12)",
+    'manuale-millewin-millelight.pdf': "Millewin 20.0.66 — Manuale utente: Millelight (rev. 7)",
+    'manuale-millewin-millelight-smartcard.pdf': "Millewin 20.0.66 — Manuale utente: Millelight smartcard (rev. 7)",
+    'manuale-millewin-in-un-ora.pdf': "Millewin 20.0.66 — Manuale utente: Millewin in un'ora (rev. 23)",
+    'manuale-millewin-startup.pdf': "Millewin 20.0.66 — Manuale utente: Millewin StartUp (rev. 20)",
+    'manuale-millebook-paziente.pdf': "Millebook — Manuale per il paziente",
+    'nuova-sanita-iniziativa-millewin.pdf': "Nuova Sanità / Iniziativa — manuale operativo per lo studio medico",
+    'istruzioni-studio-millewin-doctolib.pdf': "Istruzioni operative di studio — farmaci, esenzioni, certificati e vaccini in Millewin",
+    'spunti-pratici-studio.pdf': "Spunti di natura pratica — raccolta operativa dello Studio Medico Ippocrate",
+    # risorse informative: codici, nomenclatori, preparazioni, procedure
+    'ausili-elenco-2b-pa-dgam-002.pdf': "Elenco degli ausili assistenziali (Elenco 2B) — Allegato 2 PA-DGAM-002, USL Toscana Sud Est",
+    'codici-esami-genetici-prato-2025.pdf': "Carta dei servizi 2025 — SOS Genetica e Diagnostica di Laboratorio (Prato): codici regionali degli esami genetici",
+    'nomenclatore-tariffario-regionale.pdf': "Nomenclatore tariffario regionale delle prestazioni specialistiche ambulatoriali — Regione Toscana",
+    'criteri-densitometria-osteoporosi.pdf': "Indicazioni clinico-diagnostiche per la densitometria ossea — DGR Toscana n. 1238/2003",
+    'preparazione-colonscopia.pdf': "Preparazione alla colonscopia — schemi per Clensia, Plenvu e Selg Esse",
+    'raccolta-urine-24-ore-acido.pdf': "Raccolta delle urine delle 24 ore con acido — istruzioni per il paziente",
+    'prestazioni-esenti-gravidanza.pdf': "Prestazioni specialistiche esenti per la tutela della maternità responsabile — Allegato 10A (GU 18/03/2017)",
+    'procedura-trasfusione-domiciliare.pdf': "PA-DTFD-002 rev. 0 — Trasfusione domiciliare di emazie concentrate (USL Toscana Sud Est)",
+    'profilassi-antibiotica-odontoiatria.pdf': "Profilassi antibiotica negli interventi chirurgici ambulatoriali in ambito odontoiatrico — OMCeO Firenze",
+    'linee-guida-inps-esenzione-reperibilita.pdf': "INPS — Linee guida sull'esenzione dall'obbligo di reperibilità (DM 11/01/2016; circolare n. 95/2016, allegato 2)",
+    'ditte-cpap-acquisto-noleggio.pdf': "Ditte per acquisto e noleggio di CPAP — elenco di studio",
 }
 
 WS = b'\x00\t\n\x0c\r '
