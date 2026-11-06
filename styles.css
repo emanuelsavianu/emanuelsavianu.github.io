@@ -533,14 +533,16 @@ body.dark-mode .notice-transfer { background: var(--bg-gradient-2); border-left-
 body.dark-mode .notice-transfer .step-icon { background: var(--primary); color: var(--accent); }
 body.dark-mode .notice-transfer h3, body.dark-mode .notice-transfer p { color: var(--accent); }
 
+/* Callout, non box: etichetta + filetto superiore 2px, niente striscia laterale
+   (audit 2026-11-06 #4). Il colore d'accento resta sul filetto, la gerarchia dal testo. */
 .alert-box {
-    background-color: var(--bg-gradient-1); border-left: 5px solid var(--accent);
-    padding: 20px; margin-bottom: 25px; border-radius: 8px;
+    border-top: 2px solid var(--accent);
+    padding: 14px 0 0; margin-bottom: 25px;
     color: var(--text-dark); font-size: clamp(0.9rem, 2vw, 1rem);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05); line-height: 1.6;
+    line-height: 1.6;
 }
-body.dark-mode .alert-box { background-color: var(--bg-gradient-2); }
-.alert-box p { margin-bottom: 10px; }
+/* Misura di lettura: i paragrafi di un callout corrento restano sotto i 75ch. */
+.alert-box p { margin-bottom: 10px; max-width: 60ch; text-wrap: pretty; }
 .alert-box p:last-child { margin-bottom: 0; }
 body.dark-mode .alert-box p strong { color: #e4e6eb; }
 
@@ -883,6 +885,21 @@ body.dark-mode .box-danger {
     background: #2d1a1a;
     border-left-color: #ff6b6b;
 }
+/* Callout annidato: dentro un .card non raddoppia il contenitore (audit 2026-11-06 #4).
+   Testo con filetto superiore 2px, niente box nel box; la semantica verde/rosso
+   passa alla filettatura, le etichette (✅/❌) restano nel testo. */
+.card .privacy-notice {
+    background: transparent; border: none;
+    border-top: 2px solid var(--border-color);
+    border-radius: 0; padding: 14px 0 0; margin-top: 24px;
+}
+.card .box-info, .card .box-danger {
+    background: transparent; border: none; border-radius: 0;
+    padding: 14px 0 0; height: auto; margin: 0;
+}
+.card .box-info { border-top: 2px solid var(--success); }
+.card .box-danger { border-top: 2px solid var(--danger); }
+body.dark-mode .card .box-danger { background: transparent; }
 body.dark-mode .btn-cal-service.prima .cal-icon-wrapper {
     color: var(--accent);
 }
@@ -2446,13 +2463,6 @@ html { text-rendering: optimizeLegibility; }
             position: relative;
             overflow: hidden;
         }
-        .patient-portal-cta::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 3px;
-            background: var(--accent);
-        }
         .patient-portal-cta-icon {
             width: 54px;
             height: 54px;
@@ -2673,11 +2683,16 @@ html { text-rendering: optimizeLegibility; }
             list-style: none;
             padding: 0;
             margin: 0;
+            /* Misura di lettura 45-80 caratteri per riga (audit 2026-11-06 P1).
+               68ch (raccomandazione d'audit) misurato a runtime dava righe 75-96;
+               60ch misura 67 media / 85 max sul font reale: si tiene in soglia. */
+            max-width: 60ch;
         }
         .shortcut-list li {
             padding: 12px 0;
             border-bottom: 1px dashed var(--border-color);
             line-height: 1.6;
+            text-wrap: pretty;
         }
         body.dark-mode .shortcut-list li {
             border-bottom-color: var(--primary-light);
@@ -3331,7 +3346,11 @@ body.dark-mode .ed .ed-btn--outline { border-color: rgba(255, 255, 255, 0.28); c
 
 .ed-facts-inline { display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; font-size: 0.9rem; }
 .ed-facts-inline .lbl { color: var(--ed-on-field-2); }
-.ed-facts-inline .num, .ed-emergency .num { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; }
+/* I numeri non si spezzano: "116 117" su due righe sembrava due numeri (audit 2026-11-06 #7). */
+.ed-facts-inline .num, .ed-emergency .num { color: #fff; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 480px) {
+    .ed-facts-inline .lbl, .ed-emergency .lbl { display: block; }
+}
 .ed-facts-inline a.num, .ed-emergency a.num { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
 .ed-facts-inline a.num:hover, .ed-emergency a.num:hover { color: var(--ed-brass); opacity: 1; }
 .ed-facts-inline .urgent .num, .ed-emergency .urgent .num { color: var(--ed-danger-on-field); }
@@ -3780,7 +3799,6 @@ body.dark-mode .ed .booking-title { color: var(--ed-ink); }
     border: 0; border-radius: var(--ed-radius);
     box-shadow: none; color: #fff;
 }
-.ed .patient-portal-cta::before { display: none; }
 .ed .patient-portal-cta-icon { background: rgba(255, 255, 255, 0.1); color: var(--ed-brass); }
 .ed .patient-portal-cta h3 { color: #fff; font-family: var(--font-serif); font-weight: 600; }
 .ed .patient-portal-cta p { color: var(--ed-on-field-2); }
