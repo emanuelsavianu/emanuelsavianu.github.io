@@ -349,7 +349,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261106a">
+    <link rel="stylesheet" href="../styles.css?v=20261113a">
 
     <!-- Lenis smooth scroll (self-hosted, offline-first) -->
     <script type="module">
@@ -432,6 +432,10 @@
         .cat-cta:hover .cat-cta-go, .cat-cta:focus-visible .cat-cta-go { transform: translateX(4px); }
 
         /* ── Catalogo colleghi (2026-11-06) ───────────────────────────── */
+        /* La barra catalogo è sticky: senza questo offset un link a #ancora
+           fa atterrare il titolo sotto la barra. 190px copre la barra a
+           entrambe le larghezze (183px desktop, 169px telefono). */
+        html { scroll-padding-top: 190px; }
         .cat-lede { max-width: 68ch; margin: 0; font-size: .95rem; color: var(--text-medium);
             line-height: 1.7; text-wrap: pretty; }
 
@@ -541,7 +545,19 @@
             .cat-cta-kicker { display: none; }
             .cat-cta-title { font-size: 1.35rem; }
             .cat-cta-sub { font-size: .72rem; }
-            .cat-toolbar { margin-top: 8px; }
+            /* Su telefono i 13 chip andavano a capo e la barra sticky occupava
+               324px (38% dello schermo) sopra il catalogo, con lo sfondo in
+               dissolvenza: il testo scorreva sotto. Ora è una riga sola che
+               scorre in orizzontale, su fondo opaco. */
+            .cat-toolbar { margin-top: 0; padding-top: 12px;
+                background: var(--color-bg);
+                border-bottom: 1px solid var(--border-color);
+                box-shadow: 0 8px 14px -12px rgba(26, 47, 76, .45); }
+            .cat-chips { flex-wrap: nowrap; overflow-x: auto;
+                -webkit-overflow-scrolling: touch; scrollbar-width: none;
+                padding-bottom: 4px; }
+            .cat-chips::-webkit-scrollbar { display: none; }
+            .cat-chips > * { flex: 0 0 auto; }
             .cat-field input { font-size: 16px; }
             .cat-h2 { font-size: 1.25rem; }
             .cat-kbd { display: none; }
@@ -551,7 +567,7 @@
         .split-hero .action-grid > .btn-hero-span { grid-column: 1 / -1; }
         /* Misura di lettura 45-80 caratteri per riga (audit 2026-11-06 P1);
            60ch misurato a runtime sul font reale: media 67, max 85. */
-        #area-colleghi ol, #codici-genetici p, #modulistica p {
+        #area-colleghi ol, #codici-genetici p {
             max-width: 60ch;
             text-wrap: pretty;
         }

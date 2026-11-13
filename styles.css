@@ -386,6 +386,12 @@ header p {
         min-height: 44px;
         min-width: 44px;
     }
+    /* Stessa altezza del toggle tema: ITA/ENG restano allineati nella pillola */
+    body .lang-switch .lang-btn {
+        min-height: 44px;
+        padding: 10px 12px;
+        font-size: 1rem;
+    }
 }
 
 /* Root page (index.html): the brand header is removed, so the photo hero is the
