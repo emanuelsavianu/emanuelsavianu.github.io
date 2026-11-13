@@ -33,7 +33,7 @@ function hrefTargets(content) {
     if (v.includes('://')) continue;
     // Normalize: root-relative paths (starting with /) are resolved from site root
     // Other relative paths are resolved from file's directory
-    out.push({ path: v, isRootRelative: v.startsWith('/') });
+    out.push({ path: v, isRootRelative: v.startsWith('/'), endsWithSlash: v.split('#')[0].split('?')[0].endsWith('/') });
   }
   return out;
 }
@@ -46,7 +46,7 @@ for (const file of files) {
   const content = readFileSync(file, 'utf8');
   for (const target of hrefTargets(content)) {
     if (!target) continue;
-    const { path: targetPath, isRootRelative } = target;
+    const { path: targetPath, isRootRelative, endsWithSlash } = target;
     const normalized = targetPath.split('#')[0].split('?')[0];
     if (!normalized) continue;
     let resolved;
@@ -57,11 +57,21 @@ for (const file of files) {
       // Relative: resolve from file's directory
       resolved = normalize(resolve(dir, normalized));
     }
-    if (existsSync(resolved)) continue;
-    // Directory index resolution: 'ssn/' or 'ssn' -> ssn/index.html
+    // Un URL che punta a una CARTELLA esiste solo se la cartella ha un index.html:
+    // GitHub Pages non fa listing delle directory e risponde 404. Su disco la
+    // cartella "c'è" comunque, quindi il vecchio `existsSync(resolved) → continue`
+    // lasciava passare i 404 reali (caso /colleghi/modulistica/, 2026-11-13).
+    const pointsToDir = endsWithSlash || (existsSync(resolved) && statSync(resolved).isDirectory());
     const withIndex = join(resolved, 'index.html');
+    if (pointsToDir) {
+      if (existsSync(withIndex)) continue;
+      broken++;
+      console.log(`BROKEN: ${file.replace(ROOT + sep, '')} -> ${targetPath} (cartella senza index.html)`);
+      continue;
+    }
+    if (existsSync(resolved)) continue;
     const withHtml = resolved.endsWith(sep) ? join(resolved, 'index.html') : resolved + '.html';
-    if (existsSync(withIndex) || existsSync(withHtml)) continue;
+    if (existsSync(withHtml)) continue;
     broken++;
     console.log(`BROKEN: ${file.replace(ROOT + sep, '')} -> ${targetPath}`);
   }

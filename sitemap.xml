@@ -102,7 +102,12 @@
   </url>
   <url>
     <loc>https://savianu.it/colleghi/risorse-informative.html</loc>
-    <lastmod>2026-11-06</lastmod>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://savianu.it/colleghi/modulistica/</loc>
+    <lastmod>2026-11-13</lastmod>
     <priority>0.4</priority>
   </url>
   <url>

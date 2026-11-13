@@ -1,0 +1,451 @@
+{
+  "versione": "2026-11-13",
+  "revisione": "13 novembre 2026",
+  "titolo": "Modulistica",
+  "descrizione": "Tutti i moduli, i facsimili e i documenti da compilare, consegnare o allegare a una richiesta: elenco unico con ricerca, diviso per uso.",
+  "avviso": "Raccolta di studio e di servizio, non un atto aziendale: i documenti sono pubblicati così come ricevuti dagli enti che li hanno emessi o già in uso nello studio. Prima di usarne uno per una prescrizione, una certificazione o una procedura, verificare che sia ancora l’edizione vigente.",
+  "gruppi": [
+    {
+      "id": "domiciliare",
+      "titolo": "ADI, ADP e assistenza domiciliare",
+      "icona": "fa-house-medical",
+      "intro": "I moduli che aprono e alimentano l’assistenza domiciliare: dalla richiesta iniziale al piano, dalla scheda terapeutica ai moduli degli accessi vascolari.",
+      "voci": [
+        {
+          "file": "PAI.pdf",
+          "titolo": "Modulo PAI — Piano Assistenziale Integrato",
+          "pagine": 2,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Il modulo con cui si attiva l’assistenza domiciliare: le voci da biffare per ADI, ADP, ADI infermieristica e cure intermedie, con i dati del medico richiedente e dell’assistito."
+        },
+        {
+          "file": "STU-scheda-terapeutica-unica.pdf",
+          "titolo": "Modulo STU — Scheda Terapeutica Unica",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Mod. 031-std domiciliare: la scheda che accompagna i farmaci e le terapie prescritte a domicilio, da compilare e inviare alle Cure Primarie della Zona Distretto."
+        },
+        {
+          "file": "valutazione-iniziale-inquadramento-clinico.pdf",
+          "titolo": "Valutazione iniziale del MMG",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Mod. 010 rev. 1: anamnesi ed esame obiettivo del paziente non ancora noto al servizio, da allegare al PAI all’avvio dell’attivazione."
+        },
+        {
+          "file": "cartella-clinico-assistenziale-territoriale-adi-adp.pdf",
+          "titolo": "Cartella clinico-assistenziale territoriale ADI/ADP",
+          "pagine": 12,
+          "ente": "USL Toscana Sud Est",
+          "desc": "La cartella che segue l’assistito in assistenza domiciliare: valutazione multidimensionale, piano di assistenza, diario degli accessi e verifiche periodiche."
+        },
+        {
+          "file": "modulo-picc-team-accessi-vascolari.pdf",
+          "titolo": "Modulo PICC team — accessi vascolari",
+          "pagine": 5,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Scheda di valutazione, consenso e informativa per l’impianto e la gestione di un accesso venoso centrale: il fascicolo completo da inviare al PICC team."
+        },
+        {
+          "file": "accessi-vascolari-scheda-pre-procedura.pdf",
+          "titolo": "Accessi vascolari — scheda pre-procedura",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Mod. 0607 rev. 002: la valutazione da compilare prima dell’impianto, con indicazione, sede, esami disponibili e terapia anticoagulante in corso."
+        },
+        {
+          "file": "accessi-vascolari-consenso-informato.pdf",
+          "titolo": "Accessi vascolari — consenso informato",
+          "pagine": 3,
+          "ente": "USL Toscana Sud Est",
+          "desc": "PAISCI 011: il modulo di consenso informato per l’impianto di un dispositivo venoso, con le informazioni al paziente e i rischi descritti."
+        }
+      ]
+    },
+    {
+      "id": "facsimili",
+      "titolo": "Facsimili per certificazioni",
+      "icona": "fa-file-signature",
+      "intro": "I facsimili dei certificati che si scrivono in studio: patente, porto d’armi, capacità, decesso, trasporto di salma, vaccinazioni, malattia e INAIL. Servono come traccia di compilazione, non come modello ufficiale.",
+      "voci": [
+        {
+          "file": "facsimile-anamnestico-patente-guida.pdf",
+          "titolo": "Certificato anamnestico per patente di guida",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "Il certificato richiesto per il rilascio o il rinnovo della patente: voci su diabete, epilessia, cardiopatie, disturbi visivi e uso di sostanze."
+        },
+        {
+          "file": "facsimile-anamnestico-porto-armi.pdf",
+          "titolo": "Certificato anamnestico per porto d’armi",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "L’anamnestico per il porto d’armi e per il nulla osta all’acquisto: anamnesi tossicologica, neurologica e psichiatrica."
+        },
+        {
+          "file": "facsimile-capacita-intendere-volere.pdf",
+          "titolo": "Certificazione di capacità di intendere e di volere",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "La certificazione dell’integrità delle facoltà mentali, richiesta per atti notarili, donazioni, testamento e nomine di amministratore di sostegno."
+        },
+        {
+          "file": "facsimile-constatazione-decesso.pdf",
+          "titolo": "Constatazione di decesso",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "Il modulo per la constatazione: dati del medico e del defunto, ora e causa del decesso, con il promemoria delle comunicazioni successive."
+        },
+        {
+          "file": "facsimile-attestato-trasporto-salma.pdf",
+          "titolo": "Attestato per il trasporto di salma",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "L’attestato che accompagna il trasporto della salma fuori dal comune: dati del defunto, luogo di partenza, destinazione e incaricato del trasporto."
+        },
+        {
+          "file": "facsimile-consenso-vaccinazione.pdf",
+          "titolo": "Consenso informato alla vaccinazione",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "Il consenso scritto da far firmare prima della somministrazione, con l’anamnesi delle condizioni che controindicano o rinvíano la vaccinazione."
+        },
+        {
+          "file": "facsimile-certificato-malattia-inps.pdf",
+          "titolo": "Certificato di malattia INPS",
+          "pagine": 1,
+          "ente": "Facsimile di studio",
+          "desc": "Il modello del certificato di malattia telematico: dati del lavoratore, diagnosi, prognosi e periodi di reperibilità."
+        },
+        {
+          "file": "facsimile-inail-infortunio-mod1ss.pdf",
+          "titolo": "INAIL — certificazione di infortunio (Mod. 1 SS)",
+          "pagine": 5,
+          "ente": "INAIL",
+          "desc": "Il facsimile del Mod. 1 SS con le istruzioni di compilazione per la certificazione medica dell’infortunio sul lavoro."
+        },
+        {
+          "file": "facsimile-inail-malattia-professionale-mod5ssbis.pdf",
+          "titolo": "INAIL — malattia professionale (Mod. 5 SS bis)",
+          "pagine": 17,
+          "ente": "INAIL",
+          "desc": "Il facsimile del Mod. 5 SS bis: elenco delle malattie professionali tabellate, voci anamnestiche e criteri per la prima certificazione."
+        },
+        {
+          "file": "certificati-gratuiti-a-pagamento-iva-omceo-arezzo.pdf",
+          "titolo": "Certificati gratuiti, a pagamento e soggetti a IVA",
+          "pagine": 3,
+          "ente": "OMCeO Arezzo",
+          "desc": "La nota dell’Ordine (prot. 1012/2014) che distingue i certificati gratuiti, quelli per cui è ammesso un compenso e quelli su cui va applicata l’IVA."
+        }
+      ]
+    },
+    {
+      "id": "esenzioni",
+      "titolo": "Esenzioni, scelte e segnalazioni",
+      "icona": "fa-clipboard-check",
+      "intro": "Le certificazioni per il diritto all’esenzione, le domande sull’assistito e le segnalazioni che il medico è tenuto a inviare.",
+      "voci": [
+        {
+          "file": "modulo-esenzione-diabete.pdf",
+          "titolo": "Certificazione per esenzione — diabete",
+          "pagine": 1,
+          "ente": "Regione Toscana",
+          "desc": "Il modulo con cui si certifica il diabete mellito per l’esenzione ticket: codice di esenzione e dati clinici richiesti."
+        },
+        {
+          "file": "modulo-esenzione-ipertensione.pdf",
+          "titolo": "Certificazione per esenzione — ipertensione",
+          "pagine": 1,
+          "ente": "Regione Toscana",
+          "desc": "La certificazione dell’ipertensione arteriosa essenziale: criteri, valori pressori documentati e codice di esenzione."
+        },
+        {
+          "file": "modulo-rinnovo-esenzione-048.pdf",
+          "titolo": "Rinnovo dell’esenzione 048",
+          "pagine": 1,
+          "ente": "Regione Toscana",
+          "desc": "Il modulo per il rinnovo dell’esenzione per patologia oncologica, con il richiamo alla documentazione che attesta la persistenza del diritto."
+        },
+        {
+          "file": "modulo-domanda-scelta-mmg-pls-deroga-territoriale.pdf",
+          "titolo": "Scelta del MMG/PLS in deroga territoriale",
+          "pagine": 1,
+          "ente": "Regione Toscana",
+          "desc": "La domanda con cui l’assistito chiede un medico fuori dal proprio ambito territoriale: motivazione, dichiarazioni e accettazione del medico."
+        },
+        {
+          "file": "modulo-comunicazione-sostituzione-mmg-pls.pdf",
+          "titolo": "Comunicazione di sostituzione MMG/PLS",
+          "pagine": 1,
+          "ente": "Regione Toscana",
+          "desc": "Il modulo per comunicare l’avvio o la cessazione di una sostituzione: dati dei due medici, periodo interessato e dichiarazioni reciproche."
+        },
+        {
+          "file": "scheda-unica-segnalazione-malattie-infettive.pdf",
+          "titolo": "Scheda unica di segnalazione delle malattie infettive",
+          "pagine": 1,
+          "ente": "Ministero della Salute",
+          "desc": "Allegato A del D.M. 7 marzo 2022 (decreto n. 21090 del 25/09/2026): la scheda da inviare all’Igiene Pubblica entro 12 o 48 ore secondo il caso."
+        },
+        {
+          "file": "prestazioni-esenti-gravidanza.pdf",
+          "titolo": "Prestazioni esenti in gravidanza (Allegato 10A)",
+          "pagine": 9,
+          "ente": "Ministero della Salute",
+          "desc": "L’elenco ministeriale delle prestazioni specialistiche esenti per la tutela della maternità: da mostrare al paziente che contesta il ticket."
+        }
+      ]
+    },
+    {
+      "id": "dispositivi",
+      "titolo": "Dispositivi, protesi e ausili",
+      "icona": "fa-bandage",
+      "intro": "Le prescrizioni che passano da un modulo: dispositivi per incontinenza, stomia e autocontrollo glicemico, protesi e ausili, arruolamento all’AFA.",
+      "voci": [
+        {
+          "file": "modulo-prescrizione-incontinenza-urinaria.pdf",
+          "titolo": "Prescrizione dispositivi — incontinenza urinaria",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "La prescrizione dei dispositivi assorbenti nell’incontinenza urinaria stabilizzata: tipologia, taglia e quantità mensile."
+        },
+        {
+          "file": "modulo-prescrizione-dispositivi-stomia.pdf",
+          "titolo": "Prescrizione dispositivi — stomia",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "La prescrizione dei presidi per colostomia, ileostomia e urostomia, con i codici dei dispositivi e la periodicità della fornitura."
+        },
+        {
+          "file": "modulo-prescrizione-autocontrollo-glicemico.pdf",
+          "titolo": "Prescrizione — autocontrollo glicemico (Allegato B)",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Il modulo per strisce reattive e lancette dell’autocontrollo, con la periodicità di fornitura secondo il tipo di diabete e la terapia."
+        },
+        {
+          "file": "modulo-richiesta-fornitura-protesi-ausili.pdf",
+          "titolo": "Richiesta fornitura o riparazione di protesi e ausili",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Mod. 0583: la richiesta di fornitura, sostituzione o riparazione di un presidio, da allegare alla prescrizione specialistica."
+        },
+        {
+          "file": "modulo-attivazione-afa.pdf",
+          "titolo": "Attivazione AFA — Attività Fisica Adattata",
+          "pagine": 2,
+          "ente": "Regione Toscana",
+          "desc": "Allegato B: il modulo per l’arruolamento ai corsi di Attività Fisica Adattata, con la scheda di valutazione clinica del medico."
+        },
+        {
+          "file": "ausili-elenco-2b-pa-dgam-002.pdf",
+          "titolo": "Ausili assistenziali — Elenco 2B",
+          "pagine": 1,
+          "ente": "USL Toscana Sud Est",
+          "desc": "Allegato 2 PA-DGAM-002: la tabella ufficiale degli ausili con descrizione e codice di classificazione ISO, fonte della pagina Ausili assistenziali."
+        }
+      ]
+    },
+    {
+      "id": "procedure",
+      "titolo": "Procedure, PDTA e documenti aziendali",
+      "icona": "fa-diagram-project",
+      "intro": "I percorsi e le procedure dell’azienda sanitaria che il medico di famiglia deve conoscere prima di inviare il paziente: melanoma, demenze, GOM, trasfusioni, profilassi, reperibilità, densitometria.",
+      "voci": [
+        {
+          "file": "dgr-1007-2026-identificazione-precoce-melanoma.pdf",
+          "titolo": "DGR 1007/2026 — identificazione precoce del melanoma",
+          "pagine": 11,
+          "ente": "Regione Toscana",
+          "desc": "La delibera che istituisce il percorso «Visita per Valutazione Nevi»: criteri di eleggibilità per età, cadenze e differenze rispetto alla prima visita dermatologica."
+        },
+        {
+          "file": "informativa-valutazione-nevi-mmg-pls-specialisti.pdf",
+          "titolo": "Valutazione nevi — informativa operativa",
+          "pagine": 5,
+          "ente": "USL Toscana Sud Est",
+          "desc": "La sintesi operativa della DGR 1007/2026 per chi prescrive: come si compila la richiesta, quando serve la priorità clinica, cosa non rientra nel percorso."
+        },
+        {
+          "file": "pdta-disturbi-cognitivi-demenze.pdf",
+          "titolo": "PDTA disturbi cognitivi e demenze",
+          "pagine": 16,
+          "ente": "USL Toscana Sud Est",
+          "desc": "PDA-PCUR-003 rev. 0: il percorso dal test di screening in ambulatorio all’invio al CDCD, con follow-up, ECG periodico e raccordo con l’UVM."
+        },
+        {
+          "file": "procedura-gom-tumori-gastrointestinali.pdf",
+          "titolo": "Procedura GOM — tumori gastrointestinali",
+          "pagine": 7,
+          "ente": "USL Toscana Sud Est",
+          "desc": "PP-PARE-70 rev. 0: quali neoplasie discutere al GOM, come si invia il caso all’ambulatorio di presa in carico e i tempi della stadiazione."
+        },
+        {
+          "file": "procedura-trasfusione-domiciliare.pdf",
+          "titolo": "Trasfusione domiciliare di emazie concentrate",
+          "pagine": 27,
+          "ente": "USL Toscana Sud Est",
+          "desc": "PA-DTFD-002 rev. 0: candidabilità ed esclusioni, fasi della procedura a domicilio, responsabilità e gestione delle reazioni trasfusionali."
+        },
+        {
+          "file": "profilassi-antibiotica-odontoiatria.pdf",
+          "titolo": "Profilassi antibiotica in odontoiatria",
+          "pagine": 8,
+          "ente": "OMCeO Firenze",
+          "desc": "Le raccomandazioni sull’uso appropriato della profilassi negli interventi ambulatoriali odontoiatrici, con l’infografica destinata ai pazienti."
+        },
+        {
+          "file": "linee-guida-inps-esenzione-reperibilita.pdf",
+          "titolo": "Esenzione dall’obbligo di reperibilità",
+          "pagine": 17,
+          "ente": "INPS",
+          "desc": "Circolare n. 95/2016, allegato 2: le fasce di esenzione previste dal DM 11/01/2016, la nozione di gravità e la documentazione da acquisire."
+        },
+        {
+          "file": "criteri-densitometria-osteoporosi.pdf",
+          "titolo": "Criteri per la densitometria ossea",
+          "pagine": 4,
+          "ente": "Regione Toscana",
+          "desc": "DGR 1238/2003: le condizioni che rendono la MOC erogabile dal SSR, la tempistica dei controlli e l’obbligo di motivare la richiesta."
+        }
+      ]
+    },
+    {
+      "id": "codici",
+      "titolo": "Codici e nomenclatori",
+      "icona": "fa-list-ol",
+      "intro": "I due documenti di riferimento per scegliere il codice giusto su un’impegnativa o su una richiesta di esame.",
+      "voci": [
+        {
+          "file": "nomenclatore-tariffario-regionale.pdf",
+          "titolo": "Nomenclatore tariffario regionale",
+          "pagine": 94,
+          "ente": "Regione Toscana",
+          "desc": "Codice, nota, branca, descrizione, tariffa e indicazioni cliniche delle prestazioni specialistiche ambulatoriali: il riferimento per leggere un’impegnativa."
+        },
+        {
+          "file": "codici-esami-genetici-prato-2025.pdf",
+          "titolo": "Codici degli esami genetici (Prato)",
+          "pagine": 6,
+          "ente": "USL Toscana Centro",
+          "desc": "Carta dei servizi 2025 della SOS Genetica di Prato: codice regionale e nazionale, punto di prelievo e tempi di risposta; fonte della pagina dei codici."
+        }
+      ]
+    },
+    {
+      "id": "paziente",
+      "titolo": "Istruzioni da consegnare al paziente",
+      "icona": "fa-print",
+      "intro": "Fogli pensati per essere stampati o linkati all’assistito: preparazioni, raccolte e istruzioni pratiche.",
+      "voci": [
+        {
+          "file": "preparazione-colonscopia.pdf",
+          "titolo": "Preparazione alla colonscopia",
+          "pagine": 2,
+          "ente": "Studio Medico Ippocrate",
+          "desc": "Gli schemi orari per Clensia, Plenvu e Selg Esse secondo l’orario dell’esame e il tipo di pulizia richiesta."
+        },
+        {
+          "file": "raccolta-urine-24-ore-acido.pdf",
+          "titolo": "Raccolta delle urine delle 24 ore con acido",
+          "pagine": 1,
+          "ente": "Studio Medico Ippocrate",
+          "desc": "Le istruzioni per la raccolta, compreso il caso della doppia raccolta con e senza acido (contenitori A e B, volume totale)."
+        },
+        {
+          "file": "manuale-millebook-paziente.pdf",
+          "titolo": "Millebook — manuale per il paziente",
+          "pagine": 19,
+          "ente": "Millewin",
+          "desc": "Come prenotare, spostare o disdire un appuntamento in autonomia: da stampare o da linkare a chi chiede come si prenota online."
+        },
+        {
+          "file": "ditte-cpap-acquisto-noleggio.pdf",
+          "titolo": "Ditte per acquisto e noleggio di CPAP",
+          "pagine": 1,
+          "ente": "Studio Medico Ippocrate",
+          "desc": "L’elenco di studio delle ditte (Sapio, Medigas, Vitalair, Linde) con i riferimenti per l’acquisto e il noleggio del dispositivo."
+        }
+      ]
+    },
+    {
+      "id": "studio",
+      "titolo": "Manuali e risorse di studio",
+      "icona": "fa-book-medical",
+      "intro": "I manuali Millewin e i promemoria operativi nati in studio: quello che serve per usare il programma e per rispondere alle domande di sportello.",
+      "voci": [
+        {
+          "file": "manuale-millewin-in-un-ora.pdf",
+          "titolo": "Millewin in un’ora",
+          "pagine": 132,
+          "ente": "Millewin",
+          "desc": "Il percorso guidato completo: cartella, agenda, prescrizioni, certificati e stampe. Il manuale da cui partire per imparare il programma."
+        },
+        {
+          "file": "manuale-millewin-startup.pdf",
+          "titolo": "Millewin StartUp",
+          "pagine": 107,
+          "ente": "Millewin",
+          "desc": "Installazione, primo avvio, configurazione dello studio, database e parametri di rete."
+        },
+        {
+          "file": "manuale-millewin-millebook-medico.pdf",
+          "titolo": "Millebook Medico",
+          "pagine": 24,
+          "ente": "Millewin",
+          "desc": "Agenda online e appuntamenti condivisi con la segreteria e con i pazienti, dal lato del medico."
+        },
+        {
+          "file": "manuale-millewin-millelight.pdf",
+          "titolo": "Millelight",
+          "pagine": 15,
+          "ente": "Millewin",
+          "desc": "Accesso alla cartella da tablet o smartphone per le visite domiciliari e sincronizzazione con lo studio."
+        },
+        {
+          "file": "manuale-millewin-millelight-smartcard.pdf",
+          "titolo": "Millelight smartcard",
+          "pagine": 12,
+          "ente": "Millewin",
+          "desc": "La variante di Millelight con lettore di smart card e CNS: accesso in mobilità con autenticazione su carta."
+        },
+        {
+          "file": "manuale-millewin-gestione-allegati.pdf",
+          "titolo": "Gestione allegati",
+          "pagine": 14,
+          "ente": "Millewin",
+          "desc": "Importare, classificare e ritrovare referti, immagini e scansioni nella cartella del paziente."
+        },
+        {
+          "file": "manuale-millewin-live-update.pdf",
+          "titolo": "Mille Live Update",
+          "pagine": 12,
+          "ente": "Millewin",
+          "desc": "Aggiornamenti, patch e tabelle: cosa controllare quando un aggiornamento non parte, compreso l’errore «controllo iniziale fallito»."
+        },
+        {
+          "file": "nuova-sanita-iniziativa-millewin.pdf",
+          "titolo": "Nuova Sanità di Iniziativa",
+          "pagine": 34,
+          "ente": "Millewin",
+          "desc": "Registri di sanità di iniziativa: arruolamento dei pazienti complessi e a rischio, motivazioni, compilazione e stampa del PAI, estrazione degli arruolati."
+        },
+        {
+          "file": "istruzioni-studio-millewin-doctolib.pdf",
+          "titolo": "Istruzioni operative di studio",
+          "pagine": 10,
+          "ente": "Studio Medico Ippocrate",
+          "desc": "Farmaci, note AIFA, esenzioni, certificati di malattia e vaccinazioni dell’adulto: risponde alla maggior parte delle domande di sportello."
+        },
+        {
+          "file": "spunti-pratici-studio.pdf",
+          "titolo": "Spunti di natura pratica",
+          "pagine": 8,
+          "ente": "Studio Medico Ippocrate",
+          "desc": "Appunti operativi: recapiti e percorsi aziendali, codici utili, regole su certificati, presidi e accessi. La versione aggiornata è la pagina Note operative."
+        }
+      ]
+    }
+  ]
+}

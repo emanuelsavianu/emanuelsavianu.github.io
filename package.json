@@ -9,6 +9,8 @@
     "check:sw": "node tools/check-sw.mjs",
     "build:colleghi": "node tools/build-colleghi.mjs",
     "check:colleghi": "node tools/build-colleghi.mjs --check",
+    "build:modulistica": "node tools/build-modulistica.mjs",
+    "check:modulistica": "node tools/build-modulistica.mjs --check",
     "gen:markdown": "node tools/gen-markdown.mjs",
     "prerender": "node tools/prerender.mjs",
     "check:prerender": "node tools/prerender.mjs --check",
