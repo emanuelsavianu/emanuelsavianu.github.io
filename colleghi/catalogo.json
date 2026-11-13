@@ -326,6 +326,23 @@
    "tipo": "page"
   },
   {
+   "id": "modulistica-indice",
+   "titolo": "Modulistica — tutti i moduli in una pagina",
+   "sub": "54 PDF · ricerca per parola chiave",
+   "desc": "L'indice unico dei moduli, dei facsimili e dei documenti da compilare, consegnare o allegare: ricerca per ente o per parola chiave, otto gruppi per uso.",
+   "href": "modulistica/",
+   "area": "compilare",
+   "tag": [
+    "modulo",
+    "facsimile",
+    "pdf",
+    "indice"
+   ],
+   "kw": "modulistica moduli facsimili indice elenco scarica pdf",
+   "icona": "fa-folder-open",
+   "tipo": "page"
+  },
+  {
    "id": "adi-adp-pai",
    "titolo": "Assistenza domiciliare ADI · ADP · PAI",
    "sub": "Moduli · invio a Cure Primarie · dal 1/10/2026",
