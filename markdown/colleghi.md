@@ -6,9 +6,9 @@
 
 In testa alla pagina, accanto al titolo, c'è il pulsante **Turni RUAP** (simbolo dello studio, collegamento diretto a https://savianu.it/colleghi/RUAP/): è lo strumento che si apre più spesso, spesso i colleghi entrano solo per quello.
 
-Una sola pagina con barra di ricerca e cinque aree; i portali esterni stanno in un blocco separato in fondo. La barra cerca su titolo, descrizione, tag e sinonimi di tutte le voci (80 risorse in pagina più 22 documenti dentro le raccolte) e suggerisce i filtri con i conteggi aggiornati mentre si digita; `/` porta il cursore nella barra, `Esc` azzera.
+Una sola pagina con barra di ricerca e cinque aree; i portali esterni stanno in un blocco separato in fondo. La barra cerca su titolo, descrizione, tag e sinonimi di tutte le voci (64 risorse in pagina, 22 documenti dentro le raccolte e 17 portali esterni) e suggerisce i filtri con i conteggi aggiornati mentre si digita; `/` porta il cursore nella barra, `Esc` azzera.
 
-- **Compilare e inviare** (24) — moduli, facsimili, richieste ADI/PAI/STU, esenzioni, protesi e ausili, segnalazioni.
+- **Compilare e inviare** (25) — moduli, facsimili, richieste ADI/PAI/STU, esenzioni, protesi e ausili, segnalazioni. In testa all'area c'è l'indice unico **Modulistica** (https://savianu.it/colleghi/modulistica/): i 54 PDF in una pagina con ricerca.
 - **Prescrivere e certificare** (14) — criteri di appropriatezza, protocollo INPS, codici (genetica, medicina fisica, nomenclatore), certificati.
 - **Percorsi e accessi** (5) — guide agli accessi (pronto soccorso, infettive, vascolari), PIR, comunicazioni 2026.
 - **Software, turni e strumenti di studio** (9) — Millewin e manuali, trucchi, note operative, RUAP e turni, calcolatori.
