@@ -320,6 +320,8 @@ export default {
       '/colleghi/codici-analisi-genetiche.html':                 '/colleghi/codici-analisi-genetiche.md',
       '/colleghi/note-operative.html':                 '/colleghi/note-operative.md',
       '/colleghi/risorse-informative.html':                 '/colleghi/risorse-informative.md',
+      '/colleghi/modulistica/':                 '/colleghi/modulistica/index.md',
+      '/colleghi/modulistica/index.html': '/colleghi/modulistica/index.md',
     };
     const acceptHeader = request.headers.get('Accept') || '';
     if (acceptHeader.includes('text/markdown')) {

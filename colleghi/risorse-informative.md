@@ -47,4 +47,4 @@ Pagina completa: https://savianu.it/colleghi/risorse-informative.html
 
 ## Segnalazioni
 
-Se un documento è cambiato, se un recapito non risponde o se manca un file utile a tutti, scrivete allo studio: la raccolta si aggiorna quando cambiano le procedure. Le note operative sempre aggiornate sono nella pagina [Note operative e contatti](https://savianu.it/colleghi/note-operative.html); i moduli e i facsimili da compilare sono nella pagina [Modulistica](https://savianu.it/colleghi/#modulistica).
+Se un documento è cambiato, se un recapito non risponde o se manca un file utile a tutti, scrivete allo studio: la raccolta si aggiorna quando cambiano le procedure. Le note operative sempre aggiornate sono nella pagina [Note operative e contatti](https://savianu.it/colleghi/note-operative.html); i moduli e i facsimili da compilare sono nella pagina [Modulistica](https://savianu.it/colleghi/modulistica/).

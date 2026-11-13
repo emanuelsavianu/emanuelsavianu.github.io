@@ -14,6 +14,7 @@
 - [Codici regionali — Analisi genetiche | Dott. Savianu](https://savianu.it/colleghi/codici-analisi-genetiche.md)
 - [Note operative e contatti — MMG Arezzo | Dott. Savianu](https://savianu.it/colleghi/note-operative.md)
 - [Risorse informative e manualistica | Dott. Savianu](https://savianu.it/colleghi/risorse-informative.md)
+- [Modulistica per MMG e PLS | Dott. Savianu](https://savianu.it/colleghi/modulistica/)
 
 ## Markdown per agenti
 
@@ -30,6 +31,7 @@ invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure
 - [/colleghi/codici-analisi-genetiche.md](https://savianu.it/colleghi/codici-analisi-genetiche.md)
 - [/colleghi/note-operative.md](https://savianu.it/colleghi/note-operative.md)
 - [/colleghi/risorse-informative.md](https://savianu.it/colleghi/risorse-informative.md)
+- [/colleghi/modulistica/index.md](https://savianu.it/colleghi/modulistica/index.md)
 
 ## Contatti generali
 

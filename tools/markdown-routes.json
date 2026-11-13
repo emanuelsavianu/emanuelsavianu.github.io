@@ -62,6 +62,12 @@
       "md": "colleghi/risorse-informative.md",
       "html": "colleghi/risorse-informative.html",
       "stub": "markdown/colleghi-risorse-informative.md"
+    },
+    {
+      "route": "/colleghi/modulistica/",
+      "md": "colleghi/modulistica/index.md",
+      "html": "colleghi/modulistica/index.html",
+      "stub": "markdown/colleghi-modulistica.md"
     }
   ]
 }
