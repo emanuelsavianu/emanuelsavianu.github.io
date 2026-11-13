@@ -34,7 +34,7 @@ const OUT = join(DIR, 'index.html');
 const CHECK = process.argv.includes('--check');
 
 const URL_PAGE = 'https://savianu.it/colleghi/modulistica/';
-const STYLES_V = '20261106a';
+const STYLES_V = '20261113a';
 const APP_V = '20261104a';
 
 const esc = (s) =>
@@ -152,6 +152,7 @@ const html = `<!DOCTYPE html>
     <meta name="theme-color" content="#1a2f4c">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" href="../../assets/pwa-icon-192.png">
 
 <link rel="stylesheet" href="../../assets/fonts/fonts.css">
 <link rel="preload" href="../../assets/fonts/montserrat-var-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -170,6 +171,10 @@ const html = `<!DOCTYPE html>
     <link rel="stylesheet" href="../../styles.css?v=${STYLES_V}">
 
     <style>
+        /* La barra di ricerca è sticky: un link a #g-… deve atterrare sotto
+           la barra, non dietro. 80px = altezza barra (69px) + margine. */
+        html { scroll-padding-top: 80px; }
+
         .page-wrapper {
             min-height: 100dvh;
             display: flex;
