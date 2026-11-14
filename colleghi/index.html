@@ -433,9 +433,9 @@
 
         /* ── Catalogo colleghi (2026-11-06) ───────────────────────────── */
         /* La barra catalogo è sticky: senza questo offset un link a #ancora
-           fa atterrare il titolo sotto la barra. 190px copre la barra a
-           entrambe le larghezze (183px desktop, 169px telefono). */
-        html { scroll-padding-top: 190px; }
+           fa atterrare il titolo sotto la barra. 165px copre la barra a
+           desktop (152px); a telefono scende a 125px (barra 113px). */
+        html { scroll-padding-top: 165px; }
         .cat-lede { max-width: 68ch; margin: 0; font-size: .95rem; color: var(--text-medium);
             line-height: 1.7; text-wrap: pretty; }
 
@@ -549,7 +549,7 @@
                324px (38% dello schermo) sopra il catalogo, con lo sfondo in
                dissolvenza: il testo scorreva sotto. Ora è una riga sola che
                scorre in orizzontale, su fondo opaco. */
-            .cat-toolbar { margin-top: 0; padding-top: 12px;
+            .cat-toolbar { margin-top: 0; padding-top: 8px; padding-bottom: 10px;
                 background: var(--color-bg);
                 border-bottom: 1px solid var(--border-color);
                 box-shadow: 0 8px 14px -12px rgba(26, 47, 76, .45); }
@@ -558,6 +558,7 @@
                 padding-bottom: 4px; }
             .cat-chips::-webkit-scrollbar { display: none; }
             .cat-chips > * { flex: 0 0 auto; }
+            html { scroll-padding-top: 125px; }
             .cat-field input { font-size: 16px; }
             .cat-h2 { font-size: 1.25rem; }
             .cat-kbd { display: none; }
@@ -635,8 +636,11 @@
                 <kbd class="cat-kbd" aria-hidden="true">/</kbd>
             </div>
             <div class="cat-chips" id="cat-chips" role="group" aria-label="Filtra per tipo di documento"></div>
-            <p class="cat-count" id="cat-count" aria-live="polite"></p>
         </div>
+        <!-- Il conteggio sta FUORI dalla barra sticky: dentro costava 46px di
+             schermo su ogni scroll (20% del viewport a 390px). Resta un live
+             region, quindi lo screen reader continua ad annunciarlo. -->
+        <p class="cat-count" id="cat-count" aria-live="polite"></p>
 
         <!-- Risultati dentro le raccolte di documenti (solo durante la ricerca) -->
         <section class="cat-area cat-docs" id="cat-docs-wrap" aria-labelledby="h-docs" hidden>
