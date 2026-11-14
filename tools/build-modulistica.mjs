@@ -208,12 +208,12 @@ const html = `<!DOCTYPE html>
         /* Barra di ricerca: stesso comportamento della hub /colleghi/ */
         .mod-toolbar {
             position: sticky; top: 0; z-index: 5;
-            display: flex; flex-wrap: wrap; align-items: center; gap: 12px;
+            display: flex; flex-wrap: nowrap; align-items: center; gap: 12px;
             padding: 12px 0 14px; margin-bottom: 8px;
             background: var(--bg-gradient-1);
             border-bottom: 1px solid var(--border-color);
         }
-        .mod-search { position: relative; flex: 1 1 240px; }
+        .mod-search { position: relative; flex: 1 1 240px; min-width: 0; }
         .mod-search i {
             position: absolute; left: 12px; top: 50%; transform: translateY(-50%);
             color: var(--text-medium); font-size: 0.85rem; pointer-events: none;
