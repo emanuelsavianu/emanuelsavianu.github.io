@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-20T13:53:26Z",
+  "configDataVersion": "2026-11-20T18:29:42Z",
   // Ordine delle sedi = ordine in cui compaiono nel calendario E in cui il
   // motore enumera le celle (quindi priorità di copertura): chiesto dal
   // referente 2026-11-09 — Guadagnoli sopra tutte, poi Baldaccio, poi le tre
@@ -1049,7 +1049,6 @@ const CONFIG = {
     "2026-12-10_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-10_pom_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-10_pom_Subbiano": "mqgp5xpe79zho",
-    "2026-12-11_mat_COT": "mqgp5xpev7h1m",
     "2026-12-11_mat_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-11_mat_Subbiano": "mqgp5xpe79zho",
     "2026-12-11_pom_M.S.Savino": "mqgp5xpeohiai",
