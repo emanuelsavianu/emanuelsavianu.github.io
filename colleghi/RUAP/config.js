@@ -1,7 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-09T14:21:01Z",
+  "configDataVersion": "2026-11-20T13:53:26Z",
   // Ordine delle sedi = ordine in cui compaiono nel calendario E in cui il
   // motore enumera le celle (quindi priorità di copertura): chiesto dal
   // referente 2026-11-09 — Guadagnoli sopra tutte, poi Baldaccio, poi le tre
@@ -642,7 +642,7 @@ const CONFIG = {
     {
       "id": "mrasudwdk87n",
       "name": "Olivieri",
-      "patients": 0,
+      "patients": 85,
       "weeklyHours": 38,
       "isPool": false,
       "colorIndex": 15,
@@ -667,6 +667,9 @@ const CONFIG = {
         "ven": {
           "mat": false,
           "pom": true
+        },
+        "sab": {
+          "mat": true
         }
       },
       "unavailPeriods": [],
@@ -1046,9 +1049,9 @@ const CONFIG = {
     "2026-12-10_mat_Subbiano": "mqgp5xpe6gb6b",
     "2026-12-10_pom_M.S.Savino": "mqgp5xpec24f6",
     "2026-12-10_pom_Subbiano": "mqgp5xpe79zho",
-    "2026-12-11_mat_COT": "mqgp5xpe79zho",
+    "2026-12-11_mat_COT": "mqgp5xpev7h1m",
     "2026-12-11_mat_M.S.Savino": "mqgp5xpec24f6",
-    "2026-12-11_mat_Subbiano": "mqgp5xpev7h1m",
+    "2026-12-11_mat_Subbiano": "mqgp5xpe79zho",
     "2026-12-11_pom_M.S.Savino": "mqgp5xpeohiai",
     "2026-12-11_pom_Subbiano": "mrasudwdk87n",
     "2026-12-12_mat_COT": "mqgp5xpec24f6",
@@ -1114,7 +1117,8 @@ const CONFIG = {
   "closedDays": [
     "2026-12-07",
     "2026-12-24",
-    "2026-12-31"
+    "2026-12-31",
+    "2027-01-05"
   ],
   "placeSchedules": {
     "COT": {
@@ -1167,7 +1171,8 @@ const CONFIG = {
     "COT": [
       "2026-12-07",
       "2026-12-24",
-      "2026-12-31"
+      "2026-12-31",
+      "2027-01-05"
     ]
   }
 };
