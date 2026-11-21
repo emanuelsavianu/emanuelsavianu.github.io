@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays, reloadPlaceOpenDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261121b';
+} from './state.js?v=20261121c';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261121b';
+} from './core-utils.js?v=20261121c';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -37,12 +37,12 @@ import {
   unavailCalNav, unavailCalToday,
   openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary,
   toggleFocusDoctor
-} from './renderers.js?v=20261121b';
+} from './renderers.js?v=20261121c';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261121b';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261121c';
 import {
-  initPublish, openPublishModal, closePublishModal, confirmPublish, notifyEmanuel
-} from './publish.js?v=20261121b';
+  initPublish, openPublishModal, closePublishModal, confirmPublish, notifyEmanuel, saveTokenFromInput
+} from './publish.js?v=20261121c';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -50,7 +50,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261121b';
+} from './config.js?v=20261121c';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -283,6 +283,10 @@ el('btn-publish-cancel')?.addEventListener('click', closePublishModal);
 el('publish-modal-close')?.addEventListener('click', closePublishModal);
 el('btn-publish-confirm')?.addEventListener('click', confirmPublish);
 el('btn-publish-notify')?.addEventListener('click', notifyEmanuel);
+el('btn-publish-token-save')?.addEventListener('click', saveTokenFromInput);
+el('publish-token-input')?.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); saveTokenFromInput(); }
+});
 el('btn-darkmode')?.addEventListener('click', toggleDarkMode);
 el('btn-instructions')?.addEventListener('click', () => {
   el('instructions-modal')?.classList.remove('hidden');

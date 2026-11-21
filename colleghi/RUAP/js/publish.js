@@ -3,12 +3,12 @@
 // ====================================================
 // Il pulsante è visibile solo se c'è il token (link `#editore=<token>` una volta).
 // Il preflight è locale; il gate vero lo rifà `publish-queue.py` con check-rules.
-import { state } from './state.js?v=20261121b';
-import { el, toast, escapeHtml } from './core-utils.js?v=20261121b';
-import { getMonthlyStats, getConflicts } from './renderers.js?v=20261121b';
+import { state } from './state.js?v=20261121c';
+import { el, toast, escapeHtml } from './core-utils.js?v=20261121c';
+import { getMonthlyStats, getConflicts } from './renderers.js?v=20261121c';
 import {
   STORAGE_PUBLISH_TOKEN, STORAGE_PUBLISH_LAST, PUBLISH_BASE, PUBLISH_APP_VERSION, CONFIG_DATA_KEY,
-} from './config.js?v=20261121b';
+} from './config.js?v=20261121c';
 
 let pollTimer = null;
 let lastJob = null;
@@ -28,6 +28,46 @@ export function bootEditorFromHash() {
   try { localStorage.setItem(STORAGE_PUBLISH_TOKEN, match[1]); } catch { /* storage non disponibile */ }
   history.replaceState(null, '', location.pathname + location.search);
   return true;
+}
+
+/** Salva il codice incollato a mano (secondo dispositivo, link perso, rotazione). */
+export function saveToken(value) {
+  const token = String(value || '').trim();
+  if (!/^[A-Za-z0-9._-]{16,128}$/.test(token)) {
+    toast('Codice non valido: incolla il codice ricevuto (almeno 16 caratteri)', 'error', 6000);
+    return false;
+  }
+  try {
+    localStorage.setItem(STORAGE_PUBLISH_TOKEN, token);
+  } catch (err) {
+    toast('Salvataggio non disponibile su questo browser', 'error', 6000);
+    return false;
+  }
+  updatePublishButton();
+  renderTokenRow();
+  const confirm = el('btn-publish-confirm');
+  if (confirm) confirm.disabled = preflight().conflicts > 0;
+  toast('Codice di pubblicazione salvato su questo dispositivo', 'success', 4000);
+  return true;
+}
+
+export function saveTokenFromInput() {
+  return saveToken(el('publish-token-input')?.value || '');
+}
+
+function renderTokenRow() {
+  const stateLine = el('publish-token-state');
+  const input = el('publish-token-input');
+  const has = Boolean(publishToken());
+  if (stateLine) {
+    stateLine.textContent = has
+      ? 'Codice configurato su questo dispositivo.'
+      : 'Nessun codice su questo dispositivo: incollalo qui una volta sola (o apri il link con #editore=…).';
+  }
+  if (input) {
+    input.value = '';
+    input.placeholder = has ? 'incolla un nuovo codice per sostituirlo' : 'incolla il codice ricevuto';
+  }
 }
 
 export function currentMonthKey() {
@@ -110,11 +150,10 @@ export function updatePublishButton() {
   const button = el('btn-publish');
   if (!button) return;
   const wrap = el('publish-wrap');
-  const enabled = Boolean(publishToken());
-  // Il wrapper è display:none nel markup: senza mostrarlo il pulsante resta invisibile
-  // anche se il suo display è inline-flex.
-  if (wrap) wrap.style.display = enabled ? 'flex' : 'none';
-  button.style.display = enabled ? 'inline-flex' : 'none';
+  // Il pulsante è sempre visibile: senza codice la modale spiega come inserirlo.
+  // (Con un solo editor non c'è ragione di nasconderlo, e così il link non è l'unica via.)
+  if (wrap) wrap.style.display = 'flex';
+  button.style.display = 'inline-flex';
   const saved = readJson(STORAGE_PUBLISH_LAST, null);
   if (saved && saved.jobId) {
     lastJob = saved;
@@ -139,8 +178,10 @@ export function openPublishModal() {
   // innerHTML è sicuro qui: ogni valore dinamico passa da escapeHtml() e il resto è
   // template statico — stessa convenzione degli altri renderer.
   if (body) body.innerHTML = summaryHtml(pre);
+  renderTokenRow();
   const confirm = el('btn-publish-confirm');
-  if (confirm) confirm.disabled = pre.conflicts > 0;
+  // Senza codice la conferma è bloccata: il codice si incolla nella stessa modale.
+  if (confirm) confirm.disabled = pre.conflicts > 0 || !publishToken();
   const modal = el('publish-modal');
   if (modal) modal.style.display = 'flex';
 }
