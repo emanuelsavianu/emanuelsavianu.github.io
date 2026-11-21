@@ -1,0 +1,20 @@
+# Worker della coda di pubblicazione RUAP.
+# Rotta dedicata: più specifica di "savianu.it/*" (security worker), quindi non lo
+# tocca e non mette a rischio il sito.
+# Deploy: cd cloudflare && npx wrangler deploy --config wrangler-ruap.toml
+# Secret: npx wrangler secret put RUAP_PUBLISH_TOKEN --config wrangler-ruap.toml
+
+name = "ruap-publish"
+main = "ruap-publish.mjs"
+compatibility_date = "2024-11-01"
+
+[[routes]]
+pattern = "savianu.it/api/ruap/*"
+zone_name = "savianu.it"
+
+[[kv_namespaces]]
+binding = "RUAP_KV"
+# Placeholder per `wrangler dev` (Miniflare usa uno store locale).
+# Il Task 4 lo sostituisce con l'id reale di `wrangler kv namespace create RUAP_KV`.
+id = "00000000000000000000000000000000"
+preview_id = "00000000000000000000000000000000"
