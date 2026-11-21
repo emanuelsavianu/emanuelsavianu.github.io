@@ -433,6 +433,15 @@
         class="bg-brand-700 hover:bg-brand-600 text-white px-3 py-1.5 rounded-lg text-sm font-medium flex items-center gap-1.5">
         <i class="fa-solid fa-camera"></i> Salva Schermata
       </button>
+      <!-- Pubblica sul sito: visibile solo con il codice di pubblicazione (#editore=…) -->
+      <div id="publish-wrap" class="items-center gap-1.5" style="display:none">
+        <button id="btn-publish" title="Pubblica il mese sul sito (coda + verifica automatica)"
+          class="bg-amber-600 hover:bg-amber-500 text-white px-3 py-1.5 rounded-lg text-sm font-medium items-center gap-1.5"
+          style="display:none">
+          <i class="fa-solid fa-cloud-arrow-up"></i> Pubblica
+        </button>
+        <span id="publish-chip" class="text-xs font-semibold px-2 py-1 rounded-full bg-slate-100 text-slate-700" style="display:none"></span>
+      </div>
       <!-- Dark mode / light mode -->
       <button id="btn-darkmode" title="Attiva/disattiva modalità scura"
         class="bg-brand-400 hover:bg-brand-300 text-brand-900 px-3 py-1.5 rounded-lg text-sm font-bold flex items-center gap-1.5 shadow-sm transition-colors">
@@ -753,6 +762,31 @@
   </div>
 </div>
 
+<div id="publish-modal" class="fixed inset-0 bg-black/50 z-[60] items-start justify-center pt-8 px-4 pb-8 overflow-y-auto" style="display:none">
+  <div class="bg-white rounded-2xl shadow-2xl w-full max-w-lg">
+    <div class="bg-brand-700 text-white px-5 py-3 rounded-t-2xl flex items-center justify-between">
+      <h3 class="font-bold text-lg flex items-center gap-2">
+        <i class="fa-solid fa-cloud-arrow-up"></i> Pubblica il mese sul sito
+      </h3>
+      <button id="publish-modal-close" class="text-white/70 hover:text-white text-2xl leading-none" aria-label="Chiudi">&times;</button>
+    </div>
+    <div class="p-5 space-y-4">
+      <div id="publish-summary"></div>
+      <div class="flex items-center justify-end gap-2 flex-wrap">
+        <button id="btn-publish-notify" class="bg-white hover:bg-amber-50 text-amber-800 border border-amber-300 px-3 py-2 rounded-lg text-sm font-medium items-center gap-1.5" style="display:none">
+          <i class="fa-solid fa-paper-plane"></i> Avvisa Emanuel
+        </button>
+        <button id="btn-publish-cancel" class="bg-white hover:bg-brand-100 text-brand-800 border border-brand-300 px-3 py-2 rounded-lg text-sm font-medium">
+          Annulla
+        </button>
+        <button id="btn-publish-confirm" class="bg-amber-600 hover:bg-amber-500 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+          Pubblica sul sito
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- CONFLICTS RESOLUTION MODAL -->
 <div id="conflicts-modal" class="hidden fixed inset-0 bg-black/60 z-[60] flex items-center justify-center px-4">
   <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col fade-in">
@@ -943,7 +977,7 @@
      MODULES — App logic (ES modules)
      =================================================== -->
 <script src="config.js?v=2026-11-20T18:29:42Z"></script>
-<script type="module" src="js/events.js?v=20261109a"></script>
+<script type="module" src="js/events.js?v=20261121b"></script>
 
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">

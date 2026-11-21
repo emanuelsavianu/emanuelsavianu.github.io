@@ -17,6 +17,12 @@ export const STORAGE_HEADER_COLLAPSED = 'ruap-header-collapsed';
 export const STORAGE_FILL_ONLY = 'ruap-solo-riempimento';
 export const STORAGE_EXTRA = 'ruap-turni-extra';
 export const STORAGE_FOCUS = 'ruap-focus-medico';
+// Pubblicazione sul sito (coda KV + drain Hermes). Il token si riceve una volta col
+// link `#editore=<token>` e resta in localStorage: non c'è nulla nel repo.
+export const STORAGE_PUBLISH_TOKEN = 'ruap-publish-token';
+export const STORAGE_PUBLISH_LAST = 'ruap-publish-last';
+export const PUBLISH_BASE = '/api/ruap';
+export const PUBLISH_APP_VERSION = '2026-11-21a';
 export const STORAGE_VERSION = 2;
 export const CONFIG_DATA_KEY = 'ruap-config-data-version';
 export const HISTORY_MAX = 50;

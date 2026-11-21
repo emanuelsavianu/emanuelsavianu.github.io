@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays, reloadPlaceOpenDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261109a';
+} from './state.js?v=20261121b';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261109a';
+} from './core-utils.js?v=20261121b';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -37,9 +37,12 @@ import {
   unavailCalNav, unavailCalToday,
   openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary,
   toggleFocusDoctor
-} from './renderers.js?v=20261109a';
+} from './renderers.js?v=20261121b';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261109a';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261121b';
+import {
+  initPublish, openPublishModal, closePublishModal, confirmPublish, notifyEmanuel
+} from './publish.js?v=20261121b';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -47,7 +50,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261109a';
+} from './config.js?v=20261121b';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -275,6 +278,11 @@ document.addEventListener('click', (e) => {
 el('btn-pdf')?.addEventListener('click', exportPDF);
 el('btn-export-png')?.addEventListener('click', exportPNG);
 el('btn-export-screen')?.addEventListener('click', exportCalendarScreenshot);
+el('btn-publish')?.addEventListener('click', openPublishModal);
+el('btn-publish-cancel')?.addEventListener('click', closePublishModal);
+el('publish-modal-close')?.addEventListener('click', closePublishModal);
+el('btn-publish-confirm')?.addEventListener('click', confirmPublish);
+el('btn-publish-notify')?.addEventListener('click', notifyEmanuel);
 el('btn-darkmode')?.addEventListener('click', toggleDarkMode);
 el('btn-instructions')?.addEventListener('click', () => {
   el('instructions-modal')?.classList.remove('hidden');
@@ -493,6 +501,7 @@ function init() {
   updateUndoRedoButtons();
   updateConflictsHeaderBadge();
   updateHeaderSubtitle();
+  initPublish();
 }
 
 init();

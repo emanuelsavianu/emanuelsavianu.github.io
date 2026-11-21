@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261109a';
+} from './state.js?v=20261121b';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -17,15 +17,15 @@ import {
   isPlaceOpenOn, slotsForPlace, dayKeyOf, getPlaceSchedule,
   activePlacesInMonth, isPlaceActiveInMonth, placeOpenDays,
   getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
-} from './core-utils.js?v=20261109a';
+} from './core-utils.js?v=20261121b';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
   DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
-} from './config.js?v=20261109a';
-import { isItalianHoliday } from './holidays.js?v=20261109a';
+} from './config.js?v=20261121b';
+import { isItalianHoliday } from './holidays.js?v=20261121b';
 
 // ====================================================
 // 7. RENDERING
@@ -1256,7 +1256,7 @@ export function saveDoctorFromModal() {
 
 // --- Conflicts ---
 
-function getConflicts() {
+export function getConflicts() {
   const byDocSlot = {};
   for (const [key, docId] of Object.entries(state.assignments)) {
     const [dateKey, slotKey] = key.split('_');
@@ -2031,7 +2031,7 @@ export async function exportCalendarScreenshot() {
 // 11. MONTHLY STATS
 // ====================================================
 
-function getMonthlyStats() {
+export function getMonthlyStats() {
   const year = state.calYear;
   const month = state.calMonth;
   const lastDay = new Date(year, month + 1, 0).getDate();
