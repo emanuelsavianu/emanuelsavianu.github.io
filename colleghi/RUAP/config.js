@@ -1,12 +1,7 @@
 const CONFIG = {
   // Bump this when you change doctors, assignments, or other config data
   // so existing users get prompted to update their localStorage
-  "configDataVersion": "2026-11-20T18:29:42Z",
-  // Ordine delle sedi = ordine in cui compaiono nel calendario E in cui il
-  // motore enumera le celle (quindi priorità di copertura): chiesto dal
-  // referente 2026-11-09 — Guadagnoli sopra tutte, poi Baldaccio, poi le tre
-  // storiche. Prima di gennaio 2027 l'ordine relativo non cambia, perché le
-  // due CdC sono inattive e restano solo M.S.Savino, Subbiano, COT.
+  "configDataVersion": "2026-11-21T14:12:38Z",
   "places": [
     "Guadagnoli",
     "Baldaccio",
