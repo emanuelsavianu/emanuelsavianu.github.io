@@ -112,7 +112,7 @@ const html = `<!DOCTYPE html>
     <meta name="color-scheme" content="light dark">
 
     <title>Modulistica per MMG e PLS | Dott. Savianu</title>
-    <meta name="description" content="${esc(data.descrizione)} ${totale} PDF: moduli ADI/ADP e PAI, facsimili dei certificati, esenzioni, prescrizioni di dispositivi, procedure aziendali e manuali.">
+    <meta name="description" content="${esc(data.descrizione)} ${totale} PDF in elenco.">
     <link rel="canonical" href="${URL_PAGE}">
 
     <script type="application/ld+json">

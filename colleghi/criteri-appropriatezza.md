@@ -1,6 +1,6 @@
 ---
 title: Criteri di appropriatezza — invii e farmaci | Savianu
-description: Criteri di appropriatezza per i colleghi MMG: quando inviare allo specialista, come prescrivere (PDTA Diabete, Demenze, Nota AIFA 100), trasporto sanitario cod. 06 e checklist endoscopia digestiva.
+description: Criteri di appropriatezza per MMG: invii allo specialista, prescrizioni (PDTA Diabete, Demenze, Nota AIFA 100), trasporto sanitario cod. 06, endoscopia.
 ---
 
 # Criteri di appropriatezza — invii specialistici e farmaci

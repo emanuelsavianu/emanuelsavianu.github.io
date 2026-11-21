@@ -1,6 +1,6 @@
 ---
 title: Note operative e contatti — MMG Arezzo | Dott. Savianu
-description: Indirizzi, numeri, codici prescrittivi, orari e regole pratiche per l
+description: Indirizzi, numeri, codici prescrittivi, orari e regole pratiche per l'uso ambulatoriale ad Arezzo: telepneumoconsulto, vaccini, gravidanza, INPS, esenzioni, Millewin.
 ---
 
 # Note operative e contatti — MMG Arezzo

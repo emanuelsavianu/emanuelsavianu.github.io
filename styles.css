@@ -3954,8 +3954,8 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
 
 /* ---- touch-target hardening on the editorial pages ---- */
 .ed .ed-path__toggle { min-height: 44px; display: inline-flex; align-items: center; }
-.ed-facts-inline a.num, .ed-emergency a.num { padding: 6px 3px; margin: -6px -3px; }
-.ed site-footer .footer-nav a { display: inline-block; padding-block: 6px; }
+.ed-facts-inline a.num, .ed-emergency a.num { padding: 6px 3px; margin: -6px -3px; min-height: 44px; display: inline-flex; align-items: center; }
+.ed site-footer .footer-nav a { display: inline-flex; align-items: center; min-height: 44px; padding-block: 6px; }
 .ed .intl-consent input { width: 24px; height: 24px; flex: none; }
 @media (max-width: 768px) {
     .ed .lang-btn { padding: 13px 12px; }

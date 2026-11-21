@@ -1,6 +1,6 @@
 ---
 title: Modulistica per MMG e PLS | Dott. Savianu
-description: Tutti i moduli, i facsimili e i documenti da compilare, consegnare o allegare a una richiesta: elenco unico con ricerca, diviso per uso. 54 PDF: moduli ADI/ADP e PAI, facsimili dei certificati, esenzioni, prescrizioni di dispositivi, procedure aziendali e manuali.
+description: Tutti i moduli, i facsimili e i documenti da compilare, consegnare o allegare a una richiesta: elenco unico con ricerca, diviso per uso. 54 PDF in elenco.
 ---
 
 # Modulistica

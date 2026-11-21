@@ -1,6 +1,6 @@
 ---
 title: Risorse informative e manualistica | Dott. Savianu
-description: Raccolta di manuali Millewin, codici e nomenclatori, istruzioni per i pazienti e procedure aziendali utili al medico di medicina generale — documenti scaricabili in PDF.
+description: Manuali Millewin, codici e nomenclatori, istruzioni per i pazienti e procedure aziendali utili al medico di medicina generale: documenti PDF scaricabili.
 ---
 
 # Risorse informative e manualistica — raccolta per i colleghi

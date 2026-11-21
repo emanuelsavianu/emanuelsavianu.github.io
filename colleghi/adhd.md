@@ -1,6 +1,6 @@
 ---
-title: Batterie ADHD sovrapposte — modulo unico compilabile | Dott. Savianu
-description: Strumento per MMG e psichiatri: un modulo unico al posto delle scale ADHD sovrapposte (ASRS-18, DIVA-5, BAARS-IV, WURS, WHODAS 2.0, Zung), con le regole di derivazione. Moduli compilabili per il paziente e per un familiare.
+title: Batterie ADHD sovrapposte: modulo unico | Dott. Savianu
+description: Un modulo unico al posto delle scale ADHD sovrapposte (ASRS-18, DIVA-5, BAARS-IV, WURS, WHODAS, Zung): regole di derivazione e moduli compilabili.
 ---
 
 # Batterie ADHD sovrapposte — modulo unico compilabile

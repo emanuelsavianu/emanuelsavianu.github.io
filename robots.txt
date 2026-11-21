@@ -8,6 +8,7 @@ Disallow: /.claude/
 Disallow: /email-templates/
 Disallow: /docs/
 Disallow: /tools/
+Disallow: /assets/brand/
 Disallow: /colleghi/xsegretarie.html
 Disallow: /colleghi/RUAP/
 Disallow: /colleghi/gestoreturni/

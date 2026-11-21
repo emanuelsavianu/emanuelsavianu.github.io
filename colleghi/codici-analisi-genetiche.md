@@ -1,6 +1,6 @@
 ---
 title: Codici regionali — Analisi genetiche | Dott. Savianu
-description: Codici regionali delle analisi genetiche (cariotipo, FISH, trombofilia, HLA, mutazioni geniche, oncogenetica ereditaria) — catalogo di lavoro non ufficiale per i colleghi MMG.
+description: Codici regionali delle analisi genetiche (cariotipo, FISH, trombofilia, HLA, mutazioni, oncogenetica): catalogo di lavoro non ufficiale per i MMG.
 ---
 
 # Codici regionali — Analisi genetiche (catalogo di lavoro)

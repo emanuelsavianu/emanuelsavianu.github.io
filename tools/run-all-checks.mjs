@@ -17,6 +17,7 @@ const steps = [
   { name: 'JS syntax (config.js)',   cmd: NODE, args: ['--check', 'config.js'] },
   { name: 'Orari (orologi finti)',   cmd: NODE, args: [join('tools', 'check-hours.mjs')] },
   { name: 'URL canoniche',            cmd: NODE, args: [join('tools', 'check-urls.mjs')] },
+  { name: 'SEO/meta guardrail',        cmd: NODE, args: [join('tools', 'check-seo.mjs')] },
   { name: 'Link integrity',          cmd: NODE, args: [join('tools', 'check-links.mjs')] },
   { name: 'Hub colleghi <- catalogo', cmd: NODE, args: [join('tools', 'build-colleghi.mjs'), '--check'] },
   { name: 'Modulistica <- documenti', cmd: NODE, args: [join('tools', 'build-modulistica.mjs'), '--check'] },

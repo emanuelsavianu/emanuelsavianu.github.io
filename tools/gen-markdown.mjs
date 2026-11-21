@@ -36,12 +36,19 @@ function extractMeta(htmlPath, override) {
     const m = html.match(re);
     return m ? m[1].replace(/\s+/g, ' ').trim() : fallback;
   };
+  // Quote-aware meta lookup: a straight apostrophe inside content="…" must not
+  // truncate the value (descriptions like "l'ambulatorio" broke the old regex).
+  const pickMeta = (key) => {
+    const re = new RegExp(`<meta\\s+(?:name|property)=["']${key}["']\\s+content=(["'])([\\s\\S]*?)\\1`, 'i');
+    const m = html.match(re);
+    return m ? m[2].replace(/\s+/g, ' ').trim() : '';
+  };
   const title = override?.titleOverride
     || pick(/<title>([^<]*)<\/title>/i)
-    || pick(/<meta\s+property=["']og:title["']\s+content=["']([^"']*)["']/i)
+    || pickMeta('og:title')
     || '';
-  const description = pick(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i)
-    || pick(/<meta\s+property=["']og:description["']\s+content=["']([^"']*)["']/i)
+  const description = pickMeta('description')
+    || pickMeta('og:description')
     || '';
   return { title, description };
 }
