@@ -1,0 +1,72 @@
+name: Sentinella modulo internazionale
+
+# Sorveglia /api/intl-inquiry, l'endpoint dietro il modulo di /international/.
+#
+# Due modalità distinte, perché dicono cose diverse:
+#   dry  — liveness, NESSUNA email (cron giornaliero)
+#   real — end-to-end, UNA email vera allo studio (cron settimanale)
+#
+# Il job fallisce (= GitHub manda l'email di notifica) quando:
+#   - il worker non risponde o risponde HTML/403 (bot-fight, piattaforma);
+#   - la time-trap consegna un payload che doveva essere respinto;
+#   - la consegna end-to-end fallisce (send_failed / no_sender).
+# Il 429 è trattato come "skipped": non è un guasto e non deve allarmare.
+#
+# Per spegnere la sonda settimanale senza toccare il codice: impostare la
+# variabile di repository SENTINEL_REAL = off (Settings → Variables).
+# Va spenta se la mail settimanale in casella dà fastidio; la liveness
+# giornaliera resta attiva in ogni caso.
+
+on:
+  schedule:
+    - cron: '17 5 * * *'    # ogni giorno, 05:17 UTC — solo liveness
+    - cron: '23 6 * * 1'    # lunedì, 06:23 UTC — invio reale
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'dry = nessuna email, real = invio reale'
+        type: choice
+        options: [dry, real]
+        default: dry
+
+permissions:
+  contents: read
+
+concurrency:
+  group: intl-sentinel
+  cancel-in-progress: false
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      # Il cron settimanale è l'unico che manda una email vera, e solo se
+      # la variabile di repo non lo spegne.
+      MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || (github.event.schedule == '23 6 * * 1' && vars.SENTINEL_REAL != 'off' && 'real' || 'dry') }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Sonda l'endpoint
+        run: |
+          echo "modalità: $MODE"
+          node tools/check-intl-endpoint.mjs "--$MODE"
+
+      - name: Riepilogo
+        if: always()
+        run: |
+          {
+            echo "### Sentinella modulo internazionale"
+            echo
+            echo "- modalità: \`$MODE\`"
+            echo "- esito: \`${{ job.status }}\`"
+            echo "- run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+            echo
+            echo "Se l'esito è \`failure\` in modalità \`real\`: il modulo di /international/ non consegna."
+            echo "Diagnosi: \`npx wrangler secret list\` dal worker — senza RESEND_API_KEY non esiste"
+            echo "un sender utilizzabile (Email Routing non è attivabile: MX su Google Workspace)."
+          } >> "$GITHUB_STEP_SUMMARY"
