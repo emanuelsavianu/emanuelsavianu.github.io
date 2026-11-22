@@ -403,7 +403,7 @@
    "titolo": "PAI — Piano Assistenziale Integrato",
    "sub": "ADI · ADP · AD infermieristica",
    "desc": "Il modulo del piano assistenziale integrato per l'assistenza domiciliare.",
-   "href": "modulistica/PAI.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1L8EJ_DFnRoNxiQSe5MiSUxSQr9OaqaZV",
    "area": "compilare",
    "tag": [
     "adi",
@@ -419,7 +419,7 @@
    "titolo": "STU — scheda terapeutica unica",
    "sub": "Mod. 031-std · domiciliare",
    "desc": "La scheda terapeutica unica per la gestione dei farmaci a domicilio.",
-   "href": "modulistica/STU-scheda-terapeutica-unica.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=173Edi-UjUT5YsNd2l8OKq2DEiSDju1XD",
    "area": "compilare",
    "tag": [
     "adi",
@@ -435,7 +435,7 @@
    "titolo": "Valutazione iniziale — inquadramento clinico",
    "sub": "Mod. 010 rev. 1",
    "desc": "Scheda di valutazione iniziale: anamnesi ed esame obiettivo per l'ADI.",
-   "href": "modulistica/valutazione-iniziale-inquadramento-clinico.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1vg98qWSWwnuksD3pwCAftyMsH4KQkR8h",
    "area": "compilare",
    "tag": [
     "adi",
@@ -475,7 +475,7 @@
    "titolo": "PDTA disturbi cognitivi e demenze",
    "sub": "PDA-PCUR-003 rev. 0",
    "desc": "Il percorso diagnostico-terapeutico aziendale per i disturbi cognitivi, integrale.",
-   "href": "modulistica/pdta-disturbi-cognitivi-demenze.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1NMmrHJHGYOh0FXLaoR2YCF-iGTtehZUB",
    "area": "prescrivere",
    "tag": [
     "pdf"
@@ -489,7 +489,7 @@
    "titolo": "DGR 1007/2026 — melanoma",
    "sub": "Delibera con allegato A",
    "desc": "La delibera regionale sull'identificazione precoce del melanoma.",
-   "href": "modulistica/dgr-1007-2026-identificazione-precoce-melanoma.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1Ea3zPB1uy3g8KMhkIkhcYRXeB93nEJ7q",
    "area": "prescrivere",
    "tag": [
     "pdf"
@@ -503,7 +503,7 @@
    "titolo": "Informativa — valutazione dei nevi",
    "sub": "MMG · PLS · specialisti",
    "desc": "L'informativa operativa per la valutazione dei nevi in studio.",
-   "href": "modulistica/informativa-valutazione-nevi-mmg-pls-specialisti.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1dJmgl0gu0nErkX0kDsD7NdBtOvX3OQDo",
    "area": "prescrivere",
    "tag": [
     "pdf"
@@ -517,7 +517,7 @@
    "titolo": "Scheda unica di segnalazione — malattie infettive",
    "sub": "Igiene pubblica",
    "desc": "La scheda unica per segnalare una malattia infettiva all'igiene pubblica.",
-   "href": "modulistica/scheda-unica-segnalazione-malattie-infettive.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1feSm6IKzYkzD5uqsbnAUGiEbzXyVi11g",
    "area": "compilare",
    "tag": [
     "modulo",
@@ -547,7 +547,7 @@
    "titolo": "Procedura PP-PARE-70 — tumori gastrointestinali",
    "sub": "Sospetto o accertato",
    "desc": "La procedura per il percorso del paziente con sospetto tumore gastrointestinale.",
-   "href": "modulistica/procedura-gom-tumori-gastrointestinali.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1wzCNdnsLuGFtUcD9eC4pbBBGzwtjNi4I",
    "area": "percorsi",
    "tag": [
     "accessi",
@@ -677,7 +677,7 @@
    "titolo": "Anamnestico — patente di guida",
    "sub": "Facsimile · condizioni a rischio",
    "desc": "Scheda anamnestica per il rinnovo della patente: condizioni che controindicano la guida.",
-   "href": "modulistica/facsimile-anamnestico-patente-guida.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1xjqnW0tMsdK0OHdxv-9mDfBh7TYVSbCC",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -692,7 +692,7 @@
    "titolo": "Capacità di intendere e di volere",
    "sub": "Facsimile · certificazione",
    "desc": "Facsimile di certificazione della capacità di intendere e di volere.",
-   "href": "modulistica/facsimile-capacita-intendere-volere.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1Yzb-Qw-pWu-G8Ya_wQrEzH1n1oqyIgwx",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -707,7 +707,7 @@
    "titolo": "Certificati gratuiti, a pagamento e con IVA",
    "sub": "Nota OMCeO Arezzo · prot. 1012/2014",
    "desc": "Quali certificati sono gratuiti, quali a pagamento e quali con IVA, secondo l'Ordine di Arezzo.",
-   "href": "modulistica/certificati-gratuiti-a-pagamento-iva-omceo-arezzo.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1nIdWNuwTar2rCejEs6OVZmft3rF7UYZp",
    "area": "prescrivere",
    "tag": [
     "certificati",
@@ -722,7 +722,7 @@
    "titolo": "Constatazione di decesso",
    "sub": "Facsimile · riconoscimento",
    "desc": "Modello per il riconoscimento e la constatazione del decesso.",
-   "href": "modulistica/facsimile-constatazione-decesso.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1ysdtdIxf_E0htFCLPFj_fcciu71PB3sJ",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -737,7 +737,7 @@
    "titolo": "INAIL — infortunio sul lavoro",
    "sub": "Mod. 1 SS",
    "desc": "Certificazione medica di infortunio sul lavoro, modello 1 SS.",
-   "href": "modulistica/facsimile-inail-infortunio-mod1ss.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1r3cMBRgu6MyLwmxJTr4K3G0BdBUQ7gjE",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -753,7 +753,7 @@
    "titolo": "INAIL — malattia professionale",
    "sub": "Mod. 5 SS bis",
    "desc": "Certificazione di malattia professionale, modello 5 SS bis.",
-   "href": "modulistica/facsimile-inail-malattia-professionale-mod5ssbis.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1G7buMwrmEfMiTD8FCRzcVwCIs6ZpvyoK",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -769,7 +769,7 @@
    "titolo": "Certificato di malattia INPS",
    "sub": "Facsimile · diagnosi e prognosi",
    "desc": "Facsimile di certificato di malattia con diagnosi e prognosi.",
-   "href": "modulistica/facsimile-certificato-malattia-inps.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=18Y86Jf91NXCuiGKpfL2E3j44HsnR5wb_",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -785,7 +785,7 @@
    "titolo": "Anamnestico — porto d'armi",
    "sub": "Art. 25 L. 833/1978",
    "desc": "Scheda anamnestica per il rilascio o rinnovo del porto d'armi.",
-   "href": "modulistica/facsimile-anamnestico-porto-armi.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1jMESugvDw_cnd1FADb8ow02UIHnwdYsA",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -800,7 +800,7 @@
    "titolo": "Trasporto di salma",
    "sub": "Art. 10 c. 2 L.R. 19/2004",
    "desc": "Attestato per il trasporto di salma secondo la legge regionale toscana.",
-   "href": "modulistica/facsimile-attestato-trasporto-salma.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1HkKm21ANQFApb8KVPk9os8qYoypibjGP",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -815,7 +815,7 @@
    "titolo": "Consenso informato alla vaccinazione",
    "sub": "Regione Toscana",
    "desc": "Modulo di consenso informato per la vaccinazione, modello regionale.",
-   "href": "modulistica/facsimile-consenso-vaccinazione.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1xi74E69eJlhEISh6ZnjtniFEJNCf8eNP",
    "area": "compilare",
    "tag": [
     "facsimile",
@@ -972,7 +972,7 @@
    "titolo": "Kit schede pazienti 5 lingue (PDF)",
    "sub": "10 pagine A4 pronte da stampare",
    "desc": "Il kit completo da stampare per il banco: cinque lingue, fronte/retro.",
-   "href": "../ssn/pdf/kit-schede-pazienti-5-lingue.pdf",
+   "href": "../https://drive.google.com/uc?export=download&id=1xKKzLDGIU-v1cnvyULWklpwW-Dmxegy9",
    "area": "paziente",
    "tag": [
     "stampa",
@@ -987,7 +987,7 @@
    "titolo": "Scelta MMG/PLS in deroga",
    "sub": "Deroga territoriale · USL Sud Est",
    "desc": "Domanda di scelta del medico in deroga al bacino territoriale.",
-   "href": "modulistica/modulo-domanda-scelta-mmg-pls-deroga-territoriale.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1ePKJMPxOrhKuE-0oc534g58RLDDjM-vg",
    "area": "compilare",
    "tag": [
     "modulo",
@@ -1002,7 +1002,7 @@
    "titolo": "Comunicazione di sostituzione MMG/PLS",
    "sub": "USL Sud Est",
    "desc": "Comunicazione di sostituzione temporanea del medico o del pediatra.",
-   "href": "modulistica/modulo-comunicazione-sostituzione-mmg-pls.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1Te4chqwcoYO3jyv5tJAz2hPFl0LZ5rN5",
    "area": "compilare",
    "tag": [
     "modulo",
@@ -1017,7 +1017,7 @@
    "titolo": "Cartella clinico-assistenziale territoriale",
    "sub": "ADI · ADP",
    "desc": "La cartella territoriale per i pazienti in assistenza domiciliare.",
-   "href": "modulistica/cartella-clinico-assistenziale-territoriale-adi-adp.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1jeJcQLtRZzp825j8E2XfBZlEm5jX4QNh",
    "area": "compilare",
    "tag": [
     "adi",
@@ -1033,7 +1033,7 @@
    "titolo": "Modulo PICC team — accessi vascolari",
    "sub": "Allegato 2 · consenso e informativa",
    "desc": "Richiesta al PICC team con consenso e informativa per gli accessi vascolari.",
-   "href": "modulistica/modulo-picc-team-accessi-vascolari.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=18JBvLcKrtQTzgdGbfXzbEYIgFihLwvGU",
    "area": "compilare",
    "tag": [
     "accessi",
@@ -1049,7 +1049,7 @@
    "titolo": "Attivazione AFA",
    "sub": "Attività fisica adattata · Allegato B",
    "desc": "Modulo per attivare i corsi di attività fisica adattata.",
-   "href": "modulistica/modulo-attivazione-afa.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1TmVqfewPaF72k-MyQyecvH00McA3HQ2l",
    "area": "compilare",
    "tag": [
     "modulo",
@@ -1064,7 +1064,7 @@
    "titolo": "Esenzione — diabete",
    "sub": "Certificazione del MMG",
    "desc": "Modulo di certificazione per l'esenzione ticket per diabete.",
-   "href": "modulistica/modulo-esenzione-diabete.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=146vY0CAR_JWojI0GTNdqvGI4kxPX_4v7",
    "area": "compilare",
    "tag": [
     "esenzione",
@@ -1080,7 +1080,7 @@
    "titolo": "Esenzione — ipertensione",
    "sub": "Certificazione del MMG",
    "desc": "Modulo di certificazione per l'esenzione ticket per ipertensione.",
-   "href": "modulistica/modulo-esenzione-ipertensione.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1GI7iUssSpmXlIV_PGYSByKX5jbT9p4VX",
    "area": "compilare",
    "tag": [
     "esenzione",
@@ -1096,7 +1096,7 @@
    "titolo": "Rinnovo esenzione 048",
    "sub": "Patologia oncologica · MMG e CORD",
    "desc": "Rinnovo dell'esenzione per patologia oncologica (codice 048).",
-   "href": "modulistica/modulo-rinnovo-esenzione-048.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1KHOmm2L4K8OcvIFKa1bSUVmgwAXfKgF5",
    "area": "compilare",
    "tag": [
     "esenzione",
@@ -1112,7 +1112,7 @@
    "titolo": "Prescrizione — incontinenza urinaria",
    "sub": "Dispositivi medici",
    "desc": "Modulo per la prescrizione dei dispositivi per l'incontinenza.",
-   "href": "modulistica/modulo-prescrizione-incontinenza-urinaria.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=12bS78iijKGrccNsXqcSqghreF70NhJEu",
    "area": "prescrivere",
    "tag": [
     "ausili",
@@ -1128,7 +1128,7 @@
    "titolo": "Prescrizione — presidi per stomia",
    "sub": "Colostomia · ileostomia · urostomia",
    "desc": "Modulo per la prescrizione dei presidi per stomia.",
-   "href": "modulistica/modulo-prescrizione-dispositivi-stomia.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1gfURqe-rXw8v632nhqleliVT2SQXQpz_",
    "area": "prescrivere",
    "tag": [
     "ausili",
@@ -1144,7 +1144,7 @@
    "titolo": "Prescrizione — autocontrollo glicemico",
    "sub": "Allegato B · DGRT 806/2024",
    "desc": "Prescrizione di strisce e glucometro per l'autocontrollo glicemico.",
-   "href": "modulistica/modulo-prescrizione-autocontrollo-glicemico.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1jgNzkG6hFRw9di9hBxMMg_-awkuAO3eP",
    "area": "prescrivere",
    "tag": [
     "ausili",
@@ -1160,7 +1160,7 @@
    "titolo": "Richiesta protesi e ausili",
    "sub": "Mod. 0583 rev. 002",
    "desc": "Richiesta di fornitura di protesi e ausili all'USL.",
-   "href": "modulistica/modulo-richiesta-fornitura-protesi-ausili.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1BebrB6nNafGMTJPjXxJsLCXfFDS2YcM-",
    "area": "prescrivere",
    "tag": [
     "ausili",
@@ -1190,7 +1190,7 @@
    "titolo": "Millewin in un’ora",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Il percorso guidato completo: dalle prime schermate alla gestione della cartella, agenda, prescrizioni, certificati e stampe. È il manuale da cui partire per imparare il programma da zero o per rinfrescare i passaggi che si usano meno.",
-   "href": "modulistica/manuale-millewin-in-un-ora.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=16WHQBMvTzHDMdSAj4GMnpAWgpS7lXHJD",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1205,7 +1205,7 @@
    "titolo": "Millewin StartUp",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Installazione, primo avvio, configurazione dello studio, database e parametri di rete. La parte tecnica che serve quando si cambia postazione, si reinstalla il programma o si configura un nuovo studio.",
-   "href": "modulistica/manuale-millewin-startup.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1EbvqJ11o8KxcwL5EcdKTwbMOq3P_eR0C",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1220,7 +1220,7 @@
    "titolo": "Nuova Sanità di Iniziativa",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Gestione dei registri di sanità di iniziativa: arruolamento dei pazienti complessi (Target A) e dei pazienti a rischio, motivazioni di arruolamento, compilazione e stampa del PAI, estrazione degli arruolati.",
-   "href": "modulistica/nuova-sanita-iniziativa-millewin.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1c2GcEVFTGIienS6QaCB67qW4L8RsBGJG",
    "area": "strumenti",
    "tag": [
     "manuale",
@@ -1236,7 +1236,7 @@
    "titolo": "Millebook Medico",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Agenda online e appuntamenti condivisi con la segreteria e con i pazienti: calendari, disponibilità, inviti e gestione degli appuntamenti dal lato del medico.",
-   "href": "modulistica/manuale-millewin-millebook-medico.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1_2VRQ8OeHm4ARixLClmubGCXZnC9fAQi",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1251,7 +1251,7 @@
    "titolo": "Millebook — manuale per il paziente",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Il libretto pensato per il paziente: come prenotare, spostare o disdire un appuntamento in autonomia. Utile da stampare o da linkare a chi chiede come si prenota online.",
-   "href": "modulistica/manuale-millebook-paziente.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=15lmKje3_UotHpFm2p32xhfvhlX3S_-yg",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1266,7 +1266,7 @@
    "titolo": "Millelight",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Accesso alla cartella da tablet o smartphone per le visite domiciliari: cosa si può fare in mobilità e come avviene la sincronizzazione con lo studio.",
-   "href": "modulistica/manuale-millewin-millelight.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1ClE5-2513cch-3byN0-mswCvztULZKbY",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1281,7 +1281,7 @@
    "titolo": "Millelight smartcard",
    "sub": "PDF · Manualistica Millewin",
    "desc": "La variante di Millelight con lettore di smart card/CNS: accesso in mobilità con autenticazione su carta.",
-   "href": "modulistica/manuale-millewin-millelight-smartcard.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1UZGTXZ636Oc9deFUYG5NgWjaRXjPsFro",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1296,7 +1296,7 @@
    "titolo": "Gestione allegati",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Come importare, classificare e ritrovare gli allegati nella cartella del paziente (referti, immagini, documentazione scansionata).",
-   "href": "modulistica/manuale-millewin-gestione-allegati.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=18T2DScBimCZaPtfdZwn18awZ_4-Jrm_m",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1311,7 +1311,7 @@
    "titolo": "Mille Live Update",
    "sub": "PDF · Manualistica Millewin",
    "desc": "Aggiornamenti, patch e tabelle del programma: cosa fa il Live Update e cosa controllare quando un aggiornamento non parte (l’errore «controllo iniziale fallito» al primo avvio su un PC nuovo).",
-   "href": "modulistica/manuale-millewin-live-update.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1r9uJAO8zyF3H8Gz_6PSwyKq10NLGiCO_",
    "area": "strumenti",
    "tag": [
     "pdf"
@@ -1326,7 +1326,7 @@
    "titolo": "Istruzioni operative di studio",
    "sub": "PDF · Istruzioni e promemoria di studio",
    "desc": "Farmaci (fascia A e C, note AIFA, piani terapeutici, numero di confezioni), esenzioni (quando Millewin le applica da solo, E01, C01–C03, M00 e M99 in gravidanza), certificati di malattia e vaccinazioni dell’adulto. È il documento che risponde alla maggior parte delle domande di sportello.",
-   "href": "modulistica/istruzioni-studio-millewin-doctolib.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1FkXDyzO575GfUGVdPd43zzbmk9OGiBcF",
    "area": "strumenti",
    "tag": [
     "manuale",
@@ -1342,7 +1342,7 @@
    "titolo": "Spunti di natura pratica",
    "sub": "PDF · Istruzioni e promemoria di studio",
    "desc": "Appunti operativi messi insieme negli anni: recapiti e percorsi (telepneumoconsulto, ADI, RSA, assistenti sociali, screening), codici utili, regole pratiche su certificati, presidi, ausili e accessi. La versione sempre aggiornata è la pagina Note operative.",
-   "href": "modulistica/spunti-pratici-studio.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1jumOvGH7lXinl3mQku1l4gtI4p871v6O",
    "area": "strumenti",
    "tag": [
     "manuale",
@@ -1358,7 +1358,7 @@
    "titolo": "Ausili assistenziali — Elenco 2B",
    "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
    "desc": "La tabella ufficiale degli ausili dell’Elenco 2B con descrizione e codice di classificazione ISO: è il documento da cui è tratta la pagina Ausili assistenziali, da allegare alla richiesta quando serve il riferimento normativo.",
-   "href": "modulistica/ausili-elenco-2b-pa-dgam-002.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1UQ9JA43yceltdwt1s7B95jkVnPSXjP67",
    "area": "prescrivere",
    "tag": [
     "ausili",
@@ -1374,7 +1374,7 @@
    "titolo": "Codici degli esami genetici",
    "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
    "desc": "Codice regionale e nazionale di ogni esame, punto di prelievo, tempi di risposta e modalità di ritiro del laboratorio di genetica di Prato. Fonte della pagina Codici regionali — analisi genetiche.",
-   "href": "modulistica/codici-esami-genetici-prato-2025.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1FeCKCmj2TfO0p1C3hmiJo3v2Rca97Dtc",
    "area": "prescrivere",
    "tag": [
     "codici",
@@ -1390,7 +1390,7 @@
    "titolo": "Nomenclatore tariffario regionale",
    "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
    "desc": "Nomenclatore tariffario delle prestazioni specialistiche ambulatoriali: codice, nota, branca, descrizione, tariffa, delibera integrativa e indicazioni clinico-diagnostiche. Serve per verificare un codice, una tariffa o la nota che accompagna una prestazione.",
-   "href": "modulistica/nomenclatore-tariffario-regionale.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1DpCySC0RSAM1QwpkZ2wlyleTSWR34O5B",
    "area": "prescrivere",
    "tag": [
     "codici",
@@ -1406,7 +1406,7 @@
    "titolo": "Criteri per la densitometria ossea",
    "sub": "PDF · Codici, nomenclatori e criteri di prescrizione",
    "desc": "Le indicazioni clinico-diagnostiche che rendono la MOC erogabile dal SSR (osteoporosi secondaria, terapie prolungate, carenza estrogenica, fattori di rischio, fratture pregresse), la tempistica dei controlli (non prima di 18–24 mesi) e l’obbligo di motivare la richiesta.",
-   "href": "modulistica/criteri-densitometria-osteoporosi.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1DCu7CNp0lijdDgvsy2BcWJt5PpGScShK",
    "area": "prescrivere",
    "tag": [
     "prescrizione",
@@ -1422,7 +1422,7 @@
    "titolo": "Preparazione alla colonscopia",
    "sub": "PDF · Preparazioni e istruzioni per il paziente",
    "desc": "Schemi orari di preparazione intestinale per Clensia, Plenvu e Selg Esse, distinti per orario dell’esame (mattina presto, tarda mattina, pomeriggio) e per la necessità di una pulizia ad alto volume dopo preparazioni precedenti inadeguate.",
-   "href": "modulistica/preparazione-colonscopia.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1mKgOmTMKegsvJbNesJNPRcjh5pgyrwFr",
    "area": "paziente",
    "tag": [
     "pdf"
@@ -1437,7 +1437,7 @@
    "titolo": "Raccolta urine delle 24 ore con acido",
    "sub": "PDF · Preparazioni e istruzioni per il paziente",
    "desc": "Come versare l’acido, quali urine scartare, come etichettare la provetta e cosa consegnare al punto prelievi; include il caso della doppia raccolta con e senza acido (contenitori A e B e volume totale).",
-   "href": "modulistica/raccolta-urine-24-ore-acido.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=13NJ05lunI8kQqqcXEwZ5deDHqnq6qgll",
    "area": "paziente",
    "tag": [
     "pdf"
@@ -1452,7 +1452,7 @@
    "titolo": "Prestazioni esenti in gravidanza",
    "sub": "PDF · Preparazioni e istruzioni per il paziente",
    "desc": "L’elenco ministeriale delle prestazioni specialistiche esenti per la tutela della maternità responsabile, in gravidanza e in epoca preconcezionale. È il documento da mostrare quando il paziente contesta il ticket su un esame che rientra nell’allegato.",
-   "href": "modulistica/prestazioni-esenti-gravidanza.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1iPxn4W_YwJydTLJsOGnZdilEDqVg1Jmp",
    "area": "paziente",
    "tag": [
     "esenzione",
@@ -1468,7 +1468,7 @@
    "titolo": "Trasfusione domiciliare di emazie concentrate",
    "sub": "PDF · Procedure e percorsi aziendali",
    "desc": "Chi è candidabile alla trasfusione a domicilio (paziente non trasportabile, anziano fragile, paziente fragile) e chi no, con le fasi della procedura: richiesta e invio di campioni alla struttura trasfusionale, consegna degli emocomponenti, preparazione del paziente, esecuzione, sorveglianza e gestione delle reazioni.",
-   "href": "modulistica/procedura-trasfusione-domiciliare.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1OKhVwynQSjc5crkjUHhCahhKqCH-2UmV",
    "area": "percorsi",
    "tag": [
     "accessi",
@@ -1484,7 +1484,7 @@
    "titolo": "Profilassi antibiotica in odontoiatria",
    "sub": "PDF · Procedure e percorsi aziendali",
    "desc": "Documento di indirizzo sull’uso appropriato della profilassi antibiotica negli interventi ambulatoriali odontoiatrici, con le raccomandazioni cliniche e il ragionamento che le sostiene; in coda l’infografica destinata ai pazienti.",
-   "href": "modulistica/profilassi-antibiotica-odontoiatria.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1IPh6uDPuIdblRo_TbMgF1AawP8aNy1GZ",
    "area": "percorsi",
    "tag": [
     "prescrizione",
@@ -1500,7 +1500,7 @@
    "titolo": "Esenzione dall’obbligo di reperibilità",
    "sub": "PDF · Procedure e percorsi aziendali",
    "desc": "Le linee guida INPS sulle fasce di esenzione dalla reperibilità previste dal DM 11 gennaio 2016 (art. 25 del D.Lgs. 151/2015): patologie gravi che richiedono terapie salvavita, nozione di gravità, documentazione sanitaria necessaria e ruolo del medico certificatore.",
-   "href": "modulistica/linee-guida-inps-esenzione-reperibilita.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1uGeH8C1tnAT626eyof_8fejOy2CsA8jZ",
    "area": "percorsi",
    "tag": [
     "inps",
@@ -1516,7 +1516,7 @@
    "titolo": "Ditte per acquisto e noleggio CPAP",
    "sub": "PDF · elenco di studio",
    "desc": "Elenco delle ditte fornitrici di CPAP con i riferimenti commerciali, per acquisto e noleggio.",
-   "href": "modulistica/ditte-cpap-acquisto-noleggio.pdf",
+   "href": "https://drive.google.com/uc?export=download&id=1aUPvg5xkO1nUr7V13fxxbJVSQINHDDmG",
    "area": "prescrivere",
    "tag": [
     "pdf"

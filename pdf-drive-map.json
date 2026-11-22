@@ -1,0 +1,268 @@
+{
+ "cartella": "savianu.it-website-files",
+ "base": "https://drive.google.com/uc?export=download&id=",
+ "aggiornata": "2026-11-22",
+ "nota": "I PDF e gli archivi scaricabili del sito non stanno nel repository GitHub (limiti di dimensione per account) ma in questa cartella di Google Drive, condivisa come 'chiunque abbia il link'. La chiave e' il percorso che il file aveva nel sito; l'id e' quello Drive. Serve a tools/build-modulistica.mjs (href + peso) e ai link delle pagine. Dopo un aggiornamento: rclone copy su gdrive:savianu.it-website-files, rclone link del file, aggiornare id/size qui.",
+ "files": {
+  "colleghi/allegati/covid-2026-2027-RCP-Comirnaty-XFG.pdf": {
+   "id": "1mkMpT1IIsU_Ny4PXJXCdQZgkD45343D9",
+   "size": 976350
+  },
+  "colleghi/allegati/covid-2026-2027-circolare-ministeriale-4398-01-10-2026.pdf": {
+   "id": "1KPbLkJhts0UToaDrd-zK-jE7DtF1VfXN",
+   "size": 357674
+  },
+  "colleghi/allegati/covid-2026-2027-nota-regione-toscana-05-10-2026.pdf": {
+   "id": "1nZU7IIpntuRwLKOOFXDamGhGgs9aViBJ",
+   "size": 127930
+  },
+  "colleghi/modulistica/PAI.pdf": {
+   "id": "1L8EJ_DFnRoNxiQSe5MiSUxSQr9OaqaZV",
+   "size": 1004477
+  },
+  "colleghi/modulistica/STU-scheda-terapeutica-unica.pdf": {
+   "id": "173Edi-UjUT5YsNd2l8OKq2DEiSDju1XD",
+   "size": 252472
+  },
+  "colleghi/modulistica/accessi-vascolari-consenso-informato.pdf": {
+   "id": "1e0vJnERKd-yR0l8uW5IJh_4pt4Naq4OW",
+   "size": 197811
+  },
+  "colleghi/modulistica/accessi-vascolari-scheda-pre-procedura.pdf": {
+   "id": "1O6WrHxkqG1XEqCazL1nD_RaNK5UYyUA_",
+   "size": 176021
+  },
+  "colleghi/modulistica/ausili-elenco-2b-pa-dgam-002.pdf": {
+   "id": "1UQ9JA43yceltdwt1s7B95jkVnPSXjP67",
+   "size": 31651
+  },
+  "colleghi/modulistica/cartella-clinico-assistenziale-territoriale-adi-adp.pdf": {
+   "id": "1jeJcQLtRZzp825j8E2XfBZlEm5jX4QNh",
+   "size": 5206827
+  },
+  "colleghi/modulistica/certificati-gratuiti-a-pagamento-iva-omceo-arezzo.pdf": {
+   "id": "1nIdWNuwTar2rCejEs6OVZmft3rF7UYZp",
+   "size": 141252
+  },
+  "colleghi/modulistica/codici-esami-genetici-prato-2025.pdf": {
+   "id": "1FeCKCmj2TfO0p1C3hmiJo3v2Rca97Dtc",
+   "size": 207118
+  },
+  "colleghi/modulistica/criteri-densitometria-osteoporosi.pdf": {
+   "id": "1DCu7CNp0lijdDgvsy2BcWJt5PpGScShK",
+   "size": 112167
+  },
+  "colleghi/modulistica/dgr-1007-2026-identificazione-precoce-melanoma.pdf": {
+   "id": "1Ea3zPB1uy3g8KMhkIkhcYRXeB93nEJ7q",
+   "size": 1210957
+  },
+  "colleghi/modulistica/ditte-cpap-acquisto-noleggio.pdf": {
+   "id": "1aUPvg5xkO1nUr7V13fxxbJVSQINHDDmG",
+   "size": 82613
+  },
+  "colleghi/modulistica/facsimile-anamnestico-patente-guida.pdf": {
+   "id": "1xjqnW0tMsdK0OHdxv-9mDfBh7TYVSbCC",
+   "size": 18214
+  },
+  "colleghi/modulistica/facsimile-anamnestico-porto-armi.pdf": {
+   "id": "1jMESugvDw_cnd1FADb8ow02UIHnwdYsA",
+   "size": 13929
+  },
+  "colleghi/modulistica/facsimile-attestato-trasporto-salma.pdf": {
+   "id": "1HkKm21ANQFApb8KVPk9os8qYoypibjGP",
+   "size": 23200
+  },
+  "colleghi/modulistica/facsimile-capacita-intendere-volere.pdf": {
+   "id": "1Yzb-Qw-pWu-G8Ya_wQrEzH1n1oqyIgwx",
+   "size": 76026
+  },
+  "colleghi/modulistica/facsimile-certificato-malattia-inps.pdf": {
+   "id": "18Y86Jf91NXCuiGKpfL2E3j44HsnR5wb_",
+   "size": 80404
+  },
+  "colleghi/modulistica/facsimile-consenso-vaccinazione.pdf": {
+   "id": "1xi74E69eJlhEISh6ZnjtniFEJNCf8eNP",
+   "size": 113424
+  },
+  "colleghi/modulistica/facsimile-constatazione-decesso.pdf": {
+   "id": "1ysdtdIxf_E0htFCLPFj_fcciu71PB3sJ",
+   "size": 124696
+  },
+  "colleghi/modulistica/facsimile-inail-infortunio-mod1ss.pdf": {
+   "id": "1r3cMBRgu6MyLwmxJTr4K3G0BdBUQ7gjE",
+   "size": 949206
+  },
+  "colleghi/modulistica/facsimile-inail-malattia-professionale-mod5ssbis.pdf": {
+   "id": "1G7buMwrmEfMiTD8FCRzcVwCIs6ZpvyoK",
+   "size": 609106
+  },
+  "colleghi/modulistica/informativa-valutazione-nevi-mmg-pls-specialisti.pdf": {
+   "id": "1dJmgl0gu0nErkX0kDsD7NdBtOvX3OQDo",
+   "size": 141569
+  },
+  "colleghi/modulistica/istruzioni-studio-millewin-doctolib.pdf": {
+   "id": "1FkXDyzO575GfUGVdPd43zzbmk9OGiBcF",
+   "size": 920813
+  },
+  "colleghi/modulistica/linee-guida-inps-esenzione-reperibilita.pdf": {
+   "id": "1uGeH8C1tnAT626eyof_8fejOy2CsA8jZ",
+   "size": 122247
+  },
+  "colleghi/modulistica/manuale-millebook-paziente.pdf": {
+   "id": "15lmKje3_UotHpFm2p32xhfvhlX3S_-yg",
+   "size": 3460098
+  },
+  "colleghi/modulistica/manuale-millewin-gestione-allegati.pdf": {
+   "id": "18T2DScBimCZaPtfdZwn18awZ_4-Jrm_m",
+   "size": 822420
+  },
+  "colleghi/modulistica/manuale-millewin-in-un-ora.pdf": {
+   "id": "16WHQBMvTzHDMdSAj4GMnpAWgpS7lXHJD",
+   "size": 5909207
+  },
+  "colleghi/modulistica/manuale-millewin-live-update.pdf": {
+   "id": "1r9uJAO8zyF3H8Gz_6PSwyKq10NLGiCO_",
+   "size": 706361
+  },
+  "colleghi/modulistica/manuale-millewin-millebook-medico.pdf": {
+   "id": "1_2VRQ8OeHm4ARixLClmubGCXZnC9fAQi",
+   "size": 1119696
+  },
+  "colleghi/modulistica/manuale-millewin-millelight-smartcard.pdf": {
+   "id": "1UZGTXZ636Oc9deFUYG5NgWjaRXjPsFro",
+   "size": 617739
+  },
+  "colleghi/modulistica/manuale-millewin-millelight.pdf": {
+   "id": "1ClE5-2513cch-3byN0-mswCvztULZKbY",
+   "size": 1303466
+  },
+  "colleghi/modulistica/manuale-millewin-startup.pdf": {
+   "id": "1EbvqJ11o8KxcwL5EcdKTwbMOq3P_eR0C",
+   "size": 4661105
+  },
+  "colleghi/modulistica/modulo-attivazione-afa.pdf": {
+   "id": "1TmVqfewPaF72k-MyQyecvH00McA3HQ2l",
+   "size": 485341
+  },
+  "colleghi/modulistica/modulo-comunicazione-sostituzione-mmg-pls.pdf": {
+   "id": "1Te4chqwcoYO3jyv5tJAz2hPFl0LZ5rN5",
+   "size": 76147
+  },
+  "colleghi/modulistica/modulo-domanda-scelta-mmg-pls-deroga-territoriale.pdf": {
+   "id": "1ePKJMPxOrhKuE-0oc534g58RLDDjM-vg",
+   "size": 132412
+  },
+  "colleghi/modulistica/modulo-esenzione-diabete.pdf": {
+   "id": "146vY0CAR_JWojI0GTNdqvGI4kxPX_4v7",
+   "size": 397155
+  },
+  "colleghi/modulistica/modulo-esenzione-ipertensione.pdf": {
+   "id": "1GI7iUssSpmXlIV_PGYSByKX5jbT9p4VX",
+   "size": 3227337
+  },
+  "colleghi/modulistica/modulo-picc-team-accessi-vascolari.pdf": {
+   "id": "18JBvLcKrtQTzgdGbfXzbEYIgFihLwvGU",
+   "size": 641849
+  },
+  "colleghi/modulistica/modulo-prescrizione-autocontrollo-glicemico.pdf": {
+   "id": "1jgNzkG6hFRw9di9hBxMMg_-awkuAO3eP",
+   "size": 216270
+  },
+  "colleghi/modulistica/modulo-prescrizione-dispositivi-stomia.pdf": {
+   "id": "1gfURqe-rXw8v632nhqleliVT2SQXQpz_",
+   "size": 558856
+  },
+  "colleghi/modulistica/modulo-prescrizione-incontinenza-urinaria.pdf": {
+   "id": "12bS78iijKGrccNsXqcSqghreF70NhJEu",
+   "size": 110288
+  },
+  "colleghi/modulistica/modulo-richiesta-fornitura-protesi-ausili.pdf": {
+   "id": "1BebrB6nNafGMTJPjXxJsLCXfFDS2YcM-",
+   "size": 84980
+  },
+  "colleghi/modulistica/modulo-rinnovo-esenzione-048.pdf": {
+   "id": "1KHOmm2L4K8OcvIFKa1bSUVmgwAXfKgF5",
+   "size": 418690
+  },
+  "colleghi/modulistica/nomenclatore-tariffario-regionale.pdf": {
+   "id": "1DpCySC0RSAM1QwpkZ2wlyleTSWR34O5B",
+   "size": 533606
+  },
+  "colleghi/modulistica/nuova-sanita-iniziativa-millewin.pdf": {
+   "id": "1c2GcEVFTGIienS6QaCB67qW4L8RsBGJG",
+   "size": 2000764
+  },
+  "colleghi/modulistica/pdta-disturbi-cognitivi-demenze.pdf": {
+   "id": "1NMmrHJHGYOh0FXLaoR2YCF-iGTtehZUB",
+   "size": 435029
+  },
+  "colleghi/modulistica/preparazione-colonscopia.pdf": {
+   "id": "1mKgOmTMKegsvJbNesJNPRcjh5pgyrwFr",
+   "size": 545758
+  },
+  "colleghi/modulistica/prestazioni-esenti-gravidanza.pdf": {
+   "id": "1iPxn4W_YwJydTLJsOGnZdilEDqVg1Jmp",
+   "size": 343958
+  },
+  "colleghi/modulistica/procedura-gom-tumori-gastrointestinali.pdf": {
+   "id": "1wzCNdnsLuGFtUcD9eC4pbBBGzwtjNi4I",
+   "size": 805858
+  },
+  "colleghi/modulistica/procedura-trasfusione-domiciliare.pdf": {
+   "id": "1OKhVwynQSjc5crkjUHhCahhKqCH-2UmV",
+   "size": 8172692
+  },
+  "colleghi/modulistica/profilassi-antibiotica-odontoiatria.pdf": {
+   "id": "1IPh6uDPuIdblRo_TbMgF1AawP8aNy1GZ",
+   "size": 787022
+  },
+  "colleghi/modulistica/raccolta-urine-24-ore-acido.pdf": {
+   "id": "13NJ05lunI8kQqqcXEwZ5deDHqnq6qgll",
+   "size": 74447
+  },
+  "colleghi/modulistica/scheda-unica-segnalazione-malattie-infettive.pdf": {
+   "id": "1feSm6IKzYkzD5uqsbnAUGiEbzXyVi11g",
+   "size": 332478
+  },
+  "colleghi/modulistica/spunti-pratici-studio.pdf": {
+   "id": "1jumOvGH7lXinl3mQku1l4gtI4p871v6O",
+   "size": 154896
+  },
+  "colleghi/modulistica/valutazione-iniziale-inquadramento-clinico.pdf": {
+   "id": "1vg98qWSWwnuksD3pwCAftyMsH4KQkR8h",
+   "size": 18276
+  },
+  "ssn/pdf/guida-multilingue-5-lingue.pdf": {
+   "id": "1HsyMssRPNeK8DAiZ1jTsmKoyKnecNTP2",
+   "size": 224221
+  },
+  "ssn/pdf/kit-schede-pazienti-5-lingue.pdf": {
+   "id": "1xKKzLDGIU-v1cnvyULWklpwW-Dmxegy9",
+   "size": 27611197
+  },
+  "ssn/pdf/scheda-bn.pdf": {
+   "id": "1iMB0OWeIOhz228DkW6isIzW6Rn_Mu3V3",
+   "size": 5694727
+  },
+  "ssn/pdf/scheda-en.pdf": {
+   "id": "1RPjd6Ag7hAElfpy1Fi9nozWQ1c44D-iW",
+   "size": 5476532
+  },
+  "ssn/pdf/scheda-it.pdf": {
+   "id": "1d4bTv8hAt9wzhjk-wDvtoxgRSzw42VIz",
+   "size": 5475213
+  },
+  "ssn/pdf/scheda-ro.pdf": {
+   "id": "1Ee3XC75R7SUchgfZf3eRmDauXsM57Lt8",
+   "size": 5490471
+  },
+  "ssn/pdf/scheda-ur.pdf": {
+   "id": "1mRT8Sv_MKAxKiCmEtYqfw4-_KpQEzAN9",
+   "size": 5558004
+  },
+  "ssn/pdf/schede-pazienti-A4-traduttori.zip": {
+   "id": "1QtyoRiIyFtLaOM7369sFyb78PsP592JN",
+   "size": 27862236
+  }
+ }
+}

@@ -13,7 +13,11 @@
  * cartella, e il --check (dentro `npm test`) lo impone.
  *
  * Fonte di verità: colleghi/modulistica.json (titoli, gruppi, descrizioni).
- * Il numero di pagine viene dal campo `pagine`; il peso dal file su disco.
+ * Il numero di pagine viene dal campo `pagine`; il peso e l'URL di apertura
+ * vengono da pdf-drive-map.json: i PDF NON stanno più nel repository (occupano
+ * ~105 MB e GitHub ha limiti di dimensione per account) ma su Google Drive,
+ * nella cartella «savianu.it-website-files». Il --check confronta il JSON con la
+ * mappa Drive, così un documento elencato senza file resta un errore.
  * L'ordine dei gruppi e delle voci è quello del JSON, non alfabetico.
  *
  * Il markup di <site-nav> lo scrive tools/prerender.mjs: qui viene reso in
@@ -55,18 +59,31 @@ function peso(bytes) {
 
 const data = JSON.parse(readFileSync(DATA, 'utf8'));
 
-// --- coerenza dati <-> cartella: il controllo che impedisce il ritorno del 404
-const onDisk = readdirSync(DIR).filter((f) => extname(f).toLowerCase() === '.pdf').sort();
+// --- mappa Drive: file del sito -> id Drive (+ peso). Vedi pdf-drive-map.json.
+const DRIVE = JSON.parse(readFileSync(join(ROOT, 'pdf-drive-map.json'), 'utf8'));
+const DRIVE_BASE = DRIVE.base;
+const entry = (file) => DRIVE.files[`colleghi/modulistica/${file}`];
+const driveUrl = (file) => `${DRIVE_BASE}${entry(file).id}`;
+
+// --- coerenza dati <-> mappa Drive: il controllo che impedisce il ritorno del 404
 const listed = data.gruppi.flatMap((g) => g.voci.map((v) => v.file));
 const dupes = listed.filter((f, i) => listed.indexOf(f) !== i);
-const missingFile = listed.filter((f) => !existsSync(join(DIR, f)));
+const missingDrive = listed.filter((f) => !entry(f) || !entry(f).id);
+const mapped = Object.keys(DRIVE.files)
+  .filter((k) => k.startsWith('colleghi/modulistica/'))
+  .map((k) => k.slice('colleghi/modulistica/'.length));
+const orphanDrive = mapped.filter((f) => !listed.includes(f));
+// Un PDF rimesso nella cartella (invece che su Drive) è uno spreco di repository:
+// va segnalato, non ignorato.
+const onDisk = readdirSync(DIR).filter((f) => extname(f).toLowerCase() === '.pdf').sort();
 const unlisted = onDisk.filter((f) => !listed.includes(f));
 const problems = [];
 if (dupes.length) problems.push(`voci duplicate nel JSON: ${[...new Set(dupes)].join(', ')}`);
-if (missingFile.length) problems.push(`voci senza PDF corrispondente: ${missingFile.join(', ')}`);
-if (unlisted.length) problems.push(`PDF non elencati nel JSON: ${unlisted.join(', ')}`);
+if (missingDrive.length) problems.push(`voci senza file nella mappa Drive: ${missingDrive.join(', ')}`);
+if (orphanDrive.length) problems.push(`file nella mappa Drive non elencati nel JSON: ${orphanDrive.join(', ')}`);
+if (unlisted.length) problems.push(`PDF rimessi nella cartella del repository: ${unlisted.join(', ')}`);
 if (problems.length) {
-  console.error('[modulistica] dati non coerenti con la cartella:');
+  console.error('[modulistica] dati non coerenti con la mappa Drive:');
   for (const p of problems) console.error(`  - ${p}`);
   process.exit(1);
 }
@@ -83,11 +100,11 @@ function renderSections() {
     out.push(`            <p class="mod-intro">${esc(g.intro)}</p>`);
     out.push('            <ul class="mod-list">');
     for (const v of g.voci) {
-      const size = peso(statSync(join(DIR, v.file)).size);
+      const size = peso(entry(v.file).size);
       const meta = [v.ente, v.pagine === 1 ? '1 pagina' : `${v.pagine} pagine`].join(' · ');
       const k = norm([v.titolo, v.desc, v.ente, v.file].join(' '));
       out.push(
-        `                <li class="mod-item" data-k="${esc(k)}"><a href="${esc(v.file)}" target="_blank" rel="noopener">` +
+        `                <li class="mod-item" data-k="${esc(k)}"><a href="${esc(driveUrl(v.file))}" target="_blank" rel="noopener">` +
           `<span class="mod-body"><span class="mod-title">${esc(v.titolo)}</span>` +
           `<span class="mod-meta">${esc(meta)}</span>` +
           `<span class="mod-desc">${esc(v.desc)}</span>` +
