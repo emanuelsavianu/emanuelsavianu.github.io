@@ -999,8 +999,14 @@ export function setLanguage(lang, opts) {
     const persist = !opts || opts.persist !== false;
     const btnIt = document.getElementById('btn-it');
     const btnEn = document.getElementById('btn-en');
-    if (btnIt) btnIt.classList.toggle('active', lang === 'it');
-    if (btnEn) btnEn.classList.toggle('active', lang === 'en');
+    if (btnIt) {
+        btnIt.classList.toggle('active', lang === 'it');
+        btnIt.setAttribute('aria-pressed', String(lang === 'it'));
+    }
+    if (btnEn) {
+        btnEn.classList.toggle('active', lang === 'en');
+        btnEn.setAttribute('aria-pressed', String(lang === 'en'));
+    }
     document.documentElement.lang = lang;
 
     document.querySelectorAll('[data-i18n]').forEach(el => {

@@ -52,9 +52,9 @@ export function siteNavInnerHTML({ section = 'root', prefix = '', fixedLang = ''
   const darkBtn =
     '<button onclick="toggleDarkMode()" class="lang-btn" id="btn-dark" title="Toggle Dark Mode" aria-label="Attiva/Disattiva Tema Scuro"><i class="fas fa-moon" aria-hidden="true"></i></button>';
   const controls = (isPatient && !fixedLang)
-    ? '<button onclick="setLanguage(\'it\')" class="lang-btn active" id="btn-it">ITA</button>' +
+    ? '<button onclick="setLanguage(\'it\')" class="lang-btn active" id="btn-it" aria-pressed="true">ITA</button>' +
       '<span class="lang-separator" aria-hidden="true">|</span>' +
-      '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en">ENG</button>' +
+      '<button onclick="setLanguage(\'en\')" class="lang-btn" id="btn-en" aria-pressed="false">ENG</button>' +
       '<span class="lang-separator" aria-hidden="true">|</span>' +
       darkBtn
     : darkBtn;
