@@ -1448,6 +1448,12 @@ body.dark-mode #sw-update-toast { background: var(--bg-gradient-2); }
         height: 44px;
     }
 }
+/* A 390px il pulsante copriva l'inizio delle righe di testo e la barra azioni
+   rapide in basso offre già la navigazione: nascosto solo sul telefono
+   (audit 2026-11-22, UI-011). */
+@media (max-width: 599px) {
+    .back-to-top { display: none; }
+}
 
 /* --- SEARCH & FILTER COMPONENTS --- */
 .search-container { margin-bottom: 25px; }
