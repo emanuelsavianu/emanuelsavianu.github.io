@@ -62,9 +62,18 @@ function servedPath(file) {
 
 // Stessa formula di getPathPrefix() in app.js: ultimo segmento "file" se ha
 // un'estensione, altrimenti directory.
+//
+// Eccezione: 404.html e offline.html vengono servite su un path arbitrario
+// (GitHub Pages le usa come corpo della risposta per URL inesistenti; il SW
+// come fallback di navigazione). Per loro il document URL non è quello del
+// file, quindi ogni path relativo si risolverebbe sotto una directory che non
+// esiste: il prefix deve essere la radice.
+const ROOT_SERVED = new Set(['404.html', 'offline.html']);
+
 function prefixFor(file) {
   const rel = relative(ROOT, file).split(sep).join('/');
   const segs = rel.split('/');
+  if (ROOT_SERVED.has(segs[segs.length - 1])) return '/';
   const isFile = /\.\w+$/.test(segs[segs.length - 1]);
   return '../'.repeat(Math.max(0, segs.length - (isFile ? 1 : 0)));
 }
