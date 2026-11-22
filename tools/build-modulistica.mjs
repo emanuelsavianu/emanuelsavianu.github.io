@@ -38,7 +38,7 @@ const OUT = join(DIR, 'index.html');
 const CHECK = process.argv.includes('--check');
 
 const URL_PAGE = 'https://savianu.it/colleghi/modulistica/';
-const STYLES_V = '20261113a';
+const STYLES_V = '20261122a';
 const APP_V = '20261104a';
 
 const esc = (s) =>

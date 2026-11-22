@@ -4009,3 +4009,58 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
 /* ---- Wrapper for the skip link + appointment banner: one labelled landmark
    so banners are not "content outside any landmark" (axe region rule) ---- */
 .site-notices { display: block; }
+
+/* =================================================================
+   MOBILE FIRST-SCREEN — chrome compatto (audit 2026-11-22, UI-004)
+   -----------------------------------------------------------------
+   A 390x844 la prima schermata era quasi tutta chrome: barra controlli
+   (55px) + masthead (247) + riga del solo hamburger (54) = 356px prima
+   del contenuto, con l'azione di prenotazione sotto la piega.
+   Qui: la riga hamburger entra nella barra controlli (il menu aperto
+   resta a tutta larghezza, position:fixed) e i padding del masthead
+   scendono. Solo <=599px: tablet e desktop non cambiano.
+   ================================================================= */
+/* CTA di prima schermata: solo mobile (il blocco qui sotto la mostra) */
+.ed-quick-cta { display: none; }
+
+@media (max-width: 599px) {
+    /* Masthead: meno respiro verticale, logo più piccolo */
+    .ed header[role="banner"] { padding: 12px var(--ed-gutter) 14px; }
+    body header { padding: 12px 20px 18px; }
+    body .brand-wrap { gap: 8px; }
+    body .brand-logo { width: 60px; height: 60px; }
+    body .brand-tagline { margin-bottom: 8px; }
+    body .btn-telefono-header { padding: 10px 18px; }
+
+    /* Pagine senza barra .ed: meno spazio sopra la pillola lingua */
+    site-nav { padding-top: 8px; }
+
+    /* La riga dell'hamburger non occupa più una fascia propria */
+    site-nav > nav.site-nav {
+        position: absolute;
+        top: 5px;
+        left: 0;
+        z-index: 60;
+        width: auto;
+        min-height: 44px;
+        padding: 0 8px;
+        border-top: 0;
+        background: transparent;
+    }
+    /* Il contenitore ora è largo quanto il pulsante: il dropdown si ancora
+       alla viewport, non al bottone (larghezza piena garantita). */
+    site-nav > nav.site-nav .nav-menu {
+        position: fixed;
+        top: 54px;
+        left: 0;
+        right: 0;
+    }
+
+    /* Hero .ed: primo blocco più vicino alla piega */
+    .ed-band__inner { padding-block: 22px clamp(24px, 4vw, 40px); }
+
+    /* Azione primaria nella prima schermata: su desktop resta solo quella
+       dentro la scheda Pazienti. */
+    .ed-quick-cta { display: block; margin: 18px 0 0; }
+    .ed-quick-cta .ed-btn { width: 100%; }
+}
