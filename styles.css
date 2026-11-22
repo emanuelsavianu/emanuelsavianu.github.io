@@ -4064,3 +4064,32 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
     .ed-quick-cta { display: block; margin: 18px 0 0; }
     .ed-quick-cta .ed-btn { width: 100%; }
 }
+
+/* =================================================================
+   TAP TARGETS MOBILE (audit 2026-11-22, UI-007)
+   -----------------------------------------------------------------
+   Link dentro il testo e le liste erano alti 20-22px: passavano WCAG 2.5.8
+   solo per l'eccezione di spaziatura, ma restavano scomodi per i pazienti
+   anziani. Qui il padding aumenta l'area di tocco e il margine negativo
+   compensa: il layout non si sposta. Solo <=768px.
+   ================================================================= */
+@media (max-width: 768px) {
+    p a[href], li a[href], td a[href], .ed-p a[href], .alert-box a[href],
+    .booking-sidebar a[href], .privacy-notice a[href],
+    .ed-crumbs a, .breadcrumbs a, .modal-link {
+        display: inline-block;
+        padding-block: 4px;
+        margin-block: -4px;
+    }
+    /* Le liste delle aree in home sono i bersagli principali: 44px pieni. */
+    .ed-path__links a {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        padding-block: 0;
+        margin-block: 0;
+    }
+    .ed-path__links li + li { margin-top: 2px; }
+    /* Campo di ricerca FAQ: controllo pieno, non una riga da 20px */
+    #faq-isearch { min-height: 44px; }
+}
