@@ -73,6 +73,12 @@ const SECURITY_HEADERS = {
 // Same map as cloudflare/redirect-worker.js (spec §10), except /malattia.html
 // which was the patient guide on this domain -> ssn/cert-malattia.html.
 
+// Vecchi URL dei documenti scaricabili: i PDF non stanno più nel repository ma
+// su Google Drive, quindi senza questo map i link vecchi prenderebbero il 404 di
+// GitHub Pages. Modulo generato da tools/gen-pdf-redirects.mjs (fonte:
+// pdf-drive-map.json) — non modificarlo a mano.
+import { PDF_REDIRECTS } from './pdf-redirects.mjs';
+
 const LEGACY_REDIRECTS = {
   '/faq.html': '/ssn/faq.html',
   '/malattia.html': '/ssn/cert-malattia.html',
@@ -280,6 +286,13 @@ export default {
     // Inquiry form endpoint: handled entirely at the edge
     if (request.method === 'POST' && url.pathname === '/api/intl-inquiry') {
       return handleInquiry(request, env, ctx);
+    }
+
+    // Vecchi URL dei documenti scaricabili (ora su Google Drive): 301 permanente
+    // invece del 404, così bookmark, email e PDF indicizzati restano raggiungibili.
+    const pdfTarget = PDF_REDIRECTS[url.pathname];
+    if (pdfTarget) {
+      return Response.redirect(pdfTarget, 301);
     }
 
     // Legacy URLs: 301 before hitting the origin (they would 404 on GitHub Pages)
