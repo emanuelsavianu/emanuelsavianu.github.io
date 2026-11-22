@@ -624,13 +624,48 @@
                 <script>
                 (function() {
                   var target = document.currentScript;
+                  // Se lo script di Google è bloccato (ad-blocker, rete, CSP) `calendar`
+                  // non esiste: senza guardia si vedeva "calendar is not defined" e il
+                  // riquadro restava vuoto, senza alcun modo di prenotare.
+                  function showBookingFallback() {
+                    var frame = target && target.parentElement;
+                    if (!frame || frame.querySelector('.calendar-fallback')) return;
+                    var isEn = document.documentElement.lang === 'en';
+                    var p = document.createElement('p');
+                    p.className = 'calendar-fallback';
+                    p.style.cssText = 'margin:0;padding:20px 4px 4px;text-align:center;' +
+                      'color:var(--text-medium);font-size:.92rem;line-height:1.7';
+                    // Il recapito arriva da CONFIG (applyContacts), non da una stringa
+                    // copiata qui: un solo posto per numero e href tel:.
+                    // innerHTML qui è una stringa statica (nessun input utente).
+                    p.innerHTML = (isEn
+                      ? 'The booking calendar did not load. Call the front desk on '
+                      : 'Il calendario delle prenotazioni non si è caricato. Chiama la segreteria allo ')
+                      + '<a href="#" data-contact-link="secretary" ' +
+                        'style="color:var(--accent-text);font-weight:700">0575 910 904</a>'
+                      + (isEn
+                        ? ' (Mon&#8211;Fri 09:30&#8211;12:30, 16:00&#8211;19:00).'
+                        : ' (lun&#8211;ven 09:30&#8211;12:30, 16:00&#8211;19:00).');
+                    var existingTel = document.querySelector('a[href^="tel:"]');
+                    if (existingTel) p.querySelector('a').setAttribute('href', existingTel.getAttribute('href'));
+                    frame.appendChild(p);
+                    if (typeof window.applyContacts === 'function') window.applyContacts();
+                  }
                   window.addEventListener('load', function() {
-                    calendar.schedulingButton.load({
-                      url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1B_CFbVVkgJyLRQHZbycem1FEBy-DRubtJQrIvxm9DBt80Sm2jwvR6W2I73m1qEpjLLsstVXh5?gv=true',
-                      color: '#D50000',
-                      label: document.documentElement.lang === 'en' ? 'Book an appointment' : 'Fissa un appuntamento',
-                      target,
-                    });
+                    if (typeof calendar === 'undefined' || !calendar.schedulingButton) {
+                      showBookingFallback();
+                      return;
+                    }
+                    try {
+                      calendar.schedulingButton.load({
+                        url: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1B_CFbVVkgJyLRQHZbycem1FEBy-DRubtJQrIvxm9DBt80Sm2jwvR6W2I73m1qEpjLLsstVXh5?gv=true',
+                        color: '#D50000',
+                        label: document.documentElement.lang === 'en' ? 'Book an appointment' : 'Fissa un appuntamento',
+                        target,
+                      });
+                    } catch (err) {
+                      showBookingFallback();
+                    }
                   });
                 })();
                 </script>
