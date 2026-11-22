@@ -31,9 +31,24 @@ dark_mode:
 
 ### WCAG rules (linted)
 
-- Gold `#C29B57` on cream `#F3EFE6` = **1.8:1 → FAIL**. For text always use `--accent-text` (#7A5C2E).
-- Gold as *decorative* (borders, icon color at large sizes) is acceptable.
-- Dark mode uses lightened gold `#E0B976` everywhere gold appears.
+Misure calcolate (WCAG 2.x, luminanza relativa), non stimate:
+
+| Coppia | Rapporto | Esito |
+|---|---|---|
+| Gold `#C29B57` su crema `#F3EFE6` | **2.25:1** | FAIL come testo → usa `--accent-text` |
+| Gold su bianco `#FFFFFF` | 2.59:1 | FAIL come testo |
+| Gold su crema-alt `#E8E2D2` | 2.00:1 | FAIL come testo |
+| Gold su navy `#1A2F4C` | 5.22:1 | OK su fondo scuro |
+| `--accent-text` `#7A5C2E` su crema | 5.39:1 | OK testo |
+| `#2E7D6B` (verde sezione colleghi) su crema | **4.29:1** | **FAIL come testo normale**; usalo per bordi/icone o alleggeriscilo |
+| `#2E7D6B` su bianco | 4.93:1 | OK testo |
+| Gold chiaro `#E0B976` su navy dark `#0A1628` | 9.82:1 | OK |
+
+- Gold `#C29B57` su crema = **2.25:1 → FAIL**. Per il testo usa sempre `--accent-text` (#7A5C2E): 5.39:1 su crema, 6.18:1 su bianco.
+- Gold come *decorativo* (bordi, icone, stati attivi) è accettabile.
+- Dark mode usa il gold schiarito `#E0B976` ovunque compaia l'oro.
+- **`#2E7D6B` non va mai usato come testo a dimensione normale su crema** (4.29:1, sotto AA 4.5): solo bordi, icone o testo grande.
+- Nessun hex nuovo fuori dai blocchi token: il gate `tools/check-tokens.mjs` (dentro `npm test`) blocca gli incrementi rispetto a `tools/token-baseline.json`.
 
 ## Typography
 
