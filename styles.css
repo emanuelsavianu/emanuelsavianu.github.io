@@ -4080,9 +4080,12 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
    compensa: il layout non si sposta. Solo <=768px.
    ================================================================= */
 @media (max-width: 768px) {
-    p a[href], li a[href], td a[href], .ed-p a[href], .alert-box a[href],
-    .booking-sidebar a[href], .privacy-notice a[href],
-    .ed-crumbs a, .breadcrumbs a, .modal-link {
+    /* :where() = specificità zero: questa regola non deve mai sovrascrivere
+       il display/padding di un componente (pulsanti .ed-btn, voci del menu
+       mobile .nav-menu a, link delle liste con regole proprie). */
+    :where(p a[href], li a[href], td a[href], .ed-p a[href], .alert-box a[href],
+           .booking-sidebar a[href], .privacy-notice a[href], .highlight-box a[href],
+           .ed-crumbs a, .breadcrumbs a, .modal-link) {
         display: inline-block;
         padding-block: 4px;
         margin-block: -4px;
