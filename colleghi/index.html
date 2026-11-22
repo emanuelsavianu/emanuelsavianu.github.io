@@ -470,10 +470,13 @@
         .cat-chip { font: inherit; font-size: .78rem; font-weight: 600; padding: 5px 10px;
             border-radius: 999px; border: 1px solid var(--border-color); background: var(--white);
             color: var(--text-medium); cursor: pointer; }
-        .cat-chip b { font-weight: 600; opacity: .65; }
+        /* Conteggio filtro: niente opacity. Il testo sbiadito (miscela al 65%) scendeva
+           a 3.2:1 su bianco e 3.0:1 su crema — sotto AA. Il conteggio resta
+           distinguibile perché il peso del carattere cambia sul chip attivo. */
+        .cat-chip b { font-weight: 600; }
         .cat-chip:hover { border-color: var(--accent); color: var(--primary); }
         .cat-chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--white); }
-        .cat-chip[aria-pressed="true"] b { opacity: .85; }
+        .cat-chip[aria-pressed="true"] b { font-weight: 700; }
         .cat-chip-reset { border-style: dashed; color: var(--accent-text); }
 
         .cat-count { margin: 8px 0 0; font-size: .8rem; color: var(--text-medium); }
