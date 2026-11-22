@@ -39,6 +39,10 @@
   --gold: #C29B57;
   --teal: #3E8E7E;
   --green: #4C8C6F;
+  /* Verde per TESTO (non per bordi/fondi): #3E8E7E dà 3,91:1 su bianco e
+     #4C8C6F 3,97:1, sotto la soglia AA per testo normale. #2E7D6B = 4,93:1;
+     su crema scende a 4,29:1, quindi non usarlo lì (cfr. DESIGN.md). */
+  --teal-ink: #2E7D6B;
   --danger: #B3261E;
   --ink: #000000;
 }
@@ -259,7 +263,7 @@ html[lang="ur"] body {
   padding: 3.2mm 4mm;
   background: #fff;
 }
-.card-cert h2 { font-size: 11.5pt; font-weight: 800; color: var(--teal); margin: 0 0 1.5mm; line-height: 1.15; }
+.card-cert h2 { font-size: 11.5pt; font-weight: 800; color: var(--teal-ink); margin: 0 0 1.5mm; line-height: 1.15; }
 .card-cert p { margin: 0; font-size: 9.3pt; font-weight: 500; line-height: 1.3; overflow-wrap: anywhere; }
 
 /* ---------- Triage semaforo (stile Doctors of the World UK) ---------- */
@@ -309,7 +313,8 @@ html[lang="ur"] body {
   overflow-wrap: anywhere;
 }
 .triage-green { border-inline-start-color: var(--green); }
-.triage-green .t-label, .triage-green .num { color: var(--green); }
+.triage-green .t-label { color: var(--teal-ink); }
+.triage-green .num { color: var(--green); }
 .triage-yellow { border-inline-start-color: var(--gold); }
 .triage-yellow .t-label, .triage-yellow .num { color: #8A6421; }
 .triage-red { border-inline-start-color: var(--danger); }
@@ -360,7 +365,7 @@ html[lang="ur"] body {
 .back-sub {
   font-size: 9.5pt;
   font-weight: 600;
-  color: var(--teal);
+  color: var(--teal-ink);
   margin: 0;
 }
 
