@@ -25,6 +25,7 @@ const steps = [
   { name: 'Pre-render allineato',    cmd: NODE, args: [join('tools', 'prerender.mjs'), '--check'] },
   { name: 'i18n parity + coverage',  cmd: NODE, args: [join('tools', 'check-i18n.mjs')] },
   { name: 'SW precache sync',        cmd: NODE, args: [join('tools', 'check-sw.mjs')] },
+  { name: 'Colori fuori dai token',   cmd: NODE, args: [join('tools', 'check-tokens.mjs')] },
   { name: 'PDF senza dati compilati', cmd: NODE, args: [join('tools', 'check-pdf-pii.mjs')] },
 ];
 
