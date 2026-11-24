@@ -441,7 +441,10 @@ site-nav[data-section="root"] .site-nav { border-top: none; }
     margin-bottom: 25px; transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
-.card:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(26, 47, 76, 0.15); }
+/* Lift SOLO sulle card realmente cliccabili (triage-card, doctolib-cta,
+   btn-cal-service hanno la loro regola :hover): una card statica che si
+   solleva al passaggio del mouse promette un click che non esiste. */
+.card:hover { box-shadow: 0 12px 30px rgba(26, 47, 76, 0.15); }
 body.dark-mode .card:hover { box-shadow: 0 12px 30px rgba(194, 155, 87, 0.1); }
 
 .card-header {
@@ -1455,6 +1458,16 @@ body.dark-mode .search-input {
     color: var(--text-dark);
     border-color: var(--border-color);
 }
+/* Stato vuoto dei filtri live (app.js): `role="status" aria-live="polite"`,
+   quindi deve leggersi anche senza il colore. Nessun riquadro: è un avviso,
+   non un risultato. */
+.filter-empty {
+    margin: 10px 0 0;
+    padding: 0 2px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-medium);
+}
 
 /* --- CONTACTS + CALENDAR RESPONSIVE LAYOUT --- */
 .booking-contacts-wrapper {
@@ -1980,6 +1993,69 @@ html { text-rendering: optimizeLegibility; }
     .container { margin-top: 0; max-width: 100%; grid-template-columns: 1fr; }
     a { color: #1a2f4c; }
     body { background: #fff; }
+
+    /* --- Tema scuro in stampa: la carta è bianca ---
+       Con `body.dark-mode` attivo i token puntano al navy e le pagine hanno
+       override scuri nei propri <style> (`body.dark-mode .section-block`,
+       `.info-box`, `.doc-intro`…) e in questo foglio (`body.dark-mode
+       .card-header h1`). Su carta il risultato era testo chiaro su fondo
+       scuro — illeggibile in B/N e costosissimo in inchiostro.
+       1) i token tornano ai valori light di :root. Il blocco è scritto a
+          colonna 0 di proposito: è un blocco token, quindi esente dal gate
+          `tools/check-tokens.mjs` esattamente come :root e body.dark-mode in
+          testa al foglio;
+       2) una regola `!important` annulla sfondi scuri e colori-testo scuri.
+          Gli override dark del foglio arrivano a specificità 0,3,x
+          (`body.dark-mode .booking-sidebar .booking-info-label`,
+          `body.dark-mode h1[style*=…]`) e i loro `<style>` di pagina vengono
+          DOPO questo foglio: la classe è ripetuta tre volte come booster di
+          specificità (0,3,6), altrimenti perderebbe. */
+body.dark-mode {
+    --color-bg: #f3efe6;
+    --color-bg-alt: #e8e2d2;
+    --color-surface: #ffffff;
+    --color-text: #1a2f4c;
+    --color-text-muted: #4a5568;
+    --color-border: #d1c7b3;
+    --color-brand: #1a2f4c;
+    --color-brand-dark: #0f1a2a;
+    --color-brand-light: #285078;
+    --color-accent: #c29b57;
+    --color-accent-strong: #7a5c2e;
+    --color-focus: #7a5c2e;
+    --primary: var(--color-brand);
+    --primary-dark: var(--color-brand-dark);
+    --primary-light: var(--color-brand-light);
+    --accent: var(--color-accent);
+    --accent-text: var(--color-accent-strong);
+    --bg-gradient-1: var(--color-bg);
+    --bg-gradient-2: var(--color-bg-alt);
+    --text-dark: var(--color-text);
+    --text-medium: var(--color-text-muted);
+    --white: var(--color-surface);
+    --border-color: var(--color-border);
+    --danger: #b91c1c;
+    --success: #166534;
+    --warning: var(--color-accent);
+    --badge-fg: #ffffff;
+    --placeholder: #6b7280;
+}
+    body.dark-mode.dark-mode.dark-mode { background: var(--color-surface) !important; color: var(--color-text) !important; }
+    /* Testo scuro su carta bianca per ogni componente: immagini, icone SVG,
+       video e canvas restano intatti, i bordi restano visibili. */
+    body.dark-mode.dark-mode.dark-mode *:not(img):not(svg):not(video):not(iframe):not(canvas) {
+        color: var(--color-text) !important;
+        background-color: transparent !important;
+        background-image: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    body.dark-mode.dark-mode.dark-mode a { color: var(--color-text) !important; text-decoration: underline; }
+    body.dark-mode.dark-mode.dark-mode th,
+    body.dark-mode.dark-mode.dark-mode td { border-color: var(--color-border) !important; }
+    /* I filetti decorativi/icone in oro restano leggibili ma non diventano
+       testo: --accent-text è il ruolo "oro come testo su fondo chiaro". */
+    body.dark-mode.dark-mode.dark-mode .accent-on-light { color: var(--accent-text) !important; }
 }
 
 /* =================================================================
@@ -2158,13 +2234,13 @@ html { text-rendering: optimizeLegibility; }
                     }
                 }
 
-                /* Card hover refinement (generic .card) */
+                /* Card hover refinement (generic .card) — solo ombra: il lift
+                   resta ai componenti realmente cliccabili. */
                 @media (prefers-reduced-motion: no-preference) {
                     .card {
                         transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
                     }
                     .card:hover {
-                        transform: translateY(-2px);
                         box-shadow: 0 12px 32px rgba(26, 47, 76, 0.15);
                     }
                 }
@@ -3144,6 +3220,12 @@ body.dark-mode .ed .lang-btn.active { color: var(--ed-brass); }
 /* La barra `.ed` è navy (--ed-field): anello in oro chiaro. */
 .ed .lang-btn:focus-visible,
 .ed .nav-menu a:focus-visible { outline: 3px solid var(--accent-on-dark); outline-offset: 2px; }
+/* Stessa cosa per OGNI controllo che vive su una fascia navy (.ed-band) o su
+   un pannello navy (.ed-panel--field): il ring di default è navy su navy
+   (1.0:1, invisibile) e lì cadono le voci dell'indice, i CTA e i link oro
+   dell'emergenza. */
+.ed-band :focus-visible,
+.ed-panel--field :focus-visible { outline: 3px solid var(--accent-on-dark); outline-offset: 2px; }
 
 /* ----------------------------------------------------------------
    3. SHELL + EDITORIAL RHYTHM
@@ -4027,6 +4109,10 @@ body.dark-mode .ed .alert-emergency { background: rgba(246, 176, 176, 0.08); bor
        dentro la scheda Pazienti. */
     .ed-quick-cta { display: block; margin: 18px 0 0; }
     .ed-quick-cta .ed-btn { width: 100%; }
+    /* Con la quick CTA in cima, il CTA identico dentro la scheda Pazienti
+       sarebbe un secondo bottone oro a pochi centimetri: su mobile resta
+       solo quello sopra la piega (stessa destinazione, stesso testo). */
+    .ed-path__actions #lp-cta-doctolib { display: none; }
 }
 
 /* =================================================================

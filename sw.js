@@ -1,6 +1,6 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Network-First per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v435';
+const CACHE_NAME = 'savianu-v437';
 
 const PRECACHE_URLS = [
   '/',
@@ -50,10 +50,14 @@ async function cacheFirst(request) {
     }
     return response;
   } catch (e) {
-    if (request.destination === 'image') {
-      return new Response('', { status: 408, statusText: 'Offline' });
+    // Fallback offline. `offline.html` va servito SOLO a una navigazione: per
+    // un font, un CSS o un'immagine servire un documento HTML significa
+    // consegnare al browser un asset "valido" ma corrotto (e, su un font, un
+    // errore di parsing al posto di un 404). Qui si risponde 408 e basta.
+    if (request.mode === 'navigate' || request.destination === 'document') {
+      return caches.match('/offline.html', { ignoreSearch: true });
     }
-    return caches.match('/offline.html');
+    return new Response('', { status: 408, statusText: 'Offline' });
   }
 }
 
@@ -63,7 +67,15 @@ async function networkFirst(request) {
     const response = await fetch(request);
     if (response && response.ok) {
       const cache = await caches.open(CACHE_NAME);
-      cache.put(request, response.clone());
+      // Gli asset sono versionati (`/styles.css?v=YYYYMMDDx`): usare la URL
+      // integra come chiave crea una entry NUOVA a ogni bump del `?v=`,
+      // lasciando in cache la vecchia `/styles.css` precachata (bloat che
+      // cresce a ogni release) e senza aggiornarla. Si normalizza la chiave
+      // togliendo la query di versione, così l'entry precachata viene
+      // aggiornata sul posto.
+      const url = new URL(request.url);
+      if (url.searchParams.has('v')) url.search = '';
+      cache.put(url.href, response.clone());
     }
     return response;
   } catch (e) {

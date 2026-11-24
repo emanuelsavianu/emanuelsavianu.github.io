@@ -39,7 +39,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261124a">
+    <link rel="stylesheet" href="../styles.css?v=20261124c">
 
     <style>
         body {
@@ -177,6 +177,15 @@
         }
         .exemption-table tr:last-child td { border-bottom: none; }
         .exemption-table tr:hover td { background: rgba(194,155,87,0.06); }
+        /* A 390px le due colonne si comprimono: «Categoria» scende a 197px e
+           una riga arriva a 168px (7 righe di testo). Sotto i 600px la tabella
+           tiene una larghezza minima e scorre dentro `.table-scroll` — lo
+           stesso pattern di ssn/impegnative.html, dove initTableScroll()
+           aggiunge hint, tabindex e aria-label. Quando la tabella ci sta
+           (tablet/desktop) non cambia nulla. */
+        @media (max-width: 599px) {
+            .exemption-table { min-width: 460px; }
+        }
 
         .code-badge {
             display: inline-block;
@@ -308,6 +317,7 @@
                 <p>Le esenzioni si dividono in tre grandi gruppi:</p>
 
                 <p><strong>1. Esenzioni per Reddito</strong></p>
+                <div class="table-scroll">
                 <table class="exemption-table">
                     <thead>
                         <tr>
@@ -334,9 +344,11 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
                 <div class="alert-box-inline">Le esenzioni per reddito hanno <strong>scadenza annuale</strong> e vanno rinnovate ogni anno all'ASL. In Toscana la scadenza è solitamente il 31 marzo.</div>
 
                 <p style="margin-top: 18px;"><strong>2. Esenzioni per Invalidità e Disabilità</strong></p>
+                <div class="table-scroll">
                 <table class="exemption-table">
                     <thead>
                         <tr>
@@ -367,9 +379,11 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
 
                 <p style="margin-top: 18px;"><strong>3. Esenzioni per Patologia Cronica o Rara</strong></p>
                 <p>Sono le più comuni. Se hai una malattia cronica riconosciuta, il tuo medico può attestare il codice di esenzione. L'esenzione vale <em>solo per le prestazioni correlate</em> alla patologia. Esempi principali (DPCM 12/01/2017 — LEA):</p>
+                <div class="table-scroll">
                 <table class="exemption-table">
                     <thead>
                         <tr>
@@ -393,6 +407,7 @@
                         <tr><td><span class="code-badge">047</span></td><td>Psicosi (schizofrenia, disturbo bipolare, ecc.)</td></tr>
                     </tbody>
                 </table>
+                </div>
                 <p style="font-size: 0.85rem; color: var(--text-medium); margin-top: 6px;">Elenco parziale. Per la lista completa con tutte le prestazioni coperte: DPCM 12/01/2017 — Allegato 8.</p>
 
                 <p style="margin-top: 16px;"><strong>Malattie Rare (codici RN…)</strong></p>
@@ -472,7 +487,7 @@
     </footer>
 </site-footer>
 
-<script type="module" src="../app.js?v=20261124a"></script>
+<script type="module" src="../app.js?v=20261124c"></script>
 
 </body>
 </html>

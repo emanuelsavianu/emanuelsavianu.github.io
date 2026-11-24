@@ -39,7 +39,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261124a">
+    <link rel="stylesheet" href="../styles.css?v=20261124c">
 
     <style>
         /* --- IMPOSTAZIONI DI BASE PER DESKTOP --- */
@@ -115,6 +115,35 @@
         }
 
         body.dark-mode .doc-intro { background: var(--primary); }
+
+        /* Il foglio `.doc-page` È la superficie del documento: la `.card`
+           globale aggiungeva un secondo riquadro (bordo, ombra, padding,
+           radius) dentro la pagina → effetto "card nella card". Qui la card
+           sparisce e resta il foglio. */
+        .doc-page .card {
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            background: transparent;
+            margin: 0;
+        }
+        /* La riga dell'intestazione usava --bg-gradient-1 (crema in light,
+           quasi nero in dark): sul foglio ora serve il bordo dei token. */
+        .doc-page .card .card-header { border-bottom-color: var(--border-color); }
+
+        /* Secondo avviso in cima: NON un secondo box identico al primo.
+           Callout flat (filetto sopra, icona in --danger), pattern condiviso
+           del sito: si distingue dal pannello informativo che lo precede
+           senza introdurre un colore nuovo. */
+        .doc-intro--warn {
+            background: transparent;
+            border-left: 0;
+            border-top: 2px solid var(--danger);
+            border-radius: 0;
+            padding: 14px 0 0;
+        }
+        .doc-intro--warn > i { color: var(--danger); }
+        body.dark-mode .doc-intro--warn { background: transparent; }
 
         .doc-section-title {
             font-family: var(--font-sans);
@@ -319,7 +348,7 @@
 
         <div class="card">
             <div class="card-header" style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                <i class="fas fa-file-medical" aria-hidden="true" style="font-size: 1.5rem; color: var(--primary);"></i>
+                <i class="fas fa-file-medical" aria-hidden="true" style="font-size: 1.5rem;"></i>
                 <h1 style="font-family: var(--font-serif); font-weight: 400; font-size: 2rem; color: var(--primary); margin: 0;">Certificato di Malattia</h1>
             </div>
             <p style="font-size: 1.1rem; color: var(--text-medium); margin-bottom: 20px; border-bottom: 2px solid var(--accent); padding-bottom: 10px;">
@@ -327,13 +356,13 @@
             </p>
 
             <div class="doc-intro">
-                <i class="fas fa-info-circle" style="color: var(--accent); margin-right: 8px;"></i>
+                <i class="fas fa-info-circle" aria-hidden="true" style="color: var(--accent); margin-right: 8px;"></i>
                 Il certificato di malattia si ottiene presentandosi in studio, o richiedendo la visita domiciliare se non trasportabili, il primo giorno di malattia. La visita è obbligatoria: il certificato viene trasmesso telematicamente all'INPS e non può coprire i giorni precedenti la visita (non è ammessa la retrodatazione).
             </div>
 
-            <div class="doc-intro">
-                <i class="fas fa-exclamation-triangle" style="color: var(--accent); margin-right: 8px;"></i>
-                Si informa la gentile utenza che, ai sensi della normativa vigente, il medico <strong>NON può rilasciare certificati di malattia</strong> senza aver preventivamente effettuato una visita medica di controllo.
+            <div class="doc-intro doc-intro--warn">
+                <i class="fas fa-exclamation-triangle" aria-hidden="true" style="margin-right: 8px;"></i>
+                <strong>Avviso.</strong> Si informa la gentile utenza che, ai sensi della normativa vigente, il medico <strong>NON può rilasciare certificati di malattia</strong> senza aver preventivamente effettuato una visita medica di controllo.
             </div>
 
             <h2 class="doc-section-title"><i class="fas fa-balance-scale" style="margin-right: 8px;"></i>Cosa dice la legge</h2>
@@ -389,7 +418,7 @@
     </footer>
 </site-footer>
 
-<script type="module" src="../app.js?v=20261124a"></script>
+<script type="module" src="../app.js?v=20261124c"></script>
 
 
 </body>

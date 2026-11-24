@@ -63,7 +63,12 @@ export function siteNavInnerHTML({ section = 'root', prefix = '', fixedLang = ''
     '<nav class="site-nav" aria-label="Navigazione principale">' +
       '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
       '<ul class="nav-menu" id="site-nav-menu">' +
-        navItem(prefix || './', 'nav_home', isPatient, here === '/' || here === '' || here.endsWith('/index.html'), 'Home') +
+        // Home attiva SOLO sulla home vera: `here.endsWith('/index.html')`
+        // accendeva `aria-current="page"` anche su `/ssn/index.html` e
+        // `/colleghi/RUAP/index.html`, che hanno già la voce di sezione
+        // attiva (due aria-current simultanei = ambiguità per i lettori di
+        // schermo, audit changeset b628730).
+        navItem(prefix || './', 'nav_home', isPatient, here === '/' || here === '' || here === '/index.html', 'Home') +
         // `/ssn/faq.html` è dentro /ssn/ ma ha una voce propria: senza
         // l'esclusione si accendeva anche «Pazienti» (due aria-current=page
         // simultanei, che i lettori di schermo annunciano come ambigui).

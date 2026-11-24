@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js?v=20261005a';
 // Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
 // verità per il render client e per il pre-render statico (vedi chrome.js).
-import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261124a';
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261124c';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -321,6 +321,7 @@ export const translations = {
         footer_owner: CONFIG.NAME,
         doctolib_link_title: "Profilo Doctolib del dott. Emanuel Savianu — Studio Medico Ippocrate, Piazza Saione 3, Arezzo",
         table_scroll_hint: "Trascina per vedere tutta la tabella",
+        filter_empty: "Nessun risultato trovato",
         btn_print_checklist: "Stampa la lista",
 
         // Hours
@@ -692,6 +693,7 @@ export const translations = {
         footer_owner: CONFIG.NAME_EN,
         doctolib_link_title: "Doctolib profile of Dr. Emanuel Savianu — Studio Medico Ippocrate, Piazza Saione 3, Arezzo",
         table_scroll_hint: "Swipe to see the whole table",
+        filter_empty: "No results found",
         btn_print_checklist: "Print the checklist",
 
         // Hours
@@ -1391,14 +1393,38 @@ function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelect
     const input = document.getElementById(inputId);
     if (!input) return;
 
+    // Stato vuoto ANNUNCIATO. Senza, filtrare fino a zero risultati fa sparire
+    // la lista in silenzio: chi usa un lettore di schermo non sa se il filtro
+    // ha filtrato o se la pagina si è rotta. `role="status"` +
+    // `aria-live="polite"` lo annunciano senza interrompere la digitazione;
+    // resta `hidden` finché almeno un risultato è visibile.
+    const emptyText = () => {
+        const lang = document.documentElement.lang || 'it';
+        const block = (typeof translations !== 'undefined' && translations[lang]) || translations.it;
+        return block.filter_empty;
+    };
+    const empty = document.createElement('p');
+    empty.className = 'filter-empty';
+    empty.setAttribute('role', 'status');
+    empty.setAttribute('aria-live', 'polite');
+    empty.hidden = true;
+    (input.closest('.search-input-group') || input).insertAdjacentElement('afterend', empty);
+    // La lingua può cambiare dopo il filtraggio: il testo visibile segue.
+    document.addEventListener('site:i18n', () => {
+        if (!empty.hidden) empty.textContent = emptyText();
+    });
+
     input.addEventListener('input', function() {
         const term = this.value.toLowerCase().trim();
         const items = document.querySelectorAll(itemsSelector);
+        let visible = 0;
 
         items.forEach(item => {
             const textElement = textSelector ? item.querySelector(textSelector) : item;
             const text = textElement ? textElement.textContent.toLowerCase() : '';
-            item.style.display = text.includes(term) ? '' : 'none';
+            const match = text.includes(term);
+            item.style.display = match ? '' : 'none';
+            if (match) visible++;
         });
 
         // Optional: show/hide sections/categories if all their items are hidden
@@ -1408,6 +1434,10 @@ function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelect
                 parent.style.display = hasVisible ? '' : 'none';
             });
         }
+
+        const noResults = term.length > 0 && visible === 0;
+        if (noResults) empty.textContent = emptyText();
+        empty.hidden = !noResults;
     });
 }
 

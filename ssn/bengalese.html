@@ -58,6 +58,15 @@
             padding: 8px 22px;
             border-radius: 30px;
             margin-bottom: 14px;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Il logo è un link alla home: sul navy il ring globale (bronzo) non
+           si vedrebbe, qui usa il crema della palette di pagina. */
+        .brand-bar:focus-visible {
+            outline: 3px solid var(--gold-soft);
+            outline-offset: 3px;
         }
 
         .brand-bar img {
@@ -106,26 +115,6 @@
             padding: 0 15px;
         }
 
-        .intro {
-            background-color: #fff;
-            color: var(--navy);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            text-align: center;
-            border-left: 5px solid var(--gold);
-            box-shadow: 0 2px 5px rgba(26, 47, 76, 0.08);
-        }
-
-        .intro h2 {
-            margin: 0 0 10px 0;
-            font-size: 1.4rem;
-        }
-
-        .intro p {
-            margin: 0;
-            font-size: 1.02rem;
-        }
 
         .section {
             background: white;
@@ -245,17 +234,17 @@
             @page { size: A3 portrait; margin: 12mm; }
             body { background: transparent; padding: 0; }
             .container { max-width: 100%; margin: 0 auto; padding: 0; }
-            .intro, .section, .contacts { box-shadow: none; }
+            .section, .contacts { box-shadow: none; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="brand-bar">
-            <img src="../assets/bronzelogo.png" alt="savianu.it" width="480" height="480">
+        <a href="/" class="brand-bar" aria-label="savianu.it — Home">
+            <img src="../assets/bronzelogo.png" alt="" width="480" height="480">
             <span>savianu.it</span>
-        </div>
+        </a>
         <p class="studio-line">Studio Medico Ippocrate · Piazza Saione 3, Arezzo · <a href="tel:+390575910904">0575 910 904</a></p>
         <h1>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা</h1>
         <p class="sub">সাধারণ চিকিৎসক (জেনারেল প্র্যাকটিশনার) আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</p>
@@ -263,11 +252,6 @@
 
     <main>
     <div class="container">
-
-        <div class="intro">
-            <h2>আপনার স্বাস্থ্যের জন্য ব্যবহারিক নির্দেশিকা</h2>
-            <p>সাধারণ চিকিৎসক (জেনারেল প্র্যাকটিশনার) আপনাকে রোগ নিরাময় এবং স্বাস্থ্য সমস্যা প্রতিরোধে সাহায্য করেন।</p>
-        </div>
 
         <div class="section">
             <h3>১. ডাক্তারের চেম্বার কীভাবে কাজ করে?</h3>
