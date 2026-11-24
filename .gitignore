@@ -24,6 +24,7 @@ Thumbs.db
 /.superpowers
 *.md
 !DESIGN.md
+!tools/audit-pack-brief.md
 !docs/**/*.md
 # Published Markdown-for-Agents content (served raw via .nojekyll)
 !home.md

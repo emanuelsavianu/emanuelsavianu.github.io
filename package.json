@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node tools/run-all-checks.mjs && node tools/gen-markdown.mjs --check",
+    "audit-pack": "node tools/make-audit-pack.mjs --all",
     "check:links": "node tools/check-links.mjs",
     "check:i18n": "node tools/check-i18n.mjs",
     "check:sw": "node tools/check-sw.mjs",
