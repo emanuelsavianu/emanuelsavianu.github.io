@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js?v=20261005a';
 // Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
 // verità per il render client e per il pre-render statico (vedi chrome.js).
-import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261124c';
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261124d';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.

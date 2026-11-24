@@ -3884,10 +3884,19 @@ body.dark-mode .ed .booking-title { color: var(--ed-ink); }
 .ed .intl-card p { color: var(--ed-muted); line-height: 1.7; font-size: 0.93rem; }
 .ed .intl-divider { border: 0; border-top: 1px solid var(--ed-rule); margin: clamp(28px, 3.6vw, 48px) 0; }
 .ed .intl-steps { list-style: none; padding: 0; margin: 0; counter-reset: edstep; display: grid; gap: clamp(14px, 1.8vw, 22px); }
+/* I passi NON sono una griglia: il testo di ogni <li> arriva dall'i18n come
+   `innerHTML` (`<strong>Inquiry.</strong> Send the form…`), quindi `<strong>` e
+   il testo che segue sono due elementi anonimi DISTINTI. In una griglia a due
+   colonne il primo finiva in colonna 2 e il testo andava a capo nella colonna
+   del numero (52px): una parola per riga, con mezza pagina vuota a destra
+   (audit 2026-11-24, /international/ a 1440px). Qui il numero è fuori dal
+   flusso e il contenuto scorre normale: qualunque markup produca l'i18n va
+   bene. */
 .ed .intl-steps li {
     counter-increment: edstep;
-    display: grid; grid-template-columns: 52px minmax(0, 1fr);
-    gap: 18px; align-items: start;
+    position: relative;
+    display: block;
+    padding-left: 70px; /* 52px di numero + 18px di distanza */
     padding-bottom: clamp(14px, 1.8vw, 22px);
     border-bottom: 1px solid var(--ed-rule);
     color: var(--ed-muted); line-height: 1.7; font-size: 0.95rem;
@@ -3895,9 +3904,16 @@ body.dark-mode .ed .booking-title { color: var(--ed-ink); }
 .ed .intl-steps li:last-child { border-bottom: 0; padding-bottom: 0; }
 .ed .intl-steps li::before {
     content: counter(edstep, decimal-leading-zero);
+    position: absolute; left: 0; top: 0; width: 52px;
     font-family: var(--font-serif); font-size: 1.5rem; font-weight: 600; line-height: 1;
     color: var(--ed-brass-ink);
     border-top: 2px solid var(--ed-brass); padding-top: 8px;
+}
+/* Su schermo stretto il numero non si merita 70px: la colonna di testo scende
+   a ~250px solo se il numero torna a 34px. */
+@media (max-width: 599px) {
+    .ed .intl-steps li { padding-left: 48px; }
+    .ed .intl-steps li::before { width: 34px; font-size: 1.25rem; }
 }
 .ed .intl-info-list { list-style: none; padding: 0; margin: 0; }
 .ed .intl-info-list li {
