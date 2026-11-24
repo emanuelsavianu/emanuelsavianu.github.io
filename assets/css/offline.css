@@ -1,0 +1,104 @@
+/* =================================================================
+   offline.html — foglio autoportante della pagina "Nessuna connessione"
+   =================================================================
+   Perché un file separato e non un <style> inline:
+   pagina servita dal service worker, quindi deve restare autonoma (non
+   carica /styles.css), ma il gate `check-tokens` non ammette hex di colore
+   dentro l'HTML. Qui i colori vivono in un blocco token (:root /
+   body.dark-mode), che è esattamente il posto dove il contratto DESIGN.md
+   li vuole. Va precachato in sw.js insieme a offline.html.
+
+   Palette = NAVY · GOLD · CREAM del sito, con gli stessi valori di
+   body.dark-mode in styles.css (oro chiaro: 7.3:1 su navy).
+   ================================================================= */
+
+:root {
+    --primary: #1a2f4c;   /* testo e fondo del bottone (light) */
+    --accent: #c29b57;    /* filetto e testo del bottone */
+    --bg: #f3efe6;
+    --surface: #ffffff;
+    --surface-alt: #f3efe6;
+    --text-muted: #4a5568;
+    --text: #1a2f4c;
+    --strong: #1a2f4c;      /* etichetta in evidenza: navy su crema = 12.6:1 */
+    --shadow: rgba(26, 47, 76, 0.12);
+}
+
+body.dark-mode {
+    --primary: #1f3659;   /* fondo del bottone (dark) */
+    --accent: #e0b976;
+    --bg: #0a1628;
+    --surface: #162438;
+    --surface-alt: #11223a;
+    --text-muted: #cbd5e1;
+    --text: #f3efe6;
+    --strong: #e0b976;      /* su superficie scura l'evidenza è oro = 7.3:1 */
+    --shadow: rgba(0, 0, 0, 0.6);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+
+.card {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 40px 30px;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 8px 24px var(--shadow);
+}
+
+.icon { font-size: 3rem; margin-bottom: 20px; }
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: var(--text);
+    margin-bottom: 10px;
+}
+
+p { font-size: 1rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 20px; }
+
+.contacts {
+    background: var(--surface-alt);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 25px;
+    text-align: left;
+}
+.contacts p { margin-bottom: 8px; font-size: 0.95rem; }
+/* Etichetta in evidenza: due ruoli distinti — navy su crema in light, oro
+   chiaro su superficie scura in dark. Usare --accent in light sarebbe 2.25:1
+   (oro su crema: sotto AA), il classico errore che il contratto vieta. */
+.contacts strong { color: var(--strong); }
+
+a { color: var(--primary); }
+body.dark-mode a { color: var(--accent); }
+
+.btn {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+/* Il fondo del bottone è --primary (navy in entrambi i temi): in dark è il
+   navy schiarito, quindi il testo resta l'oro chiaro e non il navy. */
+body.dark-mode .btn { background: var(--primary); color: var(--accent); }

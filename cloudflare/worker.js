@@ -43,12 +43,12 @@ const SECURITY_HEADERS = {
   //  • 'unsafe-inline' for scripts/styles is required because the site uses
   //    inline <script> blocks and inline style attributes without a build step.
   //    Once a build step is added, replace with nonces or hashes.
-  //  • fonts.googleapis.com / gstatic: Google Fonts — STILL REQUIRED by the
-  //    self-contained pages (ssn/poster-*, bengalese/urdu, salutementale/vivisano,
-  //    colleghi/malattia+installazione, RUAP). Main-site pages now self-host
-  //    Montserrat/Cormorant Garamond via /assets/fonts/fonts.css (2026-08-22),
-  //    so these origins could be dropped only when every remaining GF page is
-  //    also self-hosted.
+  //  • fonts.googleapis.com / fonts.gstatic.com: RIMOSSI (2026-11-24).
+  //    Le ultime due pagine che importavano Google Fonts (ssn/bengalese.html,
+  //    ssn/urdu.html) ora caricano Noto Sans Bengali / Noto Nastaliq Urdu da
+  //    /assets/fonts/script-fonts.css: nessuna richiesta a terzi, nessun
+  //    trasferimento dell'IP del visitatore verso Google (GDPR), e il testo
+  //    nella lingua madre del paziente funziona anche offline.
   //  • cdnjs.cloudflare.com: RUAP/gestoreturni CSS (all.min.css) + font files + JS (jsPDF, html2canvas, xlsx)
   //  • cdn.jsdelivr.net: chart.js on malattia/guida/scudo pages
   //  • unpkg.com: react/react-dom/babel on calcolatore-ferie pages
@@ -57,8 +57,8 @@ const SECURITY_HEADERS = {
   'Content-Security-Policy': [
       "default-src 'self'",
       "script-src 'self' 'unsafe-inline' https://calendar.google.com https://cdnjs.cloudflare.com https://cdn.jsdelivr.net https://unpkg.com https://cdn.sheetjs.com",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com https://calendar.google.com",
-      "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+      "style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://calendar.google.com",
+      "font-src 'self' https://cdnjs.cloudflare.com",
       "img-src 'self' data: https://savianu.it https://www.gstatic.com",
       "connect-src 'self'",
       "frame-src https://calendar.google.com",

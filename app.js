@@ -1,11 +1,28 @@
 import { CONFIG } from './config.js?v=20261005a';
 // Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
 // verità per il render client e per il pre-render statico (vedi chrome.js).
-import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261005b';
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261124a';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
 if (typeof window !== 'undefined') window.__SAVIANU_CONFIG__ = CONFIG;
+
+// =================================================================
+// onReady — inizializzazione a prova di "load già passato"
+// Un modulo ES viene valutato DOPO il parse ma può esserlo anche dopo
+// l'evento `load` (script differito, import dinamico, navigazione da cache
+// bfcache): in quel caso un `window.addEventListener('load', …)` non scatta
+// MAI e l'inizializzatore resta muto. Qui si esegue subito se il documento è
+// già completo, altrimenti si aggancia a `load`.
+// =================================================================
+function onReady(fn) {
+  if (document.readyState === 'complete') {
+    fn();
+    return;
+  }
+  window.addEventListener('load', fn, { once: true });
+}
+
 
 // =================================================================
 // STUDIO MEDICO DOTT. SAVIANU - JAVASCRIPT
@@ -150,9 +167,9 @@ class SiteFooter extends HTMLElement {
     if (isPatient) {
       this.insertAdjacentHTML('afterend',
         '<nav class="quick-actions-bar" aria-label="Azioni rapide">' +
-          '<a href="tel:+390575910904" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria"><i class="fas fa-phone-alt" aria-hidden="true"></i><span data-i18n="qa_call">Chiama</span></a>' +
+          '<a href="' + CONFIG.CONTACTS.secretary.href + '" class="qa-item" data-i18n-aria-label="qa_call_label" aria-label="Chiama la segreteria"><i class="fas fa-phone-alt" aria-hidden="true"></i><span data-i18n="qa_call">Chiama</span></a>' +
           '<a href="' + prefix + 'ssn/faq.html" class="qa-item" data-i18n-aria-label="qa_faq_label" aria-label="Domande frequenti"><i class="fas fa-question-circle" aria-hidden="true"></i><span>FAQ</span></a>' +
-          '<a href="https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-title="doctolib_link_title" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib"><i class="fas fa-calendar-check" aria-hidden="true"></i><span data-i18n="qa_doctolib">Doctolib</span></a>' +
+          '<a href="' + CONFIG.DOCTOLIB.profile + '" target="_blank" rel="noopener noreferrer" class="qa-item" data-i18n-title="doctolib_link_title" data-i18n-aria-label="qa_doctolib_label" aria-label="Doctolib"><i class="fas fa-calendar-check" aria-hidden="true"></i><span data-i18n="qa_doctolib">Doctolib</span></a>' +
         '</nav>'
       );
     }
@@ -522,7 +539,6 @@ export const translations = {
         intl_f_submit: 'Richiedi informazioni sulla visita privata',
         intl_f_alt: 'Per informazioni su costi e disponibilità scriva a <span class="js-email"></span>.',
         intl_f_done: 'Grazie — il suo programma di posta dovrebbe aprirsi con la richiesta precompilata. Se non succede, ci scriva direttamente.',
-        intl_hero_cta: 'Richiedi informazioni sulla visita privata',
         intl_f_error: 'Invio non riuscito. Riprovi o scriva direttamente a <span class="js-email"></span>.',
         intl_f_success: 'Grazie — la sua richiesta è stata inviata. Le risponderemo entro pochi giorni lavorativi.',
         intl_f_sending: 'Invio in corso…',
@@ -887,7 +903,6 @@ export const translations = {
         intl_f_submit: 'Inquire About Primary Care',
         intl_f_alt: 'For information about fees and availability, please write to <span class="js-email"></span>.',
         intl_f_done: 'Thank you — your email program should now open with your inquiry pre-filled. If it does not, please write to us directly.',
-        intl_hero_cta: 'Inquire About Private Primary Care',
         intl_f_error: 'Submission failed. Please try again, or write to us directly at <span class="js-email"></span>.',
         intl_f_success: 'Thank you — your inquiry has been sent. We will reply within a few business days.',
         intl_f_sending: 'Sending…',
@@ -1092,25 +1107,6 @@ export function dismissGuidaRapida() {
 }
 
 initGuidaRapida();
-
-// --- FOCUS TRAP (kept for reps modal) ---
-function trapFocus(modal) {
-    const focusable = modal.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])');
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    first.focus();
-    modal.addEventListener('keydown', function handler(e) {
-        if (e.key !== 'Tab') {
-            return;
-        }
-        if (e.shiftKey) {
-            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
-        } else {
-            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
-        }
-    });
-}
 
 // --- OPEN/CLOSED BADGE ---
 (function() {
@@ -1468,11 +1464,14 @@ function initTableScroll() {
     const all = () => wraps.forEach(sync);
     all();
     window.addEventListener('resize', all, { passive: true });
-    window.addEventListener('site:i18n', all);
+    // `site:i18n` è emesso su `document` (vedi applyI18n): ascoltarlo su
+    // `window` non riceveva nulla e le etichette delle tabelle restavano
+    // nella lingua precedente dopo un cambio IT/EN.
+    document.addEventListener('site:i18n', all);
 }
 
 // --- GLOBAL INIT ON LOAD ---
-window.addEventListener('load', function() {
+onReady(function() {
     initBackToTop();
     initGlobalFilters();
     initTableScroll();
@@ -1557,7 +1556,7 @@ export function initServiceWorker() {
 
   hideUpdateToast();
 
-  window.addEventListener('load', () => {
+  onReady(() => {
       // updateViaCache:'none' → il browser non può servire dalla cache HTTP lo
       // script del SW: il controllo di aggiornamento è sempre reale, quindi il
       // toast compare solo quando c'è davvero una nuova versione in attesa.

@@ -1,89 +1,46 @@
 // Service Worker — Dr. Savianu Medical Website
 // Strategie: Network-First per HTML, Cache-First per img/font, Network-First per JS/CSS
-const CACHE_NAME = 'savianu-v432';
+const CACHE_NAME = 'savianu-v435';
 
 const PRECACHE_URLS = [
+  '/',
   '/offline.html',
   '/404.html',
-  '/colleghi/adhd.html',
-  '/colleghi/adi-adp-pai.html',
-  '/colleghi/ausili-assistenziali.html',
-  '/colleghi/codici-analisi-genetiche.html',
-  '/colleghi/comunicazioni-2026.html',
-  '/colleghi/criteri-appropriatezza.html',
-  '/colleghi/guida-accessi-malattie-infettive.html',
-  '/colleghi/guida-accessi-pronto-soccorso.html',
-  '/colleghi/guida-accessi-vascolari.html',
-  '/colleghi/',
-  '/colleghi/medicina-fisica-codici-LR.html',
-  '/colleghi/millewin-tips.html',
-  '/colleghi/modulistica/',
-  '/colleghi/note-operative.html',
-  '/colleghi/pir.html',
-  '/colleghi/protocollo-certificati-inps.html',
-  '/colleghi/risorse-informative.html',
-  '/',
-  '/international/',
-  '/privacy.html',
-  '/privati/certificato-invalidita-civile.html',
-  '/privati/faq-riforma.html',
-  '/privati/',
-  '/ssn/bengalese.html',
-  '/ssn/cert-malattia.html',
-  '/ssn/esenzioni.html',
-  '/ssn/faq.html',
-  '/ssn/impegnative.html',
-  '/ssn/',
-  '/ssn/poster-bn.html',
-  '/ssn/poster-en.html',
-  '/ssn/poster-it.html',
-  '/ssn/poster-ro.html',
-  '/ssn/poster-ur.html',
-  '/ssn/poster_multilingue.html',
-  '/ssn/salutementale-ro.html',
-  '/ssn/salutementale.html',
-  '/ssn/scheda-bn.html',
-  '/ssn/scheda-en.html',
-  '/ssn/scheda-it.html',
-  '/ssn/scheda-ro.html',
-  '/ssn/scheda-ur.html',
-  '/ssn/urdu.html',
-  '/ssn/vivisano-ro.html',
-  '/ssn/vivisano.html',
   '/styles.css',
   '/app.js',
+  '/chrome.js',
   '/config.js',
   '/manifest.json',
-  '/assets/bluelogo.png',
-  '/assets/bronzelogo.png',
-  '/assets/studio/studio-location-desktop.avif',
-  '/assets/studio/studio-location-desktop.webp',
-  '/assets/studio/studio-location-tablet.avif',
-  '/assets/studio/studio-location-tablet.webp',
-  '/assets/studio/studio-location-mobile.avif',
-  '/assets/studio/studio-location-mobile.webp',
-  '/assets/fontawesome/css/fontawesome.min.css',
-  '/assets/fontawesome/css/solid.min.css',
-  '/assets/fontawesome/webfonts/fa-solid-900.woff2',
+  '/assets/bronzelogo-192.png',
+  '/assets/css/offline.css?v=1',
   '/assets/fonts/fonts.css',
   '/assets/fonts/montserrat-var-latin.woff2',
   '/assets/fonts/montserrat-var-latin-ext.woff2',
   '/assets/fonts/cormorant-garamond-var-latin.woff2',
   '/assets/fonts/cormorant-garamond-var-latin-ext.woff2',
-  '/assets/css/tools.default.min.css',
-  '/assets/css/tools.tw.blue.min.css',
-  '/assets/css/tools.tw.navy.min.css?v=2',
-  '/assets/css/tools.tw.teal.min.css',
+  '/assets/fontawesome/css/fontawesome.min.css',
+  '/assets/fontawesome/css/solid.subset.css',
+  '/assets/fontawesome/webfonts/fa-solid-900.subset.woff2',
 ];
 
 function isSameOrigin(url) {
   return new URL(url).origin === self.location.origin;
 }
 
+// Matching tollerante alla query string.
+// Gli asset sono versionati (`/styles.css?v=20261122f`, `/app.js?v=…`,
+// `/chrome.js?v=…`): senza `ignoreSearch` la chiave della cache non combacia
+// mai con la URL precachata e, offline, CSS/JS/font non si trovavano. Con
+// `ignoreSearch` una richiesta versionata trova l'entry precachata.
+function matchCached(request) {
+  return caches.match(request, { ignoreSearch: true });
+}
+
+
 // Cache-First: per risorse statiche immutabili (immagini, font)
 async function cacheFirst(request) {
   const cache = await caches.open(CACHE_NAME);
-  const cachedResponse = await cache.match(request);
+  const cachedResponse = await matchCached(request);
   if (cachedResponse) return cachedResponse;
 
   try {
@@ -110,11 +67,11 @@ async function networkFirst(request) {
     }
     return response;
   } catch (e) {
-    const cachedResponse = await caches.match(request);
+    const cachedResponse = await matchCached(request);
     if (cachedResponse) return cachedResponse;
     // offline.html solo per navigazione HTML, non per JS/CSS/immagini
     if (request.mode === 'navigate' || (request.headers.get('accept') || '').includes('text/html')) {
-      return caches.match('/offline.html');
+      return caches.match('/offline.html', { ignoreSearch: true });
     }
     return new Response('', { status: 408, statusText: 'Network Error/Offline' });
   }

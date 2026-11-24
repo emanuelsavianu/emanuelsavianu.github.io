@@ -64,7 +64,7 @@
 </script>
     <!-- Marks the page as JS-capable: the index ships fully open, JS collapses it. -->
     <script>document.documentElement.classList.add('ed-js');</script>
-    <link rel="stylesheet" href="styles.css?v=20261122f">
+    <link rel="stylesheet" href="styles.css?v=20261124a">
 
     <!-- JSON-LD: MedicalBusiness (clinic umbrella) with Physician as founder -->
     <script type="application/ld+json">
@@ -402,7 +402,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="app.js?v=20261122a"></script>
+<script type="module" src="app.js?v=20261124a"></script>
 
 <!-- ── The live counter: reads CONFIG.SCHEDULE, writes one sentence. ── -->
 <script type="module">
@@ -493,9 +493,13 @@ import { CONFIG } from './config.js?v=20261005a';
             else { nowEl.hidden = true; }
         }
 
-        function say(open, html) {
+        // `plain` = il testo è dato, non markup: la nota di assenza arriva da
+        // config.js ed è testo libero — va resa con textContent, altrimenti un
+        // carattere `<` o un tag nella nota diventa HTML eseguito.
+        function say(open, html, plain) {
             if (stateEl) stateEl.setAttribute('data-open', String(open));
-            textEl.innerHTML = html;
+            if (plain) textEl.textContent = html;
+            else textEl.innerHTML = html;
         }
 
         // Un'assenza attiva sovrascrive l'orario: si dice ciò che è vero adesso.
@@ -503,7 +507,7 @@ import { CONFIG } from './config.js?v=20261005a';
             const absence = CONFIG.getActiveAbsence();
             if (absence) {
                 wordEl.textContent = T('lp_state_closed', 'Chiuso');
-                say(false, absence.note || '');
+                say(false, absence.note || '', true);
                 return;
             }
         }

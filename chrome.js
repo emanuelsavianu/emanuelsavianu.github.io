@@ -64,10 +64,13 @@ export function siteNavInnerHTML({ section = 'root', prefix = '', fixedLang = ''
       '<button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="site-nav-menu" aria-label="' + (isPatient ? 'Apri il menu di navigazione' : 'Apri il menu') + '"><i class="fas fa-bars" aria-hidden="true"></i></button>' +
       '<ul class="nav-menu" id="site-nav-menu">' +
         navItem(prefix || './', 'nav_home', isPatient, here === '/' || here === '' || here.endsWith('/index.html'), 'Home') +
-        navItem(prefix + 'ssn/', 'nav_ssn', isPatient, here.includes('/ssn'), 'Pazienti') +
+        // `/ssn/faq.html` è dentro /ssn/ ma ha una voce propria: senza
+        // l'esclusione si accendeva anche «Pazienti» (due aria-current=page
+        // simultanei, che i lettori di schermo annunciano come ambigui).
+        navItem(prefix + 'ssn/', 'nav_ssn', isPatient, here.includes('/ssn') && !here.endsWith('/faq.html'), 'Pazienti') +
         navItem(prefix + 'privati/', 'nav_privati', isPatient, here.includes('/privati'), 'Consulti e certificati INPS') +
         navItem(prefix + 'colleghi/', 'nav_colleghi', isPatient, here.includes('/colleghi'), 'Colleghi') +
-        navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, false, 'FAQ') +
+        navItem(prefix + 'ssn/faq.html', 'nav_faq', isPatient, here.endsWith('/ssn/faq.html'), 'FAQ') +
         // CTA "bottone": unica voce colorata della barra (doppio target, IT/EN).
         navItem(prefix + 'international/', 'nav_international', isPatient, here.includes('/international'), 'International Patients', 'nav-cta') +
       '</ul>' +

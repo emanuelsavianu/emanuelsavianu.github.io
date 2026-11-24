@@ -38,8 +38,8 @@ const OUT = join(DIR, 'index.html');
 const CHECK = process.argv.includes('--check');
 
 const URL_PAGE = 'https://savianu.it/colleghi/modulistica/';
-const STYLES_V = '20261122f';
-const APP_V = '20261122a';
+const STYLES_V = '20261124a';
+const APP_V = '20261124a';
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
