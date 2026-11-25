@@ -8,8 +8,8 @@ import {
   DEFAULT_PLACE_SCHEDULE, DEFAULT_OPEN_DAYS,
   DEFAULT_PLACE_INACTIVE, DEFAULT_PLACE_OPEN_DAYS,
   DEFAULT_PLACE_ACTIVE_FROM, DEFAULT_PLACE_ACTIVE_UNTIL
-} from './config.js?v=20261121c';
-import { isItalianHoliday } from './holidays.js?v=20261121c';
+} from './config.js?v=20261125a';
+import { isItalianHoliday } from './holidays.js?v=20261125a';
 
 // --- ID & Text ---
 

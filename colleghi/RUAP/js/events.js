@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays, reloadPlaceOpenDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261121c';
+} from './state.js?v=20261125a';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261121c';
+} from './core-utils.js?v=20261125a';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -36,13 +36,13 @@ import {
   selectDoctorColor, firstFreeColorIndex,
   unavailCalNav, unavailCalToday,
   openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary,
-  toggleFocusDoctor
-} from './renderers.js?v=20261121c';
+  toggleFocusDoctor, updateBudgetHint
+} from './renderers.js?v=20261125a';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261121c';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261125a';
 import {
   initPublish, openPublishModal, closePublishModal, confirmPublish, notifyEmanuel, saveTokenFromInput
-} from './publish.js?v=20261121c';
+} from './publish.js?v=20261125a';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -50,7 +50,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261121c';
+} from './config.js?v=20261125a';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS
@@ -152,6 +152,14 @@ el('modal-patients')?.addEventListener('input', (e) => {
   const patients = parseInt(e.target.value) || 0;
   const hours = calculateWeeklyHoursByPatients(patients);
   el('modal-hours').value = hours;
+  updateBudgetHint();
+});
+// Budget mensile = override. Il suggerimento dice SEMPRE quante ore usa davvero
+// il motore, così un budget vecchio non contraddice le ore settimanali in silenzio.
+el('modal-monthly-budget')?.addEventListener('input', updateBudgetHint);
+el('modal-budget-auto')?.addEventListener('click', () => {
+  el('modal-monthly-budget').value = '';
+  updateBudgetHint();
 });
 el('btn-add-period')?.addEventListener('click', () => { addUnavailPeriodRow('', ''); });
 el('unavail-cal-prev')?.addEventListener('click', () => unavailCalNav(-1));

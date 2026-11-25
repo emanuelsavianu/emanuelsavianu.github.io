@@ -2,16 +2,66 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261121c';
-import { isItalianHoliday } from './holidays.js?v=20261121c';
-import { MONTHS_IT } from './config.js?v=20261121c';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261125a';
+import { isItalianHoliday } from './holidays.js?v=20261125a';
+import { MONTHS_IT } from './config.js?v=20261125a';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast,
   isPlaceOpenOn, slotsForPlace, getExtraHoursInMonth, hasExtraOnDate,
-  activePlacesInMonth
-} from './core-utils.js?v=20261121c';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261121c';
+  activePlacesInMonth, getWeekStart
+} from './core-utils.js?v=20261125a';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261125a';
+
+// ====================================================
+// Tetto SETTIMANALE (2026-11-25, segnalazione della referente)
+// ====================================================
+// `weeklyHours` è il monte ore settimanale dichiarato dal medico. Prima serviva
+// solo a derivare il budget mensile (quando `monthlyBudget` è vuoto) e a disegnare
+// la barra in sidebar: nelle celle NON entrava mai, quindi chi dichiarava 6 ore
+// settimanali poteva ricevere più turni nella stessa settimana (e, con un
+// `monthlyBudget` override rimasto da un roster vecchio, anche più di 4 turni nel
+// mese). Ora è un criterio di scelta, non un vincolo rigido: si preferiscono i
+// medici che restano dentro il tetto, e chi lo sfora viene usato solo se in quella
+// fascia non c'è nessun altro. La copertura del servizio resta prioritaria (la
+// regola del riposo segue lo stesso principio dal 2026-10-15).
+
+const WEEK_FALLBACK_HOURS = 38;
+
+export function weeklyCapOf(doc) {
+  const h = doc.weeklyHours;
+  return (typeof h === 'number' && h > 0) ? h : WEEK_FALLBACK_HOURS;
+}
+
+/** Ore già assegnate al medico nella settimana (lun-sab) che contiene `dateKey`. */
+export function weeklyHoursAround(docId, dateKey, exceptKey) {
+  const start = getWeekStart(new Date(dateKey + 'T00:00:00'));
+  const days = [];
+  for (let i = 0; i < 6; i++) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + i);
+    days.push(toDateKey(d));
+  }
+  let hours = 0;
+  for (const k in state.assignments) {
+    if (k === exceptKey) continue;
+    if (state.assignments[k] !== docId) continue;
+    const parts = k.split('_');
+    if (!days.includes(parts[0])) continue;
+    const s = SLOTS.find(x => x.key === parts[1]);
+    hours += s ? s.hours : 6;
+  }
+  // I turni extra (guardia/rinforzo) sono ore lavorate: contano nella settimana.
+  (state.extraShifts || []).forEach(x => {
+    if (x.doctorId === docId && days.includes(x.dateKey)) hours += (x.hours || 0);
+  });
+  return hours;
+}
+
+/** Il turno `slotHours` in `dateKey` sta dentro il tetto settimanale del medico? */
+export function fitsWeek(doc, dateKey, slotHours, exceptKey) {
+  return weeklyHoursAround(doc.id, dateKey, exceptKey) + slotHours <= weeklyCapOf(doc);
+}
 
 // ====================================================
 // 10. AUTO-ASSIGN & GENERATION
@@ -95,7 +145,13 @@ function pickDoctorForSlot(primaryDocs, poolDocs, place, dateKey, slotKeyOnly, a
 
   // Rest first: rested doctors are tried before doctors coming off the previous
   // afternoon (preference, not a hard constraint — referente 2026-10-15).
-  const candidates = availablePrimary.concat(availablePool);
+  // Tetto settimanale FUORI, riposo DENTRO: sforare le ore dichiarate dal medico
+  // pesa più di un riposo non ottimale. Il tetto è un VINCOLO, non una preferenza
+  // (referente 2026-11-25: «devono avere solo 6 ore settimanali»): chi lo
+  // supererebbe non entra in turno, e la cella resta scoperta e visibile invece di
+  // nascondere lo sforamento. Se le ore vanno alzate, si cambiano nel roster.
+  const candidates = availablePrimary.concat(availablePool)
+    .filter(d => fitsWeek(d, dateKey, slotHours));
   const priorityGroups = [
     candidates.filter(d => !hasConsecutiveShiftConflict(d)),
     candidates.filter(d => hasConsecutiveShiftConflict(d)),
@@ -240,6 +296,9 @@ function optimizeMonth(year, month, lockedKeys = new Set()) {
     if (!isDoctorAvailableForSlot(doc, p[0], p[1])) return false;
     if (isBusy(doc.id, p[0], p[1])) return false;
     if ((h[doc.id] || 0) + slotHoursOf(p[1]) > budgetOf(doc)) return false;
+    // Tetto settimanale: le mosse di equità non devono ricreare il caso «più turni
+    // nella stessa settimana» (referente 2026-11-25).
+    if (!fitsWeek(doc, p[0], slotHoursOf(p[1]))) return false;
     return restDelta(slotKey, fromId, doc.id) <= 0;
   };
 
@@ -250,9 +309,12 @@ function optimizeMonth(year, month, lockedKeys = new Set()) {
     const slotHours = slotHoursOf(slotKeyOnly);
     const available = state.doctors.filter(d => isDoctorAvailableForSlot(d, item.dateKey, slotKeyOnly));
 
-    // a) un medico disponibile, libero in quella fascia e con budget
+    // a) un medico disponibile, libero in quella fascia, con budget e dentro il
+    //    proprio tetto settimanale (il tetto è un vincolo: la cella resta scoperta
+    //    piuttosto che far sforare chi ha poche ore dichiarate)
     const free = available.find(d => !isBusy(d.id, item.dateKey, slotKeyOnly)
-      && (hours[d.id] || 0) + slotHours <= budgetOf(d));
+      && (hours[d.id] || 0) + slotHours <= budgetOf(d)
+      && fitsWeek(d, item.dateKey, slotHours));
     if (free) {
       state.assignments[item.slotKey] = free.id;
       rebuildBusy();
@@ -278,6 +340,9 @@ function optimizeMonth(year, month, lockedKeys = new Set()) {
         const kSlot = kParts[1];
         const kHours = slotHoursOf(kSlot);
         if ((hours[d.id] || 0) - kHours + slotHours > budgetOf(d)) continue;
+        // `d` deve stare nel proprio tetto settimanale DOPO lo scambio, altrimenti
+        // la copertura creerebbe il caso che la referente ha segnalato.
+        if (!fitsWeek(d, item.dateKey, slotHours, k)) continue;
         const receiver = state.doctors.find(r => canReceive(r, k, d.id, hours));
         if (!receiver) continue;
         state.assignments[k] = receiver.id;

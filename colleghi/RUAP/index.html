@@ -701,9 +701,13 @@
       <div class="grid grid-cols-2 gap-4">
         <div>
           <label class="block text-sm font-semibold text-slate-700 mb-1">Budget Mensile (ore)</label>
-          <input type="number" id="modal-monthly-budget" placeholder="auto" min="0" max="500"
-            class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
-          <p class="text-xs text-slate-600 mt-1">Lascia vuoto = weeklyHours × 4</p>
+          <div class="flex gap-2">
+            <input type="number" id="modal-monthly-budget" placeholder="auto" min="0" max="500"
+              class="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500" />
+            <button type="button" id="modal-budget-auto" title="Torna al valore automatico"
+              class="flex-shrink-0 text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 rounded-lg px-2">auto</button>
+          </div>
+          <p id="modal-budget-hint" class="text-xs text-slate-600 mt-1">Lascia vuoto = ore settimanali × 4</p>
         </div>
         <div class="flex items-end pb-2">
           <label class="flex items-center gap-2 cursor-pointer">
@@ -989,7 +993,7 @@
      MODULES — App logic (ES modules)
      =================================================== -->
 <script src="config.js?v=2026-11-21T14:12:38Z"></script>
-<script type="module" src="js/events.js?v=20261121c"></script>
+<script type="module" src="js/events.js?v=20261125a"></script>
 
 <!-- Hidden print-optimized div for PDF export -->
 <div id="pdf-content" class="hidden" style="font-family: Arial, sans-serif; padding: 20px; background: white; color: #1e293b; width: 1100px;">

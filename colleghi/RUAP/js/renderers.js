@@ -6,7 +6,7 @@
 import {
   state, PLACES, SLOTS,
   saveToStorage, pushHistory, clearHistory
-} from './state.js?v=20261121c';
+} from './state.js?v=20261125a';
 import {
   generateId, cleanDoctorName, escapeHtml, excelDateToDate,
   toDateKey, formatDateShort, getWeekStart, calculateWeeklyHoursByPatients,
@@ -17,15 +17,15 @@ import {
   isPlaceOpenOn, slotsForPlace, dayKeyOf, getPlaceSchedule,
   activePlacesInMonth, isPlaceActiveInMonth, placeOpenDays,
   getExtraShiftsInMonth, getExtraHoursInMonth, hasExtraOnDate, extraLabel
-} from './core-utils.js?v=20261121c';
+} from './core-utils.js?v=20261125a';
 import {
   COLOR_PALETTE, DAY_NAMES, DAY_KEYS, MONTHS_IT,
   DROPDOWN_HEIGHT, DROPDOWN_WIDTH, EXTERNAL_PREFIX, WIZARD_TOTAL, MS_PER_DAY,
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION_KEY,
-  DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS
-} from './config.js?v=20261121c';
-import { isItalianHoliday } from './holidays.js?v=20261121c';
+  DEFAULT_SLOTS, EXTRA_TYPES, EXTRA_HOURS, MONTHLY_WEEKS
+} from './config.js?v=20261125a';
+import { isItalianHoliday } from './holidays.js?v=20261125a';
 
 // ====================================================
 // 7. RENDERING
@@ -1037,6 +1037,28 @@ export function selectDoctorColor(index) {
 }
 
 
+export function updateBudgetHint() {
+  const hint = el('modal-budget-hint');
+  if (!hint) return;
+  const weekly = parseInt(el('modal-hours').value);
+  const auto = (isNaN(weekly) ? 38 : weekly) * MONTHLY_WEEKS;
+  const raw = el('modal-monthly-budget').value;
+  const budget = raw === '' ? null : parseFloat(raw);
+  if (budget === null) {
+    hint.className = 'text-xs text-slate-600 mt-1';
+    hint.textContent = `Il motore usa ${auto} h/mese (${auto / MONTHLY_WEEKS} h/settimana × ${MONTHLY_WEEKS}).`;
+  } else if (budget === auto) {
+    hint.className = 'text-xs text-slate-600 mt-1';
+    hint.textContent = `Il motore usa ${budget} h/mese: uguale all'automatico (${auto} h).`;
+  } else {
+    // Il caso che ha generato il reclamo: budget override rimasto da un roster
+    // vecchio che contraddice le ore settimanali (Sodo: 6 h/settimana = 24 h/mese
+    // ma 48 h di budget). Senza dire niente, il motore usava il budget.
+    hint.className = 'text-xs text-amber-700 mt-1 font-medium';
+    hint.textContent = `Attenzione: il motore usa ${budget} h/mese, non le ${auto} h delle ${auto / MONTHLY_WEEKS} h settimanali. «auto» riallinea.`;
+  }
+}
+
 export function openDoctorModal(doctorId = null) {
   state.editingDoctorId = doctorId;
   el('doctor-modal').classList.remove('hidden');
@@ -1060,6 +1082,7 @@ export function openDoctorModal(doctorId = null) {
   el('modal-hours').value = values.hours;
   el('modal-is-pool').checked = values.isPool;
   el('modal-monthly-budget').value = values.monthlyBudget;
+  updateBudgetHint();
   el('modal-aft').value = values.aft;
   renderAvailabilityTable(doc ? doc.availability : null);
   // Nuovo medico: si parte dal primo colore LIBERO (non dal blu di default, che
@@ -1202,7 +1225,14 @@ export function saveDoctorFromModal() {
   const rawHours = parseInt(el('modal-hours').value);
   const weeklyHours = isNaN(rawHours) ? 38 : rawHours;
   const isPool = el('modal-is-pool').checked;
-  const budget = el('modal-monthly-budget').value ? parseFloat(el('modal-monthly-budget').value) : undefined;
+  const rawBudget = el('modal-monthly-budget').value;
+  const budgetValue = rawBudget ? parseFloat(rawBudget) : undefined;
+  // Un budget identico all'automatico (ore settimanali × 4) è rumore: si scrive
+  // vuoto, così se cambia il conteggio assistiti il budget segue invece di restare
+  // fermo al valore di un roster vecchio (era il caso Sodo/Bensi: 6 h settimanali
+  // dichiarate e 48 h di budget ereditato, che il motore usava al posto delle ore).
+  const budget = (budgetValue !== undefined && budgetValue === weeklyHours * MONTHLY_WEEKS)
+    ? undefined : budgetValue;
   const aft = el('modal-aft').value || '';
   const preferredPlace = el('modal-preferred-place').value || null;
   const colorIndex = normalizeColorIndex(modalColorIndex);
