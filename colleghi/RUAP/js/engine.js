@@ -2,16 +2,16 @@
 // engine.js — Shift distribution algorithm
 // ====================================================
 
-import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261125a';
-import { isItalianHoliday } from './holidays.js?v=20261125a';
-import { MONTHS_IT } from './config.js?v=20261125a';
+import { state, PLACES, SLOTS, isProcessing, setProcessing, pushHistory, saveToStorage } from './state.js?v=20261125b';
+import { isItalianHoliday } from './holidays.js?v=20261125b';
+import { MONTHS_IT } from './config.js?v=20261125b';
 import {
   toDateKey, isDoctorAvailableForSlot, getMonthlyBudget,
   getAssignedHoursInMonth, el, toast,
   isPlaceOpenOn, slotsForPlace, getExtraHoursInMonth, hasExtraOnDate,
   activePlacesInMonth, getWeekStart
-} from './core-utils.js?v=20261125a';
-import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261125a';
+} from './core-utils.js?v=20261125b';
+import { renderAll, renderMonthlyStats, updateConflictsHeaderBadge } from './renderers.js?v=20261125b';
 
 // ====================================================
 // Tetto SETTIMANALE (2026-11-25, segnalazione della referente)
@@ -549,7 +549,11 @@ export function runAutoAssignForMonth(year, month, opts = {}) {
     loadingText.textContent = `Generazione turni ${monthName}... ${pct}%`;
 
     if (end < total) {
-      requestAnimationFrame(() => processChunk(end));
+      // setTimeout, non requestAnimationFrame: rAF NON gira se la scheda non è
+      // visibile (l'utente cambia finestra mentre genera) e la generazione si
+      // fermava al primo blocco — «Generazione… 12%» per sempre. setTimeout in
+      // background viene rallentato a 1 s, ma completa.
+      setTimeout(() => processChunk(end), 0);
     } else {
       loadingEl.classList.add('hidden');
       progressBar.style.width = '0%';

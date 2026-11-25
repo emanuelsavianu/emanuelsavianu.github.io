@@ -8,12 +8,12 @@ import {
   reloadPlaces, reloadSlots, reloadClosedDays, reloadPlaceOpenDays,
   initDarkMode, toggleDarkMode, undo, redo,
   updateUndoRedoButtons
-} from './state.js?v=20261125a';
+} from './state.js?v=20261125b';
 
 import {
   el, toast, getDefaultDoctors, toDateKey, getWeekStart,
   calculateWeeklyHoursByPatients
-} from './core-utils.js?v=20261125a';
+} from './core-utils.js?v=20261125b';
 
 import {
   updateGeneraButtonLabel, renderAll, renderCalendar,
@@ -37,12 +37,12 @@ import {
   unavailCalNav, unavailCalToday,
   openExtraModal, closeExtraModal, saveExtraShift, askDeleteExtra, updateExtraSummary,
   toggleFocusDoctor, updateBudgetHint
-} from './renderers.js?v=20261125a';
+} from './renderers.js?v=20261125b';
 
-import { autoAssign, generateNextMonth } from './engine.js?v=20261125a';
+import { autoAssign, generateNextMonth } from './engine.js?v=20261125b';
 import {
   initPublish, openPublishModal, closePublishModal, confirmPublish, notifyEmanuel, saveTokenFromInput
-} from './publish.js?v=20261125a';
+} from './publish.js?v=20261125b';
 import {
   STORAGE_DOCTORS, STORAGE_ASSIGNMENTS, STORAGE_HISTORY,
   STORAGE_PLACES, STORAGE_SLOTS, STORAGE_VERSION, STORAGE_VERSION_KEY,
@@ -50,7 +50,7 @@ import {
   STORAGE_HEADER_COLLAPSED,
   STORAGE_FILL_ONLY,
   EXTERNAL_PREFIX
-} from './config.js?v=20261125a';
+} from './config.js?v=20261125b';
 
 // ====================================================
 // 15. KEYBOARD SHORTCUTS

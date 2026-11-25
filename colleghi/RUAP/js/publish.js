@@ -3,12 +3,12 @@
 // ====================================================
 // Il pulsante è visibile solo se c'è il token (link `#editore=<token>` una volta).
 // Il preflight è locale; il gate vero lo rifà `publish-queue.py` con check-rules.
-import { state } from './state.js?v=20261125a';
-import { el, toast, escapeHtml } from './core-utils.js?v=20261125a';
-import { getMonthlyStats, getConflicts } from './renderers.js?v=20261125a';
+import { state } from './state.js?v=20261125b';
+import { el, toast, escapeHtml } from './core-utils.js?v=20261125b';
+import { getMonthlyStats, getConflicts } from './renderers.js?v=20261125b';
 import {
   STORAGE_PUBLISH_TOKEN, STORAGE_PUBLISH_LAST, PUBLISH_BASE, PUBLISH_APP_VERSION, CONFIG_DATA_KEY,
-} from './config.js?v=20261125a';
+} from './config.js?v=20261125b';
 
 let pollTimer = null;
 let lastJob = null;
