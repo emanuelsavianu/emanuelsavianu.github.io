@@ -139,3 +139,15 @@
 ^28/03/2022$
 ^29/11/2001$
 ^31/01/2022$
+# Linee guida INPS per l'accertamento degli stati invalidanti (privati/pdf/):
+# non sono numeri di telefono ma colonne di carico in Watts della tabella
+# "prova da sforzo" (righe 110 e 120 W). Valori ancorati: nessuna regex generica.
+^321 357 393$
+^312 351 390$
+# Breve manuale di invalidità civile (Ferrari), privati/pdf/:
+# date di decreti e tabelle ministeriali citate nel testo, non dati di persona.
+^18/9/2008$
+^11/12/2001$
+^22/12/2008$
+^23/06/2014$
+^30/01/1997$

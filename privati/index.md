@@ -55,3 +55,9 @@ Il Dott. Savianu conosce le nuove procedure e le applica ogni giorno, anche per 
 - Indennità di accompagnamento (valutazione su atti, senza obbligo di presentarsi).
 - Agevolazioni Legge 104 (permessi, detrazioni per chi assiste).
 - Detrazioni e sconti fiscali Agenzia delle Entrate collegati al verbale.
+
+## Documenti scaricabili
+- **Linee guida INPS per l'accertamento degli stati invalidanti** — criteri di valutazione per apparato e tabelle delle percentuali di invalidità. PDF, 147 pagine (versione INPS dicembre 2022): [apri o scarica il PDF](https://savianu.it/privati/pdf/linee-guida-inps-accertamento-stati-invalidanti.pdf).
+  La percentuale che fa fede è quella del verbale; le linee guida spiegano come la Commissione arriva a calcolarla.
+- **Breve manuale di invalidità civile di Renato Maria Ferrari** — riepilogo sintetico delle tabelle ministeriali ad uso delle commissioni mediche di invalidità civile. PDF, 150 pagine: [apri o scarica il PDF](https://savianu.it/privati/pdf/breve-manuale-invalidita-civile-ferrari.pdf).
+  È un'opera divulgativa, non un atto ufficiale: la percentuale che fa fede resta quella scritta nel verbale.
