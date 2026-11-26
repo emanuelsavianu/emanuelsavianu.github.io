@@ -38,8 +38,8 @@ const OUT = join(DIR, 'index.html');
 const CHECK = process.argv.includes('--check');
 
 const URL_PAGE = 'https://savianu.it/colleghi/modulistica/';
-const STYLES_V = '20261126a';
-const APP_V = '20261126a';
+const STYLES_V = '20261126b';
+const APP_V = '20261126b';
 
 const esc = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -238,11 +238,11 @@ const html = `<!DOCTYPE html>
         .mod-search input {
             width: 100%; padding: 10px 12px 10px 34px;
             font-size: 0.92rem; font-family: inherit;
-            color: var(--text-dark); background: var(--card-bg);
+            color: var(--text-dark); background: var(--white);
             border: 1px solid var(--border-color); border-radius: var(--radius-md);
         }
         .mod-search input::placeholder { color: var(--text-medium); }
-        .mod-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+        .mod-search input:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
         .mod-count { font-size: 0.78rem; color: var(--text-medium); white-space: nowrap; }
 
         .mod-h2 {

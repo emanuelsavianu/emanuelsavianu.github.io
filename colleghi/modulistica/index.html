@@ -62,7 +62,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../../styles.css?v=20261126a">
+    <link rel="stylesheet" href="../../styles.css?v=20261126b">
 
     <style>
         /* La barra di ricerca è sticky: un link a #g-… deve atterrare sotto
@@ -115,11 +115,11 @@
         .mod-search input {
             width: 100%; padding: 10px 12px 10px 34px;
             font-size: 0.92rem; font-family: inherit;
-            color: var(--text-dark); background: var(--card-bg);
+            color: var(--text-dark); background: var(--white);
             border: 1px solid var(--border-color); border-radius: var(--radius-md);
         }
         .mod-search input::placeholder { color: var(--text-medium); }
-        .mod-search input:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+        .mod-search input:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
         .mod-count { font-size: 0.78rem; color: var(--text-medium); white-space: nowrap; }
 
         .mod-h2 {
@@ -362,6 +362,6 @@
 })();
 </script>
 
-<script type="module" src="../../app.js?v=20261126a"></script>
+<script type="module" src="../../app.js?v=20261126b"></script>
 </body>
 </html>

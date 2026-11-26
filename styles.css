@@ -2141,7 +2141,7 @@ body.dark-mode {
         .calendar-frame iframe {
             display: block;
             width: 100%;
-            height: clamp(420px, 65vh, 620px);
+            height: clamp(520px, 78vh, 640px);
             border: 0;
         }
         .calendar-fallback {
@@ -2421,7 +2421,8 @@ body.dark-mode {
             margin-top: 3px;
         }
         .faq-iitem.open .ichevron { transform: rotate(180deg); }
-        .faq-ianswer { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+        .faq-ianswer { max-height: 0; overflow: hidden; visibility: hidden; transition: max-height 0.35s ease, visibility 0s linear 0.35s; }
+        .faq-iitem.open .faq-ianswer { visibility: visible; transition: max-height 0.35s ease, visibility 0s; }
         .faq-ianswer-inner {
             padding: 0 18px 18px;
             font-size: 0.9rem;
@@ -2694,6 +2695,13 @@ body.dark-mode {
         }
         .accordion-header:hover {
             background: linear-gradient(135deg, var(--bg-gradient-2) 0%, var(--border-color) 100%);
+        }
+        /* L'item ha overflow: hidden e nessun padding: un outline esterno verrebbe
+           ritagliato. Anello interno, sempre visibile. */
+        .accordion-header:focus-visible {
+            outline: var(--focus-ring);
+            outline-offset: -3px;
+            border-radius: var(--radius-md);
         }
         body.dark-mode .accordion-header:hover {
             background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);

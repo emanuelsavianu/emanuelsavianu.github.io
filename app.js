@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js?v=20261005a';
 // Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
 // verità per il render client e per il pre-render statico (vedi chrome.js).
-import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261126a';
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261126b';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -301,7 +301,7 @@ export const translations = {
         cta_116117_main: "CHIAMA IL 116 117",
         note_116117_free: "(Numero gratuito, sempre attivo 24 ore su 24)",
         desc_116117_operator: "Un medico o un operatore ti aiuterà a capire cosa fare.",
-        when_call_116117: "✅ QUANDO CHIAMARE IL 116 117:",
+        when_call_116117: "<span aria-hidden=\"true\">✅</span> QUANDO CHIAMARE IL 116 117:",
         item_when_1: "Per consigli medici quando il tuo dottore non c'è.",
         item_when_2: "Per la Guardia Medica (di notte, nei weekend e festivi).",
         item_when_3: "Per informazioni sui servizi sanitari della zona.",
@@ -363,7 +363,7 @@ export const translations = {
         faq_q7: "Come accedo ai miei referti?",
         faq_a7: "I referti degli esami sono disponibili sul <strong>Fascicolo Sanitario Elettronico (FSE)</strong> regionale, accessibile su salute.toscana.it con SPID o CIE.<br><br>Il medico può visionare i referti durante la visita e commentarli. Se avete dubbi su un referto, <a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent-text);font-weight:700;'>prenotate una visita su Doctolib →</a>",
         faq_q9: "Come mi iscrivo come nuovo paziente?",
-        faq_a9: "Per iscriversi come nuovo paziente occorre:<ul><li>Avere residenza o domicilio nel territorio di Arezzo</li><li>Presentarsi in segreteria con <strong>tessera sanitaria</strong> e <strong>documento d'identità</strong></li></ul>Dopo la registrazione, prenotare la prima visita su <strong>Doctolib</strong> scegliendo il tipo di visita appropriato.<div class='highlight-box'>Portare alla prima visita: lista farmaci, esami precedenti, referti e codice esenzione se presente.</div>",
+        faq_a9: "Per iscriversi come nuovo paziente occorre:<ul><li>Avere residenza o domicilio nel territorio di Arezzo</li><li>Al CUP o in farmacia, tramite l'app <a href=\"https://www.regione.toscana.it/-/toscana-salute\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Toscana Salute</strong></a> oppure online su <a href=\"https://cambiomedico.sanita.toscana.it/portale/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>cambiomedico.sanita.toscana.it</strong></a></li></ul>Dopo la registrazione, prenotare la prima visita su <strong>Doctolib</strong> scegliendo il tipo di visita appropriato.<div class='highlight-box'>Portare alla prima visita: lista farmaci, esami precedenti, referti e codice esenzione se presente.</div>",
         faq_q10: "Cosa faccio in caso di emergenza?",
         faq_a10: "In caso di emergenza medica chiamare sempre il <strong>112</strong>.<br><br>Per situazioni urgenti ma non emergenziali fuori dagli orari di ambulatorio, contattare la <strong>Continuità Assistenziale</strong> (ex Guardia Medica) al numero <strong>116 117</strong>.",
         faq_q11: "Come richiedo un'impegnativa per esami o visite specialistiche?",
@@ -673,7 +673,7 @@ export const translations = {
         cta_116117_main: "CALL 116 117",
         note_116117_free: "(Free, 24/7 service)",
         desc_116117_operator: "A doctor or operator will help you.",
-        when_call_116117: "✅ WHEN TO CALL 116 117:",
+        when_call_116117: "<span aria-hidden=\"true\">✅</span> WHEN TO CALL 116 117:",
         item_when_1: "For medical advice when your doctor is unavailable.",
         item_when_2: "For the out-of-hours doctor service (nights, weekends, holidays).",
         item_when_3: "For information about local health services.",
@@ -735,7 +735,7 @@ export const translations = {
         faq_q7: "How do I access my test results?",
         faq_a7: "Test results are available on the <strong>Electronic Health Record (FSE)</strong>, accessible at salute.toscana.it using SPID or CIE.<br><br>The doctor can review and discuss results during a visit. If you have questions about a result, <a href='https://www.doctolib.it/medico-di-medicina-generale/castel-focognano/emanuel-savianu' target='_blank' rel='noopener noreferrer' style='color:var(--accent-text);font-weight:700;'>book an appointment on Doctolib →</a>",
         faq_q9: "How do I register as a new patient?",
-        faq_a9: "To register as a new patient you must:<ul><li>Reside or be domiciled in the Arezzo area</li><li>Present yourself at reception with your <strong>health card (tessera sanitaria)</strong> and <strong>photo ID</strong></li></ul>After registration, book your first appointment on <strong>Doctolib</strong> by selecting the appropriate visit type.<div class='highlight-box'>Bring to your first visit: a list of your current medications, previous test results, specialist reports, and your exemption code if applicable.</div>",
+        faq_a9: "To register as a new patient you must:<ul><li>Reside or be domiciled in the Arezzo area</li><li>At the CUP desk or at a pharmacy through the <a href=\"https://www.regione.toscana.it/-/toscana-salute\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>Toscana Salute</strong></a> app, or online at <a href=\"https://cambiomedico.sanita.toscana.it/portale/\" target=\"_blank\" rel=\"noopener noreferrer\"><strong>cambiomedico.sanita.toscana.it</strong></a></li></ul>After registration, book your first appointment on <strong>Doctolib</strong> by selecting the appropriate visit type.<div class='highlight-box'>Bring to your first visit: a list of your current medications, previous test results, specialist reports, and your exemption code if applicable.</div>",
         faq_q10: "What do I do in an emergency?",
         faq_a10: "In a medical emergency always call <strong>112</strong>.<br><br>For urgent but non-emergency situations outside clinic hours, contact the <strong>Out-of-Hours Service</strong> (Continuità Assistenziale) on <strong>116 117</strong>.",
         faq_q11: "How do I get a referral for tests or specialist appointments?",
@@ -1388,10 +1388,10 @@ function initGlobalFilters() {
     initLiveFilter('search-faq', '.accordion-item', '.accordion-header span', '.faq-category');
 
     // 3. Filter for ssn/esenzioni.html
-    initLiveFilter('search-esenzioni', '.exemption-table tbody tr', '', '.section-block');
+    initLiveFilter('search-esenzioni', '.exemption-table tbody tr', '', '.section-block, .table-scroll');
 
     // 4. Filter for ssn/impegnative.html
-    initLiveFilter('search-impegnative', '.branch-table tbody tr', '', '.section-block');
+    initLiveFilter('search-impegnative', '.branch-table tbody tr', '', '.section-block, .table-scroll');
 }
 
 function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelector) {

@@ -39,7 +39,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261126a">
+    <link rel="stylesheet" href="../styles.css?v=20261126b">
 
     <script type="application/ld+json">
     [
@@ -240,7 +240,8 @@
             line-height: 1.5;
         }
         body.dark-mode .faq-question { color: #f3efe6; }
-        .faq-question:hover { color: var(--accent); }
+        .faq-question:hover { color: var(--accent-text); }
+        body.dark-mode .faq-question:hover { color: var(--accent-on-dark); }
         .faq-question .chevron {
             font-size: 0.72rem;
             color: var(--accent);
@@ -453,14 +454,14 @@
     <section class="page-hero" aria-labelledby="faq-hero-heading">
         <p class="hero-eyebrow">
             <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
-            22 Domande e Risposte · D.Lgs. 62/2024 · Arezzo
+            21 Domande e Risposte · D.Lgs. 62/2024 · Arezzo
         </p>
         <h1 class="hero-title" id="faq-hero-heading">Guida alla Nuova <br>Riforma dell'Invalidità</h1>
         <p class="hero-desc">Tutto quello che i cittadini di Arezzo devono sapere sulla nuova procedura INPS. In vigore dal <strong style="color:var(--accent-text)">1° marzo 2026</strong>.</p>
         <div class="faq-search-wrapper">
             <div class="faq-search-bar" role="search">
                 <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-                <input type="search" id="faq-search" placeholder="Cerca tra le 22 domande…" aria-label="Cerca tra le domande frequenti">
+                <input type="search" id="faq-search" placeholder="Cerca tra le 21 domande…" aria-label="Cerca tra le domande frequenti">
             </div>
         </div>
     </section>
@@ -914,7 +915,7 @@
         </footer>
     </site-footer>
 
-<script type="module" src="../app.js?v=20261126a"></script>
+<script type="module" src="../app.js?v=20261126b"></script>
 
 <script>
     // ── Accordion ──

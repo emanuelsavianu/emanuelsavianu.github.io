@@ -48,7 +48,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261126a">
+    <link rel="stylesheet" href="../styles.css?v=20261126b">
 
     <style>
         /* FAQ-specific styles */
@@ -164,7 +164,7 @@
             font-family: inherit;
         }
         .faq-question:hover {
-            color: var(--accent);
+            color: var(--accent-text);
         }
         .faq-question .chevron {
             font-size: 0.8rem;
@@ -179,7 +179,12 @@
         .faq-answer {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
+            visibility: hidden;
+            transition: max-height 0.3s ease, visibility 0s linear 0.3s;
+        }
+        .faq-item.open .faq-answer {
+            visibility: visible;
+            transition: max-height 0.3s ease, visibility 0s;
         }
         .faq-answer-inner {
             padding: 0 20px 20px;
@@ -530,7 +535,7 @@
                 autocomplete="off"
             >
         </div>
-        <p id="faq-no-results" hidden style="text-align:center; padding:20px; color:var(--text-medium);" data-i18n="faq_no_results">
+        <p id="faq-no-results" role="status" aria-live="polite" hidden style="text-align:center; padding:20px; color:var(--text-medium);" data-i18n="faq_no_results">
             Nessuna domanda trovata — contatta la segreteria al <strong>0575 910 904</strong>.
         </p>
     </div>
@@ -593,8 +598,12 @@
             <div class="faq-answer" id="faq-a3">
                 <div class="faq-answer-inner" data-i18n="faq_a3">
                     <table style="width:100%; border-collapse: collapse;">
+                        <caption class="sr-only">Orari di apertura dell'ambulatorio</caption>
+                        <thead><tr><th scope="col" style="text-align:left; padding: 6px 0; font-size: 0.8rem; color: var(--text-medium);">Giorno</th><th scope="col" style="text-align:right; padding: 6px 0; font-size: 0.8rem; color: var(--text-medium);">Orario</th></tr></thead>
+                        <tbody>
                         <tr><td style="padding: 6px 0; font-weight: 600;">Lunedì - Venerdì</td><td style="text-align:right; color: var(--text-dark); font-weight: 700;">09:30 - 12:30 · 16:00 - 19:00</td></tr>
                         <tr><td style="padding: 6px 0; font-weight: 600; color: var(--danger);">Sabato - Domenica</td><td style="text-align:right; color: var(--danger);">Chiuso</td></tr>
+                        </tbody>
                     </table>
                     <div class="highlight-box">
                         <strong>Indirizzo:</strong> Studio Medico Ippocrate, Piazza Saione 3, Arezzo
@@ -957,7 +966,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20261126a"></script>
+<script type="module" src="../app.js?v=20261126b"></script>
 
 <script>
     // FAQ accordion

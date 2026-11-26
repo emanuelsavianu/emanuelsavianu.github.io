@@ -349,7 +349,7 @@
     document.documentElement.classList.add('dark-mode');
 }catch(e){}})();
 </script>
-    <link rel="stylesheet" href="../styles.css?v=20261126a">
+    <link rel="stylesheet" href="../styles.css?v=20261126b">
 
     <!-- Lenis smooth scroll (self-hosted, offline-first) -->
     <script type="module">
@@ -447,7 +447,7 @@
         .cat-field:focus-within { border-color: var(--accent); }
         .cat-field > i { color: var(--accent-text); }
         .cat-field input { flex: 1; min-width: 0; border: 0; background: transparent; font: inherit;
-            font-size: 1rem; color: var(--text-dark); outline: none; }
+            font-size: 1rem; color: var(--text-dark); }
         .cat-field input::placeholder { color: var(--text-medium); opacity: .85; }
         /* niente doppia "x": quella nativa di type=search la disegna il nostro pulsante */
         .cat-field input[type="search"]::-webkit-search-cancel-button,
@@ -455,6 +455,7 @@
         .cat-clear { border: 0; background: transparent; color: var(--text-medium); cursor: pointer;
             font-size: 1rem; padding: 2px 4px; }
         .cat-clear:hover { color: var(--primary); }
+        body.dark-mode .cat-clear:hover { color: var(--text-dark); }
         .cat-kbd { font: 600 11px/1 ui-monospace, monospace; padding: 4px 6px;
             border: 1px solid var(--border-color); border-radius: 5px; color: var(--text-medium); }
         .cat-field:focus-within .cat-kbd, .cat-toolbar.has-q .cat-kbd { display: none; }
@@ -475,6 +476,8 @@
            distinguibile perché il peso del carattere cambia sul chip attivo. */
         .cat-chip b { font-weight: 600; }
         .cat-chip:hover { border-color: var(--accent); color: var(--primary); }
+        body.dark-mode .cat-chip:hover { color: var(--text-dark); }
+        body.dark-mode .cat-chip[aria-pressed="true"] { color: var(--text-dark); }
         .cat-chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--white); }
         .cat-chip[aria-pressed="true"] b { font-weight: 700; }
         .cat-chip-reset { border-style: dashed; color: var(--accent-text); }
@@ -526,6 +529,7 @@
         .cat-empty { margin: 20px 0; padding: 16px; border: 1px dashed var(--border-color);
             border-radius: var(--radius-md); color: var(--text-medium); font-size: .88rem; }
         .cat-empty strong { display: block; color: var(--primary); margin-bottom: 4px; }
+        body.dark-mode .cat-empty strong { color: var(--text-dark); }
         .cat-empty a { color: var(--accent-text); }
 
         .cat-events summary { cursor: pointer; display: flex; align-items: center; gap: 10px;
@@ -760,7 +764,7 @@
                     <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — english la scheda informativa a4 in english, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-en.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — English</span><span class="cat-sub">Fronte/retro in inglese</span></span></a></li>
                     <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — বাংলা (bengali) la scheda informativa a4 in বাংলা, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-bn.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — বাংলা (Bengali)</span><span class="cat-sub">Fronte/retro in bengalese</span></span></a></li>
                     <li class="cat-item" data-g="stampa" data-k="scheda paziente a4 — اردو (urdu) la scheda informativa a4 in اردو, fronte/retro, pronta da stampare. stampa scheda lingua stampa"><a href="../ssn/scheda-ur.html"><i class="fas fa-globe" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Scheda paziente A4 — اردو (Urdu)</span><span class="cat-sub">Fronte/retro in urdu, RTL</span></span></a></li>
-                    <li class="cat-item" data-g="stampa pdf" data-k="kit schede pazienti 5 lingue (pdf) il kit completo da stampare per il banco: cinque lingue, fronte/retro. stampa kit stampa pdf"><a href="../https://drive.google.com/uc?export=download&amp;id=1xKKzLDGIU-v1cnvyULWklpwW-Dmxegy9"><i class="fas fa-file-pdf" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Kit schede pazienti 5 lingue (PDF)</span><span class="cat-sub">10 pagine A4 pronte da stampare</span></span></a></li>
+                    <li class="cat-item" data-g="stampa pdf" data-k="kit schede pazienti 5 lingue (pdf) il kit completo da stampare per il banco: cinque lingue, fronte/retro. stampa kit stampa pdf"><a href="https://drive.google.com/uc?export=download&amp;id=1xKKzLDGIU-v1cnvyULWklpwW-Dmxegy9"><i class="fas fa-file-pdf" aria-hidden="true"></i><span class="cat-body"><span class="cat-title">Kit schede pazienti 5 lingue (PDF)</span><span class="cat-sub">10 pagine A4 pronte da stampare</span></span></a></li>
                 </ul>
             </section>
             <section class="cat-area cat-links" id="area-link" aria-labelledby="h-link">
@@ -1063,6 +1067,6 @@
 })();
 </script>
 
-<script type="module" src="../app.js?v=20261126a"></script>
+<script type="module" src="../app.js?v=20261126b"></script>
 </body>
 </html>

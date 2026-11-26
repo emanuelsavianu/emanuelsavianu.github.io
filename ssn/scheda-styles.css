@@ -70,9 +70,28 @@ html[lang="bn"] body {
   font-family: 'Noto Sans Bengali', 'Noto Sans', system-ui, sans-serif;
 }
 html[lang="ur"] body {
-  font-family: 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Noto Sans', system-ui, sans-serif;
+  font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', 'Noto Naskh Arabic', 'Noto Sans', system-ui, sans-serif;
   line-height: 1.48;
 }
+/* Il box di linea dei font non latini è molto più alto (2,1–2,5 em): con
+   line-height 1,05–1,15 dei titoli le righe si sovrappongono. */
+html[lang="ur"] h1, html[lang="ur"] h2, html[lang="ur"] h3, html[lang="ur"] .site { line-height: 1.75; }
+html[lang="bn"] h1, html[lang="bn"] h2, html[lang="bn"] h3 { line-height: 1.45; }
+/* Il body urdu a 1,48 viene neutralizzato dai line-height fissi dei blocchi. */
+html[lang="ur"] .doctolib li,
+html[lang="ur"] .card-segreteria p,
+html[lang="ur"] .card-cert p,
+html[lang="ur"] .triage-row .t-desc,
+html[lang="ur"] .card-flat p { line-height: 1.6; }
+/* Niente tracking sulla scrittura corsiva. */
+html[lang="ur"] .lang-pill,
+html[lang="ur"] .doctolib h2,
+html[lang="ur"] .triage > h2,
+html[lang="ur"] .section-label,
+html[lang="ur"] .strip-navy { letter-spacing: normal; }
+/* RTL: gli span dir="ltr" (numeri, URL) si allineavano a sinistra dentro
+   contenitori a piena colonna. */
+[dir="rtl"] .site, [dir="rtl"] .t-head, [dir="rtl"] .brand-text { text-align: right; }
 
 /* Foglio: DUE .page espliciti per scheda (fronte + retro).
    190x276mm = leggermente meno del foglio A4 utile (190x277mm), per evitare pagine extra. */

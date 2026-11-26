@@ -47,7 +47,7 @@
 </script>
     <!-- Marks the page as JS-capable: accordions collapse only when JS runs. -->
     <script>document.documentElement.classList.add('ed-js');</script>
-    <link rel="stylesheet" href="../styles.css?v=20261126a">
+    <link rel="stylesheet" href="../styles.css?v=20261126b">
 
 
     <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
@@ -465,7 +465,7 @@
                 <h2>Domande Frequenti sulla Riforma</h2>
                 <span class="section-badge">D.Lgs. 62/2024 · Arezzo</span>
             </div>
-            <a href="faq-riforma.html" class="faq-fullpage-link" aria-label="Apri la guida completa con tutte le 22 domande">
+            <a href="faq-riforma.html" class="faq-fullpage-link" aria-label="Apri la guida completa con tutte le 21 domande">
                 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
                 Guida completa
             </a>
@@ -477,12 +477,12 @@
         </div>
 
         <nav class="faq-pills" aria-label="Filtra per argomento">
-            <button class="faq-pill faq-pill--active" onclick="iFaqFilter('all')" data-isection="all"><i class="fa-solid fa-border-all" aria-hidden="true"></i> Tutte</button>
-            <button class="faq-pill" onclick="iFaqFilter('procedura')" data-isection="procedura"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Procedura</button>
-            <button class="faq-pill" onclick="iFaqFilter('certificato')" data-isection="certificato"><i class="fa-solid fa-file-medical" aria-hidden="true"></i> Certificato</button>
-            <button class="faq-pill" onclick="iFaqFilter('visita')" data-isection="visita"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i> La Visita</button>
-            <button class="faq-pill" onclick="iFaqFilter('diritti')" data-isection="diritti"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Diritti</button>
-            <button class="faq-pill" onclick="iFaqFilter('speciale')" data-isection="speciale"><i class="fa-solid fa-star" aria-hidden="true"></i> Innovazioni</button>
+            <button class="faq-pill faq-pill--active" aria-pressed="true" onclick="iFaqFilter('all')" data-isection="all"><i class="fa-solid fa-border-all" aria-hidden="true"></i> Tutte</button>
+            <button class="faq-pill" aria-pressed="false" onclick="iFaqFilter(\'procedura\')" data-isection="procedura"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Procedura</button>
+            <button class="faq-pill" aria-pressed="false" onclick="iFaqFilter(\'certificato\')" data-isection="certificato"><i class="fa-solid fa-file-medical" aria-hidden="true"></i> Certificato</button>
+            <button class="faq-pill" aria-pressed="false" onclick="iFaqFilter(\'visita\')" data-isection="visita"><i class="fa-solid fa-hospital-user" aria-hidden="true"></i> La Visita</button>
+            <button class="faq-pill" aria-pressed="false" onclick="iFaqFilter(\'diritti\')" data-isection="diritti"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i> Diritti</button>
+            <button class="faq-pill" aria-pressed="false" onclick="iFaqFilter(\'speciale\')" data-isection="speciale"><i class="fa-solid fa-star" aria-hidden="true"></i> Innovazioni</button>
         </nav>
 
         <!-- Sezione 1 -->
@@ -763,7 +763,7 @@
 
 
 
-<script type="module" src="../app.js?v=20261126a"></script>
+<script type="module" src="../app.js?v=20261126b"></script>
 <script>
     // ── Scroll to FAQ ──
     function scrollToFaq() {
@@ -831,6 +831,7 @@
     function iFaqFilter(section) {
         document.querySelectorAll('.faq-pills .faq-pill').forEach(function(p) {
             p.classList.toggle('faq-pill--active', p.dataset.isection === section);
+            p.setAttribute('aria-pressed', p.dataset.isection === section ? 'true' : 'false');
         });
 
         if (section === 'all') {

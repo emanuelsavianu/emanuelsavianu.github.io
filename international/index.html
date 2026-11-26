@@ -62,7 +62,7 @@
 </script>
     <!-- Marks the page as JS-capable: accordions collapse only when JS runs. -->
     <script>document.documentElement.classList.add('ed-js');</script>
-    <link rel="stylesheet" href="../styles.css?v=20261126a">
+    <link rel="stylesheet" href="../styles.css?v=20261126b">
 
 
     <!-- Scroll Reveal (IntersectionObserver, offline-first) -->
@@ -242,6 +242,7 @@
         .intl-hint { font-size: 0.8rem; color: var(--text-medium); margin-top: 4px; }
         .intl-consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; color: var(--text-medium); line-height: 1.55; margin: 18px 0; }
         .intl-consent input { margin-top: 3px; flex-shrink: 0; }
+        .intl-consent input.intl-invalid { outline: 2px solid var(--danger); outline-offset: 2px; border-radius: 3px; }
         .intl-consent a { color: var(--accent-text); font-weight: 600; }
         .intl-divider { border-top: 1px solid var(--border-color); margin: 28px 0; }
         .intl-note {
@@ -458,11 +459,13 @@
             <form id="intl-inquiry-form" aria-label="International patient inquiry" novalidate>
                 <div class="intl-field">
                     <label for="intl-name" data-i18n="intl_f_name">Full name *</label>
-                    <input type="text" id="intl-name" name="name" autocomplete="name" required>
+                    <input type="text" id="intl-name" name="name" autocomplete="name" aria-describedby="intl-name-err" required>
+                    <span class="intl-err" id="intl-name-err"></span>
                 </div>
                 <div class="intl-field">
                     <label for="intl-email" data-i18n="intl_f_email">Email *</label>
-                    <input type="email" id="intl-email" name="email" autocomplete="email" required>
+                    <input type="email" id="intl-email" name="email" autocomplete="email" aria-describedby="intl-email-err" required>
+                    <span class="intl-err" id="intl-email-err"></span>
                 </div>
                 <div class="intl-field">
                     <label for="intl-phone" data-i18n="intl_f_phone">Phone (optional)</label>
@@ -470,10 +473,12 @@
                 </div>
                 <div class="intl-field">
                     <label for="intl-lang" data-i18n="intl_f_lang">Preferred language *</label>
-                    <select id="intl-lang" name="lang" required>
+                    <select id="intl-lang" name="lang" aria-describedby="intl-lang-err" required>
+                        <option value="" disabled selected>—</option>
                         <option value="en" data-i18n="intl_f_lang_en">English</option>
                         <option value="it" data-i18n="intl_f_lang_it">Italiano</option>
                     </select>
+                    <span class="intl-err" id="intl-lang-err"></span>
                 </div>
                 <div class="intl-field">
                     <label for="intl-status" data-i18n="intl_f_status">You are a…</label>
@@ -486,13 +491,15 @@
                 </div>
                 <div class="intl-field">
                     <label for="intl-reason" data-i18n="intl_f_reason">Reason for inquiry *</label>
-                    <select id="intl-reason" name="reason" required>
+                    <select id="intl-reason" name="reason" aria-describedby="intl-reason-err" required>
+                        <option value="" disabled selected>—</option>
                         <option value="new-patient" data-i18n="intl_f_reason_new">New patient consultation</option>
                         <option value="documentation" data-i18n="intl_f_reason_doc">Medical documentation or certificate</option>
                         <option value="coordination" data-i18n="intl_f_reason_coord">Care coordination</option>
                         <option value="home-visit" data-i18n="intl_f_reason_home">Home visit request</option>
                         <option value="other" data-i18n="intl_f_reason_other">Other</option>
                     </select>
+                    <span class="intl-err" id="intl-reason-err"></span>
                 </div>
                 <div class="intl-field">
                     <label for="intl-note" data-i18n="intl_f_note">Optional note</label>
@@ -633,12 +640,17 @@
     }
     function markInvalid() {
         var firstBad = null;
+        var errText = intlStrings().invalid;
         form.querySelectorAll('input[required], select[required], textarea[required]').forEach(function (el) {
             var bad = !el.checkValidity();
             el.classList.toggle('intl-invalid', bad);
+            el.setAttribute('aria-invalid', bad ? 'true' : 'false');
             var err = el.closest('.intl-field');
             err = err ? err.querySelector('.intl-err') : null;
-            if (err) err.classList.toggle('is-on', bad);
+            if (err) {
+                err.textContent = bad ? errText : '';
+                err.classList.toggle('is-on', bad);
+            }
             if (bad && !firstBad) firstBad = el;
         });
         if (firstBad) firstBad.focus();
@@ -771,7 +783,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="../app.js?v=20261126a"></script>
+<script type="module" src="../app.js?v=20261126b"></script>
 
 </body>
 </html>
