@@ -30,6 +30,10 @@ Art. 24 del Codice di deontologia medica e art. 55-quinquies, comma 3, D.Lgs. 16
 4. Se il certificato non è stato inviato, chiedere la regolarizzazione per iscritto all'URP della struttura (o segnalare all'Ordine per un libero professionista).
 5. Per altri giorni di riposo, prenotare la visita dal medico per il certificato di continuazione.
 
+## Se sei assistito ad Arezzo
+
+Il certificato si rilascia durante la visita, negli orari di apertura dello studio (Piazza Saione 3, Arezzo), con prenotazione tramite l'area Pazienti (Doctolib o segreteria). Sera, notte, domenica e festivi: Continuità Assistenziale, 116 117. Emergenze: 112. Chi viene dimesso dall'ospedale di Arezzo o ha avuto accesso al pronto soccorso deve chiedere il certificato prima di uscire, perché lo trasmette la struttura.
+
 ## Fonti
 
 - INPS — Normativa di riferimento per la certificazione telematica di malattia: https://www.inps.it/it/it/dettaglio-approfondimento.schede-informative.49909.normativa-di-riferimento-per-la-certificazione-telematica-di-malattia.html
