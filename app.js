@@ -1,7 +1,7 @@
 import { CONFIG } from './config.js?v=20261005a';
 // Markup della barra condiviso con tools/prerender-nav.mjs: una sola fonte di
 // verità per il render client e per il pre-render statico (vedi chrome.js).
-import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261124d';
+import { isPatientSection, siteNavInnerHTML, siteNoticesHTML, floatingFaqHTML } from './chrome.js?v=20261126a';
 
 // Config esposta alle pagine con script classici (es. /international/), che
 // non possono importare il modulo ES: unica fonte di verità per i recapiti.
@@ -1007,7 +1007,9 @@ export const translations = {
  * when unknown, so callers can fall back to a literal.
  */
 export function t(key) {
-    const lang = getPreferredLang();
+    // Pagine a lingua fissa (es. /international/): la preferenza salvata altrove
+    // non deve sovrascrivere la lingua della pagina.
+    const lang = pageFixedLang() || document.documentElement.lang || getPreferredLang();
     const block = translations[lang] || translations.it;
     return (block && block[key]) || translations.it[key] || key;
 }
@@ -1121,12 +1123,13 @@ initGuidaRapida();
     if (!anchor) return;
     const badge = document.createElement('span');
     badge.className = isOpen ? 'badge-open' : 'badge-closed';
-    const lang = getPreferredLang();
-    const openLabel = lang === 'en' ? 'Open now' : 'Aperto ora';
-    const closedLabel = lang === 'en' ? 'Closed' : 'Chiuso';
-    badge.innerHTML = isOpen
-        ? '<i class="fas fa-circle"></i> ' + openLabel
-        : '<i class="fas fa-circle"></i> ' + closedLabel;
+    const renderBadge = () => {
+        const lang = pageFixedLang() || document.documentElement.lang || getPreferredLang();
+        const label = isOpen ? (lang === 'en' ? 'Open now' : 'Aperto ora') : (lang === 'en' ? 'Closed' : 'Chiuso');
+        badge.innerHTML = '<i class="fas fa-circle" aria-hidden="true"></i> ' + label;
+    };
+    renderBadge();
+    document.addEventListener('site:i18n', renderBadge);
     anchor.parentNode.appendChild(badge);
 })();
 
@@ -1234,7 +1237,8 @@ function openDoctolibModal() {
 
 export function startBooking() {
     var el = document.getElementById('booking-section');
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (el) el.scrollIntoView({ behavior: noMotion ? 'auto' : 'smooth', block: 'start' });
 }
 
 // --- DECISION FLOWCHART ---
@@ -1370,7 +1374,8 @@ function initBackToTop() {
     });
 
     btn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const noMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: 0, behavior: noMotion ? 'auto' : 'smooth' });
     });
 }
 
@@ -1383,10 +1388,10 @@ function initGlobalFilters() {
     initLiveFilter('search-faq', '.accordion-item', '.accordion-header span', '.faq-category');
 
     // 3. Filter for ssn/esenzioni.html
-    initLiveFilter('search-esenzioni', '.exemption-table tr:not(:first-child)', '', '.section-block');
+    initLiveFilter('search-esenzioni', '.exemption-table tbody tr', '', '.section-block');
 
     // 4. Filter for ssn/impegnative.html
-    initLiveFilter('search-impegnative', '.branch-table tr:not(:first-child)', '', '.section-block');
+    initLiveFilter('search-impegnative', '.branch-table tbody tr', '', '.section-block');
 }
 
 function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelector) {
@@ -1430,7 +1435,11 @@ function initLiveFilter(inputId, itemsSelector, textSelector, parentToHideSelect
         // Optional: show/hide sections/categories if all their items are hidden
         if (parentToHideSelector) {
             document.querySelectorAll(parentToHideSelector).forEach(parent => {
-                const hasVisible = Array.from(parent.querySelectorAll(itemsSelector)).some(i => i.style.display !== 'none');
+                // Campo svuotato: ogni sezione torna visibile, anche quelle
+                // senza tabella (che altrimenti resterebbero nascoste per sempre).
+                if (!term) { parent.style.display = ''; return; }
+                const scoped = Array.from(parent.querySelectorAll(itemsSelector));
+                const hasVisible = scoped.length > 0 && scoped.some(i => i.style.display !== 'none');
                 parent.style.display = hasVisible ? '' : 'none';
             });
         }

@@ -64,7 +64,7 @@
 </script>
     <!-- Marks the page as JS-capable: the index ships fully open, JS collapses it. -->
     <script>document.documentElement.classList.add('ed-js');</script>
-    <link rel="stylesheet" href="styles.css?v=20261124d">
+    <link rel="stylesheet" href="styles.css?v=20261126a">
 
     <!-- JSON-LD: MedicalBusiness (clinic umbrella) with Physician as founder -->
     <script type="application/ld+json">
@@ -156,10 +156,10 @@
         <div class="ed-split">
             <div>
                 <h2 class="ed-sr" id="band-title" data-i18n="lp_index_label">Scegli la tua area</h2>
-                <p class="ed-state" id="lp-state" data-open="true">
+                <p class="ed-state" id="lp-state" data-open="false">
                     <span class="ed-state__dot" aria-hidden="true"></span>
-                    <span class="ed-state__word" id="lp-state-word" data-i18n="lp_state_open">Aperto ora</span>
-                    <span id="lp-state-text">chiude alle 12:30 <span class="ed-state__eta">(tra 1 h 12 min)</span></span>
+                    <span class="ed-state__word" id="lp-state-word" data-i18n="hours_title">Orari di Studio</span>
+                    <span id="lp-state-text">Lun–Ven 09:30–12:30 · 16:00–19:00</span>
                 </p>
                 <p class="ed-facts-inline" style="margin-top: 16px;">
                     <span class="urgent"><span class="lbl" data-i18n="lp_em_emergenza">Emergenza</span> <a class="num" href="tel:112">112</a></span>
@@ -404,7 +404,7 @@
     <button class="sw-toast-btn" id="sw-update-btn" data-i18n="sw_update_now">Aggiorna ora</button>
 </div>
 
-<script type="module" src="app.js?v=20261124d"></script>
+<script type="module" src="app.js?v=20261126a"></script>
 
 <!-- ── The live counter: reads CONFIG.SCHEDULE, writes one sentence. ── -->
 <script type="module">
