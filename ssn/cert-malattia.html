@@ -267,6 +267,25 @@
             color: var(--primary);
         }
 
+        /* Rimando alla pagina su chi deve rilasciare il certificato:
+           callout flat (filetto sopra in oro), pattern condiviso del sito. */
+        .doc-link-box {
+            border-top: 2px solid var(--accent);
+            background: var(--bg-gradient-2);
+            border-radius: 0 0 var(--radius-md) var(--radius-md);
+            padding: 16px 18px;
+            margin: 0 0 26px;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: var(--text-dark);
+        }
+        .doc-link-box a {
+            color: var(--accent-text);
+            font-weight: 600;
+            text-decoration: underline;
+        }
+        @media print { .doc-link-box { display: none !important; } }
+
         /* --- RESPONSIVITÀ PER SMARTPHONE E TABLET --- */
         @media (max-width: 800px) {
             body { background-color: var(--white); }
@@ -365,11 +384,18 @@
                 <strong>Avviso.</strong> Si informa la gentile utenza che, ai sensi della normativa vigente, il medico <strong>NON può rilasciare certificati di malattia</strong> senza aver preventivamente effettuato una visita medica di controllo.
             </div>
 
+            <div class="doc-link-box">
+                <i class="fas fa-user-check" aria-hidden="true" style="color: var(--accent-text); margin-right: 8px;"></i>
+                <strong>Ti hanno visitato in pronto soccorso, in ospedale o da un dentista?</strong>
+                Il certificato deve rilasciarlo chi ti ha visitato, non il medico di base:
+                <a href="certificato-malattia-chi-deve-farlo.html">chi deve rilasciare il certificato di malattia, cosa dice la legge e cosa fare</a>.
+            </div>
+
             <h2 class="doc-section-title"><i class="fas fa-balance-scale" style="margin-right: 8px;"></i>Cosa dice la legge</h2>
             <ul class="doc-list">
                 <li>
                     <strong>Obbligo di Visita</strong>
-                    La trasmissione telematica del certificato deve avvenire <strong>"all'atto della visita"</strong> (Circolare INPS n. 113 del 25/07/2013). Il medico che certifica il falso senza aver visitato il paziente incorre nel reato di <strong>Falso Ideologico</strong> (Art. 481 del Codice Penale).
+                    La trasmissione telematica del certificato deve avvenire <strong>"all'atto della visita"</strong> (Circolare INPS n. 113 del 25/07/2013). Il medico che certifica il falso senza aver visitato il paziente risponde del reato di <strong>falsità ideologica in atto pubblico</strong> (art. 479 del Codice Penale): il certificato di malattia è un atto pubblico.
                 </li>
                 <li>
                     <strong>Decorrenza</strong>

@@ -15,6 +15,7 @@
 - [Note operative e contatti — MMG Arezzo | Dott. Savianu](https://savianu.it/colleghi/note-operative.md)
 - [Risorse informative e manualistica | Dott. Savianu](https://savianu.it/colleghi/risorse-informative.md)
 - [Modulistica per MMG e PLS | Dott. Savianu](https://savianu.it/colleghi/modulistica/)
+- [Chi deve fare il certificato di malattia | Dott. Savianu](https://savianu.it/ssn/certificato-malattia-chi-deve-farlo.md)
 
 ## Markdown per agenti
 
@@ -32,6 +33,7 @@ invia l'header HTTP `Accept: text/markdown` (il worker edge lo gestisce), oppure
 - [/colleghi/note-operative.md](https://savianu.it/colleghi/note-operative.md)
 - [/colleghi/risorse-informative.md](https://savianu.it/colleghi/risorse-informative.md)
 - [/colleghi/modulistica/index.md](https://savianu.it/colleghi/modulistica/index.md)
+- [/ssn/certificato-malattia-chi-deve-farlo.md](https://savianu.it/ssn/certificato-malattia-chi-deve-farlo.md)
 
 ## Contatti generali
 

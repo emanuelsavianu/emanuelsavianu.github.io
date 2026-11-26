@@ -69,6 +69,23 @@ const SECURITY_HEADERS = {
     ].join('; '),
 };
 
+// Versione neutra e non brandizzata (pagina condivisa coi colleghi, in /neutro/):
+// il file è pubblicato così com'è e carica Tailwind CDN (JIT a runtime), Chart.js
+// e Google Fonts. Serve quindi una CSP dedicata e più permissiva, applicata SOLO
+// a questi path: la CSP del sito resta invariata altrove.
+const NEUTRAL_CSP = [
+    "default-src 'self'",
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com",
+    "font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
+    "img-src 'self' data: https://savianu.it https://www.gstatic.com",
+    "connect-src 'self'",
+    "object-src 'none'",
+    "base-uri 'self'",
+    "form-action 'self'",
+    "upgrade-insecure-requests",
+  ].join('; ');
+
 // ── Legacy path redirects (pre-merge URLs -> new structure) ─────────────────
 // Same map as cloudflare/redirect-worker.js (spec §10), except /malattia.html
 // which was the patient guide on this domain -> ssn/cert-malattia.html.
@@ -97,8 +114,10 @@ const LEGACY_REDIRECTS = {
   '/protocollo-certificati-inps.html': '/colleghi/protocollo-certificati-inps.html',
   // Pagine "vibecoded" rimosse il 2026-11-04 (301, non 404: erano indicizzate).
   '/colleghi/guida-interattiva-mmg.html': '/colleghi/',
-  '/ssn/malattia.html': '/ssn/cert-malattia.html',
-  '/colleghi/malattia.html': '/ssn/cert-malattia.html',
+  // Le due copie della pagina "malattia" (rimosse il 2026-11-04) sono state
+  // ricostruite come guida unica su chi deve rilasciare il certificato.
+  '/ssn/malattia.html': '/ssn/certificato-malattia-chi-deve-farlo.html',
+  '/colleghi/malattia.html': '/ssn/certificato-malattia-chi-deve-farlo.html',
   '/installazione.html': '/colleghi/',
   '/xsegretarie.html': '/colleghi/',
   // Percorsi legacy che il merge di zona da dottemanuelsavianu.it reindirizza
@@ -335,6 +354,7 @@ export default {
       '/colleghi/risorse-informative.html':                 '/colleghi/risorse-informative.md',
       '/colleghi/modulistica/':                 '/colleghi/modulistica/index.md',
       '/colleghi/modulistica/index.html': '/colleghi/modulistica/index.md',
+      '/ssn/certificato-malattia-chi-deve-farlo.html':                 '/ssn/certificato-malattia-chi-deve-farlo.md',
     };
     const acceptHeader = request.headers.get('Accept') || '';
     if (acceptHeader.includes('text/markdown')) {
@@ -409,9 +429,14 @@ export default {
 
     // Clone headers and inject security headers
     const newHeaders = new Headers(response.headers);
+    const isNeutral = url.pathname.startsWith('/neutro/');
     for (const [name, value] of Object.entries(SECURITY_HEADERS)) {
-      newHeaders.set(name, value);
+      newHeaders.set(name, isNeutral && name === 'Content-Security-Policy' ? NEUTRAL_CSP : value);
     }
+    // La versione neutra è condivisibile ma non deve essere indicizzata: la pagina
+    // porta già <meta name="robots" content="noindex">, questo copre anche il caso
+    // in cui il file venga servito senza <head> interpretabile dai crawler.
+    if (isNeutral) newHeaders.set('X-Robots-Tag', 'noindex, follow');
 
     return new Response(response.body, {
       status: response.status,

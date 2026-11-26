@@ -15,8 +15,8 @@ const REDIRECTS = {
   '/visite-private.html': '/privati/',
   '/colleghi.html': '/colleghi/',
   '/colleghi/guida-interattiva-mmg.html': '/colleghi/',
-  '/ssn/malattia.html': '/ssn/cert-malattia.html',
-  '/colleghi/malattia.html': '/ssn/cert-malattia.html',
+  '/ssn/malattia.html': '/ssn/certificato-malattia-chi-deve-farlo.html',
+  '/colleghi/malattia.html': '/ssn/certificato-malattia-chi-deve-farlo.html',
   '/malattia.html': '/ssn/cert-malattia.html',
   '/guida_interattiva_mmg.html': '/colleghi/',
   // Pagine rimosse dal sito (scudo del medico, calcolatori ferie): 301 sulla

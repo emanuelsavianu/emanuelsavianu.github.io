@@ -68,6 +68,12 @@
       "md": "colleghi/modulistica/index.md",
       "html": "colleghi/modulistica/index.html",
       "stub": "markdown/colleghi-modulistica.md"
+    },
+    {
+      "route": "/ssn/certificato-malattia-chi-deve-farlo.html",
+      "md": "ssn/certificato-malattia-chi-deve-farlo.md",
+      "html": "ssn/certificato-malattia-chi-deve-farlo.html",
+      "stub": "markdown/ssn-certificato-malattia-chi-deve-farlo.md"
     }
   ]
 }
